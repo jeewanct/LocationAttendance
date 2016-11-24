@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		65C6A7C8E80A76489458049F /* Pods_BluedolphinPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE78BE1830F43DAE65AB796C /* Pods_BluedolphinPro.framework */; };
+		9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902CF2F1DBE163A00692824 /* NetworkClass.swift */; };
+		9902CF501DBF31B900692824 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902CF4F1DBF31B900692824 /* UserModel.swift */; };
+		9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */; };
+		9918E8811DDD7B42000376CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8801DDD7B42000376CF /* HomeViewController.swift */; };
+		9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */; };
+		9918E8851DDD9CF1000376CF /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8841DDD9CF1000376CF /* ErrorMessage.swift */; };
+		992086A71DCCC0850055C6BF /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992086A61DCCC0850055C6BF /* GlobalFunction.swift */; };
+		99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339CFE1DE2C86000F3C770 /* CheckinObject.swift */; };
+		99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D001DE2C8BA00F3C770 /* OauthObject.swift */; };
+		99339D031DE2D5B700F3C770 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D021DE2D5B700F3C770 /* Enums.swift */; };
+		99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339F661DE5B38B00F3C770 /* AssignmentObject.swift */; };
+		994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */; };
+		994FF91E1DC9B5D000276B97 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */; };
+		994FF9201DCA173800276B97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91F1DCA173800276B97 /* Extensions.swift */; };
+		994FF92C1DCB39DB00276B97 /* Singelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF92B1DCB39DB00276B97 /* Singelton.swift */; };
+		997159F41DDDC8A0006F0C05 /* NotificationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997159F31DDDC8A0006F0C05 /* NotificationClass.swift */; };
+		99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215D1DBF80C400E5F369 /* SdkConstant.swift */; };
+		99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215F1DC07B4E00E5F369 /* OauthModel.swift */; };
+		99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */; };
+		99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1E1DDAE95C0066C07B /* Reachability.swift */; };
+		99CACFD81DB8A1590099AA00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CACFD71DB8A1590099AA00 /* AppDelegate.swift */; };
+		99CACFDA1DB8A1590099AA00 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CACFD91DB8A1590099AA00 /* ViewController.swift */; };
+		99CACFDD1DB8A1590099AA00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99CACFDB1DB8A1590099AA00 /* Main.storyboard */; };
+		99CACFDF1DB8A1590099AA00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99CACFDE1DB8A1590099AA00 /* Assets.xcassets */; };
+		99CACFE21DB8A1590099AA00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99CACFE01DB8A1590099AA00 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0C01FAD6D9C2AEE2E69FE6D7 /* Pods-BluedolphinPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluedolphinPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BluedolphinPro/Pods-BluedolphinPro.debug.xcconfig"; sourceTree = "<group>"; };
+		9902CF2F1DBE163A00692824 /* NetworkClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClass.swift; sourceTree = "<group>"; };
+		9902CF4F1DBF31B900692824 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinHolderClass.swift; sourceTree = "<group>"; };
+		9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BluedolphinPro.entitlements; sourceTree = "<group>"; };
+		9918E8801DDD7B42000376CF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainWrapper.swift; sourceTree = "<group>"; };
+		9918E8841DDD9CF1000376CF /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		992086A61DCCC0850055C6BF /* GlobalFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
+		99339CFE1DE2C86000F3C770 /* CheckinObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinObject.swift; sourceTree = "<group>"; };
+		99339D001DE2C8BA00F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
+		99339D021DE2D5B700F3C770 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		99339F661DE5B38B00F3C770 /* AssignmentObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentObject.swift; sourceTree = "<group>"; };
+		994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinModel.swift; sourceTree = "<group>"; };
+		994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
+		994FF91F1DCA173800276B97 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		994FF92B1DCB39DB00276B97 /* Singelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singelton.swift; sourceTree = "<group>"; };
+		997159F31DDDC8A0006F0C05 /* NotificationClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationClass.swift; sourceTree = "<group>"; };
+		99A2215D1DBF80C400E5F369 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
+		99A2215F1DC07B4E00E5F369 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
+		99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
+		99BD3E1E1DDAE95C0066C07B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		99CACFD41DB8A1590099AA00 /* BluedolphinPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluedolphinPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		99CACFD71DB8A1590099AA00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		99CACFD91DB8A1590099AA00 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		99CACFDC1DB8A1590099AA00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		99CACFDE1DB8A1590099AA00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		99CACFE11DB8A1590099AA00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		99CACFE31DB8A1590099AA00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE78BE1830F43DAE65AB796C /* Pods_BluedolphinPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BluedolphinPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3E49E2482600D4C1E724C7E /* Pods-BluedolphinPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluedolphinPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-BluedolphinPro/Pods-BluedolphinPro.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		99CACFD11DB8A1590099AA00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65C6A7C8E80A76489458049F /* Pods_BluedolphinPro.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8F2354312AF6AAB253C41A27 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AE78BE1830F43DAE65AB796C /* Pods_BluedolphinPro.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		99339CFD1DE2C61C00F3C770 /* Sdk */ = {
+			isa = PBXGroup;
+			children = (
+				9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */,
+				9902CF2F1DBE163A00692824 /* NetworkClass.swift */,
+				9902CF4F1DBF31B900692824 /* UserModel.swift */,
+				99A2215F1DC07B4E00E5F369 /* OauthModel.swift */,
+				99A2215D1DBF80C400E5F369 /* SdkConstant.swift */,
+				9918E8841DDD9CF1000376CF /* ErrorMessage.swift */,
+				994FF91F1DCA173800276B97 /* Extensions.swift */,
+				994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */,
+				99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */,
+				992086A61DCCC0850055C6BF /* GlobalFunction.swift */,
+				99BD3E1E1DDAE95C0066C07B /* Reachability.swift */,
+				994FF92B1DCB39DB00276B97 /* Singelton.swift */,
+				994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */,
+				99339F661DE5B38B00F3C770 /* AssignmentObject.swift */,
+				9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */,
+				99339CFE1DE2C86000F3C770 /* CheckinObject.swift */,
+				99339D001DE2C8BA00F3C770 /* OauthObject.swift */,
+				99339D021DE2D5B700F3C770 /* Enums.swift */,
+			);
+			name = Sdk;
+			sourceTree = "<group>";
+		};
+		99CACFCB1DB8A1590099AA00 = {
+			isa = PBXGroup;
+			children = (
+				99CACFD61DB8A1590099AA00 /* BluedolphinPro */,
+				99CACFD51DB8A1590099AA00 /* Products */,
+				B4EDE623195A4E756F473A90 /* Pods */,
+				8F2354312AF6AAB253C41A27 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		99CACFD51DB8A1590099AA00 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				99CACFD41DB8A1590099AA00 /* BluedolphinPro.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		99CACFD61DB8A1590099AA00 /* BluedolphinPro */ = {
+			isa = PBXGroup;
+			children = (
+				9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */,
+				99CACFD71DB8A1590099AA00 /* AppDelegate.swift */,
+				997159F31DDDC8A0006F0C05 /* NotificationClass.swift */,
+				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
+				99CACFDB1DB8A1590099AA00 /* Main.storyboard */,
+				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
+				99CACFDE1DB8A1590099AA00 /* Assets.xcassets */,
+				99CACFE01DB8A1590099AA00 /* LaunchScreen.storyboard */,
+				99CACFE31DB8A1590099AA00 /* Info.plist */,
+				99339CFD1DE2C61C00F3C770 /* Sdk */,
+			);
+			path = BluedolphinPro;
+			sourceTree = "<group>";
+		};
+		B4EDE623195A4E756F473A90 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C01FAD6D9C2AEE2E69FE6D7 /* Pods-BluedolphinPro.debug.xcconfig */,
+				E3E49E2482600D4C1E724C7E /* Pods-BluedolphinPro.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		99CACFD31DB8A1590099AA00 /* BluedolphinPro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99CACFE61DB8A1590099AA00 /* Build configuration list for PBXNativeTarget "BluedolphinPro" */;
+			buildPhases = (
+				AF6CFB31E8BA49715F022D6E /* [CP] Check Pods Manifest.lock */,
+				99CACFD01DB8A1590099AA00 /* Sources */,
+				99CACFD11DB8A1590099AA00 /* Frameworks */,
+				99CACFD21DB8A1590099AA00 /* Resources */,
+				14BE372137DC95F69CA46FDD /* [CP] Embed Pods Frameworks */,
+				EC9EC5DC1D9EBAEC1CEDDBCE /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BluedolphinPro;
+			productName = BluedolphinPro;
+			productReference = 99CACFD41DB8A1590099AA00 /* BluedolphinPro.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		99CACFCC1DB8A1590099AA00 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = raremediacompany;
+				TargetAttributes = {
+					99CACFD31DB8A1590099AA00 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 9S8FZ5YMQ4;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 99CACFCF1DB8A1590099AA00 /* Build configuration list for PBXProject "BluedolphinPro" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 99CACFCB1DB8A1590099AA00;
+			productRefGroup = 99CACFD51DB8A1590099AA00 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				99CACFD31DB8A1590099AA00 /* BluedolphinPro */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		99CACFD21DB8A1590099AA00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99CACFE21DB8A1590099AA00 /* LaunchScreen.storyboard in Resources */,
+				99CACFDF1DB8A1590099AA00 /* Assets.xcassets in Resources */,
+				99CACFDD1DB8A1590099AA00 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14BE372137DC95F69CA46FDD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BluedolphinPro/Pods-BluedolphinPro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF6CFB31E8BA49715F022D6E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EC9EC5DC1D9EBAEC1CEDDBCE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BluedolphinPro/Pods-BluedolphinPro-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		99CACFD01DB8A1590099AA00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				994FF91E1DC9B5D000276B97 /* AssignmentModel.swift in Sources */,
+				9918E8851DDD9CF1000376CF /* ErrorMessage.swift in Sources */,
+				994FF9201DCA173800276B97 /* Extensions.swift in Sources */,
+				99CACFDA1DB8A1590099AA00 /* ViewController.swift in Sources */,
+				99339D031DE2D5B700F3C770 /* Enums.swift in Sources */,
+				99CACFD81DB8A1590099AA00 /* AppDelegate.swift in Sources */,
+				992086A71DCCC0850055C6BF /* GlobalFunction.swift in Sources */,
+				9918E8811DDD7B42000376CF /* HomeViewController.swift in Sources */,
+				99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */,
+				99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */,
+				994FF92C1DCB39DB00276B97 /* Singelton.swift in Sources */,
+				9902CF501DBF31B900692824 /* UserModel.swift in Sources */,
+				9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */,
+				99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */,
+				99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */,
+				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,
+				99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */,
+				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
+				997159F41DDDC8A0006F0C05 /* NotificationClass.swift in Sources */,
+				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
+				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,
+				99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		99CACFDB1DB8A1590099AA00 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				99CACFDC1DB8A1590099AA00 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		99CACFE01DB8A1590099AA00 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				99CACFE11DB8A1590099AA00 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		99CACFE41DB8A1590099AA00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		99CACFE51DB8A1590099AA00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		99CACFE71DB8A1590099AA00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C01FAD6D9C2AEE2E69FE6D7 /* Pods-BluedolphinPro.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BluedolphinPro/BluedolphinPro.entitlements;
+				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				INFOPLIST_FILE = BluedolphinPro/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.raremediacompany.BluedolphinPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "43a9c4ff-f24d-4a00-9ec9-c80914b57fe4";
+				PROVISIONING_PROFILE_SPECIFIER = BluedolphinProDev;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		99CACFE81DB8A1590099AA00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3E49E2482600D4C1E724C7E /* Pods-BluedolphinPro.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BluedolphinPro/BluedolphinPro.entitlements;
+				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				INFOPLIST_FILE = BluedolphinPro/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.raremediacompany.BluedolphinPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "43a9c4ff-f24d-4a00-9ec9-c80914b57fe4";
+				PROVISIONING_PROFILE_SPECIFIER = BluedolphinProDev;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		99CACFCF1DB8A1590099AA00 /* Build configuration list for PBXProject "BluedolphinPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99CACFE41DB8A1590099AA00 /* Debug */,
+				99CACFE51DB8A1590099AA00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99CACFE61DB8A1590099AA00 /* Build configuration list for PBXNativeTarget "BluedolphinPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99CACFE71DB8A1590099AA00 /* Debug */,
+				99CACFE81DB8A1590099AA00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 99CACFCC1DB8A1590099AA00 /* Project object */;
+}

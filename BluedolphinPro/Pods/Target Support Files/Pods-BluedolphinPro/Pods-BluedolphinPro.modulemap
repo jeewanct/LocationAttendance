@@ -1,0 +1,6 @@
+framework module Pods_BluedolphinPro {
+  umbrella header "Pods-BluedolphinPro-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/NetworkingClass.swift"
+            timestampString = "498720287.032789"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/UserModel.swift"
+            timestampString = "501147906.671853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "userSignUp(email:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/NetworkClass.swift"
+            timestampString = "499262272.976096"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "submitData(_:method:params:headers:success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/OauthModel.swift"
+            timestampString = "501416886.423048"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "getToken(userObject:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/blitepro/BluedolphinPro/BluedolphinPro/OauthModel.swift"
+                  timestampString = "501416891.562012"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "863">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/blitepro/BluedolphinPro/BluedolphinPro/OauthModel.swift"
+                  timestampString = "501416891.564363"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "1583">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/OauthModel.swift"
+            timestampString = "501416886.423048"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "getToken(userObject:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/blitepro/BluedolphinPro/BluedolphinPro/OauthModel.swift"
+                  timestampString = "501416891.570013"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "2834">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/blitepro/BluedolphinPro/BluedolphinPro/OauthModel.swift"
+                  timestampString = "501416891.572623"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "3810">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/ViewController.swift"
+            timestampString = "501071892.645871"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "getOauth()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
