@@ -52,7 +52,7 @@ class AssignmentObject:Object,Mappable{
 }
 
 
-class RMCAssignmentObject :Object {
+class RMCAssignmentObject :Object,Mappable {
     dynamic var assignmentId:String?
     dynamic var addedOn:String?
     dynamic var time:String?
@@ -62,20 +62,59 @@ class RMCAssignmentObject :Object {
     var assigneeData = List<RMCAssignee>()
     dynamic var assignerData:RMCAssignee?
     dynamic var location:RMCLocation?
-    
+    override static func primaryKey() -> String? {
+        return "assignmentId"
+        
+    }
     required convenience init?(map: Map) {
         self.init()
+    }
+    func mapping(map: Map) {
+        addedOn    <- map["addedOn"]
+        time <- map["time"]
+        updatedOn <- map["updatedOn"]
+        statusLog <- map["statusLog"]
+        assigneeData    <- map["assigneeData"]
+        assignmentId <- map["assignmentId"]
+        assignerData <- map["assignerData"]
+        location <- map["location"]
+        assignmentDetails <- map["assignmentDetails"]
     }
 
 }
 
 
-class RMCAssignee :Object{
+class RMCAssignee :Object,Mappable{
     dynamic var userId:String?;
-    dynamic var organisationId:String?;
+    dynamic var organizationId:String?;
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    override static func primaryKey() -> String? {
+        return "userId"
+        
+    }
+    func mapping(map: Map) {
+        userId    <- map["userId"]
+        organizationId <- map["organizationId"]
+    }
 }
 
 class RMCLocation:Object{
+    var latitude:String?
+    var longitude:String?
+    var altitude:String?
+    var accuracy:String?
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    func mapping(map: Map) {
+    latitude    <- map["latitude"]
+    longitude <- map["longitude"]
+    accuracy <- map["accuracy"]
+    altitude <- map["altitude"]
+    }
     
 }
 

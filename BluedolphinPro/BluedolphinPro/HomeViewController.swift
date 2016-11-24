@@ -9,17 +9,40 @@
 import UIKit
 import RealmSwift
 class HomeViewController: UIViewController {
-
+ var data = ["One","Two","three"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        getUserData()
-        postCheckin()
+        createViewPager()
+//        let options = ViewPagerOptions(inView: self.view)
+//        options.isEachTabEvenlyDistributed = true
+//        options.isTabViewHighlightAvailable = true
+    
+        
+        //getUserData()
+        //postCheckin()
         // Do any additional setup after loading the view.
+        
+        
+        
     }
 
+    func createViewPager(){
+        let tabView = ViewPagerControl(items: data)
+        tabView.frame = CGRect(x: 0, y: 0, width: ScreenConstant.width, height: 60)
+        tabView.selectionIndicatorColor = UIColor.blue
+        self.view.addSubview(tabView)
+        
+        tabView.indexChangedHandler = { index in
+            
+            self.segmentControl(index: index)
+            
+        }
+    }
+  
     
-    
-    
+    func segmentControl(index:Int){
+        print(index)
+    }
     func postCheckin(){
         let checkin = CheckinHolder()
         checkin.accuracy = CurrentLocation.accuracy
@@ -54,3 +77,4 @@ class HomeViewController: UIViewController {
     */
 
 }
+

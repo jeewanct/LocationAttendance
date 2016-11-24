@@ -10,6 +10,7 @@
 		65C6A7C8E80A76489458049F /* Pods_BluedolphinPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE78BE1830F43DAE65AB796C /* Pods_BluedolphinPro.framework */; };
 		9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902CF2F1DBE163A00692824 /* NetworkClass.swift */; };
 		9902CF501DBF31B900692824 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902CF4F1DBF31B900692824 /* UserModel.swift */; };
+		991536991DE6F95D0046254C /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991536981DE6F95D0046254C /* AppConstant.swift */; };
 		9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */; };
 		9918E8811DDD7B42000376CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8801DDD7B42000376CF /* HomeViewController.swift */; };
 		9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */; };
@@ -19,6 +20,9 @@
 		99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D001DE2C8BA00F3C770 /* OauthObject.swift */; };
 		99339D031DE2D5B700F3C770 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D021DE2D5B700F3C770 /* Enums.swift */; };
 		99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339F661DE5B38B00F3C770 /* AssignmentObject.swift */; };
+		99339F691DE6D75D00F3C770 /* AssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339F681DE6D75D00F3C770 /* AssignmentTableViewCell.swift */; };
+		99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */; };
+		99339F711DE6EE4C00F3C770 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339F701DE6EE4C00F3C770 /* TabView.swift */; };
 		994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */; };
 		994FF91E1DC9B5D000276B97 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */; };
 		994FF9201DCA173800276B97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91F1DCA173800276B97 /* Extensions.swift */; };
@@ -39,6 +43,7 @@
 		0C01FAD6D9C2AEE2E69FE6D7 /* Pods-BluedolphinPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluedolphinPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BluedolphinPro/Pods-BluedolphinPro.debug.xcconfig"; sourceTree = "<group>"; };
 		9902CF2F1DBE163A00692824 /* NetworkClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClass.swift; sourceTree = "<group>"; };
 		9902CF4F1DBF31B900692824 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		991536981DE6F95D0046254C /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
 		9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinHolderClass.swift; sourceTree = "<group>"; };
 		9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BluedolphinPro.entitlements; sourceTree = "<group>"; };
 		9918E8801DDD7B42000376CF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +54,9 @@
 		99339D001DE2C8BA00F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
 		99339D021DE2D5B700F3C770 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		99339F661DE5B38B00F3C770 /* AssignmentObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentObject.swift; sourceTree = "<group>"; };
+		99339F681DE6D75D00F3C770 /* AssignmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentTableViewCell.swift; sourceTree = "<group>"; };
+		99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
+		99339F701DE6EE4C00F3C770 /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinModel.swift; sourceTree = "<group>"; };
 		994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
 		994FF91F1DCA173800276B97 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -140,7 +148,11 @@
 				997159F31DDDC8A0006F0C05 /* NotificationClass.swift */,
 				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
 				99CACFDB1DB8A1590099AA00 /* Main.storyboard */,
+				99339F681DE6D75D00F3C770 /* AssignmentTableViewCell.swift */,
 				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
+				991536981DE6F95D0046254C /* AppConstant.swift */,
+				99339F701DE6EE4C00F3C770 /* TabView.swift */,
+				99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */,
 				99CACFDE1DB8A1590099AA00 /* Assets.xcassets */,
 				99CACFE01DB8A1590099AA00 /* LaunchScreen.storyboard */,
 				99CACFE31DB8A1590099AA00 /* Info.plist */,
@@ -196,6 +208,9 @@
 						DevelopmentTeam = 9S8FZ5YMQ4;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -289,6 +304,7 @@
 			files = (
 				994FF91E1DC9B5D000276B97 /* AssignmentModel.swift in Sources */,
 				9918E8851DDD9CF1000376CF /* ErrorMessage.swift in Sources */,
+				99339F711DE6EE4C00F3C770 /* TabView.swift in Sources */,
 				994FF9201DCA173800276B97 /* Extensions.swift in Sources */,
 				99CACFDA1DB8A1590099AA00 /* ViewController.swift in Sources */,
 				99339D031DE2D5B700F3C770 /* Enums.swift in Sources */,
@@ -303,10 +319,13 @@
 				99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */,
 				99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */,
 				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,
+				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
 				99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */,
+				99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */,
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
 				997159F41DDDC8A0006F0C05 /* NotificationClass.swift in Sources */,
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
+				99339F691DE6D75D00F3C770 /* AssignmentTableViewCell.swift in Sources */,
 				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,
 				99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */,
 			);
