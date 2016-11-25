@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tGW-rR-4Xu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8CP-ak-waA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -167,7 +167,7 @@
             </objects>
             <point key="canvasLocation" x="3783.1999999999998" y="89.505247376311857"/>
         </scene>
-        <!--Item-->
+        <!--Home View Controller-->
         <scene sceneID="JOv-Ko-gIm">
             <objects>
                 <viewController id="tGW-rR-4Xu" customClass="HomeViewController" customModule="BluedolphinPro" customModuleProvider="target" sceneMemberID="viewController">
@@ -179,64 +179,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wu4-YI-hV2">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="done" id="bwp-Ib-GhR"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="k2h-Zn-yFa"/>
-                                    <barButtonItem systemItem="play" id="e6n-ke-NFw"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="5dn-RU-b3r"/>
-                                    <barButtonItem systemItem="add" id="Ag5-KI-Hxt"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="aJf-QI-vLl"/>
-                                    <barButtonItem systemItem="undo" id="aNQ-UM-5og"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="RTr-oa-Noj"/>
-                                    <barButtonItem systemItem="save" id="27L-Qa-YRg"/>
-                                </items>
-                            </toolbar>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Sjk-Mb-mcD">
-                                <rect key="frame" x="0.0" y="563" width="375" height="60"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l0U-Pj-0UO">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0x2-hl-OJ2">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2o-q9-EhB">
-                                        <rect key="frame" x="75" y="0.0" width="75" height="60"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2n-Bb-NrM">
-                                        <rect key="frame" x="150" y="0.0" width="75" height="60"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOr-g6-MiK">
-                                        <rect key="frame" x="225" y="0.0" width="75" height="60"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMQ-BX-wqa">
-                                        <rect key="frame" x="300" y="0.0" width="75" height="60"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Sjk-Mb-mcD">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0x2-hl-OJ2">
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="50"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2o-q9-EhB">
+                                                <rect key="frame" x="75" y="0.0" width="75" height="50"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2n-Bb-NrM">
+                                                <rect key="frame" x="150" y="0.0" width="75" height="50"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOr-g6-MiK">
+                                                <rect key="frame" x="225" y="0.0" width="75" height="50"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMQ-BX-wqa">
+                                                <rect key="frame" x="300" y="0.0" width="75" height="50"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="aub-aP-yAv"/>
+                                    <constraint firstItem="Sjk-Mb-mcD" firstAttribute="top" secondItem="l0U-Pj-0UO" secondAttribute="top" id="6of-XU-Kpq"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sjk-Mb-mcD" secondAttribute="trailing" id="Nvh-lg-S7Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="Sjk-Mb-mcD" secondAttribute="bottom" id="X7Y-Xz-n5d"/>
+                                    <constraint firstItem="Sjk-Mb-mcD" firstAttribute="leading" secondItem="l0U-Pj-0UO" secondAttribute="leading" id="o6h-uK-IUE"/>
+                                    <constraint firstAttribute="height" constant="50" id="tHe-Zc-i5B"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Sjk-Mb-mcD" firstAttribute="leading" secondItem="oac-LG-G2d" secondAttribute="leading" id="K5H-ih-PLs"/>
-                            <constraint firstItem="wu4-YI-hV2" firstAttribute="leading" secondItem="oac-LG-G2d" secondAttribute="leading" id="Rjw-nN-fnT"/>
-                            <constraint firstAttribute="trailing" secondItem="Sjk-Mb-mcD" secondAttribute="trailing" id="Ske-ap-yAO"/>
-                            <constraint firstItem="wu4-YI-hV2" firstAttribute="top" secondItem="Sjk-Mb-mcD" secondAttribute="bottom" id="a66-at-N44"/>
-                            <constraint firstItem="wu4-YI-hV2" firstAttribute="bottom" secondItem="gQv-Nf-2mn" secondAttribute="top" id="bx8-1E-yCE"/>
-                            <constraint firstAttribute="trailing" secondItem="wu4-YI-hV2" secondAttribute="trailing" id="jxJ-hP-ifE"/>
+                            <constraint firstItem="gQv-Nf-2mn" firstAttribute="top" secondItem="l0U-Pj-0UO" secondAttribute="bottom" id="1ya-kc-OeV"/>
+                            <constraint firstItem="l0U-Pj-0UO" firstAttribute="leading" secondItem="oac-LG-G2d" secondAttribute="leading" id="CYq-8c-BAT"/>
+                            <constraint firstAttribute="trailing" secondItem="l0U-Pj-0UO" secondAttribute="trailing" id="HAb-iU-aBE"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="PAE-Le-c2S"/>
+                    <navigationItem key="navigationItem" id="6sJ-gT-uXk"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHG-3i-r8d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2457" y="977"/>
+            <point key="canvasLocation" x="3396" y="976.46176911544239"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="X7v-BP-xqb">
@@ -274,6 +267,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cSo-wb-LoZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2844" y="89.505247376311857"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="ZB8-ro-rpV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8CP-ak-waA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="PAE-Le-c2S"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aHA-lN-NVU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tGW-rR-4Xu" kind="relationship" relationship="rootViewController" id="sDb-aS-LTb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GE9-F9-4Nv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2456.8000000000002" y="976.46176911544239"/>
         </scene>
     </scenes>
 </document>
