@@ -394,7 +394,7 @@ open class CustomNavigationDropdownMenu: UIView {
             delay: 0,
             usingSpringWithDamping: 0.7,
             initialSpringVelocity: 0.5,
-            options: [],
+            options:.allowUserInteraction,
             animations: {
                 self.tableView.frame.origin.y = CGFloat(-300)
                 self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
@@ -416,7 +416,7 @@ open class CustomNavigationDropdownMenu: UIView {
             delay: 0,
             usingSpringWithDamping: 0.7,
             initialSpringVelocity: 0.5,
-            options: [],
+            options:.allowUserInteraction,
             animations: {
                 self.tableView.frame.origin.y = CGFloat(-200)
         }, completion: nil
@@ -541,7 +541,7 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if let hitView = super.hitTest(point, with: event), hitView.isKind(of: DropDownTableViewCell.self) {
+        if let hitView = super.hitTest(point, with: event), hitView.isKind(of: TableCellContentView.self) {
             return hitView
         }
         return nil;
@@ -562,15 +562,15 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = DropDownTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell", configuration: self.configuration)
-        cell.textLabel?.text = self.items[indexPath.row] as? String
-        cell.checkmarkIcon.isHidden = (indexPath.row == selectedIndexPath) ? false : true
+        cell.textLabel?.text = self.items[(indexPath as NSIndexPath).row] as? String
+        cell.checkmarkIcon.isHidden = ((indexPath as NSIndexPath).row == selectedIndexPath) ? false : true
         return cell
     }
-
+    
     // Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndexPath = indexPath.row
-        self.selectRowAtIndexPathHandler!(indexPath.row)
+        selectedIndexPath = (indexPath as NSIndexPath).row
+        self.selectRowAtIndexPathHandler!((indexPath as NSIndexPath).row)
         self.reloadData()
         let cell = tableView.cellForRow(at: indexPath) as? DropDownTableViewCell
         cell?.contentView.backgroundColor = self.configuration.cellSelectionColor
@@ -587,7 +587,7 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if self.configuration.shouldKeepSelectedCellColor == true {
             cell.backgroundColor = self.configuration.cellBackgroundColor
-            cell.contentView.backgroundColor = (indexPath.row == selectedIndexPath) ? self.configuration.cellSelectionColor : self.configuration.cellBackgroundColor
+            cell.contentView.backgroundColor = ((indexPath as NSIndexPath).row == selectedIndexPath) ? self.configuration.cellSelectionColor : self.configuration.cellBackgroundColor
         }
     }
 }

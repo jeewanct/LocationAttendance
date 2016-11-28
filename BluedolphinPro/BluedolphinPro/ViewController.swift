@@ -70,8 +70,10 @@ class ViewController: UIViewController {
         let oauth = OauthModel()
         oauth.getToken(userObject: param) { (result) in
             if result == APIResult.Success.rawValue {
-                let viewController = HomeViewController()
-                self.navigationController?.show(viewController, sender: nil)
+                let navController = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentScene") as! UINavigationController
+                let controller = navController.topViewController as! AssignmentViewController
+                
+                self.navigationController?.pushViewController(navController, animated: true)
             }
         }
 

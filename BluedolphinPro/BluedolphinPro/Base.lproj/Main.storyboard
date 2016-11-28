@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8CP-ak-waA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1fu-sd-tbM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -77,16 +77,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wbr-B2-6V6">
-                                <rect key="frame" x="23" y="87" width="329" height="29"/>
-                                <segments>
-                                    <segment title="New"/>
-                                    <segment title="In Progress"/>
-                                    <segment title="Completed"/>
-                                </segments>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Do0-5Y-W4V">
-                                <rect key="frame" x="0.0" y="125" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="105" width="375" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assignmentCell" rowHeight="115" id="Laq-zX-ZBV" customClass="AssignmentTableViewCell" customModule="BluedolphinPro" customModuleProvider="target">
@@ -97,7 +89,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NIKH-110" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2C-t3-eIj">
-                                                    <rect key="frame" x="10" y="13" width="57.5" height="16"/>
+                                                    <rect key="frame" x="10" y="13" width="58" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -109,7 +101,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9f-dn-3FX">
-                                                    <rect key="frame" x="10" y="55" width="23.5" height="16"/>
+                                                    <rect key="frame" x="10" y="55" width="24" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -151,11 +143,8 @@
                         <constraints>
                             <constraint firstItem="Do0-5Y-W4V" firstAttribute="leading" secondItem="CwA-kA-PD4" secondAttribute="leading" id="Av7-5K-bax"/>
                             <constraint firstAttribute="trailing" secondItem="Do0-5Y-W4V" secondAttribute="trailing" id="C0z-Ku-I4Z"/>
-                            <constraint firstItem="Wbr-B2-6V6" firstAttribute="top" secondItem="Wd0-Qp-J28" secondAttribute="bottom" constant="23" id="MK5-tK-uWz"/>
-                            <constraint firstAttribute="trailing" secondItem="Wbr-B2-6V6" secondAttribute="trailing" constant="23" id="OCt-20-sMS"/>
-                            <constraint firstItem="Wbr-B2-6V6" firstAttribute="leading" secondItem="CwA-kA-PD4" secondAttribute="leading" constant="23" id="RGZ-H4-aT9"/>
-                            <constraint firstItem="BsQ-tc-OP1" firstAttribute="top" secondItem="Do0-5Y-W4V" secondAttribute="bottom" id="p5n-bs-7U4"/>
-                            <constraint firstItem="Do0-5Y-W4V" firstAttribute="top" secondItem="Wbr-B2-6V6" secondAttribute="bottom" constant="10" id="x7b-w6-khM"/>
+                            <constraint firstItem="Do0-5Y-W4V" firstAttribute="top" secondItem="Wd0-Qp-J28" secondAttribute="bottom" constant="41" id="Zto-pO-g44"/>
+                            <constraint firstItem="BsQ-tc-OP1" firstAttribute="top" secondItem="Do0-5Y-W4V" secondAttribute="bottom" constant="60" id="p5n-bs-7U4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kao-WB-YYL"/>
@@ -217,7 +206,7 @@
         <!--Item-->
         <scene sceneID="fse-gQ-6B2">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1fu-sd-tbM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AssignmentScene" automaticallyAdjustsScrollViewInsets="NO" id="1fu-sd-tbM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="pO5-cQ-gbw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AhM-su-8iN">
