@@ -10,7 +10,7 @@ target 'BluedolphinPro' do
 pod 'Alamofire'
 pod 'RealmSwift'
 pod 'AlamofireObjectMapper'
-
+pod 'GoogleMaps'
 
 end
 
