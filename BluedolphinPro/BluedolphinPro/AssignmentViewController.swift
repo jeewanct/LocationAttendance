@@ -7,11 +7,20 @@
 //
 
 import UIKit
+import GoogleMaps
 
-class AssignmentViewController: UIViewController {
+
+
+class googleMapUsage {
+    static let sharedInstance = googleMapUsage()
+    var globalMapView = GMSMapView()
+}
+
+class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
     var tableDataArray = ["hello","new","world","Go"];
     @IBOutlet weak var assignmentTableView: UITableView!
     
+    @IBOutlet weak var mapView: UIView!
     var viewPager:ViewPagerControl!
     var tabView:ViewPagerControl!
     var menuView: CustomNavigationDropdownMenu!
@@ -30,6 +39,7 @@ class AssignmentViewController: UIViewController {
         createNavView()
         createViewPager()
         createTabbarView()
+        createMapView()
         
         
         let notificationButton = UIBarButtonItem(image: #imageLiteral(resourceName: "notifications"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(notificationAction(_:)))
@@ -49,6 +59,18 @@ class AssignmentViewController: UIViewController {
         
     }
     
+    
+    func createMapView(){
+        DispatchQueue.main.async {
+            googleMapUsage.sharedInstance.globalMapView = GMSMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.mapView.frame.height))
+            self.mapView.addSubview(googleMapUsage.sharedInstance.globalMapView)
+            googleMapUsage.sharedInstance.globalMapView.delegate=self
+            googleMapUsage.sharedInstance.globalMapView.animate(toZoom: 10)
+            googleMapUsage.sharedInstance.globalMapView.clipsToBounds = true
+            googleMapUsage.sharedInstance.globalMapView.isMyLocationEnabled = true
+            googleMapUsage.sharedInstance.globalMapView.settings.myLocationButton = true
+        }
+    }
     func createViewPager(){
         let data = ["New","In Progress","Completed"]
         viewPager = ViewPagerControl(items: data)
@@ -121,7 +143,7 @@ class AssignmentViewController: UIViewController {
         
         tabView.indexChangedHandler = { index in
             
-            self.segmentControl(index: index)
+            self.tabChanger(segment: index)
             
         }
         
@@ -157,6 +179,18 @@ class AssignmentViewController: UIViewController {
         }
         
         self.navigationItem.titleView = menuView
+    }
+    
+    func tabChanger(segment:Int){
+        switch segment {
+        case 0:
+            mapView.isHidden = true
+        case 1:
+            mapView.isHidden = false
+            
+        default:
+            break
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -18,7 +18,7 @@
 		9918E8811DDD7B42000376CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8801DDD7B42000376CF /* HomeViewController.swift */; };
 		9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */; };
 		9918E8851DDD9CF1000376CF /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8841DDD9CF1000376CF /* ErrorMessage.swift */; };
-		992086A71DCCC0850055C6BF /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992086A61DCCC0850055C6BF /* GlobalFunction.swift */; };
+		992086A71DCCC0850055C6BF /* GlobalSDKFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */; };
 		99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339CFE1DE2C86000F3C770 /* CheckinObject.swift */; };
 		99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D001DE2C8BA00F3C770 /* OauthObject.swift */; };
 		99339D031DE2D5B700F3C770 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D021DE2D5B700F3C770 /* Enums.swift */; };
@@ -29,7 +29,7 @@
 		994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */; };
 		994FF91E1DC9B5D000276B97 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */; };
 		994FF9201DCA173800276B97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91F1DCA173800276B97 /* Extensions.swift */; };
-		994FF92C1DCB39DB00276B97 /* Singelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF92B1DCB39DB00276B97 /* Singelton.swift */; };
+		994FF92C1DCB39DB00276B97 /* SDKSingelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */; };
 		997159F41DDDC8A0006F0C05 /* NotificationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997159F31DDDC8A0006F0C05 /* NotificationClass.swift */; };
 		99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215D1DBF80C400E5F369 /* SdkConstant.swift */; };
 		99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215F1DC07B4E00E5F369 /* OauthModel.swift */; };
@@ -55,7 +55,7 @@
 		9918E8801DDD7B42000376CF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainWrapper.swift; sourceTree = "<group>"; };
 		9918E8841DDD9CF1000376CF /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
-		992086A61DCCC0850055C6BF /* GlobalFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
+		992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSDKFunction.swift; sourceTree = "<group>"; };
 		99339CFE1DE2C86000F3C770 /* CheckinObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinObject.swift; sourceTree = "<group>"; };
 		99339D001DE2C8BA00F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
 		99339D021DE2D5B700F3C770 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 		994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinModel.swift; sourceTree = "<group>"; };
 		994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
 		994FF91F1DCA173800276B97 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		994FF92B1DCB39DB00276B97 /* Singelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singelton.swift; sourceTree = "<group>"; };
+		994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKSingelton.swift; sourceTree = "<group>"; };
 		997159F31DDDC8A0006F0C05 /* NotificationClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationClass.swift; sourceTree = "<group>"; };
 		99A2215D1DBF80C400E5F369 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
 		99A2215F1DC07B4E00E5F369 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
@@ -124,9 +124,9 @@
 				994FF91F1DCA173800276B97 /* Extensions.swift */,
 				994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */,
 				99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */,
-				992086A61DCCC0850055C6BF /* GlobalFunction.swift */,
+				992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */,
 				99BD3E1E1DDAE95C0066C07B /* Reachability.swift */,
-				994FF92B1DCB39DB00276B97 /* Singelton.swift */,
+				994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */,
 				994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */,
 				99339F661DE5B38B00F3C770 /* AssignmentObject.swift */,
 				9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */,
@@ -328,11 +328,11 @@
 				99CACFDA1DB8A1590099AA00 /* ViewController.swift in Sources */,
 				99339D031DE2D5B700F3C770 /* Enums.swift in Sources */,
 				99CACFD81DB8A1590099AA00 /* AppDelegate.swift in Sources */,
-				992086A71DCCC0850055C6BF /* GlobalFunction.swift in Sources */,
+				992086A71DCCC0850055C6BF /* GlobalSDKFunction.swift in Sources */,
 				9918E8811DDD7B42000376CF /* HomeViewController.swift in Sources */,
 				99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */,
 				99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */,
-				994FF92C1DCB39DB00276B97 /* Singelton.swift in Sources */,
+				994FF92C1DCB39DB00276B97 /* SDKSingelton.swift in Sources */,
 				9902CF501DBF31B900692824 /* UserModel.swift in Sources */,
 				991536C11DEBF8390046254C /* CustomNavView.swift in Sources */,
 				9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */,

@@ -85,7 +85,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Laq-zX-ZBV" id="Il6-6T-5Ov">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="114.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NIKH-110" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2C-t3-eIj">
@@ -138,18 +138,27 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3e8-Io-aq9">
+                                <rect key="frame" x="0.0" y="105" width="375" height="502"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="3e8-Io-aq9" secondAttribute="trailing" id="5hw-5m-u3t"/>
                             <constraint firstItem="Do0-5Y-W4V" firstAttribute="leading" secondItem="CwA-kA-PD4" secondAttribute="leading" id="Av7-5K-bax"/>
                             <constraint firstAttribute="trailing" secondItem="Do0-5Y-W4V" secondAttribute="trailing" id="C0z-Ku-I4Z"/>
+                            <constraint firstItem="3e8-Io-aq9" firstAttribute="leading" secondItem="CwA-kA-PD4" secondAttribute="leading" id="EJS-c7-uLc"/>
                             <constraint firstItem="Do0-5Y-W4V" firstAttribute="top" secondItem="Wd0-Qp-J28" secondAttribute="bottom" constant="41" id="Zto-pO-g44"/>
+                            <constraint firstItem="BsQ-tc-OP1" firstAttribute="top" secondItem="3e8-Io-aq9" secondAttribute="bottom" constant="60" id="iYY-3H-Gz1"/>
                             <constraint firstItem="BsQ-tc-OP1" firstAttribute="top" secondItem="Do0-5Y-W4V" secondAttribute="bottom" constant="60" id="p5n-bs-7U4"/>
+                            <constraint firstItem="3e8-Io-aq9" firstAttribute="top" secondItem="Wd0-Qp-J28" secondAttribute="bottom" constant="41" id="s1d-de-EeU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kao-WB-YYL"/>
                     <connections>
                         <outlet property="assignmentTableView" destination="Do0-5Y-W4V" id="dKk-gr-jQD"/>
+                        <outlet property="mapView" destination="3e8-Io-aq9" id="7UY-Ru-CG4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PM-DZ-afb" userLabel="First Responder" sceneMemberID="firstResponder"/>

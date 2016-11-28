@@ -15,3 +15,6 @@ struct ScreenConstant {
     static var originX   = UIScreen.main.bounds.origin.x
     static var originY   = UIScreen.main.bounds.origin.y
 }
+struct GOOGLE_MAPS{
+    static var ApiKey = "AIzaSyCv2aXPsTEYdWG2q3IM9neN690s4JFxe4A"
+}

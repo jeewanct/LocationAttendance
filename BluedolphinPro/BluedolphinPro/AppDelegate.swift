@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -62,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func startUpTask(){
         self.coreLocationController  = CoreLocationController()
+        GMSServices.provideAPIKey(GOOGLE_MAPS.ApiKey)
         self.getDeviceID()
     }
     
