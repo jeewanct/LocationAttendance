@@ -72,12 +72,12 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "501768245.094847"
+                  timestampString = "502017947.165998"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
                   endingLineNumber = "40"
-                  offsetFromSymbolStart = "863">
+                  offsetFromSymbolStart = "724">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -87,12 +87,12 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "501768245.097228"
+                  timestampString = "502017947.168288"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
                   endingLineNumber = "40"
-                  offsetFromSymbolStart = "1583">
+                  offsetFromSymbolStart = "1308">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -120,12 +120,12 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "501768245.102109"
+                  timestampString = "502017947.172104"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
                   endingLineNumber = "51"
-                  offsetFromSymbolStart = "2834">
+                  offsetFromSymbolStart = "2248">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -135,12 +135,12 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "501768245.103852"
+                  timestampString = "502017947.173713"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
                   endingLineNumber = "51"
-                  offsetFromSymbolStart = "3810">
+                  offsetFromSymbolStart = "2988">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -158,6 +158,70 @@
             startingLineNumber = "72"
             endingLineNumber = "72"
             landmarkName = "getOauth()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/HomeViewController.swift"
+            timestampString = "502014698.457113"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "createNavView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/CustomNavView.swift"
+            timestampString = "502012251.322042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/CustomNavView.swift"
+            timestampString = "502012976.573411"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
+            landmarkName = "init(navigationController:containerView:title:items:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/CustomNavView.swift"
+            timestampString = "502014300.404808"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "564"
+            endingLineNumber = "564"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

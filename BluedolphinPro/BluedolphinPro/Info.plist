@@ -43,5 +43,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SourceSansPro-Regular.ttf</string>
+		<string>SourceSansPro-Bold.ttf</string>
+	</array>
 </dict>
 </plist>

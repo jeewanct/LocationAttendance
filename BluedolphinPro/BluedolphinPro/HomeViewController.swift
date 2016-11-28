@@ -11,16 +11,20 @@ import RealmSwift
 
 
 class HomeViewController: UIViewController {
- var data = ["One","Two","three"]
+ 
+    var viewPager:ViewPagerControl!
     var tabView:ViewPagerControl!
+    var menuView: CustomNavigationDropdownMenu!
     override func viewDidLoad() {
         super.viewDidLoad()
         createViewPager()
+        createNavView()
+        createTabbarView()
       
         
 //        let options = ViewPagerOptions(inView: self.view)
 //        options.isEachTabEvenlyDistributed = true
-//        options.isTabViewHighlightAvailable = true
+//        options.isviewPagerHighlightAvailable = true
     
         
         //getUserData()
@@ -30,18 +34,23 @@ class HomeViewController: UIViewController {
         
         
     }
+    
+    
+    
 
     func createViewPager(){
-        tabView = ViewPagerControl(items: data)
-        tabView.type = .text
-        tabView.frame = CGRect(x: 0, y: 64, width: ScreenConstant.width, height: 60)
-        tabView.isHighlighted = true
-        tabView.selectionIndicatorColor = UIColor.blue
-        tabView.selectionIndicatorHeight = 2
+        let data = ["New","In Progress","Completed"]
+        viewPager = ViewPagerControl(items: data)
+        viewPager.type = .text
+        viewPager.frame = CGRect(x: 0, y: 0
+            , width: ScreenConstant.width, height: 50)
+        viewPager.isHighlighted = true
+        viewPager.selectionIndicatorColor = UIColor.blue
+        viewPager.selectionIndicatorHeight = 2
         
-        self.view.addSubview(tabView)
+        self.view.addSubview(viewPager)
         
-        tabView.indexChangedHandler = { index in
+        viewPager.indexChangedHandler = { index in
             
             self.segmentControl(index: index)
             
@@ -62,9 +71,9 @@ class HomeViewController: UIViewController {
         if let swipeGesture = sender as? UISwipeGestureRecognizer{
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
-                tabView.setSelectedSegmentIndex(tabView.selectedSegmentIndex + 1 > 2 ? 2:tabView.selectedSegmentIndex + 1, animated: true)
+                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex + 1 > 2 ? 2:viewPager.selectedSegmentIndex + 1, animated: true)
             case UISwipeGestureRecognizerDirection.left:
-                tabView.setSelectedSegmentIndex(tabView.selectedSegmentIndex - 1 < 0 ? 0:tabView.selectedSegmentIndex - 1, animated: true)
+                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex - 1 < 0 ? 0:viewPager.selectedSegmentIndex - 1, animated: true)
                 print("left swipe")
             default:
                 print("other swipe")
@@ -74,6 +83,29 @@ class HomeViewController: UIViewController {
     
     func segmentControl(index:Int){
         print(index)
+    }
+    
+    
+    func createTabbarView(){
+        let image1 = ["active list view","active map view","add new","Filter","sort"]
+        let image2 = ["list","map view","add new","Filter","sort"]
+        
+        tabView = ViewPagerControl(images: image2, selectedImage: image1)
+        //ViewPagerControl(items: data)
+        tabView.type = .image
+        tabView.frame = CGRect(x: 0, y: ScreenConstant.height - 124, width: ScreenConstant.width, height: 60)
+        
+        
+        tabView.selectionIndicatorColor = UIColor.white
+        //tabView.showSelectionIndication = false
+        self.view.addSubview(tabView)
+        
+        tabView.indexChangedHandler = { index in
+            
+            self.segmentControl(index: index)
+            
+        }
+        
     }
     func postCheckin(){
         let checkin = CheckinHolder()
@@ -92,6 +124,39 @@ class HomeViewController: UIViewController {
         user.postCheckin()
         
     }
+    
+    
+    func createNavView(){
+        let items = ["My Dashboard", "Assignments", "Calendar", "Call History", "Profile"]
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+            //UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+        
+        menuView = CustomNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Assignments", items: items as [AnyObject])
+        menuView.cellHeight = 50
+        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
+        menuView.cellSelectionColor = UIColor.white
+            //UIColor(red: 0.0/255.0, green:160.0/255.0, blue:195.0/255.0, alpha: 1.0)
+        menuView.shouldKeepSelectedCellColor = true
+        menuView.cellTextLabelColor = UIColor.black
+        menuView.cellTextLabelFont = UIFont(name: "SourceSansPro-Bold", size: 17)
+        menuView.cellTextLabelAlignment = .left // .Center // .Right // .Left
+        menuView.arrowPadding = 15
+        menuView.animationDuration = 0.5
+        menuView.maskBackgroundColor = UIColor.black
+        menuView.maskBackgroundOpacity = 0.3
+        menuView.shouldChangeTitleText = true
+        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
+            print("Did select item at index: \(indexPath)")
+           
+           
+        }
+        
+        self.navigationItem.titleView = menuView
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -108,11 +173,7 @@ class HomeViewController: UIViewController {
     }
     */
     
-//    func addObserver(){
-//        
-//        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.MobileNumber(_:)), name: NSNotification.Name(rawValue: NotifRequestSuccess.mobileNumber.rawValue), object: nil)
-//        
-//    }
+
 
 }
     

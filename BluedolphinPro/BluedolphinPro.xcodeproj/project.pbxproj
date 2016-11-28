@@ -11,6 +11,10 @@
 		9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902CF2F1DBE163A00692824 /* NetworkClass.swift */; };
 		9902CF501DBF31B900692824 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902CF4F1DBF31B900692824 /* UserModel.swift */; };
 		991536991DE6F95D0046254C /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991536981DE6F95D0046254C /* AppConstant.swift */; };
+		991536BF1DE86A4A0046254C /* DropDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991536BE1DE86A4A0046254C /* DropDownButton.swift */; };
+		991536C11DEBF8390046254C /* CustomNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991536C01DEBF8390046254C /* CustomNavView.swift */; };
+		991536C51DEBFF810046254C /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 991536C31DEBFF810046254C /* SourceSansPro-Bold.ttf */; };
+		991536C61DEBFF810046254C /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 991536C41DEBFF810046254C /* SourceSansPro-Regular.ttf */; };
 		9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */; };
 		9918E8811DDD7B42000376CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8801DDD7B42000376CF /* HomeViewController.swift */; };
 		9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */; };
@@ -44,6 +48,10 @@
 		9902CF2F1DBE163A00692824 /* NetworkClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClass.swift; sourceTree = "<group>"; };
 		9902CF4F1DBF31B900692824 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		991536981DE6F95D0046254C /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
+		991536BE1DE86A4A0046254C /* DropDownButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownButton.swift; sourceTree = "<group>"; };
+		991536C01DEBF8390046254C /* CustomNavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavView.swift; sourceTree = "<group>"; };
+		991536C31DEBFF810046254C /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
+		991536C41DEBFF810046254C /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinHolderClass.swift; sourceTree = "<group>"; };
 		9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BluedolphinPro.entitlements; sourceTree = "<group>"; };
 		9918E8801DDD7B42000376CF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +105,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		991536C21DEBFF810046254C /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				991536C31DEBFF810046254C /* SourceSansPro-Bold.ttf */,
+				991536C41DEBFF810046254C /* SourceSansPro-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		99339CFD1DE2C61C00F3C770 /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +160,8 @@
 		99CACFD61DB8A1590099AA00 /* BluedolphinPro */ = {
 			isa = PBXGroup;
 			children = (
+				991536C21DEBFF810046254C /* Font */,
+				991536C01DEBF8390046254C /* CustomNavView.swift */,
 				9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */,
 				99CACFD71DB8A1590099AA00 /* AppDelegate.swift */,
 				997159F31DDDC8A0006F0C05 /* NotificationClass.swift */,
@@ -150,6 +169,7 @@
 				99CACFDB1DB8A1590099AA00 /* Main.storyboard */,
 				99339F681DE6D75D00F3C770 /* AssignmentTableViewCell.swift */,
 				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
+				991536BE1DE86A4A0046254C /* DropDownButton.swift */,
 				991536981DE6F95D0046254C /* AppConstant.swift */,
 				99339F701DE6EE4C00F3C770 /* TabView.swift */,
 				99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */,
@@ -241,9 +261,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				991536C61DEBFF810046254C /* SourceSansPro-Regular.ttf in Resources */,
 				99CACFE21DB8A1590099AA00 /* LaunchScreen.storyboard in Resources */,
 				99CACFDF1DB8A1590099AA00 /* Assets.xcassets in Resources */,
 				99CACFDD1DB8A1590099AA00 /* Main.storyboard in Resources */,
+				991536C51DEBFF810046254C /* SourceSansPro-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,11 +337,13 @@
 				99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */,
 				994FF92C1DCB39DB00276B97 /* Singelton.swift in Sources */,
 				9902CF501DBF31B900692824 /* UserModel.swift in Sources */,
+				991536C11DEBF8390046254C /* CustomNavView.swift in Sources */,
 				9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */,
 				99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */,
 				99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */,
 				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
+				991536BF1DE86A4A0046254C /* DropDownButton.swift in Sources */,
 				99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */,
 				99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */,
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
