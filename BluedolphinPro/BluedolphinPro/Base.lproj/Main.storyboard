@@ -68,7 +68,7 @@
         <!--Assignment View Controller-->
         <scene sceneID="129-9P-xZs">
             <objects>
-                <viewController id="pBf-8K-lez" customClass="AssignmentViewController" customModule="BluedolphinPro" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="pBf-8K-lez" customClass="AssignmentViewController" customModule="BluedolphinPro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wd0-Qp-J28"/>
                         <viewControllerLayoutGuide type="bottom" id="BsQ-tc-OP1"/>
@@ -154,16 +154,40 @@
                             <constraint firstItem="BsQ-tc-OP1" firstAttribute="top" secondItem="Do0-5Y-W4V" secondAttribute="bottom" constant="60" id="p5n-bs-7U4"/>
                             <constraint firstItem="3e8-Io-aq9" firstAttribute="top" secondItem="Wd0-Qp-J28" secondAttribute="bottom" constant="41" id="s1d-de-EeU"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="3e8-Io-aq9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="kao-WB-YYL"/>
                     <connections>
                         <outlet property="assignmentTableView" destination="Do0-5Y-W4V" id="dKk-gr-jQD"/>
                         <outlet property="mapView" destination="3e8-Io-aq9" id="7UY-Ru-CG4"/>
+                        <segue destination="E6B-Of-kyw" kind="show" identifier="showDetails" id="srj-67-kBE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PM-DZ-afb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3783.1999999999998" y="89.505247376311857"/>
+        </scene>
+        <!--Assignment Detail View Controller-->
+        <scene sceneID="U7H-to-Vtd">
+            <objects>
+                <viewController id="E6B-Of-kyw" customClass="AssignmentDetailViewController" customModule="BluedolphinPro" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bzx-ot-0wI"/>
+                        <viewControllerLayoutGuide type="bottom" id="x4b-Gm-CYv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UAu-T2-sn4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JEc-jZ-CxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4545" y="136"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="JOv-Ko-gIm">
@@ -176,17 +200,7 @@
                     <view key="view" contentMode="scaleToFill" id="oac-LG-G2d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LXO-lT-i4Y">
-                                <rect key="frame" x="164.5" y="318.5" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="LXO-lT-i4Y" firstAttribute="centerY" secondItem="oac-LG-G2d" secondAttribute="centerY" id="OXa-16-KpR"/>
-                            <constraint firstItem="LXO-lT-i4Y" firstAttribute="centerX" secondItem="oac-LG-G2d" secondAttribute="centerX" id="YiT-w3-Ncp"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6sJ-gT-uXk"/>
                 </viewController>

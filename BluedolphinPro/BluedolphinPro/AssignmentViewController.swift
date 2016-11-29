@@ -90,7 +90,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
             NSFontAttributeName : UIFont(name: "SourceSansPro-Regular", size: 13)!
         ]
         self.view.addSubview(viewPager)
-        
+        viewPager.setSelectedSegmentIndex(0, animated: false)
         viewPager.indexChangedHandler = { index in
             
             self.segmentControl(index: index)
@@ -166,7 +166,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
         //UIColor(red: 0.0/255.0, green:160.0/255.0, blue:195.0/255.0, alpha: 1.0)
         menuView.shouldKeepSelectedCellColor = true
         menuView.cellTextLabelColor = UIColor.black
-        menuView.cellTextLabelFont = UIFont(name: "SourceSansPro-Bold", size: 17)
+        menuView.cellTextLabelFont = UIFont(name: "SourceSansPro-Regular", size: 17)
         menuView.cellTextLabelAlignment = .left // .Center // .Right // .Left
         menuView.arrowPadding = 15
         menuView.animationDuration = 0.3
@@ -222,6 +222,11 @@ extension AssignmentViewController:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell") as! AssignmentTableViewCell
         
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "showDetails", sender: self)
         
     }
     
