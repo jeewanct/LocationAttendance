@@ -17,10 +17,10 @@ class AssignmentDetailViewController: UIViewController {
     var timeLineTableArray = ["OutGoingCall","Image Captured","Assignment Started"]
     
     @IBOutlet weak var timeLineTableView: UITableView!
-    
-    
-    
     @IBOutlet weak var imagesTableView: UITableView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createTabbarView()
@@ -30,9 +30,14 @@ class AssignmentDetailViewController: UIViewController {
         timeLineTableView.delegate = self
         timeLineTableView.dataSource = self
         timeLineTableView.isHidden = true
+        let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(AssignmentDetailViewController.saveAction(_:)))
+        self.navigationItem.rightBarButtonItem = saveButton
+        self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
         // Do any additional setup after loading the view.
     }
-    
+    func saveAction(_:UIButton){
+        
+    }
     
     func createTabbarView(){
         let image1 = ["notes","attachments","signature"]
