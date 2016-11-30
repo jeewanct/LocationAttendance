@@ -12,10 +12,24 @@ class AssignmentDetailViewController: UIViewController {
     var viewPager:ViewPagerControl!
     var tabView:ViewPagerControl!
     
+    
+   var imagesTableDataArray = ["Image 01","Image 02","Image 03","Image 04"];
+    var timeLineTableArray = ["OutGoingCall","Image Captured","Assignment Started"]
+    
+    @IBOutlet weak var timeLineTableView: UITableView!
+    
+    
+    
+    @IBOutlet weak var imagesTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         createTabbarView()
-        createViewPager() 
+        createViewPager()
+        imagesTableView.delegate = self
+        imagesTableView.dataSource = self
+        timeLineTableView.delegate = self
+        timeLineTableView.dataSource = self
+        timeLineTableView.isHidden = true
         // Do any additional setup after loading the view.
     }
     
@@ -26,7 +40,7 @@ class AssignmentDetailViewController: UIViewController {
         tabView = ViewPagerControl(images: image2, selectedImage: image1)
         //ViewPagerControl(items: data)
         tabView.type = .image
-        tabView.frame = CGRect(x: 0, y: ScreenConstant.height - 124, width: ScreenConstant.width, height: 60)
+        tabView.frame = CGRect(x: 0, y: ScreenConstant.height - 114, width: ScreenConstant.width, height: 50)
         
         
         tabView.selectionIndicatorColor = UIColor.white
@@ -72,7 +86,15 @@ class AssignmentDetailViewController: UIViewController {
     }
     
     func segmentControl(index:Int){
-        print(index)
+        switch(index){
+        case 0:
+            timeLineTableView.isHidden = true
+        case 1:
+            timeLineTableView.isHidden = false
+        default:
+            break
+
+        }
     }
     
     
@@ -107,4 +129,56 @@ class AssignmentDetailViewController: UIViewController {
     }
     */
 
+}
+
+
+extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == imagesTableView{
+        return imagesTableDataArray.count
+        }else{
+            return timeLineTableArray.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == imagesTableView{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
+            cell.imageView?.image = UIImage(named: "add new")
+            cell.textLabel?.text = imagesTableDataArray[indexPath.row]
+            
+            return cell
+
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "timeLineCell") as! TimeLineTableViewCell
+            cell.taskTitleLabel.text = timeLineTableArray[indexPath.row]
+            cell.taskImageView.image = UIImage(named: "bookmark")
+            cell.taskTimeLabel.text = "11/11/16 21:30"
+            if indexPath.row == 0{
+                cell.upLineView.isHidden = true
+                cell.downLineView.isHidden = false
+                
+            }else if indexPath.row == timeLineTableArray.count - 1 {
+                cell.upLineView.isHidden = false
+               cell.downLineView.isHidden = true
+            }else{
+                cell.upLineView.isHidden = false
+                cell.downLineView.isHidden = false
+            }
+            return cell
+        }
+        
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //self.performSegue(withIdentifier: "showDetails", sender: self)
+        
+    }
+    
+    
+    
+    
 }

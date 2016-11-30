@@ -72,7 +72,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "502100849.89663"
+                  timestampString = "502185921.266066"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
@@ -87,7 +87,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "502100849.898295"
+                  timestampString = "502185921.267747"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
@@ -120,7 +120,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "502100849.90321"
+                  timestampString = "502185921.27123"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
@@ -135,7 +135,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "502100849.906254"
+                  timestampString = "502185921.272947"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
@@ -200,7 +200,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/HomeViewController.swift"
-                  timestampString = "502100849.915989"
+                  timestampString = "502185921.28687"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -215,7 +215,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/HomeViewController.swift"
-                  timestampString = "502100849.917656"
+                  timestampString = "502185921.288536"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -223,6 +223,22 @@
                   offsetFromSymbolStart = "796">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/AppDelegate.swift"
+            timestampString = "502112318.678503"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "userNotificationCenter(_:didReceive:withCompletionHandler:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
