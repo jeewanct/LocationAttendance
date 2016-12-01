@@ -67,6 +67,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         GMSServices.provideAPIKey(GOOGLE_MAPS.ApiKey)
         self.getDeviceID()
+        checkLogin()
+        
+    }
+    
+    func checkLogin(){
+        getUserData()
+        if !Singleton.sharedInstance.userId.isBlank{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let destVC = storyboard.instantiateViewController(withIdentifier: "AssignmentScene") as! UINavigationController
+            if self.window != nil {
+                self.window?.rootViewController = destVC
+            }
+        }
+        
     }
     
         func getDeviceID(){

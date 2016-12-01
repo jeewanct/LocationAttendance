@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBAction func SignIn(_ sender: AnyObject) {
         email = mobileTextField.text!
             //+ "@rmc.in"
-        //pass = password.text!
+        pass = passwordTextfield.text!
         updateUser()
         getOauth()
         
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
                 let navController = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentScene") as! UINavigationController
                 let controller = navController.topViewController as! AssignmentViewController
                 
-                self.navigationController?.pushViewController(navController, animated: true)
+                self.navigationController?.pushViewController(controller, animated: true)
             }
         }
 

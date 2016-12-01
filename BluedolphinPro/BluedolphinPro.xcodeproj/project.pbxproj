@@ -22,6 +22,7 @@
 		991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */; };
 		991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */; };
 		991B468C1DF00AF10012D8DC /* LocalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B468B1DF00AF10012D8DC /* LocalExtensions.swift */; };
+		991B468E1DF027FA0012D8DC /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B468D1DF027FA0012D8DC /* Loader.swift */; };
 		992086A71DCCC0850055C6BF /* GlobalSDKFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */; };
 		99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339CFE1DE2C86000F3C770 /* CheckinObject.swift */; };
 		99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D001DE2C8BA00F3C770 /* OauthObject.swift */; };
@@ -62,6 +63,7 @@
 		991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewController.swift; sourceTree = "<group>"; };
 		991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
 		991B468B1DF00AF10012D8DC /* LocalExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalExtensions.swift; sourceTree = "<group>"; };
+		991B468D1DF027FA0012D8DC /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSDKFunction.swift; sourceTree = "<group>"; };
 		99339CFE1DE2C86000F3C770 /* CheckinObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinObject.swift; sourceTree = "<group>"; };
 		99339D001DE2C8BA00F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				991536C01DEBF8390046254C /* CustomNavView.swift */,
 				99339F701DE6EE4C00F3C770 /* TabView.swift */,
+				991B468D1DF027FA0012D8DC /* Loader.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */,
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
 				991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */,
+				991B468E1DF027FA0012D8DC /* Loader.swift in Sources */,
 				991B468C1DF00AF10012D8DC /* LocalExtensions.swift in Sources */,
 				99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */,
 				99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */,
