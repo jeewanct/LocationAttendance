@@ -21,6 +21,7 @@
 		991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D861DED5028004D1355 /* CommonFunction.swift */; };
 		991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */; };
 		991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */; };
+		991B468C1DF00AF10012D8DC /* LocalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B468B1DF00AF10012D8DC /* LocalExtensions.swift */; };
 		992086A71DCCC0850055C6BF /* GlobalSDKFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */; };
 		99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339CFE1DE2C86000F3C770 /* CheckinObject.swift */; };
 		99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D001DE2C8BA00F3C770 /* OauthObject.swift */; };
@@ -33,7 +34,6 @@
 		994FF91E1DC9B5D000276B97 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */; };
 		994FF9201DCA173800276B97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91F1DCA173800276B97 /* Extensions.swift */; };
 		994FF92C1DCB39DB00276B97 /* SDKSingelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */; };
-		997159F41DDDC8A0006F0C05 /* NotificationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997159F31DDDC8A0006F0C05 /* NotificationClass.swift */; };
 		99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215D1DBF80C400E5F369 /* SdkConstant.swift */; };
 		99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215F1DC07B4E00E5F369 /* OauthModel.swift */; };
 		99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */; };
@@ -61,6 +61,7 @@
 		991A6D861DED5028004D1355 /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewController.swift; sourceTree = "<group>"; };
 		991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
+		991B468B1DF00AF10012D8DC /* LocalExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalExtensions.swift; sourceTree = "<group>"; };
 		992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSDKFunction.swift; sourceTree = "<group>"; };
 		99339CFE1DE2C86000F3C770 /* CheckinObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinObject.swift; sourceTree = "<group>"; };
 		99339D001DE2C8BA00F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
@@ -73,7 +74,6 @@
 		994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
 		994FF91F1DCA173800276B97 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKSingelton.swift; sourceTree = "<group>"; };
-		997159F31DDDC8A0006F0C05 /* NotificationClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationClass.swift; sourceTree = "<group>"; };
 		99A2215D1DBF80C400E5F369 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
 		99A2215F1DC07B4E00E5F369 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
 		99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
@@ -116,6 +116,72 @@
 				991536C41DEBFF810046254C /* SourceSansPro-Regular.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		991B46821DEFED800012D8DC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
+				991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */,
+				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
+				99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		991B46831DEFED8B0012D8DC /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				99CACFD71DB8A1590099AA00 /* AppDelegate.swift */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		991B46841DEFEDAD0012D8DC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				991536C01DEBF8390046254C /* CustomNavView.swift */,
+				99339F701DE6EE4C00F3C770 /* TabView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		991B46851DEFEDC00012D8DC /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */,
+				99339F681DE6D75D00F3C770 /* AssignmentTableViewCell.swift */,
+			);
+			name = TableViewCell;
+			sourceTree = "<group>";
+		};
+		991B46861DEFEDD20012D8DC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				991536981DE6F95D0046254C /* AppConstant.swift */,
+				991A6D861DED5028004D1355 /* CommonFunction.swift */,
+				991B468B1DF00AF10012D8DC /* LocalExtensions.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		991B46871DEFEDF80012D8DC /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				99CACFDB1DB8A1590099AA00 /* Main.storyboard */,
+				99CACFE01DB8A1590099AA00 /* LaunchScreen.storyboard */,
+			);
+			name = StoryBoard;
+			sourceTree = "<group>";
+		};
+		991B46881DEFEE0E0012D8DC /* Wired */ = {
+			isa = PBXGroup;
+			children = (
+				9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */,
+				99CACFDE1DB8A1590099AA00 /* Assets.xcassets */,
+				99CACFE31DB8A1590099AA00 /* Info.plist */,
+			);
+			name = Wired;
 			sourceTree = "<group>";
 		};
 		99339CFD1DE2C61C00F3C770 /* Sdk */ = {
@@ -164,24 +230,14 @@
 		99CACFD61DB8A1590099AA00 /* BluedolphinPro */ = {
 			isa = PBXGroup;
 			children = (
+				991B46861DEFEDD20012D8DC /* Common */,
 				991536C21DEBFF810046254C /* Font */,
-				991536C01DEBF8390046254C /* CustomNavView.swift */,
-				9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */,
-				99CACFD71DB8A1590099AA00 /* AppDelegate.swift */,
-				997159F31DDDC8A0006F0C05 /* NotificationClass.swift */,
-				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
-				99CACFDB1DB8A1590099AA00 /* Main.storyboard */,
-				991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */,
-				991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */,
-				99339F681DE6D75D00F3C770 /* AssignmentTableViewCell.swift */,
-				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
-				991536981DE6F95D0046254C /* AppConstant.swift */,
-				991A6D861DED5028004D1355 /* CommonFunction.swift */,
-				99339F701DE6EE4C00F3C770 /* TabView.swift */,
-				99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */,
-				99CACFDE1DB8A1590099AA00 /* Assets.xcassets */,
-				99CACFE01DB8A1590099AA00 /* LaunchScreen.storyboard */,
-				99CACFE31DB8A1590099AA00 /* Info.plist */,
+				991B46841DEFEDAD0012D8DC /* Views */,
+				991B46881DEFEE0E0012D8DC /* Wired */,
+				991B46831DEFED8B0012D8DC /* AppDelegate */,
+				991B46821DEFED800012D8DC /* Controllers */,
+				991B46871DEFEDF80012D8DC /* StoryBoard */,
+				991B46851DEFEDC00012D8DC /* TableViewCell */,
 				99339CFD1DE2C61C00F3C770 /* Sdk */,
 			);
 			path = BluedolphinPro;
@@ -351,11 +407,11 @@
 				991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */,
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
 				991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */,
+				991B468C1DF00AF10012D8DC /* LocalExtensions.swift in Sources */,
 				99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */,
 				99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */,
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
 				991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */,
-				997159F41DDDC8A0006F0C05 /* NotificationClass.swift in Sources */,
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
 				99339F691DE6D75D00F3C770 /* AssignmentTableViewCell.swift in Sources */,
 				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var password: UITextField!
+   @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var mobileTextField: UITextField!
     var email = String()
     var pass = String()
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBAction func SignIn(_ sender: AnyObject) {
         email = mobileTextField.text!
             //+ "@rmc.in"
-        pass = password.text!
+        //pass = password.text!
         updateUser()
         getOauth()
         
@@ -30,8 +30,9 @@ class ViewController: UIViewController {
         if let deviceToken = UserDefaults.standard.value(forKey: UserDefaultsKeys.deviceToken.rawValue) as? String{
             print(deviceToken)
         }
+        mobileTextField.delegate = self
+        passwordTextfield.delegate  = self
         
-
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -81,5 +82,31 @@ class ViewController: UIViewController {
     
 
 
+}
+extension ViewController:UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let updatedText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        
+        if updatedText.isBlank {
+            textField.leftViewMode = .never
+        }else{
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 10 , height: textField.frame.size.height))
+            label.text = textField.placeholder
+            label.frame.size.width = label.intrinsicContentSize.width
+            label.font = UIFont(name: "SourceSansPro-Regular", size: 14)
+            label.textColor = UIColor.black
+            label.textAlignment = .center
+            textField.leftView = label
+            textField.leftView?.frame.origin.x = 5
+            textField.leftViewMode = .always
+            
+        }
+        return true
+    }
+    
 }
 
