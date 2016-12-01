@@ -11,6 +11,7 @@ pod 'Alamofire'
 pod 'RealmSwift'
 pod 'AlamofireObjectMapper'
 pod 'GoogleMaps'
+pod 'IQKeyboardManagerSwift'
 
 end
 

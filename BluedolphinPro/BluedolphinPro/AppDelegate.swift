@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import GoogleMaps
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -63,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func startUpTask(){
         self.coreLocationController  = CoreLocationController()
+        IQKeyboardManager.sharedManager().enable = true
         GMSServices.provideAPIKey(GOOGLE_MAPS.ApiKey)
         self.getDeviceID()
     }
