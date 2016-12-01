@@ -1,0 +1,101 @@
+//
+//  MainViewController.swift
+//  BluedolphinPro
+//
+//  Created by Raghvendra on 01/12/16.
+//  Copyright © 2016 raremediacompany. All rights reserved.
+//
+
+import UIKit
+
+class MainViewController: UIViewController {
+
+    @IBOutlet weak var mainContainerView: UIView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default .removeObserver(self, name: NSNotification.Name(rawValue: "Pushreceived"), object: nil)
+        NotificationCenter.default .addObserver(self, selector: Selector(("methodOfReceivedNotification:")), name: NSNotification.Name(rawValue: "Pushreceived"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
+
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func ShowController (sender : NSNotification) {
+        switch (sender.name.rawValue) {
+        case LocalNotifcation.Profile.rawValue:
+            
+            //      for views in mainContainer.subviews {
+            //        views.removeFromSuperview()
+            //      }
+            //println(self.childViewControllers.count)
+            var lastController: AnyObject?
+            
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainerView.subviews {
+                views.removeFromSuperview()
+            }
+            
+            lastController?.willMove(toParentViewController: nil)
+            //lastController?.willMoveToParentViewController(toSuperview: nil)
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileScene") as! UINavigationController
+            //println(self.childViewControllers)
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainerView.frame
+            
+            self.mainContainerView.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
+            
+            
+        case LocalNotifcation.Assignment.rawValue:
+            
+           
+            var lastController: AnyObject?
+            
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainerView.subviews {
+                views.removeFromSuperview()
+            }
+            lastController?.willMove(toParentViewController: nil)
+           
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentScene") as! UINavigationController
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainerView.frame
+            self.mainContainerView.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
+            
+        default:
+            /* let destVc = self.storyboard?.instantiateViewControllerWithIdentifier("blue") as! UINavigationController
+             self.addChildViewController(destVc)
+             destVc.view.frame = self.mainContainer.frame
+             self.mainContainer.addSubview(destVc.view)
+             destVc.didMoveToParentViewController(self)*/
+            print("")
+        }
+    }
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         GMSServices.provideAPIKey(GOOGLE_MAPS.ApiKey)
         self.getDeviceID()
-        checkLogin()
+        //checkLogin()
         
     }
     

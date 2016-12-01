@@ -174,13 +174,25 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
         menuView.maskBackgroundOpacity = 0.3
         menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
             print("Did select item at index: \(indexPath)")
-            
+            self.menuChanger(segment: indexPath)
             
         }
         
         self.navigationItem.titleView = menuView
     }
     
+    func menuChanger(segment:Int){
+        switch segment {
+        case 1:
+            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue) , object: nil)
+            
+        case 4:
+            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
+            
+        default:
+            break
+        }
+    }
     func tabChanger(segment:Int){
         switch segment {
         case 0:
@@ -192,6 +204,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
             break
         }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

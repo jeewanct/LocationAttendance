@@ -11,13 +11,13 @@ import Foundation
 
 //Live server
 
-//let APIURL = "https://lsjefx2kij.execute-api.ap-southeast-2.amazonaws.com/test"
-//enum ModuleUrl :String{
-//    case User = "/users/"
-//    case Checkin = "/checkins/organization/"
-//    case Oauth = "/oauth/token"
-//    case Assignment = "assignments/organization/"
-//}
+let APIURL = "https://lsjefx2kij.execute-api.ap-southeast-2.amazonaws.com/test"
+enum ModuleUrl :String{
+    case User = "/users/"
+    case Checkin = "/checkins/organization/"
+    case Oauth = "/oauth/token"
+    case Assignment = "assignments/organization/"
+}
 
 //local server
 
@@ -26,13 +26,13 @@ import Foundation
 //test
 
 
-let APIURL = "http://bluedolphinapi.ap-south-1.elasticbeanstalk.com"
-
-enum ModuleUrl :String{
-    case User = "/Users"
-    case Checkin = "/Checkins/Organization/"
-    case Oauth = "/Oauth2/Token"
-    case Assignment = "Assignments/Organization/"
-}
+//let APIURL = "http://bluedolphinapi.ap-south-1.elasticbeanstalk.com"
+//
+//enum ModuleUrl :String{
+//    case User = "/Users"
+//    case Checkin = "/Checkins/Organization/"
+//    case Oauth = "/Oauth2/Token"
+//    case Assignment = "Assignments/Organization/"
+//}
 
 
