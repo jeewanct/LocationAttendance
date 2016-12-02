@@ -11,8 +11,8 @@ import Alamofire
 
 
 class NetworkModel: NSObject {
-    class func fetchData(_ strURL: String, success:@escaping (Any) -> Void, failure:@escaping (Error) -> Void) {
-        Alamofire.request(strURL).responseJSON { (responseObject) -> Void in
+    class func fetchData(_ strURL: String,header:NSDictionary, success:@escaping (NSDictionary) -> Void, failure:@escaping (Error) -> Void) {
+        Alamofire.request(strURL,headers: header as? HTTPHeaders).responseJSON { (responseObject) -> Void in
             
             print(responseObject)
             

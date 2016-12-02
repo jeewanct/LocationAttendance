@@ -16,7 +16,7 @@ enum ModuleUrl :String{
     case User = "/users/"
     case Checkin = "/checkins/organization/"
     case Oauth = "/oauth/token"
-    case Assignment = "assignments/organization/"
+    case Assignment = "/assignments/organization/"
 }
 
 //local server
@@ -26,8 +26,10 @@ enum ModuleUrl :String{
 //test
 
 
-//let APIURL = "http://bluedolphinapi.ap-south-1.elasticbeanstalk.com"
+//let APIURL = "http://bluedolphinapi-dev.ap-south-1.elasticbeanstalk.com/"
 //
+////"http://bluedolphinapi.ap-south-1.elasticbeanstalk.com"
+////
 //enum ModuleUrl :String{
 //    case User = "/Users"
 //    case Checkin = "/Checkins/Organization/"

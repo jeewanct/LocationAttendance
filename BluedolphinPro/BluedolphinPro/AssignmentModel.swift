@@ -26,8 +26,37 @@ class AssignmentModel :Meta{
     }
     
     
-    func getAssignments(){
+    func getAssignments(assignmentId:String,completion: @escaping (_ result: String) -> Void){
+        let url = AssignmentModel.url() + Singleton.sharedInstance.organizationId + "?userId=" + Singleton.sharedInstance.userId + "&assignmentId=" + assignmentId
+        print(url)
+        NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
+            guard let status = response["statusCode"] as? Int else {
+                return
+            }
+            switch status {
+            case 200:
+                guard let responseData = response["data"] as? NSDictionary else {
+                    return
+                }
+                if let documents = responseData["documents"] as? NSArray {
+                    for data in documents{
+                      self.saveAssignment(assignmentData: data as! NSDictionary)
+                    }
+                }
+                
+                break;
+            default:break
+            }
+        }) { (error) in
+            
+            print(error)
+        }
         
+        //        NetworkModel.submitData(url, method: .get, params: [:], headers: self.getHeader(), success: { (responseData) in
+//            
+//        }) { (error) in
+//            print(error)
+//        }
     }
     
     func postAssignments(){
@@ -70,6 +99,44 @@ class AssignmentModel :Meta{
             realm.add(assignment,update:true)
         }
         
+    }
+    
+    func getAssignmentFromDb()->Results<RMCAssignmentObject>{
+        let realm = try! Realm()
+        let assignments = realm.objects(RMCAssignmentObject.self)
+       return assignments
+        
+    }
+    func saveAssignment(assignmentData:NSDictionary){
+        let assignment = RMCAssignmentObject()
+        if let associationId = assignmentData["associationIds"] as? NSDictionary{
+            assignment.assigneeData = ArrayTransform().transformFromJSON( associationId["assigneeData"])!
+            assignment.assignerData = associationId["assignerData"] as? RMCAssignee
+        }
+        if let assignmentDetails = assignmentData["associationIds"] as? NSDictionary{
+            assignment.assignmentDetails = toJsonString(assignmentDetails)
+        }
+        if let assignmentData = assignmentData["assignmentData"] as? NSDictionary{
+            assignment.addedOn = assignmentData["addedOn"] as? String
+            assignment.assignmentDeadline = assignmentData["assignmentDeadline"] as? String
+            assignment.assignmentId = assignmentData["assignmentId"] as? String
+            assignment.status = assignmentData["status"] as? String
+            assignment.time = assignmentData["time"] as? String
+            assignment.updatedOn = assignmentData["updatedOn"] as? String
+            if let assignmentlocation = assignmentData["location"] as? NSDictionary{
+               assignment.location?.accuracy = assignmentlocation["accuracy"] as? String
+                assignment.location?.altitude = assignmentlocation["accuracy"] as? String
+                if let coordinates = assignmentlocation["coordinates"] as? [String]{
+                    assignment.location?.longitude = coordinates[0]
+                    assignment.location?.latitude = coordinates[1]
+                }
+            }
+            
+        }
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(assignment,update:true)
+        }
     }
 
 }

@@ -73,11 +73,15 @@ func getUserData(){
     let storage = UserDefaults.standard
     if let organizationId = storage.value(forKey: UserDefaultsKeys.organizationId.rawValue) as? String{
         Singleton.sharedInstance.organizationId = organizationId
+        print("organisation id = \(organizationId)")
     }
     
     if let tokenData = realm.objects(AccessTokenObject.self).filter("organizationId = %@",Singleton.sharedInstance.organizationId).first {
         Singleton.sharedInstance.userId = tokenData.userId!
+        print("user id = \(Singleton.sharedInstance.userId)")
+
         Singleton.sharedInstance.accessToken = tokenData.token!
+        print("accessToken id = \(Singleton.sharedInstance.accessToken)")
     }
     
 }

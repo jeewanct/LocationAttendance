@@ -10,9 +10,42 @@ import Foundation
 
 import RealmSwift
 import ObjectMapper
+class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
+    typealias Object = List<T>
+    typealias JSON = Array<AnyObject>
+    
+    func transformFromJSON(_ value: Any?) -> List<T>? {
+        let realmList = List<T>()
+        
+        if let jsonArray = value as? Array<Any> {
+            for item in jsonArray {
+                if let realmModel = Mapper<T>().map(JSONObject: item) {
+                    realmList.append(realmModel)
+                }
+            }
+        }
+        
+        return realmList
+    }
+    
+    func transformToJSON(_ value: List<T>?) -> Array<AnyObject>? {
+        
+        guard let realmList = value, realmList.count > 0 else { return nil }
+        
+        var resultArray = Array<T>()
+        
+        for entry in realmList {
+            resultArray.append(entry)
+        }
+        
+        return resultArray
+    }
+}
 
 
 class AssignmentObject:Object,Mappable{
+    
+    
     var assignmentId:String?
     var assigneeId:String?
     var status:String?
@@ -59,9 +92,11 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var updatedOn:String?
     dynamic var assignmentDetails:String?
     dynamic var statusLog:String?
+    dynamic var assignmentDeadline:String?
     var assigneeData = List<RMCAssignee>()
     dynamic var assignerData:RMCAssignee?
     dynamic var location:RMCLocation?
+    dynamic var status:String?
     override static func primaryKey() -> String? {
         return "assignmentId"
         
@@ -74,11 +109,13 @@ class RMCAssignmentObject :Object,Mappable {
         time <- map["time"]
         updatedOn <- map["updatedOn"]
         statusLog <- map["statusLog"]
-        assigneeData    <- map["assigneeData"]
+        assigneeData    <- (map["assigneeData"],ArrayTransform<RMCAssignee>())
         assignmentId <- map["assignmentId"]
         assignerData <- map["assignerData"]
         location <- map["location"]
         assignmentDetails <- map["assignmentDetails"]
+        assignmentDeadline <- map["assignmentDeadline"]
+        status <- map["status"]
     }
 
 }

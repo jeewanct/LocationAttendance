@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0gJ-oW-CKn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="U15-d3-QQj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -28,20 +28,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ySm-cY-316">
-                                <rect key="frame" x="23" y="217" width="329" height="30"/>
+                                <rect key="frame" x="23" y="321" width="329" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Hrr-hC-bdQ"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZG-sf-tvf">
-                                <rect key="frame" x="23" y="287" width="329" height="30"/>
+                                <rect key="frame" x="23" y="401" width="329" height="30"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
                                     <action selector="SignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P3Z-dZ-bje"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mobile" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n7U-B4-uFj">
-                                <rect key="frame" x="23" y="164" width="329" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n7U-B4-uFj">
+                                <rect key="frame" x="23" y="258" width="329" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Sph-S9-weG"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -54,18 +60,23 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginLogo" translatesAutoresizingMaskIntoConstraints="NO" id="npB-sc-3hN">
+                                <rect key="frame" x="135" y="70" width="105" height="138"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YZG-sf-tvf" firstAttribute="top" secondItem="ySm-cY-316" secondAttribute="bottom" constant="40" id="8Uf-MJ-JXY"/>
-                            <constraint firstItem="n7U-B4-uFj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="B9D-rs-4i4"/>
                             <constraint firstItem="ySm-cY-316" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="23" id="E0P-I1-FoB"/>
                             <constraint firstAttribute="trailing" secondItem="ySm-cY-316" secondAttribute="trailing" constant="23" id="Ht9-k5-oSJ"/>
                             <constraint firstItem="YZG-sf-tvf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="23" id="L5u-mX-dct"/>
                             <constraint firstItem="ySm-cY-316" firstAttribute="top" secondItem="n7U-B4-uFj" secondAttribute="bottom" constant="23" id="Lpp-x6-5bM"/>
                             <constraint firstItem="n7U-B4-uFj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="23" id="NSg-l8-jMj"/>
                             <constraint firstAttribute="trailing" secondItem="YZG-sf-tvf" secondAttribute="trailing" constant="23" id="RmZ-8a-FYe"/>
+                            <constraint firstItem="npB-sc-3hN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="StP-ja-lgn"/>
+                            <constraint firstItem="npB-sc-3hN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="aDb-wH-Fds"/>
                             <constraint firstAttribute="trailing" secondItem="n7U-B4-uFj" secondAttribute="trailing" constant="23" id="cpj-fE-MN1"/>
+                            <constraint firstItem="n7U-B4-uFj" firstAttribute="top" secondItem="npB-sc-3hN" secondAttribute="bottom" constant="50" id="jmD-E4-sFk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1PS-Wd-kxl"/>
@@ -454,7 +465,7 @@
         <!--Navigation Controller-->
         <scene sceneID="X7v-BP-xqb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="U15-d3-QQj" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="U15-d3-QQj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OgX-HY-HO4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -563,6 +574,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LoginLogo" width="105" height="138"/>
         <image name="address" width="14" height="14"/>
         <image name="bookmark" width="16" height="16"/>
         <image name="call" width="14" height="14"/>

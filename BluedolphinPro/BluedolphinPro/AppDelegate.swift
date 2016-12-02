@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         GMSServices.provideAPIKey(GOOGLE_MAPS.ApiKey)
         self.getDeviceID()
-        //checkLogin()
+        checkLogin()
         
     }
     
@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         getUserData()
         if !Singleton.sharedInstance.userId.isBlank{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let destVC = storyboard.instantiateViewController(withIdentifier: "AssignmentScene") as! UINavigationController
+            let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
             if self.window != nil {
                 self.window?.rootViewController = destVC
             }
@@ -102,7 +102,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate:UNUserNotificationCenterDelegate{
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print(userInfo)
-        
+        let state: UIApplicationState = application.applicationState
+        if state != UIApplicationState.active {
+            
+            //        println("json of push \(userInfo)")
+            //       println(userInfo["aps"])
+          NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
+            
+            
+        } else {
+            let result: NSDictionary = userInfo as NSDictionary
+            let type:NotificationType = NotificationType(rawValue: result ["notificationType"] as! String)!
+            switch type {
+            case .Welcome:
+                break
+            case .NewAssignment:
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
+            }
+            
+        }
         completionHandler(UIBackgroundFetchResult.noData)
         
         
@@ -136,6 +154,29 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             UIApplication.shared.registerForRemoteNotifications()
         }
     }
+    
+    func pushAlertView(userInfo:NSDictionary) {
+        var alertMessage = ""
+        let result: NSDictionary? = userInfo["aps"] as! NSDictionary
+        alertMessage = result?["alert"] as! String
+        
+        let alert2 = UIAlertController(title: "Message", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        //    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
+        //      //pushReceived = false
+        //
+        //    })
+        //    alert2.addAction(cancelAction)
+        alert2.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+            
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo as! [AnyHashable : Any])
+        }))
+        
+        
+        self.window?.rootViewController?.present(alert2, animated: true, completion: nil)
+        
+    }
+    
     
 
 }

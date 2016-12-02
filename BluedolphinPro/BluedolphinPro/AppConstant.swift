@@ -22,4 +22,9 @@ struct GOOGLE_MAPS{
 enum LocalNotifcation:String{
     case Profile = "MyProfile"
     case Assignment = "MyAssignments"
+    case Pushreceived = "Pushreceived"
+}
+enum NotificationType:String{
+    case NewAssignment = "New-Assignment"
+    case Welcome = "Welcome-Message"
 }

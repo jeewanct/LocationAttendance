@@ -13,10 +13,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var mainContainerView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default .removeObserver(self, name: NSNotification.Name(rawValue: "Pushreceived"), object: nil)
-        NotificationCenter.default .addObserver(self, selector: Selector(("methodOfReceivedNotification:")), name: NSNotification.Name(rawValue: "Pushreceived"), object: nil)
+    
+        
+        NotificationCenter.default .removeObserver(self, name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: nil)
+        NotificationCenter.default .addObserver(self, selector: #selector(MainViewController.methodOfReceivedNotification(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
+        //self.updateNewAssignmentData(id: "55bad4e2-7157-4d63-b170-708b54a8261f")
 
         // Do any additional setup after loading the view.
     }
@@ -88,6 +91,33 @@ class MainViewController: UIViewController {
             print("")
         }
     }
+    
+    func methodOfReceivedNotification(notification: NSNotification){
+        let result: NSDictionary = notification.userInfo! as NSDictionary
+        let type:NotificationType = NotificationType(rawValue: result ["notificationType"] as! String)!
+        switch type {
+        case .Welcome:
+            break
+        case .NewAssignment:
+            if let assignmentId = result["assignmentId"] as? String{
+                updateNewAssignmentData(id: assignmentId)
+            }
+            
+        }
+        
+       
+        
+        
+        
+        // //println(notification)
+        
+        //    self.goToScreen(status,info: result)
+    }
+    
+    func goToScreen(flag:Int,info:NSDictionary){
+        //switch flag {}
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -97,5 +127,38 @@ class MainViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func pushAlertView(userInfo:NSDictionary) {
+        var alertMessage = ""
+        //let result: AnyObject? = userInfo ["aps"]
+        alertMessage = userInfo.value(forKey: "message")! as! String
+        
+        let alert2 = UIAlertController(title: "Message", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { action in
+            //pushReceived = false
+            
+            
+            
+        })
+        alert2.addAction(cancelAction)
+        alert2.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { action in
+            
+        }))
+        
+        
+        self.present(alert2, animated: true, completion: nil)
+        
+    }
+    
+    
+    func updateNewAssignmentData(id:String){
+        let model = AssignmentModel()
+        model.getAssignments(assignmentId: id) { (success) in
+            
+        }
+        
+        
+        
+    }
 
 }

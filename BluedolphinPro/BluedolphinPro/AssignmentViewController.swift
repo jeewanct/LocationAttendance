@@ -210,6 +210,9 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
         // Dispose of any resources that can be recreated.
     }
     
+    func getAssignmentData(){
+       var assignments = AssignmentModel().getAssignmentFromDb()
+    }
 
     /*
     // MARK: - Navigation
