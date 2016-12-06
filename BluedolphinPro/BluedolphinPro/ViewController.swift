@@ -89,6 +89,7 @@ class ViewController: UIViewController {
         let oauth = OauthModel()
         oauth.getToken(userObject: param) { (result) in
             if result == APIResult.Success.rawValue {
+                getUserData()
                 let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
                 UIApplication.shared.keyWindow?.rootViewController = destVC
             }

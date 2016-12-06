@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import RealmSwift
 
 
 
@@ -20,17 +21,68 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
     var tableDataArray = ["hello","new","world","Go"];
     @IBOutlet weak var assignmentTableView: UITableView!
     
+    
     @IBOutlet weak var mapView: UIView!
     var viewPager:ViewPagerControl!
     var tabView:ViewPagerControl!
     var menuView: CustomNavigationDropdownMenu!
+    
+    var tasks: Results<RMCAssignmentObject>!
+    var subscription: NotificationToken?
+    
+    
+    func getTasks(_ status: String) -> Results<RMCAssignmentObject> {
+        let realm = try! Realm()
+        tasks = realm.objects(RMCAssignmentObject.self)
+//        switch status{
+//            case "Downloaded":
+//            tasks = tasks.filter("status = true")
+//        default:break
+//        }
+    
+        return tasks
+//        return tasks.sorted([
+//            SortDescriptor(property: "priority", ascending: false),
+//            SortDescriptor(property: "created", ascending: false),
+//            ])
+    }
+    
+    func notificationSubscription(tasks: Results<RMCAssignmentObject>) -> NotificationToken {
+        return tasks.addNotificationBlock {[weak self] (changes: RealmCollectionChange<Results<RMCAssignmentObject>>) in
+            self?.updateUI(changes: changes)
+        }
+    }
+    
+    func updateUI(changes: RealmCollectionChange<Results<RMCAssignmentObject>>) {
+        switch changes {
+        case .initial(_):
+            assignmentTableView.reloadData()
+        case .update(_, let deletions, let insertions, _):
+            
+            assignmentTableView.beginUpdates()
+            
+            assignmentTableView.insertRows(at: insertions.map {IndexPath(row: $0, section: 0)},
+                                           with: .automatic)
+            assignmentTableView.deleteRows(at: deletions.map {IndexPath(row: $0, section: 0)},
+                                           with: .automatic)
+            
+            assignmentTableView.endUpdates()
+            break
+        case .error(let error):
+            print(error)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         createLayout()
+        
         // Do any additional setup after loading the view.
     }
     
     func createLayout(){
+        tasks = getTasks("g")
+        print(tasks.count)
+        subscription = notificationSubscription(tasks:tasks)
         assignmentTableView.delegate = self
         assignmentTableView.dataSource = self
         let customView = UIView(frame: CGRect(x:0,y: 0, width:ScreenConstant.width,height: 50))
@@ -70,6 +122,39 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
             googleMapUsage.sharedInstance.globalMapView.isMyLocationEnabled = true
             googleMapUsage.sharedInstance.globalMapView.settings.myLocationButton = true
         }
+    }
+    
+    
+    func showCheckinMarkers(_ resultSet:Results
+        <RMCAssignmentObject>){
+        googleMapUsage.sharedInstance.globalMapView.clear()
+        var bounds = GMSCoordinateBounds()
+        DispatchQueue.main.async(execute: {
+            for data in resultSet{
+                
+                
+                let newlatlong = CLLocationCoordinate2D(latitude: Double(data.location!.latitude!)!, longitude: Double((data.location!.longitude!))!)
+                print(newlatlong)
+                
+                if let appointmentTime = data.time {
+                    
+                    let scheduleTime = appointmentTime.asDate.formatted
+                    let marker = PlaceMarker(coordinate: newlatlong)
+                    marker.title = data.assignmentId
+                    marker.snippet =  data.assignmentDetails! + "\n" + scheduleTime
+                    bounds = bounds.includingCoordinate(marker.position)
+                    marker.map = googleMapUsage.sharedInstance.globalMapView
+                }
+                
+                
+            }
+            
+            googleMapUsage.sharedInstance.globalMapView.animate(with: GMSCameraUpdate.fit(bounds))
+        })
+        //        dispatch_async(dispatch_get_main_queue(), {
+        //
+        //        })
+        
     }
     func createViewPager(){
         let data = ["New","In Progress","Completed"]
@@ -199,6 +284,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
             mapView.isHidden = true
         case 1:
             mapView.isHidden = false
+            //showCheckinMarkers(tasks)
             
         default:
             break
@@ -210,9 +296,9 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    func getAssignmentData(){
-       var assignments = AssignmentModel().getAssignmentFromDb()
-    }
+//    func getAssignmentData(){
+//       var assignments = AssignmentModel().getAssignmentFromDb()
+//    }
 
     /*
     // MARK: - Navigation
@@ -230,13 +316,13 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
 extension AssignmentViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableDataArray.count
+        return tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let task = tasks[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell") as! AssignmentTableViewCell
-        
+        cell.configureWithTask(task)
         return cell
         
     }

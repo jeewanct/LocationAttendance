@@ -97,6 +97,7 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var assignerData:RMCAssignee?
     dynamic var location:RMCLocation?
     dynamic var status:String?
+    var bookmarked:Bool?
     override static func primaryKey() -> String? {
         return "assignmentId"
         
@@ -116,6 +117,7 @@ class RMCAssignmentObject :Object,Mappable {
         assignmentDetails <- map["assignmentDetails"]
         assignmentDeadline <- map["assignmentDeadline"]
         status <- map["status"]
+        bookmarked <- map["bookmark"]
     }
 
 }
@@ -128,10 +130,10 @@ class RMCAssignee :Object,Mappable{
     required convenience init?(map: Map) {
         self.init()
     }
-    override static func primaryKey() -> String? {
-        return "userId"
-        
-    }
+//    override static func primaryKey() -> String? {
+//        return "userId"
+//        
+//    }
     func mapping(map: Map) {
         userId    <- map["userId"]
         organizationId <- map["organizationId"]

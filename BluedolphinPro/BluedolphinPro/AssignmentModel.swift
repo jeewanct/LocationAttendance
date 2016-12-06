@@ -111,9 +111,14 @@ class AssignmentModel :Meta{
         let assignment = RMCAssignmentObject()
         if let associationId = assignmentData["associationIds"] as? NSDictionary{
             assignment.assigneeData = ArrayTransform().transformFromJSON( associationId["assigneeData"])!
-            assignment.assignerData = associationId["assignerData"] as? RMCAssignee
+            if let assignerData = associationId["assignerData"] as? NSDictionary {
+                let assigner = RMCAssignee()
+                assigner.organizationId = assignerData["organizationId"] as? String
+                assigner.userId =  assignerData["userId"] as? String
+                assignment.assignerData = assigner
+            }
         }
-        if let assignmentDetails = assignmentData["associationIds"] as? NSDictionary{
+        if let assignmentDetails = assignmentData["assignmentDetails"] as? NSDictionary{
             assignment.assignmentDetails = toJsonString(assignmentDetails)
         }
         if let assignmentData = assignmentData["assignmentData"] as? NSDictionary{
@@ -124,12 +129,18 @@ class AssignmentModel :Meta{
             assignment.time = assignmentData["time"] as? String
             assignment.updatedOn = assignmentData["updatedOn"] as? String
             if let assignmentlocation = assignmentData["location"] as? NSDictionary{
-               assignment.location?.accuracy = assignmentlocation["accuracy"] as? String
-                assignment.location?.altitude = assignmentlocation["accuracy"] as? String
-                if let coordinates = assignmentlocation["coordinates"] as? [String]{
-                    assignment.location?.longitude = coordinates[0]
-                    assignment.location?.latitude = coordinates[1]
+                let location = RMCLocation()
+                location.accuracy = String(describing: assignmentlocation["accuracy"] as! NSNumber)
+               
+                location.altitude = String(describing: assignmentlocation["altitude"] as! NSNumber)
+                
+                if let coordinates = assignmentlocation["coordinates"] as? [Double]{
+                    location.longitude = String(coordinates[0])
+                    location.latitude = String(coordinates[1])
+                    print(coordinates[0])
                 }
+                print(location)
+                assignment.location = location
             }
             
         }

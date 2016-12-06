@@ -119,13 +119,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="11/11/16 22:10 to 11/12/16 22:10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCw-q4-WRe">
-                                                    <rect key="frame" x="10" y="34" width="355" height="22.5"/>
+                                                    <rect key="frame" x="10" y="34" width="355" height="22"/>
                                                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sewari Wadala Road B/1, Matunga East, Mumbai, Maharashtra 400019, India" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="qcj-Et-4sl">
-                                                    <rect key="frame" x="35" y="58.5" width="330" height="31.5"/>
+                                                    <rect key="frame" x="35" y="58" width="330" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -138,7 +138,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address" translatesAutoresizingMaskIntoConstraints="NO" id="Wly-Pp-pkF">
-                                                    <rect key="frame" x="10" y="64.5" width="20" height="20"/>
+                                                    <rect key="frame" x="10" y="64" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="awC-Kb-7Ix"/>
                                                         <constraint firstAttribute="height" constant="20" id="ggC-2U-BMt"/>
@@ -467,7 +467,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="U15-d3-QQj" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OgX-HY-HO4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OgX-HY-HO4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -486,7 +486,7 @@
                 <navigationController storyboardIdentifier="AssignmentScene" automaticallyAdjustsScrollViewInsets="NO" id="1fu-sd-tbM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="pO5-cQ-gbw"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AhM-su-8iN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AhM-su-8iN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -541,7 +541,7 @@
                 <navigationController storyboardIdentifier="ProfileScene" automaticallyAdjustsScrollViewInsets="NO" id="8CP-ak-waA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="PAE-Le-c2S"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aHA-lN-NVU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aHA-lN-NVU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -559,7 +559,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="0gJ-oW-CKn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ubs-43-Rpm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ubs-43-Rpm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -171,8 +171,6 @@ class ViewPagerControl: UIControl {
             addButtons(forImage:items,forselectImage:selectedButtonImage)
         case .textImage:
             break
-        default:
-            addButtons(forItems: items)
         }
         self.layer.masksToBounds = false
         let shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: 2)

@@ -45,6 +45,7 @@
 		99CACFDD1DB8A1590099AA00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99CACFDB1DB8A1590099AA00 /* Main.storyboard */; };
 		99CACFDF1DB8A1590099AA00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99CACFDE1DB8A1590099AA00 /* Assets.xcassets */; };
 		99CACFE21DB8A1590099AA00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99CACFE01DB8A1590099AA00 /* LaunchScreen.storyboard */; };
+		99DDC1A31DF6BA4B001BD0DB /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		99CACFDE1DB8A1590099AA00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99CACFE11DB8A1590099AA00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		99CACFE31DB8A1590099AA00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		AE78BE1830F43DAE65AB796C /* Pods_BluedolphinPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BluedolphinPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E49E2482600D4C1E724C7E /* Pods-BluedolphinPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluedolphinPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-BluedolphinPro/Pods-BluedolphinPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +147,7 @@
 		991B46841DEFEDAD0012D8DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */,
 				991536C01DEBF8390046254C /* CustomNavView.swift */,
 				99339F701DE6EE4C00F3C770 /* TabView.swift */,
 				991B468D1DF027FA0012D8DC /* Loader.swift */,
@@ -416,6 +419,7 @@
 				991B468E1DF027FA0012D8DC /* Loader.swift in Sources */,
 				991B468C1DF00AF10012D8DC /* LocalExtensions.swift in Sources */,
 				99369CF71DF036C200B405E4 /* MainViewController.swift in Sources */,
+				99DDC1A31DF6BA4B001BD0DB /* PlaceMarker.swift in Sources */,
 				99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */,
 				99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */,
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,

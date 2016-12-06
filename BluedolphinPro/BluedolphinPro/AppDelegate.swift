@@ -157,7 +157,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
     
     func pushAlertView(userInfo:NSDictionary) {
         var alertMessage = ""
-        let result: NSDictionary? = userInfo["aps"] as! NSDictionary
+        let result: NSDictionary? = userInfo["aps"] as? NSDictionary
         alertMessage = result?["alert"] as! String
         
         let alert2 = UIAlertController(title: "Message", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
@@ -169,7 +169,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         alert2.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
             
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo as! [AnyHashable : Any])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo as? [AnyHashable : Any])
         }))
         
         
