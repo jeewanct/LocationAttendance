@@ -109,7 +109,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
         
     }
     func searchAction(_:Any){
-        
+        self.performSegue(withIdentifier: "showSearch", sender: nil)
     }
     
     
