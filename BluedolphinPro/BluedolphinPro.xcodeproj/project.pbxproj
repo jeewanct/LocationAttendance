@@ -38,6 +38,7 @@
 		994FF92C1DCB39DB00276B97 /* SDKSingelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */; };
 		99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215D1DBF80C400E5F369 /* SdkConstant.swift */; };
 		99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215F1DC07B4E00E5F369 /* OauthModel.swift */; };
+		99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721B81DF7FF370059DFBB /* SearchViewController.swift */; };
 		99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */; };
 		99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1E1DDAE95C0066C07B /* Reachability.swift */; };
 		99CACFD81DB8A1590099AA00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CACFD71DB8A1590099AA00 /* AppDelegate.swift */; };
@@ -81,6 +82,7 @@
 		994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKSingelton.swift; sourceTree = "<group>"; };
 		99A2215D1DBF80C400E5F369 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
 		99A2215F1DC07B4E00E5F369 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
+		99A721B81DF7FF370059DFBB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
 		99BD3E1E1DDAE95C0066C07B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		99CACFD41DB8A1590099AA00 /* BluedolphinPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluedolphinPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +134,7 @@
 				991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */,
 				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
 				99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */,
+				99A721B81DF7FF370059DFBB /* SearchViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,
 				991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */,
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
+				99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */,
 				991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */,
 				991B468E1DF027FA0012D8DC /* Loader.swift in Sources */,
 				991B468C1DF00AF10012D8DC /* LocalExtensions.swift in Sources */,

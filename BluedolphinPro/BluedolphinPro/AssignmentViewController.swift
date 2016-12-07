@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import RealmSwift
+import MapKit
 
 
 
@@ -91,8 +92,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
         createNavView()
         createViewPager()
         createTabbarView()
-        createMapView()
-        
+        //createMapView()
+        createAppleMap()
         
         let notificationButton = UIBarButtonItem(image: #imageLiteral(resourceName: "notifications"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(notificationAction(_:)))
         let searchButton = UIBarButtonItem(image: #imageLiteral(resourceName: "search"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(searchAction(_:)))
@@ -124,27 +125,36 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
         }
     }
     
+    func createAppleMap(){
+        let appleMap = MKMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.mapView.frame.height))
+        //appleMap.showsUserLocation = true
+        let currentLocationItem = MKUserTrackingBarButtonItem.init(mapView: appleMap)
+        self.mapView.addSubview(appleMap)
+    }
+    
     
     func showCheckinMarkers(_ resultSet:Results
         <RMCAssignmentObject>){
         googleMapUsage.sharedInstance.globalMapView.clear()
-        var bounds = GMSCoordinateBounds()
+        let bounds = GMSCoordinateBounds()
         DispatchQueue.main.async(execute: {
             for data in resultSet{
+                print(data.location)
+                print(data.location!.latitude!)
+                print(data.location!.longitude!)
                 
-                
-                let newlatlong = CLLocationCoordinate2D(latitude: Double(data.location!.latitude!)!, longitude: Double((data.location!.longitude!))!)
-                print(newlatlong)
-                
-                if let appointmentTime = data.time {
-                    
-                    let scheduleTime = appointmentTime.asDate.formatted
-                    let marker = PlaceMarker(coordinate: newlatlong)
-                    marker.title = data.assignmentId
-                    marker.snippet =  data.assignmentDetails! + "\n" + scheduleTime
-                    bounds = bounds.includingCoordinate(marker.position)
-                    marker.map = googleMapUsage.sharedInstance.globalMapView
-                }
+//                let newlatlong = CLLocationCoordinate2D(latitude: Double(data.location!.latitude!)!, longitude: Double((data.location!.longitude!))!)
+//                print(newlatlong)
+//                
+//                if let appointmentTime = data.time {
+//                    
+//                    let scheduleTime = appointmentTime.asDate.formatted
+//                    let marker = PlaceMarker(coordinate: newlatlong)
+//                    marker.title = data.assignmentId
+//                    marker.snippet =  data.assignmentDetails! + "\n" + scheduleTime
+//                    bounds = bounds.includingCoordinate(marker.position)
+//                    marker.map = googleMapUsage.sharedInstance.globalMapView
+//                }
                 
                 
             }
