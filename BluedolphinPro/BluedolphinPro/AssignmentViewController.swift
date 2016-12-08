@@ -86,6 +86,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
         subscription = notificationSubscription(tasks:tasks)
         assignmentTableView.delegate = self
         assignmentTableView.dataSource = self
+        assignmentTableView.register(UINib(nibName: "AssignmentTableCell", bundle: nil), forCellReuseIdentifier: "assignmentCell")
         let customView = UIView(frame: CGRect(x:0,y: 0, width:ScreenConstant.width,height: 50))
         customView.backgroundColor = UIColor.white
         assignmentTableView.tableFooterView = customView
@@ -331,7 +332,7 @@ extension AssignmentViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let task = tasks[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell") as! AssignmentTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell") as! AssignmentTableCell
         cell.configureWithTask(task)
         return cell
         

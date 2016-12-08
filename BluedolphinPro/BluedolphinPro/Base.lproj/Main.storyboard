@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -111,62 +110,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Laq-zX-ZBV" id="Il6-6T-5Ov">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="NIKH-110" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2C-t3-eIj">
-                                                    <rect key="frame" x="10" y="13" width="58" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="11/11/16 22:10 to 11/12/16 22:10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCw-q4-WRe">
-                                                    <rect key="frame" x="10" y="34" width="355" height="22.5"/>
-                                                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sewari Wadala Road B/1, Matunga East, Mumbai, Maharashtra 400019, India" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="qcj-Et-4sl">
-                                                    <rect key="frame" x="35" y="58.5" width="330" height="31.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address" translatesAutoresizingMaskIntoConstraints="NO" id="Wly-Pp-pkF">
-                                                    <rect key="frame" x="10" y="64.5" width="20" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="awC-Kb-7Ix"/>
-                                                        <constraint firstAttribute="height" constant="20" id="ggC-2U-BMt"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVC-wn-2QG">
-                                                    <rect key="frame" x="89" y="10" width="22" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="LjU-uH-ZZv"/>
-                                                        <constraint firstAttribute="width" constant="22" id="Y03-3R-cAW"/>
-                                                    </constraints>
-                                                    <state key="normal" image="bookmark"/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="K2C-t3-eIj" firstAttribute="leading" secondItem="Il6-6T-5Ov" secondAttribute="leading" constant="10" id="2jF-wp-Elb"/>
-                                                <constraint firstItem="VCw-q4-WRe" firstAttribute="top" secondItem="K2C-t3-eIj" secondAttribute="bottom" constant="5" id="77K-Qn-pok"/>
-                                                <constraint firstAttribute="trailing" secondItem="qcj-Et-4sl" secondAttribute="trailing" constant="10" id="QXK-fy-x36"/>
-                                                <constraint firstItem="Wly-Pp-pkF" firstAttribute="leading" secondItem="Il6-6T-5Ov" secondAttribute="leading" constant="10" id="QdA-x5-ubA"/>
-                                                <constraint firstItem="qcj-Et-4sl" firstAttribute="centerY" secondItem="Wly-Pp-pkF" secondAttribute="centerY" id="a7D-yV-S3v"/>
-                                                <constraint firstItem="K2C-t3-eIj" firstAttribute="top" secondItem="Il6-6T-5Ov" secondAttribute="topMargin" constant="5" id="aEr-PE-eTR"/>
-                                                <constraint firstItem="ZVC-wn-2QG" firstAttribute="centerY" secondItem="K2C-t3-eIj" secondAttribute="centerY" id="bwk-Hn-1Uo"/>
-                                                <constraint firstItem="qcj-Et-4sl" firstAttribute="leading" secondItem="Wly-Pp-pkF" secondAttribute="trailing" constant="5" id="fAE-Mt-62U"/>
-                                                <constraint firstAttribute="trailing" secondItem="VCw-q4-WRe" secondAttribute="trailing" constant="10" id="lt8-SJ-OvH"/>
-                                                <constraint firstItem="VCw-q4-WRe" firstAttribute="leading" secondItem="Il6-6T-5Ov" secondAttribute="leading" constant="10" id="mhf-Mc-mjx"/>
-                                                <constraint firstItem="Wly-Pp-pkF" firstAttribute="top" secondItem="VCw-q4-WRe" secondAttribute="bottom" constant="8" id="ony-Si-xsj"/>
-                                                <constraint firstItem="ZVC-wn-2QG" firstAttribute="leading" secondItem="K2C-t3-eIj" secondAttribute="trailing" constant="21" id="rt3-jY-Dcj"/>
-                                                <constraint firstAttribute="bottom" secondItem="qcj-Et-4sl" secondAttribute="bottom" constant="24.5" id="w7h-pY-jCb"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="addressLabel" destination="qcj-Et-4sl" id="ebK-dN-xJW"/>
-                                            <outlet property="jobNameLabel" destination="K2C-t3-eIj" id="rjp-Ob-HP6"/>
-                                            <outlet property="startTimeLabel" destination="VCw-q4-WRe" id="VE2-lE-HGF"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -622,7 +566,6 @@
         <image name="LoginLogo" width="105" height="138"/>
         <image name="add new" width="44" height="44"/>
         <image name="address" width="14" height="14"/>
-        <image name="bookmark" width="16" height="16"/>
         <image name="call" width="14" height="14"/>
         <image name="mail" width="14" height="14"/>
     </resources>

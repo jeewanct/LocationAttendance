@@ -25,8 +25,7 @@ class AssignmentDetailViewController: UIViewController {
         super.viewDidLoad()
         createTabbarView()
         createViewPager()
-        imagesTableView.delegate = self
-        imagesTableView.dataSource = self
+        
         timeLineTableView.delegate = self
         timeLineTableView.dataSource = self
         timeLineTableView.isHidden = true
@@ -140,22 +139,13 @@ class AssignmentDetailViewController: UIViewController {
 extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == imagesTableView{
-        return imagesTableDataArray.count
-        }else{
+        
             return timeLineTableArray.count
-        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == imagesTableView{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
-            cell.imageView?.image = UIImage(named: "add new")
-            cell.textLabel?.text = imagesTableDataArray[indexPath.row]
-            
-            return cell
-
-        }else {
+        
             let cell = tableView.dequeueReusableCell(withIdentifier: "timeLineCell") as! TimeLineTableViewCell
             cell.taskTitleLabel.text = timeLineTableArray[indexPath.row]
             cell.taskImageView.image = UIImage(named: "bookmark")
@@ -172,7 +162,7 @@ extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSour
                 cell.downLineView.isHidden = false
             }
             return cell
-        }
+        
         
         
         

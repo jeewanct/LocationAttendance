@@ -13,6 +13,8 @@ import RealmSwift
 class SearchViewController: UITableViewController {
 let searchController = UISearchController(searchResultsController: nil)
     
+      var viewPager:ViewPagerControl!
+    
     lazy   var searchBars:UISearchBar = UISearchBar(frame:
         
         CGRect(x:0, y:0, width:ScreenConstant.width - 100, height:20))
@@ -25,6 +27,8 @@ let searchController = UISearchController(searchResultsController: nil)
         super.viewDidLoad()
         tasks = getTasks("s")
         configureSearchbar()
+        createViewPager()
+        tableView.register(UINib(nibName: "AssignmentTableCell", bundle: nil), forCellReuseIdentifier: "assignmentCell")
         // Do any additional setup after loading the view.
     }
     
@@ -40,6 +44,61 @@ let searchController = UISearchController(searchResultsController: nil)
         
         return tasks
         
+    }
+    
+    func createViewPager(){
+        let data = ["New","In Progress","Completed"]
+        viewPager = ViewPagerControl(items: data)
+        viewPager.type = .text
+        viewPager.frame = CGRect(x: 0, y: 0
+            , width: ScreenConstant.width, height: 40)
+        viewPager.isHighlighted = true
+        viewPager.selectionIndicatorColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+        viewPager.selectionIndicatorHeight = 2
+        viewPager.titleTextAttributes = [
+            NSForegroundColorAttributeName : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+            NSFontAttributeName : UIFont(name: "SourceSansPro-Regular", size: 13)!
+        ]
+        
+        viewPager.selectedTitleTextAttributes = [
+            NSForegroundColorAttributeName : #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1),
+            NSFontAttributeName : UIFont(name: "SourceSansPro-Regular", size: 13)!
+        ]
+        self.view.addSubview(viewPager)
+        viewPager.setSelectedSegmentIndex(0, animated: false)
+        viewPager.indexChangedHandler = { index in
+            
+            self.segmentControl(index: index)
+            
+        }
+        
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        
+        self.view.addGestureRecognizer(swipeLeft)
+        self.view.addGestureRecognizer(swipeRight)
+        
+    }
+    
+    func swiped(sender:UISwipeGestureRecognizer){
+        if let swipeGesture = sender as? UISwipeGestureRecognizer{
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.right:
+                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex + 1 > 2 ? 2:viewPager.selectedSegmentIndex + 1, animated: true)
+            case UISwipeGestureRecognizerDirection.left:
+                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex - 1 < 0 ? 0:viewPager.selectedSegmentIndex - 1, animated: true)
+                print("left swipe")
+            default:
+                print("other swipe")
+            }
+        }
+    }
+    
+    func segmentControl(index:Int){
+        print(index)
     }
     
     
@@ -140,21 +199,21 @@ extension SearchViewController: UISearchResultsUpdating {
 }
 
 extension SearchViewController{
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return tasks.count
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let task = tasks[indexPath.row]
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell") as! AssignmentTableViewCell
-//        cell.configureWithTask(task)
-//        return cell
-//        
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        //self.performSegue(withIdentifier: "showDetails", sender: self)
-//        
-//    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasks.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let task = tasks[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell") as! AssignmentTableCell
+        cell.configureWithTask(task)
+        return cell
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //self.performSegue(withIdentifier: "showDetails", sender: self)
+        
+    }
 
 }
