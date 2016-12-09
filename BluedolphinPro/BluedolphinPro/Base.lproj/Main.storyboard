@@ -447,11 +447,6 @@
                             <constraint firstAttribute="trailing" secondItem="II0-7p-1vn" secondAttribute="trailing" id="rLe-6n-XCp"/>
                             <constraint firstItem="10W-oS-QVi" firstAttribute="leading" secondItem="UAu-T2-sn4" secondAttribute="leading" id="swf-7y-xZg"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="II0-7p-1vn"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="addressButton" destination="dUg-II-xtX" id="zua-Hg-ATG"/>

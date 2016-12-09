@@ -131,32 +131,7 @@ let searchController = UISearchController(searchResultsController: nil)
 //        let rightNavBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: "selector")
 //        self.navigationItem.rightBarButtonItem = rightNavBarButton
     }
-//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let control = UISegmentedControl(items: ["Seg1","Seg2","Seg3"])
-//        control.addTarget(self, action: "valueChanged:", for: UIControlEvents.valueChanged)
-//        if(section == 0){
-//            return control;
-//        }
-//        return nil;
-//    }
-//    
-//    func valueChanged(segmentedControl: UISegmentedControl) {
-//        print("Coming in : \(segmentedControl.selectedSegmentIndex)")
-////        if(segmentedControl.selectedSegmentIndex == 0){
-////            self.data = self.data0
-////        } else if(segmentedControl.selectedSegmentIndex == 1){
-////            self.data = self.data1
-////        } else if(segmentedControl.selectedSegmentIndex == 2){
-////            self.data = self.data2
-////        } else {
-////            self.data = data0
-////        }
-//        self.tableView.reloadData()
-//    }
-//    
-//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 44.0
-//    }
+
     func backbuttonAction(sender:Any){
         self.navigationController!.popViewController(animated: true)
         }

@@ -41,6 +41,7 @@
 		99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */; };
 		99A721BD1DF83D890059DFBB /* AssignmentTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */; };
 		99A721DF1DFA6EF00059DFBB /* AwsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721DE1DFA6EF00059DFBB /* AwsManager.swift */; };
+		99A721E11DFAC4F70059DFBB /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721E01DFAC4F70059DFBB /* BottomBar.swift */; };
 		99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */; };
 		99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1E1DDAE95C0066C07B /* Reachability.swift */; };
 		99CACFD81DB8A1590099AA00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CACFD71DB8A1590099AA00 /* AppDelegate.swift */; };
@@ -87,6 +88,7 @@
 		99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentTableCell.swift; sourceTree = "<group>"; };
 		99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentTableCell.xib; sourceTree = "<group>"; };
 		99A721DE1DFA6EF00059DFBB /* AwsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwsManager.swift; sourceTree = "<group>"; };
+		99A721E01DFAC4F70059DFBB /* BottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
 		99BD3E1E1DDAE95C0066C07B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		99CACFD41DB8A1590099AA00 /* BluedolphinPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluedolphinPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +160,7 @@
 				991536C01DEBF8390046254C /* CustomNavView.swift */,
 				99339F701DE6EE4C00F3C770 /* TabView.swift */,
 				991B468D1DF027FA0012D8DC /* Loader.swift */,
+				99A721E01DFAC4F70059DFBB /* BottomBar.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				99A721DF1DFA6EF00059DFBB /* AwsManager.swift in Sources */,
 				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,
 				991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */,
+				99A721E11DFAC4F70059DFBB /* BottomBar.swift in Sources */,
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
 				99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */,
 				99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */,

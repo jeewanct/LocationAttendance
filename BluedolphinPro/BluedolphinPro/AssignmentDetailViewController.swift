@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class AssignmentDetailViewController: UIViewController {
     var viewPager:ViewPagerControl!
@@ -43,6 +44,10 @@ class AssignmentDetailViewController: UIViewController {
         let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(AssignmentDetailViewController.saveAction(_:)))
         self.navigationItem.rightBarButtonItem = saveButton
         self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+        self.navigationItem.backBarButtonItem?.style = .plain
+        
+        contactNumberButton.addTarget(self, action: #selector(AssignmentDetailViewController.callAlertView), for: UIControlEvents.touchUpInside)
+        emailButton.addTarget(self, action: #selector(AssignmentDetailViewController.mailAction), for: UIControlEvents.touchUpInside)
         // Do any additional setup after loading the view.
     }
     func saveAction(_:UIButton){
@@ -118,8 +123,7 @@ class AssignmentDetailViewController: UIViewController {
             break;
             //mapView.isHidden = true
         case 1:
-            break
-            //mapView.isHidden = false
+            showActionSheet()
             
         default:
             break
@@ -153,14 +157,116 @@ class AssignmentDetailViewController: UIViewController {
                 endTimeLabel.text = "End:" + endtime.asDate.formatted
             }
 
-
-            
         }
 
+    }
     
+    
+    func showActionSheet(){
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let sendButton = UIAlertAction(title: "Camera", style: .default, handler: { (action) -> Void in
+            print("Ok button tapped")
+        })
+        
+        let  deleteButton = UIAlertAction(title: "Document", style: .default, handler: { (action) -> Void in
+            print("Delete button tapped")
+        })
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            //self.tabView.
+        })
+        
+        
+        alertController.addAction(sendButton)
+        alertController.addAction(deleteButton)
+        alertController.addAction(cancelButton)
+        
+        self.navigationController!.present(alertController, animated: true, completion: nil)
         
     }
+    
 
+    func callAlertView() {
+        
+        let alertString =  "Carrier charges may apply Are  you sure you want to call"
+        showAlertView(alertString, yesAction: callAction)
+        
+    }
+    func showAlertView(_ alertmessage:String,yesAction: @escaping ()->Void) {
+        let alert=UIAlertController(title: "Alert", message:alertmessage, preferredStyle: UIAlertControllerStyle.alert);
+        //default input textField (no configuration...)
+        //no event handler (just close dialog box)
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil));
+        //event handler with closure
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+            yesAction()
+        }));
+       self.present(alert, animated: true, completion: nil);
+        
+    }
+    func showAlert(_ message : String) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+            return        }
+        alertController.addAction(OkAction)
+        self.present(alertController, animated: true) {
+        }
+    }
+    
+    
+    func callAction(){
+        if let assignmentdetail = assignment?.assignmentDetails?.parseJSONString as? NSDictionary{
+        if let number = assignmentdetail["mobile"] as? String{
+            print(number)
+            let phoneCallURL:URL = URL(string: "tel://\(number)")!
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                //application.openURL(phoneCallURL);
+                application.open(phoneCallURL, options: [:], completionHandler: { (success) in
+                    if success {
+                        print("call")
+                    }
+                })
+            }
+            else {
+                self.showAlert("Your device is not compatible to call.")
+            }
+            
+        }
+        }
+    }
+    
+    func mailAction(){
+        //        if workdict!.emailId!.isBlank {
+        //            self.showAlert("No email available")
+        //        } else {
+        if let assignmentdetail = assignment?.assignmentDetails?.parseJSONString as? NSDictionary{
+        if let email = assignmentdetail["email"] as? String{
+        if( MFMailComposeViewController.canSendMail() ) {
+            
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = self
+            if email.isBlank {
+                //mailComposer.setToRecipients([(workdict?.emailId)!])
+            }else{
+                mailComposer.setToRecipients([email])
+            }
+            
+            //Set the subject and message of the email
+            //mailComposer.setSubject("Have you heard a swift?")
+            //mailComposer.setMessageBody("This is what they sound like.", isHTML: false)
+            
+            
+            self.present(mailComposer, animated: true, completion: nil)
+        }
+        //}
+        
+        }
+        }
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -168,16 +274,7 @@ class AssignmentDetailViewController: UIViewController {
     
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
 
 
@@ -207,10 +304,7 @@ extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSour
                 cell.downLineView.isHidden = false
             }
             return cell
-        
-        
-        
-        
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -222,3 +316,9 @@ extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSour
     
     
 }
+extension AssignmentDetailViewController:MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+

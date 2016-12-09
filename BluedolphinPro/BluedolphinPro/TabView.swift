@@ -237,10 +237,11 @@ class ViewPagerControl: UIControl {
     
     func tapped(segmentButton sender: UIButton) {
         let newIndex = sender.tag
-        let indexChanged: Bool = newIndex != selectedSegmentIndex
+        //let indexChanged: Bool = newIndex != selectedSegmentIndex
         selectedSegmentIndex = newIndex
         
-        if let indexChangedHandler = indexChangedHandler, indexChanged == true {
+        if let indexChangedHandler = indexChangedHandler
+            /*, indexChanged == true */{
             indexChangedHandler(selectedSegmentIndex)
         }
         
@@ -291,4 +292,6 @@ class ViewPagerControl: UIControl {
             self.layoutIfNeeded()
         }
     }
+    
 }
+
