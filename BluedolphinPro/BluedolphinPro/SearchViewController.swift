@@ -10,11 +10,12 @@ import UIKit
 import RealmSwift
 
 
-class SearchViewController: UITableViewController {
+class SearchViewController: UIViewController {
 let searchController = UISearchController(searchResultsController: nil)
     
       var viewPager:ViewPagerControl!
     
+    @IBOutlet weak var searchTable: UITableView!
     lazy   var searchBars:UISearchBar = UISearchBar(frame:
         
         CGRect(x:0, y:0, width:ScreenConstant.width - 100, height:20))
@@ -28,7 +29,9 @@ let searchController = UISearchController(searchResultsController: nil)
         tasks = getTasks("s")
         configureSearchbar()
         createViewPager()
-        tableView.register(UINib(nibName: "AssignmentTableCell", bundle: nil), forCellReuseIdentifier: "assignmentCell")
+        searchTable.delegate = self
+        searchTable.dataSource = self
+        searchTable.register(UINib(nibName: "AssignmentTableCell", bundle: nil), forCellReuseIdentifier: "assignmentCell")
         // Do any additional setup after loading the view.
     }
     
@@ -177,7 +180,7 @@ let searchController = UISearchController(searchResultsController: nil)
 //            let categoryMatch = (scope == "New") || (candy.category == scope)
 //            return categoryMatch && candy.name.lowercased().contains(searchText.lowercased())
 //        })
-        tableView.reloadData()
+        searchTable.reloadData()
     }
 
 }
@@ -198,12 +201,12 @@ extension SearchViewController: UISearchResultsUpdating {
     }
 }
 
-extension SearchViewController{
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SearchViewController:UITableViewDelegate,UITableViewDataSource{
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let task = tasks[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell") as! AssignmentTableCell
         cell.configureWithTask(task)
@@ -211,7 +214,7 @@ extension SearchViewController{
         
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //self.performSegue(withIdentifier: "showDetails", sender: self)
         
     }

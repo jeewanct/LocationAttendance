@@ -7,6 +7,19 @@
 //
 
 import Foundation
+import UIKit
+
+
+extension UILabel {
+    func resizeHeightToFit(heightConstraint: NSLayoutConstraint) {
+        let attributes = [NSFontAttributeName : font]
+        numberOfLines = 0
+        lineBreakMode = NSLineBreakMode.byWordWrapping
+        let rect = text?.boundingRect(with: CGSize(width:frame.size.width,height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes, context: nil)
+        heightConstraint.constant = (rect?.height)!
+        setNeedsLayout()
+    }
+}
 
 extension String {
     subscript (r: Range<Int>) -> String {

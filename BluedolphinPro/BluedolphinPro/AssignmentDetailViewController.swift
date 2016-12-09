@@ -13,19 +13,30 @@ class AssignmentDetailViewController: UIViewController {
     var tabView:ViewPagerControl!
     
     
-   var imagesTableDataArray = ["Image 01","Image 02","Image 03","Image 04"];
+   
     var timeLineTableArray = ["OutGoingCall","Image Captured","Assignment Started"]
     
+    @IBOutlet weak var instructionLabelHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var timeLineTableView: UITableView!
-    @IBOutlet weak var imagesTableView: UITableView!
     
+    @IBOutlet weak var startTimeLabel: UILabel!
     
+    @IBOutlet weak var endTimeLabel: UILabel!
+   
+    @IBOutlet weak var addressButton: UIButton!
     
+    @IBOutlet weak var contactNameLabel: UILabel!
+    @IBOutlet weak var contactNumberButton: UIButton!
+    @IBOutlet weak var emailButton: UIButton!
+    
+    @IBOutlet weak var instructionLabel: UILabel!
+    var assignment : RMCAssignmentObject?
     override func viewDidLoad() {
         super.viewDidLoad()
         createTabbarView()
         createViewPager()
-        
+        createLayout()
         timeLineTableView.delegate = self
         timeLineTableView.dataSource = self
         timeLineTableView.isHidden = true
@@ -83,11 +94,10 @@ class AssignmentDetailViewController: UIViewController {
             self.segmentControl(index: index)
             
         }
-        
-        
-        
-        
     }
+    
+    
+    
     
     func segmentControl(index:Int){
         switch(index){
@@ -114,6 +124,41 @@ class AssignmentDetailViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    func createLayout(){
+        if let assignmentdetail = assignment?.assignmentDetails?.parseJSONString as? NSDictionary{
+            if let address = assignmentdetail["address"] as? String{
+                addressButton.setTitle(address, for: UIControlState.normal)
+            }
+            if let mobile = assignmentdetail["mobile"] as? String{
+                contactNumberButton.setTitle(mobile, for: UIControlState.normal)
+            }
+            if let email = assignmentdetail["email"] as? String{
+                emailButton.setTitle(email, for: UIControlState.normal)
+            }
+
+            if let contactPerson = assignmentdetail["contactPerson"] as? String{
+                contactNameLabel.text = contactPerson
+            }
+
+            if let instructions = assignmentdetail["instructions"] as? String{
+                instructionLabel.text = instructions
+                instructionLabel.resizeHeightToFit(heightConstraint:instructionLabelHeightConstraint )
+            }
+            if let startTime = assignment?.time {
+                startTimeLabel.text = "Start:" + startTime.asDate.formatted
+            }
+            if let endtime = assignment?.assignmentDeadline {
+                endTimeLabel.text = "End:" + endtime.asDate.formatted
+            }
+
+
+            
+        }
+
+    
+        
     }
 
     override func didReceiveMemoryWarning() {

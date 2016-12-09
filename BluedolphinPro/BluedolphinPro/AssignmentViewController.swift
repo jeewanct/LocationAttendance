@@ -339,8 +339,10 @@ extension AssignmentViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "showDetails", sender: self)
-        
+        //self.performSegue(withIdentifier: "showDetails", sender: self)
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentDetail") as? AssignmentDetailViewController
+        controller?.assignment = tasks[indexPath.row]
+        self.navigationController?.pushViewController(controller!, animated: true)
     }
     
     

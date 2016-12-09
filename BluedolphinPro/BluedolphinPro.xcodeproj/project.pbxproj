@@ -28,7 +28,6 @@
 		99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D001DE2C8BA00F3C770 /* OauthObject.swift */; };
 		99339D031DE2D5B700F3C770 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D021DE2D5B700F3C770 /* Enums.swift */; };
 		99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339F661DE5B38B00F3C770 /* AssignmentObject.swift */; };
-		99339F691DE6D75D00F3C770 /* AssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339F681DE6D75D00F3C770 /* AssignmentTableViewCell.swift */; };
 		99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */; };
 		99339F711DE6EE4C00F3C770 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339F701DE6EE4C00F3C770 /* TabView.swift */; };
 		99369CF71DF036C200B405E4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99369CF61DF036C200B405E4 /* MainViewController.swift */; };
@@ -41,6 +40,7 @@
 		99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721B81DF7FF370059DFBB /* SearchViewController.swift */; };
 		99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */; };
 		99A721BD1DF83D890059DFBB /* AssignmentTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */; };
+		99A721DF1DFA6EF00059DFBB /* AwsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721DE1DFA6EF00059DFBB /* AwsManager.swift */; };
 		99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */; };
 		99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1E1DDAE95C0066C07B /* Reachability.swift */; };
 		99CACFD81DB8A1590099AA00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CACFD71DB8A1590099AA00 /* AppDelegate.swift */; };
@@ -74,7 +74,6 @@
 		99339D001DE2C8BA00F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
 		99339D021DE2D5B700F3C770 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		99339F661DE5B38B00F3C770 /* AssignmentObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentObject.swift; sourceTree = "<group>"; };
-		99339F681DE6D75D00F3C770 /* AssignmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentTableViewCell.swift; sourceTree = "<group>"; };
 		99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
 		99339F701DE6EE4C00F3C770 /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		99369CF61DF036C200B405E4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		99A721B81DF7FF370059DFBB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentTableCell.swift; sourceTree = "<group>"; };
 		99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentTableCell.xib; sourceTree = "<group>"; };
+		99A721DE1DFA6EF00059DFBB /* AwsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwsManager.swift; sourceTree = "<group>"; };
 		99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
 		99BD3E1E1DDAE95C0066C07B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		99CACFD41DB8A1590099AA00 /* BluedolphinPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluedolphinPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,7 +168,6 @@
 				99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */,
 				99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */,
 				991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */,
-				99339F681DE6D75D00F3C770 /* AssignmentTableViewCell.swift */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -223,6 +222,7 @@
 				99339CFE1DE2C86000F3C770 /* CheckinObject.swift */,
 				99339D001DE2C8BA00F3C770 /* OauthObject.swift */,
 				99339D021DE2D5B700F3C770 /* Enums.swift */,
+				99A721DE1DFA6EF00059DFBB /* AwsManager.swift */,
 			);
 			name = Sdk;
 			sourceTree = "<group>";
@@ -422,6 +422,7 @@
 				9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */,
 				99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */,
 				99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */,
+				99A721DF1DFA6EF00059DFBB /* AwsManager.swift in Sources */,
 				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,
 				991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */,
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
@@ -437,7 +438,6 @@
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
 				991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */,
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
-				99339F691DE6D75D00F3C770 /* AssignmentTableViewCell.swift in Sources */,
 				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,
 				99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */,
 			);
