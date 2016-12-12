@@ -11,19 +11,13 @@ import RealmSwift
 
 
 class SearchViewController: UIViewController {
-let searchController = UISearchController(searchResultsController: nil)
-    
-      var viewPager:ViewPagerControl!
-    
     @IBOutlet weak var searchTable: UITableView!
-    lazy   var searchBars:UISearchBar = UISearchBar(frame:
-        
-        CGRect(x:0, y:0, width:ScreenConstant.width - 100, height:20))
-
     var tasks : Results<RMCAssignmentObject>!
-    var searchResult : Results<RMCAssignmentObject>!
-    
-    
+    var searchResult : List<RMCAssignmentObject>!
+    var viewPager:ViewPagerControl!
+    lazy   var searchBars:UISearchBar = UISearchBar(frame:
+        CGRect(x:0, y:0, width:ScreenConstant.width - 100, height:20))
+    var searchActive : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         tasks = getTasks("s")
@@ -109,16 +103,7 @@ let searchController = UISearchController(searchResultsController: nil)
         
         
         // Setup the Search Controller
-//        searchController.searchResultsUpdater = self
-//        searchController.searchBar.delegate = self
-//        definesPresentationContext = true
-//        searchController.dimsBackgroundDuringPresentation = false
-//        
-//        // Setup the Scope Bar
-//        searchController.searchBar.scopeButtonTitles = ["New", "In-Progress", "Completed"]
-//        
-//        searchController.searchBar.showsBookmarkButton = true
-//        tableView.tableHeaderView = searchController.searchBar
+        searchBars.delegate = self
         searchBars.searchBarStyle = .minimal
         searchBars.setPositionAdjustment(UIOffset.init(horizontal: 0, vertical: 0), for: UISearchBarIcon.search)
         searchBars.showsBookmarkButton = true
@@ -160,29 +145,96 @@ let searchController = UISearchController(searchResultsController: nil)
 
 }
 
-extension SearchViewController: UISearchBarDelegate {
-    // MARK: - UISearchBar Delegate
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+//MARK: Search delegate
+extension SearchViewController:UISearchBarDelegate{
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        //        searchTrainlingContraint.constant = -80
+        //        UIView.animateWithDuration(0.5) {
+        //            self.view.layoutIfNeeded()
+        //        }
     }
+    //
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+    }
+    
+    //    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    //        searchActive = false;
+    //        taskTableview.reloadData()
+    //    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        self.view.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        //        filtered = result.filter {
+        //            $0.jobNumber!.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+        //        }
+        //        if(filtered.count == 0){
+        //            searchActive = false;
+        //        } else {
+        //            searchActive = true;
+        //        }
+        //        self.taskTableview.reloadData()
+        //
+        
+        
+        if searchBar.text!.isEmpty{
+            searchActive = false
+            
+            searchTable.reloadData()
+        } else {
+            //println(" search text %@ ",searchBar.text as NSString)
+            searchActive = true
+            searchResult = List<RMCAssignmentObject>()
+            
+            for obj in tasks {
+                if let assignmentdetail = obj.assignmentDetails?.parseJSONString as? NSDictionary{
+                    guard let address = assignmentdetail["address"] as? String else {
+                        return
+                    }
+                    guard let jobnumber = assignmentdetail["jobNumber"] as? String else {
+                        return
+                    }
+                    
+                   let currentString = address + " " + jobnumber
+                    //println("  text %@ ",currentString.lowercaseString)
+                    if currentString.lowercased().range(of: searchText.lowercased())  != nil {
+                        searchResult.append(obj)
+                    }
+                }
+                
+            }
+            searchTable.reloadData()
+            
+        }
+        
+    }
+    
 }
 
-extension SearchViewController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
-    }
-}
 
 extension SearchViewController:UITableViewDelegate,UITableViewDataSource{
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(searchActive) {
+            return searchResult.count
+        }
         return tasks.count
     }
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let task = tasks[indexPath.row]
+        var task : RMCAssignmentObject!
+        if(searchActive) {
+            task = searchResult[indexPath.row]
+
+        }
+        else {
+            task = tasks[indexPath.row]
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "assignmentCell") as! AssignmentTableCell
         cell.configureWithTask(task)
         return cell
