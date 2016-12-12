@@ -15,6 +15,7 @@ PODS:
   - Realm/Headers (2.0.2)
   - RealmSwift (2.0.2):
     - Realm (= 2.0.2)
+  - XLForm (3.2.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - GoogleMaps
   - IQKeyboardManagerSwift
   - RealmSwift
+  - XLForm (~> 3.0)
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
@@ -31,7 +33,8 @@ SPEC CHECKSUMS:
   ObjectMapper: 4060d739febae11ab0c6af8d786f98667c82e1bd
   Realm: 0f5a194af0b7e6158b83db41b4ee1a00be7ddf1a
   RealmSwift: 0eb5070d851cba7c66e841ca756d83609dc78bc8
+  XLForm: 2250b4e96ab8ffa5f3355838c79edd90de451782
 
-PODFILE CHECKSUM: 83a6392f8b65ae19b9c4683d4b80b2a34eb72f0d
+PODFILE CHECKSUM: c4d8db52ef5002cb5a63f4ebcd615aa6d227a3dc
 
 COCOAPODS: 1.1.0.rc.3

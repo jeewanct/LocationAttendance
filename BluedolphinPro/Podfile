@@ -12,6 +12,7 @@ pod 'RealmSwift'
 pod 'AlamofireObjectMapper'
 pod 'GoogleMaps'
 pod 'IQKeyboardManagerSwift'
+pod 'XLForm', '~> 3.0'
 
 end
 

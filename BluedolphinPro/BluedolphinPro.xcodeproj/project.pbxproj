@@ -35,6 +35,9 @@
 		994FF91E1DC9B5D000276B97 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */; };
 		994FF9201DCA173800276B97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF91F1DCA173800276B97 /* Extensions.swift */; };
 		994FF92C1DCB39DB00276B97 /* SDKSingelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */; };
+		9971974B1DFE7E82008834DD /* SelfAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */; };
+		997197501DFED115008834DD /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9971974F1DFED115008834DD /* OTPView.swift */; };
+		997197521DFED308008834DD /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997197511DFED308008834DD /* OTPViewController.swift */; };
 		99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215D1DBF80C400E5F369 /* SdkConstant.swift */; };
 		99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215F1DC07B4E00E5F369 /* OauthModel.swift */; };
 		99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721B81DF7FF370059DFBB /* SearchViewController.swift */; };
@@ -82,6 +85,10 @@
 		994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
 		994FF91F1DCA173800276B97 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKSingelton.swift; sourceTree = "<group>"; };
+		9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfAssignmentViewController.swift; sourceTree = "<group>"; };
+		9971974C1DFE846A008834DD /* BluedolphinPro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BluedolphinPro-Bridging-Header.h"; sourceTree = "<group>"; };
+		9971974F1DFED115008834DD /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
+		997197511DFED308008834DD /* OTPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		99A2215D1DBF80C400E5F369 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
 		99A2215F1DC07B4E00E5F369 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
 		99A721B81DF7FF370059DFBB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -135,12 +142,14 @@
 		991B46821DEFED800012D8DC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				997197511DFED308008834DD /* OTPViewController.swift */,
 				99369CF61DF036C200B405E4 /* MainViewController.swift */,
 				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
 				991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */,
 				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
 				99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */,
 				99A721B81DF7FF370059DFBB /* SearchViewController.swift */,
+				9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -156,6 +165,7 @@
 		991B46841DEFEDAD0012D8DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9971974F1DFED115008834DD /* OTPView.swift */,
 				99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */,
 				991536C01DEBF8390046254C /* CustomNavView.swift */,
 				99339F701DE6EE4C00F3C770 /* TabView.swift */,
@@ -200,6 +210,7 @@
 				9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */,
 				99CACFDE1DB8A1590099AA00 /* Assets.xcassets */,
 				99CACFE31DB8A1590099AA00 /* Info.plist */,
+				9971974C1DFE846A008834DD /* BluedolphinPro-Bridging-Header.h */,
 			);
 			name = Wired;
 			sourceTree = "<group>";
@@ -309,6 +320,7 @@
 					99CACFD31DB8A1590099AA00 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 9S8FZ5YMQ4;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -423,6 +435,7 @@
 				9902CF501DBF31B900692824 /* UserModel.swift in Sources */,
 				991536C11DEBF8390046254C /* CustomNavView.swift in Sources */,
 				9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */,
+				997197521DFED308008834DD /* OTPViewController.swift in Sources */,
 				99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */,
 				99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */,
 				99A721DF1DFA6EF00059DFBB /* AwsManager.swift in Sources */,
@@ -438,11 +451,13 @@
 				99369CF71DF036C200B405E4 /* MainViewController.swift in Sources */,
 				99DDC1A31DF6BA4B001BD0DB /* PlaceMarker.swift in Sources */,
 				99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */,
+				9971974B1DFE7E82008834DD /* SelfAssignmentViewController.swift in Sources */,
 				99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */,
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
 				991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */,
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
 				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,
+				997197501DFED115008834DD /* OTPView.swift in Sources */,
 				99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +585,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BluedolphinPro/BluedolphinPro.entitlements;
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				INFOPLIST_FILE = BluedolphinPro/Info.plist;
@@ -579,6 +595,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "43a9c4ff-f24d-4a00-9ec9-c80914b57fe4";
 				PROVISIONING_PROFILE_SPECIFIER = BluedolphinProDev;
+				SWIFT_OBJC_BRIDGING_HEADER = "BluedolphinPro/BluedolphinPro-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -589,6 +607,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BluedolphinPro/BluedolphinPro.entitlements;
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				INFOPLIST_FILE = BluedolphinPro/Info.plist;
@@ -598,6 +617,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "43a9c4ff-f24d-4a00-9ec9-c80914b57fe4";
 				PROVISIONING_PROFILE_SPECIFIER = BluedolphinProDev;
+				SWIFT_OBJC_BRIDGING_HEADER = "BluedolphinPro/BluedolphinPro-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

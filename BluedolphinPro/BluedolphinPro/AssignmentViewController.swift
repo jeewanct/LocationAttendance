@@ -295,7 +295,17 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
             mapView.isHidden = true
         case 1:
             mapView.isHidden = false
+        case 2:
+            
+//                let controller = self.storyboard?.instantiateViewController(withIdentifier: "selfAssignNav") as? UINavigationController
+//                self.navigationController?.present(controller!, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "presentSelfAssignment", sender: nil)
+            
+            
             //showCheckinMarkers(tasks)
+        case 3:
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? OTPViewController
+            self.navigationController?.show(controleer, sender: nil)
             
         default:
             break

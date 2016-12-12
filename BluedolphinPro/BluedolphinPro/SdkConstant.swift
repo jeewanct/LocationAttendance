@@ -25,12 +25,13 @@ import Foundation
 
 //dev Server
 
-let APIURL = "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev"
+let APIURL = "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/"
 enum ModuleUrl :String{
-    case User = "/user/"
-    case Checkin = "/checkin/organization/"
-    case Oauth = "/oauth/token"
-    case Assignment = "/assignment/organization/"
+    case User = "user/"
+    case Checkin = "/checkin/organisation/"
+    case Oauth = "auth/"
+    case Assignment = "assignment/organisation/"
+    case UpdatePassword = "user/updateotp"
 }
 
 
