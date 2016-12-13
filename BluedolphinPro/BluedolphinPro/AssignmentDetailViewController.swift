@@ -120,8 +120,10 @@ class AssignmentDetailViewController: UIViewController {
     func tabChanger(segment:Int){
         switch segment {
         case 0:
-            break;
-            //mapView.isHidden = true
+            let navController = self.storyboard?.instantiateViewController(withIdentifier: "notesScreen") as! UINavigationController
+//            let controller = navController.topViewController as! AddNotesViewController
+            //controller.workdictHolder = workdict
+            self.present(navController, animated: true, completion: nil)
         case 1:
             showActionSheet()
             
@@ -140,6 +142,9 @@ class AssignmentDetailViewController: UIViewController {
             }
             if let email = assignmentdetail["email"] as? String{
                 emailButton.setTitle(email, for: UIControlState.normal)
+            }
+            if let jobNumber = assignmentdetail["jobNumber"] as? String{
+                self.navigationItem.title = jobNumber
             }
 
             if let contactPerson = assignmentdetail["contactPerson"] as? String{

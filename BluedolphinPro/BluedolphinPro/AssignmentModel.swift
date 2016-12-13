@@ -19,7 +19,8 @@ class AssignmentModel :Meta{
             "Content-Type":"application/json",
             "Accept-Encoding":"application/gzip",
             "Accept":"application/json",
-            "Authorization":"Bearer " + Singleton.sharedInstance.accessToken
+            "Authorization":"Bearer " + Singleton.sharedInstance.accessToken,
+            "userId":Singleton.sharedInstance.userId
         ]
         
         return headers
@@ -27,7 +28,7 @@ class AssignmentModel :Meta{
     
     
     func getAssignments(assignmentId:String,completion: @escaping (_ result: String) -> Void){
-        let url = AssignmentModel.url() + Singleton.sharedInstance.organizationId + "?userId=" + Singleton.sharedInstance.userId + "&assignmentId=" + assignmentId
+        let url = AssignmentModel.url() + Singleton.sharedInstance.organizationId + "/assignment?assignmentId=" + assignmentId
         print(url)
         NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
             guard let status = response["statusCode"] as? Int else {
@@ -67,7 +68,7 @@ class AssignmentModel :Meta{
             data.append(value.toDictionary())
         }
         let param = [
-            "userId":Singleton.sharedInstance.accessToken,
+            //"userId":Singleton.sharedInstance.accessToken,
             "data":data
             
             ] as [String : Any]

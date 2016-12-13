@@ -93,6 +93,7 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var assignmentDetails:String?
     dynamic var statusLog:String?
     dynamic var assignmentDeadline:String?
+    dynamic var assignmentStartTime:String?
     var assigneeData = List<RMCAssignee>()
     dynamic var assignerData:RMCAssignee?
     dynamic var location:RMCLocation?
@@ -116,6 +117,7 @@ class RMCAssignmentObject :Object,Mappable {
         location <- map["location"]
         assignmentDetails <- map["assignmentDetails"]
         assignmentDeadline <- map["assignmentDeadline"]
+        assignmentStartTime <- map["assignmentStartTime"]
         status <- map["status"]
         bookmarked <- map["bookmark"]
     }

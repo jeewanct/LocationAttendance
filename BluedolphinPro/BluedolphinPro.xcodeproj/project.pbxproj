@@ -38,6 +38,8 @@
 		9971974B1DFE7E82008834DD /* SelfAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */; };
 		997197501DFED115008834DD /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9971974F1DFED115008834DD /* OTPView.swift */; };
 		997197521DFED308008834DD /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997197511DFED308008834DD /* OTPViewController.swift */; };
+		99927C311DFFC8C800131027 /* ScratchPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C301DFFC8C800131027 /* ScratchPad.swift */; };
+		99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C321DFFD38C00131027 /* AddNotesViewController.swift */; };
 		99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215D1DBF80C400E5F369 /* SdkConstant.swift */; };
 		99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215F1DC07B4E00E5F369 /* OauthModel.swift */; };
 		99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721B81DF7FF370059DFBB /* SearchViewController.swift */; };
@@ -89,6 +91,8 @@
 		9971974C1DFE846A008834DD /* BluedolphinPro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BluedolphinPro-Bridging-Header.h"; sourceTree = "<group>"; };
 		9971974F1DFED115008834DD /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		997197511DFED308008834DD /* OTPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
+		99927C301DFFC8C800131027 /* ScratchPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchPad.swift; sourceTree = "<group>"; };
+		99927C321DFFD38C00131027 /* AddNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
 		99A2215D1DBF80C400E5F369 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
 		99A2215F1DC07B4E00E5F369 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
 		99A721B81DF7FF370059DFBB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */,
 				99A721B81DF7FF370059DFBB /* SearchViewController.swift */,
 				9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */,
+				99927C321DFFD38C00131027 /* AddNotesViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 				99339F701DE6EE4C00F3C770 /* TabView.swift */,
 				991B468D1DF027FA0012D8DC /* Loader.swift */,
 				99A721E01DFAC4F70059DFBB /* BottomBar.swift */,
+				99927C301DFFC8C800131027 /* ScratchPad.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -444,6 +450,7 @@
 				99A721E11DFAC4F70059DFBB /* BottomBar.swift in Sources */,
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
 				99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */,
+				99927C311DFFC8C800131027 /* ScratchPad.swift in Sources */,
 				99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */,
 				991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */,
 				991B468E1DF027FA0012D8DC /* Loader.swift in Sources */,
@@ -456,6 +463,7 @@
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
 				991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */,
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
+				99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */,
 				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,
 				997197501DFED115008834DD /* OTPView.swift in Sources */,
 				99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */,

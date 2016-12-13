@@ -33,6 +33,10 @@ class AssignmentTableCell: UITableViewCell {
             if let address = assignmentdetail["address"] as? String{
                 addressLabel.text = address
             }
+            if let jobNumber = assignmentdetail["jobNumber"] as? String{
+                jobNameLabel.text = jobNumber
+            }
+
             
         }
         if let startTime = task.time {

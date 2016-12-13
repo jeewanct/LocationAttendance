@@ -30,7 +30,7 @@ enum ModuleUrl :String{
     case User = "user/"
     case Checkin = "/checkin/organisation/"
     case Oauth = "auth/"
-    case Assignment = "assignment/organisation/"
+    case Assignment = "organisation/"
     case UpdatePassword = "user/updateotp"
 }
 
