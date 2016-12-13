@@ -305,7 +305,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
             //showCheckinMarkers(tasks)
         case 3:
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? OTPViewController
-            self.navigationController?.show(controleer, sender: nil)
+            self.navigationController?.show(controller!, sender: nil)
             
         default:
             break

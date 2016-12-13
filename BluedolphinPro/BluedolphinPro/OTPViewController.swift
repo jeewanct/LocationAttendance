@@ -10,12 +10,14 @@ import UIKit
 
 class OTPViewController: UIViewController ,CodeInputViewDelegate{
 
+    @IBOutlet weak var otpView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let codeInputView = CodeInputView(frame: CGRect(x: (view.frame.width-215)/2, y: 242, width: 215, height: 60))
+        let codeInputView = CodeInputView(frame: CGRect(x: 0, y: 0, width: otpView.frame.width, height: otpView.frame.height))
         codeInputView.delegate = self
         codeInputView.tag = 17
-        view.addSubview(codeInputView)
+        
+        otpView.addSubview(codeInputView)
         
         codeInputView.becomeFirstResponder()
 

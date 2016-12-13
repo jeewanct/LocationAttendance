@@ -11,6 +11,7 @@ import Foundation
 import UIKit
 
 public class CodeInputView: UIView, UIKeyInput {
+    public var numberOfText:Int = 6
     public var delegate: CodeInputViewDelegate?
     private var nextTag = 1
     
@@ -24,17 +25,17 @@ public class CodeInputView: UIView, UIKeyInput {
     // MARK: - UIView
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        let width = Double(self.frame.width)/Double(numberOfText) - 10
         // Add four digitLabels
-        var frame = CGRect(x: 15, y: 10, width: 35, height: 40)
-        for index in 1...6 {
+        var frame = CGRect(x: 5, y: 5, width: width, height: 40)
+        for index in 1...numberOfText {
             let digitLabel = UILabel(frame: frame)
             digitLabel.font = UIFont.systemFont(ofSize: 42)
             digitLabel.tag = index
             digitLabel.text = "–"
             digitLabel.textAlignment = .center
             addSubview(digitLabel)
-            frame.origin.x += 35 + 15
+            frame.origin.x += CGFloat(width) + 10
         }
     }
     required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") } // NSCoding
@@ -49,11 +50,11 @@ public class CodeInputView: UIView, UIKeyInput {
     }
     
     public func insertText(_ text: String) {
-        if nextTag < 7{
+        if nextTag < numberOfText + 1{
             (viewWithTag(nextTag)! as! UILabel).text = text
             nextTag += 1
             
-            if nextTag == 7 {
+            if nextTag == numberOfText + 1 {
                 var code = ""
                 for index in 1..<nextTag {
                     code += (viewWithTag(index)! as! UILabel).text!
