@@ -686,7 +686,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rad-vq-0Dt" customClass="YPDrawSignatureView" customModule="BluedolphinPro" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rad-vq-0Dt" customClass="ScratchPad" customModule="BluedolphinPro" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="320" height="463"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -698,7 +698,7 @@
                                 </constraints>
                                 <state key="normal" title="Clear"/>
                                 <connections>
-                                    <action selector="clearAction:" destination="Spx-ae-whK" eventType="touchUpInside" id="jI1-zi-Udr"/>
+                                    <action selector="signatureClearAction:" destination="Spx-ae-whK" eventType="touchUpInside" id="1a4-GG-LEv"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tnb-lu-SCd">
@@ -729,18 +729,11 @@
                             <constraint firstItem="rad-vq-0Dt" firstAttribute="leading" secondItem="CLS-WI-mqD" secondAttribute="leading" id="z76-nq-U4z"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Signature" id="ABQ-fO-H9U">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="LA1-WE-oG1">
-                            <color key="tintColor" red="0.40784313729999999" green="0.6588235294" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="cancelAction:" destination="Spx-ae-whK" id="APc-MT-zFj"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Signature" id="ABQ-fO-H9U"/>
                     <connections>
-                        <outlet property="imgView" destination="Tnb-lu-SCd" id="pLD-qY-aRc"/>
-                        <outlet property="signatureLabel" destination="CJY-vu-1Em" id="fLQ-DN-tQ1"/>
-                        <outlet property="signatureView" destination="rad-vq-0Dt" id="sG1-gc-TL5"/>
+                        <outlet property="noSignatureLabel" destination="CJY-vu-1Em" id="r5Q-iE-THv"/>
+                        <outlet property="signatureImageView" destination="Tnb-lu-SCd" id="mUZ-SE-xa7"/>
+                        <outlet property="signatureView" destination="rad-vq-0Dt" id="eEY-hy-Kmd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Swi-nt-Ebl" userLabel="First Responder" sceneMemberID="firstResponder"/>

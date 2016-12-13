@@ -127,6 +127,12 @@ class AssignmentDetailViewController: UIViewController {
         case 1:
             showActionSheet()
             
+        case 2:
+            let navController = self.storyboard?.instantiateViewController(withIdentifier: "signatureScreen") as! UINavigationController
+//            let controller = navController.topViewController as! SignatureViewController
+//            controller.workdictHolder = workdict
+            self.present(navController, animated: true, completion: nil)
+            
         default:
             break
         }

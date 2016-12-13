@@ -40,6 +40,7 @@
 		997197521DFED308008834DD /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997197511DFED308008834DD /* OTPViewController.swift */; };
 		99927C311DFFC8C800131027 /* ScratchPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C301DFFC8C800131027 /* ScratchPad.swift */; };
 		99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C321DFFD38C00131027 /* AddNotesViewController.swift */; };
+		99927C351DFFD91700131027 /* SignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C341DFFD91700131027 /* SignatureViewController.swift */; };
 		99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215D1DBF80C400E5F369 /* SdkConstant.swift */; };
 		99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215F1DC07B4E00E5F369 /* OauthModel.swift */; };
 		99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721B81DF7FF370059DFBB /* SearchViewController.swift */; };
@@ -93,6 +94,7 @@
 		997197511DFED308008834DD /* OTPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		99927C301DFFC8C800131027 /* ScratchPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchPad.swift; sourceTree = "<group>"; };
 		99927C321DFFD38C00131027 /* AddNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
+		99927C341DFFD91700131027 /* SignatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureViewController.swift; sourceTree = "<group>"; };
 		99A2215D1DBF80C400E5F369 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
 		99A2215F1DC07B4E00E5F369 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
 		99A721B81DF7FF370059DFBB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 		991B46821DEFED800012D8DC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				99927C341DFFD91700131027 /* SignatureViewController.swift */,
 				997197511DFED308008834DD /* OTPViewController.swift */,
 				99369CF61DF036C200B405E4 /* MainViewController.swift */,
 				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
@@ -465,6 +468,7 @@
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
 				99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */,
 				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,
+				99927C351DFFD91700131027 /* SignatureViewController.swift in Sources */,
 				997197501DFED115008834DD /* OTPView.swift in Sources */,
 				99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */,
 			);

@@ -19,7 +19,8 @@ class CheckinModel:Meta{
             "Content-Type":"application/json",
             "Accept-Encoding":"application/gzip",
             "Accept":"application/json",
-            "Authorization":"Bearer " + Singleton.sharedInstance.accessToken
+            "Authorization":"Bearer " + Singleton.sharedInstance.accessToken,
+            "userId":Singleton.sharedInstance.userId
         ]
         
         return headers
@@ -36,7 +37,7 @@ class CheckinModel:Meta{
             data.append(value.toDictionary())
         }
         let param = [
-            "userId":Singleton.sharedInstance.userId,
+            //"userId":Singleton.sharedInstance.userId,
             "data":data
         
         ] as [String : Any]
