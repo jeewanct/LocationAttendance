@@ -48,5 +48,9 @@
 		<string>SourceSansPro-Regular.ttf</string>
 		<string>SourceSansPro-Bold.ttf</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Want to access your camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Want to access your PhotoGallery</string>
 </dict>
 </plist>

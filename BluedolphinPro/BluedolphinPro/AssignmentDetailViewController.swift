@@ -33,11 +33,16 @@ class AssignmentDetailViewController: UIViewController {
     
     @IBOutlet weak var instructionLabel: UILabel!
     var assignment : RMCAssignmentObject?
+    var alertTextfield = UITextField()
+    fileprivate var albumName:String?
+    var customAlbum :CustomPhotoAlbum?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createTabbarView()
         createViewPager()
         createLayout()
+        
         timeLineTableView.delegate = self
         timeLineTableView.dataSource = self
         timeLineTableView.isHidden = true
@@ -151,6 +156,7 @@ class AssignmentDetailViewController: UIViewController {
             }
             if let jobNumber = assignmentdetail["jobNumber"] as? String{
                 self.navigationItem.title = jobNumber
+                albumName = jobNumber
             }
 
             if let contactPerson = assignmentdetail["contactPerson"] as? String{
@@ -167,7 +173,9 @@ class AssignmentDetailViewController: UIViewController {
             if let endtime = assignment?.assignmentDeadline {
                 endTimeLabel.text = "End:" + endtime.asDate.formatted
             }
-
+            
+                
+                customAlbum = CustomPhotoAlbum(name: albumName!)
         }
 
     }
@@ -177,7 +185,7 @@ class AssignmentDetailViewController: UIViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let sendButton = UIAlertAction(title: "Camera", style: .default, handler: { (action) -> Void in
-            print("Ok button tapped")
+            self.btnCamera()
         })
         
         let  deleteButton = UIAlertAction(title: "Document", style: .default, handler: { (action) -> Void in
@@ -326,6 +334,94 @@ extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSour
     
     
     
+}
+
+
+extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImagePickerControllerDelegate {
+        func btnCamera() {
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)){
+            //load the camera interface
+            let picker : UIImagePickerController = UIImagePickerController()
+            picker.sourceType = UIImagePickerControllerSourceType.camera
+            picker.delegate = self
+            picker.allowsEditing = false
+            self.present(picker, animated: true, completion: nil)
+        }else{
+            //no camera available
+            let alert = UIAlertController(title: "Error", message: "There is no camera available", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: {(alertAction)in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image: UIImage = info["UIImagePickerControllerOriginalImage"] as? UIImage{
+            DispatchQueue.main.async(execute: {
+                // NSLog("Adding Image to Library -> %@", (success ? "Sucess":"Error!"))
+                picker.dismiss(animated: true, completion: nil)
+                self.showTextfieldAlert(image)
+                
+            })
+            //Implement if allowing user to edit the selected image
+            //let editedImage = info.objectForKey("UIImagePickerControllerEditedImage") as UIImage
+            
+            
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
+        picker.dismiss(animated: true, completion: nil)
+    }
+    //Textfield Alert
+    func configurationTextField(_ textField: UITextField!)
+    {
+        print("configurat hire the TextField")
+        
+        if let tField = textField {
+            
+            self.alertTextfield = tField        //Save reference to the UITextField
+            self.alertTextfield.placeholder = "Enter photoName"
+        }
+    }
+    
+    
+    func handleCancel(_ alertView: UIAlertAction!)
+    {
+        print("User click Cancel button")
+        print(self.alertTextfield.text)
+    }
+    
+    func showTextfieldAlert(_ image:UIImage){
+        let alert = UIAlertController(title: "Image Name", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addTextField(configurationHandler: configurationTextField)
+        
+        alert.addAction(UIAlertAction(title: "Discard", style: UIAlertActionStyle.cancel, handler:handleCancel))
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler:{ (UIAlertAction)in
+            print("User click Ok button")
+            print(self.alertTextfield.text!)
+            if self.alertTextfield.text!.isBlank {
+                self.customAlbum!.updatePhoto(image)
+                let manager = AWSS3Manager()
+                manager.configAwsManager()
+                manager.sendFile(imageName : "NoName" + Date().formattedISO8601, image: image, extention: "jpg")
+                //self.saveImage(image, name:"NoName")
+            }else {
+                self.customAlbum!.updatePhoto(image)
+                let manager = AWSS3Manager()
+                manager.configAwsManager()
+                manager.sendFile(imageName : self.alertTextfield.text! + Date().formattedISO8601, image: image, extention: "jpg")
+                //self.saveImage(image, name: self.alertTextfield.text!)
+                
+            }
+        }))
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
 }
 extension AssignmentDetailViewController:MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

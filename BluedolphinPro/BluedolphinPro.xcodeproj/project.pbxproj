@@ -43,6 +43,7 @@
 		99927C351DFFD91700131027 /* SignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C341DFFD91700131027 /* SignatureViewController.swift */; };
 		99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215D1DBF80C400E5F369 /* SdkConstant.swift */; };
 		99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215F1DC07B4E00E5F369 /* OauthModel.swift */; };
+		99A509C81E0166BD00688FAF /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A509C71E0166BD00688FAF /* CustomPhotoAlbum.swift */; };
 		99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721B81DF7FF370059DFBB /* SearchViewController.swift */; };
 		99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */; };
 		99A721BD1DF83D890059DFBB /* AssignmentTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */; };
@@ -97,6 +98,7 @@
 		99927C341DFFD91700131027 /* SignatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureViewController.swift; sourceTree = "<group>"; };
 		99A2215D1DBF80C400E5F369 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
 		99A2215F1DC07B4E00E5F369 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
+		99A509C71E0166BD00688FAF /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
 		99A721B81DF7FF370059DFBB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentTableCell.swift; sourceTree = "<group>"; };
 		99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentTableCell.xib; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				991536981DE6F95D0046254C /* AppConstant.swift */,
 				991A6D861DED5028004D1355 /* CommonFunction.swift */,
 				991B468B1DF00AF10012D8DC /* LocalExtensions.swift */,
+				99A509C71E0166BD00688FAF /* CustomPhotoAlbum.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,
 				991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */,
 				99A721E11DFAC4F70059DFBB /* BottomBar.swift in Sources */,
+				99A509C81E0166BD00688FAF /* CustomPhotoAlbum.swift in Sources */,
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
 				99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */,
 				99927C311DFFC8C800131027 /* ScratchPad.swift in Sources */,

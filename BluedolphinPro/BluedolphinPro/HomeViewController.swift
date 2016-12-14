@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var totalHourTextfield: UITextField!
     @IBOutlet weak var fecodeTextField: UITextField!
-    var statusOption = ["Available","Offline"]
+    var statusOption = ["Online","Offline"]
     var organisationOption = ["New","BdLite","BdPro"]
     let pickerView = UIPickerView()
     var menuView: CustomNavigationDropdownMenu!
@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
             print(deviceToken)
         }
             createNavView()
-        createLayout()
+            createLayout()
         
       
         
@@ -70,13 +70,13 @@ class HomeViewController: UIViewController {
         var dropdownImage = UIImage(named: "dropdown")
          dropdownImage =  dropdownImage?.imageWithInsets(insetDimen: 10)
         nameLabel.text = "Raghvendra"
-        statusTextField.text = "Available"
+        statusTextField.text = statusOption[0]
         statusTextField.inputView = pickerView
         statusTextField.delegate = self
         statusTextField.rightViewMode = .always;
         statusTextField.rightView = UIImageView(image: dropdownImage)
         
-        organisationTextField.text = "Available"
+        organisationTextField.text = organisationOption[0]
         organisationTextField.inputView = pickerView
         organisationTextField.delegate = self
         organisationTextField.rightViewMode = .always;
@@ -97,9 +97,16 @@ class HomeViewController: UIViewController {
         totalHourTextfield.leftViewMode = .always;
         totalHourTextfield.leftView = UIImageView(image: UIImage(named: "clock"))
         
+        let notificationButton = UIBarButtonItem(image: #imageLiteral(resourceName: "notifications"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(notificationAction(_:)))
+        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+        self.navigationItem.leftBarButtonItem = notificationButton
         
         
        
+    }
+    
+    func notificationAction(_:Any){
+        
     }
     
     
@@ -220,9 +227,27 @@ extension HomeViewController:UIPickerViewDataSource, UIPickerViewDelegate{
   
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if currentTextField == statusTextField {
-      statusTextField.text = statusOption[row]
+            updateStatus(data: statusOption[row])
+  
         }
-     organisationTextField.text = organisationOption[row]
+    updateOrganisation(data:  organisationOption[row])
+    }
+    
+    func updateStatus(data:String){
+        statusTextField.text = data
+        switch data {
+        case statusOption[0]:
+            self.signalView.backgroundColor = UIColor.green
+            
+            case statusOption[1]:
+            self.signalView.backgroundColor = UIColor.red
+            
+        default:
+            break
+        }
+    }
+    func updateOrganisation(data:String){
+             organisationTextField.text  = data
     }
     
 }
