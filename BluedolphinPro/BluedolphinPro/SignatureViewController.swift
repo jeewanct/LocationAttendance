@@ -50,6 +50,11 @@ noSignatureLabel.isHidden = true
     func saveAction(_ sender: AnyObject) {
         if self.signatureView.containsSignature {
             if let signatureImage = self.signatureView.getSignature() {
+                
+                
+                let manager = AWSS3Manager()
+                manager.configAwsManager()
+                manager.sendFile(imageName : "Signature" + Date().formattedISO8601, image: signatureImage, extention: "jpg")
 //                customAlbum!.updatePhoto(signatureImage)
 //                showLoader()
 //                createCheckin(signatureImage)

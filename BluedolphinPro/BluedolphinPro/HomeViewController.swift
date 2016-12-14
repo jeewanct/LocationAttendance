@@ -12,8 +12,21 @@ import RealmSwift
 
 class HomeViewController: UIViewController {
  
-    var viewPager:ViewPagerControl!
-    var tabView:ViewPagerControl!
+    @IBOutlet weak var signalView: UIView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var statusTextField: UITextField!
+    
+    @IBOutlet weak var organisationTextField: UITextField!
+    
+    @IBOutlet weak var mobileNumberTextfield: UITextField!
+    
+    @IBOutlet weak var totalHourTextfield: UITextField!
+    @IBOutlet weak var fecodeTextField: UITextField!
+    var statusOption = ["Available","Offline"]
+    var organisationOption = ["New","BdLite","BdPro"]
     var menuView: CustomNavigationDropdownMenu!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +34,7 @@ class HomeViewController: UIViewController {
             print(deviceToken)
         }
             createNavView()
+        createLayout()
         
       
         
@@ -35,6 +49,53 @@ class HomeViewController: UIViewController {
         
         
         
+    }
+    
+    func createLayout(){
+        let pickerView = UIPickerView()
+        
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+        //profileImageView.contentMode = .center
+        profileImageView.clipsToBounds = true
+        
+        profileImageView.layer.borderColor = UIColor.gray.cgColor
+        profileImageView.layer.borderWidth = 1.0
+        signalView.layer.cornerRadius = signalView.frame.size.width/2
+        signalView.clipsToBounds = true
+        var dropdownImage = UIImage(named: "dropdown")
+         dropdownImage =  dropdownImage?.imageWithInsets(insetDimen: 10)
+        nameLabel.text = "Raghvendra"
+        statusTextField.text = "Available"
+        statusTextField.inputView = pickerView
+        statusTextField.rightViewMode = .always;
+        statusTextField.rightView = UIImageView(image: dropdownImage)
+        
+        organisationTextField.text = "Available"
+        organisationTextField.inputView = pickerView
+        organisationTextField.rightViewMode = .always;
+        organisationTextField.rightView = UIImageView(image:dropdownImage )
+        
+        fecodeTextField.text = " FE Code: " + "Loream Ipsum"
+        fecodeTextField.isUserInteractionEnabled = false
+        fecodeTextField.leftViewMode = .always;
+        fecodeTextField.leftView = UIImageView(image: UIImage(named: "code"))
+        
+        mobileNumberTextfield.text = " Mobile Number: " + "+919015620820"
+        mobileNumberTextfield.isUserInteractionEnabled = false
+        mobileNumberTextfield.leftViewMode = .always;
+        mobileNumberTextfield.leftView = UIImageView(image: UIImage(named: "phone"))
+        
+        totalHourTextfield.text = " Total Hours: " + "10:20"
+        totalHourTextfield.isUserInteractionEnabled = false
+        totalHourTextfield.leftViewMode = .always;
+        totalHourTextfield.leftView = UIImageView(image: UIImage(named: "clock"))
+        
+        
+        
+       
     }
     
     
@@ -126,6 +187,40 @@ class HomeViewController: UIViewController {
     
 
 
+}
+
+extension HomeViewController:UIPickerViewDataSource, UIPickerViewDelegate{
+    @available(iOS 2.0, *)
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView.inputView == statusTextField {
+          return statusOption.count
+        }
+        return organisationOption.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView.inputView == statusTextField {
+            return statusOption[row]
+        }
+        return organisationOption[row]
+    }
+  
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView.inputView == statusTextField {
+      statusTextField.text = statusOption[row]
+        }
+     organisationTextField.text = organisationOption[row]
+    }
+    
 }
     
     
