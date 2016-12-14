@@ -12,6 +12,7 @@ import RealmSwift
 
 class HomeViewController: UIViewController {
  
+    var currentTextField = UITextField()
     @IBOutlet weak var signalView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     
@@ -27,6 +28,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var fecodeTextField: UITextField!
     var statusOption = ["Available","Offline"]
     var organisationOption = ["New","BdLite","BdPro"]
+    let pickerView = UIPickerView()
     var menuView: CustomNavigationDropdownMenu!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +54,7 @@ class HomeViewController: UIViewController {
     }
     
     func createLayout(){
-        let pickerView = UIPickerView()
+        
         
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -70,11 +72,13 @@ class HomeViewController: UIViewController {
         nameLabel.text = "Raghvendra"
         statusTextField.text = "Available"
         statusTextField.inputView = pickerView
+        statusTextField.delegate = self
         statusTextField.rightViewMode = .always;
         statusTextField.rightView = UIImageView(image: dropdownImage)
         
         organisationTextField.text = "Available"
         organisationTextField.inputView = pickerView
+        organisationTextField.delegate = self
         organisationTextField.rightViewMode = .always;
         organisationTextField.rightView = UIImageView(image:dropdownImage )
         
@@ -201,26 +205,31 @@ extension HomeViewController:UIPickerViewDataSource, UIPickerViewDelegate{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView.inputView == statusTextField {
+         if currentTextField == statusTextField {
           return statusOption.count
         }
         return organisationOption.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView.inputView == statusTextField {
+        if currentTextField == statusTextField {
             return statusOption[row]
         }
         return organisationOption[row]
     }
   
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView.inputView == statusTextField {
+        if currentTextField == statusTextField {
       statusTextField.text = statusOption[row]
         }
      organisationTextField.text = organisationOption[row]
     }
     
+}
+extension HomeViewController :UITextFieldDelegate {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        currentTextField = textField
+    }
 }
     
     
