@@ -10,6 +10,10 @@
 		65C6A7C8E80A76489458049F /* Pods_BluedolphinPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE78BE1830F43DAE65AB796C /* Pods_BluedolphinPro.framework */; };
 		9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902CF2F1DBE163A00692824 /* NetworkClass.swift */; };
 		9902CF501DBF31B900692824 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902CF4F1DBF31B900692824 /* UserModel.swift */; };
+		990411451E02738E002FCF53 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990411441E02738E002FCF53 /* PhotoViewController.swift */; };
+		990411471E027630002FCF53 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990411461E027630002FCF53 /* GalleryViewController.swift */; };
+		9904114A1E027655002FCF53 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990411481E027655002FCF53 /* GalleryCollectionViewCell.swift */; };
+		9904114B1E027655002FCF53 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 990411491E027655002FCF53 /* GalleryCollectionViewCell.xib */; };
 		991536991DE6F95D0046254C /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991536981DE6F95D0046254C /* AppConstant.swift */; };
 		991536C11DEBF8390046254C /* CustomNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991536C01DEBF8390046254C /* CustomNavView.swift */; };
 		991536C51DEBFF810046254C /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 991536C31DEBFF810046254C /* SourceSansPro-Bold.ttf */; };
@@ -63,6 +67,10 @@
 		0C01FAD6D9C2AEE2E69FE6D7 /* Pods-BluedolphinPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluedolphinPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BluedolphinPro/Pods-BluedolphinPro.debug.xcconfig"; sourceTree = "<group>"; };
 		9902CF2F1DBE163A00692824 /* NetworkClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClass.swift; sourceTree = "<group>"; };
 		9902CF4F1DBF31B900692824 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		990411441E02738E002FCF53 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		990411461E027630002FCF53 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		990411481E027655002FCF53 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		990411491E027655002FCF53 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
 		991536981DE6F95D0046254C /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
 		991536C01DEBF8390046254C /* CustomNavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavView.swift; sourceTree = "<group>"; };
 		991536C31DEBFF810046254C /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
@@ -150,6 +158,8 @@
 		991B46821DEFED800012D8DC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				990411441E02738E002FCF53 /* PhotoViewController.swift */,
+				990411461E027630002FCF53 /* GalleryViewController.swift */,
 				99927C341DFFD91700131027 /* SignatureViewController.swift */,
 				997197511DFED308008834DD /* OTPViewController.swift */,
 				99369CF61DF036C200B405E4 /* MainViewController.swift */,
@@ -192,6 +202,8 @@
 				99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */,
 				99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */,
 				991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */,
+				990411481E027655002FCF53 /* GalleryCollectionViewCell.swift */,
+				990411491E027655002FCF53 /* GalleryCollectionViewCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -373,6 +385,7 @@
 				99CACFE21DB8A1590099AA00 /* LaunchScreen.storyboard in Resources */,
 				99CACFDF1DB8A1590099AA00 /* Assets.xcassets in Resources */,
 				99CACFDD1DB8A1590099AA00 /* Main.storyboard in Resources */,
+				9904114B1E027655002FCF53 /* GalleryCollectionViewCell.xib in Resources */,
 				991536C51DEBFF810046254C /* SourceSansPro-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,11 +466,13 @@
 				99A721DF1DFA6EF00059DFBB /* AwsManager.swift in Sources */,
 				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,
 				991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */,
+				990411451E02738E002FCF53 /* PhotoViewController.swift in Sources */,
 				99A721E11DFAC4F70059DFBB /* BottomBar.swift in Sources */,
 				99A509C81E0166BD00688FAF /* CustomPhotoAlbum.swift in Sources */,
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
 				99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */,
 				99927C311DFFC8C800131027 /* ScratchPad.swift in Sources */,
+				9904114A1E027655002FCF53 /* GalleryCollectionViewCell.swift in Sources */,
 				99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */,
 				991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */,
 				991B468E1DF027FA0012D8DC /* Loader.swift in Sources */,
@@ -473,6 +488,7 @@
 				99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */,
 				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,
 				99927C351DFFD91700131027 /* SignatureViewController.swift in Sources */,
+				990411471E027630002FCF53 /* GalleryViewController.swift in Sources */,
 				997197501DFED115008834DD /* OTPView.swift in Sources */,
 				99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */,
 			);

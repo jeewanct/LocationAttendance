@@ -36,7 +36,10 @@ class AssignmentDetailViewController: UIViewController {
     var alertTextfield = UITextField()
     fileprivate var albumName:String?
     var customAlbum :CustomPhotoAlbum?
-
+    
+    @IBOutlet weak var imageLabel: UILabel!
+    
+    @IBOutlet weak var galleryView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         createTabbarView()
@@ -53,7 +56,15 @@ class AssignmentDetailViewController: UIViewController {
         
         contactNumberButton.addTarget(self, action: #selector(AssignmentDetailViewController.callAlertView), for: UIControlEvents.touchUpInside)
         emailButton.addTarget(self, action: #selector(AssignmentDetailViewController.mailAction), for: UIControlEvents.touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
+        galleryView.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
+    }
+    
+    func tapBlurButton(_ sender: UITapGestureRecognizer) {
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "PhotoViewController") as?
+        PhotoViewController
+        self.navigationController?.show(controller!, sender: nil)
     }
     func saveAction(_:UIButton){
         
