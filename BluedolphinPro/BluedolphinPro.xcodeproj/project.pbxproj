@@ -146,6 +146,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9904114C1E03B613002FCF53 /* Checkins */ = {
+			isa = PBXGroup;
+			children = (
+				994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */,
+				9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */,
+				99339CFE1DE2C86000F3C770 /* CheckinObject.swift */,
+			);
+			name = Checkins;
+			sourceTree = "<group>";
+		};
+		9904114D1E03B620002FCF53 /* Assignments */ = {
+			isa = PBXGroup;
+			children = (
+				994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */,
+				99339F661DE5B38B00F3C770 /* AssignmentObject.swift */,
+			);
+			name = Assignments;
+			sourceTree = "<group>";
+		};
 		991536C21DEBFF810046254C /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,15 +268,12 @@
 				99A2215D1DBF80C400E5F369 /* SdkConstant.swift */,
 				9918E8841DDD9CF1000376CF /* ErrorMessage.swift */,
 				994FF91F1DCA173800276B97 /* Extensions.swift */,
-				994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */,
+				9904114C1E03B613002FCF53 /* Checkins */,
 				99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */,
 				992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */,
 				99BD3E1E1DDAE95C0066C07B /* Reachability.swift */,
 				994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */,
-				994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */,
-				99339F661DE5B38B00F3C770 /* AssignmentObject.swift */,
-				9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */,
-				99339CFE1DE2C86000F3C770 /* CheckinObject.swift */,
+				9904114D1E03B620002FCF53 /* Assignments */,
 				99339D001DE2C8BA00F3C770 /* OauthObject.swift */,
 				99339D021DE2D5B700F3C770 /* Enums.swift */,
 				99A721DE1DFA6EF00059DFBB /* AwsManager.swift */,

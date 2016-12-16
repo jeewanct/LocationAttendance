@@ -12,6 +12,7 @@ class AddNotesViewController: UIViewController {
     @IBOutlet weak var notesTextView: UITextView!
     fileprivate var placholderText = "Add your notes"
     fileprivate let COMMENTS_LIMIT = 1000
+    var assignment : RMCAssignmentObject?
     override func viewDidLoad() {
         super.viewDidLoad()
         notesTextView.delegate = self
@@ -53,7 +54,7 @@ class AddNotesViewController: UIViewController {
             showAlert("Please enter some note")
         }
         else {
-            
+            postCheckin()
         }
     }
     
@@ -82,7 +83,22 @@ class AddNotesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
+    func postCheckin(){
+        
+        let checkin = CheckinHolder()
+       
+        checkin.checkinDetails = [AssignmentWork.notes.rawValue:notesTextView.text! as AnyObject]
+        checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
+        checkin.checkinType = CheckinType.Inprogress.rawValue
+        checkin.assignmentId = assignment?.assignmentId
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        checkinModelObject.postCheckin()
+        let assignmentModel = AssignmentModel()
+        assignmentModel.updateAssignment(id:checkin.assignmentId! , type: AssignmentWork.notes, value: notesTextView.text!, status: CheckinType.Inprogress)
+        
+    }
     /*
     // MARK: - Navigation
 

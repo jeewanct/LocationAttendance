@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default .addObserver(self, selector: #selector(MainViewController.methodOfReceivedNotification(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
-        //self.updateNewAssignmentData(id: "dc26ecb6-0e80-4d9f-afb9-26ed20ce35f1")
+        self.updateNewAssignmentData(id: "dc26ecb6-0e80-4d9f-afb9-26ed20ce35f1")
 
         // Do any additional setup after loading the view.
     }

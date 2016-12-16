@@ -38,10 +38,10 @@ func currenViewController() -> UIViewController {
     
 }
 
-func toDictionary(text: String) -> [String:AnyObject]? {
+func toDictionary(text: String) -> AnyObject? {
     if let data = text.data(using: String.Encoding.utf8) {
         do {
-            return try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
+            return try JSONSerialization.jsonObject(with: data, options: []) as AnyObject
         } catch let error as NSError {
             print(error)
         }

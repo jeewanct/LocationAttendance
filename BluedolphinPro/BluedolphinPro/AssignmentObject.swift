@@ -141,6 +141,11 @@ class RMCAssignee :Object,Mappable{
         organizationId <- map["organizationId"]
     }
 }
+class assignmentLog:Object{
+    dynamic var status :String?
+    dynamic var time:String?
+    dynamic var checkinId:String?
+}
 
 class RMCLocation:Object{
     var latitude:String?

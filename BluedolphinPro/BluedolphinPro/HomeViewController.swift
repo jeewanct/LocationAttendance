@@ -162,7 +162,7 @@ class HomeViewController: UIViewController {
         checkin.altitude = CurrentLocation.altitude
         checkin.latitude = String(CurrentLocation.coordinate.latitude)
         checkin.longitude = String(CurrentLocation.coordinate.longitude)
-        checkin.checkinDetails = toJsonString(["notes":"hello new note"] as AnyObject)
+        checkin.checkinDetails = ["notes":"hello new note" as AnyObject]
         checkin.checkinCategory = CheckinCategory.Transient.rawValue
         checkin.checkinType = CheckinType.Location.rawValue
         checkin.organizationId = Singleton.sharedInstance.organizationId

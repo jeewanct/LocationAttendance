@@ -24,6 +24,12 @@ class RMCCheckin:Object,Mappable{
     dynamic var checkinCategory:String?
     dynamic var checkinType:String?
     dynamic var checkinDetails:String?
+    dynamic var imageUrl:String?
+    dynamic var assignmentId:String?
+    
+    
+    dynamic var imageStatus:String?
+    dynamic var relativeUrl:String?
     override static func primaryKey() -> String? {
         return "checkinId"
         
@@ -45,6 +51,10 @@ class RMCCheckin:Object,Mappable{
         checkinCategory <- map["checkinCategory"]
         checkinType <- map["checkinType"]
         checkinDetails <- map["checkinDetails"]
+        imageUrl <- map["imageUrl"]
+        assignmentId <- map["assignmentId"]
+        imageStatus <- map["imageStatus"]
+        relativeUrl <- map["relativeUrl"]
     }
     
     

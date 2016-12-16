@@ -18,6 +18,10 @@ class CheckinHolder:NSObject{
      var time:String?
      var checkinCategory:String?
      var checkinType:String?
-     var checkinDetails:String?
+     var checkinDetails:[String:AnyObject]?
+     var imageUrl:String?
+     var assignmentId:String?
+     var imageStatus:String?
+     var relativeUrl:String?
     
 }

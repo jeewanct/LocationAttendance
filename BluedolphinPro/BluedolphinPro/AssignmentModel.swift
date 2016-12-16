@@ -150,8 +150,53 @@ class AssignmentModel :Meta{
             realm.add(assignment,update:true)
         }
     }
+    
+    func updateAssignment(id:String,type:AssignmentWork,value:String,status:CheckinType){
+        let realm = try! Realm()
+        let assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId = %@",id).first
+        assignment?.status = status.rawValue
+        if let data = assignment?.assignmentDetails{
+             let assignmentdetail =
+                 toDictionary(text: data) as! NSMutableDictionary
+            let currentUpdate = [type.rawValue:value]
+            assignmentdetail.addEntries(from: currentUpdate)
+            assignment?.assignmentDetails = toJsonString(assignmentdetail as AnyObject)
+            
+            
+
+        }else{
+            let currentUpdate = [type.rawValue:value]
+            assignment?.assignmentDetails = toJsonString(currentUpdate as AnyObject)
+        }
+        
+        if let statusLogString = assignment?.statusLog {
+            let statusLog = toDictionary(text: statusLogString) as! NSMutableArray
+            var currentUpdate = Dictionary<String,Any>()
+                currentUpdate["time"] = Date().formattedISO8601
+            currentUpdate["status"] = status.rawValue
+            currentUpdate["assignmentDetail"] = assignment?.assignmentDetails
+            currentUpdate["type"] = type.rawValue
+            statusLog.add(currentUpdate)
+            assignment?.statusLog = toJsonString(statusLog)
+            
+        }
+        
+        try! realm.write {
+            realm.add(assignment!, update: true)
+        }
+        
+        
+       
+        
+        
+        
+        
+        
+    }
 
 }
+
+
 
 
 

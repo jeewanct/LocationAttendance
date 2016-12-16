@@ -9,6 +9,10 @@
 import Foundation
 import RealmSwift
 
+func getUUIDString()->String{
+    return UUID().uuidString
+}
+
 class CheckinModel:Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Checkin.rawValue
@@ -34,7 +38,23 @@ class CheckinModel:Meta{
         let checkins = realm.objects(RMCCheckin.self)
         var data = [NSDictionary]()
         for value in checkins{
-            data.append(value.toDictionary())
+            let checkinData = CheckinHolder()
+            checkinData.accuracy = value.accuracy
+            checkinData.altitude = value.altitude
+            checkinData.assignmentId = value.assignmentId
+            checkinData.checkinCategory = value.checkinCategory
+            checkinData.checkinId = value.checkinId
+            checkinData.checkinDetails = toDictionary(text: value.checkinDetails!) as! [String : AnyObject]?
+            checkinData.checkinType = value.checkinType
+            checkinData.imageUrl = value.imageUrl
+            checkinData.time = value.time
+            checkinData.organizationId = value.organizationId
+            checkinData.imageStatus = value.imageStatus
+            if checkinData.imageStatus == ImageStatus.Uploaded.rawValue {
+               data.append(checkinData.asJson())
+            }
+            
+            
         }
         let param = [
             //"userId":Singleton.sharedInstance.userId,
@@ -95,13 +115,26 @@ class CheckinModel:Meta{
     }
     
     func createCheckin(checkinData:CheckinHolder){
-    
-    
-
-        
+        let checkin = RMCCheckin()
+        checkin.checkinDetails = toJsonString(checkinData.checkinDetails as AnyObject)
+        checkin.accuracy = CurrentLocation.accuracy
+        checkin.altitude = CurrentLocation.altitude
+        checkin.latitude = String(CurrentLocation.coordinate.latitude)
+        checkin.longitude = String(CurrentLocation.coordinate.longitude)
+        checkin.assignmentId = checkinData.assignmentId
+        checkin.checkinCategory = checkinData.checkinCategory
+        checkin.checkinId = getUUIDString()
+        checkin.organizationId = Singleton.sharedInstance.organizationId
+        checkin.checkinType = checkinData.checkinType
+        checkin.time = Date().formattedISO8601
+        if checkin.checkinType == CheckinType.PhotCheckin.rawValue {
+            checkin.imageStatus = ImageStatus.NotUploaded.rawValue
+            checkin.relativeUrl = checkinData.relativeUrl
+            
+        }
         let realm = try! Realm()
         try! realm.write {
-            realm.create(RMCCheckin.self, value: checkinData.asJson(), update: true)
+            realm.add(checkin, update: true)
         }
 
     }

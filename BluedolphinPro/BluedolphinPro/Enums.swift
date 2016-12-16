@@ -34,3 +34,13 @@ enum CheckinType:String{
     case Assigned = "Assigned"
     case Location = "Location"
 }
+enum ImageStatus:String{
+    case Uploaded = "Uploaded"
+    case NotUploaded = "NotUploaded"
+}
+enum AssignmentWork:String{
+    case notes = "notes"
+    case location = "location"
+    case Photo = "imageUrl"
+    case Signature = "signatureUrl"
+}
