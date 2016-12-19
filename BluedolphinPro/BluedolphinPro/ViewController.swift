@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         
                 let userData = UserDataModel()
                 userData.createUserData(userObject: objectdata)
-                userData.userSignUp(email: email)
+                userData.userSignUp(mobile: email)
     }
     
     
@@ -81,9 +81,9 @@ class ViewController: UIViewController {
                 let param = [
                             "grantType":"accessToken",
                             "selfRequest":"true",
-                            "signUpType":"custom",
-                            "email":email,
-                            "password":pass
+                            "loginType":"mobile",
+                            "mobile":email,
+                            "otpToken":pass
                         ]
         
         let oauth = OauthModel()

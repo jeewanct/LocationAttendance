@@ -17,7 +17,7 @@ class OauthModel :Meta{
     }
     
     
-    func getToken(userObject:[String:String],completion: @escaping (_ result: String) -> Void){
+    func getToken(userObject:[String:Any],completion: @escaping (_ result: String) -> Void){
         
         
         let headers = [
@@ -91,20 +91,28 @@ class OauthModel :Meta{
     
     func updateToken(){
          let realm = try! Realm()
+        var today : Bool?
+        if let todayDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.startDate.rawValue) as? Date {
+            today = Calendar.current.isDateInToday(todayDate)
+        }
+        else {
+            today = false
+        }
+        if today == false {
         var refreshToken = String()
-        let refreshTokenData = realm.objects(RefreshTokenObject.self)
-        for data in refreshTokenData{
-            if let token = data["refreshToken"] as? String {
+        let refreshTokenData = realm.objects(RefreshTokenObject.self).first
+       print(refreshTokenData)
+            if let token = refreshTokenData?["token"] as? String {
                 refreshToken = token
             }
-        }
+        
         
         let param = [
             "grantType":"refreshToken",
-            "selfRequest":"true",
+            "selfRequest":true,
             "refreshToken": refreshToken,
             "userId" :Singleton.sharedInstance.userId
-        ]
+        ] as [String : Any]
         
         let headers = [
             "Content-Type":"application/json",
@@ -122,10 +130,9 @@ class OauthModel :Meta{
                 
                 
                 if let data = dataValue["data"] as? NSDictionary {
+                    UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.startDate.rawValue)
                     try! realm.write {
-                        //                                let oauth = realm.objects(Oauth.self){
-                        //                                    realm.delete(self)
-                        //                                }
+                        
                         if let accessToken = data["accessToken"] as? NSArray{
                             for val in accessToken{
                                 realm.create(AccessTokenObject.self, value: val, update: true)
@@ -141,6 +148,7 @@ class OauthModel :Meta{
                         
                         
                     }
+                    getUserData()
                 }
             case 400...449:
                 break;
@@ -159,5 +167,6 @@ class OauthModel :Meta{
 
         
     }
+        }
 }
 }

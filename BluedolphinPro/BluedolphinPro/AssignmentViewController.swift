@@ -24,6 +24,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
     
     
     @IBOutlet weak var mapView: UIView!
+    
     var viewPager:ViewPagerControl!
     var tabView:ViewPagerControl!
     var menuView: CustomNavigationDropdownMenu!
@@ -32,15 +33,17 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
     var subscription: NotificationToken?
     
     
-    func getTasks(_ status: String) -> Results<RMCAssignmentObject> {
+    func getTasks(_ status: CheckinType) -> Results<RMCAssignmentObject> {
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
 //        switch status{
-//            case "Downloaded":
-//            tasks = tasks.filter("status = true")
+//            case .Assigned:
+//            tasks = tasks.filter("status = %@",status.rawValue)
+//        case .Inprogress:
+//            
 //        default:break
 //        }
-    
+        tasks = tasks.filter("status = %@",status.rawValue)
         return tasks
 //        return tasks.sorted([
 //            SortDescriptor(property: "priority", ascending: false),
@@ -81,7 +84,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
     }
     
     func createLayout(){
-        tasks = getTasks("g")
+        tasks = getTasks(.Assigned)
         print(tasks.count)
         subscription = notificationSubscription(tasks:tasks)
         assignmentTableView.delegate = self
@@ -219,7 +222,17 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
     }
     
     func segmentControl(index:Int){
-        print(index)
+        switch index {
+        case 0:
+            tasks = getTasks(.Assigned)
+        case 1:
+            tasks = getTasks(.Inprogress)
+        case 2:
+            tasks = getTasks(.Submitted)
+        default:
+            break
+        }
+        
     }
     
     

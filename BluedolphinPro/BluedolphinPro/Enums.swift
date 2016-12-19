@@ -14,6 +14,7 @@ enum UserDefaultsKeys:String{
     case organizationId = "CurrentOrganizationId"
     case accessToken =  "CurrentAccessToken"
     case deviceToken = "DeviceToken"
+    case startDate = "START_DATE"
     
 }
 enum APIResult:String{
@@ -27,7 +28,7 @@ enum CheckinCategory:String{
 
 enum CheckinType:String{
     case PhotCheckin = "Photo"
-    case Inprogress = "In Progress"
+    case Inprogress = "In-Progress"
     case Downloaded = "Downloaded"
     case Submitted = "Submitted"
     case Completed = "Completed"

@@ -11,7 +11,7 @@ import RealmSwift
 
 class AssignmentModel :Meta{
     internal static func url() -> String {
-        return  APIURL + ModuleUrl.Assignment.rawValue
+        return  APIURL + ModuleUrl.Organisation.rawValue
     }
     
     func getHeader()->[String:String]{
@@ -154,43 +154,52 @@ class AssignmentModel :Meta{
     func updateAssignment(id:String,type:AssignmentWork,value:String,status:CheckinType){
         let realm = try! Realm()
         let assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId = %@",id).first
-        assignment?.status = status.rawValue
+    
+    try! realm.write {
+       assignment!.status = status.rawValue
+        }
         if let data = assignment?.assignmentDetails{
-             let assignmentdetail =
-                 toDictionary(text: data) as! NSMutableDictionary
+             let assignmentdetail = NSMutableDictionary(dictionary:  toDictionary(text: data) as! NSDictionary)
             let currentUpdate = [type.rawValue:value]
             assignmentdetail.addEntries(from: currentUpdate)
+            try! realm.write {
             assignment?.assignmentDetails = toJsonString(assignmentdetail as AnyObject)
+            }
             
             
 
         }else{
             let currentUpdate = [type.rawValue:value]
+            try! realm.write {
             assignment?.assignmentDetails = toJsonString(currentUpdate as AnyObject)
+            }
         }
         
         if let statusLogString = assignment?.statusLog {
-            let statusLog = toDictionary(text: statusLogString) as! NSMutableArray
+            let statusLog = NSMutableArray(object:  toDictionary(text: statusLogString)!)
+            
             var currentUpdate = Dictionary<String,Any>()
                 currentUpdate["time"] = Date().formattedISO8601
             currentUpdate["status"] = status.rawValue
             currentUpdate["assignmentDetail"] = assignment?.assignmentDetails
             currentUpdate["type"] = type.rawValue
             statusLog.add(currentUpdate)
+            try! realm.write {
             assignment?.statusLog = toJsonString(statusLog)
+            }
             
+        }else {
+            var currentUpdate = Dictionary<String,Any>()
+            currentUpdate["time"] = Date().formattedISO8601
+            currentUpdate["status"] = status.rawValue
+            currentUpdate["assignmentDetail"] = assignment?.assignmentDetails
+            currentUpdate["type"] = type.rawValue
+            let statusLog = NSMutableArray()
+            statusLog.add(currentUpdate)
+            try! realm.write {
+                assignment?.statusLog = toJsonString(statusLog)
+            }
         }
-        
-        try! realm.write {
-            realm.add(assignment!, update: true)
-        }
-        
-        
-       
-        
-        
-        
-        
         
     }
 

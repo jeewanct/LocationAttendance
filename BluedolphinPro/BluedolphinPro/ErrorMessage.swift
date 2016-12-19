@@ -23,3 +23,14 @@ import Foundation
 //    message = "/users/ does not exist";
 //    statusCode = 404;
 //}
+
+
+//SUCCESS: {
+//    message = "selfRequest (INVALID): Field is INVALID,";
+//    statusCode = 400;
+//}
+//SUCCESS: {
+//    code = InvalidCredentials;
+//    message = "Mobile OTP Token expired or invalid";
+//    statusCode = 401;
+//}

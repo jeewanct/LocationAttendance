@@ -15,7 +15,7 @@ func getUUIDString()->String{
 
 class CheckinModel:Meta{
     internal static func url() -> String {
-        return  APIURL + ModuleUrl.Checkin.rawValue
+        return  APIURL + ModuleUrl.Organisation.rawValue + Singleton.sharedInstance.organizationId + ModuleUrl.Checkin.rawValue
     }
     
     func getHeader()->[String:String]{
@@ -41,6 +41,8 @@ class CheckinModel:Meta{
             let checkinData = CheckinHolder()
             checkinData.accuracy = value.accuracy
             checkinData.altitude = value.altitude
+            checkinData.longitude = value.longitude
+            checkinData.latitude = value.latitude
             checkinData.assignmentId = value.assignmentId
             checkinData.checkinCategory = value.checkinCategory
             checkinData.checkinId = value.checkinId
@@ -50,19 +52,20 @@ class CheckinModel:Meta{
             checkinData.time = value.time
             checkinData.organizationId = value.organizationId
             checkinData.imageStatus = value.imageStatus
-            if checkinData.imageStatus == ImageStatus.Uploaded.rawValue {
+            //if checkinData.imageStatus == ImageStatus.Uploaded.rawValue {
                data.append(checkinData.asJson())
-            }
+            //}
             
             
         }
+        print (data)
         let param = [
             //"userId":Singleton.sharedInstance.userId,
             "data":data
         
         ] as [String : Any]
         print(param)
-        NetworkModel.submitData(CheckinModel.url()+Singleton.sharedInstance.organizationId, method: .post, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
+        NetworkModel.submitData(CheckinModel.url(), method: .post, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
             guard let statusCode = responseData["statusCode"] as? Int else {
                 return
             }

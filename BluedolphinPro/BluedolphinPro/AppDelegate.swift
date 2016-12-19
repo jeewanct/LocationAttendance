@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -73,6 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func checkLogin(){
         getUserData()
+        
+        
         if !Singleton.sharedInstance.userId.isBlank{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController

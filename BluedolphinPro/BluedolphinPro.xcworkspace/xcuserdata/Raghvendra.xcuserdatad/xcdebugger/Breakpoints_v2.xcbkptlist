@@ -29,7 +29,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
             endingLineNumber = "110"
-            landmarkName = "userSignUp(email:)"
+            landmarkName = "userSignUp(mobile:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -68,11 +68,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Any&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "503575954.859897"
+                  timestampString = "503839864.291816"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
@@ -83,11 +83,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Any&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "503575954.861674"
+                  timestampString = "503839864.294439"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
@@ -116,11 +116,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Any&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "503575954.865042"
+                  timestampString = "503839864.298028"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
@@ -131,11 +131,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  symbolName = "BluedolphinPro.OauthModel.(getToken (userObject : Swift.Dictionary&lt;Swift.String, Any&gt;, completion : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
-                  timestampString = "503575954.866736"
+                  timestampString = "503839864.301613"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BluedolphinPro/AppDelegate.swift"
-            timestampString = "502365691.925371"
+            timestampString = "503835860.336674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "userNotificationCenter(_:didReceive:withCompletionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BluedolphinPro/AssignmentViewController.swift"
-            timestampString = "502808527.699927"
+            timestampString = "503839599.037816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
             landmarkName = "createNavView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -200,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BluedolphinPro/MainViewController.swift"
-            timestampString = "502375650.19688"
+            timestampString = "503835860.336674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "methodOfReceivedNotification(notification:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -216,55 +216,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BluedolphinPro/MainViewController.swift"
-            timestampString = "502709059.348325"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "updateNewAssignmentData(id:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.MainViewController.updateNewAssignmentData (id : Swift.String) -&gt; ()"
-                  moduleName = "BluedolphinPro"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/MainViewController.swift"
-                  timestampString = "503575954.879635"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "158"
-                  endingLineNumber = "158"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.MainViewController.(updateNewAssignmentData (id : Swift.String) -&gt; ()).(closure #1)"
-                  moduleName = "BluedolphinPro"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/MainViewController.swift"
-                  timestampString = "503575954.88128"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "160"
-                  endingLineNumber = "160"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BluedolphinPro/MainViewController.swift"
-            timestampString = "502709059.348325"
+            timestampString = "503835860.336674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "159"
@@ -280,11 +232,59 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/MainViewController.swift"
-                  timestampString = "503575954.884678"
+                  timestampString = "503839864.320807"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "160"
-                  endingLineNumber = "160"
+                  startingLineNumber = "159"
+                  endingLineNumber = "159"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.MainViewController.(updateNewAssignmentData (id : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/MainViewController.swift"
+                  timestampString = "503839864.323197"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/MainViewController.swift"
+            timestampString = "503835860.336674"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "updateNewAssignmentData(id:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.MainViewController.updateNewAssignmentData (id : Swift.String) -&gt; ()"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/MainViewController.swift"
+                  timestampString = "503839864.326658"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161"
                   offsetFromSymbolStart = "88">
                </Location>
                <Location
@@ -295,11 +295,11 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/MainViewController.swift"
-                  timestampString = "503575954.886473"
+                  timestampString = "503839864.328514"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "160"
-                  endingLineNumber = "160"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161"
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
@@ -331,22 +331,6 @@
             timestampString = "503304760.388003"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "getAssignmentFromDb()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BluedolphinPro/AssignmentModel.swift"
-            timestampString = "503304760.388003"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
             endingLineNumber = "113"
             landmarkName = "saveAssignment(assignmentData:)"
@@ -360,7 +344,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/AssignmentModel.swift"
-                  timestampString = "503575954.895949"
+                  timestampString = "503839864.336935"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "113"
@@ -375,7 +359,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/AssignmentModel.swift"
-                  timestampString = "503575954.897588"
+                  timestampString = "503839864.338944"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "113"
@@ -392,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BluedolphinPro/AppDelegate.swift"
-            timestampString = "502714870.712634"
+            timestampString = "503835860.336674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "application(_:didReceiveRemoteNotification:fetchCompletionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -424,7 +408,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/SearchViewController.swift"
-                  timestampString = "503575954.903952"
+                  timestampString = "503839864.348168"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "195"
@@ -439,7 +423,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/SearchViewController.swift"
-                  timestampString = "503575954.905666"
+                  timestampString = "503839864.351189"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "195"
@@ -463,6 +447,166 @@
             endingLineNumber = "426"
             landmarkName = "showTextfieldAlert(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/CheckinModel.swift"
+            timestampString = "503834213.663243"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "postCheckin()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/AssignmentModel.swift"
+            timestampString = "503822952.629757"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "updateAssignment(id:type:value:status:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/CheckinModel.swift"
+            timestampString = "503834213.663243"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "postCheckin()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/OauthModel.swift"
+            timestampString = "503828210.929353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "updateToken()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.OauthModel.updateToken () -&gt; ()"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
+                  timestampString = "503839864.369815"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "1040">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.OauthModel.updateToken () -&gt; ()"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/OauthModel.swift"
+                  timestampString = "503839864.371491"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "1440">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/OauthModel.swift"
+            timestampString = "503828215.649534"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "updateToken()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BluedolphinPro/CheckinModel.swift"
+            timestampString = "503837103.182023"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "checkCheckinData(data:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.CheckinModel.checkCheckinData (data : __ObjC.NSDictionary) -&gt; ()"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/CheckinModel.swift"
+                  timestampString = "503839864.378692"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "692">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.CheckinModel.checkCheckinData (data : __ObjC.NSDictionary) -&gt; ()"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Raghvendra/Documents/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/CheckinModel.swift"
+                  timestampString = "503839864.38033"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "1404">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

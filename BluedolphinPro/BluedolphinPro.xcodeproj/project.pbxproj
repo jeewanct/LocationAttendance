@@ -14,6 +14,8 @@
 		990411471E027630002FCF53 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990411461E027630002FCF53 /* GalleryViewController.swift */; };
 		9904114A1E027655002FCF53 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990411481E027655002FCF53 /* GalleryCollectionViewCell.swift */; };
 		9904114B1E027655002FCF53 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 990411491E027655002FCF53 /* GalleryCollectionViewCell.xib */; };
+		990BE8691E03F98A0038F0AF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990BE8681E03F98A0038F0AF /* LoginModel.swift */; };
+		990BE86B1E040BC10038F0AF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990BE86A1E040BC10038F0AF /* RootViewController.swift */; };
 		991536991DE6F95D0046254C /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991536981DE6F95D0046254C /* AppConstant.swift */; };
 		991536C11DEBF8390046254C /* CustomNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991536C01DEBF8390046254C /* CustomNavView.swift */; };
 		991536C51DEBFF810046254C /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 991536C31DEBFF810046254C /* SourceSansPro-Bold.ttf */; };
@@ -71,6 +73,8 @@
 		990411461E027630002FCF53 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		990411481E027655002FCF53 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		990411491E027655002FCF53 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
+		990BE8681E03F98A0038F0AF /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		990BE86A1E040BC10038F0AF /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		991536981DE6F95D0046254C /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
 		991536C01DEBF8390046254C /* CustomNavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavView.swift; sourceTree = "<group>"; };
 		991536C31DEBFF810046254C /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 				99A721B81DF7FF370059DFBB /* SearchViewController.swift */,
 				9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */,
 				99927C321DFFD38C00131027 /* AddNotesViewController.swift */,
+				990BE86A1E040BC10038F0AF /* RootViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 		99339CFD1DE2C61C00F3C770 /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
+				990BE8681E03F98A0038F0AF /* LoginModel.swift */,
 				9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */,
 				9902CF2F1DBE163A00692824 /* NetworkClass.swift */,
 				9902CF4F1DBF31B900692824 /* UserModel.swift */,
@@ -498,6 +504,8 @@
 				99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */,
 				9971974B1DFE7E82008834DD /* SelfAssignmentViewController.swift in Sources */,
 				99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */,
+				990BE8691E03F98A0038F0AF /* LoginModel.swift in Sources */,
+				990BE86B1E040BC10038F0AF /* RootViewController.swift in Sources */,
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
 				991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */,
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,

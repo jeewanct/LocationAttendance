@@ -18,14 +18,14 @@ protocol Meta {
 class RMCUser :Object ,Mappable{
     
 
-    dynamic var email:String?
-    dynamic var password:String?
+    dynamic var mobile:String?
+    dynamic var otpToken:String?
     dynamic var firstName:String?
     dynamic var lastName:String?
     dynamic var imeiId:String?
     dynamic var deviceType:String?
     dynamic var deviceToken :String?
-    dynamic var signUpType:String?
+    dynamic var loginType:String?
     //dynamic var appId:String?
     
     
@@ -35,19 +35,19 @@ class RMCUser :Object ,Mappable{
     }
     
     func mapping(map: Map) {
-        email    <- map["email"]
-        password <- map["password"]
+        mobile    <- map["mobile"]
+        otpToken <- map["otpToken"]
         firstName <- map["firstName"]
         lastName <- map["lastName"]
         imeiId    <- map["imeiId"]
         deviceType <- map["deviceType"]
         deviceToken <- map["deviceToken"]
-        signUpType <- map["signUpType"]
+        loginType <- map["loginType"]
         
         
     }
     override static func primaryKey() -> String? {
-        return "email"
+        return "mobile"
     }
     
 
@@ -69,9 +69,9 @@ class UserDataModel :Meta{
     }
     
     
-    func userSignUp(email:String){
+    func userSignUp(mobile:String){
         let realm = try! Realm()
-        let user = realm.objects(RMCUser.self).filter("email=%@",email).first
+        let user = realm.objects(RMCUser.self).filter("mobile=%@",mobile).first
         let param = user?.toDictionary()
         
         
@@ -113,14 +113,14 @@ class UserDataModel :Meta{
     
     func createUserData(userObject:[String:String]){
         let user = RMCUser()
-        user.email = userObject["email"]
+        user.mobile = userObject["mobile"]
         user.firstName = userObject["firstName"]
         user.lastName = userObject["lastName"]
         user.deviceToken = userObject["deviceToken"]
         user.deviceType = userObject["deviceType"]
-        user.password = userObject["password"]
+        user.otpToken = userObject["otpToken"]
         user.imeiId = userObject["imeiId"]
-        user.signUpType = userObject["signUpType"]
+        user.loginType = userObject["loginType"]
         
         let realm = try! Realm()
         try! realm.write {

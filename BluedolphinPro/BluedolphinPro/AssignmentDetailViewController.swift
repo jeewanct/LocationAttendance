@@ -137,8 +137,8 @@ class AssignmentDetailViewController: UIViewController {
         switch segment {
         case 0:
             let navController = self.storyboard?.instantiateViewController(withIdentifier: "notesScreen") as! UINavigationController
-//            let controller = navController.topViewController as! AddNotesViewController
-            //controller.workdictHolder = workdict
+           let controller = navController.topViewController as! AddNotesViewController
+            controller.assignment = assignment
             self.present(navController, animated: true, completion: nil)
         case 1:
             showActionSheet()
