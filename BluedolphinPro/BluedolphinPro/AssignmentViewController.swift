@@ -18,7 +18,7 @@ class googleMapUsage {
     var globalMapView = GMSMapView()
 }
 
-class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
+class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     var tableDataArray = ["hello","new","world","Go"];
     @IBOutlet weak var assignmentTableView: UITableView!
     
@@ -32,23 +32,16 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
     var tasks: Results<RMCAssignmentObject>!
     var subscription: NotificationToken?
     
-    
-    func getTasks(_ status: CheckinType) -> Results<RMCAssignmentObject> {
+    var currentStatus:CheckinType = .Assigned
+    func getTasks(){
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
-//        switch status{
-//            case .Assigned:
-//            tasks = tasks.filter("status = %@",status.rawValue)
-//        case .Inprogress:
-//            
-//        default:break
-//        }
-        tasks = tasks.filter("status = %@",status.rawValue)
-        return tasks
+        tasks = tasks.filter("status = %@",currentStatus.rawValue)
 //        return tasks.sorted([
 //            SortDescriptor(property: "priority", ascending: false),
 //            SortDescriptor(property: "created", ascending: false),
 //            ])
+    assignmentTableView.reloadData()
     }
     
     func notificationSubscription(tasks: Results<RMCAssignmentObject>) -> NotificationToken {
@@ -76,16 +69,20 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
             print(error)
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         createLayout()
         
         // Do any additional setup after loading the view.
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        getTasks()
+        
+    }
     func createLayout(){
-        tasks = getTasks(.Assigned)
-        print(tasks.count)
+        getTasks()
         subscription = notificationSubscription(tasks:tasks)
         assignmentTableView.delegate = self
         assignmentTableView.dataSource = self
@@ -224,14 +221,16 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate{
     func segmentControl(index:Int){
         switch index {
         case 0:
-            tasks = getTasks(.Assigned)
+            currentStatus = .Assigned
+            
         case 1:
-            tasks = getTasks(.Inprogress)
+            currentStatus = .Inprogress
         case 2:
-            tasks = getTasks(.Submitted)
+            currentStatus = .Submitted
         default:
             break
         }
+        getTasks()
         
     }
     

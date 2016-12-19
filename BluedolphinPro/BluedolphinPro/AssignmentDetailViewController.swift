@@ -182,7 +182,7 @@ class AssignmentDetailViewController: UIViewController {
                 startTimeLabel.text = "Start:" + startTime.asDate.formatted
             }
             if let endtime = assignment?.assignmentDeadline {
-                endTimeLabel.text = "End:" + endtime.asDate.formatted
+                endTimeLabel.text = "End: " + endtime.asDate.formatted
             }
             
                 
