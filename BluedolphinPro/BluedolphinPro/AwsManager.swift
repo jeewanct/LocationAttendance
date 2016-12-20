@@ -39,14 +39,14 @@ class AWSS3Manager {
         AWSServiceManager.default().defaultServiceConfiguration = configuration
     }
     
-    func sendFile(imageName:String,image:UIImage, extention:String){
+    func sendFile(imageName:String,image:UIImage, extention:String,completion: @escaping (_ result: String) -> Void){
         let ext = extention
         let fileName = imageName + "." + ext
         let uploadRequest = AWSS3TransferManagerUploadRequest()
         do {
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             let fileURL = documentsURL.appendingPathComponent(fileName)
-            if let pngImageData = UIImageJPEGRepresentation(image, 0.1) {
+            if let pngImageData = UIImagePNGRepresentation(image) {
                 try pngImageData.write(to: fileURL, options: .atomic)
             }
             
@@ -77,6 +77,8 @@ class AWSS3Manager {
                     //NSURL(string: self.cdnUrl! + fileName)!
                 //let image = UIImage(data: NSData(contentsOf: s3URL as URL)! as Data)
                 print("Uploaded to:\n\(s3URL)")
+                completion("\(s3URL)")
+                
             }
             else {
                 print("Unexpected empty result.")

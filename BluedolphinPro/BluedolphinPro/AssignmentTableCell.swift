@@ -30,16 +30,18 @@ class AssignmentTableCell: UITableViewCell {
         print(task)
         
         if let assignmentdetail = task.assignmentDetails?.parseJSONString as? NSDictionary{
-            if let address = assignmentdetail["address"] as? String{
-                addressLabel.text = address
-            }
-            if let jobNumber = assignmentdetail["jobNumber"] as? String{
+                        if let jobNumber = assignmentdetail["jobNumber"] as? String{
                 jobNameLabel.text = jobNumber
             }
 
             
         }
-        if let startTime = task.time {
+        if let address = task.assignmentAddress{
+            addressLabel.text = address
+        }
+
+        
+        if let startTime = task.assignmentStartTime {
             startTimeLabel.text = startTime.asDate.formatted
         }
         if let endtime = task.assignmentDeadline {

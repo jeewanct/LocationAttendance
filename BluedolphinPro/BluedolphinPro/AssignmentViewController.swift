@@ -74,6 +74,9 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         super.viewDidLoad()
        
         createLayout()
+        let model = CheckinModel()
+        model.updatePhotoCheckin()
+        model.postCheckin()
         
         // Do any additional setup after loading the view.
     }

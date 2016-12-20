@@ -27,4 +27,5 @@ enum LocalNotifcation:String{
 enum NotificationType:String{
     case NewAssignment = "New-Assignment"
     case Welcome = "Welcome-Message"
+    case UpdatedAssignment = "Updated-Assignment"
 }

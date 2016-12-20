@@ -67,13 +67,14 @@ class OauthModel :Meta{
                                 
                             }
                             
-                        case 400...449:
-                            completion(APIResult.Fail.rawValue)
-                            break;
-                        case 500...502:
-                            completion(APIResult.Fail.rawValue)
-                            break
-                            
+                            completion(APIResult.Success.rawValue)
+                            case 401:
+                                completion(APIResult.InvalidCredentials.rawValue)
+                            case 409:
+                                completion(APIResult.InvalidData.rawValue)
+                            case 500...502:
+                                completion(APIResult.InternalServer.rawValue)
+                           
                             
                         default:break
                         }

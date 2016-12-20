@@ -8,8 +8,9 @@
 
 import UIKit
 
-class OTPViewController: UIViewController ,CodeInputViewDelegate{
-
+class OTPViewController: UIViewController {
+    
+    @IBOutlet weak var otpLabel: UILabel!
     @IBOutlet weak var otpView: UIView!
     var mobileNumber = String()
     var otpToken = String()
@@ -25,18 +26,15 @@ class OTPViewController: UIViewController ,CodeInputViewDelegate{
         otpView.addSubview(codeInputView)
         
         codeInputView.becomeFirstResponder()
-
+        otpLabel.text = "Otp send to \(mobileNumber)"
         // Do any additional setup after loading the view.
     }
     
     @IBAction func resendButton(_ sender: Any) {
+        sendOTP()
     }
-    func codeInputView(codeInputView: CodeInputView, didFinishWithCode code: String) {
-        otpToken  = code
-        updateUser()
-        getOauth()
-    }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -67,27 +65,104 @@ class OTPViewController: UIViewController ,CodeInputViewDelegate{
             "loginType":"mobile",
             "mobile":mobileNumber,
             "otpToken":otpToken
-        ] as [String : Any]
-        
-        let oauth = OauthModel()
-        oauth.getToken(userObject: param) { (result) in
-            if result == APIResult.Success.rawValue {
-                getUserData()
-                let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                UIApplication.shared.keyWindow?.rootViewController = destVC
+            ] as [String : Any]
+        if isInternetAvailable() {
+            showLoader(text: "Checking Info")
+            let oauth = OauthModel()
+            oauth.getToken(userObject: param) { (result) in
+                
+                switch (result){
+                case APIResult.Success.rawValue:
+                    self.updateUser()
+                    getUserData()
+                    let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+                    UIApplication.shared.keyWindow?.rootViewController = destVC
+                case APIResult.InvalidCredentials.rawValue:
+                    self.showAlert(ErrorMessage.InvalidOtp.rawValue)
+                    
+                case APIResult.InternalServer.rawValue:
+                    self.showAlert(ErrorMessage.InternalServer.rawValue)
+                    
+                    
+                case APIResult.InvalidData.rawValue:
+                    self.showAlert(ErrorMessage.NotValidData.rawValue)
+                default:
+                    break
+                    
+                }
+                
             }
+            
+        }else {
+            showAlert(ErrorMessage.NetError.rawValue)
+        }
+        
+    }
+    
+    
+    func sendOTP(){
+        let otpmodel = OTPModel()
+        showLoader()
+        otpmodel.getOtp(mobile: mobileNumber) { (result) in
+            switch (result){
+            case APIResult.Success.rawValue:
+                self.showAlert("Otp Sent")
+            case APIResult.InvalidCredentials.rawValue:
+                self.showAlert(ErrorMessage.UserNotFound.rawValue)
+                
+            case APIResult.InternalServer.rawValue:
+                self.showAlert(ErrorMessage.InternalServer.rawValue)
+                
+                
+            case APIResult.InvalidData.rawValue:
+                self.showAlert(ErrorMessage.NotValidData.rawValue)
+            default:
+                break
+                
+            }
+            
         }
         
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func showAlert(_ message : String) {
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+            return        }
+        alertController.addAction(OkAction)
+        self.present(alertController, animated: true) {
+        }
     }
-    */
-
+    
+    func showLoader(text:String = "Requesting OTP" ){
+        AlertView.sharedInstance.setLabelText(text)
+        AlertView.sharedInstance.showActivityIndicator(self.view)
+        let delay = 3.0 * Double(NSEC_PER_SEC)
+        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {
+            AlertView.sharedInstance.hideActivityIndicator(self.view)
+            //self.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    
+    
 }
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
+extension OTPViewController:CodeInputViewDelegate{
+    func codeInputView(codeInputView: CodeInputView, didFinishWithCode code: String) {
+        otpToken  = code
+        getOauth()
+    }
+}
+

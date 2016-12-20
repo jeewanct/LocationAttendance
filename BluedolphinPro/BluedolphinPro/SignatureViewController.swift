@@ -13,10 +13,21 @@ class SignatureViewController: UIViewController {
     @IBOutlet weak var signatureView: ScratchPad!
     @IBOutlet weak var signatureImageView: UIImageView!
     @IBOutlet weak var noSignatureLabel: UILabel!
+     var assignment : RMCAssignmentObject?
+    fileprivate var albumName:String = "BluedolphinPro"
+    var customAlbum :CustomPhotoAlbum?
     override func viewDidLoad() {
         super.viewDidLoad()
-noSignatureLabel.isHidden = true
+        noSignatureLabel.isHidden = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AddNotesViewController.cancelPressed(_:)))
+        if let assignmentdetail = assignment?.assignmentDetails?.parseJSONString as? NSDictionary{
+            if let jobNumber = assignmentdetail["jobNumber"] as? String{
+                self.navigationItem.title = jobNumber
+                albumName = jobNumber
+            }
+        }
+        customAlbum = CustomPhotoAlbum(name: albumName)
+        
         
         // Do any additional setup after loading the view.
     }
@@ -52,10 +63,17 @@ noSignatureLabel.isHidden = true
             if let signatureImage = self.signatureView.getSignature() {
                 
                 
-                let manager = AWSS3Manager()
-                manager.configAwsManager()
-                manager.sendFile(imageName : "Signature" + Date().formattedISO8601, image: signatureImage, extention: "jpg")
-//                customAlbum!.updatePhoto(signatureImage)
+//                let manager = AWSS3Manager()
+//                manager.configAwsManager()
+//                manager.sendFile(imageName : "Signature" + Date().formattedISO8601, image: signatureImage, extention: "jpg")
+               //print(customAlbum!.updatePhoto(signatureImage))
+                customAlbum?.updatePhoto(signatureImage, completion: { (data) in
+                    DispatchQueue.main.async {
+                        self.postCheckin(imageId:data)
+                    }
+
+                    
+                })
 //                showLoader()
 //                createCheckin(signatureImage)
                 // Since the Signature is now saved to the Photo Roll, the View can be cleared anyway.
@@ -92,6 +110,24 @@ noSignatureLabel.isHidden = true
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func postCheckin(imageId:String){
+        
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.JobNumber.rawValue:albumName as AnyObject]
+        checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
+        checkin.checkinType = CheckinType.PhotCheckin.rawValue
+        checkin.assignmentId = assignment?.assignmentId
+        checkin.imageName = albumName + ".Signature"
+        checkin.relativeUrl = imageId
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        //checkinModelObject.postCheckin()
+        let assignmentModel = AssignmentModel()
+        assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.Signature, value: imageId, status: CheckinType.Inprogress)
+        
+    }
 
 }
 

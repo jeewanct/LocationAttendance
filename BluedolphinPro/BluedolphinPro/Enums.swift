@@ -19,6 +19,9 @@ enum UserDefaultsKeys:String{
 }
 enum APIResult:String{
     case Success = "Success"
+    case InvalidCredentials = "InvalidCredentials"
+    case InternalServer = "InternalServerError"
+    case InvalidData = "InvalidData"
     case Fail = "Fail"
 }
 enum CheckinCategory:String{
@@ -44,4 +47,5 @@ enum AssignmentWork:String{
     case location = "location"
     case Photo = "imageUrl"
     case Signature = "signatureUrl"
+    case JobNumber = "jobNumber"
 }

@@ -21,7 +21,8 @@ class CheckinHolder:NSObject{
      var checkinDetails:[String:AnyObject]?
      var imageUrl:String?
      var assignmentId:String?
-     var imageStatus:String?
+     var imageName:String?
      var relativeUrl:String?
+    var jobNumber:String?
     
 }

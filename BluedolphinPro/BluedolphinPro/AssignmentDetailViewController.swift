@@ -34,7 +34,7 @@ class AssignmentDetailViewController: UIViewController {
     @IBOutlet weak var instructionLabel: UILabel!
     var assignment : RMCAssignmentObject?
     var alertTextfield = UITextField()
-    fileprivate var albumName:String?
+    fileprivate var albumName:String = "BluedolphinPro"
     var customAlbum :CustomPhotoAlbum?
     
     @IBOutlet weak var imageLabel: UILabel!
@@ -145,8 +145,8 @@ class AssignmentDetailViewController: UIViewController {
             
         case 2:
             let navController = self.storyboard?.instantiateViewController(withIdentifier: "signatureScreen") as! UINavigationController
-//            let controller = navController.topViewController as! SignatureViewController
-//            controller.workdictHolder = workdict
+            let controller = navController.topViewController as! SignatureViewController
+           controller.assignment = assignment
             self.present(navController, animated: true, completion: nil)
             
         default:
@@ -156,18 +156,12 @@ class AssignmentDetailViewController: UIViewController {
     
     func createLayout(){
         if let assignmentdetail = assignment?.assignmentDetails?.parseJSONString as? NSDictionary{
-            if let address = assignmentdetail["address"] as? String{
-                addressButton.setTitle(address, for: UIControlState.normal)
-            }
+            
             if let mobile = assignmentdetail["mobile"] as? String{
                 contactNumberButton.setTitle(mobile, for: UIControlState.normal)
             }
             if let email = assignmentdetail["email"] as? String{
                 emailButton.setTitle(email, for: UIControlState.normal)
-            }
-            if let jobNumber = assignmentdetail["jobNumber"] as? String{
-                self.navigationItem.title = jobNumber
-                albumName = jobNumber
             }
 
             if let contactPerson = assignmentdetail["contactPerson"] as? String{
@@ -178,15 +172,24 @@ class AssignmentDetailViewController: UIViewController {
                 instructionLabel.text = instructions
                 instructionLabel.resizeHeightToFit(heightConstraint:instructionLabelHeightConstraint )
             }
-            if let startTime = assignment?.time {
-                startTimeLabel.text = "Start:" + startTime.asDate.formatted
-            }
-            if let endtime = assignment?.assignmentDeadline {
-                endTimeLabel.text = "End: " + endtime.asDate.formatted
-            }
             
                 
-                customAlbum = CustomPhotoAlbum(name: albumName!)
+            
+        }
+        if let startTime = assignment?.assignmentStartTime {
+            startTimeLabel.text = "Start:" + startTime.asDate.formatted
+        }
+        if let jobNumber = assignment?.jobNumber{
+            self.navigationItem.title = jobNumber
+            albumName = jobNumber
+            customAlbum = CustomPhotoAlbum(name: albumName)
+        }
+
+        if let endtime = assignment?.assignmentDeadline {
+            endTimeLabel.text = "End: " + endtime.asDate.formatted
+        }
+        if let address = assignment?.assignmentAddress{
+            addressButton.setTitle(address, for: UIControlState.normal)
         }
 
     }
@@ -402,7 +405,7 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
     func handleCancel(_ alertView: UIAlertAction!)
     {
         print("User click Cancel button")
-        print(self.alertTextfield.text)
+        print(self.alertTextfield.text!)
     }
     
     func showTextfieldAlert(_ image:UIImage){
@@ -415,16 +418,16 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
             print("User click Ok button")
             print(self.alertTextfield.text!)
             if self.alertTextfield.text!.isBlank {
-                self.customAlbum!.updatePhoto(image)
-                let manager = AWSS3Manager()
-                manager.configAwsManager()
-                manager.sendFile(imageName : "NoName" + Date().formattedISO8601, image: image, extention: "jpg")
+                //self.customAlbum!.
+//                let manager = AWSS3Manager()
+//                manager.configAwsManager()
+//                manager.sendFile(imageName : "NoName" + Date().formattedISO8601, image: image, extention: "jpg")
                 //self.saveImage(image, name:"NoName")
             }else {
-                self.customAlbum!.updatePhoto(image)
-                let manager = AWSS3Manager()
-                manager.configAwsManager()
-                manager.sendFile(imageName : self.alertTextfield.text! + Date().formattedISO8601, image: image, extention: "jpg")
+                //print( self.customAlbum!.updatePhoto(image))
+//                let manager = AWSS3Manager()
+//                manager.configAwsManager()
+//                manager.sendFile(imageName : self.alertTextfield.text! + Date().formattedISO8601, image: image, extention: "jpg")
                 //self.saveImage(image, name: self.alertTextfield.text!)
                 
             }

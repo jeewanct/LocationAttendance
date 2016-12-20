@@ -21,7 +21,22 @@ internal static func url() -> String {
         ]
         NetworkModel.fetchData(OTPModel.url() + mobile, header: headers as NSDictionary, success: { (response) in
             print(response)
-            completion(APIResult.Success.rawValue)
+            guard let status = response["statusCode"] as? Int else {
+                return
+            }
+            switch status {
+            case 200:
+                completion(APIResult.Success.rawValue)
+            case 401:
+                completion(APIResult.InvalidCredentials.rawValue)
+            case 409:
+                completion(APIResult.InvalidData.rawValue)
+            case 500...502:
+                completion(APIResult.InternalServer.rawValue)
+                
+            default:break
+            }
+            
         }) { (error) in
             print(error)
         }

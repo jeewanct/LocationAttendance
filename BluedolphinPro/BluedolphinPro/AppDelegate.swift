@@ -119,8 +119,9 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             switch type {
             case .Welcome:
                 break
-            case .NewAssignment:
+            case .NewAssignment,.UpdatedAssignment:
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
+                
             }
             
         }

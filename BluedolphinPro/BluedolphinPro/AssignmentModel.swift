@@ -120,11 +120,17 @@ class AssignmentModel :Meta{
             }
         }
         if let assignmentDetails = assignmentData["assignmentDetails"] as? NSDictionary{
+            if let jobNumber = assignmentDetails["jobNumber"] as? String{
+               assignment.jobNumber = jobNumber
+            }
+            
             assignment.assignmentDetails = toJsonString(assignmentDetails)
         }
         if let assignmentData = assignmentData["assignmentData"] as? NSDictionary{
             assignment.addedOn = assignmentData["addedOn"] as? String
             assignment.assignmentDeadline = assignmentData["assignmentDeadline"] as? String
+            assignment.assignmentAddress = assignmentData["assignmentAddress"] as? String
+            assignment.assignmentStartTime = assignmentData["assignmentStartTime"] as? String
             assignment.assignmentId = assignmentData["assignmentId"] as? String
             assignment.status = assignmentData["status"] as? String
             assignment.time = assignmentData["time"] as? String

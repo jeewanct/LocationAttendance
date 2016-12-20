@@ -11,7 +11,6 @@ import RealmSwift
 
 
 
-
 func ChangeRootVC(_ presentViewController: UIViewController,destinationView: UIViewController) {
     (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController = destinationView
     (UIApplication.shared.delegate as! AppDelegate).window?.makeKeyAndVisible()

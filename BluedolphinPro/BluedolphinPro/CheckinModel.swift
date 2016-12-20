@@ -51,14 +51,19 @@ class CheckinModel:Meta{
             checkinData.imageUrl = value.imageUrl
             checkinData.time = value.time
             checkinData.organizationId = value.organizationId
-            checkinData.imageStatus = value.imageStatus
-            //if checkinData.imageStatus == ImageStatus.Uploaded.rawValue {
-               data.append(checkinData.asJson())
-            //}
+            //checkinData.imageName = value.imageName
+            if checkinData.checkinType == CheckinType.PhotCheckin.rawValue && checkinData.imageUrl == nil {
+               
+            }else {
+                data.append(checkinData.asJson())
+            }
             
             
         }
         print (data)
+        if data.count == 0 {
+            return
+        }
         let param = [
             //"userId":Singleton.sharedInstance.userId,
             "data":data
@@ -129,9 +134,10 @@ class CheckinModel:Meta{
         checkin.checkinId = getUUIDString()
         checkin.organizationId = Singleton.sharedInstance.organizationId
         checkin.checkinType = checkinData.checkinType
+        checkin.jobNumber = checkinData.jobNumber
         checkin.time = Date().formattedISO8601
         if checkin.checkinType == CheckinType.PhotCheckin.rawValue {
-            checkin.imageStatus = ImageStatus.NotUploaded.rawValue
+            checkin.imageName = checkinData.imageName
             checkin.relativeUrl = checkinData.relativeUrl
             
         }
@@ -141,5 +147,42 @@ class CheckinModel:Meta{
         }
 
     }
+    func updatePhotoCheckin(){
+        let realm = try! Realm()
+         var checkins = realm.objects(RMCCheckin.self)
+        print(checkins)
+        var customAlbum :CustomPhotoAlbum?
+        
+        checkins = checkins.filter("checkinType=%@",CheckinType.PhotCheckin.rawValue)
+        for data in checkins {
+            if let checkinDetails = data.checkinDetails?.parseJSONString as? NSDictionary{
+                if let number = checkinDetails["jobNumber"] as? String{
+                    customAlbum = CustomPhotoAlbum(name: number)
+                    //data.jobNumber
+                }
+            }
+            if let id = data.relativeUrl
+            {
+                customAlbum?.fetchPhoto(localIdentifier: id, completion: { (image) in
+                    let manager = AWSS3Manager()
+                    manager.configAwsManager()
+                    manager.sendFile(imageName: data.imageName!, image: image, extention: "png", completion: { (url) in
+                        try! realm.write {
+                            data.imageUrl = url
+                        }
+                    })
+                    
+                })
+            }
+            
+           
+            
+            
+        }
+        
+        
+    }
+    
+    
     
 }

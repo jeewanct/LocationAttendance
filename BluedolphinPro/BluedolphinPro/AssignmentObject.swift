@@ -94,10 +94,12 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var statusLog:String?
     dynamic var assignmentDeadline:String?
     dynamic var assignmentStartTime:String?
+    dynamic var assignmentAddress:String?
     var assigneeData = List<RMCAssignee>()
     dynamic var assignerData:RMCAssignee?
     dynamic var location:RMCLocation?
     dynamic var status:String?
+    dynamic var jobNumber:String?
     var bookmarked:Bool?
     override static func primaryKey() -> String? {
         return "assignmentId"
@@ -118,8 +120,11 @@ class RMCAssignmentObject :Object,Mappable {
         assignmentDetails <- map["assignmentDetails"]
         assignmentDeadline <- map["assignmentDeadline"]
         assignmentStartTime <- map["assignmentStartTime"]
+         assignmentAddress <- map["assignmentAddress"]
         status <- map["status"]
         bookmarked <- map["bookmark"]
+        jobNumber <- map["jobNumber"]
+        
     }
 
 }

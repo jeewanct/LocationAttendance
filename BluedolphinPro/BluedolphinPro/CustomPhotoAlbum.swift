@@ -45,13 +45,13 @@ class CustomPhotoAlbum {
         }
     }
     
-    func saveImage(_ image: UIImage) {
+    func saveImage(_ image: UIImage,completion: @escaping (_ result: String) -> Void) {
         
         if assetCollection == nil {
-            return   // If there was an error upstream, skip the save.
+            // If there was an error upstream, skip the save.
         }
         var assetPlaceholder:PHObjectPlaceholder!
-        
+        var localID:String = ""
         PHPhotoLibrary.shared().performChanges({
             if #available(iOS 9.0, *) {
                 let options = PHAssetResourceCreationOptions()
@@ -59,6 +59,7 @@ class CustomPhotoAlbum {
                 let newcreation:PHAssetCreationRequest = PHAssetCreationRequest.forAsset()
                 newcreation.addResource(with: PHAssetResourceType.photo, data:UIImageJPEGRepresentation(image, 1)!, options: options)
                 assetPlaceholder = newcreation.placeholderForCreatedAsset
+                
             } else { // < ios 9
                 // Fallback on earlier versions
                 let assetChangeRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
@@ -70,11 +71,30 @@ class CustomPhotoAlbum {
                 albumChangeRequest.addAssets([assetPlaceholder!] as NSFastEnumeration)
                 
             }
-        }, completionHandler: nil)
+        }, completionHandler: { success, error in
+            if success {
+                localID = assetPlaceholder.localIdentifier
+                //            let assetID =
+                //                localID.replacingOccurrences(
+                //            of: "/.*", with: "",
+                //            options: NSString.CompareOptions.RegularExpressionSearch, range: nil)
+                //            let ext = "jpg"
+                //            let assetURLStr =
+                //            "assets-library://asset/asset.\(ext)?id=\(assetID)&ext=\(ext)"
+                
+                // Do something with assetURLStr
+                completion(localID)
+                            }
+            
+            
+        })
+        
+
+        
     }
     
     
-    func updatePhoto(_ image: UIImage){
+    func updatePhoto(_ image: UIImage,completion: @escaping (_ result: String) -> Void){
         if assetCollection == nil {
             return   // If there was an error upstream, skip the delete.
         }
@@ -104,16 +124,23 @@ class CustomPhotoAlbum {
         //
         //    }
         
-        self.saveImage(image)
-        
+       self.saveImage(image) { (localId) in
+        completion(localId)
+        }
     }
     
-    func fetchPhoto()->UIImage{
-        let fetchOptions: PHFetchOptions = PHFetchOptions()
+    func fetchPhoto(localIdentifier:String,completion: @escaping (_ result: UIImage) -> Void){
+        
+        
+        
+        
         var storedImage = UIImage()
         //        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+       
         
-        let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
+        if  localIdentifier != "" {
+            
+            let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [localIdentifier], options: nil)
         
         if (fetchResult.lastObject != nil) {
             //        let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
@@ -125,6 +152,7 @@ class CustomPhotoAlbum {
                 imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options:nil, resultHandler: {
                     (result, info)->Void in
                     storedImage = result!
+                    completion(storedImage)
                     
                 })
             }
@@ -133,7 +161,10 @@ class CustomPhotoAlbum {
         //    else {
         //       return UIImage()
         //    }
-        return storedImage
+        
+        
+        }
+        
         
     }
     
