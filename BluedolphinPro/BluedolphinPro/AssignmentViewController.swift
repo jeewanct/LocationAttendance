@@ -239,7 +239,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     
     func createTabbarView(){
-        let image1 = ["active list view","active map view","add new","Filter","sort"]
+        let image1 = ["list_active","location_active","add new","Filter","sort"]
         let image2 = ["list","map view","add new","Filter","sort"]
         
         tabView = ViewPagerControl(images: image2, selectedImage: image1)

@@ -55,12 +55,7 @@ class SelfAssignmentViewController:XLFormViewController  {
     
     func savePressed(_:UIButton){
         let data =  form.formValues()
-        //        let assignment = AssignmentObject()
-        //        assignment.accuracy = CurrentLocation.accuracy
-        //        assignment.altitude = CurrentLocation.altitude
-        //        assignment.latitude = String(CurrentLocation.coordinate.latitude)
-        //        assignment.longitude = String(CurrentLocation.coordinate.longitude)
-        //        assignment.assignmentId = getUUIDString()
+        let assignment = AssignmentObject()
         print(data["startDate"])
 
     }

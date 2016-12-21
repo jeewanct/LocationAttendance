@@ -64,6 +64,7 @@ class AssignmentDetailViewController: UIViewController {
     func tapBlurButton(_ sender: UITapGestureRecognizer) {
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "PhotoViewController") as?
         PhotoViewController
+        controller?.albumName = albumName
         self.navigationController?.show(controller!, sender: nil)
     }
     func saveAction(_:UIButton){
@@ -423,12 +424,21 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
 //                manager.configAwsManager()
 //                manager.sendFile(imageName : "NoName" + Date().formattedISO8601, image: image, extention: "jpg")
                 //self.saveImage(image, name:"NoName")
+                self.customAlbum?.updatePhoto(image, completion: { (data) in
+                    DispatchQueue.main.async {
+                        self.postCheckin(imageId:data,imageName:"NoName")
+                    }
+                    
+                    
+                })
             }else {
-                //print( self.customAlbum!.updatePhoto(image))
-//                let manager = AWSS3Manager()
-//                manager.configAwsManager()
-//                manager.sendFile(imageName : self.alertTextfield.text! + Date().formattedISO8601, image: image, extention: "jpg")
-                //self.saveImage(image, name: self.alertTextfield.text!)
+                self.customAlbum?.updatePhoto(image, completion: { (data) in
+                    DispatchQueue.main.async {
+                        self.postCheckin(imageId:data,imageName:self.alertTextfield.text!)
+                    }
+                    
+                    
+                })
                 
             }
         }))
@@ -436,10 +446,30 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
             print("completion block")
         })
     }
+    
+    
+    func postCheckin(imageId:String,imageName:String){
+        
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.JobNumber.rawValue:albumName as AnyObject]
+        checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
+        checkin.checkinType = CheckinType.PhotCheckin.rawValue
+        checkin.assignmentId = assignment?.assignmentId
+        checkin.imageName = imageName + Date().formattedISO8601
+        checkin.relativeUrl = imageId
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        //checkinModelObject.postCheckin()
+        let assignmentModel = AssignmentModel()
+        assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.Photo, value: imageId, status: CheckinType.Inprogress)
+        
+    }
 }
 extension AssignmentDetailViewController:MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         dismiss(animated: true, completion: nil)
     }
 }
+
 
