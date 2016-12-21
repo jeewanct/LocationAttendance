@@ -73,11 +73,11 @@ class AWSS3Manager {
             }
             
             if task.result != nil {
-                let s3URL = NSURL(string: self.s3Url + fileName)
+                let s3URL =  self.cdnUrl! + fileName
                     //NSURL(string: self.cdnUrl! + fileName)!
                 //let image = UIImage(data: NSData(contentsOf: s3URL as URL)! as Data)
                 print("Uploaded to:\n\(s3URL)")
-                completion("\(s3URL)")
+                completion(s3URL)
                 
             }
             else {

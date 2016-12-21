@@ -81,11 +81,10 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
-        getTasks()
         
     }
     func createLayout(){
-        getTasks()
+        segmentControl(index: 0)
         subscription = notificationSubscription(tasks:tasks)
         assignmentTableView.delegate = self
         assignmentTableView.dataSource = self
@@ -96,8 +95,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         createNavView()
         createViewPager()
         createTabbarView()
-        //createMapView()
-        createAppleMap()
+        createMapView()
+        //createAppleMap()
         
         let notificationButton = UIBarButtonItem(image: #imageLiteral(resourceName: "notifications"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(notificationAction(_:)))
         let searchButton = UIBarButtonItem(image: #imageLiteral(resourceName: "search"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(searchAction(_:)))
@@ -132,7 +131,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     func createAppleMap(){
         let appleMap = MKMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.mapView.frame.height))
         //appleMap.showsUserLocation = true
-        let currentLocationItem = MKUserTrackingBarButtonItem.init(mapView: appleMap)
+       // let currentLocationItem = MKUserTrackingBarButtonItem.init(mapView: appleMap)
         self.mapView.addSubview(appleMap)
     }
     
@@ -140,25 +139,25 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     func showCheckinMarkers(_ resultSet:Results
         <RMCAssignmentObject>){
         googleMapUsage.sharedInstance.globalMapView.clear()
-        let bounds = GMSCoordinateBounds()
+        var bounds = GMSCoordinateBounds()
         DispatchQueue.main.async(execute: {
             for data in resultSet{
-                print(data.location)
-                print(data.location!.latitude!)
-                print(data.location!.longitude!)
+                if let location = data.location {
+                                    let newlatlong = CLLocationCoordinate2D(latitude: Double(location.latitude!)!, longitude: Double((location.longitude!))!)
+                                    print(newlatlong)
+                    
+                                    if let appointmentTime = data.time {
+                    
+                                        let scheduleTime = appointmentTime.asDate.formatted
+                                        let marker = PlaceMarker(coordinate: newlatlong)
+                                        marker.title = data.assignmentId
+                                        marker.snippet =  data.assignmentDetails! + "\n" + scheduleTime
+                                        bounds = bounds.includingCoordinate(marker.position)
+                                        marker.map = googleMapUsage.sharedInstance.globalMapView
+                                    }
+                }
                 
-//                let newlatlong = CLLocationCoordinate2D(latitude: Double(data.location!.latitude!)!, longitude: Double((data.location!.longitude!))!)
-//                print(newlatlong)
-//                
-//                if let appointmentTime = data.time {
-//                    
-//                    let scheduleTime = appointmentTime.asDate.formatted
-//                    let marker = PlaceMarker(coordinate: newlatlong)
-//                    marker.title = data.assignmentId
-//                    marker.snippet =  data.assignmentDetails! + "\n" + scheduleTime
-//                    bounds = bounds.includingCoordinate(marker.position)
-//                    marker.map = googleMapUsage.sharedInstance.globalMapView
-//                }
+
                 
                 
             }
@@ -234,6 +233,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             break
         }
         getTasks()
+        showCheckinMarkers(tasks)
         
     }
     
@@ -310,6 +310,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             mapView.isHidden = true
         case 1:
             mapView.isHidden = false
+            
+
         case 2:
             
 //                let controller = self.storyboard?.instantiateViewController(withIdentifier: "selfAssignNav") as? UINavigationController
@@ -317,10 +319,12 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             self.performSegue(withIdentifier: "presentSelfAssignment", sender: nil)
             
             
-            //showCheckinMarkers(tasks)
-        case 3:
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? OTPViewController
-            self.navigationController?.show(controller!, sender: nil)
+                    case 3:
+//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? OTPViewController
+//            self.navigationController?.show(controller!, sender: nil)
+                        break;
+        case 4:
+            showActionSheet()
             
         default:
             break
@@ -373,4 +377,34 @@ extension AssignmentViewController:UITableViewDelegate,UITableViewDataSource{
     
     
     
+}
+
+extension AssignmentViewController{
+    
+    func showActionSheet(){
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let sendButton = UIAlertAction(title: "Start Date:Ascending", style: .default, handler: { (action) -> Void in
+            //self.btnCamera()
+        })
+        
+        let  deleteButton = UIAlertAction(title: "Start Date:Ascending", style: .default, handler: { (action) -> Void in
+            //print("Delete button tapped")
+        })
+        let  clearButton = UIAlertAction(title: "Clear Sort", style: .default, handler: { (action) -> Void in
+            //print("Delete button tapped")
+        })
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            //self.tabView.
+        })
+        
+        
+        alertController.addAction(sendButton)
+        alertController.addAction(deleteButton)
+        alertController.addAction(clearButton)
+        alertController.addAction(cancelButton)
+        self.navigationController!.present(alertController, animated: true, completion: nil)
+        
+    }
 }

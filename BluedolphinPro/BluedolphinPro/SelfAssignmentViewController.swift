@@ -18,14 +18,9 @@ class SelfAssignmentViewController:XLFormViewController  {
         static let EndTime = "endTime"
         static let Name = "name"
         static let Email = "email"
-        static let Twitter = "twitter"
-        static let Number = "number"
-        static let Integer = "integer"
-        static let Decimal = "decimal"
-        static let Password = "password"
-        static let Phone = "phone"
-        static let Url = "url"
-        static let ZipCode = "zipCode"
+        static let Address = "address"
+        static let PhoneNumber = "number"
+        static let ContactPerson = "contactPerson"
         static let TextView = "textView"
         static let Notes = "notes"
     }
@@ -33,13 +28,18 @@ class SelfAssignmentViewController:XLFormViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Create Assignments"
-         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(SelfAssignmentViewController.cancelPressed(_:)))
-         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(SelfAssignmentViewController.savePressed(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(SelfAssignmentViewController.cancelPressed(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(SelfAssignmentViewController.savePressed(_:)))
+        self.tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length,
+                                                       self.tableView.contentInset.left,
+                                                       self.tableView.contentInset.bottom,
+                                                       self.tableView.contentInset.right);
 
         // Do any additional setup after loading the view.
     }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
         initializeForm()
         
     }
@@ -54,9 +54,18 @@ class SelfAssignmentViewController:XLFormViewController  {
     }
     
     func savePressed(_:UIButton){
-        
+        let data =  form.formValues()
+        //        let assignment = AssignmentObject()
+        //        assignment.accuracy = CurrentLocation.accuracy
+        //        assignment.altitude = CurrentLocation.altitude
+        //        assignment.latitude = String(CurrentLocation.coordinate.latitude)
+        //        assignment.longitude = String(CurrentLocation.coordinate.longitude)
+        //        assignment.assignmentId = getUUIDString()
+        print(data["startDate"])
+
     }
     func initializeForm() {
+        
         let form : XLFormDescriptor
         var section : XLFormSectionDescriptor
         var row : XLFormRowDescriptor
@@ -65,48 +74,49 @@ class SelfAssignmentViewController:XLFormViewController  {
         section = XLFormSectionDescriptor()
         
       
-        
+        form.addFormSection(section)
         row = XLFormRowDescriptor(tag: Tags.Name, rowType: XLFormRowDescriptorTypeText, title: "Name")
         row.isRequired = true
         section.addFormRow(row)
-        row = XLFormRowDescriptor(tag: Tags.Email, rowType: XLFormRowDescriptorTypeSelectorPush, title: "Address")
-        row.value = "New delhi CP"
-        section.addFormRow(row)
-        
-        row = XLFormRowDescriptor(tag: Tags.Name, rowType: XLFormRowDescriptorTypeText, title: "Contact Person")
+        row = XLFormRowDescriptor(tag: Tags.Address, rowType: XLFormRowDescriptorTypeSelectorPush, title: "Address")
+        row.value = CurrentLocation.address
         row.isRequired = true
         section.addFormRow(row)
-        row = XLFormRowDescriptor(tag: Tags.Name, rowType: XLFormRowDescriptorTypePhone, title: "Phone Number")
+        
+        row = XLFormRowDescriptor(tag: Tags.ContactPerson, rowType: XLFormRowDescriptorTypeText, title: "Contact Person")
+        row.isRequired = true
+        section.addFormRow(row)
+        row = XLFormRowDescriptor(tag: Tags.PhoneNumber, rowType: XLFormRowDescriptorTypePhone, title: "Phone Number")
         row.isRequired = true
         section.addFormRow(row)
         row = XLFormRowDescriptor(tag: Tags.Email, rowType: XLFormRowDescriptorTypeEmail, title: "Email")
         // validate the email
-        //row.addValidator(XLFormValidator.email())
+        row.addValidator(XLFormValidator.email())
+        row.isRequired = true
         section.addFormRow(row)
         // Date
-        row = XLFormRowDescriptor(tag: Tags.StartDate, rowType: XLFormRowDescriptorTypeDate, title:"Start Date")
+        row = XLFormRowDescriptor(tag: Tags.StartDate, rowType: XLFormRowDescriptorTypeDateTime, title:"Start Date")
         row.value = Date()
         section.addFormRow(row)
-        row = XLFormRowDescriptor(tag: Tags.EndDate, rowType: XLFormRowDescriptorTypeDate, title:"End Date")
-        row.value = Date()
-        section.addFormRow(row)
-        
-        // Time
-        row = XLFormRowDescriptor(tag: Tags.StartTime, rowType: XLFormRowDescriptorTypeTime, title: "From")
-        row.value = Date()
-
-        section.addFormRow(row)
-        row = XLFormRowDescriptor(tag: Tags.EndTime, rowType: XLFormRowDescriptorTypeTime, title: "To")
+        row = XLFormRowDescriptor(tag: Tags.EndDate, rowType: XLFormRowDescriptorTypeDateTime, title:"End Date")
         row.value = Date()
         section.addFormRow(row)
         
+//        // Time
+//        row = XLFormRowDescriptor(tag: Tags.StartTime, rowType: XLFormRowDescriptorTypeTime, title: "From")
+//        row.value = Date()
+//
+//        section.addFormRow(row)
+//        row = XLFormRowDescriptor(tag: Tags.EndTime, rowType: XLFormRowDescriptorTypeTime, title: "To")
+//        row.value = Date()
+//        section.addFormRow(row)
         
-        form.addFormSection(section)
+        
+        
         self.form = form
     }
     
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -115,7 +125,7 @@ class SelfAssignmentViewController:XLFormViewController  {
         return 0.1
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return 50
     }
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1

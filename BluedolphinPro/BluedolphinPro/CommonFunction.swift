@@ -17,3 +17,23 @@ enum ErrorMessage:String{
     case InvalidFECode = "Please enter valid mobile  number"
     case InvalidOtp = "Please enter valid otpcode"
 }
+
+func combineDateWithTime(date: Date, time: Date) -> Date? {
+    let calendar = NSCalendar.current
+    
+    let dayUnits =  Set<Calendar.Component>([.year, .month, .day])
+    let dateComponents =   calendar.dateComponents(dayUnits, from:date )
+    
+    
+    let timeUnits = Set<Calendar.Component>([.hour, .minute, .second])
+    let timeComponents = calendar.dateComponents(timeUnits, from: time)
+    
+    var mergedComponments = DateComponents()
+    mergedComponments.year = dateComponents.year!
+    mergedComponments.month = dateComponents.month!
+    mergedComponments.day = dateComponents.day!
+    mergedComponments.hour = timeComponents.hour!
+    mergedComponments.minute = timeComponents.minute!
+    mergedComponments.second = timeComponents.second!
+        return calendar.date(from: mergedComponments )
+}

@@ -44,6 +44,7 @@
 		9971974B1DFE7E82008834DD /* SelfAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */; };
 		997197501DFED115008834DD /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9971974F1DFED115008834DD /* OTPView.swift */; };
 		997197521DFED308008834DD /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997197511DFED308008834DD /* OTPViewController.swift */; };
+		998E46E81E0A3987001045A3 /* AssignmentHolderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E46E71E0A3986001045A3 /* AssignmentHolderClass.swift */; };
 		99927C311DFFC8C800131027 /* ScratchPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C301DFFC8C800131027 /* ScratchPad.swift */; };
 		99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C321DFFD38C00131027 /* AddNotesViewController.swift */; };
 		99927C351DFFD91700131027 /* SignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C341DFFD91700131027 /* SignatureViewController.swift */; };
@@ -105,6 +106,7 @@
 		9971974C1DFE846A008834DD /* BluedolphinPro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BluedolphinPro-Bridging-Header.h"; sourceTree = "<group>"; };
 		9971974F1DFED115008834DD /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		997197511DFED308008834DD /* OTPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
+		998E46E71E0A3986001045A3 /* AssignmentHolderClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentHolderClass.swift; sourceTree = "<group>"; };
 		99927C301DFFC8C800131027 /* ScratchPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchPad.swift; sourceTree = "<group>"; };
 		99927C321DFFD38C00131027 /* AddNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
 		99927C341DFFD91700131027 /* SignatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */,
 				99339F661DE5B38B00F3C770 /* AssignmentObject.swift */,
+				998E46E71E0A3986001045A3 /* AssignmentHolderClass.swift */,
 			);
 			name = Assignments;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				99A721DF1DFA6EF00059DFBB /* AwsManager.swift in Sources */,
 				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,
 				991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */,
+				998E46E81E0A3987001045A3 /* AssignmentHolderClass.swift in Sources */,
 				990411451E02738E002FCF53 /* PhotoViewController.swift in Sources */,
 				99A721E11DFAC4F70059DFBB /* BottomBar.swift in Sources */,
 				99A509C81E0166BD00688FAF /* CustomPhotoAlbum.swift in Sources */,

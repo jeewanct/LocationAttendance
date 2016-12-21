@@ -55,6 +55,7 @@ class AssignmentObject:Object,Mappable{
     var accuracy:String?
     var organizationId:String?
     var assignmentDeadline:String?
+    //var assignmentStartTime:String?
     var assignmentDetails:String?
     override static func primaryKey() -> String? {
         return "assignmentId"
@@ -152,11 +153,11 @@ class assignmentLog:Object{
     dynamic var checkinId:String?
 }
 
-class RMCLocation:Object{
-    var latitude:String?
-    var longitude:String?
-    var altitude:String?
-    var accuracy:String?
+class RMCLocation:Object,Mappable{
+    dynamic var latitude:String?
+    dynamic var longitude:String?
+    dynamic var altitude:String?
+    dynamic var accuracy:String?
     required convenience init?(map: Map) {
         self.init()
     }

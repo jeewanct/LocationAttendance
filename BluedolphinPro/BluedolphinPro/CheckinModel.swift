@@ -152,7 +152,7 @@ class CheckinModel:Meta{
          var checkins = realm.objects(RMCCheckin.self)
         print(checkins)
         var customAlbum :CustomPhotoAlbum?
-        
+        var checkinId = String()
         checkins = checkins.filter("checkinType=%@",CheckinType.PhotCheckin.rawValue)
         for data in checkins {
             if let checkinDetails = data.checkinDetails?.parseJSONString as? NSDictionary{
@@ -161,15 +161,21 @@ class CheckinModel:Meta{
                     //data.jobNumber
                 }
             }
+            checkinId = data.checkinId!
             if let id = data.relativeUrl
             {
                 customAlbum?.fetchPhoto(localIdentifier: id, completion: { (image) in
                     let manager = AWSS3Manager()
                     manager.configAwsManager()
                     manager.sendFile(imageName: data.imageName!, image: image, extention: "png", completion: { (url) in
-                        try! realm.write {
-                            data.imageUrl = url
+                        let realm = try! Realm()
+                        if let currentcheckin = realm.objects(RMCCheckin.self).filter("checkinId=%@",checkinId).first{
+                            try! realm.write {
+                                currentcheckin.imageUrl = url
+                                currentcheckin.relativeUrl = ""
+                            }
                         }
+                        
                     })
                     
                 })
