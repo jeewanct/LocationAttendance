@@ -18,9 +18,10 @@ class SearchViewController: UIViewController {
     lazy   var searchBars:UISearchBar = UISearchBar(frame:
         CGRect(x:0, y:0, width:ScreenConstant.width - 100, height:20))
     var searchActive : Bool = false
+    var currentStatus:CheckinType = .Assigned
     override func viewDidLoad() {
         super.viewDidLoad()
-        tasks = getTasks("s")
+        segmentControl(index: 0)
         configureSearchbar()
         createViewPager()
         searchTable.delegate = self
@@ -30,18 +31,18 @@ class SearchViewController: UIViewController {
     }
     
     
-    func getTasks(_ status: String) -> Results<RMCAssignmentObject> {
+    
+    func getTasks(ascendingFlag:Bool = true){
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
-        //        switch status{
-        //            case "Downloaded":
-        //            tasks = tasks.filter("status = true")
-        //        default:break
-        //        }
-        
-        return tasks
-        
+        tasks = tasks.filter("status = %@",currentStatus.rawValue)
+        tasks = tasks.sorted(by: [
+            SortDescriptor(property: "assignmentStartTime", ascending: ascendingFlag),
+            //            SortDescriptor(property: "created", ascending: false),
+            ])
+        searchTable.reloadData()
     }
+    
     
     func createViewPager(){
         let data = ["New","In Progress","Completed"]
@@ -95,7 +96,20 @@ class SearchViewController: UIViewController {
     }
     
     func segmentControl(index:Int){
-        print(index)
+        switch index {
+        case 0:
+            currentStatus = .Assigned
+            
+        case 1:
+            currentStatus = .Inprogress
+        case 2:
+            currentStatus = .Submitted
+        default:
+            break
+        }
+        getTasks()
+//        showCheckinMarkers(tasks)
+        
     }
     
     
@@ -192,10 +206,11 @@ extension SearchViewController:UISearchBarDelegate{
             searchResult = List<RMCAssignmentObject>()
             
             for obj in tasks {
+                guard let address = obj.assignmentAddress else {
+                    return
+                }
                 if let assignmentdetail = obj.assignmentDetails?.parseJSONString as? NSDictionary{
-                    guard let address = assignmentdetail["address"] as? String else {
-                        return
-                    }
+                    
                     guard let jobnumber = assignmentdetail["jobNumber"] as? String else {
                         return
                     }

@@ -33,14 +33,14 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     var subscription: NotificationToken?
     
     var currentStatus:CheckinType = .Assigned
-    func getTasks(){
+    func getTasks(ascendingFlag:Bool = true){
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
         tasks = tasks.filter("status = %@",currentStatus.rawValue)
-//        return tasks.sorted([
-//            SortDescriptor(property: "priority", ascending: false),
+        tasks = tasks.sorted(by: [
+            SortDescriptor(property: "assignmentStartTime", ascending: ascendingFlag),
 //            SortDescriptor(property: "created", ascending: false),
-//            ])
+            ])
     assignmentTableView.reloadData()
     }
     
@@ -386,13 +386,16 @@ extension AssignmentViewController{
         
         let sendButton = UIAlertAction(title: "Start Date:Ascending", style: .default, handler: { (action) -> Void in
             //self.btnCamera()
+            self.getTasks(ascendingFlag: true)
         })
         
-        let  deleteButton = UIAlertAction(title: "Start Date:Ascending", style: .default, handler: { (action) -> Void in
+        let  deleteButton = UIAlertAction(title: "Start Date:Descending", style: .default, handler: { (action) -> Void in
             //print("Delete button tapped")
+            self.getTasks(ascendingFlag: false)
         })
         let  clearButton = UIAlertAction(title: "Clear Sort", style: .default, handler: { (action) -> Void in
             //print("Delete button tapped")
+            self.getTasks()
         })
         
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in

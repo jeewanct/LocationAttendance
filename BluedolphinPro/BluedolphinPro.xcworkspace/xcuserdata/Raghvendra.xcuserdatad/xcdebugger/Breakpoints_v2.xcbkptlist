@@ -280,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BluedolphinPro/SearchViewController.swift"
-            timestampString = "502980196.057404"
+            timestampString = "504009067.867094"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "searchBar(_:textDidChange:)"
             landmarkType = "7">
             <Locations>
