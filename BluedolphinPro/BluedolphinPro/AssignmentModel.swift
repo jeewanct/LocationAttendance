@@ -60,7 +60,7 @@ class AssignmentModel :Meta{
 //        }
     }
     
-    func postAssignments(){
+    func postdbAssignments(){
         let realm = try! Realm()
         let checkins = realm.objects(AssignmentObject.self)
         var data = [NSDictionary]()
@@ -73,7 +73,25 @@ class AssignmentModel :Meta{
             
             ] as [String : Any]
         
-        NetworkModel.submitData(AssignmentModel.url(), method: .put, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
+        NetworkModel.submitData(AssignmentModel.url() + Singleton.sharedInstance.organizationId + "/assignment", method: .put, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
+            print(responseData)
+        }) { (error) in
+            print(error)
+        }
+    }
+    func postAssignments(assignment:NSObject){
+       
+        var data = [NSDictionary]()
+      
+            data.append(assignment.asJson())
+        
+        let param = [
+            //"userId":Singleton.sharedInstance.accessToken,
+            "data":data
+            
+            ] as [String : Any]
+        print(param)
+        NetworkModel.submitData(AssignmentModel.url() + Singleton.sharedInstance.organizationId + "/assignment", method: .post, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
             print(responseData)
         }) { (error) in
             print(error)

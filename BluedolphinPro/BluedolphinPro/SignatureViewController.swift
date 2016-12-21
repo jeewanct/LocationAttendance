@@ -78,6 +78,7 @@ class SignatureViewController: UIViewController {
 //                createCheckin(signatureImage)
                 // Since the Signature is now saved to the Photo Roll, the View can be cleared anyway.
                 self.signatureView.clearSignature()
+                self.dismiss(animated: true, completion: nil)
             }
         }
         else {

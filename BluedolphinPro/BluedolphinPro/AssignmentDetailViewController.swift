@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import RealmSwift
 
 class AssignmentDetailViewController: UIViewController {
     var viewPager:ViewPagerControl!
@@ -36,6 +37,7 @@ class AssignmentDetailViewController: UIViewController {
     var alertTextfield = UITextField()
     fileprivate var albumName:String = "BluedolphinPro"
     var customAlbum :CustomPhotoAlbum?
+    var changeSegment : SegmentChanger?
     
     @IBOutlet weak var imageLabel: UILabel!
     
@@ -44,31 +46,42 @@ class AssignmentDetailViewController: UIViewController {
         super.viewDidLoad()
         createTabbarView()
         createViewPager()
-        createLayout()
         
         timeLineTableView.delegate = self
         timeLineTableView.dataSource = self
         timeLineTableView.isHidden = true
-        let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(AssignmentDetailViewController.saveAction(_:)))
+        let saveButton = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(AssignmentDetailViewController.saveAction(_:)))
         self.navigationItem.rightBarButtonItem = saveButton
         self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
-        self.navigationItem.backBarButtonItem?.style = .plain
-        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(backbuttonAction(sender:)))        
         contactNumberButton.addTarget(self, action: #selector(AssignmentDetailViewController.callAlertView), for: UIControlEvents.touchUpInside)
         emailButton.addTarget(self, action: #selector(AssignmentDetailViewController.mailAction), for: UIControlEvents.touchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
         galleryView.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        getAssignmentData()
+    }
     func tapBlurButton(_ sender: UITapGestureRecognizer) {
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "PhotoViewController") as?
         PhotoViewController
         controller?.albumName = albumName
         self.navigationController?.show(controller!, sender: nil)
     }
+    
+    func backbuttonAction(sender:Any){
+        if let delegate = self.changeSegment {
+            delegate.moveToSegment((assignment?.status)!)
+        }
+        self.navigationController!.popViewController(animated: true)
+    }
     func saveAction(_:UIButton){
-        
+        postSubmissionCheckin()
+        if let delegate = self.changeSegment {
+            delegate.moveToSegment((assignment?.status)!)
+        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     func createTabbarView(){
@@ -89,6 +102,14 @@ class AssignmentDetailViewController: UIViewController {
             self.tabChanger(segment: index)
             
         }
+        
+    }
+    
+    func getAssignmentData(){
+        let realm = try! Realm()
+        assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId= %@",assignment?.assignmentId).first
+        createLayout()
+        
         
     }
     func createViewPager(){
@@ -203,9 +224,9 @@ class AssignmentDetailViewController: UIViewController {
             self.btnCamera()
         })
         
-        let  deleteButton = UIAlertAction(title: "Document", style: .default, handler: { (action) -> Void in
-            print("Delete button tapped")
-        })
+//        let  deleteButton = UIAlertAction(title: "Document", style: .default, handler: { (action) -> Void in
+//            print("Delete button tapped")
+//        })
         
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
             //self.tabView.
@@ -213,7 +234,7 @@ class AssignmentDetailViewController: UIViewController {
         
         
         alertController.addAction(sendButton)
-        alertController.addAction(deleteButton)
+        //alertController.addAction(deleteButton)
         alertController.addAction(cancelButton)
         
         self.navigationController!.present(alertController, animated: true, completion: nil)
@@ -463,6 +484,23 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
         //checkinModelObject.postCheckin()
         let assignmentModel = AssignmentModel()
         assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.Photo, value: imageId, status: CheckinType.Inprogress)
+        
+    }
+    func postSubmissionCheckin(){
+        
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.JobNumber.rawValue:albumName as AnyObject]
+        checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
+        checkin.checkinType = CheckinType.Submitted.rawValue
+        checkin.assignmentId = assignment?.assignmentId
+//        checkin.imageName = imageName + Date().formattedISO8601
+//        checkin.relativeUrl = imageId
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        //checkinModelObject.postCheckin()
+        let assignmentModel = AssignmentModel()
+        assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.Submission, value:"Submitted", status: CheckinType.Submitted)
         
     }
 }

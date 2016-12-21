@@ -11,6 +11,13 @@ import GoogleMaps
 import RealmSwift
 import MapKit
 
+protocol SegmentChanger {
+    func moveToSegment(_ status:String)
+}
+
+protocol SelectedAddress{
+    func showSelectedAddress(_ address:String,coordinate:CLLocationCoordinate2D)
+}
 
 
 class googleMapUsage {
@@ -33,6 +40,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     var subscription: NotificationToken?
     
     var currentStatus:CheckinType = .Assigned
+    
+    var changeSegment : SegmentChanger?
     func getTasks(ascendingFlag:Bool = true){
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
@@ -196,29 +205,29 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         }
         
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        
-        self.view.addGestureRecognizer(swipeLeft)
-        self.view.addGestureRecognizer(swipeRight)
+//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
+//        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+//        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
+//        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+//        
+//        self.view.addGestureRecognizer(swipeLeft)
+//        self.view.addGestureRecognizer(swipeRight)
         
     }
     
-    func swiped(sender:UISwipeGestureRecognizer){
-        if let swipeGesture = sender as? UISwipeGestureRecognizer{
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.right:
-                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex + 1 > 2 ? 2:viewPager.selectedSegmentIndex + 1, animated: true)
-            case UISwipeGestureRecognizerDirection.left:
-                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex - 1 < 0 ? 0:viewPager.selectedSegmentIndex - 1, animated: true)
-                print("left swipe")
-            default:
-                print("other swipe")
-            }
-        }
-    }
+//    func swiped(sender:UISwipeGestureRecognizer){
+//        if let swipeGesture = sender as? UISwipeGestureRecognizer{
+//            switch swipeGesture.direction {
+//            case UISwipeGestureRecognizerDirection.right:
+//                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex + 1 > 2 ? 2:viewPager.selectedSegmentIndex + 1, animated: true)
+//            case UISwipeGestureRecognizerDirection.left:
+//                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex - 1 < 0 ? 0:viewPager.selectedSegmentIndex - 1, animated: true)
+//                print("left swipe")
+//            default:
+//                print("other swipe")
+//            }
+//        }
+//    }
     
     func segmentControl(index:Int){
         switch index {
@@ -371,6 +380,7 @@ extension AssignmentViewController:UITableViewDelegate,UITableViewDataSource{
         //self.performSegue(withIdentifier: "showDetails", sender: self)
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentDetail") as? AssignmentDetailViewController
         controller?.assignment = tasks[indexPath.row]
+        controller?.changeSegment = self
         self.navigationController?.pushViewController(controller!, animated: true)
     }
     
@@ -410,4 +420,26 @@ extension AssignmentViewController{
         self.navigationController!.present(alertController, animated: true, completion: nil)
         
     }
+}
+
+extension AssignmentViewController :SegmentChanger{
+    func moveToSegment(_ pos:String){
+        switch pos {
+        case CheckinType.Assigned.rawValue :
+            
+            viewPager.setSelectedSegmentIndex(0, animated: false)
+        case CheckinType.Inprogress.rawValue:
+           viewPager.setSelectedSegmentIndex(1, animated: false)
+            
+            case CheckinType.Submitted.rawValue:
+            viewPager.setSelectedSegmentIndex(2, animated: false)
+            
+        default:
+            viewPager.setSelectedSegmentIndex(0, animated: false)
+            
+        }
+        
+        
+    }
+    
 }

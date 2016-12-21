@@ -10,6 +10,7 @@ import Foundation
 
 import RealmSwift
 import ObjectMapper
+
 class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
     typealias Object = List<T>
     typealias JSON = Array<AnyObject>
@@ -42,6 +43,27 @@ class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
     }
 }
 
+
+class AssignmentHolder:NSObject{
+    
+    
+    var assignmentId:String?
+    var assigneeIds:[String]?
+    var status:String?
+    var latitude:String?
+    var longitude:String?
+    var altitude:String?
+    var accuracy:String?
+    var organizationId:String?
+    var assignmentDeadline:String?
+    var assignmentStartTime:String?
+    var assignmentDetails:NSDictionary?
+    var assignmentAddress:String?
+    var organisationId:String?
+    var time:String?
+   
+        
+    }
 
 class AssignmentObject:Object,Mappable{
     

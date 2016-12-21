@@ -8,9 +8,10 @@
 
 import UIKit
 import XLForm
+import RealmSwift
 
 class SelfAssignmentViewController:XLFormViewController  {
-
+    var uuidString = String()
     fileprivate struct Tags {
         static let StartDate = "startDate"
         static let EndDate = "endDate"
@@ -55,10 +56,47 @@ class SelfAssignmentViewController:XLFormViewController  {
     
     func savePressed(_:UIButton){
         let data =  form.formValues()
-        let assignment = AssignmentObject()
-        print(data["startDate"])
+        uuidString = getUUIDString()
+        let assignmentObject = AssignmentHolder()
+        assignmentObject.accuracy = CurrentLocation.accuracy
+        assignmentObject.altitude = CurrentLocation.altitude
+        assignmentObject.longitude = String(CurrentLocation.coordinate.longitude)
+        assignmentObject.latitude = String(CurrentLocation.coordinate.latitude)
+        assignmentObject.assignmentId = uuidString
+        assignmentObject.assigneeIds  = [Singleton.sharedInstance.userId]
+        assignmentObject.assignmentAddress = data["address"] as? String
+        assignmentObject.assignmentDeadline = "\(data["endDate"]!)"
+        assignmentObject.assignmentStartTime = "\(data["startDate"]!)"
+        assignmentObject.organizationId = Singleton.sharedInstance.organizationId
+        assignmentObject.time = Date().formattedISO8601
+        assignmentObject.status = CheckinType.Assigned.rawValue
+        
+        assignmentObject.assignmentDetails = [
+            "mobile":data["number"]!,
+            "contactPerson":data["contactPerson"]!,
+            "instructions":"Firebase push",
+            "email":data["email"]!,
+            "jobNumber":getJobNumber()
+        
+        ]
+        let assignmentModel = AssignmentModel()
+        assignmentModel.postAssignments(assignment: assignmentObject)
+    
+        
+        
 
     }
+    func getJobNumber()->String{
+        let realm = try! Realm()
+        let tokenObject = realm.objects(AccessTokenObject.self).filter("organizationId=%@",Singleton.sharedInstance.organizationId).first
+        print(tokenObject)
+        let organisationName  = tokenObject?.organizationName
+        
+        let jobNumber = organisationName![0..<4].uppercased() + "-" + uuidString[0..<4]
+        return jobNumber
+        
+    }
+
     func initializeForm() {
         
         let form : XLFormDescriptor
@@ -82,6 +120,7 @@ class SelfAssignmentViewController:XLFormViewController  {
         row.isRequired = true
         section.addFormRow(row)
         row = XLFormRowDescriptor(tag: Tags.PhoneNumber, rowType: XLFormRowDescriptorTypePhone, title: "Phone Number")
+        
         row.isRequired = true
         section.addFormRow(row)
         row = XLFormRowDescriptor(tag: Tags.Email, rowType: XLFormRowDescriptorTypeEmail, title: "Email")

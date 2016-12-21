@@ -48,4 +48,5 @@ enum AssignmentWork:String{
     case Photo = "imageUrl"
     case Signature = "signatureUrl"
     case JobNumber = "jobNumber"
+    case Submission = "submission"
 }

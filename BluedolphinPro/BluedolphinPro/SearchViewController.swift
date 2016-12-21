@@ -71,29 +71,29 @@ class SearchViewController: UIViewController {
         }
         
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        
-        self.view.addGestureRecognizer(swipeLeft)
-        self.view.addGestureRecognizer(swipeRight)
+//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
+//        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+//        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
+//        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+//        
+//        self.view.addGestureRecognizer(swipeLeft)
+//        self.view.addGestureRecognizer(swipeRight)
         
     }
     
-    func swiped(sender:UISwipeGestureRecognizer){
-        if let swipeGesture = sender as? UISwipeGestureRecognizer{
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.right:
-                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex + 1 > 2 ? 2:viewPager.selectedSegmentIndex + 1, animated: true)
-            case UISwipeGestureRecognizerDirection.left:
-                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex - 1 < 0 ? 0:viewPager.selectedSegmentIndex - 1, animated: true)
-                print("left swipe")
-            default:
-                print("other swipe")
-            }
-        }
-    }
+//    func swiped(sender:UISwipeGestureRecognizer){
+//        if let swipeGesture = sender as? UISwipeGestureRecognizer{
+//            switch swipeGesture.direction {
+//            case UISwipeGestureRecognizerDirection.right:
+//                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex + 1 > 2 ? 2:viewPager.selectedSegmentIndex + 1, animated: true)
+//            case UISwipeGestureRecognizerDirection.left:
+//                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex - 1 < 0 ? 0:viewPager.selectedSegmentIndex - 1, animated: true)
+//                print("left swipe")
+//            default:
+//                print("other swipe")
+//            }
+//        }
+//    }
     
     func segmentControl(index:Int){
         switch index {

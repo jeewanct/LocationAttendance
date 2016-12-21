@@ -55,6 +55,8 @@ class AddNotesViewController: UIViewController {
         }
         else {
             postCheckin()
+            self.dismiss(animated: true, completion: nil)
+
         }
     }
     
