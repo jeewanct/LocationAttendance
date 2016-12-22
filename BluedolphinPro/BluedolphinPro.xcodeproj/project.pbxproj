@@ -29,6 +29,7 @@
 		991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */; };
 		991B468C1DF00AF10012D8DC /* LocalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B468B1DF00AF10012D8DC /* LocalExtensions.swift */; };
 		991B468E1DF027FA0012D8DC /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B468D1DF027FA0012D8DC /* Loader.swift */; };
+		991F09331E0B069200539473 /* CreateAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991F09321E0B069200539473 /* CreateAssignmentViewController.swift */; };
 		992086A71DCCC0850055C6BF /* GlobalSDKFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */; };
 		99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339CFE1DE2C86000F3C770 /* CheckinObject.swift */; };
 		99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D001DE2C8BA00F3C770 /* OauthObject.swift */; };
@@ -90,6 +91,7 @@
 		991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
 		991B468B1DF00AF10012D8DC /* LocalExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalExtensions.swift; sourceTree = "<group>"; };
 		991B468D1DF027FA0012D8DC /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		991F09321E0B069200539473 /* CreateAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAssignmentViewController.swift; sourceTree = "<group>"; };
 		992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSDKFunction.swift; sourceTree = "<group>"; };
 		99339CFE1DE2C86000F3C770 /* CheckinObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinObject.swift; sourceTree = "<group>"; };
 		99339D001DE2C8BA00F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		991B46821DEFED800012D8DC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				991F09321E0B069200539473 /* CreateAssignmentViewController.swift */,
 				990411441E02738E002FCF53 /* PhotoViewController.swift */,
 				990411461E027630002FCF53 /* GalleryViewController.swift */,
 				99927C341DFFD91700131027 /* SignatureViewController.swift */,
@@ -273,7 +276,7 @@
 				9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */,
 				9902CF2F1DBE163A00692824 /* NetworkClass.swift */,
 				9902CF4F1DBF31B900692824 /* UserModel.swift */,
-				99A2215F1DC07B4E00E5F369 /* OauthModel.swift */,
+				99D5470C1E0BB11D0087193B /* Auth */,
 				99A2215D1DBF80C400E5F369 /* SdkConstant.swift */,
 				9918E8841DDD9CF1000376CF /* ErrorMessage.swift */,
 				994FF91F1DCA173800276B97 /* Extensions.swift */,
@@ -283,7 +286,6 @@
 				99BD3E1E1DDAE95C0066C07B /* Reachability.swift */,
 				994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */,
 				9904114D1E03B620002FCF53 /* Assignments */,
-				99339D001DE2C8BA00F3C770 /* OauthObject.swift */,
 				99339D021DE2D5B700F3C770 /* Enums.swift */,
 				99A721DE1DFA6EF00059DFBB /* AwsManager.swift */,
 			);
@@ -322,6 +324,15 @@
 				99339CFD1DE2C61C00F3C770 /* Sdk */,
 			);
 			path = BluedolphinPro;
+			sourceTree = "<group>";
+		};
+		99D5470C1E0BB11D0087193B /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				99A2215F1DC07B4E00E5F369 /* OauthModel.swift */,
+				99339D001DE2C8BA00F3C770 /* OauthObject.swift */,
+			);
+			name = Auth;
 			sourceTree = "<group>";
 		};
 		B4EDE623195A4E756F473A90 /* Pods */ = {
@@ -513,6 +524,7 @@
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
 				991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */,
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
+				991F09331E0B069200539473 /* CreateAssignmentViewController.swift in Sources */,
 				99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */,
 				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,
 				99927C351DFFD91700131027 /* SignatureViewController.swift in Sources */,

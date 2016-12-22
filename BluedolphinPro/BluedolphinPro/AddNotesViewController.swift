@@ -24,19 +24,19 @@ class AddNotesViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AddNotesViewController.cancelPressed(_:)))
         let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(AddNotesViewController.saveAction(_:)))
         
-//        if workdictHolder?.jobStatus == JobStatus.CompleteStatus.rawValue{
-//            navigationItem.rightBarButtonItem = nil
-//            notesTextView.isEditable = false
-//            if  notesTextView.text == placholderText{
-//                notesTextView.text = "No notes saved"
-//                
-//            }
-//            
-//        }
-//        else {
+        if assignment?.status == CheckinType.Submitted.rawValue{
+            navigationItem.rightBarButtonItem = nil
+            notesTextView.isEditable = false
+            if  notesTextView.text == placholderText{
+                notesTextView.text = "No notes saved"
+                
+            }
+            
+        }
+        else {
             navigationItem.rightBarButtonItem = saveButton
             notesTextView.isEditable = true
-        //}
+        }
         navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 104/255, green: 168/255, blue: 220/25, alpha: 1)
 
         // Do any additional setup after loading the view.

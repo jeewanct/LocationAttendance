@@ -17,8 +17,8 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     }
     func setThumbnailImage(_ thumbnailImage: UIImage){
         self.imageView.image = thumbnailImage
-        self.imageView.layer.borderWidth = 1
-        self.imageView.layer.borderColor = UIButton().tintColor.cgColor
+//        self.imageView.layer.borderWidth = 1
+//        self.imageView.layer.borderColor = UIButton().tintColor.cgColor
     }
 
 }

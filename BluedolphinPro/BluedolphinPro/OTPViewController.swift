@@ -27,9 +27,13 @@ class OTPViewController: UIViewController {
         
         codeInputView.becomeFirstResponder()
         otpLabel.text = "Otp send to \(mobileNumber)"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(backbuttonAction(sender:)))
         // Do any additional setup after loading the view.
     }
     
+    func backbuttonAction(sender:Any){
+        self.navigationController!.popViewController(animated: true)
+    }
     @IBAction func resendButton(_ sender: Any) {
         sendOTP()
     }

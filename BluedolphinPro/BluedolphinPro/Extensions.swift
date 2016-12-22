@@ -212,36 +212,36 @@ extension Foundation.Date {
 
 
 extension String {
-    var asDate:NSDate! {
+    var asDate:Date! {
         let styler = DateFormatter()
         styler.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         styler.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        return styler.date(from: self) as NSDate!
+        return styler.date(from: self) as Date!
     }
     
-    func asDateFormattedWith(format:String) -> NSDate! {
+    func asDateFormattedWith(format:String) -> Date! {
         let styler = DateFormatter()
         styler.dateFormat = format
         styler.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        return styler.date(from: self)! as NSDate!
+        return styler.date(from: self)! as Date!
     }
     
 }
 
-extension NSDate {
+extension Date {
     var formatted:String {
         let formatter = DateFormatter()
         formatter.timeZone = NSTimeZone.system
 //        formatter.dateStyle = .medium
 //        formatter.timeStyle = .medium
         formatter.dateFormat = "dd/MM/yyyy HH:mm"
-        return formatter.string(from: self as Date)
+        return formatter.string(from: self )
     }
     func formattedWith(format:String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = NSTimeZone.system
-        return formatter.string(from: self as Date)
+        return formatter.string(from: self )
     }
 }
 

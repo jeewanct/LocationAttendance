@@ -322,10 +322,16 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             
 
         case 2:
+//            let navController = self.storyboard?.instantiateViewController(withIdentifier: "selfassignmentscene") as! UINavigationController
+//            let controller = navController.topViewController as! SelfAssignmentViewController
+//            //controller.assignment = assignment
+//            self.present(navController, animated: true, completion: nil)
+                        let navController = self.storyboard?.instantiateViewController(withIdentifier: "selfAssignNav") as! UINavigationController
+                        let controller = navController.topViewController as! CreateAssignmentViewController
+                        controller.changeSegment = self
+                        self.present(navController, animated: true, completion: nil)
             
-//                let controller = self.storyboard?.instantiateViewController(withIdentifier: "selfAssignNav") as? UINavigationController
-//                self.navigationController?.present(controller!, animated: true, completion: nil)
-            self.performSegue(withIdentifier: "presentSelfAssignment", sender: nil)
+
             
             
                     case 3:
@@ -428,14 +434,16 @@ extension AssignmentViewController :SegmentChanger{
         case CheckinType.Assigned.rawValue :
             
             viewPager.setSelectedSegmentIndex(0, animated: false)
+            segmentControl(index: 0)
         case CheckinType.Inprogress.rawValue:
            viewPager.setSelectedSegmentIndex(1, animated: false)
-            
+            segmentControl(index: 1)
             case CheckinType.Submitted.rawValue:
             viewPager.setSelectedSegmentIndex(2, animated: false)
-            
+            segmentControl(index: 2)
         default:
             viewPager.setSelectedSegmentIndex(0, animated: false)
+            segmentControl(index: 1)
             
         }
         

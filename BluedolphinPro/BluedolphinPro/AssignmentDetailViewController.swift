@@ -51,7 +51,12 @@ class AssignmentDetailViewController: UIViewController {
         timeLineTableView.dataSource = self
         timeLineTableView.isHidden = true
         let saveButton = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(AssignmentDetailViewController.saveAction(_:)))
-        self.navigationItem.rightBarButtonItem = saveButton
+        if assignment?.status == CheckinType.Submitted.rawValue{
+            navigationItem.rightBarButtonItem = nil
+        }else {
+            self.navigationItem.rightBarButtonItem = saveButton
+        }
+        
         self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(backbuttonAction(sender:)))        
         contactNumberButton.addTarget(self, action: #selector(AssignmentDetailViewController.callAlertView), for: UIControlEvents.touchUpInside)
@@ -163,7 +168,11 @@ class AssignmentDetailViewController: UIViewController {
             controller.assignment = assignment
             self.present(navController, animated: true, completion: nil)
         case 1:
-            showActionSheet()
+             if assignment?.status == CheckinType.Submitted.rawValue{
+                
+             }else {
+                showActionSheet()
+            }
             
         case 2:
             let navController = self.storyboard?.instantiateViewController(withIdentifier: "signatureScreen") as! UINavigationController

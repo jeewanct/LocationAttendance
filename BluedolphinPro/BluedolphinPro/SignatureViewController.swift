@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class SignatureViewController: UIViewController {
 
@@ -23,9 +24,10 @@ class SignatureViewController: UIViewController {
         if let assignmentdetail = assignment?.assignmentDetails?.parseJSONString as? NSDictionary{
             if let jobNumber = assignmentdetail["jobNumber"] as? String{
                 self.navigationItem.title = jobNumber
-                albumName = jobNumber
+                albumName = jobNumber // albumName + "." + 
             }
         }
+        
         customAlbum = CustomPhotoAlbum(name: albumName)
         
         
@@ -34,16 +36,16 @@ class SignatureViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(SignatureViewController.saveAction(_:)))
-//        if workdictHolder?.jobStatus == JobStatus.CompleteStatus.rawValue{
-//            navigationItem.rightBarButtonItem = nil
-//            imgView.isHidden = false
-//            displayPhoto()
-//            
-//        }
-//        else {
+        if assignment?.status == CheckinType.Submitted.rawValue{
+            navigationItem.rightBarButtonItem = nil
+            signatureImageView.isHidden = false
+            displayPhoto()
+            
+        }
+        else {
             navigationItem.rightBarButtonItem = saveButton
             signatureImageView.isHidden = true
-        //}
+        }
         navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 104/255, green: 168/255, blue: 220/25, alpha: 1)
         //self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
@@ -86,6 +88,45 @@ class SignatureViewController: UIViewController {
         }
     }
     
+    func displayPhoto(){
+        let fetchOptions: PHFetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
+        //        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        
+        let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        
+        if let first_Obj:AnyObject = fetchResult.firstObject{
+            //found the album
+            
+            let assetCollection = first_Obj as! PHAssetCollection
+            let photoasset =   PHAsset.fetchAssets(in: assetCollection ,options: nil)
+            if (photoasset.lastObject != nil) {
+                //        let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
+                let screenSize: CGSize = UIScreen.main.bounds.size
+                let targetSize = CGSize(width: screenSize.width, height: screenSize.height)
+                
+                let imageManager = PHImageManager.default()
+                if let asset = photoasset.lastObject {
+                    imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options:nil, resultHandler: {
+                        (result, info)->Void in
+                        self.signatureImageView.image = result!
+                        
+                    })
+                }
+                
+            }else{
+                noSignatureLabel.isHidden = false
+                //notaskLabel.hidden = false
+                //Album placeholder for the asset collection, used to reference collection in completion handler
+            }
+            
+        }else{
+            noSignatureLabel.isHidden = false
+            //notaskLabel.hidden = false
+            //Album placeholder for the asset collection, used to reference collection in completion handler
+        }
+        
+    }
     
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)

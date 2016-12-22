@@ -25,7 +25,7 @@ class SelfAssignmentViewController:XLFormViewController  {
         static let TextView = "textView"
         static let Notes = "notes"
     }
-    
+    var changeSegment : SegmentChanger?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Create Assignments"
@@ -82,14 +82,17 @@ class SelfAssignmentViewController:XLFormViewController  {
         let assignmentModel = AssignmentModel()
         assignmentModel.postAssignments(assignment: assignmentObject)
     
-        
+        if let delegate = self.changeSegment {
+            delegate.moveToSegment(CheckinType.Assigned.rawValue)
+        }
+        self.dismiss(animated: true, completion: nil)
+
         
 
     }
     func getJobNumber()->String{
         let realm = try! Realm()
         let tokenObject = realm.objects(AccessTokenObject.self).filter("organizationId=%@",Singleton.sharedInstance.organizationId).first
-        print(tokenObject)
         let organisationName  = tokenObject?.organizationName
         
         let jobNumber = organisationName![0..<4].uppercased() + "-" + uuidString[0..<4]
@@ -148,7 +151,7 @@ class SelfAssignmentViewController:XLFormViewController  {
         
         
         self.form = form
-    }
+}
     
     
     override func didReceiveMemoryWarning() {

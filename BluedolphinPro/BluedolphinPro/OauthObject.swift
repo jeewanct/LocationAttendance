@@ -20,6 +20,7 @@ class AccessTokenObject :Object,Mappable {
     dynamic var userId:String?
     dynamic var organizationName:String?
     dynamic var expires  = 0
+    dynamic var userName:String?
     //dynamic var primeKey :String?
     //Impl. of Mappable protocol
     required convenience init?(map: Map) {
@@ -41,6 +42,7 @@ class AccessTokenObject :Object,Mappable {
         userId <- map["userId"]
         organizationName <- map["organizationName"]
         expires <- map["expires"]
+        userName <- map["userName"]
         // primeKey = userId! + "." + organizationId!
     }
     
