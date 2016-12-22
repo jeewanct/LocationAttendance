@@ -48,6 +48,11 @@ class CreateAssignmentViewController: UIViewController {
         endDateTextfield.inputView = datePicker
         
         addressTextfield.text = CurrentLocation.address
+        nameTextfield.isUserInteractionEnabled = false
+        addressTextfield.isUserInteractionEnabled = false
+        nameTextfield.text = Singleton.sharedInstance.userName.capitalized
+        
+        
     }
     func cancelPressed(_:UIButton){
         self.dismiss(animated: true, completion: nil)
@@ -55,6 +60,22 @@ class CreateAssignmentViewController: UIViewController {
     }
     
     func savePressed(_:UIButton){
+        
+        createAssignment()
+        
+        
+    }
+    func getJobNumber()->String{
+        let realm = try! Realm()
+        let tokenObject = realm.objects(AccessTokenObject.self).filter("organizationId=%@",Singleton.sharedInstance.organizationId).first
+        let organisationName  = tokenObject?.organizationName
+        
+        let jobNumber = organisationName![0..<4].uppercased() + "-" + uuidString[0..<4]
+        return jobNumber
+        
+    }
+    
+    func createAssignment(){
         uuidString = getUUIDString()
         let assignmentObject = AssignmentHolder()
         assignmentObject.accuracy = CurrentLocation.accuracy
@@ -85,18 +106,6 @@ class CreateAssignmentViewController: UIViewController {
             delegate.moveToSegment(CheckinType.Assigned.rawValue)
         }
         self.dismiss(animated: true, completion: nil)
-        
-        
-        
-    }
-    func getJobNumber()->String{
-        let realm = try! Realm()
-        let tokenObject = realm.objects(AccessTokenObject.self).filter("organizationId=%@",Singleton.sharedInstance.organizationId).first
-        let organisationName  = tokenObject?.organizationName
-        
-        let jobNumber = organisationName![0..<4].uppercased() + "-" + uuidString[0..<4]
-        return jobNumber
-        
     }
     func dateChanged(sender:UIDatePicker){
         activeTextfield.text = sender.date.formatted

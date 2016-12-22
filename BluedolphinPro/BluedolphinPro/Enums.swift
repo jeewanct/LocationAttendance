@@ -15,6 +15,7 @@ enum UserDefaultsKeys:String{
     case accessToken =  "CurrentAccessToken"
     case deviceToken = "DeviceToken"
     case startDate = "START_DATE"
+    case FeCode = "Fecode"
     
 }
 enum APIResult:String{

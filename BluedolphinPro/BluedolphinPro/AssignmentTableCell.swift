@@ -37,7 +37,7 @@ class AssignmentTableCell: UITableViewCell {
             
         }
         if let address = task.assignmentAddress{
-            addressLabel.text = address
+            addressLabel.text = address.capitalized
         }
 
         

@@ -19,6 +19,7 @@ class SearchViewController: UIViewController {
         CGRect(x:0, y:0, width:ScreenConstant.width - 100, height:20))
     var searchActive : Bool = false
     var currentStatus:CheckinType = .Assigned
+    var changeSegment : SegmentChanger?
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentControl(index: 0)
@@ -257,8 +258,44 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var task : RMCAssignmentObject!
+        if(searchActive) {
+            task = searchResult[indexPath.row]
+            
+        }
+        else {
+            task = tasks[indexPath.row]
+        }
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentDetail") as? AssignmentDetailViewController
+        controller?.assignment = task
+        controller?.changeSegment = self
+        self.navigationController?.pushViewController(controller!, animated: true)
         //self.performSegue(withIdentifier: "showDetails", sender: self)
         
     }
 
+}
+extension SearchViewController :SegmentChanger{
+    func moveToSegment(_ pos:String){
+        switch pos {
+        case CheckinType.Assigned.rawValue :
+            
+            viewPager.setSelectedSegmentIndex(0, animated: false)
+            segmentControl(index: 0)
+        case CheckinType.Inprogress.rawValue:
+            viewPager.setSelectedSegmentIndex(1, animated: false)
+            segmentControl(index: 1)
+        case CheckinType.Submitted.rawValue:
+            viewPager.setSelectedSegmentIndex(2, animated: false)
+            segmentControl(index: 2)
+        default:
+            viewPager.setSelectedSegmentIndex(0, animated: false)
+            segmentControl(index: 1)
+            
+        }
+        
+        
+    }
+    
 }

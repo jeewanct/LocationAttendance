@@ -220,7 +220,7 @@ class AssignmentDetailViewController: UIViewController {
             endTimeLabel.text = "End: " + endtime.asDate.formatted
         }
         if let address = assignment?.assignmentAddress{
-            addressButton.setTitle(address, for: UIControlState.normal)
+            addressButton.setTitle(address.capitalized, for: UIControlState.normal)
         }
 
     }

@@ -69,7 +69,7 @@ class HomeViewController: UIViewController {
         signalView.clipsToBounds = true
         var dropdownImage = UIImage(named: "dropdown")
          dropdownImage =  dropdownImage?.imageWithInsets(insetDimen: 10)
-        nameLabel.text = "Raghvendra"
+        nameLabel.text = Singleton.sharedInstance.userName.capitalized
         statusTextField.text = statusOption[0]
         statusTextField.inputView = pickerView
         statusTextField.delegate = self

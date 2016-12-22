@@ -79,6 +79,8 @@ class OTPViewController: UIViewController {
                 case APIResult.Success.rawValue:
                     self.updateUser()
                     getUserData()
+                    
+                    UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
                     let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
                     UIApplication.shared.keyWindow?.rootViewController = destVC
                 case APIResult.InvalidCredentials.rawValue:

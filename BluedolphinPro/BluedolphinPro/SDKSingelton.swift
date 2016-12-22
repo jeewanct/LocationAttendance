@@ -16,6 +16,8 @@ class Singleton {
     var userId = String()
     var DeviceUDID = String()
     var accessToken = String()
+    var userName = String()
+    var mobileNumber = String()
     func batteryLevel() -> Float {
         
         return UIDevice.current.batteryLevel
