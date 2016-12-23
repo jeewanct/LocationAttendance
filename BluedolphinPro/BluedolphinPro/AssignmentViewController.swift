@@ -271,7 +271,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         
     
     func createNavView(){
-        let items = ["My Dashboard", "Assignments", "Calendar", "Call History", "Profile"]
+        let items = [ "Assignments", "Profile"]
         
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor.white
@@ -303,10 +303,10 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     func menuChanger(segment:Int){
         switch segment {
-        case 1:
+        case 0:
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue) , object: nil)
             
-        case 4:
+        case 1:
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
             
         default:

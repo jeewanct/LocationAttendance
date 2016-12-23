@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.01</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -25,8 +25,17 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Want to access your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Want to access your location</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Want to access your PhotoGallery</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SourceSansPro-Regular.ttf</string>
+		<string>SourceSansPro-Bold.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -43,14 +52,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SourceSansPro-Regular.ttf</string>
-		<string>SourceSansPro-Bold.ttf</string>
-	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Want to access your camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Want to access your PhotoGallery</string>
 </dict>
 </plist>

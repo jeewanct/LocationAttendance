@@ -82,12 +82,12 @@ class HomeViewController: UIViewController {
         organisationTextField.rightViewMode = .always;
         organisationTextField.rightView = UIImageView(image:dropdownImage )
         
-        fecodeTextField.text = " FE Code: " + "Loream Ipsum"
+        fecodeTextField.text = " FE Code: " + Singleton.sharedInstance.mobileNumber
         fecodeTextField.isUserInteractionEnabled = false
         fecodeTextField.leftViewMode = .always;
         fecodeTextField.leftView = UIImageView(image: UIImage(named: "code"))
         
-        mobileNumberTextfield.text = " Mobile Number: " + "+919015620820"
+        mobileNumberTextfield.text = " Mobile Number: " + Singleton.sharedInstance.mobileNumber
         mobileNumberTextfield.isUserInteractionEnabled = false
         mobileNumberTextfield.leftViewMode = .always;
         mobileNumberTextfield.leftView = UIImageView(image: UIImage(named: "phone"))
@@ -109,9 +109,8 @@ class HomeViewController: UIViewController {
         
     }
     
-    
     func createNavView(){
-        let items = ["My Dashboard", "Assignments", "Calendar", "Call History", "Profile"]
+        let items = [ "Assignments", "Profile"]
         
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor.white
@@ -134,9 +133,7 @@ class HomeViewController: UIViewController {
         menuView.maskBackgroundOpacity = 0.3
         menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
             print("Did select item at index: \(indexPath)")
-            
-         self.menuChanger(segment: indexPath)
-            
+            self.menuChanger(segment: indexPath)
             
         }
         
@@ -145,16 +142,62 @@ class HomeViewController: UIViewController {
     
     func menuChanger(segment:Int){
         switch segment {
-        case 1:
+        case 0:
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue) , object: nil)
             
-        case 4:
+        case 1:
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
             
         default:
             break
         }
     }
+
+//    func createNavView(){
+//        let items = ["My Dashboard", "Assignments", "Calendar", "Call History", "Profile"]
+//        
+//        self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.navigationBar.barTintColor = UIColor.white
+//        //UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+//        
+//        menuView = CustomNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Profile", items: items as [AnyObject])
+//        menuView.cellHeight = 50
+//        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
+//        
+//        menuView.cellSelectionColor = UIColor.white
+//        //UIColor(red: 0.0/255.0, green:160.0/255.0, blue:195.0/255.0, alpha: 1.0)
+//        menuView.shouldKeepSelectedCellColor = true
+//        menuView.cellTextLabelColor = UIColor.black
+//        menuView.cellTextLabelFont = UIFont(name: "SourceSansPro-Regular", size: 17)
+//        menuView.cellTextLabelAlignment = .left // .Center // .Right // .Left
+//        menuView.arrowPadding = 15
+//        menuView.animationDuration = 0.3
+//        menuView.maskBackgroundColor = UIColor.black
+//        menuView.maskBackgroundOpacity = 0.3
+//        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
+//            print("Did select item at index: \(indexPath)")
+//            
+//         self.menuChanger(segment: indexPath)
+//            
+//            
+//        }
+//        
+//        self.navigationItem.titleView = menuView
+//    }
+//    
+//    func menuChanger(segment:Int){
+//        switch segment {
+//        case 1:
+//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue) , object: nil)
+//            
+//        case 4:
+//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
+//            
+//        default:
+//            break
+//        }
+//    }
 
     func postCheckin(){
         let checkin = CheckinHolder()
