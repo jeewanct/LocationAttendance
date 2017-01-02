@@ -25,17 +25,22 @@ public class CodeInputView: UIView, UIKeyInput {
     // MARK: - UIView
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        let width = Double(self.frame.width)/Double(numberOfText) - 10
+        print(frame)
+        let width = CGFloat(self.frame.width)/CGFloat(numberOfText)
         // Add four digitLabels
-        var frame = CGRect(x: 5, y: 5, width: width, height: 40)
+        
+       
+        var frame = CGRect(x: 0, y: 5, width: width - 20, height: 40)
+        
         for index in 1...numberOfText {
+            frame.origin.x += 10
             let digitLabel = UILabel(frame: frame)
             digitLabel.font = UIFont.systemFont(ofSize: 42)
             digitLabel.tag = index
             digitLabel.text = "–"
             digitLabel.textAlignment = .center
             addSubview(digitLabel)
-            frame.origin.x += CGFloat(width) + 10
+            frame.origin.x += frame.width + 10
         }
     }
     required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") } // NSCoding
