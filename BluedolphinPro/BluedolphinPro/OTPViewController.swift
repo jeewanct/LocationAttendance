@@ -32,7 +32,7 @@ class OTPViewController: UIViewController {
     }
     
     func backbuttonAction(sender:Any){
-        self.navigationController!.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func resendButton(_ sender: Any) {
         sendOTP()
@@ -80,7 +80,7 @@ class OTPViewController: UIViewController {
                     self.updateUser()
                     getUserData()
                     
-                    UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
+                    aghv.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
                     let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
                     UIApplication.shared.keyWindow?.rootViewController = destVC
                 case APIResult.InvalidCredentials.rawValue:
