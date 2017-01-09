@@ -80,7 +80,7 @@ class OTPViewController: UIViewController {
                     self.updateUser()
                     getUserData()
                     
-                    aghv.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
+                    UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
                     let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
                     UIApplication.shared.keyWindow?.rootViewController = destVC
                 case APIResult.InvalidCredentials.rawValue:

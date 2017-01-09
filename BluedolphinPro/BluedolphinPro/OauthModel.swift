@@ -102,7 +102,7 @@ class OauthModel :Meta{
         if today == false {
         var refreshToken = String()
         let refreshTokenData = realm.objects(RefreshTokenObject.self).first
-       print(refreshTokenData)
+             print(refreshTokenData)
             if let token = refreshTokenData?["token"] as? String {
                 refreshToken = token
             }
