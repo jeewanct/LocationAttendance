@@ -31,6 +31,8 @@
 	<string>Want to access your location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Want to access your PhotoGallery</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Want to access nearby beacons</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SourceSansPro-Regular.ttf</string>

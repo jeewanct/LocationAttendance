@@ -28,6 +28,7 @@ enum APIResult:String{
 enum CheckinCategory:String{
     case Transient = "Transient"
     case NonTransient = "Non-Transient"
+    case Data = "Data"
 }
 
 enum CheckinType:String{
@@ -38,6 +39,7 @@ enum CheckinType:String{
     case Completed = "Completed"
     case Assigned = "Assigned"
     case Location = "Location"
+    case Data = "Data"
 }
 enum ImageStatus:String{
     case Uploaded = "Uploaded"

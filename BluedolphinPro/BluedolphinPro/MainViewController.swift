@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
 //        self.updateNewAssignmentData(id: "dc26ecb6-0e80-4d9f-afb9-26ed20ce35f1")
         
-        
+        startScanning()
 
         // Do any additional setup after loading the view.
     }
@@ -166,4 +166,62 @@ class MainViewController: UIViewController {
         
     }
 
+}
+
+extension MainViewController {
+    func startScanning(){
+        let beaconManager = IBeaconManager()
+        //var itemdata =  [24361:10010,27403:10858,21826:21481]
+        //        let kontaktIOBeacon = iBeacon(minor: nil, major: nil, proximityId: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")
+        let estimoteBeacon1 = iBeacon(minor: 10010, major: 24361, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+        let estimoteBeacon2 = iBeacon(minor: 10858, major: 27403, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+        let estimoteBeacon3 = iBeacon(minor: 21481, major: 21826, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+        beaconManager.registerBeacons([ estimoteBeacon1,estimoteBeacon2,estimoteBeacon3])
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
+        
+        beaconManager.startMonitoring({
+            
+        }) { (messages) in
+            print("Error Messages \(messages)")
+        }
+    }
+    /**Called when the beacons are ranged*/
+    func beaconsRanged(notification:NSNotification){
+        if let visibleIbeacons = notification.object as? [iBeacon]{
+            
+            var seanbeacons = NSMutableArray()
+            for beacon in visibleIbeacons{
+                /// Do something with the iBeacon
+                
+                let dict = [
+                    "uuid" : beacon.UUID ,
+                    "major": String(describing: beacon.major!),
+                    "minor" : String(describing: beacon.minor!),
+                    //"proximity" :  String(describing: beacon.proximity),
+                    "rssi" : beacon.rssi,
+                    "distance" :beacon.accuracy
+                
+                ]
+                seanbeacons.add(dict)
+                print(dict)
+            }
+            
+            if seanbeacons.count != 0 {
+                let checkin = CheckinHolder()
+                
+                checkin.checkinDetails = ["seenbeacons":seanbeacons]
+                checkin.checkinCategory = CheckinCategory.Data.rawValue
+                checkin.checkinType = CheckinType.Data.rawValue
+               
+                //        checkin.imageName = imageName + Date().formattedISO8601
+                //        checkin.relativeUrl = imageId
+                let checkinModelObject = CheckinModel()
+                checkinModelObject.createCheckin(checkinData: checkin)
+                checkinModelObject.postCheckin()
+            }
+            
+            
+        }
+    }
 }
