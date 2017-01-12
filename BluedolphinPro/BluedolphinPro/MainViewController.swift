@@ -11,6 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet weak var mainContainerView: UIView!
+    var seanbeacons = NSMutableDictionary()
     override func viewDidLoad() {
         super.viewDidLoad()
         let oauth = OauthModel()
@@ -190,7 +191,7 @@ extension MainViewController {
     func beaconsRanged(notification:NSNotification){
         if let visibleIbeacons = notification.object as? [iBeacon]{
             
-            var seanbeacons = NSMutableArray()
+            
             for beacon in visibleIbeacons{
                 /// Do something with the iBeacon
                 
@@ -200,26 +201,32 @@ extension MainViewController {
                     "minor" : String(describing: beacon.minor!),
                     //"proximity" :  String(describing: beacon.proximity),
                     "rssi" : beacon.rssi,
-                    "distance" :beacon.accuracy
+                    "distance" :beacon.accuracy,
+                    "lastseen" : Date().formattedISO8601
                 
                 ]
-                seanbeacons.add(dict)
+                seanbeacons.addEntries(from: [beacon.major! :dict])
                 print(dict)
             }
-            
-            if seanbeacons.count != 0 {
+            let delay = 5.0 * Double(NSEC_PER_SEC)
+            let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: time, execute: {
+            if self.seanbeacons.count != 0 {
                 let checkin = CheckinHolder()
-                
-                checkin.checkinDetails = ["seenbeacons":seanbeacons]
+                let beaconArray = NSMutableArray()
+                for (_,value) in self.seanbeacons {
+                    beaconArray.add(value)
+                }
+                checkin.checkinDetails = ["seenbeacons":beaconArray]
                 checkin.checkinCategory = CheckinCategory.Data.rawValue
                 checkin.checkinType = CheckinType.Data.rawValue
-               
-                //        checkin.imageName = imageName + Date().formattedISO8601
+                self.seanbeacons = NSMutableDictionary()                //        checkin.imageName = imageName + Date().formattedISO8601
                 //        checkin.relativeUrl = imageId
                 let checkinModelObject = CheckinModel()
                 checkinModelObject.createCheckin(checkinData: checkin)
                 checkinModelObject.postCheckin()
             }
+            })
             
             
         }

@@ -74,7 +74,7 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         let location = locations.last! as CLLocation
         geoCode(location)
         CurrentLocation.coordinate = location.coordinate
-        CurrentLocation.accuracy = String(location.verticalAccuracy)
+        CurrentLocation.accuracy = String(location.horizontalAccuracy)
         CurrentLocation.altitude = String(location.altitude)
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
