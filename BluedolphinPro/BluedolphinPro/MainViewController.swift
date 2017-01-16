@@ -213,11 +213,12 @@ extension MainViewController {
             DispatchQueue.main.asyncAfter(deadline: time, execute: {
             if self.seanbeacons.count != 0 {
                 let checkin = CheckinHolder()
-                let beaconArray = NSMutableArray()
+                var beaconArray = Array<Any>()
                 for (_,value) in self.seanbeacons {
-                    beaconArray.add(value)
+                    beaconArray.append(value)
                 }
-                checkin.checkinDetails = ["seenbeacons":beaconArray]
+                checkin.beaconProximities = beaconArray
+                checkin.checkinDetails = [:]
                 checkin.checkinCategory = CheckinCategory.Data.rawValue
                 checkin.checkinType = CheckinType.Data.rawValue
                 self.seanbeacons = NSMutableDictionary()                //        checkin.imageName = imageName + Date().formattedISO8601

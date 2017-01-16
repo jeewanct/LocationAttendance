@@ -51,10 +51,23 @@ class CheckinModel:Meta{
             checkinData.imageUrl = value.imageUrl
             checkinData.time = value.time
             checkinData.organizationId = value.organizationId
-            //checkinData.imageName = value.imageName
-            if checkinData.checkinType == CheckinType.PhotCheckin.rawValue && checkinData.imageUrl == nil {
+                    //checkinData.imageName = value.imageName
+            if checkinData.checkinType == CheckinType.PhotoCheckin.rawValue && checkinData.imageUrl == nil {
                
-            }else {
+            }else if checkinData.checkinType == CheckinType.Data.rawValue{
+                var beconArray = Array<NSDictionary>()
+                for becon in value.beaconProximity {
+                    print(becon)
+                    
+                    beconArray.append(becon.toDictionary())
+                }
+                checkinData.beaconProximities = beconArray
+                print(checkinData.beaconProximities!)
+                data.append(checkinData.asJson())
+
+            }
+            
+            else {
                 data.append(checkinData.asJson())
             }
             
@@ -136,15 +149,30 @@ class CheckinModel:Meta{
         checkin.checkinType = checkinData.checkinType
         checkin.jobNumber = checkinData.jobNumber
         checkin.time = Date().formattedISO8601
-        if checkin.checkinType == CheckinType.PhotCheckin.rawValue {
+        if checkin.checkinType == CheckinType.PhotoCheckin.rawValue {
             checkin.imageName = checkinData.imageName
             checkin.relativeUrl = checkinData.relativeUrl
             
+        }else if checkin.checkinType == CheckinType.Data.rawValue {
+            let beconList = List<RMCBeacon>()
+            for data in checkinData.beaconProximities!{
+                let beconObject = RMCBeacon.mapToRMCBeacon(dict: data as! NSDictionary)
+                
+                beconList.append(beconObject)
+                
+            }
+            
+            checkin.beaconProximity = beconList
         }
+        
         let realm = try! Realm()
         try! realm.write {
             realm.add(checkin, update: true)
         }
+        
+
+        
+        
 
     }
     func updatePhotoCheckin(){
@@ -153,7 +181,7 @@ class CheckinModel:Meta{
         print(checkins)
         var customAlbum :CustomPhotoAlbum?
         var checkinId = String()
-        checkins = checkins.filter("checkinType=%@",CheckinType.PhotCheckin.rawValue)
+        checkins = checkins.filter("checkinType=%@",CheckinType.PhotoCheckin.rawValue)
         for data in checkins {
             if let checkinDetails = data.checkinDetails?.parseJSONString as? NSDictionary{
                 if let number = checkinDetails["jobNumber"] as? String{

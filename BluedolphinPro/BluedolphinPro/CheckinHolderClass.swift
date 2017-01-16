@@ -24,6 +24,6 @@ class CheckinHolder:NSObject{
      var imageName:String?
      var relativeUrl:String?
      var jobNumber:String?
-     var beconProximity:[NSDictionary]?
+     var beaconProximities:Array<Any>?
     
 }

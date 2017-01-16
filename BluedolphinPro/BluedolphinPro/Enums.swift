@@ -32,7 +32,7 @@ enum CheckinCategory:String{
 }
 
 enum CheckinType:String{
-    case PhotCheckin = "Photo"
+    case PhotoCheckin = "Photo"
     case Inprogress = "In-Progress"
     case Downloaded = "Downloaded"
     case Submitted = "Submitted"

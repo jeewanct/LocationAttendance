@@ -32,6 +32,8 @@ class RMCCheckin:Object,Mappable{
     dynamic var imageName:String?
     dynamic var relativeUrl:String?
     dynamic var jobNumber:String?
+    
+    var beaconProximity  = List<RMCBeacon>()
     override static func primaryKey() -> String? {
         return "checkinId"
         
@@ -58,6 +60,7 @@ class RMCCheckin:Object,Mappable{
         imageName <- map["imageName"]
         relativeUrl <- map["relativeUrl"]
         jobNumber <- map["jobNumber"]
+        beaconProximity <- map["beaconProximity"]
     }
     
     

@@ -24,6 +24,7 @@
 		9918E8811DDD7B42000376CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8801DDD7B42000376CF /* HomeViewController.swift */; };
 		9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */; };
 		9918E8851DDD9CF1000376CF /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8841DDD9CF1000376CF /* ErrorMessage.swift */; };
+		9919E1491E2CA0B800AB4944 /* BeaconObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919E1481E2CA0B800AB4944 /* BeaconObject.swift */; };
 		991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D861DED5028004D1355 /* CommonFunction.swift */; };
 		991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */; };
 		991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */; };
@@ -89,6 +90,7 @@
 		9918E8801DDD7B42000376CF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainWrapper.swift; sourceTree = "<group>"; };
 		9918E8841DDD9CF1000376CF /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		9919E1481E2CA0B800AB4944 /* BeaconObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconObject.swift; sourceTree = "<group>"; };
 		991A6D861DED5028004D1355 /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewController.swift; sourceTree = "<group>"; };
 		991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				99CBC7B81E23A630005F0D67 /* BluetoothManager.swift */,
 				99CBC7B91E23A630005F0D67 /* Ibeacon.swift */,
 				99CBC7BA1E23A630005F0D67 /* IbeaconManager.swift */,
+				9919E1481E2CA0B800AB4944 /* BeaconObject.swift */,
 			);
 			name = Ibeacon;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */,
 				991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */,
 				991B468E1DF027FA0012D8DC /* Loader.swift in Sources */,
+				9919E1491E2CA0B800AB4944 /* BeaconObject.swift in Sources */,
 				991B468C1DF00AF10012D8DC /* LocalExtensions.swift in Sources */,
 				99369CF71DF036C200B405E4 /* MainViewController.swift in Sources */,
 				99DDC1A31DF6BA4B001BD0DB /* PlaceMarker.swift in Sources */,

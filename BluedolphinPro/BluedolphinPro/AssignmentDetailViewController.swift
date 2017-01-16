@@ -484,7 +484,7 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
         
         checkin.checkinDetails = [AssignmentWork.JobNumber.rawValue:albumName as AnyObject]
         checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
-        checkin.checkinType = CheckinType.PhotCheckin.rawValue
+        checkin.checkinType = CheckinType.PhotoCheckin.rawValue
         checkin.assignmentId = assignment?.assignmentId
         checkin.imageName = imageName + Date().formattedISO8601
         checkin.relativeUrl = imageId

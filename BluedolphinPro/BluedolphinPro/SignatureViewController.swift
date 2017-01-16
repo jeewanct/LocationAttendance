@@ -159,7 +159,7 @@ class SignatureViewController: UIViewController {
         
         checkin.checkinDetails = [AssignmentWork.JobNumber.rawValue:albumName as AnyObject]
         checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
-        checkin.checkinType = CheckinType.PhotCheckin.rawValue
+        checkin.checkinType = CheckinType.PhotoCheckin.rawValue
         checkin.assignmentId = assignment?.assignmentId
         checkin.imageName = albumName + ".Signature"
         checkin.relativeUrl = imageId
