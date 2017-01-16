@@ -23,6 +23,7 @@ class CheckinHolder:NSObject{
      var assignmentId:String?
      var imageName:String?
      var relativeUrl:String?
-    var jobNumber:String?
+     var jobNumber:String?
+     var beconProximity:[NSDictionary]?
     
 }

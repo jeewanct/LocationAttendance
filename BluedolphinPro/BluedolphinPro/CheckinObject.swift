@@ -28,6 +28,7 @@ class RMCCheckin:Object,Mappable{
     dynamic var assignmentId:String?
     
     
+    
     dynamic var imageName:String?
     dynamic var relativeUrl:String?
     dynamic var jobNumber:String?
