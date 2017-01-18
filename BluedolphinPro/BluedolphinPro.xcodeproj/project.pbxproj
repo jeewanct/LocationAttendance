@@ -25,6 +25,8 @@
 		9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */; };
 		9918E8851DDD9CF1000376CF /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9918E8841DDD9CF1000376CF /* ErrorMessage.swift */; };
 		9919E1491E2CA0B800AB4944 /* BeaconObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919E1481E2CA0B800AB4944 /* BeaconObject.swift */; };
+		9919E14B1E2CF93200AB4944 /* PopUpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919E14A1E2CF93200AB4944 /* PopUpListView.swift */; };
+		9919E14D1E2CF94C00AB4944 /* PopUpListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9919E14C1E2CF94C00AB4944 /* PopUpListView.xib */; };
 		991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D861DED5028004D1355 /* CommonFunction.swift */; };
 		991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */; };
 		991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */; };
@@ -91,6 +93,8 @@
 		9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainWrapper.swift; sourceTree = "<group>"; };
 		9918E8841DDD9CF1000376CF /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		9919E1481E2CA0B800AB4944 /* BeaconObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconObject.swift; sourceTree = "<group>"; };
+		9919E14A1E2CF93200AB4944 /* PopUpListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpListView.swift; sourceTree = "<group>"; };
+		9919E14C1E2CF94C00AB4944 /* PopUpListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpListView.xib; sourceTree = "<group>"; };
 		991A6D861DED5028004D1355 /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewController.swift; sourceTree = "<group>"; };
 		991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 				991B468D1DF027FA0012D8DC /* Loader.swift */,
 				99A721E01DFAC4F70059DFBB /* BottomBar.swift */,
 				99927C301DFFC8C800131027 /* ScratchPad.swift */,
+				9919E14A1E2CF93200AB4944 /* PopUpListView.swift */,
+				9919E14C1E2CF94C00AB4944 /* PopUpListView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -441,6 +447,7 @@
 				99CACFE21DB8A1590099AA00 /* LaunchScreen.storyboard in Resources */,
 				99CACFDF1DB8A1590099AA00 /* Assets.xcassets in Resources */,
 				99CACFDD1DB8A1590099AA00 /* Main.storyboard in Resources */,
+				9919E14D1E2CF94C00AB4944 /* PopUpListView.xib in Resources */,
 				9904114B1E027655002FCF53 /* GalleryCollectionViewCell.xib in Resources */,
 				991536C51DEBFF810046254C /* SourceSansPro-Bold.ttf in Resources */,
 			);
@@ -519,6 +526,7 @@
 				9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */,
 				997197521DFED308008834DD /* OTPViewController.swift in Sources */,
 				99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */,
+				9919E14B1E2CF93200AB4944 /* PopUpListView.swift in Sources */,
 				99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */,
 				99A721DF1DFA6EF00059DFBB /* AwsManager.swift in Sources */,
 				994FF91C1DC8BA2E00276B97 /* CheckinModel.swift in Sources */,

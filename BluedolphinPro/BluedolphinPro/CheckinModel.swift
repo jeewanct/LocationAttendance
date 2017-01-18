@@ -36,7 +36,7 @@ class CheckinModel:Meta{
     func postCheckin(){
         let realm = try! Realm()
         let checkins = realm.objects(RMCCheckin.self)
-        var data = [NSDictionary]()
+        var checkinsDataArray = [NSDictionary]()
         for value in checkins{
             let checkinData = CheckinHolder()
             checkinData.accuracy = value.accuracy
@@ -63,25 +63,31 @@ class CheckinModel:Meta{
                 }
                 checkinData.beaconProximities = beconArray
                 print(checkinData.beaconProximities!)
-                data.append(checkinData.asJson())
+                checkinsDataArray.append(checkinData.asJson())
 
             }
             
             else {
-                data.append(checkinData.asJson())
+                checkinsDataArray.append(checkinData.asJson())
             }
             
             
         }
-        print (data)
-        if data.count == 0 {
+        print (checkinsDataArray)
+        if checkinsDataArray.count == 0 {
             return
         }
+        let checkinchunks = checkinsDataArray.chunk(20)
+        for elements in checkinchunks{
+            sendCheckin(data:elements )
+        }
+    }
+    func sendCheckin(data:[NSDictionary]){
         let param = [
             //"userId":Singleton.sharedInstance.userId,
             "data":data
-        
-        ] as [String : Any]
+            
+            ] as [String : Any]
         print(param)
         NetworkModel.submitData(CheckinModel.url(), method: .post, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
             guard let statusCode = responseData["statusCode"] as? Int else {
@@ -105,6 +111,7 @@ class CheckinModel:Meta{
         }) { (error) in
             print(error)
         }
+        
     }
     
     
@@ -113,7 +120,7 @@ class CheckinModel:Meta{
             return
         }
         switch statusCode{
-        case 200:
+        case 200,400:
             if let checkinId = data["checkinId"] as? String{
                 let realm = try! Realm()
                 guard let checkin = realm.objects(RMCCheckin.self).filter("checkinId = %@",checkinId).first  else {

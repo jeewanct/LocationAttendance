@@ -19,6 +19,13 @@ struct GOOGLE_MAPS{
     static var ApiKey = "AIzaSyCv2aXPsTEYdWG2q3IM9neN690s4JFxe4A"
 }
 
+struct APPCOLOR {
+    static var baseColor = UIColor(red: 64/255, green: 116/255, blue: 186/255, alpha: 1)
+    static var selectionColor = UIColor(red: 248/255, green: 156/255, blue: 28/255, alpha: 1)
+    static var headerColor = UIColor(red: 33/255, green: 64/255, blue: 140/255, alpha: 1)
+    static var navColor = UIColor(red: 116/255, green: 169/255, blue: 219/255, alpha: 1)
+}
+
 enum LocalNotifcation:String{
     case Profile = "MyProfile"
     case Assignment = "MyAssignments"

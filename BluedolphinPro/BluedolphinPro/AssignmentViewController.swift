@@ -31,7 +31,10 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     
     @IBOutlet weak var mapView: UIView!
-    
+    lazy var popListView: PopUpListView = {
+        let popListView = PopUpListView(frame:self.view.frame)
+        return popListView
+    }()
     var viewPager:ViewPagerControl!
     var tabView:ViewPagerControl!
     var menuView: CustomNavigationDropdownMenu!
@@ -114,7 +117,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
         self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
         self.navigationItem.leftBarButtonItem = notificationButton
-
+        self.navigationController?.view.addSubview(popListView)
+        popListView.isHidden = true
     }
 
     func notificationAction(_:Any){
@@ -398,32 +402,39 @@ extension AssignmentViewController:UITableViewDelegate,UITableViewDataSource{
 extension AssignmentViewController{
     
     func showActionSheet(){
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+//        let alertController = UIAlertController(title: nil, message: "Sort", preferredStyle: .actionSheet)
+//        
+//        let sendButton = UIAlertAction(title: "Start Date:Ascending", style: .default, handler: { (action) -> Void in
+//            //self.btnCamera()
+//            self.getTasks(ascendingFlag: true)
+//        })
+//        
+//        let  deleteButton = UIAlertAction(title: "Start Date:Descending", style: .default, handler: { (action) -> Void in
+//            //print("Delete button tapped")
+//            self.getTasks(ascendingFlag: false)
+//        })
+//        let  clearButton = UIAlertAction(title: "Clear Sort", style: .default, handler: { (action) -> Void in
+//            //print("Delete button tapped")
+//            self.getTasks()
+//        })
+//        
+//        let cancelButton = UIAlertAction(title: "Cancel", style: .default, handler: { (action) -> Void in
+//            //self.tabView.
+//        })
+//        
+//        
+//        alertController.addAction(sendButton)
+//        alertController.addAction(deleteButton)
+//        alertController.addAction(clearButton)
+////        alertController.addAction(cancelButton)
+//        self.navigationController!.present(alertController, animated: true, completion: nil)
         
-        let sendButton = UIAlertAction(title: "Start Date:Ascending", style: .default, handler: { (action) -> Void in
-            //self.btnCamera()
-            self.getTasks(ascendingFlag: true)
-        })
-        
-        let  deleteButton = UIAlertAction(title: "Start Date:Descending", style: .default, handler: { (action) -> Void in
-            //print("Delete button tapped")
-            self.getTasks(ascendingFlag: false)
-        })
-        let  clearButton = UIAlertAction(title: "Clear Sort", style: .default, handler: { (action) -> Void in
-            //print("Delete button tapped")
-            self.getTasks()
-        })
-        
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-            //self.tabView.
-        })
-        
-        
-        alertController.addAction(sendButton)
-        alertController.addAction(deleteButton)
-        alertController.addAction(clearButton)
-        alertController.addAction(cancelButton)
-        self.navigationController!.present(alertController, animated: true, completion: nil)
+
+
+       popListView.displayView()
+    
+
         
     }
 }
