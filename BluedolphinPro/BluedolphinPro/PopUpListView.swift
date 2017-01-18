@@ -5,15 +5,23 @@
 //  Created by Raghvendra on 16/01/17.
 //  Copyright © 2017 raremediacompany. All rights reserved.
 //
-
+enum SortEnum:String{
+    case StartDateAsc
+    case StartDateDes
+    case ClearSort
+}
 import UIKit
 
+
+protocol ListSelection:class {
+    func cellSelected(value:SortEnum)
+}
 
 class PopUpListView: UIView,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet var contentView: PopUpListView!
 
-    
+    weak var delegate: ListSelection!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var sortListView: UITableView!
     var selectableIndexPath:IndexPath =  IndexPath(row: 0, section: 0)
@@ -152,6 +160,20 @@ class PopUpListView: UIView,UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectableIndexPath = indexPath
+        if let delegate = self.delegate {
+            switch indexPath.row {
+            case 0:
+                delegate.cellSelected(value: .StartDateAsc)
+            case 1:
+                delegate.cellSelected(value: .StartDateDes)
+            case 2:
+                delegate.cellSelected(value: .ClearSort)
+            default:
+                break
+            }
+        }
+        hideMenu()
+
     }
     
    

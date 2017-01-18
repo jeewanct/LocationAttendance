@@ -114,7 +114,7 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var time:String?
     dynamic var updatedOn:String?
     dynamic var assignmentDetails:String?
-    dynamic var statusLog:String?
+    dynamic var assignmentStatusLog:String?
     dynamic var assignmentDeadline:String?
     dynamic var assignmentStartTime:String?
     dynamic var assignmentAddress:String?
@@ -124,6 +124,10 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var status:String?
     dynamic var jobNumber:String?
     var bookmarked:Bool?
+    dynamic var lastUpdated:String?
+    var selfAssignment:Bool?
+    dynamic var downloadedOn:String?
+    dynamic var submittedOn:String?
     override static func primaryKey() -> String? {
         return "assignmentId"
         
@@ -135,7 +139,7 @@ class RMCAssignmentObject :Object,Mappable {
         addedOn    <- map["addedOn"]
         time <- map["time"]
         updatedOn <- map["updatedOn"]
-        statusLog <- map["statusLog"]
+        assignmentStatusLog <- map["assignmentStatusLog"]
         assigneeData    <- (map["assigneeData"],ArrayTransform<RMCAssignee>())
         assignmentId <- map["assignmentId"]
         assignerData <- map["assignerData"]
@@ -146,8 +150,11 @@ class RMCAssignmentObject :Object,Mappable {
          assignmentAddress <- map["assignmentAddress"]
         status <- map["status"]
         bookmarked <- map["bookmark"]
+        lastUpdated <- map["lastUpdated"]
+        selfAssignment <- map["selfAssignment"]
+        downloadedOn <- map["downloadedOn"]
+        submittedOn <- map["submittedOn"]
         jobNumber <- map["jobNumber"]
-        
     }
 
 }

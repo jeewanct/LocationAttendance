@@ -52,4 +52,5 @@ enum AssignmentWork:String{
     case Signature = "signatureUrl"
     case JobNumber = "jobNumber"
     case Submission = "submission"
+    case Downloaded = "downloaded"
 }

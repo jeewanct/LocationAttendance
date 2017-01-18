@@ -45,6 +45,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     var currentStatus:CheckinType = .Assigned
     
     var changeSegment : SegmentChanger?
+    var sortChanger:ListSelection?
     func getTasks(ascendingFlag:Bool = true){
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
@@ -54,6 +55,17 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
 //            SortDescriptor(property: "created", ascending: false),
             ])
     assignmentTableView.reloadData()
+    }
+    
+    func getTasks(){
+        let realm = try! Realm()
+        tasks = realm.objects(RMCAssignmentObject.self)
+        tasks = tasks.filter("status = %@",currentStatus.rawValue)
+        tasks = tasks.sorted(by: [
+            SortDescriptor(property: "downloadedOn", ascending: true),
+            //            SortDescriptor(property: "created", ascending: false),
+            ])
+        assignmentTableView.reloadData()
     }
     
     func notificationSubscription(tasks: Results<RMCAssignmentObject>) -> NotificationToken {
@@ -118,6 +130,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
         self.navigationItem.leftBarButtonItem = notificationButton
         self.navigationController?.view.addSubview(popListView)
+        popListView.delegate = self
+
         popListView.isHidden = true
     }
 
@@ -403,32 +417,7 @@ extension AssignmentViewController{
     
     func showActionSheet(){
     
-//        let alertController = UIAlertController(title: nil, message: "Sort", preferredStyle: .actionSheet)
-//        
-//        let sendButton = UIAlertAction(title: "Start Date:Ascending", style: .default, handler: { (action) -> Void in
-//            //self.btnCamera()
-//            self.getTasks(ascendingFlag: true)
-//        })
-//        
-//        let  deleteButton = UIAlertAction(title: "Start Date:Descending", style: .default, handler: { (action) -> Void in
-//            //print("Delete button tapped")
-//            self.getTasks(ascendingFlag: false)
-//        })
-//        let  clearButton = UIAlertAction(title: "Clear Sort", style: .default, handler: { (action) -> Void in
-//            //print("Delete button tapped")
-//            self.getTasks()
-//        })
-//        
-//        let cancelButton = UIAlertAction(title: "Cancel", style: .default, handler: { (action) -> Void in
-//            //self.tabView.
-//        })
-//        
-//        
-//        alertController.addAction(sendButton)
-//        alertController.addAction(deleteButton)
-//        alertController.addAction(clearButton)
-////        alertController.addAction(cancelButton)
-//        self.navigationController!.present(alertController, animated: true, completion: nil)
+
         
 
 
@@ -461,4 +450,19 @@ extension AssignmentViewController :SegmentChanger{
         
     }
     
+}
+
+extension AssignmentViewController:ListSelection{
+    func cellSelected(value:SortEnum){
+        switch value {
+        case .ClearSort:
+            getTasks()
+
+        case .StartDateAsc:
+            self.getTasks(ascendingFlag: false)
+        case .StartDateDes:
+            self.getTasks(ascendingFlag: false)
+            
+        }
+    }
 }

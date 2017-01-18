@@ -31,39 +31,35 @@
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qTC-11-ATP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tH-ra-GvC">
-                                <rect key="frame" x="0.0" y="413.5" width="375" height="40"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="gZa-S0-gaZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="27"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Vg-t6-xto">
-                                <rect key="frame" x="0.0" y="454.5" width="375" height="212.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="3tH-ra-GvC" firstAttribute="leading" secondItem="qTC-11-ATP" secondAttribute="leading" id="MCV-L6-CrO"/>
-                            <constraint firstAttribute="trailing" secondItem="3Vg-t6-xto" secondAttribute="trailing" id="MPm-Yh-s4E"/>
-                            <constraint firstItem="3Vg-t6-xto" firstAttribute="leading" secondItem="qTC-11-ATP" secondAttribute="leading" id="NrI-kE-3qS"/>
-                            <constraint firstAttribute="bottom" secondItem="3Vg-t6-xto" secondAttribute="bottom" id="RXd-BK-ifJ"/>
-                            <constraint firstItem="3tH-ra-GvC" firstAttribute="centerY" secondItem="qTC-11-ATP" secondAttribute="centerY" constant="100" id="kbP-aC-Ghj"/>
-                            <constraint firstItem="3Vg-t6-xto" firstAttribute="top" secondItem="3tH-ra-GvC" secondAttribute="bottom" constant="1" id="lOj-YC-P7t"/>
-                            <constraint firstAttribute="trailing" secondItem="3tH-ra-GvC" secondAttribute="trailing" id="yNV-xT-sXa"/>
-                        </constraints>
                     </view>
-                    <blurEffect style="prominent"/>
+                    <blurEffect style="light"/>
                 </visualEffectView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tH-ra-GvC">
+                    <rect key="frame" x="0.0" y="413.5" width="375" height="40"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="gZa-S0-gaZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="27"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Vg-t6-xto">
+                    <rect key="frame" x="0.0" y="454.5" width="375" height="212.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <constraints>
+                <constraint firstItem="3Vg-t6-xto" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="62L-cY-zpN"/>
                 <constraint firstAttribute="bottom" secondItem="Gv7-yl-CfF" secondAttribute="bottom" id="BdR-QB-pbL"/>
+                <constraint firstItem="3Vg-t6-xto" firstAttribute="top" secondItem="3tH-ra-GvC" secondAttribute="bottom" constant="1" id="GPG-Zz-AVs"/>
+                <constraint firstItem="3tH-ra-GvC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="100" id="NOh-nt-C9s"/>
                 <constraint firstItem="Gv7-yl-CfF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OTs-gT-muz"/>
+                <constraint firstAttribute="bottom" secondItem="3Vg-t6-xto" secondAttribute="bottom" id="ZGQ-CU-rZ8"/>
                 <constraint firstItem="Gv7-yl-CfF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bII-aN-ZKs"/>
+                <constraint firstAttribute="trailing" secondItem="3tH-ra-GvC" secondAttribute="trailing" id="bbK-gg-2oM"/>
+                <constraint firstAttribute="trailing" secondItem="3Vg-t6-xto" secondAttribute="trailing" id="ksn-Ok-WBd"/>
+                <constraint firstItem="3tH-ra-GvC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nhZ-Vn-zEK"/>
                 <constraint firstAttribute="trailing" secondItem="Gv7-yl-CfF" secondAttribute="trailing" id="r6B-wX-CYU"/>
             </constraints>
             <point key="canvasLocation" x="34.5" y="53.5"/>

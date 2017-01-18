@@ -167,21 +167,71 @@ class AssignmentModel :Meta{
                 print(location)
                 assignment.location = location
             }
+            if assignment.assignerData?.userId == Singleton.sharedInstance.userId {
+                assignment.selfAssignment = true
+            }else {
+                assignment.selfAssignment = false
+            }
+            
             
         }
         let realm = try! Realm()
         try! realm.write {
             realm.add(assignment,update:true)
         }
+       self.postDownloadedCheckin(assignmentId: assignment.assignmentId!)
     }
+    
+    
+    func postDownloadedCheckin(assignmentId:String){
+        
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [:]
+        checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
+        checkin.checkinType = CheckinType.Downloaded.rawValue
+        checkin.assignmentId = assignmentId
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        if isInternetAvailable(){
+            checkinModelObject.postCheckin()
+        }
+        
+        let assignmentModel = AssignmentModel()
+        assignmentModel.updateAssignment(id:assignmentId , type: AssignmentWork.Downloaded, value: Date().formattedISO8601, status: CheckinType.Downloaded)
+        
+    }
+    
+
     
     func updateAssignment(id:String,type:AssignmentWork,value:String,status:CheckinType){
         let realm = try! Realm()
         let assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId = %@",id).first
     
-    try! realm.write {
-       assignment!.status = status.rawValue
+        try! realm.write {
+            assignment!.status = status.rawValue
         }
+        switch status {
+        case .Downloaded:
+            try! realm.write {
+                assignment!.downloadedOn = Date().formattedISO8601
+            }
+            
+        case .Submitted :
+            try! realm.write {
+                assignment!.submittedOn = Date().formattedISO8601
+            }
+        case .Inprogress,.PhotoCheckin:
+            try! realm.write {
+                assignment!.lastUpdated = Date().formattedISO8601
+            }
+        default:
+            try! realm.write {
+                assignment!.lastUpdated = Date().formattedISO8601
+            }
+        }
+        
+        
         if let data = assignment?.assignmentDetails{
              let assignmentdetail = NSMutableDictionary(dictionary:  toDictionary(text: data) as! NSDictionary)
             let currentUpdate = [type.rawValue:value]
@@ -199,7 +249,7 @@ class AssignmentModel :Meta{
             }
         }
         
-        if let statusLogString = assignment?.statusLog {
+        if let statusLogString = assignment?.assignmentStatusLog {
             let statusLog = NSMutableArray(object:  toDictionary(text: statusLogString)!)
             
             var currentUpdate = Dictionary<String,Any>()
@@ -209,7 +259,7 @@ class AssignmentModel :Meta{
             currentUpdate["type"] = type.rawValue
             statusLog.add(currentUpdate)
             try! realm.write {
-            assignment?.statusLog = toJsonString(statusLog)
+            assignment?.assignmentStatusLog = toJsonString(statusLog)
             }
             
         }else {
@@ -221,7 +271,7 @@ class AssignmentModel :Meta{
             let statusLog = NSMutableArray()
             statusLog.add(currentUpdate)
             try! realm.write {
-                assignment?.statusLog = toJsonString(statusLog)
+                assignment?.assignmentStatusLog = toJsonString(statusLog)
             }
         }
         

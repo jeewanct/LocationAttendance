@@ -166,6 +166,8 @@ class MainViewController: UIViewController {
         
         
     }
+    
+    
 
 }
 
@@ -225,7 +227,10 @@ extension MainViewController {
                 //        checkin.relativeUrl = imageId
                 let checkinModelObject = CheckinModel()
                 checkinModelObject.createCheckin(checkinData: checkin)
-                checkinModelObject.postCheckin()
+                if isInternetAvailable(){
+                    checkinModelObject.postCheckin()
+                }
+
             }
             })
             
