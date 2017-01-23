@@ -42,54 +42,51 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     var tasks: Results<RMCAssignmentObject>!
     var subscription: NotificationToken?
     
-    var currentStatus:CheckinType = .Assigned
+    var currentStatus:CheckinType = .Downloaded
+    
     
     var changeSegment : SegmentChanger?
     var sortChanger:ListSelection?
     
     
     
-    func getTasks(ascendingFlag:Bool = true){
+    func getTasks(sortParameter:String = "",ascendingFlag:Bool = true){
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
+        print(tasks)
+        
         tasks = tasks.filter("status = %@",currentStatus.rawValue)
-        switch currentStatus {
-        case .Assigned,.Downloaded:
-            tasks = tasks.sorted(by: [
-                SortDescriptor(property: "downloadedOn", ascending: true),
-                //            SortDescriptor(property: "created", ascending: false),
-                ])
-        case .Inprogress:
-            tasks = tasks.sorted(by: [
-                SortDescriptor(property: "lastUpdated", ascending: true),
-                //            SortDescriptor(property: "created", ascending: false),
-                ])
-            
-        case .Submitted:
-            tasks = tasks.sorted(by: [
-                SortDescriptor(property: "submittedOn", ascending: true),
-                //            SortDescriptor(property: "created", ascending: false),
-                ])
-        default:
-            break
-        }
-        tasks = tasks.sorted(by: [
-            SortDescriptor(property: "assignmentStartTime", ascending: ascendingFlag),
-            //            SortDescriptor(property: "created", ascending: false),
-            ])
+//        switch currentStatus {
+//        case .Assigned,.Downloaded:
+//            tasks = tasks.sorted(by: [
+//                SortDescriptor(property: "downloadedOn", ascending: true),
+//                //            SortDescriptor(property: "created", ascending: false),
+//                ])
+//        case .Inprogress:
+//            tasks = tasks.sorted(by: [
+//                SortDescriptor(property: "lastUpdated", ascending: true),
+//                //            SortDescriptor(property: "created", ascending: false),
+//                ])
+//            
+//        case .Submitted:
+//            tasks = tasks.sorted(by: [
+//                SortDescriptor(property: "submittedOn", ascending: true),
+//                //            SortDescriptor(property: "created", ascending: false),
+//                ])
+//        default:
+//            break
+//        }
+//        if  sortParameter != "" {
+//            tasks = tasks.sorted(by: [
+//                SortDescriptor(property: sortParameter, ascending: ascendingFlag),
+//                //            SortDescriptor(property: "created", ascending: false),
+//                ])
+//        }
+        print(tasks.count)
         assignmentTableView.reloadData()
     }
     
-    func getTasks(){
-        let realm = try! Realm()
-        tasks = realm.objects(RMCAssignmentObject.self)
-        tasks = tasks.filter("status = %@",currentStatus.rawValue)
-        tasks = tasks.sorted(by: [
-            SortDescriptor(property: "downloadedOn", ascending: true),
-            //            SortDescriptor(property: "created", ascending: false),
-            ])
-        assignmentTableView.reloadData()
-    }
+    
     
     func notificationSubscription(tasks: Results<RMCAssignmentObject>) -> NotificationToken {
         return tasks.addNotificationBlock {[weak self] (changes: RealmCollectionChange<Results<RMCAssignmentObject>>) in
@@ -271,7 +268,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     func segmentControl(index:Int){
         switch index {
         case 0:
-            currentStatus = .Assigned
+            currentStatus = .Downloaded
             
         case 1:
             currentStatus = .Inprogress
@@ -441,7 +438,7 @@ extension AssignmentViewController{
 extension AssignmentViewController :SegmentChanger{
     func moveToSegment(_ pos:String){
         switch pos {
-        case CheckinType.Assigned.rawValue :
+        case CheckinType.Assigned.rawValue,CheckinType.Downloaded.rawValue :
             
             viewPager.setSelectedSegmentIndex(0, animated: false)
             segmentControl(index: 0)
@@ -468,9 +465,10 @@ extension AssignmentViewController:ListSelection{
         case .ClearSort:
             getTasks()
         case .StartDateAsc:
-            self.getTasks(ascendingFlag: false)
+            self.getTasks(sortParameter: "assignmentStartTime", ascendingFlag: true)
+            
         case .StartDateDes:
-            self.getTasks(ascendingFlag: false)
+            self.getTasks(sortParameter: "assignmentStartTime", ascendingFlag: true)
             
         }
     }

@@ -59,7 +59,38 @@ class AssignmentModel :Meta{
 //            print(error)
 //        }
     }
-    
+    func getAssignments(status:String,completion: @escaping (_ result: String) -> Void){
+        let url = AssignmentModel.url() + Singleton.sharedInstance.organizationId + "/assignment?assigneeId=" + Singleton.sharedInstance.userId + "?status=" + status
+        print(url)
+        NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
+            guard let status = response["statusCode"] as? Int else {
+                return
+            }
+            switch status {
+            case 200:
+                guard let responseData = response["data"] as? NSDictionary else {
+                    return
+                }
+                if let documents = responseData["documents"] as? NSArray {
+                    for data in documents{
+                        self.saveAssignment(assignmentData: data as! NSDictionary)
+                    }
+                }
+                
+                break;
+            default:break
+            }
+        }) { (error) in
+            
+            print(error)
+        }
+        
+        //        NetworkModel.submitData(url, method: .get, params: [:], headers: self.getHeader(), success: { (responseData) in
+        //
+        //        }) { (error) in
+        //            print(error)
+        //        }
+    }
     func postdbAssignments(){
         let realm = try! Realm()
         let checkins = realm.objects(AssignmentObject.self)
@@ -179,7 +210,12 @@ class AssignmentModel :Meta{
         try! realm.write {
             realm.add(assignment,update:true)
         }
-       self.postDownloadedCheckin(assignmentId: assignment.assignmentId!)
+        
+        
+        if assignment.status == CheckinType.Assigned.rawValue {
+            self.postDownloadedCheckin(assignmentId: assignment.assignmentId!)
+
+        }
     }
     
     

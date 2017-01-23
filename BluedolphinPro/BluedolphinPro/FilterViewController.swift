@@ -22,7 +22,10 @@ class FilterViewController: UIViewController {
    
     @IBOutlet weak var selfButtton: SSRadioButton!
     
-    @IBOutlet weak var allButton: SSRadioButton!
+    
+    @IBOutlet weak var startDateButton: UIButton!
+    @IBOutlet weak var endDateButton: UIButton!
+    @IBOutlet weak var assignedByButton: UIButton!
     @IBOutlet weak var managerButton: SSRadioButton!
      var radioButtonController: SSRadioButtonsController?
     override func viewDidLoad() {
@@ -32,13 +35,26 @@ class FilterViewController: UIViewController {
         self.navigationItem.title = "Filter by"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(FilterViewController.cancelPressed(_:)))
             
-        radioButtonController = SSRadioButtonsController(buttons: selfButtton, allButton, managerButton)
+        radioButtonController = SSRadioButtonsController(buttons: selfButtton, managerButton)
         radioButtonController!.delegate = self
         radioButtonController!.shouldLetDeSelect = true
-        
+        startDateButton.addTarget(self, action: #selector(startButtonPressed), for: UIControlEvents.touchUpInside)
+        endDateButton.addTarget(self, action: #selector(endButtonPressed), for: UIControlEvents.touchUpInside)
+        assignedByButton.addTarget(self, action: #selector(assignedByButtonPressed), for: UIControlEvents.touchUpInside)
         // Do any additional setup after loading the view.
     }
-    
+    func startButtonPressed(sender:UIButton){
+        sender.isSelected = !sender.isSelected
+        
+    }
+    func endButtonPressed(sender:UIButton){
+        sender.isSelected = !sender.isSelected
+
+    }
+    func assignedByButtonPressed(sender:UIButton){
+        sender.isSelected = !sender.isSelected
+
+    }
     func setdelegate(){
         let datePicker = UIDatePicker()
 

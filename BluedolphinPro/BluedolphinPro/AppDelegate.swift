@@ -139,7 +139,13 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("User Info = ",response.notification.request.content.userInfo)
+        print(response)
+        print(response.actionIdentifier)
+        print(response.notification)
+        print(response.notification.request)
+        print(response.notification.request.content)
+
+        print("User Info = ",response.notification.request.content.userInfo.values)
         completionHandler()
     }
 
