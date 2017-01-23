@@ -107,6 +107,19 @@ class FilterViewController: UIViewController {
         
     }
     func tabChanger(segment:Int){
+        switch segment {
+        case 0:
+            startDateButton.isSelected = false
+            endDateButton.isSelected = false
+
+            assignedByButton.isSelected = false
+
+        case 1:
+            break
+            
+        default:
+            break
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
