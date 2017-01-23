@@ -46,15 +46,38 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     var changeSegment : SegmentChanger?
     var sortChanger:ListSelection?
+    
+    
+    
     func getTasks(ascendingFlag:Bool = true){
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
         tasks = tasks.filter("status = %@",currentStatus.rawValue)
+        switch currentStatus {
+        case .Assigned,.Downloaded:
+            tasks = tasks.sorted(by: [
+                SortDescriptor(property: "downloadedOn", ascending: true),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+        case .Inprogress:
+            tasks = tasks.sorted(by: [
+                SortDescriptor(property: "lastUpdated", ascending: true),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+            
+        case .Submitted:
+            tasks = tasks.sorted(by: [
+                SortDescriptor(property: "submittedOn", ascending: true),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+        default:
+            break
+        }
         tasks = tasks.sorted(by: [
             SortDescriptor(property: "assignmentStartTime", ascending: ascendingFlag),
-//            SortDescriptor(property: "created", ascending: false),
+            //            SortDescriptor(property: "created", ascending: false),
             ])
-    assignmentTableView.reloadData()
+        assignmentTableView.reloadData()
     }
     
     func getTasks(){
@@ -96,13 +119,11 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         createLayout()
         let model = CheckinModel()
         model.updatePhotoCheckin()
         model.postCheckin()
-        
-        // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
         
@@ -131,10 +152,10 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         self.navigationItem.leftBarButtonItem = notificationButton
         self.navigationController?.view.addSubview(popListView)
         popListView.delegate = self
-
+        
         popListView.isHidden = true
     }
-
+    
     func notificationAction(_:Any){
         
     }
@@ -158,7 +179,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     func createAppleMap(){
         let appleMap = MKMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.mapView.frame.height))
         //appleMap.showsUserLocation = true
-       // let currentLocationItem = MKUserTrackingBarButtonItem.init(mapView: appleMap)
+        // let currentLocationItem = MKUserTrackingBarButtonItem.init(mapView: appleMap)
         self.mapView.addSubview(appleMap)
     }
     
@@ -170,21 +191,21 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         DispatchQueue.main.async(execute: {
             for data in resultSet{
                 if let location = data.location {
-                                    let newlatlong = CLLocationCoordinate2D(latitude: Double(location.latitude!)!, longitude: Double((location.longitude!))!)
-                                    print(newlatlong)
+                    let newlatlong = CLLocationCoordinate2D(latitude: Double(location.latitude!)!, longitude: Double((location.longitude!))!)
+                    print(newlatlong)
                     
-                                    if let appointmentTime = data.time {
-                    
-                                        let scheduleTime = appointmentTime.asDate.formatted
-                                        let marker = PlaceMarker(coordinate: newlatlong)
-                                        marker.title = data.assignmentId
-                                        marker.snippet =  data.assignmentDetails! + "\n" + scheduleTime
-                                        bounds = bounds.includingCoordinate(marker.position)
-                                        marker.map = googleMapUsage.sharedInstance.globalMapView
-                                    }
+                    if let appointmentTime = data.time {
+                        
+                        let scheduleTime = appointmentTime.asDate.formatted
+                        let marker = PlaceMarker(coordinate: newlatlong)
+                        marker.title = data.assignmentId
+                        marker.snippet =  data.assignmentDetails! + "\n" + scheduleTime
+                        bounds = bounds.includingCoordinate(marker.position)
+                        marker.map = googleMapUsage.sharedInstance.globalMapView
+                    }
                 }
                 
-
+                
                 
                 
             }
@@ -223,29 +244,29 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         }
         
         
-//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
-//        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-//        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
-//        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-//        
-//        self.view.addGestureRecognizer(swipeLeft)
-//        self.view.addGestureRecognizer(swipeRight)
+        //        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
+        //        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        //        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swiped(sender:)))
+        //        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        //
+        //        self.view.addGestureRecognizer(swipeLeft)
+        //        self.view.addGestureRecognizer(swipeRight)
         
     }
     
-//    func swiped(sender:UISwipeGestureRecognizer){
-//        if let swipeGesture = sender as? UISwipeGestureRecognizer{
-//            switch swipeGesture.direction {
-//            case UISwipeGestureRecognizerDirection.right:
-//                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex + 1 > 2 ? 2:viewPager.selectedSegmentIndex + 1, animated: true)
-//            case UISwipeGestureRecognizerDirection.left:
-//                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex - 1 < 0 ? 0:viewPager.selectedSegmentIndex - 1, animated: true)
-//                print("left swipe")
-//            default:
-//                print("other swipe")
-//            }
-//        }
-//    }
+    //    func swiped(sender:UISwipeGestureRecognizer){
+    //        if let swipeGesture = sender as? UISwipeGestureRecognizer{
+    //            switch swipeGesture.direction {
+    //            case UISwipeGestureRecognizerDirection.right:
+    //                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex + 1 > 2 ? 2:viewPager.selectedSegmentIndex + 1, animated: true)
+    //            case UISwipeGestureRecognizerDirection.left:
+    //                viewPager.setSelectedSegmentIndex(viewPager.selectedSegmentIndex - 1 < 0 ? 0:viewPager.selectedSegmentIndex - 1, animated: true)
+    //                print("left swipe")
+    //            default:
+    //                print("other swipe")
+    //            }
+    //        }
+    //    }
     
     func segmentControl(index:Int){
         switch index {
@@ -286,7 +307,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         }
         
     }
-        
+    
     
     func createNavView(){
         let items = [ "Assignments", "Profile"]
@@ -338,24 +359,21 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         case 1:
             mapView.isHidden = false
             
-
+            
         case 2:
-//            let navController = self.storyboard?.instantiateViewController(withIdentifier: "selfassignmentscene") as! UINavigationController
-//            let controller = navController.topViewController as! SelfAssignmentViewController
-//            //controller.assignment = assignment
-//            self.present(navController, animated: true, completion: nil)
-                        let navController = self.storyboard?.instantiateViewController(withIdentifier: "selfAssignNav") as! UINavigationController
-                        let controller = navController.topViewController as! CreateAssignmentViewController
-                        controller.changeSegment = self
-                        self.present(navController, animated: true, completion: nil)
             
-
+            let navController = self.storyboard?.instantiateViewController(withIdentifier: "selfAssignNav") as! UINavigationController
+            let controller = navController.topViewController as! CreateAssignmentViewController
+            controller.changeSegment = self
+            self.present(navController, animated: true, completion: nil)
             
             
-                    case 3:
-//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? OTPViewController
-//            self.navigationController?.show(controller!, sender: nil)
-                        break;
+            
+            
+        case 3:
+            let navController = self.storyboard?.instantiateViewController(withIdentifier: "filterNav") as! UINavigationController
+            self.present(navController, animated: true, completion: nil)
+            break;
         case 4:
             showActionSheet()
             
@@ -369,20 +387,20 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-//    func getAssignmentData(){
-//       var assignments = AssignmentModel().getAssignmentFromDb()
-//    }
-
+    //    func getAssignmentData(){
+    //       var assignments = AssignmentModel().getAssignmentFromDb()
+    //    }
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 
@@ -416,15 +434,7 @@ extension AssignmentViewController:UITableViewDelegate,UITableViewDataSource{
 extension AssignmentViewController{
     
     func showActionSheet(){
-    
-
-        
-
-
-       popListView.displayView()
-    
-
-        
+        popListView.displayView()
     }
 }
 
@@ -436,9 +446,9 @@ extension AssignmentViewController :SegmentChanger{
             viewPager.setSelectedSegmentIndex(0, animated: false)
             segmentControl(index: 0)
         case CheckinType.Inprogress.rawValue:
-           viewPager.setSelectedSegmentIndex(1, animated: false)
+            viewPager.setSelectedSegmentIndex(1, animated: false)
             segmentControl(index: 1)
-            case CheckinType.Submitted.rawValue:
+        case CheckinType.Submitted.rawValue:
             viewPager.setSelectedSegmentIndex(2, animated: false)
             segmentControl(index: 2)
         default:
@@ -457,7 +467,6 @@ extension AssignmentViewController:ListSelection{
         switch value {
         case .ClearSort:
             getTasks()
-
         case .StartDateAsc:
             self.getTasks(ascendingFlag: false)
         case .StartDateDes:

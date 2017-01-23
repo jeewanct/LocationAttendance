@@ -14,6 +14,8 @@
 		990411471E027630002FCF53 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990411461E027630002FCF53 /* GalleryViewController.swift */; };
 		9904114A1E027655002FCF53 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990411481E027655002FCF53 /* GalleryCollectionViewCell.swift */; };
 		9904114B1E027655002FCF53 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 990411491E027655002FCF53 /* GalleryCollectionViewCell.xib */; };
+		990935821E30DAC100A42108 /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990935801E30DAC100A42108 /* SSRadioButton.swift */; };
+		990935831E30DAC100A42108 /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990935811E30DAC100A42108 /* SSRadioButtonsController.swift */; };
 		990BE8691E03F98A0038F0AF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990BE8681E03F98A0038F0AF /* LoginModel.swift */; };
 		990BE86B1E040BC10038F0AF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990BE86A1E040BC10038F0AF /* RootViewController.swift */; };
 		991536991DE6F95D0046254C /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991536981DE6F95D0046254C /* AppConstant.swift */; };
@@ -27,6 +29,7 @@
 		9919E1491E2CA0B800AB4944 /* BeaconObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919E1481E2CA0B800AB4944 /* BeaconObject.swift */; };
 		9919E14B1E2CF93200AB4944 /* PopUpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919E14A1E2CF93200AB4944 /* PopUpListView.swift */; };
 		9919E14D1E2CF94C00AB4944 /* PopUpListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9919E14C1E2CF94C00AB4944 /* PopUpListView.xib */; };
+		9919E1771E2F96BE00AB4944 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919E1761E2F96BE00AB4944 /* FilterViewController.swift */; };
 		991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D861DED5028004D1355 /* CommonFunction.swift */; };
 		991A6D891DED6EC8004D1355 /* AssignmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */; };
 		991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */; };
@@ -81,6 +84,8 @@
 		990411461E027630002FCF53 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		990411481E027655002FCF53 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		990411491E027655002FCF53 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
+		990935801E30DAC100A42108 /* SSRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButton.swift; sourceTree = "<group>"; };
+		990935811E30DAC100A42108 /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButtonsController.swift; sourceTree = "<group>"; };
 		990BE8681E03F98A0038F0AF /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		990BE86A1E040BC10038F0AF /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		991536981DE6F95D0046254C /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
@@ -95,6 +100,7 @@
 		9919E1481E2CA0B800AB4944 /* BeaconObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconObject.swift; sourceTree = "<group>"; };
 		9919E14A1E2CF93200AB4944 /* PopUpListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpListView.swift; sourceTree = "<group>"; };
 		9919E14C1E2CF94C00AB4944 /* PopUpListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpListView.xib; sourceTree = "<group>"; };
+		9919E1761E2F96BE00AB4944 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		991A6D861DED5028004D1355 /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewController.swift; sourceTree = "<group>"; };
 		991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
@@ -208,6 +214,7 @@
 				991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */,
 				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
 				99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */,
+				9919E1761E2F96BE00AB4944 /* FilterViewController.swift */,
 				99A721B81DF7FF370059DFBB /* SearchViewController.swift */,
 				9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */,
 				99927C321DFFD38C00131027 /* AddNotesViewController.swift */,
@@ -227,6 +234,8 @@
 		991B46841DEFEDAD0012D8DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				990935801E30DAC100A42108 /* SSRadioButton.swift */,
+				990935811E30DAC100A42108 /* SSRadioButtonsController.swift */,
 				9971974F1DFED115008834DD /* OTPView.swift */,
 				99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */,
 				991536C01DEBF8390046254C /* CustomNavView.swift */,
@@ -521,7 +530,9 @@
 				99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */,
 				99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */,
 				994FF92C1DCB39DB00276B97 /* SDKSingelton.swift in Sources */,
+				990935831E30DAC100A42108 /* SSRadioButtonsController.swift in Sources */,
 				9902CF501DBF31B900692824 /* UserModel.swift in Sources */,
+				990935821E30DAC100A42108 /* SSRadioButton.swift in Sources */,
 				991536C11DEBF8390046254C /* CustomNavView.swift in Sources */,
 				9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */,
 				997197521DFED308008834DD /* OTPViewController.swift in Sources */,
@@ -550,6 +561,7 @@
 				99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */,
 				9971974B1DFE7E82008834DD /* SelfAssignmentViewController.swift in Sources */,
 				99339F6B1DE6D8AC00F3C770 /* AssignmentViewController.swift in Sources */,
+				9919E1771E2F96BE00AB4944 /* FilterViewController.swift in Sources */,
 				990BE8691E03F98A0038F0AF /* LoginModel.swift in Sources */,
 				990BE86B1E040BC10038F0AF /* RootViewController.swift in Sources */,
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
