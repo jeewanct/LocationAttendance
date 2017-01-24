@@ -8,6 +8,8 @@
 enum SortEnum:String{
     case StartDateAsc
     case StartDateDes
+    case EndDateAsc
+    case EndDateDes
     case ClearSort
 }
 import UIKit
@@ -71,7 +73,7 @@ class PopUpListView: UIView,UITableViewDelegate,UITableViewDataSource {
         return view
     }    
     
-    let items = ["Start Date (Asc)","Start Date (Des)","Clear Sort"]
+    let items = ["Start Date (Asc)","Start Date (Des)","End Date (Asc)","End Date (Dsc)","Clear Sort"]
     
     
     func displayView() {
@@ -167,6 +169,13 @@ class PopUpListView: UIView,UITableViewDelegate,UITableViewDataSource {
             case 1:
                 delegate.cellSelected(value: .StartDateDes)
             case 2:
+                delegate.cellSelected(value: .EndDateAsc)
+
+            case 3:
+                delegate.cellSelected(value: .EndDateDes)
+
+            case 4:
+                
                 delegate.cellSelected(value: .ClearSort)
             default:
                 break

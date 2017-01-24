@@ -30,17 +30,18 @@ class FilterViewController: UIViewController {
      var radioButtonController: SSRadioButtonsController?
     override func viewDidLoad() {
         super.viewDidLoad()
-        createTabbarView()
-        setdelegate()
         self.navigationItem.title = "Filter by"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(FilterViewController.cancelPressed(_:)))
             
         radioButtonController = SSRadioButtonsController(buttons: selfButtton, managerButton)
         radioButtonController!.delegate = self
-        radioButtonController!.shouldLetDeSelect = true
         startDateButton.addTarget(self, action: #selector(startButtonPressed), for: UIControlEvents.touchUpInside)
         endDateButton.addTarget(self, action: #selector(endButtonPressed), for: UIControlEvents.touchUpInside)
         assignedByButton.addTarget(self, action: #selector(assignedByButtonPressed), for: UIControlEvents.touchUpInside)
+        
+        createTabbarView()
+        setdelegate()
+
         // Do any additional setup after loading the view.
     }
     func startButtonPressed(sender:UIButton){
@@ -74,7 +75,7 @@ class FilterViewController: UIViewController {
         let datePicker = UIDatePicker()
 
         datePicker.datePickerMode = .dateAndTime
-        datePicker.minimumDate = Date()
+        //datePicker.minimumDate = Date()
         datePicker.addTarget(self, action: #selector(dateChanged(sender:)), for: UIControlEvents.valueChanged)
         startDateFrom.inputView = datePicker
         startDateTo.inputView = datePicker
@@ -101,7 +102,13 @@ class FilterViewController: UIViewController {
         
         if Singleton.sharedInstance.assignedByValue != nil {
            assignedByButton.isSelected = true
+            if Singleton.sharedInstance.assignedByValue == "Self"{
+                radioButtonController!.pressed(selfButtton)
            
+            }else{
+                radioButtonController!.pressed(managerButton)
+
+            }
         }
 
     }
@@ -154,7 +161,7 @@ class FilterViewController: UIViewController {
     }
     
     func showAlert(_ message : String) {
-        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
             return        }
         alertController.addAction(OkAction)

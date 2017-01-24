@@ -35,7 +35,7 @@
                     <blurEffect style="light"/>
                 </visualEffectView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tH-ra-GvC">
-                    <rect key="frame" x="0.0" y="413.5" width="375" height="40"/>
+                    <rect key="frame" x="0.0" y="313.5" width="375" height="40"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="gZa-S0-gaZ"/>
@@ -45,7 +45,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Vg-t6-xto">
-                    <rect key="frame" x="0.0" y="454.5" width="375" height="212.5"/>
+                    <rect key="frame" x="0.0" y="354.5" width="375" height="312.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
@@ -53,7 +53,7 @@
                 <constraint firstItem="3Vg-t6-xto" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="62L-cY-zpN"/>
                 <constraint firstAttribute="bottom" secondItem="Gv7-yl-CfF" secondAttribute="bottom" id="BdR-QB-pbL"/>
                 <constraint firstItem="3Vg-t6-xto" firstAttribute="top" secondItem="3tH-ra-GvC" secondAttribute="bottom" constant="1" id="GPG-Zz-AVs"/>
-                <constraint firstItem="3tH-ra-GvC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="100" id="NOh-nt-C9s"/>
+                <constraint firstItem="3tH-ra-GvC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NOh-nt-C9s"/>
                 <constraint firstItem="Gv7-yl-CfF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OTs-gT-muz"/>
                 <constraint firstAttribute="bottom" secondItem="3Vg-t6-xto" secondAttribute="bottom" id="ZGQ-CU-rZ8"/>
                 <constraint firstItem="Gv7-yl-CfF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bII-aN-ZKs"/>

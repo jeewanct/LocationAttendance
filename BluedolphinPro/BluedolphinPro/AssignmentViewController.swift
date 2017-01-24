@@ -485,7 +485,12 @@ extension AssignmentViewController:ListSelection{
             self.getTasks(sortParameter: "assignmentStartTime", ascendingFlag: true)
             
         case .StartDateDes:
-            self.getTasks(sortParameter: "assignmentStartTime", ascendingFlag: true)
+            self.getTasks(sortParameter: "assignmentStartTime", ascendingFlag: false)
+        case .EndDateAsc:
+            self.getTasks(sortParameter: "assignmentDeadline", ascendingFlag: true)
+        case .EndDateDes:
+            self.getTasks(sortParameter: "assignmentDeadline", ascendingFlag: false)
+            
             
         }
     }
