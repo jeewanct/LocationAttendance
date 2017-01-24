@@ -99,7 +99,7 @@ class SearchViewController: UIViewController {
     func segmentControl(index:Int){
         switch index {
         case 0:
-            currentStatus = .Assigned
+            currentStatus = .Downloaded
             
         case 1:
             currentStatus = .Inprogress
@@ -279,7 +279,7 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource{
 extension SearchViewController :SegmentChanger{
     func moveToSegment(_ pos:String){
         switch pos {
-        case CheckinType.Assigned.rawValue :
+        case CheckinType.Downloaded.rawValue :
             
             viewPager.setSelectedSegmentIndex(0, animated: false)
             segmentControl(index: 0)

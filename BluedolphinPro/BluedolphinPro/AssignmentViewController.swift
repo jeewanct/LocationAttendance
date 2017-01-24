@@ -56,32 +56,53 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         print(tasks)
         
         tasks = tasks.filter("status = %@",currentStatus.rawValue)
-//        switch currentStatus {
-//        case .Assigned,.Downloaded:
-//            tasks = tasks.sorted(by: [
-//                SortDescriptor(property: "downloadedOn", ascending: true),
-//                //            SortDescriptor(property: "created", ascending: false),
-//                ])
-//        case .Inprogress:
-//            tasks = tasks.sorted(by: [
-//                SortDescriptor(property: "lastUpdated", ascending: true),
-//                //            SortDescriptor(property: "created", ascending: false),
-//                ])
-//            
-//        case .Submitted:
-//            tasks = tasks.sorted(by: [
-//                SortDescriptor(property: "submittedOn", ascending: true),
-//                //            SortDescriptor(property: "created", ascending: false),
-//                ])
-//        default:
-//            break
-//        }
-//        if  sortParameter != "" {
-//            tasks = tasks.sorted(by: [
-//                SortDescriptor(property: sortParameter, ascending: ascendingFlag),
-//                //            SortDescriptor(property: "created", ascending: false),
-//                ])
-//        }
+        switch currentStatus {
+        case .Assigned,.Downloaded:
+            tasks = tasks.sorted(by: [
+                SortDescriptor(property: "downloadedOn", ascending: true),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+        case .Inprogress:
+            tasks = tasks.sorted(by: [
+                SortDescriptor(property: "lastUpdated", ascending: true),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+            
+        case .Submitted:
+            tasks = tasks.sorted(by: [
+                SortDescriptor(property: "submittedOn", ascending: true),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+        default:
+            break
+        }
+        if  sortParameter != "" {
+            tasks = tasks.sorted(by: [
+                SortDescriptor(property: sortParameter, ascending: ascendingFlag),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+        }
+        if Singleton.sharedInstance.startFromDate != nil {
+            tasks = tasks.filter("assignmentStartTime BETWEEN %@", [Singleton.sharedInstance.startFromDate?.asDateFormattedWith(),Singleton.sharedInstance.startToDate?.asDateFormattedWith()])
+            
+
+        }
+        if Singleton.sharedInstance.endFromDate != nil {
+            tasks = tasks.filter("assignmentDeadline BETWEEN %@", [Singleton.sharedInstance.endFromDate?.asDateFormattedWith(),Singleton.sharedInstance.endToDate?.asDateFormattedWith()])
+            
+
+        }
+
+        if Singleton.sharedInstance.assignedByValue != nil {
+            if Singleton.sharedInstance.assignedByValue?.uppercased() == "SELF" {
+                tasks = tasks.filter("selfAssignment = %@","true")
+
+            }else{
+                tasks = tasks.filter("selfAssignment = %@","false")
+
+            }
+        }
+
         print(tasks.count)
         assignmentTableView.reloadData()
     }
@@ -123,7 +144,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         model.postCheckin()
     }
     override func viewDidAppear(_ animated: Bool) {
-        
+        getTasks()
     }
     func createLayout(){
         segmentControl(index: 0)
@@ -209,10 +230,6 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             
             googleMapUsage.sharedInstance.globalMapView.animate(with: GMSCameraUpdate.fit(bounds))
         })
-        //        dispatch_async(dispatch_get_main_queue(), {
-        //
-        //        })
-        
     }
     func createViewPager(){
         let data = ["New","In Progress","Completed"]

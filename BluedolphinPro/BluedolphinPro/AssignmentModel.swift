@@ -19,8 +19,8 @@ class AssignmentModel :Meta{
             "Content-Type":"application/json",
             "Accept-Encoding":"application/gzip",
             "Accept":"application/json",
-            "Authorization":"Bearer " + Singleton.sharedInstance.accessToken,
-            "userId":Singleton.sharedInstance.userId
+            "Authorization":"Bearer " + SDKSingleton.sharedInstance.accessToken,
+            "userId":SDKSingleton.sharedInstance.userId
         ]
         
         return headers
@@ -28,7 +28,7 @@ class AssignmentModel :Meta{
     
     
     func getAssignments(assignmentId:String,completion: @escaping (_ result: String) -> Void){
-        let url = AssignmentModel.url() + Singleton.sharedInstance.organizationId + "/assignment?assignmentId=" + assignmentId
+        let url = AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment?assignmentId=" + assignmentId
         print(url)
         NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
             guard let status = response["statusCode"] as? Int else {
@@ -53,14 +53,14 @@ class AssignmentModel :Meta{
             print(error)
         }
         
-        //        NetworkModel.submitData(url, method: .get, params: [:], headers: self.getHeader(), success: { (responseData) in
-//            
-//        }) { (error) in
-//            print(error)
-//        }
+
     }
+    
+    
+    
     func getAssignments(status:String,completion: @escaping (_ result: String) -> Void){
-        let url = AssignmentModel.url() + Singleton.sharedInstance.organizationId + "/assignment?assigneeId=" + Singleton.sharedInstance.userId + "?status=" + status
+        let url = AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment?assigneeId=" + SDKSingleton.sharedInstance.userId
+            //+ "?status=" + status
         print(url)
         NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
             guard let status = response["statusCode"] as? Int else {
@@ -85,12 +85,8 @@ class AssignmentModel :Meta{
             print(error)
         }
         
-        //        NetworkModel.submitData(url, method: .get, params: [:], headers: self.getHeader(), success: { (responseData) in
-        //
-        //        }) { (error) in
-        //            print(error)
-        //        }
-    }
+}
+    
     func postdbAssignments(){
         let realm = try! Realm()
         let checkins = realm.objects(AssignmentObject.self)
@@ -99,17 +95,19 @@ class AssignmentModel :Meta{
             data.append(value.toDictionary())
         }
         let param = [
-            //"userId":Singleton.sharedInstance.accessToken,
+            //"userId":SDKSingleton.sharedInstance.accessToken,
             "data":data
             
             ] as [String : Any]
         
-        NetworkModel.submitData(AssignmentModel.url() + Singleton.sharedInstance.organizationId + "/assignment", method: .put, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
+        NetworkModel.submitData(AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment", method: .put, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
             print(responseData)
         }) { (error) in
             print(error)
         }
     }
+    
+    
     func postAssignments(assignment:NSObject){
        
         var data = [NSDictionary]()
@@ -117,17 +115,19 @@ class AssignmentModel :Meta{
             data.append(assignment.asJson())
         
         let param = [
-            //"userId":Singleton.sharedInstance.accessToken,
+            //"userId":SDKSingleton.sharedInstance.accessToken,
             "data":data
             
             ] as [String : Any]
         print(param)
-        NetworkModel.submitData(AssignmentModel.url() + Singleton.sharedInstance.organizationId + "/assignment", method: .post, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
+        NetworkModel.submitData(AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment", method: .post, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
             print(responseData)
         }) { (error) in
             print(error)
         }
     }
+    
+    
     
     func createAssignment(assignmentData:[String:String]){
         
@@ -157,6 +157,8 @@ class AssignmentModel :Meta{
        return assignments
         
     }
+    
+    
     func saveAssignment(assignmentData:NSDictionary){
         let assignment = RMCAssignmentObject()
         if let associationId = assignmentData["associationIds"] as? NSDictionary{
@@ -177,9 +179,9 @@ class AssignmentModel :Meta{
         }
         if let assignmentData = assignmentData["assignmentData"] as? NSDictionary{
             assignment.addedOn = assignmentData["addedOn"] as? String
-            assignment.assignmentDeadline = assignmentData["assignmentDeadline"] as? String
+            assignment.assignmentDeadline = (assignmentData["assignmentDeadline"] as? String)?.asDate
             assignment.assignmentAddress = assignmentData["assignmentAddress"] as? String
-            assignment.assignmentStartTime = assignmentData["assignmentStartTime"] as? String
+            assignment.assignmentStartTime = (assignmentData["assignmentStartTime"] as? String)?.asDate
             assignment.assignmentId = assignmentData["assignmentId"] as? String
             assignment.status = assignmentData["status"] as? String
             assignment.time = assignmentData["time"] as? String
@@ -198,10 +200,10 @@ class AssignmentModel :Meta{
                 print(location)
                 assignment.location = location
             }
-            if assignment.assignerData?.userId == Singleton.sharedInstance.userId {
-                assignment.selfAssignment = true
+            if assignment.assignerData?.userId == SDKSingleton.sharedInstance.userId {
+                assignment.selfAssignment = "true"
             }else {
-                assignment.selfAssignment = false
+                assignment.selfAssignment = "false"
             }
             
             
@@ -232,9 +234,11 @@ class AssignmentModel :Meta{
         if isInternetAvailable(){
             checkinModelObject.postCheckin()
         }
-        
-        let assignmentModel = AssignmentModel()
-        assignmentModel.updateAssignment(id:assignmentId , type: AssignmentWork.Downloaded, value: Date().formattedISO8601, status: CheckinType.Downloaded)
+        let delay = 3.0 * Double(NSEC_PER_SEC)
+        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {
+        self.updateAssignment(id:assignmentId , type: AssignmentWork.Downloaded, value: Date().formattedISO8601, status: CheckinType.Downloaded)
+        })
         
     }
     
@@ -244,26 +248,27 @@ class AssignmentModel :Meta{
         let realm = try! Realm()
         let assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId = %@",id).first
     
+        print(assignment ?? "")
         try! realm.write {
             assignment!.status = status.rawValue
         }
         switch status {
         case .Downloaded:
             try! realm.write {
-                assignment!.downloadedOn = Date().formattedISO8601
+                assignment!.downloadedOn = Date()
             }
             
         case .Submitted :
             try! realm.write {
-                assignment!.submittedOn = Date().formattedISO8601
+                assignment!.submittedOn = Date()
             }
         case .Inprogress,.PhotoCheckin:
             try! realm.write {
-                assignment!.lastUpdated = Date().formattedISO8601
+                assignment!.lastUpdated = Date()
             }
         default:
             try! realm.write {
-                assignment!.lastUpdated = Date().formattedISO8601
+                assignment!.lastUpdated = Date()
             }
         }
         

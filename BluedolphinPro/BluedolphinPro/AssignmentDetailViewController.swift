@@ -208,7 +208,7 @@ class AssignmentDetailViewController: UIViewController {
             
         }
         if let startTime = assignment?.assignmentStartTime {
-            startTimeLabel.text = "Start:" + startTime.asDate.formatted
+            startTimeLabel.text = "Start:" + startTime.formatted
         }
         if let jobNumber = assignment?.jobNumber{
             self.navigationItem.title = jobNumber
@@ -217,7 +217,7 @@ class AssignmentDetailViewController: UIViewController {
         }
 
         if let endtime = assignment?.assignmentDeadline {
-            endTimeLabel.text = "End: " + endtime.asDate.formatted
+            endTimeLabel.text = "End: " + endtime.formatted
         }
         if let address = assignment?.assignmentAddress{
             addressButton.setTitle(address.capitalized, for: UIControlState.normal)

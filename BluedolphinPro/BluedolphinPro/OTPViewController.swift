@@ -51,7 +51,7 @@ class OTPViewController: UIViewController {
                           "otpToken":otpToken,
                           "deviceType":"ios",
                           "deviceToken":UserDefaults.standard.value(forKey: "DeviceToken") as! String,
-                          "imeiId":Singleton.sharedInstance.DeviceUDID
+                          "imeiId":SDKSingleton.sharedInstance.DeviceUDID
             
             
         ]

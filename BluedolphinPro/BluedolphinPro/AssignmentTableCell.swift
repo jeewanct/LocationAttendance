@@ -42,10 +42,10 @@ class AssignmentTableCell: UITableViewCell {
 
         
         if let startTime = task.assignmentStartTime {
-            startTimeLabel.text = startTime.asDate.formatted
+            startTimeLabel.text = startTime.formatted
         }
         if let endtime = task.assignmentDeadline {
-            startTimeLabel.text =   startTimeLabel.text! + " to " + endtime.asDate.formatted
+            startTimeLabel.text =   startTimeLabel.text! + " to " + endtime.formatted
         }
         
     }

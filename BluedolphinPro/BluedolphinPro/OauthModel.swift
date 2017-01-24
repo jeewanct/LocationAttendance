@@ -1,3 +1,4 @@
+  
 //
 //  OauthModel.swift
 //  BluedolphinPro
@@ -102,7 +103,7 @@ class OauthModel :Meta{
         if today == false {
         var refreshToken = String()
         let refreshTokenData = realm.objects(RefreshTokenObject.self).first
-             print(refreshTokenData)
+             print(refreshTokenData ?? "")
             if let token = refreshTokenData?["token"] as? String {
                 refreshToken = token
             }
@@ -112,7 +113,7 @@ class OauthModel :Meta{
             "grantType":"refreshToken",
             "selfRequest":true,
             "refreshToken": refreshToken,
-            "userId" :Singleton.sharedInstance.userId
+            "userId" :SDKSingleton.sharedInstance.userId
         ] as [String : Any]
         
         let headers = [

@@ -7,3 +7,13 @@
 //
 
 import Foundation
+class Singleton {
+    
+    static let sharedInstance: Singleton = Singleton()
+    var startToDate:String?
+    var startFromDate:String?
+    var endToDate:String?
+    var endFromDate:String?
+    var assignedByValue:String?
+
+}

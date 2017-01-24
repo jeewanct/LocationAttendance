@@ -15,7 +15,7 @@ func getUUIDString()->String{
 
 class CheckinModel:Meta{
     internal static func url() -> String {
-        return  APIURL + ModuleUrl.Organisation.rawValue + Singleton.sharedInstance.organizationId + ModuleUrl.Checkin.rawValue
+        return  APIURL + ModuleUrl.Organisation.rawValue + SDKSingleton.sharedInstance.organizationId + ModuleUrl.Checkin.rawValue
     }
     
     func getHeader()->[String:String]{
@@ -23,8 +23,8 @@ class CheckinModel:Meta{
             "Content-Type":"application/json",
             "Accept-Encoding":"application/gzip",
             "Accept":"application/json",
-            "Authorization":"Bearer " + Singleton.sharedInstance.accessToken,
-            "userId":Singleton.sharedInstance.userId
+            "Authorization":"Bearer " + SDKSingleton.sharedInstance.accessToken,
+            "userId":SDKSingleton.sharedInstance.userId
         ]
         
         return headers
@@ -33,9 +33,12 @@ class CheckinModel:Meta{
     
     
     
-    func postCheckin(){
+    func postCheckin(checkinId:String = ""){
         let realm = try! Realm()
-        let checkins = realm.objects(RMCCheckin.self)
+        var checkins = realm.objects(RMCCheckin.self)
+        if checkinId != "" {
+            checkins = checkins.filter("checkinId = %@",checkinId)
+        }
         var checkinsDataArray = [NSDictionary]()
         for value in checkins{
             let checkinData = CheckinHolder()
@@ -84,7 +87,7 @@ class CheckinModel:Meta{
     }
     func sendCheckin(data:[NSDictionary]){
         let param = [
-            //"userId":Singleton.sharedInstance.userId,
+            //"userId":SDKSingleton.sharedInstance.userId,
             "data":data
             
             ] as [String : Any]
@@ -152,7 +155,7 @@ class CheckinModel:Meta{
         checkin.assignmentId = checkinData.assignmentId
         checkin.checkinCategory = checkinData.checkinCategory
         checkin.checkinId = getUUIDString()
-        checkin.organizationId = Singleton.sharedInstance.organizationId
+        checkin.organizationId = SDKSingleton.sharedInstance.organizationId
         checkin.checkinType = checkinData.checkinType
         checkin.jobNumber = checkinData.jobNumber
         checkin.time = Date().formattedISO8601

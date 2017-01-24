@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
-class Singleton {
+class SDKSingleton {
     
-    static let sharedInstance: Singleton = Singleton()
+    static let sharedInstance: SDKSingleton = SDKSingleton()
     
     var organizationId = String()
     var userId = String()

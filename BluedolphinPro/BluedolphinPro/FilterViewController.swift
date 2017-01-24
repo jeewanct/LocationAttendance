@@ -44,15 +44,30 @@ class FilterViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     func startButtonPressed(sender:UIButton){
-        sender.isSelected = !sender.isSelected
+        if !startDateTo.text!.isBlank && !startDateFrom.text!.isBlank{
+            sender.isSelected = !sender.isSelected
+
+        }else {
+            showAlert("Please Select both start dates")
+        }
         
     }
     func endButtonPressed(sender:UIButton){
-        sender.isSelected = !sender.isSelected
+        if !endDateTo.text!.isBlank && !endDateFrom.text!.isBlank{
+            sender.isSelected = !sender.isSelected
+            
+        }else {
+            showAlert("Please Select both end dates")
+        }
 
     }
     func assignedByButtonPressed(sender:UIButton){
-        sender.isSelected = !sender.isSelected
+        if radioButtonController?.selectedButton() != nil {
+            sender.isSelected = !sender.isSelected
+
+        }else {
+            showAlert("Please Select one of the options")
+        }
 
     }
     func setdelegate(){
@@ -69,6 +84,26 @@ class FilterViewController: UIViewController {
         startDateTo.delegate = self
         endDateFrom.delegate = self
         endDateTo.delegate = self
+        setFilterData()
+        
+    }
+    func setFilterData(){
+        if Singleton.sharedInstance.startFromDate != nil {
+           startDateButton.isSelected = true
+        startDateFrom.text = Singleton.sharedInstance.startFromDate
+        startDateTo.text = Singleton.sharedInstance.startToDate
+        }
+        if Singleton.sharedInstance.endFromDate != nil {
+            endDateButton.isSelected = true
+            endDateFrom.text = Singleton.sharedInstance.endFromDate
+            endDateTo.text = Singleton.sharedInstance.endToDate
+        }
+        
+        if Singleton.sharedInstance.assignedByValue != nil {
+           assignedByButton.isSelected = true
+           
+        }
+
     }
     
     func dateChanged(sender:UIDatePicker){
@@ -109,17 +144,62 @@ class FilterViewController: UIViewController {
     func tabChanger(segment:Int){
         switch segment {
         case 0:
-            startDateButton.isSelected = false
-            endDateButton.isSelected = false
-
-            assignedByButton.isSelected = false
-
+            clearAllFilter()
         case 1:
-            break
+            applyFilter()
             
         default:
             break
         }
+    }
+    
+    func showAlert(_ message : String) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+            return        }
+        alertController.addAction(OkAction)
+        self.present(alertController, animated: true) {
+        }
+    }
+    func clearAllFilter(){
+        startDateButton.isSelected = false
+        endDateButton.isSelected = false
+        assignedByButton.isSelected = false
+        Singleton.sharedInstance.assignedByValue = nil
+        Singleton.sharedInstance.startToDate = nil
+        Singleton.sharedInstance.startFromDate = nil
+        Singleton.sharedInstance.endToDate = nil
+        Singleton.sharedInstance.endFromDate = nil
+ 
+    }
+    
+    func applyFilter(){
+        if startDateButton.isSelected{
+            Singleton.sharedInstance.startToDate = startDateTo.text
+            Singleton.sharedInstance.startFromDate = startDateFrom.text
+  
+        }else {
+            Singleton.sharedInstance.startToDate = nil
+            Singleton.sharedInstance.startFromDate = nil
+        }
+        if endDateButton.isSelected{
+            Singleton.sharedInstance.endToDate = endDateTo.text
+            Singleton.sharedInstance.endFromDate = endDateFrom.text
+            
+        }else{
+            Singleton.sharedInstance.endToDate = nil
+            Singleton.sharedInstance.endFromDate = nil
+        }
+        if assignedByButton.isSelected{
+          let assignedBy = radioButtonController?.selectedButton()!.title(for: UIControlState.normal)
+            Singleton.sharedInstance.assignedByValue = assignedBy!
+        }else {
+            Singleton.sharedInstance.assignedByValue = nil
+
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

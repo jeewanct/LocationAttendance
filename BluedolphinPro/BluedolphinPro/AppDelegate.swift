@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         getUserData()
         
         
-        if !Singleton.sharedInstance.userId.isBlank{
+        if !SDKSingleton.sharedInstance.userId.isBlank{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
             if self.window != nil {
@@ -91,12 +91,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(DeviceUDID ?? "")
         let kcs = KeychainService()
         if let recoveredId = kcs.load(name:"UniqueId") {
-            Singleton.sharedInstance.DeviceUDID = recoveredId
+            SDKSingleton.sharedInstance.DeviceUDID = recoveredId
         }
         else {
             
-            Singleton.sharedInstance.DeviceUDID = DeviceUDID!
-           _ = kcs.save(name: "UniqueId", value: Singleton.sharedInstance.DeviceUDID as NSString)
+            SDKSingleton.sharedInstance.DeviceUDID = DeviceUDID!
+           _ = kcs.save(name: "UniqueId", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
         }
     }
     

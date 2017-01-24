@@ -115,19 +115,19 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var updatedOn:String?
     dynamic var assignmentDetails:String?
     dynamic var assignmentStatusLog:String?
-    dynamic var assignmentDeadline:String?
-    dynamic var assignmentStartTime:String?
+    dynamic var assignmentDeadline:Date?
+    dynamic var assignmentStartTime:Date?
     dynamic var assignmentAddress:String?
     var assigneeData = List<RMCAssignee>()
     dynamic var assignerData:RMCAssignee?
     dynamic var location:RMCLocation?
     dynamic var status:String?
     dynamic var jobNumber:String?
-    var bookmarked:Bool?
-    dynamic var lastUpdated:String?
-    var selfAssignment:Bool?
-    dynamic var downloadedOn:String?
-    dynamic var submittedOn:String?
+    dynamic var bookmarked:String?
+    dynamic var lastUpdated:Date?
+   dynamic var selfAssignment:String?
+    dynamic var downloadedOn:Date?
+    dynamic var submittedOn:Date?
     override static func primaryKey() -> String? {
         return "assignmentId"
         

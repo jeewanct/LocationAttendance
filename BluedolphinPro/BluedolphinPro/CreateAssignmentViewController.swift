@@ -50,7 +50,7 @@ class CreateAssignmentViewController: UIViewController {
         addressTextfield.text = CurrentLocation.address
         nameTextfield.isUserInteractionEnabled = false
         addressTextfield.isUserInteractionEnabled = false
-        nameTextfield.text = Singleton.sharedInstance.userName.capitalized
+        nameTextfield.text = SDKSingleton.sharedInstance.userName.capitalized
         
         
     }
@@ -67,7 +67,7 @@ class CreateAssignmentViewController: UIViewController {
     }
     func getJobNumber()->String{
         let realm = try! Realm()
-        let tokenObject = realm.objects(AccessTokenObject.self).filter("organizationId=%@",Singleton.sharedInstance.organizationId).first
+        let tokenObject = realm.objects(AccessTokenObject.self).filter("organizationId=%@",SDKSingleton.sharedInstance.organizationId).first
         let organisationName  = tokenObject?.organizationName
         
         let jobNumber = organisationName![0..<4].uppercased() + "-" + uuidString[0..<4]
@@ -83,11 +83,11 @@ class CreateAssignmentViewController: UIViewController {
         assignmentObject.longitude = String(CurrentLocation.coordinate.longitude)
         assignmentObject.latitude = String(CurrentLocation.coordinate.latitude)
         assignmentObject.assignmentId = uuidString
-        assignmentObject.assigneeIds  = [Singleton.sharedInstance.userId]
+        assignmentObject.assigneeIds  = [SDKSingleton.sharedInstance.userId]
         assignmentObject.assignmentAddress = addressTextfield.text!
         assignmentObject.assignmentDeadline = assignmentEnddate
         assignmentObject.assignmentStartTime = assignmentStartdate
-        assignmentObject.organizationId = Singleton.sharedInstance.organizationId
+        assignmentObject.organizationId = SDKSingleton.sharedInstance.organizationId
         assignmentObject.time = Date().formattedISO8601
         assignmentObject.status = CheckinType.Assigned.rawValue
         

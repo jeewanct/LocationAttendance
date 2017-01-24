@@ -227,7 +227,7 @@ extension String {
         return styler.date(from: self) as Date!
     }
     
-    func asDateFormattedWith(format:String) -> Date! {
+    func asDateFormattedWith(format:String = "dd/MM/yyyy HH:mm") -> Date! {
         let styler = DateFormatter()
         styler.dateFormat = format
         styler.timeZone = NSTimeZone(name: "UTC") as TimeZone!
@@ -245,7 +245,7 @@ extension Date {
         formatter.dateFormat = "dd/MM/yyyy HH:mm"
         return formatter.string(from: self )
     }
-    func formattedWith(format:String) -> String {
+    func formattedWith(format:String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = NSTimeZone.system

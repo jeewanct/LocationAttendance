@@ -74,6 +74,7 @@
 		99CBC7BC1E23A630005F0D67 /* Ibeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBC7B91E23A630005F0D67 /* Ibeacon.swift */; };
 		99CBC7BD1E23A630005F0D67 /* IbeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBC7BA1E23A630005F0D67 /* IbeaconManager.swift */; };
 		99DDC1A31DF6BA4B001BD0DB /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */; };
+		99EB0EB01E373354000CF3B1 /* ProjectSingelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB0EAF1E373354000CF3B1 /* ProjectSingelton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +149,7 @@
 		99CBC7B91E23A630005F0D67 /* Ibeacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ibeacon.swift; sourceTree = "<group>"; };
 		99CBC7BA1E23A630005F0D67 /* IbeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IbeaconManager.swift; sourceTree = "<group>"; };
 		99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
+		99EB0EAF1E373354000CF3B1 /* ProjectSingelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSingelton.swift; sourceTree = "<group>"; };
 		AE78BE1830F43DAE65AB796C /* Pods_BluedolphinPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BluedolphinPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E49E2482600D4C1E724C7E /* Pods-BluedolphinPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluedolphinPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-BluedolphinPro/Pods-BluedolphinPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -268,6 +270,7 @@
 				991A6D861DED5028004D1355 /* CommonFunction.swift */,
 				991B468B1DF00AF10012D8DC /* LocalExtensions.swift */,
 				99A509C71E0166BD00688FAF /* CustomPhotoAlbum.swift */,
+				99EB0EAF1E373354000CF3B1 /* ProjectSingelton.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				992086A71DCCC0850055C6BF /* GlobalSDKFunction.swift in Sources */,
 				9918E8811DDD7B42000376CF /* HomeViewController.swift in Sources */,
 				99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */,
+				99EB0EB01E373354000CF3B1 /* ProjectSingelton.swift in Sources */,
 				99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */,
 				994FF92C1DCB39DB00276B97 /* SDKSingelton.swift in Sources */,
 				990935831E30DAC100A42108 /* SSRadioButtonsController.swift in Sources */,

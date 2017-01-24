@@ -69,7 +69,7 @@ class HomeViewController: UIViewController {
         signalView.clipsToBounds = true
         var dropdownImage = UIImage(named: "dropdown")
          dropdownImage =  dropdownImage?.imageWithInsets(insetDimen: 10)
-        nameLabel.text = Singleton.sharedInstance.userName.capitalized
+        nameLabel.text = SDKSingleton.sharedInstance.userName.capitalized
         statusTextField.text = statusOption[0]
         statusTextField.inputView = pickerView
         statusTextField.delegate = self
@@ -82,12 +82,12 @@ class HomeViewController: UIViewController {
         organisationTextField.rightViewMode = .always;
         organisationTextField.rightView = UIImageView(image:dropdownImage )
         
-        fecodeTextField.text = " FE Code: " + Singleton.sharedInstance.mobileNumber
+        fecodeTextField.text = " FE Code: " + SDKSingleton.sharedInstance.mobileNumber
         fecodeTextField.isUserInteractionEnabled = false
         fecodeTextField.leftViewMode = .always;
         fecodeTextField.leftView = UIImageView(image: UIImage(named: "code"))
         
-        mobileNumberTextfield.text = " Mobile Number: " + Singleton.sharedInstance.mobileNumber
+        mobileNumberTextfield.text = " Mobile Number: " + SDKSingleton.sharedInstance.mobileNumber
         mobileNumberTextfield.isUserInteractionEnabled = false
         mobileNumberTextfield.leftViewMode = .always;
         mobileNumberTextfield.leftView = UIImageView(image: UIImage(named: "phone"))
@@ -208,7 +208,7 @@ class HomeViewController: UIViewController {
         checkin.checkinDetails = ["notes":"hello new note" as AnyObject]
         checkin.checkinCategory = CheckinCategory.Transient.rawValue
         checkin.checkinType = CheckinType.Location.rawValue
-        checkin.organizationId = Singleton.sharedInstance.organizationId
+        checkin.organizationId = SDKSingleton.sharedInstance.organizationId
         checkin.checkinId = UUID().uuidString
         checkin.time = Date().formattedISO8601
         let user = CheckinModel()
