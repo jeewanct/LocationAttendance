@@ -36,3 +36,12 @@ enum NotificationType:String{
     case Welcome = "Welcome-Message"
     case UpdatedAssignment = "Updated-Assignment"
 }
+
+enum SortEnum:String{
+    case StartDateAsc
+    case StartDateDes
+    case EndDateAsc
+    case EndDateDes
+    case ClearSort
+}
+

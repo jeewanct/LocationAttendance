@@ -15,5 +15,5 @@ class Singleton {
     var endToDate:String?
     var endFromDate:String?
     var assignedByValue:String?
-
+    var sortBy:String?
 }

@@ -168,6 +168,9 @@ class CustomPhotoAlbum {
         
     }
     
+    func imageCountInAlbum() ->Int{
+        return assetCollection.estimatedAssetCount
+    }
     
     
     

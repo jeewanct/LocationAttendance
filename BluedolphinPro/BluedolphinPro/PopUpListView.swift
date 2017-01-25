@@ -5,13 +5,6 @@
 //  Created by Raghvendra on 16/01/17.
 //  Copyright © 2017 raremediacompany. All rights reserved.
 //
-enum SortEnum:String{
-    case StartDateAsc
-    case StartDateDes
-    case EndDateAsc
-    case EndDateDes
-    case ClearSort
-}
 import UIKit
 
 
@@ -26,7 +19,7 @@ class PopUpListView: UIView,UITableViewDelegate,UITableViewDataSource {
     weak var delegate: ListSelection!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var sortListView: UITableView!
-    var selectableIndexPath:IndexPath =  IndexPath(row: 0, section: 0)
+    var selectableIndexPath:IndexPath =  IndexPath(row: 4, section: 0)
     var view: UIView!
     
     /*

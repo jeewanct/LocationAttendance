@@ -53,58 +53,90 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     func getTasks(sortParameter:String = "",ascendingFlag:Bool = true){
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
-        print(tasks)
-        
         tasks = tasks.filter("status = %@",currentStatus.rawValue)
-        switch currentStatus {
-        case .Assigned,.Downloaded:
-            tasks = tasks.sorted(by: [
-                SortDescriptor(property: "downloadedOn", ascending: true),
-                //            SortDescriptor(property: "created", ascending: false),
-                ])
-        case .Inprogress:
-            tasks = tasks.sorted(by: [
-                SortDescriptor(property: "lastUpdated", ascending: true),
-                //            SortDescriptor(property: "created", ascending: false),
-                ])
-            
-        case .Submitted:
-            tasks = tasks.sorted(by: [
-                SortDescriptor(property: "submittedOn", ascending: true),
-                //            SortDescriptor(property: "created", ascending: false),
-                ])
-        default:
-            break
-        }
-        if  sortParameter != "" {
-            tasks = tasks.sorted(by: [
-                SortDescriptor(property: sortParameter, ascending: ascendingFlag),
-                //            SortDescriptor(property: "created", ascending: false),
-                ])
-        }
+        sortData()
+        filterData()
+        print(tasks.count)
+        assignmentTableView.reloadData()
+    }
+    
+    func filterData(){
         if Singleton.sharedInstance.startFromDate != nil {
             tasks = tasks.filter("assignmentStartTime BETWEEN %@", [Singleton.sharedInstance.startFromDate?.asDateFormattedWith(),Singleton.sharedInstance.startToDate?.asDateFormattedWith()])
             
-
+            
         }
         if Singleton.sharedInstance.endFromDate != nil {
             tasks = tasks.filter("assignmentDeadline BETWEEN %@", [Singleton.sharedInstance.endFromDate?.asDateFormattedWith(),Singleton.sharedInstance.endToDate?.asDateFormattedWith()])
             
-
+            
         }
-
+        
         if Singleton.sharedInstance.assignedByValue != nil {
             if Singleton.sharedInstance.assignedByValue?.uppercased() == "SELF" {
                 tasks = tasks.filter("selfAssignment = %@","true")
-
+                
             }else{
                 tasks = tasks.filter("selfAssignment = %@","false")
-
+                
             }
         }
-
-        print(tasks.count)
-        assignmentTableView.reloadData()
+        
+    }
+    func sortData(){
+        
+        
+        switch Singleton.sharedInstance.sortBy! {
+        case SortEnum.ClearSort.rawValue:
+            switch currentStatus {
+            case .Assigned,.Downloaded:
+                tasks = tasks.sorted(by: [
+                    SortDescriptor(keyPath: "downloadedOn", ascending: true),
+                    //            SortDescriptor(property: "created", ascending: false),
+                    ])
+            case .Inprogress:
+                tasks = tasks.sorted(by: [
+                    SortDescriptor(keyPath: "lastUpdated", ascending: true),
+                    //            SortDescriptor(property: "created", ascending: false),
+                    ])
+                
+            case .Submitted:
+                tasks = tasks.sorted(by: [
+                    SortDescriptor(keyPath: "submittedOn", ascending: true),
+                    //            SortDescriptor(property: "created", ascending: false),
+                    ])
+            default:
+                break
+            }
+        case SortEnum.StartDateAsc.rawValue:
+            tasks = tasks.sorted(by: [
+                SortDescriptor(property: "assignmentStartTime", ascending: true),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+            
+            
+        case SortEnum.StartDateDes.rawValue:
+            tasks = tasks.sorted(by: [
+                SortDescriptor(property: "assignmentStartTime", ascending: false),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+            
+        case SortEnum.EndDateAsc.rawValue:
+            
+            tasks = tasks.sorted(by: [
+                SortDescriptor(keyPath: "assignmentDeadline", ascending: true),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+        case SortEnum.EndDateDes.rawValue:
+            tasks = tasks.sorted(by: [
+                SortDescriptor(keyPath: "assignmentDeadline", ascending: false),
+                //            SortDescriptor(property: "created", ascending: false),
+                ])
+            
+            
+        default:
+            break
+        }
     }
     
     
@@ -478,20 +510,8 @@ extension AssignmentViewController :SegmentChanger{
 
 extension AssignmentViewController:ListSelection{
     func cellSelected(value:SortEnum){
-        switch value {
-        case .ClearSort:
-            getTasks()
-        case .StartDateAsc:
-            self.getTasks(sortParameter: "assignmentStartTime", ascendingFlag: true)
-            
-        case .StartDateDes:
-            self.getTasks(sortParameter: "assignmentStartTime", ascendingFlag: false)
-        case .EndDateAsc:
-            self.getTasks(sortParameter: "assignmentDeadline", ascendingFlag: true)
-        case .EndDateDes:
-            self.getTasks(sortParameter: "assignmentDeadline", ascendingFlag: false)
-            
-            
-        }
+        Singleton.sharedInstance.sortBy =  value.rawValue
+        getTasks()
+
     }
 }

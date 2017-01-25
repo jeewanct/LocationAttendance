@@ -16,7 +16,15 @@ class AddNotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         notesTextView.delegate = self
-        //notesTextView.text = workdictHolder?.userNotes
+        
+        if let assignmentdetail = assignment?.assignmentDetails?.parseJSONString as? NSDictionary{
+            
+            if let notes = assignmentdetail["notes"] as? String{
+                notesTextView.text = notes
+            }
+        }
+        
+        
         if (notesTextView.text == "") {
             textViewDidEndEditing(notesTextView)
         }

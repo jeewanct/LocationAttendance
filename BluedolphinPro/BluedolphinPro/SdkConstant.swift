@@ -23,6 +23,11 @@ import Foundation
 
 //let APIURL = "http://192.168.1.3:8709"
 
+
+//Staging server 
+
+
+//let APIURL = "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging"
 //dev Server
 
 let APIURL = "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/"

@@ -24,7 +24,7 @@ class SignatureViewController: UIViewController {
         if let assignmentdetail = assignment?.assignmentDetails?.parseJSONString as? NSDictionary{
             if let jobNumber = assignmentdetail["jobNumber"] as? String{
                 self.navigationItem.title = jobNumber
-                albumName = jobNumber // albumName + "." + 
+                albumName = jobNumber + ".Signature"
             }
         }
         

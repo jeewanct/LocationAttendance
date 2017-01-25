@@ -21,6 +21,8 @@ class MainViewController: UIViewController {
         NotificationCenter.default .addObserver(self, selector: #selector(MainViewController.methodOfReceivedNotification(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
+        
+        Singleton.sharedInstance.sortBy = SortEnum.ClearSort.rawValue
 //        self.updateNewAssignmentData(id: "dc26ecb6-0e80-4d9f-afb9-26ed20ce35f1")
 //       let model = AssignmentModel()
 //        model.getAssignments(status: "Downloaded", completion: { (result) in

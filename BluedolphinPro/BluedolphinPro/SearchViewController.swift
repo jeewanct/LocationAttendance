@@ -28,6 +28,8 @@ class SearchViewController: UIViewController {
         searchTable.delegate = self
         searchTable.dataSource = self
         searchTable.register(UINib(nibName: "AssignmentTableCell", bundle: nil), forCellReuseIdentifier: "assignmentCell")
+        searchTable.tableFooterView = UIView()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -122,6 +124,7 @@ class SearchViewController: UIViewController {
         searchBars.searchBarStyle = .minimal
         searchBars.setPositionAdjustment(UIOffset.init(horizontal: 0, vertical: 0), for: UISearchBarIcon.search)
         searchBars.showsBookmarkButton = true
+        searchBars.becomeFirstResponder()
         
     //self.navigationItem.backBarButtonItem?.setBackgroundImage(UIImage(named:"back"), for: UIControlState.normal, style: UIBarButtonItemStyle.plain, barMetrics: UIBarMetrics.defaultPrompt)
 

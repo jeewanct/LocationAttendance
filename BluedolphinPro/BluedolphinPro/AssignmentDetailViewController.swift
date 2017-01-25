@@ -82,11 +82,10 @@ class AssignmentDetailViewController: UIViewController {
         self.navigationController!.popViewController(animated: true)
     }
     func saveAction(_:UIButton){
-        postSubmissionCheckin()
-        if let delegate = self.changeSegment {
-            delegate.moveToSegment((assignment?.status)!)
-        }
-        self.navigationController?.popViewController(animated: true)
+        let submitMessage  = "Do you want to submit the assignment?"
+        showAlertView(submitMessage, yesAction: postSubmissionCheckin)
+        
+        
     }
     
     func createTabbarView(){
@@ -112,7 +111,7 @@ class AssignmentDetailViewController: UIViewController {
     
     func getAssignmentData(){
         let realm = try! Realm()
-        assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId= %@",assignment?.assignmentId).first
+        assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId= %@",assignment!.assignmentId).first
         createLayout()
         
         
@@ -222,7 +221,13 @@ class AssignmentDetailViewController: UIViewController {
         if let address = assignment?.assignmentAddress{
             addressButton.setTitle(address.capitalized, for: UIControlState.normal)
         }
+        let numberOfImages = customAlbum!.imageCountInAlbum()
+        if numberOfImages == 0 {
+            imageLabel.text = "No Image"
+        }else{
+            imageLabel.text = "\(numberOfImages) Image"
 
+        }
     }
     
     
@@ -510,7 +515,10 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
         //checkinModelObject.postCheckin()
         let assignmentModel = AssignmentModel()
         assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.Submission, value:"Submitted", status: CheckinType.Submitted)
-        
+        if let delegate = self.changeSegment {
+            delegate.moveToSegment((assignment?.status)!)
+        }
+        self.navigationController?.popViewController(animated: true)
     }
 }
 extension AssignmentDetailViewController:MFMailComposeViewControllerDelegate {

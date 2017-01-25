@@ -150,19 +150,19 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
     }
 
     func registerForRemoteNotification() {
-        if #available(iOS 10.0, *) {
-            let center  = UNUserNotificationCenter.current()
-            center.delegate = self
-            center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
-                if error == nil{
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            }
-        }
-        else {
+//        if #available(iOS 10.0, *) {
+//            let center  = UNUserNotificationCenter.current()
+//            center.delegate = self
+//            center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
+//                if error == nil{
+//                    UIApplication.shared.registerForRemoteNotifications()
+//                }
+//            }
+//        }
+//        else {
             UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
             UIApplication.shared.registerForRemoteNotifications()
-        }
+        //}
     }
     
     func pushAlertView(userInfo:NSDictionary) {
