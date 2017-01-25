@@ -3,12 +3,12 @@ This application makes use of the following third party libraries:
 
 ## AWSCore
 
-The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License.
+The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 
 
 ## AWSS3
 
-The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License.
+The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 
 
 ## Alamofire
@@ -62,14 +62,7 @@ SOFTWARE.
 
 ## GoogleMaps
 
-If you use the Google Maps SDK for iOS in your application, you must
-include the attribution text as part of a legal notices section in your
-application. Including legal notices as an independent menu item, or as
-part of an "About" menu item, is recommended.
-
-You can get the attribution text by making a call to
-GMSServices.openSourceLicenseInfo().
-
+Copyright 2016 Google
 
 ## IQKeyboardManagerSwift
 
