@@ -221,12 +221,19 @@ class AssignmentDetailViewController: UIViewController {
         if let address = assignment?.assignmentAddress{
             addressButton.setTitle(address.capitalized, for: UIControlState.normal)
         }
-        let numberOfImages = customAlbum!.imageCountInAlbum()
-        if numberOfImages == 0 {
-            imageLabel.text = "No Image"
-        }else{
-            imageLabel.text = "\(numberOfImages) Image"
+        updateImageCount()
+        
+    }
+    func updateImageCount(){
+        //customAlbum = CustomPhotoAlbum(name: albumName)
 
+        if  let numberOfImages = customAlbum?.imageCountInAlbum()  {
+            if numberOfImages == 0 {
+                imageLabel.text = "No Image"
+            }else{
+                imageLabel.text = "\(numberOfImages) Image"
+                
+            }
         }
     }
     
@@ -460,24 +467,33 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
 //                manager.sendFile(imageName : "NoName" + Date().formattedISO8601, image: image, extention: "jpg")
                 //self.saveImage(image, name:"NoName")
                 self.customAlbum?.updatePhoto(image, completion: { (data) in
+                   self.updateImageCount()
                     DispatchQueue.main.async {
                         self.postCheckin(imageId:data,imageName:"NoName")
-                    }
-                    
-                    
-                })
-            }else {
-                self.customAlbum?.updatePhoto(image, completion: { (data) in
-                    DispatchQueue.main.async {
-                        self.postCheckin(imageId:data,imageName:self.alertTextfield.text!)
+
                     }
                     
                     
                 })
                 
+
+            }else {
+                self.customAlbum?.updatePhoto(image, completion: { (data) in
+                    self.updateImageCount()
+
+                    DispatchQueue.main.async {
+                        self.postCheckin(imageId:data,imageName:self.alertTextfield.text!)
+
+                    }
+                    
+ 
+                })
+                
             }
+            
         }))
         self.present(alert, animated: true, completion: {
+            
             print("completion block")
         })
     }

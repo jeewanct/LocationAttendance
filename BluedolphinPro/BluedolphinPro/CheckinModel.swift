@@ -123,7 +123,7 @@ class CheckinModel:Meta{
             return
         }
         switch statusCode{
-        case 200,400:
+        case 200,400,409:
             if let checkinId = data["checkinId"] as? String{
                 let realm = try! Realm()
                 guard let checkin = realm.objects(RMCCheckin.self).filter("checkinId = %@",checkinId).first  else {

@@ -128,7 +128,7 @@ open class iBeacon : NSObject {
         }
         
         
-        if self.UUID.lowercased() == (object as AnyObject).UUID.lowercased(){
+        if self.UUID.lowercased() == (object as! iBeacon).UUID.lowercased(){
             return true
         }
         return false
