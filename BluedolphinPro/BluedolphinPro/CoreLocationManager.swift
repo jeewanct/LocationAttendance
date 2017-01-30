@@ -12,7 +12,7 @@ import UIKit
 
 
 struct CurrentLocation {
-    static var coordinate = CLLocationCoordinate2D()
+    static var coordinate = CLLocationCoordinate2D(latitude: 28.63, longitude: 77.23)
     static var accuracy = String()
     static var altitude = String()
     static var address = String()

@@ -92,6 +92,16 @@ open class iBeacon : NSObject {
         self.accuracy = ""
         super.init()
     }
+    public init(minor:String?, major:String?, proximityId:String, id:String){
+        
+        self.UUID = proximityId
+        self.major = UInt16(major!)
+        self.minor =  UInt16(minor!)
+        self.id = id
+        self.rssi = ""
+        self.accuracy = ""
+        super.init()
+    }
     
     /**
      

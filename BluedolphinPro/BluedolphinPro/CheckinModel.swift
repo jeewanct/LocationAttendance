@@ -57,7 +57,7 @@ class CheckinModel:Meta{
                     //checkinData.imageName = value.imageName
             if checkinData.checkinType == CheckinType.PhotoCheckin.rawValue && checkinData.imageUrl == nil {
                
-            }else if checkinData.checkinType == CheckinType.Data.rawValue{
+            }else if checkinData.checkinType == CheckinType.Beacon.rawValue{
                 var beconArray = Array<NSDictionary>()
                 for becon in value.beaconProximity {
                     print(becon)
@@ -146,6 +146,7 @@ class CheckinModel:Meta{
     }
     
     func createCheckin(checkinData:CheckinHolder){
+        let realm = try! Realm()
         let checkin = RMCCheckin()
         checkin.checkinDetails = toJsonString(checkinData.checkinDetails as AnyObject)
         checkin.accuracy = CurrentLocation.accuracy
@@ -163,11 +164,15 @@ class CheckinModel:Meta{
             checkin.imageName = checkinData.imageName
             checkin.relativeUrl = checkinData.relativeUrl
             
-        }else if checkin.checkinType == CheckinType.Data.rawValue {
+        }else if checkin.checkinType == CheckinType.Beacon.rawValue {
             let beconList = List<RMCBeacon>()
             for data in checkinData.beaconProximities!{
                 let beconObject = RMCBeacon.mapToRMCBeacon(dict: data as! NSDictionary)
                 
+            let vicinitybeacon =  realm.objects(VicinityBeacon.self).filter("major = %@",beconObject.major!)
+                for vicinityObject in vicinitybeacon{
+                    beconObject.beaconId = vicinityObject.beaconId
+                }
                 beconList.append(beconObject)
                 
             }
@@ -175,7 +180,7 @@ class CheckinModel:Meta{
             checkin.beaconProximity = beconList
         }
         
-        let realm = try! Realm()
+        
         try! realm.write {
             realm.add(checkin, update: true)
         }

@@ -30,6 +30,16 @@ class MainViewController: UIViewController {
 //        })
         
         //startScanning()
+        let vicinityManager = VicinityManager()
+        vicinityManager.getNearByBeacons { (value) in
+            switch value {
+            case .StartScanning:
+                self.startScanning()
+            case .Failure,.NoScanning:
+                break;
+            
+            }
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -180,12 +190,20 @@ class MainViewController: UIViewController {
 extension MainViewController {
     func startScanning(){
         let beaconManager = IBeaconManager()
-        //var itemdata =  [24361:10010,27403:10858,21826:21481]
-        //        let kontaktIOBeacon = iBeacon(minor: nil, major: nil, proximityId: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")
-        let estimoteBeacon1 = iBeacon(minor: 10010, major: 24361, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
-        let estimoteBeacon2 = iBeacon(minor: 10858, major: 27403, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
-        let estimoteBeacon3 = iBeacon(minor: 21481, major: 21826, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
-        beaconManager.registerBeacons([ estimoteBeacon1,estimoteBeacon2,estimoteBeacon3])
+        var beaconArray = [iBeacon]()
+//        let estimoteBeacon1 = iBeacon(minor: 10010, major: 24361, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+//        let estimoteBeacon2 = iBeacon(minor: 10858, major: 27403, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+//        let estimoteBeacon3 = iBeacon(minor: 21481, major: 21826, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+        let vicinityManager = VicinityManager()
+
+        let beaconsData = vicinityManager.fetchBeaconsFromDb()
+        for beaconObject in beaconsData{
+            let ibeacon =
+            iBeacon(minor: beaconObject.minor, major: beaconObject.major, proximityId: beaconObject.uuid!, id: beaconObject.beaconId!)
+            beaconArray.append(ibeacon)
+        }
+        
+        beaconManager.registerBeacons(beaconArray)
 //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         
@@ -216,7 +234,7 @@ extension MainViewController {
                 seanbeacons.addEntries(from: [beacon.major! :dict])
                 print(dict)
             }
-            let delay = 5.0 * Double(NSEC_PER_SEC)
+            let delay = 300.0 * Double(NSEC_PER_SEC)
             let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: time, execute: {
             if self.seanbeacons.count != 0 {
@@ -227,8 +245,8 @@ extension MainViewController {
                 }
                 checkin.beaconProximities = beaconArray
                 checkin.checkinDetails = [:]
-                checkin.checkinCategory = CheckinCategory.Data.rawValue
-                checkin.checkinType = CheckinType.Data.rawValue
+                checkin.checkinCategory = CheckinCategory.Transient.rawValue
+                checkin.checkinType = CheckinType.Beacon.rawValue
                 self.seanbeacons = NSMutableDictionary()                //        checkin.imageName = imageName + Date().formattedISO8601
                 //        checkin.relativeUrl = imageId
                 let checkinModelObject = CheckinModel()

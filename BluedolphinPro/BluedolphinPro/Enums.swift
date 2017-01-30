@@ -40,6 +40,7 @@ enum CheckinType:String{
     case Assigned = "Assigned"
     case Location = "Location"
     case Data = "Data"
+    case Beacon = "Beacon"
 }
 enum ImageStatus:String{
     case Uploaded = "Uploaded"

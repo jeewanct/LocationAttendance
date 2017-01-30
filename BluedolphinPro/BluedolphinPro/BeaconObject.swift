@@ -17,8 +17,13 @@ class RMCBeacon :Object,Mappable{
     dynamic var major:String?
     dynamic var minor:String?
     dynamic var uuid:String?
+    dynamic var beaconId:String?
     required convenience init?(map : Map){
         self.init()
+    }
+    override static func primaryKey() -> String? {
+        return "beaconId"
+        
     }
     static func mapToRMCBeacon(dict:NSDictionary) -> RMCBeacon{
         return Mapper<RMCBeacon>().map(JSONObject: dict)!
@@ -30,6 +35,45 @@ class RMCBeacon :Object,Mappable{
         major <- map["major"]
         minor    <- map["minor"]
         uuid <- map["uuid"]
+        beaconId <- map["beaconId"]
     }
     
 }
+
+class VicinityBeacon:Object{
+    
+    dynamic var addedOn:String?
+    dynamic var updatedOn:String?
+    dynamic var uuid:String?
+    dynamic var major:String?
+    dynamic var minor:String?
+    dynamic var beaconId:String?
+    dynamic var address:String?
+    dynamic var organizationId:String?
+    dynamic var placeId:String?
+    dynamic var location:RMCLocation?
+    required convenience init?(map : Map){
+        self.init()
+    }
+    override static func primaryKey() -> String? {
+        return "beaconId"
+        
+    }
+    func mapping(map: Map) {
+        addedOn    <- map["addedOn"]
+        updatedOn <- map["updatedOn"]
+        uuid <- map["uuid"]
+        major <- map["major"]
+        minor    <- map["minor"]
+        beaconId <- map["beaconId"]
+        address <- map["address"]
+        organizationId <- map["organizationId"]
+        placeId <- map["placeId"]
+        location <- map["location"]
+    }
+    
+    
+    
+}
+
+
