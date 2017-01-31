@@ -3,6 +3,9 @@ PODS:
   - AlamofireObjectMapper (4.0.0):
     - Alamofire (~> 4.0)
     - ObjectMapper (~> 2.0)
+  - AWSCore (2.4.16)
+  - AWSS3 (2.4.16):
+    - AWSCore (= 2.4.16)
   - ObjectMapper (2.2.0)
   - Realm (2.0.2):
     - Realm/Headers (= 2.0.2)
@@ -13,15 +16,18 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
+  - AWSS3
   - RealmSwift
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   AlamofireObjectMapper: 9faa3ce5a240efda1b209009a2d6e1e949227abc
+  AWSCore: 7c3c129991e6387bcbad7132bc3661e7135754db
+  AWSS3: fef6aa8f8f625df8f67f1b6574fe761f3a4ddc99
   ObjectMapper: 4060d739febae11ab0c6af8d786f98667c82e1bd
   Realm: 0f5a194af0b7e6158b83db41b4ee1a00be7ddf1a
   RealmSwift: 0eb5070d851cba7c66e841ca756d83609dc78bc8
 
-PODFILE CHECKSUM: 0f7c50bfbe102b0bfb842901e82333ca19ccbac3
+PODFILE CHECKSUM: 9a25a685e594fea28160c03aa253314c7e0bdba3
 
 COCOAPODS: 1.1.0.rc.3

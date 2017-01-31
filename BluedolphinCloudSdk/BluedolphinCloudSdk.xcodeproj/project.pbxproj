@@ -7,22 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		991EE2881E40BF5B00E4A00D /* AssignmentHolderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2691E40BF5B00E4A00D /* AssignmentHolderClass.swift */; };
+		991EE2891E40BF5B00E4A00D /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE26A1E40BF5B00E4A00D /* AssignmentModel.swift */; };
+		991EE28A1E40BF5B00E4A00D /* AssignmentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE26B1E40BF5B00E4A00D /* AssignmentObject.swift */; };
+		991EE28B1E40BF5B00E4A00D /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE26D1E40BF5B00E4A00D /* OauthModel.swift */; };
+		991EE28C1E40BF5B00E4A00D /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE26E1E40BF5B00E4A00D /* OauthObject.swift */; };
+		991EE28D1E40BF5B00E4A00D /* CheckinHolderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2701E40BF5B00E4A00D /* CheckinHolderClass.swift */; };
+		991EE28E1E40BF5B00E4A00D /* CheckinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2711E40BF5B00E4A00D /* CheckinModel.swift */; };
+		991EE28F1E40BF5B00E4A00D /* CheckinObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2721E40BF5B00E4A00D /* CheckinObject.swift */; };
+		991EE2901E40BF5B00E4A00D /* AwsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2741E40BF5B00E4A00D /* AwsManager.swift */; };
+		991EE2911E40BF5B00E4A00D /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2751E40BF5B00E4A00D /* CoreLocationManager.swift */; };
+		991EE2921E40BF5C00E4A00D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2761E40BF5B00E4A00D /* Enums.swift */; };
+		991EE2931E40BF5C00E4A00D /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2771E40BF5B00E4A00D /* ErrorMessage.swift */; };
+		991EE2941E40BF5C00E4A00D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2781E40BF5B00E4A00D /* Extensions.swift */; };
+		991EE2951E40BF5C00E4A00D /* GlobalSDKFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2791E40BF5B00E4A00D /* GlobalSDKFunction.swift */; };
+		991EE2961E40BF5C00E4A00D /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE27A1E40BF5B00E4A00D /* KeyChainWrapper.swift */; };
+		991EE2971E40BF5C00E4A00D /* NetworkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE27B1E40BF5B00E4A00D /* NetworkClass.swift */; };
+		991EE2981E40BF5C00E4A00D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE27C1E40BF5B00E4A00D /* Reachability.swift */; };
+		991EE2991E40BF5C00E4A00D /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE27D1E40BF5B00E4A00D /* SdkConstant.swift */; };
+		991EE29A1E40BF5C00E4A00D /* SDKSingelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE27E1E40BF5B00E4A00D /* SDKSingelton.swift */; };
+		991EE29B1E40BF5C00E4A00D /* BeaconObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2801E40BF5B00E4A00D /* BeaconObject.swift */; };
+		991EE29C1E40BF5C00E4A00D /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2811E40BF5B00E4A00D /* BluetoothManager.swift */; };
+		991EE29D1E40BF5C00E4A00D /* Ibeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2821E40BF5B00E4A00D /* Ibeacon.swift */; };
+		991EE29E1E40BF5C00E4A00D /* IbeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2831E40BF5B00E4A00D /* IbeaconManager.swift */; };
+		991EE29F1E40BF5C00E4A00D /* VicinityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2841E40BF5B00E4A00D /* VicinityManager.swift */; };
+		991EE2A01E40BF5C00E4A00D /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2861E40BF5B00E4A00D /* LoginModel.swift */; };
+		991EE2A11E40BF5C00E4A00D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2871E40BF5B00E4A00D /* UserModel.swift */; };
+		991EE2A31E40C19800E4A00D /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2A21E40C19800E4A00D /* CustomPhotoAlbum.swift */; };
 		99339D131DE32AD200F3C770 /* BluedolphinCloudSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 99339D111DE32AD200F3C770 /* BluedolphinCloudSdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		99339D211DE32B1900F3C770 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D191DE32B1900F3C770 /* AssignmentModel.swift */; };
-		99339D221DE32B1900F3C770 /* CheckinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D1A1DE32B1900F3C770 /* CheckinModel.swift */; };
-		99339D231DE32B1900F3C770 /* CheckinObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D1B1DE32B1900F3C770 /* CheckinObject.swift */; };
-		99339D241DE32B1900F3C770 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D1C1DE32B1900F3C770 /* Enums.swift */; };
-		99339D251DE32B1900F3C770 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D1D1DE32B1900F3C770 /* Extensions.swift */; };
-		99339D261DE32B1900F3C770 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D1E1DE32B1900F3C770 /* GlobalFunction.swift */; };
-		99339D271DE32B1900F3C770 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D1F1DE32B1900F3C770 /* OauthModel.swift */; };
-		99339D281DE32B1900F3C770 /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D201DE32B1900F3C770 /* OauthObject.swift */; };
-		99339D2F1DE32B3500F3C770 /* CheckinHolderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D291DE32B3500F3C770 /* CheckinHolderClass.swift */; };
-		99339D301DE32B3500F3C770 /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D2A1DE32B3500F3C770 /* KeyChainWrapper.swift */; };
-		99339D311DE32B3500F3C770 /* NetworkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D2B1DE32B3500F3C770 /* NetworkClass.swift */; };
-		99339D321DE32B3500F3C770 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D2C1DE32B3500F3C770 /* Reachability.swift */; };
-		99339D331DE32B3500F3C770 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D2D1DE32B3500F3C770 /* SdkConstant.swift */; };
-		99339D341DE32B3500F3C770 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D2E1DE32B3500F3C770 /* UserModel.swift */; };
-		99339D361DE32D2800F3C770 /* Singelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D351DE32D2800F3C770 /* Singelton.swift */; };
 		A1ADEA9532F07BD836A6FF8E /* Pods_BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D771F3BC31D3C77084C535 /* Pods_BluedolphinCloudSdk.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,24 +42,36 @@
 		09D771F3BC31D3C77084C535 /* Pods_BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BluedolphinCloudSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B952A282A3EBE68EF75E3CB /* Pods-BluedolphinCloudSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluedolphinCloudSdk.release.xcconfig"; path = "Pods/Target Support Files/Pods-BluedolphinCloudSdk/Pods-BluedolphinCloudSdk.release.xcconfig"; sourceTree = "<group>"; };
 		821133109368509D4BF09B66 /* Pods-BluedolphinCloudSdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluedolphinCloudSdk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BluedolphinCloudSdk/Pods-BluedolphinCloudSdk.debug.xcconfig"; sourceTree = "<group>"; };
+		991EE2691E40BF5B00E4A00D /* AssignmentHolderClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentHolderClass.swift; sourceTree = "<group>"; };
+		991EE26A1E40BF5B00E4A00D /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
+		991EE26B1E40BF5B00E4A00D /* AssignmentObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentObject.swift; sourceTree = "<group>"; };
+		991EE26D1E40BF5B00E4A00D /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
+		991EE26E1E40BF5B00E4A00D /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
+		991EE2701E40BF5B00E4A00D /* CheckinHolderClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinHolderClass.swift; sourceTree = "<group>"; };
+		991EE2711E40BF5B00E4A00D /* CheckinModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinModel.swift; sourceTree = "<group>"; };
+		991EE2721E40BF5B00E4A00D /* CheckinObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinObject.swift; sourceTree = "<group>"; };
+		991EE2741E40BF5B00E4A00D /* AwsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwsManager.swift; sourceTree = "<group>"; };
+		991EE2751E40BF5B00E4A00D /* CoreLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
+		991EE2761E40BF5B00E4A00D /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		991EE2771E40BF5B00E4A00D /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		991EE2781E40BF5B00E4A00D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		991EE2791E40BF5B00E4A00D /* GlobalSDKFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSDKFunction.swift; sourceTree = "<group>"; };
+		991EE27A1E40BF5B00E4A00D /* KeyChainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainWrapper.swift; sourceTree = "<group>"; };
+		991EE27B1E40BF5B00E4A00D /* NetworkClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClass.swift; sourceTree = "<group>"; };
+		991EE27C1E40BF5B00E4A00D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		991EE27D1E40BF5B00E4A00D /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
+		991EE27E1E40BF5B00E4A00D /* SDKSingelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKSingelton.swift; sourceTree = "<group>"; };
+		991EE2801E40BF5B00E4A00D /* BeaconObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconObject.swift; sourceTree = "<group>"; };
+		991EE2811E40BF5B00E4A00D /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		991EE2821E40BF5B00E4A00D /* Ibeacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ibeacon.swift; sourceTree = "<group>"; };
+		991EE2831E40BF5B00E4A00D /* IbeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IbeaconManager.swift; sourceTree = "<group>"; };
+		991EE2841E40BF5B00E4A00D /* VicinityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicinityManager.swift; sourceTree = "<group>"; };
+		991EE2861E40BF5B00E4A00D /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		991EE2871E40BF5B00E4A00D /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		991EE2A21E40C19800E4A00D /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
 		99339D0E1DE32AD200F3C770 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BluedolphinCloudSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99339D111DE32AD200F3C770 /* BluedolphinCloudSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BluedolphinCloudSdk.h; sourceTree = "<group>"; };
 		99339D121DE32AD200F3C770 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		99339D191DE32B1900F3C770 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
-		99339D1A1DE32B1900F3C770 /* CheckinModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinModel.swift; sourceTree = "<group>"; };
-		99339D1B1DE32B1900F3C770 /* CheckinObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinObject.swift; sourceTree = "<group>"; };
-		99339D1C1DE32B1900F3C770 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		99339D1D1DE32B1900F3C770 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		99339D1E1DE32B1900F3C770 /* GlobalFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
-		99339D1F1DE32B1900F3C770 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
-		99339D201DE32B1900F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
-		99339D291DE32B3500F3C770 /* CheckinHolderClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinHolderClass.swift; sourceTree = "<group>"; };
-		99339D2A1DE32B3500F3C770 /* KeyChainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainWrapper.swift; sourceTree = "<group>"; };
-		99339D2B1DE32B3500F3C770 /* NetworkClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClass.swift; sourceTree = "<group>"; };
-		99339D2C1DE32B3500F3C770 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		99339D2D1DE32B3500F3C770 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
-		99339D2E1DE32B3500F3C770 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		99339D351DE32D2800F3C770 /* Singelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singelton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +95,88 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		991EE2671E40BF5B00E4A00D /* Sdk */ = {
+			isa = PBXGroup;
+			children = (
+				991EE2681E40BF5B00E4A00D /* Assignments */,
+				991EE26C1E40BF5B00E4A00D /* Auth */,
+				991EE26F1E40BF5B00E4A00D /* Checkins */,
+				991EE2731E40BF5B00E4A00D /* Helpers */,
+				991EE27F1E40BF5B00E4A00D /* Ibeacon */,
+				991EE2851E40BF5B00E4A00D /* Login */,
+			);
+			path = Sdk;
+			sourceTree = "<group>";
+		};
+		991EE2681E40BF5B00E4A00D /* Assignments */ = {
+			isa = PBXGroup;
+			children = (
+				991EE2691E40BF5B00E4A00D /* AssignmentHolderClass.swift */,
+				991EE26A1E40BF5B00E4A00D /* AssignmentModel.swift */,
+				991EE26B1E40BF5B00E4A00D /* AssignmentObject.swift */,
+			);
+			path = Assignments;
+			sourceTree = "<group>";
+		};
+		991EE26C1E40BF5B00E4A00D /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				991EE26D1E40BF5B00E4A00D /* OauthModel.swift */,
+				991EE26E1E40BF5B00E4A00D /* OauthObject.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		991EE26F1E40BF5B00E4A00D /* Checkins */ = {
+			isa = PBXGroup;
+			children = (
+				991EE2701E40BF5B00E4A00D /* CheckinHolderClass.swift */,
+				991EE2711E40BF5B00E4A00D /* CheckinModel.swift */,
+				991EE2721E40BF5B00E4A00D /* CheckinObject.swift */,
+			);
+			path = Checkins;
+			sourceTree = "<group>";
+		};
+		991EE2731E40BF5B00E4A00D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				991EE2A21E40C19800E4A00D /* CustomPhotoAlbum.swift */,
+				991EE2741E40BF5B00E4A00D /* AwsManager.swift */,
+				991EE2751E40BF5B00E4A00D /* CoreLocationManager.swift */,
+				991EE2761E40BF5B00E4A00D /* Enums.swift */,
+				991EE2771E40BF5B00E4A00D /* ErrorMessage.swift */,
+				991EE2781E40BF5B00E4A00D /* Extensions.swift */,
+				991EE2791E40BF5B00E4A00D /* GlobalSDKFunction.swift */,
+				991EE27A1E40BF5B00E4A00D /* KeyChainWrapper.swift */,
+				991EE27B1E40BF5B00E4A00D /* NetworkClass.swift */,
+				991EE27C1E40BF5B00E4A00D /* Reachability.swift */,
+				991EE27D1E40BF5B00E4A00D /* SdkConstant.swift */,
+				991EE27E1E40BF5B00E4A00D /* SDKSingelton.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		991EE27F1E40BF5B00E4A00D /* Ibeacon */ = {
+			isa = PBXGroup;
+			children = (
+				991EE2801E40BF5B00E4A00D /* BeaconObject.swift */,
+				991EE2811E40BF5B00E4A00D /* BluetoothManager.swift */,
+				991EE2821E40BF5B00E4A00D /* Ibeacon.swift */,
+				991EE2831E40BF5B00E4A00D /* IbeaconManager.swift */,
+				991EE2841E40BF5B00E4A00D /* VicinityManager.swift */,
+			);
+			path = Ibeacon;
+			sourceTree = "<group>";
+		};
+		991EE2851E40BF5B00E4A00D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				991EE2861E40BF5B00E4A00D /* LoginModel.swift */,
+				991EE2871E40BF5B00E4A00D /* UserModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		99339D041DE32AD200F3C770 = {
 			isa = PBXGroup;
 			children = (
@@ -92,21 +198,7 @@
 		99339D101DE32AD200F3C770 /* BluedolphinCloudSdk */ = {
 			isa = PBXGroup;
 			children = (
-				99339D291DE32B3500F3C770 /* CheckinHolderClass.swift */,
-				99339D2A1DE32B3500F3C770 /* KeyChainWrapper.swift */,
-				99339D2B1DE32B3500F3C770 /* NetworkClass.swift */,
-				99339D351DE32D2800F3C770 /* Singelton.swift */,
-				99339D2C1DE32B3500F3C770 /* Reachability.swift */,
-				99339D2D1DE32B3500F3C770 /* SdkConstant.swift */,
-				99339D2E1DE32B3500F3C770 /* UserModel.swift */,
-				99339D191DE32B1900F3C770 /* AssignmentModel.swift */,
-				99339D1A1DE32B1900F3C770 /* CheckinModel.swift */,
-				99339D1B1DE32B1900F3C770 /* CheckinObject.swift */,
-				99339D1C1DE32B1900F3C770 /* Enums.swift */,
-				99339D1D1DE32B1900F3C770 /* Extensions.swift */,
-				99339D1E1DE32B1900F3C770 /* GlobalFunction.swift */,
-				99339D1F1DE32B1900F3C770 /* OauthModel.swift */,
-				99339D201DE32B1900F3C770 /* OauthObject.swift */,
+				991EE2671E40BF5B00E4A00D /* Sdk */,
 				99339D111DE32AD200F3C770 /* BluedolphinCloudSdk.h */,
 				99339D121DE32AD200F3C770 /* Info.plist */,
 			);
@@ -237,21 +329,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99339D271DE32B1900F3C770 /* OauthModel.swift in Sources */,
-				99339D311DE32B3500F3C770 /* NetworkClass.swift in Sources */,
-				99339D321DE32B3500F3C770 /* Reachability.swift in Sources */,
-				99339D251DE32B1900F3C770 /* Extensions.swift in Sources */,
-				99339D211DE32B1900F3C770 /* AssignmentModel.swift in Sources */,
-				99339D331DE32B3500F3C770 /* SdkConstant.swift in Sources */,
-				99339D231DE32B1900F3C770 /* CheckinObject.swift in Sources */,
-				99339D281DE32B1900F3C770 /* OauthObject.swift in Sources */,
-				99339D341DE32B3500F3C770 /* UserModel.swift in Sources */,
-				99339D241DE32B1900F3C770 /* Enums.swift in Sources */,
-				99339D361DE32D2800F3C770 /* Singelton.swift in Sources */,
-				99339D2F1DE32B3500F3C770 /* CheckinHolderClass.swift in Sources */,
-				99339D301DE32B3500F3C770 /* KeyChainWrapper.swift in Sources */,
-				99339D261DE32B1900F3C770 /* GlobalFunction.swift in Sources */,
-				99339D221DE32B1900F3C770 /* CheckinModel.swift in Sources */,
+				991EE2881E40BF5B00E4A00D /* AssignmentHolderClass.swift in Sources */,
+				991EE2A01E40BF5C00E4A00D /* LoginModel.swift in Sources */,
+				991EE28E1E40BF5B00E4A00D /* CheckinModel.swift in Sources */,
+				991EE2A11E40BF5C00E4A00D /* UserModel.swift in Sources */,
+				991EE28F1E40BF5B00E4A00D /* CheckinObject.swift in Sources */,
+				991EE2911E40BF5B00E4A00D /* CoreLocationManager.swift in Sources */,
+				991EE2A31E40C19800E4A00D /* CustomPhotoAlbum.swift in Sources */,
+				991EE2891E40BF5B00E4A00D /* AssignmentModel.swift in Sources */,
+				991EE28B1E40BF5B00E4A00D /* OauthModel.swift in Sources */,
+				991EE2991E40BF5C00E4A00D /* SdkConstant.swift in Sources */,
+				991EE29A1E40BF5C00E4A00D /* SDKSingelton.swift in Sources */,
+				991EE28D1E40BF5B00E4A00D /* CheckinHolderClass.swift in Sources */,
+				991EE28C1E40BF5B00E4A00D /* OauthObject.swift in Sources */,
+				991EE2901E40BF5B00E4A00D /* AwsManager.swift in Sources */,
+				991EE29E1E40BF5C00E4A00D /* IbeaconManager.swift in Sources */,
+				991EE2971E40BF5C00E4A00D /* NetworkClass.swift in Sources */,
+				991EE2951E40BF5C00E4A00D /* GlobalSDKFunction.swift in Sources */,
+				991EE2921E40BF5C00E4A00D /* Enums.swift in Sources */,
+				991EE2931E40BF5C00E4A00D /* ErrorMessage.swift in Sources */,
+				991EE29B1E40BF5C00E4A00D /* BeaconObject.swift in Sources */,
+				991EE2961E40BF5C00E4A00D /* KeyChainWrapper.swift in Sources */,
+				991EE28A1E40BF5B00E4A00D /* AssignmentObject.swift in Sources */,
+				991EE29F1E40BF5C00E4A00D /* VicinityManager.swift in Sources */,
+				991EE29D1E40BF5C00E4A00D /* Ibeacon.swift in Sources */,
+				991EE2981E40BF5C00E4A00D /* Reachability.swift in Sources */,
+				991EE29C1E40BF5C00E4A00D /* BluetoothManager.swift in Sources */,
+				991EE2941E40BF5C00E4A00D /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

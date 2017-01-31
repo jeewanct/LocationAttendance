@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "856C9FAAF65BC48A5AEF841C57D09E95"
+               BlueprintIdentifier = "9CBE0B20888A061B259861F55378F1B4"
                BuildableName = "Pods_BluedolphinCloudSdk.framework"
                BlueprintName = "Pods-BluedolphinCloudSdk"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "856C9FAAF65BC48A5AEF841C57D09E95"
+            BlueprintIdentifier = "9CBE0B20888A061B259861F55378F1B4"
             BuildableName = "Pods_BluedolphinCloudSdk.framework"
             BlueprintName = "Pods-BluedolphinCloudSdk"
             ReferencedContainer = "container:Pods.xcodeproj">
