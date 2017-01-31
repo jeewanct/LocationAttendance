@@ -231,6 +231,8 @@ extension FilterViewController:UITextFieldDelegate{
         activeTextfield = textField
         switch  textField {
         case startDateFrom:
+            startDateButton.isSelected = false
+
             datePicker.minimumDate = nil
             startDateTo.text = ""
         case startDateTo:
@@ -242,6 +244,8 @@ extension FilterViewController:UITextFieldDelegate{
                 
             }
         case endDateFrom:
+            endDateButton.isSelected = false
+
             datePicker.minimumDate = nil
             endDateTo.text = ""
         case endDateTo:

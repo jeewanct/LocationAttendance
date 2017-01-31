@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var mainContainerView: UIView!
     var seanbeacons = NSMutableDictionary()
+    var beaconSentflag = true
     override func viewDidLoad() {
         super.viewDidLoad()
         let oauth = OauthModel()
@@ -234,29 +235,36 @@ extension MainViewController {
                 seanbeacons.addEntries(from: [beacon.major! :dict])
                 print(dict)
             }
-            let delay = 300.0 * Double(NSEC_PER_SEC)
-            let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
-            DispatchQueue.main.asyncAfter(deadline: time, execute: {
-            if self.seanbeacons.count != 0 {
-                let checkin = CheckinHolder()
-                var beaconArray = Array<Any>()
-                for (_,value) in self.seanbeacons {
-                    beaconArray.append(value)
-                }
-                checkin.beaconProximities = beaconArray
-                checkin.checkinDetails = [:]
-                checkin.checkinCategory = CheckinCategory.Transient.rawValue
-                checkin.checkinType = CheckinType.Beacon.rawValue
-                self.seanbeacons = NSMutableDictionary()                //        checkin.imageName = imageName + Date().formattedISO8601
-                //        checkin.relativeUrl = imageId
-                let checkinModelObject = CheckinModel()
-                checkinModelObject.createCheckin(checkinData: checkin)
-                if isInternetAvailable(){
-                    checkinModelObject.postCheckin()
-                }
+            if beaconSentflag {
+                beaconSentflag = false
+                let delay = 300.0 * Double(NSEC_PER_SEC)
+                let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: time, execute: {
+                    self.beaconSentflag = true
 
+                    if self.seanbeacons.count != 0 {
+
+                        let checkin = CheckinHolder()
+                        var beaconArray = Array<Any>()
+                        for (_,value) in self.seanbeacons {
+                            beaconArray.append(value)
+                        }
+                        checkin.beaconProximities = beaconArray
+                        checkin.checkinDetails = [:]
+                        checkin.checkinCategory = CheckinCategory.Transient.rawValue
+                        checkin.checkinType = CheckinType.Beacon.rawValue
+                        self.seanbeacons = NSMutableDictionary()                //        checkin.imageName = imageName + Date().formattedISO8601
+                        //        checkin.relativeUrl = imageId
+                        let checkinModelObject = CheckinModel()
+                        checkinModelObject.createCheckin(checkinData: checkin)
+                        if isInternetAvailable(){
+                            checkinModelObject.postCheckin()
+                        }
+                        
+                    }
+                })
             }
-            })
+            
             
             
         }

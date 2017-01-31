@@ -245,12 +245,12 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
                     let newlatlong = CLLocationCoordinate2D(latitude: Double(location.latitude!)!, longitude: Double((location.longitude!))!)
                     print(newlatlong)
                     
-                    if let appointmentTime = data.time {
+                    if let appointmentTime = data.assignmentStartTime {
                         
-                        let scheduleTime = appointmentTime.asDate.formatted
+                        let scheduleTime = appointmentTime.formatted
                         let marker = PlaceMarker(coordinate: newlatlong)
-                        marker.title = data.assignmentId
-                        marker.snippet =  data.assignmentDetails! + "\n" + scheduleTime
+                        marker.title = data.jobNumber
+                        marker.snippet =  data.assignmentAddress! + "\n" + scheduleTime
                         bounds = bounds.includingCoordinate(marker.position)
                         marker.map = googleMapUsage.sharedInstance.globalMapView
                     }

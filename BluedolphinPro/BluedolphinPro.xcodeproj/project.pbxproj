@@ -179,21 +179,21 @@
 		9904114C1E03B613002FCF53 /* Checkins */ = {
 			isa = PBXGroup;
 			children = (
-				994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */,
 				9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */,
+				994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */,
 				99339CFE1DE2C86000F3C770 /* CheckinObject.swift */,
 			);
-			name = Checkins;
+			path = Checkins;
 			sourceTree = "<group>";
 		};
 		9904114D1E03B620002FCF53 /* Assignments */ = {
 			isa = PBXGroup;
 			children = (
+				998E46E71E0A3986001045A3 /* AssignmentHolderClass.swift */,
 				994FF91D1DC9B5D000276B97 /* AssignmentModel.swift */,
 				99339F661DE5B38B00F3C770 /* AssignmentObject.swift */,
-				998E46E71E0A3986001045A3 /* AssignmentHolderClass.swift */,
 			);
-			name = Assignments;
+			path = Assignments;
 			sourceTree = "<group>";
 		};
 		991536C21DEBFF810046254C /* Font */ = {
@@ -208,23 +208,23 @@
 		991B46821DEFED800012D8DC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				991F09321E0B069200539473 /* CreateAssignmentViewController.swift */,
-				990411441E02738E002FCF53 /* PhotoViewController.swift */,
-				990411461E027630002FCF53 /* GalleryViewController.swift */,
-				99927C341DFFD91700131027 /* SignatureViewController.swift */,
-				997197511DFED308008834DD /* OTPViewController.swift */,
-				99369CF61DF036C200B405E4 /* MainViewController.swift */,
-				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
+				99927C321DFFD38C00131027 /* AddNotesViewController.swift */,
 				991A6D881DED6EC7004D1355 /* AssignmentDetailViewController.swift */,
-				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
 				99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */,
+				991F09321E0B069200539473 /* CreateAssignmentViewController.swift */,
 				9919E1761E2F96BE00AB4944 /* FilterViewController.swift */,
+				990411461E027630002FCF53 /* GalleryViewController.swift */,
+				9918E8801DDD7B42000376CF /* HomeViewController.swift */,
+				99369CF61DF036C200B405E4 /* MainViewController.swift */,
+				997197511DFED308008834DD /* OTPViewController.swift */,
+				990411441E02738E002FCF53 /* PhotoViewController.swift */,
+				990BE86A1E040BC10038F0AF /* RootViewController.swift */,
 				99A721B81DF7FF370059DFBB /* SearchViewController.swift */,
 				9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */,
-				99927C321DFFD38C00131027 /* AddNotesViewController.swift */,
-				990BE86A1E040BC10038F0AF /* RootViewController.swift */,
+				99927C341DFFD91700131027 /* SignatureViewController.swift */,
+				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
 			);
-			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		991B46831DEFED8B0012D8DC /* AppDelegate */ = {
@@ -232,25 +232,25 @@
 			children = (
 				99CACFD71DB8A1590099AA00 /* AppDelegate.swift */,
 			);
-			name = AppDelegate;
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		991B46841DEFEDAD0012D8DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				990935801E30DAC100A42108 /* SSRadioButton.swift */,
-				990935811E30DAC100A42108 /* SSRadioButtonsController.swift */,
+				99A721E01DFAC4F70059DFBB /* BottomBar.swift */,
+				991536C01DEBF8390046254C /* CustomNavView.swift */,
+				991B468D1DF027FA0012D8DC /* Loader.swift */,
 				9971974F1DFED115008834DD /* OTPView.swift */,
 				99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */,
-				991536C01DEBF8390046254C /* CustomNavView.swift */,
-				99339F701DE6EE4C00F3C770 /* TabView.swift */,
-				991B468D1DF027FA0012D8DC /* Loader.swift */,
-				99A721E01DFAC4F70059DFBB /* BottomBar.swift */,
-				99927C301DFFC8C800131027 /* ScratchPad.swift */,
 				9919E14A1E2CF93200AB4944 /* PopUpListView.swift */,
 				9919E14C1E2CF94C00AB4944 /* PopUpListView.xib */,
+				990935801E30DAC100A42108 /* SSRadioButton.swift */,
+				990935811E30DAC100A42108 /* SSRadioButtonsController.swift */,
+				99927C301DFFC8C800131027 /* ScratchPad.swift */,
+				99339F701DE6EE4C00F3C770 /* TabView.swift */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		991B46851DEFEDC00012D8DC /* TableViewCell */ = {
@@ -258,11 +258,11 @@
 			children = (
 				99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */,
 				99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */,
-				991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */,
 				990411481E027655002FCF53 /* GalleryCollectionViewCell.swift */,
 				990411491E027655002FCF53 /* GalleryCollectionViewCell.xib */,
+				991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */,
 			);
-			name = TableViewCell;
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		991B46861DEFEDD20012D8DC /* Common */ = {
@@ -270,49 +270,49 @@
 			children = (
 				991536981DE6F95D0046254C /* AppConstant.swift */,
 				991A6D861DED5028004D1355 /* CommonFunction.swift */,
-				991B468B1DF00AF10012D8DC /* LocalExtensions.swift */,
 				99A509C71E0166BD00688FAF /* CustomPhotoAlbum.swift */,
+				991B468B1DF00AF10012D8DC /* LocalExtensions.swift */,
 				99EB0EAF1E373354000CF3B1 /* ProjectSingelton.swift */,
 			);
-			name = Common;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		991B46871DEFEDF80012D8DC /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
-				99CACFDB1DB8A1590099AA00 /* Main.storyboard */,
 				99CACFE01DB8A1590099AA00 /* LaunchScreen.storyboard */,
+				99CACFDB1DB8A1590099AA00 /* Main.storyboard */,
 			);
-			name = StoryBoard;
+			path = StoryBoard;
 			sourceTree = "<group>";
 		};
 		991B46881DEFEE0E0012D8DC /* Wired */ = {
 			isa = PBXGroup;
 			children = (
-				9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */,
 				99CACFDE1DB8A1590099AA00 /* Assets.xcassets */,
-				99CACFE31DB8A1590099AA00 /* Info.plist */,
 				9971974C1DFE846A008834DD /* BluedolphinPro-Bridging-Header.h */,
+				9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */,
+				99CACFE31DB8A1590099AA00 /* Info.plist */,
 			);
-			name = Wired;
+			path = Wired;
 			sourceTree = "<group>";
 		};
 		991EE2651E40872500E4A00D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */,
-				9902CF2F1DBE163A00692824 /* NetworkClass.swift */,
-				99A2215D1DBF80C400E5F369 /* SdkConstant.swift */,
+				99A721DE1DFA6EF00059DFBB /* AwsManager.swift */,
+				99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */,
+				99339D021DE2D5B700F3C770 /* Enums.swift */,
 				9918E8841DDD9CF1000376CF /* ErrorMessage.swift */,
 				994FF91F1DCA173800276B97 /* Extensions.swift */,
-				99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */,
 				992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */,
+				9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */,
+				9902CF2F1DBE163A00692824 /* NetworkClass.swift */,
 				99BD3E1E1DDAE95C0066C07B /* Reachability.swift */,
 				994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */,
-				99339D021DE2D5B700F3C770 /* Enums.swift */,
-				99A721DE1DFA6EF00059DFBB /* AwsManager.swift */,
+				99A2215D1DBF80C400E5F369 /* SdkConstant.swift */,
 			);
-			name = Helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		991EE2661E40873700E4A00D /* Login */ = {
@@ -321,29 +321,29 @@
 				990BE8681E03F98A0038F0AF /* LoginModel.swift */,
 				9902CF4F1DBF31B900692824 /* UserModel.swift */,
 			);
-			name = Login;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		99339CFD1DE2C61C00F3C770 /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
-				99CBC7BE1E23A638005F0D67 /* Ibeacon */,
-				991EE2661E40873700E4A00D /* Login */,
-				991EE2651E40872500E4A00D /* Helpers */,
+				9904114D1E03B620002FCF53 /* Assignments */,
 				99D5470C1E0BB11D0087193B /* Auth */,
 				9904114C1E03B613002FCF53 /* Checkins */,
-				9904114D1E03B620002FCF53 /* Assignments */,
+				991EE2651E40872500E4A00D /* Helpers */,
+				99CBC7BE1E23A638005F0D67 /* Ibeacon */,
+				991EE2661E40873700E4A00D /* Login */,
 			);
-			name = Sdk;
+			path = Sdk;
 			sourceTree = "<group>";
 		};
 		99CACFCB1DB8A1590099AA00 = {
 			isa = PBXGroup;
 			children = (
 				99CACFD61DB8A1590099AA00 /* BluedolphinPro */,
-				99CACFD51DB8A1590099AA00 /* Products */,
-				B4EDE623195A4E756F473A90 /* Pods */,
 				8F2354312AF6AAB253C41A27 /* Frameworks */,
+				B4EDE623195A4E756F473A90 /* Pods */,
+				99CACFD51DB8A1590099AA00 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -358,15 +358,15 @@
 		99CACFD61DB8A1590099AA00 /* BluedolphinPro */ = {
 			isa = PBXGroup;
 			children = (
-				991B46861DEFEDD20012D8DC /* Common */,
-				991536C21DEBFF810046254C /* Font */,
-				991B46841DEFEDAD0012D8DC /* Views */,
-				991B46881DEFEE0E0012D8DC /* Wired */,
 				991B46831DEFED8B0012D8DC /* AppDelegate */,
+				991B46861DEFEDD20012D8DC /* Common */,
 				991B46821DEFED800012D8DC /* Controllers */,
+				991536C21DEBFF810046254C /* Font */,
+				99339CFD1DE2C61C00F3C770 /* Sdk */,
 				991B46871DEFEDF80012D8DC /* StoryBoard */,
 				991B46851DEFEDC00012D8DC /* TableViewCell */,
-				99339CFD1DE2C61C00F3C770 /* Sdk */,
+				991B46841DEFEDAD0012D8DC /* Views */,
+				991B46881DEFEE0E0012D8DC /* Wired */,
 			);
 			path = BluedolphinPro;
 			sourceTree = "<group>";
@@ -374,13 +374,13 @@
 		99CBC7BE1E23A638005F0D67 /* Ibeacon */ = {
 			isa = PBXGroup;
 			children = (
-				991EE2631E3F0D1300E4A00D /* VicinityManager.swift */,
+				9919E1481E2CA0B800AB4944 /* BeaconObject.swift */,
 				99CBC7B81E23A630005F0D67 /* BluetoothManager.swift */,
 				99CBC7B91E23A630005F0D67 /* Ibeacon.swift */,
 				99CBC7BA1E23A630005F0D67 /* IbeaconManager.swift */,
-				9919E1481E2CA0B800AB4944 /* BeaconObject.swift */,
+				991EE2631E3F0D1300E4A00D /* VicinityManager.swift */,
 			);
-			name = Ibeacon;
+			path = Ibeacon;
 			sourceTree = "<group>";
 		};
 		99D5470C1E0BB11D0087193B /* Auth */ = {
@@ -389,7 +389,7 @@
 				99A2215F1DC07B4E00E5F369 /* OauthModel.swift */,
 				99339D001DE2C8BA00F3C770 /* OauthObject.swift */,
 			);
-			name = Auth;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		B4EDE623195A4E756F473A90 /* Pods */ = {
@@ -611,6 +611,7 @@
 				99CACFDC1DB8A1590099AA00 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		99CACFE01DB8A1590099AA00 /* LaunchScreen.storyboard */ = {
@@ -619,6 +620,7 @@
 				99CACFE11DB8A1590099AA00 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -726,18 +728,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = BluedolphinPro/BluedolphinPro.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BluedolphinPro/Wired/BluedolphinPro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
-				INFOPLIST_FILE = BluedolphinPro/Info.plist;
+				INFOPLIST_FILE = BluedolphinPro/Wired/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremediacompany.BluedolphinPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "444006e9-70a2-4f89-ac3c-703ff405e34d";
 				PROVISIONING_PROFILE_SPECIFIER = BluedolphinProDev;
-				SWIFT_OBJC_BRIDGING_HEADER = "BluedolphinPro/BluedolphinPro-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BluedolphinPro/Wired/BluedolphinPro-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -750,18 +752,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = BluedolphinPro/BluedolphinPro.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BluedolphinPro/Wired/BluedolphinPro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
-				INFOPLIST_FILE = BluedolphinPro/Info.plist;
+				INFOPLIST_FILE = BluedolphinPro/Wired/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremediacompany.BluedolphinPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "444006e9-70a2-4f89-ac3c-703ff405e34d";
 				PROVISIONING_PROFILE_SPECIFIER = BluedolphinProDev;
-				SWIFT_OBJC_BRIDGING_HEADER = "BluedolphinPro/BluedolphinPro-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BluedolphinPro/Wired/BluedolphinPro-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
