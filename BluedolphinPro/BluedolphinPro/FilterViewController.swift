@@ -27,6 +27,7 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var endDateButton: UIButton!
     @IBOutlet weak var assignedByButton: UIButton!
     @IBOutlet weak var managerButton: SSRadioButton!
+    let datePicker = UIDatePicker()
      var radioButtonController: SSRadioButtonsController?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +73,7 @@ class FilterViewController: UIViewController {
 
     }
     func setdelegate(){
-        let datePicker = UIDatePicker()
+        
 
         datePicker.datePickerMode = .dateAndTime
         //datePicker.minimumDate = Date()
@@ -228,10 +229,49 @@ class FilterViewController: UIViewController {
 extension FilterViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextfield = textField
+        switch  textField {
+        case startDateFrom:
+            datePicker.minimumDate = nil
+            startDateTo.text = ""
+        case startDateTo:
+            if startDateFrom.text!.isBlank{
+                showAlert("Select from date first")
+                startDateFrom.becomeFirstResponder()
+            }else{
+                datePicker.minimumDate = startDateFrom.text?.asDateFormattedWith()
+                
+            }
+        case endDateFrom:
+            datePicker.minimumDate = nil
+            endDateTo.text = ""
+        case endDateTo:
+            if endDateFrom.text!.isBlank{
+                showAlert("Select from date first")
+                endDateFrom.becomeFirstResponder()
+            }else{
+                datePicker.minimumDate = endDateFrom.text?.asDateFormattedWith()
+
+            }
+        default:
+            break
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case endDateTo:
+            endDateButton.isSelected = true
+        case startDateTo:
+            startDateButton.isSelected = true
+
+        default:
+            break
+        }
     }
 }
+
 extension FilterViewController:SSRadioButtonControllerDelegate{
     func didSelectButton(aButton: UIButton?) {
-        
+        assignedByButton.isSelected = true
     }
 }

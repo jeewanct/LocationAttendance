@@ -23,6 +23,8 @@ class CreateAssignmentViewController: UIViewController {
      var changeSegment : SegmentChanger?
     var assignmentStartdate = String()
     var assignmentEnddate = String()
+    let datePicker = UIDatePicker()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Create Assignments"
@@ -40,12 +42,12 @@ class CreateAssignmentViewController: UIViewController {
         emailTextfield.delegate = self
         startDateTextfield.delegate = self
         endDateTextfield.delegate = self
-        let datePicker = UIDatePicker()
         datePicker.datePickerMode = .dateAndTime
         datePicker.minimumDate = Date()
         datePicker.addTarget(self, action: #selector(dateChanged(sender:)), for: UIControlEvents.valueChanged)
         startDateTextfield.inputView = datePicker
         endDateTextfield.inputView = datePicker
+
         
         addressTextfield.text = CurrentLocation.address
         nameTextfield.isUserInteractionEnabled = false
@@ -113,11 +115,22 @@ class CreateAssignmentViewController: UIViewController {
         case startDateTextfield:
             assignmentStartdate = sender.date.formattedISO8601
         case endDateTextfield:
+            
             assignmentEnddate = sender.date.formattedISO8601
+
         default:
             break
         }
         
+    }
+    
+    func showAlert(_ message : String) {
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+            return        }
+        alertController.addAction(OkAction)
+        self.present(alertController, animated: true) {
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -140,6 +153,20 @@ class CreateAssignmentViewController: UIViewController {
 extension CreateAssignmentViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextfield = textField
+        switch  textField {
+        case startDateTextfield:
+            datePicker.minimumDate = Date()
+            endDateTextfield.text = ""
+        case endDateTextfield:
+            if startDateTextfield.text!.isBlank{
+                showAlert("Please select Assignment start date ")
+            }else{
+                datePicker.minimumDate = startDateTextfield.text?.asDateFormattedWith()
+                
+            }
+        default:
+            break
+        }
         
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

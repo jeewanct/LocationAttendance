@@ -57,6 +57,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         sortData()
         filterData()
         print(tasks.count)
+        showCheckinMarkers(tasks)
         assignmentTableView.reloadData()
     }
     
@@ -110,14 +111,14 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             }
         case SortEnum.StartDateAsc.rawValue:
             tasks = tasks.sorted(by: [
-                SortDescriptor(property: "assignmentStartTime", ascending: true),
+                SortDescriptor(keyPath: "assignmentStartTime", ascending: true),
                 //            SortDescriptor(property: "created", ascending: false),
                 ])
             
             
         case SortEnum.StartDateDes.rawValue:
             tasks = tasks.sorted(by: [
-                SortDescriptor(property: "assignmentStartTime", ascending: false),
+                SortDescriptor(keyPath: "assignmentStartTime", ascending: false),
                 //            SortDescriptor(property: "created", ascending: false),
                 ])
             
@@ -327,7 +328,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             break
         }
         getTasks()
-        showCheckinMarkers(tasks)
+        
         
     }
     

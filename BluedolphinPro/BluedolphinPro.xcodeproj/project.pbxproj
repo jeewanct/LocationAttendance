@@ -297,26 +297,42 @@
 			name = Wired;
 			sourceTree = "<group>";
 		};
-		99339CFD1DE2C61C00F3C770 /* Sdk */ = {
+		991EE2651E40872500E4A00D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				99CBC7BE1E23A638005F0D67 /* Ibeacon */,
-				990BE8681E03F98A0038F0AF /* LoginModel.swift */,
 				9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */,
 				9902CF2F1DBE163A00692824 /* NetworkClass.swift */,
-				9902CF4F1DBF31B900692824 /* UserModel.swift */,
-				99D5470C1E0BB11D0087193B /* Auth */,
 				99A2215D1DBF80C400E5F369 /* SdkConstant.swift */,
 				9918E8841DDD9CF1000376CF /* ErrorMessage.swift */,
 				994FF91F1DCA173800276B97 /* Extensions.swift */,
-				9904114C1E03B613002FCF53 /* Checkins */,
 				99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */,
 				992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */,
 				99BD3E1E1DDAE95C0066C07B /* Reachability.swift */,
 				994FF92B1DCB39DB00276B97 /* SDKSingelton.swift */,
-				9904114D1E03B620002FCF53 /* Assignments */,
 				99339D021DE2D5B700F3C770 /* Enums.swift */,
 				99A721DE1DFA6EF00059DFBB /* AwsManager.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		991EE2661E40873700E4A00D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				990BE8681E03F98A0038F0AF /* LoginModel.swift */,
+				9902CF4F1DBF31B900692824 /* UserModel.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		99339CFD1DE2C61C00F3C770 /* Sdk */ = {
+			isa = PBXGroup;
+			children = (
+				99CBC7BE1E23A638005F0D67 /* Ibeacon */,
+				991EE2661E40873700E4A00D /* Login */,
+				991EE2651E40872500E4A00D /* Helpers */,
+				99D5470C1E0BB11D0087193B /* Auth */,
+				9904114C1E03B613002FCF53 /* Checkins */,
+				9904114D1E03B620002FCF53 /* Assignments */,
 			);
 			name = Sdk;
 			sourceTree = "<group>";
