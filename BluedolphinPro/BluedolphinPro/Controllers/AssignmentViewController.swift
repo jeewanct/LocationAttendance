@@ -31,6 +31,14 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     
     @IBOutlet weak var mapView: UIView!
+    
+    
+    @IBOutlet var filterButton: UIButton!
+    @IBOutlet var sortButton: UIButton!
+    @IBOutlet var selfAssignmentButton: UIButton!
+    @IBOutlet var mapViewButton: UIButton!
+    @IBOutlet var listButton: UIButton!
+    
     lazy var popListView: PopUpListView = {
         let popListView = PopUpListView(frame:self.view.frame)
         return popListView
@@ -50,6 +58,69 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     
     
+    func setbuttonImage(){
+        listButton.setImage(#imageLiteral(resourceName: "list_active"), for: UIControlState.selected)
+        mapViewButton.setImage(#imageLiteral(resourceName: "location_active"), for: UIControlState.selected)
+        
+        if Singleton.sharedInstance.sortBy != SortEnum.ClearSort.rawValue{
+            sortButton.setImage(#imageLiteral(resourceName: "active sort"), for: UIControlState.normal)
+
+        }else{
+            sortButton.setImage(#imageLiteral(resourceName: "sort"), for: UIControlState.normal)
+
+        }
+        if Singleton.sharedInstance.assignedByValue != nil || Singleton.sharedInstance.startFromDate != nil || Singleton.sharedInstance.endFromDate != nil {
+            filterButton.setImage(#imageLiteral(resourceName: "FilterSelected"), for: UIControlState.normal)
+
+        }
+        else{
+            filterButton.setImage(#imageLiteral(resourceName: "Filter"), for: UIControlState.normal)
+        }
+
+    }
+    @IBAction func tabButtonPressed(_ sender: UIButton) {
+        switch sender {
+        case listButton:
+            mapView.isHidden = true
+            listButton.isSelected = true
+            mapViewButton.isSelected = false
+            sortButton.isEnabled = true
+            sortButton.setImage(#imageLiteral(resourceName: "sort"), for: UIControlState.normal)
+            if Singleton.sharedInstance.sortBy != SortEnum.ClearSort.rawValue{
+                sortButton.setImage(#imageLiteral(resourceName: "active sort"), for: UIControlState.normal)
+                
+            }
+        case mapViewButton:
+            mapView.isHidden = false
+            listButton.isSelected = false
+            mapViewButton.isSelected = true
+            sortButton.isEnabled = false
+            sortButton.setImage(#imageLiteral(resourceName: "disabled sort"), for: UIControlState.normal)
+            
+            
+        case selfAssignmentButton:
+            
+            let navController = self.storyboard?.instantiateViewController(withIdentifier: "selfAssignNav") as! UINavigationController
+            let controller = navController.topViewController as! CreateAssignmentViewController
+            controller.changeSegment = self
+            self.present(navController, animated: true, completion: nil)
+            
+            
+            
+            
+        case filterButton:
+            let navController = self.storyboard?.instantiateViewController(withIdentifier: "filterNav") as! UINavigationController
+            self.present(navController, animated: true, completion: nil)
+            break;
+        case sortButton:
+            showActionSheet()
+            
+        default:
+            break
+        }
+        
+        
+    }
     func getTasks(sortParameter:String = "",ascendingFlag:Bool = true){
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
@@ -178,6 +249,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     }
     override func viewDidAppear(_ animated: Bool) {
         getTasks()
+        setbuttonImage()
     }
     func createLayout(){
         segmentControl(index: 0)
@@ -190,7 +262,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         assignmentTableView.tableFooterView = customView
         createNavView()
         createViewPager()
-        createTabbarView()
+        //createTabbarView()
         createMapView()
         //createAppleMap()
         
@@ -203,8 +275,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         self.navigationItem.leftBarButtonItem = notificationButton
         self.navigationController?.view.addSubview(popListView)
         popListView.delegate = self
-        
         popListView.isHidden = true
+        setbuttonImage()
     }
     
     func notificationAction(_:Any){
@@ -429,6 +501,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         }
     }
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -512,7 +585,10 @@ extension AssignmentViewController :SegmentChanger{
 extension AssignmentViewController:ListSelection{
     func cellSelected(value:SortEnum){
         Singleton.sharedInstance.sortBy =  value.rawValue
+        setbuttonImage()
+
         getTasks()
+        //tabView.setButtonImage(4, image: #imageLiteral(resourceName: "active sort"))
 
     }
 }

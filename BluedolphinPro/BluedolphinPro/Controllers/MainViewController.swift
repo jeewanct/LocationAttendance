@@ -237,7 +237,7 @@ extension MainViewController {
             }
             if beaconSentflag {
                 beaconSentflag = false
-                let delay = 300.0 * Double(NSEC_PER_SEC)
+                let delay = 900.0 * Double(NSEC_PER_SEC)
                 let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: time, execute: {
                     self.beaconSentflag = true

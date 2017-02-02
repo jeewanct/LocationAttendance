@@ -257,7 +257,19 @@ class ViewPagerControl: UIControl {
         }
     }
     
+    open func setButtonImage(_ index: Int,image:UIImage){
+        assert(index < items.count, "Attempting to set index to a segment that does not exist.")
+        
+        
+        if  let button = stackView.arrangedSubviews[index] as? UIButton {
+            button.setImage(image, for: UIControlState.selected)
+        }
+        
+    }
+    
     /**
+     
+     
      Changes the currently selected segment index.
      
      - parameter index: Index of the segment to select.

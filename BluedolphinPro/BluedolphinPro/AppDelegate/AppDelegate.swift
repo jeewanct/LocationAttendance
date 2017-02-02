@@ -119,8 +119,12 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             switch type {
             case .Welcome:
                 break
-            case .NewAssignment,.UpdatedAssignment:
+            case .NewAssignment:
+                self.showLocalNotification(userInfo)
+
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
+            case .UpdatedAssignment:
+                break;
                 
             }
             
@@ -186,6 +190,17 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         self.window?.rootViewController?.present(alert2, animated: true, completion: nil)
         
     }
+    
+    func showLocalNotification(_ data:[AnyHashable: Any]){
+        let notification = UILocalNotification()
+        notification.fireDate = Date()
+        notification.alertBody = "New Assignment received!"
+        //notification.alertAction =
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = data
+        UIApplication.shared.scheduleLocalNotification(notification)
+    }
+    
     
     
 

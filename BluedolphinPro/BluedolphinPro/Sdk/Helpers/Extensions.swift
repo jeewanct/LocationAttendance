@@ -233,6 +233,12 @@ extension String {
         styler.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         return styler.date(from: self)! as Date!
     }
+    func asDateFormat(format:String = "dd/MM/yyyy HH:mm") -> Date! {
+        let styler = DateFormatter()
+        styler.dateFormat = format
+        styler.timeZone = NSTimeZone.system
+        return styler.date(from: self)! as Date!
+    }
     
 }
 

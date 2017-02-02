@@ -161,7 +161,7 @@ extension CreateAssignmentViewController:UITextFieldDelegate{
             if startDateTextfield.text!.isBlank{
                 showAlert("Please select Assignment start date ")
             }else{
-                datePicker.minimumDate = startDateTextfield.text?.asDateFormattedWith()
+                datePicker.minimumDate = startDateTextfield.text?.asDateFormat()
                 
             }
         default:
