@@ -17,6 +17,7 @@ struct ScreenConstant {
 }
 struct GOOGLE_MAPS{
     static var ApiKey = "AIzaSyCv2aXPsTEYdWG2q3IM9neN690s4JFxe4A"
+    //static var Serverkey
 }
 
 struct APPCOLOR {

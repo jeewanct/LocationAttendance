@@ -36,7 +36,7 @@ class FilterViewController: UIViewController {
             
         radioButtonController = SSRadioButtonsController(buttons: selfButtton, managerButton)
         radioButtonController?.delegate = self
-        radioButtonController?.shouldLetDeSelect = true
+        radioButtonController?.shouldLetDeSelect = false
         startDateButton.addTarget(self, action: #selector(startButtonPressed), for: UIControlEvents.touchUpInside)
         endDateButton.addTarget(self, action: #selector(endButtonPressed), for: UIControlEvents.touchUpInside)
         assignedByButton.addTarget(self, action: #selector(assignedByButtonPressed), for: UIControlEvents.touchUpInside)

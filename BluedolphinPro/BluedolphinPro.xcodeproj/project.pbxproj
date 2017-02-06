@@ -58,6 +58,8 @@
 		99927C351DFFD91700131027 /* SignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C341DFFD91700131027 /* SignatureViewController.swift */; };
 		99A2215E1DBF80C400E5F369 /* SdkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215D1DBF80C400E5F369 /* SdkConstant.swift */; };
 		99A221601DC07B4E00E5F369 /* OauthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A2215F1DC07B4E00E5F369 /* OauthModel.swift */; };
+		99A273241E44B36600ABE746 /* AddressSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A273231E44B36600ABE746 /* AddressSearchViewController.swift */; };
+		99A273261E44B54C00ABE746 /* GoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A273251E44B54C00ABE746 /* GoogleHelper.swift */; };
 		99A509C81E0166BD00688FAF /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A509C71E0166BD00688FAF /* CustomPhotoAlbum.swift */; };
 		99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721B81DF7FF370059DFBB /* SearchViewController.swift */; };
 		99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */; };
@@ -132,6 +134,8 @@
 		99927C341DFFD91700131027 /* SignatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureViewController.swift; sourceTree = "<group>"; };
 		99A2215D1DBF80C400E5F369 /* SdkConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkConstant.swift; sourceTree = "<group>"; };
 		99A2215F1DC07B4E00E5F369 /* OauthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthModel.swift; sourceTree = "<group>"; };
+		99A273231E44B36600ABE746 /* AddressSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSearchViewController.swift; sourceTree = "<group>"; };
+		99A273251E44B54C00ABE746 /* GoogleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleHelper.swift; sourceTree = "<group>"; };
 		99A509C71E0166BD00688FAF /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
 		99A721B81DF7FF370059DFBB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		99A721BA1DF83D890059DFBB /* AssignmentTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentTableCell.swift; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 				9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */,
 				99927C341DFFD91700131027 /* SignatureViewController.swift */,
 				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
+				99A273231E44B36600ABE746 /* AddressSearchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 		991B46861DEFEDD20012D8DC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				99A273251E44B54C00ABE746 /* GoogleHelper.swift */,
 				991536981DE6F95D0046254C /* AppConstant.swift */,
 				991A6D861DED5028004D1355 /* CommonFunction.swift */,
 				99A509C71E0166BD00688FAF /* CustomPhotoAlbum.swift */,
@@ -575,6 +581,7 @@
 				99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */,
 				99927C311DFFC8C800131027 /* ScratchPad.swift in Sources */,
 				9904114A1E027655002FCF53 /* GalleryCollectionViewCell.swift in Sources */,
+				99A273261E44B54C00ABE746 /* GoogleHelper.swift in Sources */,
 				99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */,
 				991A6D8B1DEEAEDB004D1355 /* TimeLineTableViewCell.swift in Sources */,
 				991B468E1DF027FA0012D8DC /* Loader.swift in Sources */,
@@ -594,6 +601,7 @@
 				991F09331E0B069200539473 /* CreateAssignmentViewController.swift in Sources */,
 				99CBC7BC1E23A630005F0D67 /* Ibeacon.swift in Sources */,
 				99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */,
+				99A273241E44B36600ABE746 /* AddressSearchViewController.swift in Sources */,
 				99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */,
 				99927C351DFFD91700131027 /* SignatureViewController.swift in Sources */,
 				990411471E027630002FCF53 /* GalleryViewController.swift in Sources */,

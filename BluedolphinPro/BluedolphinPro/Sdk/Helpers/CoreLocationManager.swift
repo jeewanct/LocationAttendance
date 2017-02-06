@@ -16,6 +16,7 @@ struct CurrentLocation {
     static var accuracy = String()
     static var altitude = String()
     static var address = String()
+    static var time = Date()
 }
 
 import CoreLocation
@@ -76,6 +77,9 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         CurrentLocation.coordinate = location.coordinate
         CurrentLocation.accuracy = String(location.horizontalAccuracy)
         CurrentLocation.altitude = String(location.altitude)
+        CurrentLocation.time = location.timestamp
+        print(CurrentLocation.time)
+        
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error while updating location " + error.localizedDescription)

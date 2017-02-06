@@ -250,6 +250,27 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         getTasks()
         setbuttonImage()
+        print(Date())
+        print(CurrentLocation.time)
+       print( Date().minuteFrom(CurrentLocation.time))
+        
+        
+            let phoneCallURL:URL = URL(string: "prefs:root=General&path=DATE_AND_TIME")!
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                //application.openURL(phoneCallURL);
+                application.open(phoneCallURL, options: [:], completionHandler: { (success) in
+                    if success {
+                        print("call")
+                    }
+                })
+            }
+            else {
+                print("not able to open")
+            }
+
+        
+        //}
     }
     func createLayout(){
         segmentControl(index: 0)

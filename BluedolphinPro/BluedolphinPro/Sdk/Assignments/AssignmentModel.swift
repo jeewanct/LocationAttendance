@@ -159,6 +159,9 @@ class AssignmentModel :Meta{
     }
     
     
+    
+    
+    
     func saveAssignment(assignmentData:NSDictionary){
         let assignment = RMCAssignmentObject()
         if let associationId = assignmentData["associationIds"] as? NSDictionary{
