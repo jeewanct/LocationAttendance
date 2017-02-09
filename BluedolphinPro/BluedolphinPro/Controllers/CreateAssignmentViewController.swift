@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import CoreLocation
 
 class CreateAssignmentViewController: UIViewController {
     @IBOutlet weak var nameTextfield: UITextField!
@@ -24,6 +25,8 @@ class CreateAssignmentViewController: UIViewController {
     var assignmentStartdate = String()
     var assignmentEnddate = String()
     let datePicker = UIDatePicker()
+    var selectedCoordinates = CLLocationCoordinate2D()
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +52,9 @@ class CreateAssignmentViewController: UIViewController {
         endDateTextfield.inputView = datePicker
 
         
-        addressTextfield.text = CurrentLocation.address
+        //addressTextfield.text = CurrentLocation.address
         nameTextfield.isUserInteractionEnabled = false
-        addressTextfield.isUserInteractionEnabled = false
+        //addressTextfield.isUserInteractionEnabled = false
         nameTextfield.text = SDKSingleton.sharedInstance.userName.capitalized
         
         
@@ -164,6 +167,13 @@ extension CreateAssignmentViewController:UITextFieldDelegate{
                 datePicker.minimumDate = startDateTextfield.text?.asDateFormat()
                 
             }
+        case addressTextfield:
+            let navController = self.storyboard?.instantiateViewController(withIdentifier: "SearchScreen") as! UINavigationController
+            let controller = navController.topViewController as! AddressSearchViewController
+             controller.changeAddress = self
+            
+            self.present(navController, animated: true, completion: nil)
+            
         default:
             break
         }
@@ -178,4 +188,18 @@ extension CreateAssignmentViewController:UITextFieldDelegate{
         return true
         
     }
+}
+
+
+
+
+
+extension CreateAssignmentViewController :SelectedAddress{
+    func showSelectedAddress(_ address:String,coordinate:CLLocationCoordinate2D){
+        addressTextfield.text = address
+       
+        selectedCoordinates.latitude = coordinate.latitude
+        selectedCoordinates.longitude = coordinate.longitude
+    }
+    
 }

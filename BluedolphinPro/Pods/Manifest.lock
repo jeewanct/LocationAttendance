@@ -11,6 +11,8 @@ PODS:
   - GoogleMaps/Base (2.1.1)
   - GoogleMaps/Maps (2.1.1):
     - GoogleMaps/Base
+  - GooglePlaces (2.1.1):
+    - GoogleMaps/Base (= 2.1.1)
   - IQKeyboardManagerSwift (4.0.8)
   - ObjectMapper (2.2.2)
   - Realm (2.3.0):
@@ -25,6 +27,7 @@ DEPENDENCIES:
   - AlamofireObjectMapper
   - AWSS3
   - GoogleMaps
+  - GooglePlaces
   - IQKeyboardManagerSwift
   - RealmSwift
   - XLForm (~> 3.0)
@@ -35,12 +38,13 @@ SPEC CHECKSUMS:
   AWSCore: 7c3c129991e6387bcbad7132bc3661e7135754db
   AWSS3: fef6aa8f8f625df8f67f1b6574fe761f3a4ddc99
   GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
+  GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
   ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
   Realm: 69d7de9aa569a11eed490aaabc8f2109e3985ecf
   RealmSwift: dc6f99ea55e59490cec69c860f91932b6bf7efb6
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: de722b553265b58ea1c70458a761843d6e5ccad0
+PODFILE CHECKSUM: c53d52cc7ff731ca63a35c43aee1b8a4662b5013
 
-COCOAPODS: 1.1.0.rc.3
+COCOAPODS: 1.2.0

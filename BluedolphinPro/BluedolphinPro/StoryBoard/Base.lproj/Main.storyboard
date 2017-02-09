@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yfs-ab-ljw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yfs-ab-ljw">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -556,12 +556,11 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="tVW-mx-dXR">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="tVW-mx-dXR">
                                                 <rect key="frame" x="15" y="225" width="290" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="Gvm-gE-cDC"/>
                                                 </constraints>
-                                                <string key="text">orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="16"/>
                                                 <color key="textColor" red="0.45504838197969544" green="0.45504838197969544" blue="0.45504838197969544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -573,7 +572,7 @@
                                                         <rect key="frame" x="10" y="8" width="26" height="34"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7O-xk-dzG">
-                                                        <rect key="frame" x="46" y="17" width="43" height="18"/>
+                                                        <rect key="frame" x="46" y="16" width="43" height="18"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -765,7 +764,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goku" translatesAutoresizingMaskIntoConstraints="NO" id="m83-vm-mLl" customClass="CenterScaleToFitImageView" customModule="BluedolphinPro" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileplaceholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="m83-vm-mLl" customClass="CenterScaleToFitImageView" customModule="BluedolphinPro" customModuleProvider="target">
                                 <rect key="frame" x="88" y="87" width="145" height="145"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="145" id="2nw-z0-5Tj"/>
@@ -1173,7 +1172,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="800"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhD-PP-sds">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBt-fv-rA0">
                                                 <rect key="frame" x="0.0" y="273" width="320" height="91"/>
@@ -1183,7 +1182,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="L5w-rm-NUZ"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1195,9 +1194,9 @@
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0x-f6-Hb5">
-                                                        <rect key="frame" x="10" y="50" width="300" height="30"/>
+                                                        <rect key="frame" x="10" y="50" width="300" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="reg-1H-s4C"/>
+                                                            <constraint firstAttribute="height" constant="35" id="reg-1H-s4C"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
@@ -1231,7 +1230,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="pFk-DO-Rng"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1243,9 +1242,9 @@
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ceR-7i-rWS">
-                                                        <rect key="frame" x="10" y="50" width="300" height="30"/>
+                                                        <rect key="frame" x="10" y="50" width="300" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="G4D-zg-Dtw"/>
+                                                            <constraint firstAttribute="height" constant="35" id="G4D-zg-Dtw"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
@@ -1280,7 +1279,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="LDT-Ga-Io9"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1292,9 +1291,9 @@
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cVp-ZH-7PQ">
-                                                        <rect key="frame" x="10" y="50" width="300" height="30"/>
+                                                        <rect key="frame" x="10" y="50" width="300" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="plX-RP-WyC"/>
+                                                            <constraint firstAttribute="height" constant="35" id="plX-RP-WyC"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
@@ -1328,7 +1327,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="CLf-NS-4Fk"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1340,9 +1339,9 @@
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4vi-k5-fal">
-                                                        <rect key="frame" x="10" y="50" width="300" height="30"/>
+                                                        <rect key="frame" x="10" y="50" width="300" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="KQI-xN-XPZ"/>
+                                                            <constraint firstAttribute="height" constant="35" id="KQI-xN-XPZ"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
@@ -1376,7 +1375,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="Wmx-pV-v47"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1388,9 +1387,9 @@
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oMg-Mv-f7c">
-                                                        <rect key="frame" x="10" y="50" width="300" height="30"/>
+                                                        <rect key="frame" x="10" y="50" width="300" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="5jk-MY-UeR"/>
+                                                            <constraint firstAttribute="height" constant="35" id="5jk-MY-UeR"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
@@ -1419,12 +1418,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1YO-tF-X3m">
                                                 <rect key="frame" x="0.0" y="455" width="320" height="91"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StartDate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRZ-4X-6XB">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRZ-4X-6XB">
                                                         <rect key="frame" x="10" y="10" width="300" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="7U4-56-7Yh"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1436,9 +1435,9 @@
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oia-Fn-qaT">
-                                                        <rect key="frame" x="10" y="50" width="300" height="30"/>
+                                                        <rect key="frame" x="10" y="50" width="300" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="XGb-VV-ORo"/>
+                                                            <constraint firstAttribute="height" constant="35" id="XGb-VV-ORo"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
@@ -1467,12 +1466,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDU-gC-fkG">
                                                 <rect key="frame" x="0.0" y="546" width="320" height="91"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EndDate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9h-kg-QLT">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9h-kg-QLT">
                                                         <rect key="frame" x="10" y="10" width="300" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="4Bs-Fg-m51"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1484,9 +1483,9 @@
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oYq-fG-fWw">
-                                                        <rect key="frame" x="10" y="50" width="300" height="30"/>
+                                                        <rect key="frame" x="10" y="50" width="300" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="A3K-26-5Zg"/>
+                                                            <constraint firstAttribute="height" constant="35" id="A3K-26-5Zg"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
@@ -1516,20 +1515,20 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="WeJ-Yu-09M" firstAttribute="top" secondItem="hYi-pW-KLB" secondAttribute="bottom" id="1hj-kc-VcH"/>
+                                            <constraint firstItem="1YO-tF-X3m" firstAttribute="height" secondItem="Rif-TC-s8n" secondAttribute="height" id="3Se-Ce-wGa"/>
                                             <constraint firstItem="Kxx-iM-Wua" firstAttribute="leading" secondItem="hhD-PP-sds" secondAttribute="leading" id="AVF-6z-fNg"/>
                                             <constraint firstItem="Rif-TC-s8n" firstAttribute="leading" secondItem="hhD-PP-sds" secondAttribute="leading" id="Bbd-Qv-RgA"/>
                                             <constraint firstItem="Rif-TC-s8n" firstAttribute="top" secondItem="EBt-fv-rA0" secondAttribute="bottom" id="DgF-Y1-URW"/>
                                             <constraint firstItem="EBt-fv-rA0" firstAttribute="height" secondItem="hYi-pW-KLB" secondAttribute="height" id="GFC-CI-V5y"/>
                                             <constraint firstAttribute="trailing" secondItem="YDU-gC-fkG" secondAttribute="trailing" id="GoP-we-Zae"/>
                                             <constraint firstItem="WeJ-Yu-09M" firstAttribute="height" secondItem="hYi-pW-KLB" secondAttribute="height" id="IXo-OE-4gK"/>
-                                            <constraint firstAttribute="bottom" secondItem="YDU-gC-fkG" secondAttribute="bottom" constant="63" id="K72-16-kOh"/>
                                             <constraint firstItem="1YO-tF-X3m" firstAttribute="top" secondItem="Rif-TC-s8n" secondAttribute="bottom" id="NDi-xD-drQ"/>
                                             <constraint firstItem="Rif-TC-s8n" firstAttribute="height" secondItem="hYi-pW-KLB" secondAttribute="height" id="PsR-no-vRf"/>
                                             <constraint firstAttribute="trailing" secondItem="EBt-fv-rA0" secondAttribute="trailing" id="RD4-h0-ySg"/>
                                             <constraint firstItem="1YO-tF-X3m" firstAttribute="leading" secondItem="hhD-PP-sds" secondAttribute="leading" id="SoT-pX-ByZ"/>
                                             <constraint firstItem="YDU-gC-fkG" firstAttribute="leading" secondItem="hhD-PP-sds" secondAttribute="leading" id="T2m-sD-5kg"/>
                                             <constraint firstItem="YDU-gC-fkG" firstAttribute="top" secondItem="1YO-tF-X3m" secondAttribute="bottom" id="Vch-2T-yjr"/>
-                                            <constraint firstAttribute="height" constant="700" id="Yb4-cZ-scB"/>
+                                            <constraint firstAttribute="height" constant="750" id="Yb4-cZ-scB"/>
                                             <constraint firstItem="Kxx-iM-Wua" firstAttribute="height" secondItem="hYi-pW-KLB" secondAttribute="height" id="bvS-0q-3L6"/>
                                             <constraint firstAttribute="trailing" secondItem="Rif-TC-s8n" secondAttribute="trailing" id="dzk-or-gzd"/>
                                             <constraint firstAttribute="trailing" secondItem="hYi-pW-KLB" secondAttribute="trailing" id="es5-tW-2DB"/>
@@ -1648,7 +1647,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Signature Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJY-vu-1Em">
-                                <rect key="frame" x="80" y="305" width="161" height="22"/>
+                                <rect key="frame" x="80" y="305.5" width="160.5" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1977,7 +1976,7 @@
         <!--Address-->
         <scene sceneID="VFh-Uj-Hbn">
             <objects>
-                <viewController storyboardIdentifier="addressController" automaticallyAdjustsScrollViewInsets="NO" id="tQr-fN-ZF7" customClass="Addres" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addressController" automaticallyAdjustsScrollViewInsets="NO" id="tQr-fN-ZF7" customClass="AddressSearchViewController" customModule="BluedolphinPro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w7F-0L-mCu"/>
                         <viewControllerLayoutGuide type="bottom" id="qZL-pM-0jQ"/>
@@ -1987,23 +1986,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6m-LP-t2Z">
-                                <rect key="frame" x="0.0" y="114" width="320" height="454"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jR1-o3-6aF">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="tQr-fN-ZF7" id="jbn-pt-FnA"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qZL-pM-0jQ" firstAttribute="top" secondItem="N6m-LP-t2Z" secondAttribute="bottom" id="7h9-hX-jOu"/>
+                            <constraint firstItem="jR1-o3-6aF" firstAttribute="top" secondItem="w7F-0L-mCu" secondAttribute="bottom" id="Pml-Rh-EGa"/>
+                            <constraint firstAttribute="trailing" secondItem="jR1-o3-6aF" secondAttribute="trailing" id="Za0-dz-9Pv"/>
+                            <constraint firstItem="N6m-LP-t2Z" firstAttribute="top" secondItem="jR1-o3-6aF" secondAttribute="bottom" id="bBd-ru-N5p"/>
                             <constraint firstAttribute="trailing" secondItem="N6m-LP-t2Z" secondAttribute="trailing" id="dMP-XL-Klg"/>
+                            <constraint firstItem="jR1-o3-6aF" firstAttribute="leading" secondItem="NqJ-XS-iHe" secondAttribute="leading" id="gkR-Ax-ELf"/>
                             <constraint firstItem="N6m-LP-t2Z" firstAttribute="leading" secondItem="NqJ-XS-iHe" secondAttribute="leading" id="i3z-gW-kHs"/>
-                            <constraint firstItem="N6m-LP-t2Z" firstAttribute="top" secondItem="w7F-0L-mCu" secondAttribute="bottom" constant="50" id="wVb-iP-8A6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Address" id="s0r-cb-Jei"/>
+                    <connections>
+                        <outlet property="mapView" destination="N6m-LP-t2Z" id="EDv-tw-jFb"/>
+                        <outlet property="searchBar" destination="jR1-o3-6aF" id="gZC-6t-Npo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QM8-aW-z7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8846" y="-1546"/>
+            <point key="canvasLocation" x="8844.375" y="-1546.4788732394366"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Omg-Lm-a3n">
@@ -2033,11 +2046,11 @@
         <image name="call" width="14" height="14"/>
         <image name="checkbox" width="26" height="26"/>
         <image name="chevron_right" width="9" height="16"/>
-        <image name="goku" width="1920" height="1080"/>
         <image name="image_placeholder" width="26" height="34"/>
         <image name="list" width="19" height="19"/>
         <image name="mail" width="14" height="14"/>
         <image name="map view" width="19" height="19"/>
+        <image name="profileplaceholder.png" width="120" height="120"/>
         <image name="selected" width="26" height="26"/>
         <image name="send_otp" width="166" height="49"/>
         <image name="sort" width="19" height="19"/>
