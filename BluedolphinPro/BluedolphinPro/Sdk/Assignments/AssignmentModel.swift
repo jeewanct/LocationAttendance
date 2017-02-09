@@ -92,16 +92,51 @@ class AssignmentModel :Meta{
         let checkins = realm.objects(AssignmentObject.self)
         var data = [NSDictionary]()
         for value in checkins{
-            data.append(value.toDictionary())
+            let assignmentholder = AssignmentHolder()
+            assignmentholder.accuracy = value.accuracy
+            assignmentholder.altitude = value.altitude
+    
+            assignmentholder.assigneeIds = value.assigneeId?.components(separatedBy: ",")
+            assignmentholder.longitude = value.longitude
+            assignmentholder.latitude = value.latitude
+            assignmentholder.assignmentAddress = value.assignmentAddress
+            assignmentholder.assignmentDeadline = value.assignmentDeadline
+            assignmentholder.assignmentStartTime = value.assignmentStartTime
+            assignmentholder.assignmentId = value.assignmentId
+            assignmentholder.status = value.status
+            assignmentholder.organizationId = value.organizationId
+            assignmentholder.assignmentDetails = toDictionary(text: value.assignmentDetails!) as! NSDictionary?
+            assignmentholder.time = value.time
+            
+            data.append(assignmentholder.asJson())
+        }
+        if data.count == 0 {
+            return
         }
         let param = [
             //"userId":SDKSingleton.sharedInstance.accessToken,
             "data":data
             
             ] as [String : Any]
-        
-        NetworkModel.submitData(AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment", method: .put, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
-            print(responseData)
+        print (param)
+        NetworkModel.submitData(AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment", method: .post, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
+            guard let statusCode = responseData["statusCode"] as? Int else {
+                return
+            }
+            switch(statusCode){
+            case 200:
+                if let data = responseData["data"] as? NSArray{
+                    for checkin in data{
+                        self.checkAssignmentData(data: checkin as! NSDictionary )
+                    }
+                }
+                
+            default:
+                break;
+                
+                
+                
+            }
         }) { (error) in
             print(error)
         }
@@ -127,27 +162,59 @@ class AssignmentModel :Meta{
         }
     }
     
+    func checkAssignmentData(data:NSDictionary){
+        guard let statusCode = data["statusCode"] as? Int else {
+            return
+        }
+        switch statusCode{
+        case 200,400:
+            if let checkinId = data["assignmentId"] as? String{
+                let realm = try! Realm()
+                guard let checkin = realm.objects(AssignmentObject.self).filter("assignmentId = %@",checkinId).first  else {
+                    return
+                }
+                try! realm.write {
+                    realm.delete(checkin)
+                }
+            }
+            
+            
+            
+            
+        default:
+            break;
+        }
+        
+        
+        
+    }
     
     
-    func createAssignment(assignmentData:[String:String]){
+    
+    func createAssignment(assignmentData:AssignmentHolder){
+        print(assignmentData)
+        saveSelfAssignment(assignmentData: assignmentData)
         
         
         let assignment = AssignmentObject()
-        
-        assignment.accuracy = assignmentData["accuracy"]
-        assignment.altitude = assignmentData["altitude"]
-        assignment.assigneeId = assignmentData["assigneeId"]
-        assignment.assignmentDetails = assignmentData["assignmentDetails"]
-        assignment.assignmentId = assignmentData["assignmentId"]
-        assignment.assignmentDeadline =  assignmentData["assignmentDeadline"]
-        assignment.organizationId = assignmentData["organizationId"]
-        assignment.status = assignmentData["status"]
-        assignment.latitude =  assignmentData["latitude"]
-        assignment.longitude =  assignmentData["longitude"]
+        assignment.accuracy = assignmentData.accuracy
+        assignment.altitude = assignmentData.altitude
+        assignment.assigneeId = assignmentData.assigneeIds?.joined(separator: ",")
+        assignment.assignmentDetails = toJsonString( assignmentData.assignmentDetails!)
+        assignment.assignmentId = assignmentData.assignmentId
+        assignment.assignmentDeadline =  assignmentData.assignmentDeadline
+        assignment.organizationId = assignmentData.organizationId
+        assignment.status = assignmentData.status
+        assignment.assignmentStartTime = assignmentData.assignmentStartTime
+        assignment.latitude =  assignmentData.latitude
+        assignment.longitude =  assignmentData.longitude
+        assignment.assignmentAddress  = assignmentData.assignmentAddress
+        assignment.time = assignmentData.time
         let realm = try! Realm()
         try! realm.write {
             realm.add(assignment,update:true)
         }
+        
         
     }
     
@@ -158,7 +225,54 @@ class AssignmentModel :Meta{
         
     }
     
-    
+    func saveSelfAssignment(assignmentData:AssignmentHolder){
+        let assignment = RMCAssignmentObject()
+        
+                let assigner = RMCAssignee()
+                assigner.organizationId = assignmentData.organizationId
+                assigner.userId =  assignmentData.assigneeIds?[0]
+                assignment.assignerData = assigner
+        
+        if let assignmentDetails = assignmentData.assignmentDetails {
+            if let jobNumber = assignmentDetails["jobNumber"] as? String{
+                assignment.jobNumber = jobNumber
+            }
+            
+            assignment.assignmentDetails = toJsonString(assignmentDetails)
+        }
+       
+            assignment.addedOn = assignmentData.time
+            assignment.assignmentDeadline = (assignmentData.assignmentDeadline)?.asDate
+            assignment.assignmentAddress = assignmentData.assignmentAddress
+            assignment.assignmentStartTime = (assignmentData.assignmentStartTime)?.asDate
+            assignment.assignmentId = assignmentData.assignmentId
+            assignment.status = assignmentData.status
+            assignment.time = assignmentData.time
+            assignment.updatedOn = assignmentData.time
+        
+            let location = RMCLocation()
+                location.accuracy = assignmentData.accuracy
+                location.altitude = assignmentData.altitude
+                location.longitude = assignmentData.longitude
+                location.latitude = assignmentData.latitude
+                assignment.location = location
+            if assignment.assignerData?.userId == SDKSingleton.sharedInstance.userId {
+                assignment.selfAssignment = "true"
+            }else {
+                assignment.selfAssignment = "false"
+            }
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(assignment,update:true)
+        }
+        
+        
+        if assignment.status == CheckinType.Assigned.rawValue {
+            self.postDownloadedCheckin(assignmentId: assignment.assignmentId!)
+            
+        }
+    }
     
     
     

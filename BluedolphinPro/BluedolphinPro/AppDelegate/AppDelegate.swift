@@ -10,6 +10,7 @@ import UIKit
 import UserNotifications
 import GoogleMaps
 import IQKeyboardManagerSwift
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -64,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func startUpTask(){
+        updateRealmConfiguration()
         self.coreLocationController  = CoreLocationController()
         IQKeyboardManager.sharedManager().enable = true
         GMSServices.provideAPIKey(GOOGLE_MAPS.ApiKey)
@@ -201,6 +203,26 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         UIApplication.shared.scheduleLocalNotification(notification)
     }
     
+    func updateRealmConfiguration(){
+        let config =     Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            schemaVersion: 2,
+            
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+                
+                if oldSchemaVersion < 2 {
+                    migration.enumerateObjects(ofType: AssignmentObject.className()) { oldObject, newObject in
+//                        newObject?["assignmentAddress"] = assignmentAddress
+//                        newObject?["assignmentStartTime"] = assignmentStartTime
+                    }    }
+        }
+            
+        )
+       Realm.Configuration.defaultConfiguration = config
+    }
     
     
 

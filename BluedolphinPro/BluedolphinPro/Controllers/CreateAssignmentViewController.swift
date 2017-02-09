@@ -99,13 +99,14 @@ class CreateAssignmentViewController: UIViewController {
         assignmentObject.assignmentDetails = [
             "mobile":phoneNumberTextfield.text!,
             "contactPerson":contactPersonTextfield.text!,
-            "instructions":"Firebase push",
+            "instructions":" ",
             "email":emailTextfield.text!,
             "jobNumber":getJobNumber()
             
         ]
         let assignmentModel = AssignmentModel()
-        assignmentModel.postAssignments(assignment: assignmentObject)
+       assignmentModel.createAssignment(assignmentData: assignmentObject)
+        assignmentModel.postdbAssignments()
         
         if let delegate = self.changeSegment {
             delegate.moveToSegment(CheckinType.Assigned.rawValue)

@@ -42,7 +42,8 @@ class MainViewController: UIViewController {
             }
         }
         
-        
+        let assignmentModel = AssignmentModel()
+        assignmentModel.postdbAssignments()
 
         // Do any additional setup after loading the view.
     }

@@ -44,41 +44,24 @@ class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
 }
 
 
-class AssignmentHolder:NSObject{
-    
-    
-    var assignmentId:String?
-    var assigneeIds:[String]?
-    var status:String?
-    var latitude:String?
-    var longitude:String?
-    var altitude:String?
-    var accuracy:String?
-    var organizationId:String?
-    var assignmentDeadline:String?
-    var assignmentStartTime:String?
-    var assignmentDetails:NSDictionary?
-    var assignmentAddress:String?
-    var organisationId:String?
-    var time:String?
-   
-        
-    }
 
 class AssignmentObject:Object,Mappable{
     
     
-    var assignmentId:String?
-    var assigneeId:String?
-    var status:String?
-    var latitude:String?
-    var longitude:String?
-    var altitude:String?
-    var accuracy:String?
-    var organizationId:String?
-    var assignmentDeadline:String?
-    //var assignmentStartTime:String?
-    var assignmentDetails:String?
+   dynamic var assignmentId:String?
+   dynamic var assigneeId:String?
+   dynamic var status:String?
+   dynamic var latitude:String?
+   dynamic var longitude:String?
+   dynamic var altitude:String?
+   dynamic  var accuracy:String?
+   dynamic  var organizationId:String?
+   dynamic  var assignmentDeadline:String?
+    dynamic var assignmentStartTime:String?
+    dynamic var assignmentAddress:String?
+    dynamic var time :String?
+    
+    dynamic var assignmentDetails:String?
     override static func primaryKey() -> String? {
         return "assignmentId"
         
@@ -99,7 +82,11 @@ class AssignmentObject:Object,Mappable{
         assignmentDeadline <- map["assignmentDeadline"]
         assigneeId <- map["assigneeId"]
         status <- map["status"]
+        time <- map["time"]
+
         assignmentDetails <- map["assignmentDetails"]
+        assignmentStartTime <- map["assignmentStartTime"]
+        assignmentAddress <- map["assignmentAddress"]
     }
     
     
@@ -125,7 +112,7 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var jobNumber:String?
     dynamic var bookmarked:String?
     dynamic var lastUpdated:Date?
-   dynamic var selfAssignment:String?
+    dynamic var selfAssignment:String?
     dynamic var downloadedOn:Date?
     dynamic var submittedOn:Date?
     override static func primaryKey() -> String? {
@@ -147,7 +134,7 @@ class RMCAssignmentObject :Object,Mappable {
         assignmentDetails <- map["assignmentDetails"]
         assignmentDeadline <- map["assignmentDeadline"]
         assignmentStartTime <- map["assignmentStartTime"]
-         assignmentAddress <- map["assignmentAddress"]
+        assignmentAddress <- map["assignmentAddress"]
         status <- map["status"]
         bookmarked <- map["bookmark"]
         lastUpdated <- map["lastUpdated"]
@@ -156,7 +143,7 @@ class RMCAssignmentObject :Object,Mappable {
         submittedOn <- map["submittedOn"]
         jobNumber <- map["jobNumber"]
     }
-
+    
 }
 
 
@@ -167,10 +154,10 @@ class RMCAssignee :Object,Mappable{
     required convenience init?(map: Map) {
         self.init()
     }
-//    override static func primaryKey() -> String? {
-//        return "userId"
-//        
-//    }
+    //    override static func primaryKey() -> String? {
+    //        return "userId"
+    //
+    //    }
     func mapping(map: Map) {
         userId    <- map["userId"]
         organizationId <- map["organizationId"]
@@ -191,11 +178,32 @@ class RMCLocation:Object,Mappable{
         self.init()
     }
     func mapping(map: Map) {
-    latitude    <- map["latitude"]
-    longitude <- map["longitude"]
-    accuracy <- map["accuracy"]
-    altitude <- map["altitude"]
+        latitude    <- map["latitude"]
+        longitude <- map["longitude"]
+        accuracy <- map["accuracy"]
+        altitude <- map["altitude"]
     }
     
 }
+
+class AssignmentHolder:NSObject{
+    
+    
+    var assignmentId:String?
+    var assigneeIds:[String]?
+    var status:String?
+    var latitude:String?
+    var longitude:String?
+    var altitude:String?
+    var accuracy:String?
+    var organizationId:String?
+    var assignmentDeadline:String?
+    var assignmentStartTime:String?
+    var assignmentDetails:NSDictionary?
+    var assignmentAddress:String?
+    var time:String?
+    
+    
+}
+
 
