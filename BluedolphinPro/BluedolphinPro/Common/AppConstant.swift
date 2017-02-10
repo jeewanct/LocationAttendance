@@ -46,3 +46,16 @@ enum SortEnum:String{
     case ClearSort
 }
 
+enum SelfAssignmentError:String{
+    case placeNameError = "Please enter Place name"
+    case addressError = "Please enter address"
+    case contactPersonError = "Please enter contact Person"
+    case contactNumberError = "Please enter contact Number"
+    case mobileInvalid = "Please enter valid mobile number"
+    case emailError = "Please enter valid email "
+    case startdateError = "Please enter Assignment Start Date"
+    case starttimeError = "Assignment Start Time cannot be less than Current Time"
+    case enddateError = "Please enter Assignment End Date"
+    case endtimeError = "Assignment End Time cannot be less than Current Time"
+}
+

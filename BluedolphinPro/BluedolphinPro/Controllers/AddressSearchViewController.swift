@@ -25,7 +25,7 @@ class AddressSearchViewController: UIViewController,UISearchBarDelegate {
     var searchResultController: SearchResultsController!
     var searchController:UISearchController!
 
-   var selectedLocation = CLLocationCoordinate2D()
+   var selectedLocation = CLLocation()
     
     
     var saveButton :UIBarButtonItem?
@@ -67,9 +67,9 @@ class AddressSearchViewController: UIViewController,UISearchBarDelegate {
     }
     
     func saveAction(_ sender: AnyObject) {
-        if CLLocationCoordinate2DIsValid(selectedLocation) && !searchBar.text!.isBlank{
+        if CLLocationCoordinate2DIsValid(selectedLocation.coordinate) && !searchBar.text!.isBlank{
             if let delegate = self.changeAddress {
-                delegate.showSelectedAddress(searchBar.text!,coordinate: selectedLocation)
+                delegate.showSelectedAddress(searchBar.text!,location: selectedLocation)
             }
             self.view.endEditing(true)
             self.dismiss(animated: true, completion: nil)
@@ -176,7 +176,7 @@ extension AddressSearchViewController:LocateOnTheMap {
                 print("Error", error)
             }
             if let placemark = placemarks?.first {
-                let location:CLLocationCoordinate2D = placemark.location!.coordinate
+                let location:CLLocation = placemark.location!
                 
                 
                 // self.locationTableView.isHidden = true
@@ -189,19 +189,19 @@ extension AddressSearchViewController:LocateOnTheMap {
     
     
     
-    func updateLocationMarker(_ location : CLLocationCoordinate2D) {
+    func updateLocationMarker(_ location : CLLocation) {
         googleMapUsage.sharedInstance.globalMapView.clear()
         //    locationMarker = GMSMarker()
         
         selectedLocation = location
-        let cameraUpdate = GMSCameraUpdate.setTarget(location, zoom: Float(18))
+        let cameraUpdate = GMSCameraUpdate.setTarget(location.coordinate, zoom: Float(18))
         
         navigationItem.rightBarButtonItem = saveButton
         googleMapUsage.sharedInstance.globalMapView.animate(with: cameraUpdate)
         let locationMarker = GMSMarker()
         let markerIcon = UIImage(named: "default_marker")
         locationMarker.icon = markerIcon
-        locationMarker.position = location
+        locationMarker.position = location.coordinate
         locationMarker.appearAnimation = kGMSMarkerAnimationPop
         locationMarker.map = googleMapUsage.sharedInstance.globalMapView
         

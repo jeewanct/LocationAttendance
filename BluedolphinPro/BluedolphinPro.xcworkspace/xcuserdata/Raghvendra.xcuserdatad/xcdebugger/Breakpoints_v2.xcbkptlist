@@ -709,22 +709,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BluedolphinPro/Controllers/AssignmentViewController.swift"
-            timestampString = "507625194.43882"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "setbuttonImage()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BluedolphinPro/Controllers/FilterViewController.swift"
             timestampString = "507633426.586033"
             startingColumnNumber = "9223372036854775807"
@@ -771,13 +755,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BluedolphinPro/Controllers/AssignmentViewController.swift"
-            timestampString = "507803418.823019"
+            filePath = "BluedolphinPro/AppDelegate/AppDelegate.swift"
+            timestampString = "508338121.909323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
-            landmarkName = "viewDidAppear(_:)"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "updateRealmConfiguration()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -787,14 +771,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BluedolphinPro/AppDelegate/AppDelegate.swift"
-            timestampString = "508338121.909323"
+            filePath = "BluedolphinPro/Controllers/CreateAssignmentViewController.swift"
+            timestampString = "508400136.197847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "updateRealmConfiguration()"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "addressButtonAction()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.CreateAssignmentViewController.addressButtonAction () -&gt; ()"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/CreateAssignmentViewController.swift"
+                  timestampString = "508400420.192407"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BluedolphinPro.CreateAssignmentViewController.addressButtonAction () -&gt; ()"
+                  moduleName = "BluedolphinPro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/CreateAssignmentViewController.swift"
+                  timestampString = "508400420.193797"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "888">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

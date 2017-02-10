@@ -16,7 +16,7 @@ protocol SegmentChanger {
 }
 
 protocol SelectedAddress{
-    func showSelectedAddress(_ address:String,coordinate:CLLocationCoordinate2D)
+    func showSelectedAddress(_ address:String,location:CLLocation)
 }
 
 
@@ -161,20 +161,20 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         switch Singleton.sharedInstance.sortBy! {
         case SortEnum.ClearSort.rawValue:
             switch currentStatus {
-            case .Assigned,.Downloaded:
+            case .Downloaded:
                 tasks = tasks.sorted(by: [
-                    SortDescriptor(keyPath: "downloadedOn", ascending: true),
+                    SortDescriptor(keyPath: "downloadedOn", ascending: false),
                     //            SortDescriptor(property: "created", ascending: false),
                     ])
             case .Inprogress:
                 tasks = tasks.sorted(by: [
-                    SortDescriptor(keyPath: "lastUpdated", ascending: true),
+                    SortDescriptor(keyPath: "lastUpdated", ascending: false),
                     //            SortDescriptor(property: "created", ascending: false),
                     ])
                 
             case .Submitted:
                 tasks = tasks.sorted(by: [
-                    SortDescriptor(keyPath: "submittedOn", ascending: true),
+                    SortDescriptor(keyPath: "submittedOn", ascending: false),
                     //            SortDescriptor(property: "created", ascending: false),
                     ])
             default:
@@ -250,24 +250,24 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         getTasks()
         setbuttonImage()
-        print(Date())
-        print(CurrentLocation.time)
-       print( Date().minuteFrom(CurrentLocation.time))
-        
-        
-            let phoneCallURL:URL = URL(string: "prefs:root=General&path=DATE_AND_TIME")!
-            let application:UIApplication = UIApplication.shared
-            if (application.canOpenURL(phoneCallURL)) {
-                //application.openURL(phoneCallURL);
-                application.open(phoneCallURL, options: [:], completionHandler: { (success) in
-                    if success {
-                        print("call")
-                    }
-                })
-            }
-            else {
-                print("not able to open")
-            }
+//        print(Date())
+//        print(CurrentLocation.time)
+//       print( Date().minuteFrom(CurrentLocation.time))
+//        
+//        
+//            let phoneCallURL:URL = URL(string: "prefs:root=General&path=DATE_AND_TIME")!
+//            let application:UIApplication = UIApplication.shared
+//            if (application.canOpenURL(phoneCallURL)) {
+//                //application.openURL(phoneCallURL);
+//                application.open(phoneCallURL, options: [:], completionHandler: { (success) in
+//                    if success {
+//                        print("call")
+//                    }
+//                })
+//            }
+//            else {
+//                print("not able to open")
+//            }
 
         
         //}
@@ -582,7 +582,7 @@ extension AssignmentViewController{
 extension AssignmentViewController :SegmentChanger{
     func moveToSegment(_ pos:String){
         switch pos {
-        case CheckinType.Assigned.rawValue,CheckinType.Downloaded.rawValue :
+        case CheckinType.Downloaded.rawValue :
             
             viewPager.setSelectedSegmentIndex(0, animated: false)
             segmentControl(index: 0)

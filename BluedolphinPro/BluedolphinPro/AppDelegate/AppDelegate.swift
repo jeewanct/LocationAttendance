@@ -193,16 +193,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         
     }
     
-    func showLocalNotification(_ data:[AnyHashable: Any]){
-        let notification = UILocalNotification()
-        notification.fireDate = Date()
-        notification.alertBody = "New Assignment received!"
-        //notification.alertAction =
-        notification.soundName = UILocalNotificationDefaultSoundName
-        notification.userInfo = data
-        UIApplication.shared.scheduleLocalNotification(notification)
-    }
-    
+   
     func updateRealmConfiguration(){
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
@@ -215,8 +206,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                 
                 if oldSchemaVersion < 2 {
                     migration.enumerateObjects(ofType: AssignmentObject.className()) { oldObject, newObject in
-//                        newObject?["assignmentAddress"] = assignmentAddress
-//                        newObject?["assignmentStartTime"] = assignmentStartTime
+
                     }    }
         }
             

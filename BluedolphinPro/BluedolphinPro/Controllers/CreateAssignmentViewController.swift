@@ -18,14 +18,16 @@ class CreateAssignmentViewController: UIViewController {
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var phoneNumberTextfield: UITextField!
     @IBOutlet weak var contactPersonTextfield: UITextField!
-    @IBOutlet weak var addressTextfield: UITextField!
+   
+    @IBOutlet weak var addressButton: UIButton!
     var uuidString = String()
     var activeTextfield = UITextField()
      var changeSegment : SegmentChanger?
     var assignmentStartdate = String()
     var assignmentEnddate = String()
     let datePicker = UIDatePicker()
-    var selectedCoordinates = CLLocationCoordinate2D()
+    var selectedLocation = CLLocation()
+    var assignmentAddress = String()
    
 
     override func viewDidLoad() {
@@ -39,7 +41,7 @@ class CreateAssignmentViewController: UIViewController {
 
     func setDelegate(){
         nameTextfield.delegate = self
-        addressTextfield.delegate = self
+        
         contactPersonTextfield.delegate = self
         phoneNumberTextfield.delegate = self
         emailTextfield.delegate = self
@@ -51,11 +53,16 @@ class CreateAssignmentViewController: UIViewController {
         startDateTextfield.inputView = datePicker
         endDateTextfield.inputView = datePicker
 
+      
         
-        //addressTextfield.text = CurrentLocation.address
         nameTextfield.isUserInteractionEnabled = false
-        //addressTextfield.isUserInteractionEnabled = false
         nameTextfield.text = SDKSingleton.sharedInstance.userName.capitalized
+        
+        self.addressButton.layer.borderWidth = 1.0
+        self.addressButton.layer.borderColor =
+            UIColor.lightGray.withAlphaComponent(0.4).cgColor
+        self.addressButton.layer.cornerRadius = 1
+        addressButton.addTarget(self, action: #selector(addressButtonAction), for: UIControlEvents.touchUpInside)
         
         
     }
@@ -65,8 +72,40 @@ class CreateAssignmentViewController: UIViewController {
     }
     
     func savePressed(_:UIButton){
+        //        if placeNameTextfield.text!.isBlank{
+        //            self.showAlert(SelfAssignmentError.placeNameError.rawValue)
+        //        }else
         
-        createAssignment()
+        if assignmentAddress.isBlank{
+            self.showAlert(SelfAssignmentError.addressError.rawValue)
+        }else if contactPersonTextfield.text!.isBlank{
+            self.showAlert(SelfAssignmentError.contactPersonError.rawValue)
+        }else if phoneNumberTextfield.text!.isBlank{
+            self.showAlert(SelfAssignmentError.contactNumberError.rawValue)
+        }else if !phoneNumberTextfield.text!.isMobile{
+            self.showAlert(SelfAssignmentError.mobileInvalid.rawValue)
+        }else if !emailTextfield.text!.isBlank && !emailTextfield.text!.isEmail{
+            self.showAlert(SelfAssignmentError.emailError.rawValue)
+        }else if startDateTextfield.text!.isBlank{
+            self.showAlert(SelfAssignmentError.startdateError.rawValue)
+        }else if NSDate().compare(startDateTextfield.text!.asDateFormat()) == ComparisonResult.orderedDescending {
+            
+            self.showAlert(SelfAssignmentError.starttimeError.rawValue)
+            
+            
+        }
+        else if endDateTextfield.text!.isBlank{
+            self.showAlert(SelfAssignmentError.enddateError.rawValue)
+        }else if NSDate().compare(endDateTextfield.text!.asDateFormat()) == ComparisonResult.orderedDescending {
+            
+            self.showAlert(SelfAssignmentError.endtimeError.rawValue)
+            
+            
+        }
+        else{
+            createAssignment()
+        }
+        
         
         
     }
@@ -79,17 +118,24 @@ class CreateAssignmentViewController: UIViewController {
         return jobNumber
         
     }
+    func addressButtonAction(){
+        let navController = self.storyboard?.instantiateViewController(withIdentifier: "SearchScreen") as! UINavigationController
+        let controller = navController.topViewController as! AddressSearchViewController
+        controller.changeAddress = self
+        self.present(navController, animated: true, completion: nil)
+        
+    }
     
     func createAssignment(){
         uuidString = getUUIDString()
         let assignmentObject = AssignmentHolder()
-        assignmentObject.accuracy = CurrentLocation.accuracy
-        assignmentObject.altitude = CurrentLocation.altitude
-        assignmentObject.longitude = String(CurrentLocation.coordinate.longitude)
-        assignmentObject.latitude = String(CurrentLocation.coordinate.latitude)
+        assignmentObject.accuracy = String(selectedLocation.horizontalAccuracy)
+        assignmentObject.altitude = String(selectedLocation.altitude)
+        assignmentObject.longitude = String(selectedLocation.coordinate.longitude)
+        assignmentObject.latitude = String(selectedLocation.coordinate.latitude)
         assignmentObject.assignmentId = uuidString
         assignmentObject.assigneeIds  = [SDKSingleton.sharedInstance.userId]
-        assignmentObject.assignmentAddress = addressTextfield.text!
+        assignmentObject.assignmentAddress = assignmentAddress
         assignmentObject.assignmentDeadline = assignmentEnddate
         assignmentObject.assignmentStartTime = assignmentStartdate
         assignmentObject.organizationId = SDKSingleton.sharedInstance.organizationId
@@ -109,7 +155,7 @@ class CreateAssignmentViewController: UIViewController {
         assignmentModel.postdbAssignments()
         
         if let delegate = self.changeSegment {
-            delegate.moveToSegment(CheckinType.Assigned.rawValue)
+            delegate.moveToSegment(CheckinType.Downloaded.rawValue)
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -168,12 +214,8 @@ extension CreateAssignmentViewController:UITextFieldDelegate{
                 datePicker.minimumDate = startDateTextfield.text?.asDateFormat()
                 
             }
-        case addressTextfield:
-            let navController = self.storyboard?.instantiateViewController(withIdentifier: "SearchScreen") as! UINavigationController
-            let controller = navController.topViewController as! AddressSearchViewController
-             controller.changeAddress = self
+        
             
-            self.present(navController, animated: true, completion: nil)
             
         default:
             break
@@ -196,11 +238,12 @@ extension CreateAssignmentViewController:UITextFieldDelegate{
 
 
 extension CreateAssignmentViewController :SelectedAddress{
-    func showSelectedAddress(_ address:String,coordinate:CLLocationCoordinate2D){
-        addressTextfield.text = address
-       
-        selectedCoordinates.latitude = coordinate.latitude
-        selectedCoordinates.longitude = coordinate.longitude
+    func showSelectedAddress(_ address:String,location:CLLocation){
+        
+        assignmentAddress = address
+        addressButton.setTitle(assignmentAddress, for: UIControlState.normal)
+        selectedLocation  = location
+        
     }
     
 }
