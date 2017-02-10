@@ -122,7 +122,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             case .Welcome:
                 break
             case .NewAssignment:
-                self.showLocalNotification(userInfo)
+                //self.showLocalNotification(userInfo)
 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
             case .UpdatedAssignment:
@@ -156,18 +156,25 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
     }
 
     func registerForRemoteNotification() {
-//        if #available(iOS 10.0, *) {
-//            let center  = UNUserNotificationCenter.current()
-//            center.delegate = self
-//            center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
-//                if error == nil{
-//                    UIApplication.shared.registerForRemoteNotifications()
-//                }
-//            }
-//        }
-//        else {
-            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+        // iOS 10 support
+        if #available(iOS 10, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
+           UIApplication.shared.registerForRemoteNotifications()
+        }
+            // iOS 9 support
+        else if #available(iOS 9, *) {
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
             UIApplication.shared.registerForRemoteNotifications()
+        }
+            // iOS 8 support
+        else if #available(iOS 8, *) {
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+            // iOS 7 support
+        else {  
+           UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
+        }
         //}
     }
     

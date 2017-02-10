@@ -127,7 +127,6 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         tasks = tasks.filter("status = %@",currentStatus.rawValue)
         sortData()
         filterData()
-        print(tasks.count)
         showCheckinMarkers(tasks)
         assignmentTableView.reloadData()
     }
@@ -336,7 +335,6 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             for data in resultSet{
                 if let location = data.location {
                     let newlatlong = CLLocationCoordinate2D(latitude: Double(location.latitude!)!, longitude: Double((location.longitude!))!)
-                    print(newlatlong)
                     
                     if let appointmentTime = data.assignmentStartTime {
                         

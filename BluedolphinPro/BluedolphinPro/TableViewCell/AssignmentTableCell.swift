@@ -27,7 +27,6 @@ class AssignmentTableCell: UITableViewCell {
     }
     
     func configureWithTask(_ task: RMCAssignmentObject) {
-        print(task)
         
         if let assignmentdetail = task.assignmentDetails?.parseJSONString as? NSDictionary{
                         if let jobNumber = assignmentdetail["jobNumber"] as? String{

@@ -76,7 +76,6 @@ class CheckinModel:Meta{
             
             
         }
-        print (checkinsDataArray)
         if checkinsDataArray.count == 0 {
             return
         }
@@ -210,7 +209,7 @@ class CheckinModel:Meta{
                 customAlbum?.fetchPhoto(localIdentifier: id, completion: { (image) in
                     let manager = AWSS3Manager()
                     manager.configAwsManager()
-                    manager.sendFile(imageName: data.imageName!, image: image, extention: "png", completion: { (url) in
+                    manager.sendFile(imageName: data.imageName!, image: image, extention: "jpg", completion: { (url) in
                         let realm = try! Realm()
                         if let currentcheckin = realm.objects(RMCCheckin.self).filter("checkinId=%@",checkinId).first{
                             try! realm.write {

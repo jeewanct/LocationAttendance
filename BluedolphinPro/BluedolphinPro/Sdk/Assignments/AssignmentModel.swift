@@ -192,7 +192,7 @@ class AssignmentModel :Meta{
     
     
     func createAssignment(assignmentData:AssignmentHolder){
-        print(assignmentData)
+        
         saveSelfAssignment(assignmentData: assignmentData)
         
         
@@ -364,9 +364,7 @@ class AssignmentModel :Meta{
     func updateAssignment(id:String,type:AssignmentWork,value:String,status:CheckinType){
         let realm = try! Realm()
         let assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId = %@",id).first
-    
-        print(assignment ?? "")
-        try! realm.write {
+            try! realm.write {
             assignment!.status = status.rawValue
         }
         switch status {
