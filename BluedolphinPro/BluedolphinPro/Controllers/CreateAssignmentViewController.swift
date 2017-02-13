@@ -61,6 +61,7 @@ class CreateAssignmentViewController: UIViewController {
         self.addressButton.layer.borderWidth = 1.0
         self.addressButton.layer.borderColor =
             UIColor.lightGray.withAlphaComponent(0.4).cgColor
+        self.addressButton.clipsToBounds = true
         self.addressButton.layer.cornerRadius = 5
         self.addressButton.titleLabel?.numberOfLines = 2
         addressButton.addTarget(self, action: #selector(addressButtonAction), for: UIControlEvents.touchUpInside)
@@ -242,7 +243,7 @@ extension CreateAssignmentViewController :SelectedAddress{
     func showSelectedAddress(_ address:String,location:CLLocation){
         
         assignmentAddress = address
-        addressButton.setTitle(assignmentAddress, for: UIControlState.normal)
+        addressButton.setTitle(" " + assignmentAddress, for: UIControlState.normal)
         selectedLocation  = location
         
     }

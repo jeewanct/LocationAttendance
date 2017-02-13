@@ -24,13 +24,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
         
         Singleton.sharedInstance.sortBy = SortEnum.ClearSort.rawValue
-//        self.updateNewAssignmentData(id: "dc26ecb6-0e80-4d9f-afb9-26ed20ce35f1")
-//       let model = AssignmentModel()
-//        model.getAssignments(status: "Downloaded", completion: { (result) in
-//            
-//        })
-        
-        //startScanning()
+
         let vicinityManager = VicinityManager()
         vicinityManager.getNearByBeacons { (value) in
             switch value {
@@ -45,6 +39,7 @@ class MainViewController: UIViewController {
         let assignmentModel = AssignmentModel()
         assignmentModel.postdbAssignments()
 
+        postTransientCheckin()
         // Do any additional setup after loading the view.
     }
 
@@ -124,6 +119,8 @@ class MainViewController: UIViewController {
             break
         case .NewAssignment,.UpdatedAssignment:
             if let assignmentId = result["assignmentId"] as? String{
+                
+            
                 updateNewAssignmentData(id: assignmentId)
             }
             
@@ -179,11 +176,11 @@ class MainViewController: UIViewController {
     
     func updateNewAssignmentData(id:String){
         let model = AssignmentModel()
-        model.getAssignments(assignmentId: id) { (success) in
-            
+        if model.getAssignmentFromDb(assignmentId: id).count == 0 {
+            model.getAssignments(assignmentId: id) { (success) in
+                
+            }
         }
-        
-        
         
     }
     
@@ -192,6 +189,21 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController {
+    
+    func postTransientCheckin(){
+        
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Transient.rawValue
+        checkin.checkinType = CheckinType.Location.rawValue
+        
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        checkinModelObject.postCheckin()
+       
+        
+    }
     func startScanning(){
         let beaconManager = IBeaconManager()
         var beaconArray = [iBeacon]()
@@ -253,7 +265,7 @@ extension MainViewController {
                             beaconArray.append(value)
                         }
                         checkin.beaconProximities = beaconArray
-                        checkin.checkinDetails = [:]
+                        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
                         checkin.checkinCategory = CheckinCategory.Transient.rawValue
                         checkin.checkinType = CheckinType.Beacon.rawValue
                         self.seanbeacons = NSMutableDictionary()                //        checkin.imageName = imageName + Date().formattedISO8601

@@ -167,7 +167,7 @@ class AssignmentModel :Meta{
             return
         }
         switch statusCode{
-        case 200,400:
+        case 200,400,409:
             if let checkinId = data["assignmentId"] as? String{
                 let realm = try! Realm()
                 guard let checkin = realm.objects(AssignmentObject.self).filter("assignmentId = %@",checkinId).first  else {
@@ -218,10 +218,10 @@ class AssignmentModel :Meta{
         
     }
     
-    func getAssignmentFromDb()->Results<RMCAssignmentObject>{
+    func getAssignmentFromDb(assignmentId:String)->Results<RMCAssignmentObject>{
         let realm = try! Realm()
-        let assignments = realm.objects(RMCAssignmentObject.self)
-       return assignments
+        let assignments = realm.objects(RMCAssignmentObject.self).filter("assignmentId= %@",assignmentId)
+        return assignments
         
     }
     

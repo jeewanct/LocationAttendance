@@ -155,8 +155,6 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         
     }
     func sortData(){
-        
-        
         switch Singleton.sharedInstance.sortBy! {
         case SortEnum.ClearSort.rawValue:
             switch currentStatus {

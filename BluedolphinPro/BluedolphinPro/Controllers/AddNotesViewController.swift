@@ -98,7 +98,7 @@ class AddNotesViewController: UIViewController {
         
         let checkin = CheckinHolder()
        
-        checkin.checkinDetails = [AssignmentWork.notes.rawValue:notesTextView.text! as AnyObject]
+        checkin.checkinDetails = [AssignmentWork.notes.rawValue:notesTextView.text! as AnyObject,AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
         checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
         checkin.checkinType = CheckinType.Inprogress.rawValue
         checkin.assignmentId = assignment?.assignmentId

@@ -503,7 +503,7 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
         
         let checkin = CheckinHolder()
         
-        checkin.checkinDetails = [AssignmentWork.JobNumber.rawValue:albumName as AnyObject]
+        checkin.checkinDetails = [AssignmentWork.JobNumber.rawValue:albumName as AnyObject,AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
         checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
         checkin.checkinType = CheckinType.PhotoCheckin.rawValue
         checkin.assignmentId = assignment?.assignmentId
@@ -520,7 +520,7 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
         
         let checkin = CheckinHolder()
         
-        checkin.checkinDetails = [AssignmentWork.JobNumber.rawValue:albumName as AnyObject]
+        checkin.checkinDetails = [AssignmentWork.JobNumber.rawValue:albumName as AnyObject,AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
         checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
         checkin.checkinType = CheckinType.Submitted.rawValue
         checkin.assignmentId = assignment?.assignmentId
