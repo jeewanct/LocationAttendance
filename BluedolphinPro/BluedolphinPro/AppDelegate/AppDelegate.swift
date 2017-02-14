@@ -14,8 +14,8 @@ import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
+    
     var coreLocationController:CoreLocationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        postTransientCheckin()
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
@@ -129,6 +130,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                 break;
                 
             }
+            //
             
         }
         completionHandler(UIBackgroundFetchResult.noData)
@@ -178,28 +180,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         //}
     }
     
-    func pushAlertView(userInfo:NSDictionary) {
-        var alertMessage = ""
-        let result: NSDictionary? = userInfo["aps"] as? NSDictionary
-        alertMessage = result?["alert"] as! String
-        
-        let alert2 = UIAlertController(title: "Message", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
-        //    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
-        //      //pushReceived = false
-        //
-        //    })
-        //    alert2.addAction(cancelAction)
-        alert2.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-            
-            
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo as? [AnyHashable : Any])
-        }))
-        
-        
-        self.window?.rootViewController?.present(alert2, animated: true, completion: nil)
-        
-    }
-    
+   
    
     func updateRealmConfiguration(){
         let config =     Realm.Configuration(
@@ -219,6 +200,22 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             
         )
        Realm.Configuration.defaultConfiguration = config
+    }
+    
+    
+    func postTransientCheckin(){
+        
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Transient.rawValue
+        checkin.checkinType = CheckinType.Location.rawValue
+        
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        checkinModelObject.postCheckin()
+        
+        
     }
     
     

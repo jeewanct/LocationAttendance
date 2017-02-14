@@ -9,7 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+   // var window: UIWindow?
     @IBOutlet weak var mainContainerView: UIView!
     var seanbeacons = NSMutableDictionary()
     var beaconSentflag = true
@@ -39,7 +39,7 @@ class MainViewController: UIViewController {
         let assignmentModel = AssignmentModel()
         assignmentModel.postdbAssignments()
 
-        postTransientCheckin()
+//        postTransientCheckin()
         // Do any additional setup after loading the view.
     }
 
@@ -178,11 +178,34 @@ class MainViewController: UIViewController {
         let model = AssignmentModel()
         if model.getAssignmentFromDb(assignmentId: id).count == 0 {
             model.getAssignments(assignmentId: id) { (success) in
-                
+                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.NewAssignment.rawValue), object: self, userInfo: nil)
+                self.pushAlertView(alertMessage: "New Assignment received Do you want to see ?")
             }
         }
         
     }
+    
+    
+    func pushAlertView(alertMessage:String) {
+        let alert2 = UIAlertController(title: "Alert", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { action in
+            //pushReceived = false
+            
+        })
+        alert2.addAction(cancelAction)
+        
+        
+        alert2.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue), object: self, userInfo: nil)
+        }))
+        
+        
+        self.present(alert2, animated: true, completion: nil)
+        
+    }
+    
     
     
 
@@ -190,20 +213,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
     
-    func postTransientCheckin(){
-        
-        let checkin = CheckinHolder()
-        
-        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
-        checkin.checkinCategory = CheckinCategory.Transient.rawValue
-        checkin.checkinType = CheckinType.Location.rawValue
-        
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
-        checkinModelObject.postCheckin()
-       
-        
-    }
+  
     func startScanning(){
         let beaconManager = IBeaconManager()
         var beaconArray = [iBeacon]()
@@ -272,9 +282,9 @@ extension MainViewController {
                         //        checkin.relativeUrl = imageId
                         let checkinModelObject = CheckinModel()
                         checkinModelObject.createCheckin(checkinData: checkin)
-                        if isInternetAvailable(){
-                            checkinModelObject.postCheckin()
-                        }
+//                        if isInternetAvailable(){
+//                            checkinModelObject.postCheckin()
+//                        }
                         
                     }
                 })

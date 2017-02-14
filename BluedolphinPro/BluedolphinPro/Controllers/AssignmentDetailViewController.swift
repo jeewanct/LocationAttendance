@@ -46,6 +46,7 @@ class AssignmentDetailViewController: UIViewController {
         super.viewDidLoad()
         createTabbarView()
         createViewPager()
+         addressButton.addTarget(self, action: #selector(AssignmentDetailViewController.openGoogleMap), for: UIControlEvents.touchUpInside)
         
         timeLineTableView.delegate = self
         timeLineTableView.dataSource = self
@@ -516,6 +517,9 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
         assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.Photo, value: imageId, status: CheckinType.Inprogress)
         
     }
+    
+    
+    
     func postSubmissionCheckin(){
         
         let checkin = CheckinHolder()
@@ -542,5 +546,31 @@ extension AssignmentDetailViewController:MFMailComposeViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
+
+extension AssignmentDetailViewController{
+    func openGoogleMap(){
+        let googlePath = "http://maps.google.com/maps"
+        let googleApp =  "comgooglemaps://"
+        let query = "?q=" + assignment!.assignmentAddress!
+        //let applePath = "http://maps.apple.com/"
+        
+        
+        if UIApplication.shared.canOpenURL(URL(string: googleApp)!)
+        {
+            if let url = URL(string: googleApp + query.stringByAddingPercentEncodingForRFC3986()!) {
+                
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            
+        } else {
+            UIApplication.shared.open(URL(string: googlePath + query.stringByAddingPercentEncodingForRFC3986()!)!, options: [:], completionHandler: nil)
+        }
+        
+        
+        
+    }
+    
+}
+
 
 

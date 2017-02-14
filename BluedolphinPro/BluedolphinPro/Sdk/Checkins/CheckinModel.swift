@@ -147,7 +147,11 @@ class CheckinModel:Meta{
     func createCheckin(checkinData:CheckinHolder){
         let realm = try! Realm()
         let checkin = RMCCheckin()
-        checkin.checkinDetails = toJsonString(checkinData.checkinDetails as AnyObject)
+        var checkinDetails = checkinData.checkinDetails!
+        checkinDetails[AssignmentWork.AppVersion.rawValue] = AppVersion as AnyObject?
+        checkinDetails[AssignmentWork.UserAgent.rawValue] = deviceType as AnyObject?
+        
+        checkin.checkinDetails = toJsonString(checkinDetails as AnyObject)
         checkin.accuracy = CurrentLocation.accuracy
         checkin.altitude = CurrentLocation.altitude
         checkin.latitude = String(CurrentLocation.coordinate.latitude)

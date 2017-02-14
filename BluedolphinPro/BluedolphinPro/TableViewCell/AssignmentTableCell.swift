@@ -46,7 +46,7 @@ class AssignmentTableCell: UITableViewCell {
         if let endtime = task.assignmentDeadline {
             startTimeLabel.text =   startTimeLabel.text! + " to " + endtime.formatted
         }
-        
+        bookMarkButton.setImage(#imageLiteral(resourceName: "inactive ribbon"), for: UIControlState.normal)
     }
     
 }

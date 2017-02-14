@@ -213,63 +213,60 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     func notificationSubscription(tasks: Results<RMCAssignmentObject>) -> NotificationToken {
         return tasks.addNotificationBlock {[weak self] (changes: RealmCollectionChange<Results<RMCAssignmentObject>>) in
             self?.updateUI(changes: changes)
+            
         }
     }
     
     func updateUI(changes: RealmCollectionChange<Results<RMCAssignmentObject>>) {
-        switch changes {
-        case .initial(_):
-            assignmentTableView.reloadData()
-        case .update(_, let deletions, let insertions, _):
-            
-            assignmentTableView.beginUpdates()
-            
-            assignmentTableView.insertRows(at: insertions.map {IndexPath(row: $0, section: 0)},
-                                           with: .automatic)
-            assignmentTableView.deleteRows(at: deletions.map {IndexPath(row: $0, section: 0)},
-                                           with: .automatic)
-            
-            assignmentTableView.endUpdates()
-            break
-        case .error(let error):
-            print(error)
-        }
+        guard let tableView = self.assignmentTableView else { return }
+//        switch changes {
+//        case .initial(_):
+//            tableView.reloadData()
+//        case .update(_, let deletions, let insertions , let modifications):
+//            
+//            tableView.beginUpdates()
+//            
+//            tableView.insertRows(at: insertions.map {IndexPath(row: $0, section: 0)},
+//                                           with: .automatic)
+//            tableView.deleteRows(at: deletions.map {IndexPath(row: $0, section: 0)},
+//                                        with: .automatic)
+//            tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+//                                with: .automatic)
+//            tableView.endUpdates()
+//
+//        case .error(let error):
+//            print(error)
+//        }
+        tableView.reloadData()
+        
+
+        
+    }
+    
+    
+    deinit {
+        subscription?.stop()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         createLayout()
         let model = CheckinModel()
         model.updatePhotoCheckin()
-        model.postCheckin()
+       
     }
     override func viewDidAppear(_ animated: Bool) {
         getTasks()
         setbuttonImage()
-//        print(Date())
-//        print(CurrentLocation.time)
-//       print( Date().minuteFrom(CurrentLocation.time))
-//        
-//        
-//            let phoneCallURL:URL = URL(string: "prefs:root=General&path=DATE_AND_TIME")!
-//            let application:UIApplication = UIApplication.shared
-//            if (application.canOpenURL(phoneCallURL)) {
-//                //application.openURL(phoneCallURL);
-//                application.open(phoneCallURL, options: [:], completionHandler: { (success) in
-//                    if success {
-//                        print("call")
-//                    }
-//                })
-//            }
-//            else {
-//                print("not able to open")
-//            }
 
+    }
+    func newAssignmentRecieved(){
+        segmentControl(index: 0)
         
-        //}
     }
     func createLayout(){
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(newAssignmentRecieved), name: NSNotification.Name(rawValue: LocalNotifcation.NewAssignment.rawValue), object: nil)
         segmentControl(index: 0)
         subscription = notificationSubscription(tasks:tasks)
         assignmentTableView.delegate = self

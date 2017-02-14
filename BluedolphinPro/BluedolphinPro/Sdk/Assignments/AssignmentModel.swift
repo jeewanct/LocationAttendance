@@ -44,7 +44,7 @@ class AssignmentModel :Meta{
                       self.saveAssignment(assignmentData: data as! NSDictionary)
                     }
                 }
-                
+                completion("Success")
                 break;
             default:break
             }
