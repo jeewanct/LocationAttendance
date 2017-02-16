@@ -131,6 +131,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         assignmentTableView.reloadData()
     }
     
+    
     func filterData(){
         if Singleton.sharedInstance.startFromDate != nil {
             tasks = tasks.filter("assignmentStartTime BETWEEN %@", [Singleton.sharedInstance.startFromDate?.asDateFormattedWith(),Singleton.sharedInstance.startToDate?.asDateFormattedWith()])
@@ -251,22 +252,35 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         createLayout()
-        let model = CheckinModel()
-        model.updatePhotoCheckin()
+        syncLocalData()
+        
+        
        
+    }
+    func syncLocalData(){
+         if isInternetAvailable() {
+            fetchnewAssignment()
+            let model = CheckinModel()
+            model.updatePhotoCheckin()
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         getTasks()
         setbuttonImage()
 
     }
-    func newAssignmentRecieved(){
-        segmentControl(index: 0)
+    
+    
+    func fetchnewAssignment(){
+        let model = AssignmentModel()
+        
+        model.getAssignments(status:"Assigned") { (result) in
+            print(result)
+        }
         
     }
     func createLayout(){
         
-        NotificationCenter.default.addObserver(self, selector: #selector(newAssignmentRecieved), name: NSNotification.Name(rawValue: LocalNotifcation.NewAssignment.rawValue), object: nil)
         segmentControl(index: 0)
         subscription = notificationSubscription(tasks:tasks)
         assignmentTableView.delegate = self

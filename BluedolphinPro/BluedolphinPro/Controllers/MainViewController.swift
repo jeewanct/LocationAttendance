@@ -9,7 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-   // var window: UIWindow?
+    var window: UIWindow?
     @IBOutlet weak var mainContainerView: UIView!
     var seanbeacons = NSMutableDictionary()
     var beaconSentflag = true
@@ -26,6 +26,7 @@ class MainViewController: UIViewController {
         Singleton.sharedInstance.sortBy = SortEnum.ClearSort.rawValue
 
         let vicinityManager = VicinityManager()
+         if isInternetAvailable() {
         vicinityManager.getNearByBeacons { (value) in
             switch value {
             case .StartScanning:
@@ -35,9 +36,12 @@ class MainViewController: UIViewController {
             
             }
         }
+        }
         
         let assignmentModel = AssignmentModel()
+         if isInternetAvailable() {
         assignmentModel.postdbAssignments()
+        }
 
 //        postTransientCheckin()
         // Do any additional setup after loading the view.
@@ -116,6 +120,7 @@ class MainViewController: UIViewController {
         let type:NotificationType = NotificationType(rawValue: result ["notificationType"] as! String)!
         switch type {
         case .Welcome:
+            showAlertView(alertMessage: "Welcome to BlueDolphin Cloud")
             break
         case .NewAssignment,.UpdatedAssignment:
             if let assignmentId = result["assignmentId"] as? String{
@@ -149,25 +154,24 @@ class MainViewController: UIViewController {
     }
     */
     
-    func pushAlertView(userInfo:NSDictionary) {
-        var alertMessage = ""
+    func showAlertView(alertMessage:String) {
         //let result: AnyObject? = userInfo ["aps"]
-        alertMessage = userInfo.value(forKey: "message")! as! String
         
-        let alert2 = UIAlertController(title: "Message", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { action in
-            //pushReceived = false
+        
+        let alert = UIAlertController(title: "Message", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { action in
+
             
             
             
         })
-        alert2.addAction(cancelAction)
-        alert2.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { action in
-            
-        }))
+        alert.addAction(cancelAction)
+//        alert2.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { action in
+//            
+//        }))
+//        
         
-        
-        self.present(alert2, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
         
     }
     
@@ -177,10 +181,13 @@ class MainViewController: UIViewController {
     func updateNewAssignmentData(id:String){
         let model = AssignmentModel()
         if model.getAssignmentFromDb(assignmentId: id).count == 0 {
-            model.getAssignments(assignmentId: id) { (success) in
-                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.NewAssignment.rawValue), object: self, userInfo: nil)
-                self.pushAlertView(alertMessage: "New Assignment received Do you want to see ?")
+            if isInternetAvailable() {
+                model.getAssignments(assignmentId: id) { (success) in
+                    //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.NewAssignment.rawValue), object: self, userInfo: nil)
+                    self.pushAlertView(alertMessage: "New Assignment received Do you want to see ?")
+                }
             }
+            
         }
         
     }
@@ -202,7 +209,7 @@ class MainViewController: UIViewController {
         }))
         
         
-        self.present(alert2, animated: true, completion: nil)
+       UIApplication.shared.keyWindow?.rootViewController?.present(alert2, animated: true, completion: nil)
         
     }
     

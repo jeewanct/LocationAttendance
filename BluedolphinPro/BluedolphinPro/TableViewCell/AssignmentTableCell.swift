@@ -10,6 +10,7 @@ import UIKit
 
 class AssignmentTableCell: UITableViewCell {
 
+    @IBOutlet weak var newAssignmentLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var jobNameLabel: UILabel!
@@ -46,6 +47,17 @@ class AssignmentTableCell: UITableViewCell {
         if let endtime = task.assignmentDeadline {
             startTimeLabel.text =   startTimeLabel.text! + " to " + endtime.formatted
         }
+        if let newAssignment = task.newAssignment{
+            if newAssignment == "true"{
+                newAssignmentLabel.backgroundColor =  APPCOLOR.navColor
+            }else{
+                newAssignmentLabel.backgroundColor = UIColor.white
+            }
+            
+        }else {
+            newAssignmentLabel.backgroundColor = UIColor.white
+        }
+        
         bookMarkButton.setImage(#imageLiteral(resourceName: "inactive ribbon"), for: UIControlState.normal)
     }
     

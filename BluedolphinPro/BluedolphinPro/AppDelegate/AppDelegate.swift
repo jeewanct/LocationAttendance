@@ -186,13 +186,13 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 2,
+            schemaVersion: 3,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 
-                if oldSchemaVersion < 2 {
+                if oldSchemaVersion < 3 {
                     migration.enumerateObjects(ofType: AssignmentObject.className()) { oldObject, newObject in
 
                     }    }
@@ -213,7 +213,10 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         
         let checkinModelObject = CheckinModel()
         checkinModelObject.createCheckin(checkinData: checkin)
-        checkinModelObject.postCheckin()
+        if isInternetAvailable() {
+          checkinModelObject.postCheckin()
+        }
+        
         
         
     }

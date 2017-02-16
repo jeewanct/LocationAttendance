@@ -115,6 +115,7 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var selfAssignment:String?
     dynamic var downloadedOn:Date?
     dynamic var submittedOn:Date?
+    dynamic var newAssignment :String?
     override static func primaryKey() -> String? {
         return "assignmentId"
         
@@ -142,6 +143,7 @@ class RMCAssignmentObject :Object,Mappable {
         downloadedOn <- map["downloadedOn"]
         submittedOn <- map["submittedOn"]
         jobNumber <- map["jobNumber"]
+        newAssignment <- map["newAssignment"]
     }
     
 }

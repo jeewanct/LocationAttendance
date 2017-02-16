@@ -20,6 +20,7 @@ class SearchViewController: UIViewController {
     var searchActive : Bool = false
     var currentStatus:CheckinType = .Assigned
     var changeSegment : SegmentChanger?
+    var searchString = String()
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentControl(index: 0)
@@ -39,10 +40,11 @@ class SearchViewController: UIViewController {
         let realm = try! Realm()
         tasks = realm.objects(RMCAssignmentObject.self)
         tasks = tasks.filter("status = %@",currentStatus.rawValue)
-        tasks = tasks.sorted(by: [
-            SortDescriptor(property: "assignmentStartTime", ascending: ascendingFlag),
-            //            SortDescriptor(property: "created", ascending: false),
-            ])
+//        tasks = tasks.sorted(by: [
+//            SortDescriptor(property: "assignmentStartTime", ascending: ascendingFlag),
+//            //            SortDescriptor(property: "created", ascending: false),
+//            ])
+        filterAssignment()
         searchTable.reloadData()
     }
     
@@ -205,32 +207,38 @@ extension SearchViewController:UISearchBarDelegate{
             
             searchTable.reloadData()
         } else {
-            //println(" search text %@ ",searchBar.text as NSString)
             searchActive = true
-            searchResult = List<RMCAssignmentObject>()
-            
-            for obj in tasks {
-                guard let address = obj.assignmentAddress else {
-                    return
-                }
-                if let assignmentdetail = obj.assignmentDetails?.parseJSONString as? NSDictionary{
-                    
-                    guard let jobnumber = assignmentdetail["jobNumber"] as? String else {
-                        return
-                    }
-                    
-                   let currentString = address + " " + jobnumber
-                    //println("  text %@ ",currentString.lowercaseString)
-                    if currentString.lowercased().range(of: searchText.lowercased())  != nil {
-                        searchResult.append(obj)
-                    }
-                }
-                
-            }
-            searchTable.reloadData()
+
+            searchString = searchText
+            //println(" search text %@ ",searchBar.text as NSString)
+            filterAssignment()
             
         }
         
+    }
+    
+    func filterAssignment(){
+        searchResult = List<RMCAssignmentObject>()
+        
+        for obj in tasks {
+            guard let address = obj.assignmentAddress else {
+                return
+            }
+            if let assignmentdetail = obj.assignmentDetails?.parseJSONString as? NSDictionary{
+                
+                guard let jobnumber = assignmentdetail["jobNumber"] as? String else {
+                    return
+                }
+                
+                let currentString = address + " " + jobnumber
+                //println("  text %@ ",currentString.lowercaseString)
+                if currentString.lowercased().range(of: searchString.lowercased())  != nil {
+                    searchResult.append(obj)
+                }
+            }
+            
+        }
+        searchTable.reloadData()
     }
     
 }

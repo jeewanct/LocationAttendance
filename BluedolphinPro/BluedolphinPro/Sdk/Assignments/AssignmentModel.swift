@@ -59,8 +59,7 @@ class AssignmentModel :Meta{
     
     
     func getAssignments(status:String,completion: @escaping (_ result: String) -> Void){
-        let url = AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment?assigneeId=" + SDKSingleton.sharedInstance.userId
-            //+ "?status=" + status
+        let url = AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment?assigneeId=" + SDKSingleton.sharedInstance.userId + "?status=" + status
         print(url)
         NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
             guard let status = response["statusCode"] as? Int else {
@@ -73,8 +72,18 @@ class AssignmentModel :Meta{
                 }
                 if let documents = responseData["documents"] as? NSArray {
                     for data in documents{
-                        self.saveAssignment(assignmentData: data as! NSDictionary)
+                        let assignmentDict = data as! NSDictionary
+                        if let assignmentData = assignmentDict["assignmentData"] as? NSDictionary{
+                            if let id = assignmentData["assignmentId"] as? String {
+                                if self.getAssignmentFromDb(assignmentId: id).count == 0 {
+                                    self.saveAssignment(assignmentData: assignmentDict)
+                                }
+                            }
+                        }
+                        
                     }
+                    
+                    completion("Success")
                 }
                 
                 break;
@@ -85,7 +94,7 @@ class AssignmentModel :Meta{
             print(error)
         }
         
-}
+    }
     
     func postdbAssignments(){
         let realm = try! Realm()
@@ -261,7 +270,7 @@ class AssignmentModel :Meta{
             }else {
                 assignment.selfAssignment = "false"
             }
-        
+        assignment.newAssignment = "true"
         let realm = try! Realm()
         try! realm.write {
             realm.add(assignment,update:true)
@@ -322,7 +331,7 @@ class AssignmentModel :Meta{
             }else {
                 assignment.selfAssignment = "false"
             }
-            
+            assignment.newAssignment = "true"
             
         }
         let realm = try! Realm()
