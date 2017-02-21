@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class MainViewController: UIViewController {
     var window: UIWindow?
     @IBOutlet weak var mainContainerView: UIView!
@@ -261,7 +262,7 @@ extension MainViewController {
                     //"proximity" :  String(describing: beacon.proximity),
                     "rssi" : beacon.rssi,
                     "distance" :beacon.accuracy,
-                    "lastseen" : Date().formattedISO8601
+                    "lastseen" : getCurrentDate().formattedISO8601
                 
                 ]
                 seanbeacons.addEntries(from: [beacon.major! :dict])

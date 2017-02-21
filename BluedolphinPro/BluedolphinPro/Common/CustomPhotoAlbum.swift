@@ -64,7 +64,7 @@ class CustomPhotoAlbum {
         PHPhotoLibrary.shared().performChanges({
             if #available(iOS 9.0, *) {
                 let options = PHAssetResourceCreationOptions()
-                options.originalFilename = "BD_Signature" + Date().timeStamp()
+                options.originalFilename = "BD_Signature" + getCurrentDate().timeStamp()
                 let newcreation:PHAssetCreationRequest = PHAssetCreationRequest.forAsset()
                 newcreation.addResource(with: PHAssetResourceType.photo, data:UIImageJPEGRepresentation(image, 1)!, options: options)
                 assetPlaceholder = newcreation.placeholderForCreatedAsset

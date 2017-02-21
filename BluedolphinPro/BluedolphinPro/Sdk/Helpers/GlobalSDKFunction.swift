@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import TrueTime
 
 
 
@@ -18,6 +19,11 @@ func ChangeRootVC(_ presentViewController: UIViewController,destinationView: UIV
 
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     Swift.print(items[0], separator:separator, terminator: terminator)
+}
+
+func getCurrentDate()->Date{
+    return TrueTimeClient.sharedInstance.referenceTime?.time ?? Date()
+        //Date()
 }
 
 func currenViewController() -> UIViewController {
@@ -61,11 +67,6 @@ func toJsonString(_ dict:AnyObject)->String{
     return tempJson
 }
 
-
-
-func getOrganization(){
-    
-}
 
 func getUserData(){
     let realm = try! Realm()

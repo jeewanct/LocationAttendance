@@ -16,7 +16,8 @@ class AssignmentDetailViewController: UIViewController {
     
     
    
-    var timeLineTableArray = ["OutGoingCall","Image Captured","Assignment Started"]
+    var timeLineTableArray = NSArray()
+        //["OutGoingCall","Image Captured","Assignment Started"]
     
     @IBOutlet weak var instructionLabelHeightConstraint: NSLayoutConstraint!
     
@@ -68,6 +69,7 @@ class AssignmentDetailViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         getAssignmentData()
+        updateHistoryScreens()
     }
     func tapBlurButton(_ sender: UITapGestureRecognizer) {
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "PhotoViewController") as?
@@ -152,6 +154,7 @@ class AssignmentDetailViewController: UIViewController {
         case 0:
             timeLineTableView.isHidden = true
         case 1:
+             self.updateHistoryScreens()
             timeLineTableView.isHidden = false
         default:
             break
@@ -355,44 +358,7 @@ class AssignmentDetailViewController: UIViewController {
 }
 
 
-extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSource{
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-            return timeLineTableArray.count
-        
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-            let cell = tableView.dequeueReusableCell(withIdentifier: "timeLineCell") as! TimeLineTableViewCell
-            cell.taskTitleLabel.text = timeLineTableArray[indexPath.row]
-            cell.taskImageView.image = UIImage(named: "bookmark")
-            cell.taskTimeLabel.text = "11/11/16 21:30"
-            if indexPath.row == 0{
-                cell.upLineView.isHidden = true
-                cell.downLineView.isHidden = false
-                
-            }else if indexPath.row == timeLineTableArray.count - 1 {
-                cell.upLineView.isHidden = false
-               cell.downLineView.isHidden = true
-            }else{
-                cell.upLineView.isHidden = false
-                cell.downLineView.isHidden = false
-            }
-            return cell
 
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //self.performSegue(withIdentifier: "showDetails", sender: self)
-        
-    }
-    
-    
-    
-    
-}
 
 
 extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImagePickerControllerDelegate {
@@ -480,11 +446,12 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
 
             }else {
                 self.customAlbum?.updatePhoto(image, completion: { (data) in
-                    self.updateImageCount()
+                    
 
                     DispatchQueue.main.async {
                         self.postCheckin(imageId:data,imageName:self.alertTextfield.text!)
-
+                        self.updateHistoryScreens()
+                        self.updateImageCount()
                     }
                     
  
@@ -508,7 +475,7 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
         checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
         checkin.checkinType = CheckinType.PhotoCheckin.rawValue
         checkin.assignmentId = assignment?.assignmentId
-        checkin.imageName = imageName + Date().formattedISO8601
+        checkin.imageName = imageName + getCurrentDate().formattedISO8601
         checkin.relativeUrl = imageId
         let checkinModelObject = CheckinModel()
         checkinModelObject.createCheckin(checkinData: checkin)
@@ -572,5 +539,73 @@ extension AssignmentDetailViewController{
     
 }
 
+
+extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSource{
+    
+    func updateHistoryScreens(){
+        
+        if let statusLogString = assignment?.assignmentStatusLog {
+            print(statusLogString)
+            timeLineTableArray =   toDictionary(text: statusLogString)! as! NSArray
+            print(timeLineTableArray)
+        }
+        timeLineTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return timeLineTableArray.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "timeLineCell") as! TimeLineTableViewCell
+        if let timelineObject = timeLineTableArray[indexPath.row] as? NSDictionary {
+            let taskType = timelineObject["type"] as! String
+            switch taskType {
+            case AssignmentWork.Downloaded.rawValue:
+                cell.taskTitleLabel.text = "Downloaded"
+            case AssignmentWork.notes.rawValue:
+                cell.taskTitleLabel.text = "Notes Updated"
+            case AssignmentWork.Signature.rawValue:
+                cell.taskTitleLabel.text = "Signature Updated"
+            case AssignmentWork.Photo.rawValue:
+                cell.taskTitleLabel.text = "Image Captured"
+            case AssignmentWork.Submission.rawValue:
+                cell.taskTitleLabel.text = "Submitted"
+                
+            default:
+                break
+            }
+            
+            cell.taskImageView.image = UIImage(named: "bookmark")
+            cell.taskTimeLabel.text = (timelineObject["time"] as! String).asDate.formatted
+        }
+        
+        if indexPath.row == 0{
+            cell.upLineView.isHidden = true
+            cell.downLineView.isHidden = false
+            
+        }else if indexPath.row == timeLineTableArray.count - 1 {
+            cell.upLineView.isHidden = false
+            cell.downLineView.isHidden = true
+        }else{
+            cell.upLineView.isHidden = false
+            cell.downLineView.isHidden = false
+        }
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //self.performSegue(withIdentifier: "showDetails", sender: self)
+        
+    }
+    
+    
+    
+    
+}
 
 

@@ -10,7 +10,7 @@ import Foundation
 import  UIKit
 
 
-let AppVersion = "0.3"
+let AppVersion = "1.0"
 let deviceType = "ios"
 
 let TARGET_DEVICE_SIZE = CGSize(width: 414,height: 736)

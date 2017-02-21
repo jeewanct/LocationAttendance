@@ -59,7 +59,7 @@ class AssignmentModel :Meta{
     
     
     func getAssignments(status:String,completion: @escaping (_ result: String) -> Void){
-        let url = AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment?assigneeId=" + SDKSingleton.sharedInstance.userId + "?status=" + status
+        let url = AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment?assigneeId=" + SDKSingleton.sharedInstance.userId + "&status=" + status
         print(url)
         NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
             guard let status = response["statusCode"] as? Int else {
@@ -363,7 +363,7 @@ class AssignmentModel :Meta{
         let delay = 3.0 * Double(NSEC_PER_SEC)
         let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: time, execute: {
-        self.updateAssignment(id:assignmentId , type: AssignmentWork.Downloaded, value: Date().formattedISO8601, status: CheckinType.Downloaded)
+        self.updateAssignment(id:assignmentId , type: AssignmentWork.Downloaded, value: getCurrentDate().formattedISO8601, status: CheckinType.Downloaded)
         })
         
     }
@@ -415,13 +415,15 @@ class AssignmentModel :Meta{
         }
         
         if let statusLogString = assignment?.assignmentStatusLog {
-            let statusLog = NSMutableArray(object:  toDictionary(text: statusLogString)!)
+            let statusLog  = NSMutableArray(array: toDictionary(text: statusLogString)! as! [Any], copyItems: true)
+            
             
             var currentUpdate = Dictionary<String,Any>()
-                currentUpdate["time"] = Date().formattedISO8601
+                currentUpdate["time"] = getCurrentDate().formattedISO8601
             currentUpdate["status"] = status.rawValue
             currentUpdate["assignmentDetail"] = assignment?.assignmentDetails
             currentUpdate["type"] = type.rawValue
+
             statusLog.add(currentUpdate)
             try! realm.write {
             assignment?.assignmentStatusLog = toJsonString(statusLog)
@@ -429,7 +431,7 @@ class AssignmentModel :Meta{
             
         }else {
             var currentUpdate = Dictionary<String,Any>()
-            currentUpdate["time"] = Date().formattedISO8601
+            currentUpdate["time"] = getCurrentDate().formattedISO8601
             currentUpdate["status"] = status.rawValue
             currentUpdate["assignmentDetail"] = assignment?.assignmentDetails
             currentUpdate["type"] = type.rawValue

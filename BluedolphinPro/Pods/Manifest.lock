@@ -20,6 +20,9 @@ PODS:
   - Realm/Headers (2.3.0)
   - RealmSwift (2.3.0):
     - Realm (= 2.3.0)
+  - Result (3.1.0)
+  - TrueTime (4.0.0):
+    - Result (~> 3.0)
   - XLForm (3.3.0)
 
 DEPENDENCIES:
@@ -30,6 +33,7 @@ DEPENDENCIES:
   - GooglePlaces
   - IQKeyboardManagerSwift
   - RealmSwift
+  - TrueTime
   - XLForm (~> 3.0)
 
 SPEC CHECKSUMS:
@@ -43,8 +47,10 @@ SPEC CHECKSUMS:
   ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
   Realm: 69d7de9aa569a11eed490aaabc8f2109e3985ecf
   RealmSwift: dc6f99ea55e59490cec69c860f91932b6bf7efb6
+  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
+  TrueTime: 7924bbe03d015c22a5b59f28001f879f1b4cb183
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: c53d52cc7ff731ca63a35c43aee1b8a4662b5013
+PODFILE CHECKSUM: 7bdcabbca77dd2fe3709b7a4c6213b9ae44c4c06
 
 COCOAPODS: 1.2.0

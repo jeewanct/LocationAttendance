@@ -26,10 +26,15 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var totalHourTextfield: UITextField!
     @IBOutlet weak var fecodeTextField: UITextField!
+    
+    @IBOutlet weak var versionLabel: UILabel!
+    
     var statusOption = ["Online","Offline"]
     var organisationOption = ["New","BdLite","BdPro"]
     let pickerView = UIPickerView()
     var menuView: CustomNavigationDropdownMenu!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let deviceToken = UserDefaults.standard.value(forKey: UserDefaultsKeys.deviceToken.rawValue) as? String{
@@ -100,7 +105,7 @@ class HomeViewController: UIViewController {
         let notificationButton = UIBarButtonItem(image: #imageLiteral(resourceName: "notifications"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(notificationAction(_:)))
         self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
         self.navigationItem.leftBarButtonItem = notificationButton
-        
+        versionLabel.text = "Version : \(AppVersion)"
         
        
     }
@@ -210,7 +215,7 @@ class HomeViewController: UIViewController {
         checkin.checkinType = CheckinType.Location.rawValue
         checkin.organizationId = SDKSingleton.sharedInstance.organizationId
         checkin.checkinId = UUID().uuidString
-        checkin.time = Date().formattedISO8601
+        checkin.time = getCurrentDate().formattedISO8601
         let user = CheckinModel()
         user.createCheckin(checkinData: checkin)
         user.postCheckin()
@@ -294,6 +299,8 @@ extension HomeViewController:UIPickerViewDataSource, UIPickerViewDelegate{
     }
     
 }
+
+
 extension HomeViewController :UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         currentTextField = textField

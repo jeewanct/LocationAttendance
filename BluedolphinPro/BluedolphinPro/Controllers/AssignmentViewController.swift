@@ -258,10 +258,12 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
        
     }
     func syncLocalData(){
+        print("Current TimeStamp \(getCurrentDate())")
          if isInternetAvailable() {
             fetchnewAssignment()
             let model = CheckinModel()
             model.updatePhotoCheckin()
+            
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -273,12 +275,19 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     func fetchnewAssignment(){
         let model = AssignmentModel()
-        
+        if isInternetAvailable() {
         model.getAssignments(status:"Assigned") { (result) in
             print(result)
         }
-        
+        }
     }
+    
+    func refresh(refreshControl: UIRefreshControl) {
+        // Do your job, when done:
+        fetchnewAssignment()
+        refreshControl.endRefreshing()
+    }
+    
     func createLayout(){
         
         segmentControl(index: 0)
@@ -289,6 +298,13 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         let customView = UIView(frame: CGRect(x:0,y: 0, width:ScreenConstant.width,height: 50))
         customView.backgroundColor = UIColor.white
         assignmentTableView.tableFooterView = customView
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.lightGray
+        refreshControl.addTarget(self, action: #selector(refresh(refreshControl:)), for: .valueChanged)
+        assignmentTableView.addSubview(refreshControl)
+        
+        
         createNavView()
         createViewPager()
         //createTabbarView()

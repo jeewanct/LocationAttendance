@@ -48,7 +48,7 @@ class CreateAssignmentViewController: UIViewController {
         startDateTextfield.delegate = self
         endDateTextfield.delegate = self
         datePicker.datePickerMode = .dateAndTime
-        datePicker.minimumDate = Date()
+        datePicker.minimumDate = getCurrentDate()
         datePicker.addTarget(self, action: #selector(dateChanged(sender:)), for: UIControlEvents.valueChanged)
         startDateTextfield.inputView = datePicker
         endDateTextfield.inputView = datePicker
@@ -141,7 +141,7 @@ class CreateAssignmentViewController: UIViewController {
         assignmentObject.assignmentDeadline = assignmentEnddate
         assignmentObject.assignmentStartTime = assignmentStartdate
         assignmentObject.organizationId = SDKSingleton.sharedInstance.organizationId
-        assignmentObject.time = Date().formattedISO8601
+        assignmentObject.time = getCurrentDate().formattedISO8601
         assignmentObject.status = CheckinType.Assigned.rawValue
         
         assignmentObject.assignmentDetails = [

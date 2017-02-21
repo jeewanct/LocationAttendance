@@ -15,6 +15,7 @@ pod 'IQKeyboardManagerSwift'
 pod 'AWSS3'
 pod 'XLForm', '~> 3.0'
 pod 'GooglePlaces'
+pod 'TrueTime'
 
 
 end

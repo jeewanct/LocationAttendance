@@ -162,7 +162,7 @@ class CheckinModel:Meta{
         checkin.organizationId = SDKSingleton.sharedInstance.organizationId
         checkin.checkinType = checkinData.checkinType
         checkin.jobNumber = checkinData.jobNumber
-        checkin.time = Date().formattedISO8601
+        checkin.time = getCurrentDate().formattedISO8601
         if checkin.checkinType == CheckinType.PhotoCheckin.rawValue {
             checkin.imageName = checkinData.imageName
             checkin.relativeUrl = checkinData.relativeUrl

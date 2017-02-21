@@ -11,6 +11,8 @@ import UserNotifications
 import GoogleMaps
 import IQKeyboardManagerSwift
 import RealmSwift
+import TrueTime
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -66,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func startUpTask(){
+        TrueTimeClient.sharedInstance.start()
         updateRealmConfiguration()
         self.coreLocationController  = CoreLocationController()
         IQKeyboardManager.sharedManager().enable = true

@@ -68,7 +68,7 @@ class SelfAssignmentViewController:XLFormViewController  {
         assignmentObject.assignmentDeadline = "\(data["endDate"]!)"
         assignmentObject.assignmentStartTime = "\(data["startDate"]!)"
         assignmentObject.organizationId = SDKSingleton.sharedInstance.organizationId
-        assignmentObject.time = Date().formattedISO8601
+        assignmentObject.time = getCurrentDate().formattedISO8601
         assignmentObject.status = CheckinType.Assigned.rawValue
         
         assignmentObject.assignmentDetails = [

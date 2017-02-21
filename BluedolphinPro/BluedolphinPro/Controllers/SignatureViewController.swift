@@ -72,6 +72,8 @@ class SignatureViewController: UIViewController {
                 customAlbum?.updatePhoto(signatureImage, completion: { (data) in
                     DispatchQueue.main.async {
                         self.postCheckin(imageId:data)
+                        self.signatureView.clearSignature()
+                        self.dismiss(animated: true, completion: nil)
                     }
 
                     
@@ -79,8 +81,7 @@ class SignatureViewController: UIViewController {
 //                showLoader()
 //                createCheckin(signatureImage)
                 // Since the Signature is now saved to the Photo Roll, the View can be cleared anyway.
-                self.signatureView.clearSignature()
-                self.dismiss(animated: true, completion: nil)
+                
             }
         }
         else {
