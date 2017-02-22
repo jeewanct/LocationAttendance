@@ -34,6 +34,7 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.distanceFilter  = 3000 // Must move at least 3km
+            locationManager.startMonitoringSignificantLocationChanges()
             //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()

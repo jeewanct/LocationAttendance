@@ -548,7 +548,9 @@ extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSour
             print(statusLogString)
             timeLineTableArray =   toDictionary(text: statusLogString)! as! NSArray
             print(timeLineTableArray)
-        }
+           timeLineTableArray = timeLineTableArray.reversed() as NSArray
+            }
+        
         timeLineTableView.reloadData()
     }
     
@@ -564,22 +566,30 @@ extension AssignmentDetailViewController:UITableViewDelegate,UITableViewDataSour
         if let timelineObject = timeLineTableArray[indexPath.row] as? NSDictionary {
             let taskType = timelineObject["type"] as! String
             switch taskType {
+            case  AssignmentWork.Created.rawValue:
+                cell.taskTitleLabel.text = AssignmentWork.Created.rawValue
+                cell.taskImageView.image = #imageLiteral(resourceName: "created")
             case AssignmentWork.Downloaded.rawValue:
                 cell.taskTitleLabel.text = "Downloaded"
+                cell.taskImageView.image = #imageLiteral(resourceName: "download")
             case AssignmentWork.notes.rawValue:
                 cell.taskTitleLabel.text = "Notes Updated"
+                cell.taskImageView.image = #imageLiteral(resourceName: "note-placeholder")
             case AssignmentWork.Signature.rawValue:
                 cell.taskTitleLabel.text = "Signature Updated"
+                cell.taskImageView.image = #imageLiteral(resourceName: "signature-placeholder")
             case AssignmentWork.Photo.rawValue:
                 cell.taskTitleLabel.text = "Image Captured"
+                cell.taskImageView.image = #imageLiteral(resourceName: "picture")
             case AssignmentWork.Submission.rawValue:
                 cell.taskTitleLabel.text = "Submitted"
+                cell.taskImageView.image = #imageLiteral(resourceName: "submitted")
                 
             default:
                 break
             }
             
-            cell.taskImageView.image = UIImage(named: "bookmark")
+            
             cell.taskTimeLabel.text = (timelineObject["time"] as! String).asDate.formatted
         }
         

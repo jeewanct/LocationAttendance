@@ -271,6 +271,18 @@ class AssignmentModel :Meta{
                 assignment.selfAssignment = "false"
             }
         assignment.newAssignment = "true"
+        
+        
+        var currentUpdate = Dictionary<String,Any>()
+        currentUpdate["time"] = assignment.time
+        currentUpdate["status"] = assignment.status
+        currentUpdate["assignmentDetail"] = assignment.assignmentDetails
+        currentUpdate["type"] = AssignmentWork.Created.rawValue
+        let statusLog = NSMutableArray()
+        statusLog.add(currentUpdate)
+        assignment.assignmentStatusLog = toJsonString(statusLog)
+        
+        
         let realm = try! Realm()
         try! realm.write {
             realm.add(assignment,update:true)
@@ -332,6 +344,17 @@ class AssignmentModel :Meta{
                 assignment.selfAssignment = "false"
             }
             assignment.newAssignment = "true"
+            
+            
+            var currentUpdate = Dictionary<String,Any>()
+            currentUpdate["time"] = assignment.time
+            currentUpdate["status"] = assignment.status
+            currentUpdate["assignmentDetail"] = assignment.assignmentDetails
+            currentUpdate["type"] = AssignmentWork.Created.rawValue
+            let statusLog = NSMutableArray()
+            statusLog.add(currentUpdate)
+            assignment.assignmentStatusLog = toJsonString(statusLog)
+        
             
         }
         let realm = try! Realm()

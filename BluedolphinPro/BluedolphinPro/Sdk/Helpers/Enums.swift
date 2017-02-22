@@ -56,4 +56,5 @@ enum AssignmentWork:String{
     case Downloaded = "downloaded"
     case AppVersion = "versionName"
     case UserAgent = "userAgent"
+    case Created = "Created"
 }

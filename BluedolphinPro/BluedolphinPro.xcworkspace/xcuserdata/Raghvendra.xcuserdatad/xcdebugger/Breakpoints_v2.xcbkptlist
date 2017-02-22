@@ -772,7 +772,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/CreateAssignmentViewController.swift"
-                  timestampString = "509362309.380439"
+                  timestampString = "509442121.967866"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "124"
@@ -787,7 +787,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/CreateAssignmentViewController.swift"
-                  timestampString = "509362309.381866"
+                  timestampString = "509442121.969259"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "124"
@@ -836,7 +836,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/AssignmentViewController.swift"
-                  timestampString = "509362309.387402"
+                  timestampString = "509442121.974593"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "279"
@@ -851,7 +851,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/AssignmentViewController.swift"
-                  timestampString = "509362309.388808"
+                  timestampString = "509442121.97599"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "280"
@@ -875,54 +875,6 @@
             endingLineNumber = "65"
             landmarkName = "getAssignments(status:completion:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BluedolphinPro/Controllers/AssignmentDetailViewController.swift"
-            timestampString = "509366752.816481"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "547"
-            endingLineNumber = "547"
-            landmarkName = "updateHistoryScreens()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.AssignmentDetailViewController.updateHistoryScreens () -&gt; ()"
-                  moduleName = "BluedolphinPro"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/AssignmentDetailViewController.swift"
-                  timestampString = "509362309.394271"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "545"
-                  endingLineNumber = "545"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.AssignmentDetailViewController.updateHistoryScreens () -&gt; ()"
-                  moduleName = "BluedolphinPro"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/AssignmentDetailViewController.swift"
-                  timestampString = "509362309.39569"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "545"
-                  endingLineNumber = "545"
-                  offsetFromSymbolStart = "372">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

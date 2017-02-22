@@ -38,6 +38,7 @@
 		991EE2641E3F0D1300E4A00D /* VicinityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2631E3F0D1300E4A00D /* VicinityManager.swift */; };
 		991F09331E0B069200539473 /* CreateAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991F09321E0B069200539473 /* CreateAssignmentViewController.swift */; };
 		992086A71DCCC0850055C6BF /* GlobalSDKFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */; };
+		9931B53F1E5C6BCF002B79E6 /* iBeaconAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9931B53E1E5C6BCF002B79E6 /* iBeaconAdvertisement.swift */; };
 		99339CFF1DE2C86000F3C770 /* CheckinObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339CFE1DE2C86000F3C770 /* CheckinObject.swift */; };
 		99339D011DE2C8BA00F3C770 /* OauthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D001DE2C8BA00F3C770 /* OauthObject.swift */; };
 		99339D031DE2D5B700F3C770 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99339D021DE2D5B700F3C770 /* Enums.swift */; };
@@ -113,6 +114,7 @@
 		991EE2631E3F0D1300E4A00D /* VicinityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicinityManager.swift; sourceTree = "<group>"; };
 		991F09321E0B069200539473 /* CreateAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAssignmentViewController.swift; sourceTree = "<group>"; };
 		992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSDKFunction.swift; sourceTree = "<group>"; };
+		9931B53E1E5C6BCF002B79E6 /* iBeaconAdvertisement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iBeaconAdvertisement.swift; sourceTree = "<group>"; };
 		99339CFE1DE2C86000F3C770 /* CheckinObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinObject.swift; sourceTree = "<group>"; };
 		99339D001DE2C8BA00F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
 		99339D021DE2D5B700F3C770 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				991EE2651E40872500E4A00D /* Helpers */,
 				99CBC7BE1E23A638005F0D67 /* Ibeacon */,
 				991EE2661E40873700E4A00D /* Login */,
+				9931B53E1E5C6BCF002B79E6 /* iBeaconAdvertisement.swift */,
 			);
 			path = Sdk;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				9902CF501DBF31B900692824 /* UserModel.swift in Sources */,
 				990935821E30DAC100A42108 /* SSRadioButton.swift in Sources */,
 				991536C11DEBF8390046254C /* CustomNavView.swift in Sources */,
+				9931B53F1E5C6BCF002B79E6 /* iBeaconAdvertisement.swift in Sources */,
 				9902CF301DBE163A00692824 /* NetworkClass.swift in Sources */,
 				997197521DFED308008834DD /* OTPViewController.swift in Sources */,
 				99339F671DE5B38B00F3C770 /* AssignmentObject.swift in Sources */,
