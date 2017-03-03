@@ -114,7 +114,7 @@ class AssignmentDetailViewController: UIViewController {
     
     func getAssignmentData(){
         let realm = try! Realm()
-        assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId= %@",assignment!.assignmentId).first
+        assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId= %@",assignment?.assignmentId!).first
         createLayout()
         
         

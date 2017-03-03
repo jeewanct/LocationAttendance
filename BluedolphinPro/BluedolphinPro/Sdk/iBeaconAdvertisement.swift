@@ -25,7 +25,7 @@ class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
     var beaconConfig = Dictionary<String,Any>()
     
     // Singleton pattern
-    class var sharedGTBeaconBroadcaster:IBeaconBroadcaster {
+    class var sharedInstance:IBeaconBroadcaster {
         return IBeaconBroadcasterSharedInstance
     }
     
@@ -34,7 +34,7 @@ class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
         
         // Init the peripheral manager instance
        // _peripheralManager = CBPeripheralManager(delegate: self, queue: dispatch_get_global_queue(DispatchQueue.GlobalQueuePriority.default), options: nil)
-        _peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        _peripheralManager = CBPeripheralManager(delegate: self, queue: DispatchQueue.global(qos: .default))
             
             
             
@@ -47,6 +47,7 @@ class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
         beaconConfig["minor"] = minor
         beaconConfig["power"] = power
         beaconConfig["broadcasting"] = false
+        
     }
     /**
      *
@@ -135,7 +136,7 @@ class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
         } else {
             
             // Set up a beacon region with the UUID, Major and Minor values
-            let region = CLBeaconRegion(proximityUUID:beaconUUID! as UUID, major:withMajor.uint16Value, minor:withMinor.uint16Value, identifier:"com.gemtots.afr")
+            let region = CLBeaconRegion(proximityUUID:beaconUUID! as UUID, major:withMajor.uint16Value, minor:withMinor.uint16Value, identifier:"com.raremediacompany.bluedolphinPro")
             
             // Attempt to set up a peripheral with the measured power
             let peripheralData : NSMutableDictionary? = region.peripheralData(withMeasuredPower: (withPower.intValue == 127) ? nil : withPower)

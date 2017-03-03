@@ -245,17 +245,18 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     }
     
     
-    deinit {
-        subscription?.stop()
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createLayout()
         syncLocalData()
-        
-        
-       
+    }
+    
+    
+    
+    deinit {
+        subscription?.stop()
     }
     func syncLocalData(){
         print("Current TimeStamp \(getCurrentDate())")
@@ -334,7 +335,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     func createMapView(){
         DispatchQueue.main.async {
-            googleMapUsage.sharedInstance.globalMapView = GMSMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.mapView.frame.height))
+            googleMapUsage.sharedInstance.globalMapView = GMSMapView(frame: CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.mapView.frame.height))
             self.mapView.addSubview(googleMapUsage.sharedInstance.globalMapView)
             googleMapUsage.sharedInstance.globalMapView.delegate=self
             googleMapUsage.sharedInstance.globalMapView.animate(toZoom: 10)
@@ -473,7 +474,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     
     func createNavView(){
-        let items = [ "Assignments", "Profile"]
+        let items = [ "Assignments", "Profile","VirtualBeacon"]
         
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor.white
@@ -510,6 +511,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             
         case 1:
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
+        case 2:
+            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue) , object: nil)
             
         default:
             break
@@ -521,18 +524,12 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             mapView.isHidden = true
         case 1:
             mapView.isHidden = false
-            
-            
         case 2:
             
             let navController = self.storyboard?.instantiateViewController(withIdentifier: "selfAssignNav") as! UINavigationController
             let controller = navController.topViewController as! CreateAssignmentViewController
             controller.changeSegment = self
-            self.present(navController, animated: true, completion: nil)
-            
-            
-            
-            
+            self.present(navController, animated: true, completion: nil)  
         case 3:
             let navController = self.storyboard?.instantiateViewController(withIdentifier: "filterNav") as! UINavigationController
             self.present(navController, animated: true, completion: nil)
@@ -606,7 +603,6 @@ extension AssignmentViewController :SegmentChanger{
     func moveToSegment(_ pos:String){
         switch pos {
         case CheckinType.Downloaded.rawValue :
-            
             viewPager.setSelectedSegmentIndex(0, animated: false)
             segmentControl(index: 0)
         case CheckinType.Inprogress.rawValue:
@@ -618,10 +614,7 @@ extension AssignmentViewController :SegmentChanger{
         default:
             viewPager.setSelectedSegmentIndex(0, animated: false)
             segmentControl(index: 1)
-            
         }
-        
-        
     }
     
 }

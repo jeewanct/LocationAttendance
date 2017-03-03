@@ -10,150 +10,67 @@ import UIKit
 
 
 class MainViewController: UIViewController {
-    var window: UIWindow?
     @IBOutlet weak var mainContainerView: UIView!
     var seanbeacons = NSMutableDictionary()
     var beaconSentflag = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let oauth = OauthModel()
         oauth.updateToken()
-        
+        Singleton.sharedInstance.sortBy = SortEnum.ClearSort.rawValue
+        setObservers()
+        getNearByBeacons()
+        postdbAssignment()
+       
+        //        postTransientCheckin()
+        // Do any additional setup after loading the view.
+    }
+    func setObservers(){
         NotificationCenter.default .removeObserver(self, name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: nil)
         NotificationCenter.default .addObserver(self, selector: #selector(MainViewController.methodOfReceivedNotification(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
-        
-        Singleton.sharedInstance.sortBy = SortEnum.ClearSort.rawValue
-
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: nil)
+    }
+    
+    func getNearByBeacons(){
         let vicinityManager = VicinityManager()
-         if isInternetAvailable() {
-        vicinityManager.getNearByBeacons { (value) in
-            switch value {
-            case .StartScanning:
-                self.startScanning()
-            case .Failure,.NoScanning:
-                break;
-            
+        if isInternetAvailable() {
+            vicinityManager.getNearByBeacons { (value) in
+                switch value {
+                case .StartScanning:
+                    self.startScanning()
+                case .Failure,.NoScanning:
+                    break;
+                    
+                }
             }
         }
+        
+    }
+    func postdbAssignment(){
+        let assignmentModel = AssignmentModel()
+        if isInternetAvailable() {
+            assignmentModel.postdbAssignments()
         }
         
-        let assignmentModel = AssignmentModel()
-         if isInternetAvailable() {
-        assignmentModel.postdbAssignments()
-        }
-
-//        postTransientCheckin()
-        // Do any additional setup after loading the view.
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func ShowController (sender : NSNotification) {
-        switch (sender.name.rawValue) {
-        case LocalNotifcation.Profile.rawValue:
-            
-            //      for views in mainContainer.subviews {
-            //        views.removeFromSuperview()
-            //      }
-            //println(self.childViewControllers.count)
-            var lastController: AnyObject?
-            
-            if let controller =  self.childViewControllers.first as? UINavigationController {
-                lastController = controller
-            } else {
-                lastController = self.childViewControllers.last as! UINavigationController
-            }
-            for views in self.mainContainerView.subviews {
-                views.removeFromSuperview()
-            }
-            
-            lastController?.willMove(toParentViewController: nil)
-            //lastController?.willMoveToParentViewController(toSuperview: nil)
-            lastController?.removeFromParentViewController()
-            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileScene") as! UINavigationController
-            //println(self.childViewControllers)
-            self.addChildViewController(destVc)
-            destVc.view.frame = self.mainContainerView.frame
-            
-            self.mainContainerView.addSubview(destVc.view)
-            destVc.didMove(toParentViewController: self)
-            
-            
-        case LocalNotifcation.Assignment.rawValue:
-            
-           
-            var lastController: AnyObject?
-            
-            if let controller =  self.childViewControllers.first as? UINavigationController {
-                lastController = controller
-            } else {
-                lastController = self.childViewControllers.last as! UINavigationController
-            }
-            for views in self.mainContainerView.subviews {
-                views.removeFromSuperview()
-            }
-            lastController?.willMove(toParentViewController: nil)
-           
-            lastController?.removeFromParentViewController()
-            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentScene") as! UINavigationController
-            self.addChildViewController(destVc)
-            destVc.view.frame = self.mainContainerView.frame
-            self.mainContainerView.addSubview(destVc.view)
-            destVc.didMove(toParentViewController: self)
-            
-        default:
-            /* let destVc = self.storyboard?.instantiateViewControllerWithIdentifier("blue") as! UINavigationController
-             self.addChildViewController(destVc)
-             destVc.view.frame = self.mainContainer.frame
-             self.mainContainer.addSubview(destVc.view)
-             destVc.didMoveToParentViewController(self)*/
-            print("")
-        }
-    }
     
-    func methodOfReceivedNotification(notification: NSNotification){
-        let result: NSDictionary = notification.userInfo! as NSDictionary
-        let type:NotificationType = NotificationType(rawValue: result ["notificationType"] as! String)!
-        switch type {
-        case .Welcome:
-            showAlertView(alertMessage: "Welcome to BlueDolphin Cloud")
-            break
-        case .NewAssignment,.UpdatedAssignment:
-            if let assignmentId = result["assignmentId"] as? String{
-                
-            
-                updateNewAssignmentData(id: assignmentId)
-            }
-            
-        }
-        
-       
-        
-        
-        
-        // //println(notification)
-        
-        //    self.goToScreen(status,info: result)
-    }
-    
-    func goToScreen(flag:Int,info:NSDictionary){
-        //switch flag {}
-        
-    }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
     func showAlertView(alertMessage:String) {
         //let result: AnyObject? = userInfo ["aps"]
@@ -161,16 +78,16 @@ class MainViewController: UIViewController {
         
         let alert = UIAlertController(title: "Message", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
         let cancelAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { action in
-
+            
             
             
             
         })
         alert.addAction(cancelAction)
-//        alert2.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { action in
-//            
-//        }))
-//        
+        //        alert2.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { action in
+        //
+        //        }))
+        //
         
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
         
@@ -210,35 +127,152 @@ class MainViewController: UIViewController {
         }))
         
         
-       UIApplication.shared.keyWindow?.rootViewController?.present(alert2, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alert2, animated: true, completion: nil)
         
     }
     
     
     
+    
+}
 
+extension MainViewController {
+    func ShowController (sender : NSNotification) {
+        switch (sender.name.rawValue) {
+        case LocalNotifcation.Profile.rawValue:
+            
+            //      for views in mainContainer.subviews {
+            //        views.removeFromSuperview()
+            //      }
+            //println(self.childViewControllers.count)
+            var lastController: AnyObject?
+            
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainerView.subviews {
+                views.removeFromSuperview()
+            }
+            
+            lastController?.willMove(toParentViewController: nil)
+            //lastController?.willMoveToParentViewController(toSuperview: nil)
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileScene") as! UINavigationController
+            //println(self.childViewControllers)
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainerView.frame
+            
+            self.mainContainerView.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
+            
+            
+        case LocalNotifcation.Assignment.rawValue:
+            
+            
+            var lastController: AnyObject?
+            
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainerView.subviews {
+                views.removeFromSuperview()
+            }
+            lastController?.willMove(toParentViewController: nil)
+            
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentScene") as! UINavigationController
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainerView.frame
+            self.mainContainerView.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
+        case LocalNotifcation.VirtualBeacon.rawValue:
+            
+            
+            var lastController: AnyObject?
+            
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainerView.subviews {
+                views.removeFromSuperview()
+            }
+            lastController?.willMove(toParentViewController: nil)
+            
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "VirtualBeacon") as! UINavigationController
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainerView.frame
+            self.mainContainerView.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
+            
+        default:
+            /* let destVc = self.storyboard?.instantiateViewControllerWithIdentifier("blue") as! UINavigationController
+             self.addChildViewController(destVc)
+             destVc.view.frame = self.mainContainer.frame
+             self.mainContainer.addSubview(destVc.view)
+             destVc.didMoveToParentViewController(self)*/
+            print("")
+        }
+    }
+    
+    func methodOfReceivedNotification(notification: NSNotification){
+        let result: NSDictionary = notification.userInfo! as NSDictionary
+        let type:NotificationType = NotificationType(rawValue: result ["notificationType"] as! String)!
+        switch type {
+        case .Welcome:
+            showAlertView(alertMessage: "Welcome to BlueDolphin Cloud")
+            break
+        case .NewAssignment,.UpdatedAssignment:
+            if let assignmentId = result["assignmentId"] as? String{
+                
+                
+                updateNewAssignmentData(id: assignmentId)
+            }
+            
+        }
+        
+        
+        
+        
+        
+        // //println(notification)
+        
+        //    self.goToScreen(status,info: result)
+    }
+    
+    func goToScreen(flag:Int,info:NSDictionary){
+        //switch flag {}
+        
+    }
+    
 }
 
 extension MainViewController {
     
-  
+    
     func startScanning(){
         let beaconManager = IBeaconManager()
         var beaconArray = [iBeacon]()
-//        let estimoteBeacon1 = iBeacon(minor: 10010, major: 24361, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
-//        let estimoteBeacon2 = iBeacon(minor: 10858, major: 27403, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
-//        let estimoteBeacon3 = iBeacon(minor: 21481, major: 21826, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+        //        let estimoteBeacon1 = iBeacon(minor: 10010, major: 24361, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+        //        let estimoteBeacon2 = iBeacon(minor: 10858, major: 27403, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+        //        let estimoteBeacon3 = iBeacon(minor: 21481, major: 21826, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
         let vicinityManager = VicinityManager()
-
+        
         let beaconsData = vicinityManager.fetchBeaconsFromDb()
         for beaconObject in beaconsData{
             let ibeacon =
-            iBeacon(minor: beaconObject.minor, major: beaconObject.major, proximityId: beaconObject.uuid!, id: beaconObject.beaconId!)
+                iBeacon(minor: beaconObject.minor, major: beaconObject.major, proximityId: beaconObject.uuid!, id: beaconObject.beaconId!)
             beaconArray.append(ibeacon)
         }
         
         beaconManager.registerBeacons(beaconArray)
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
+        //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         
         beaconManager.startMonitoring({
@@ -263,20 +297,20 @@ extension MainViewController {
                     "rssi" : beacon.rssi,
                     "distance" :beacon.accuracy,
                     "lastseen" : getCurrentDate().formattedISO8601
-                
+                    
                 ]
                 seanbeacons.addEntries(from: [beacon.major! :dict])
                 print(dict)
             }
             if beaconSentflag {
                 beaconSentflag = false
-                let delay = 900.0 * Double(NSEC_PER_SEC)
+                let delay = 90.0 * Double(NSEC_PER_SEC)
                 let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: time, execute: {
                     self.beaconSentflag = true
-
+                    
                     if self.seanbeacons.count != 0 {
-
+                        
                         let checkin = CheckinHolder()
                         var beaconArray = Array<Any>()
                         for (_,value) in self.seanbeacons {
@@ -290,9 +324,9 @@ extension MainViewController {
                         //        checkin.relativeUrl = imageId
                         let checkinModelObject = CheckinModel()
                         checkinModelObject.createCheckin(checkinData: checkin)
-//                        if isInternetAvailable(){
-//                            checkinModelObject.postCheckin()
-//                        }
+                        //                        if isInternetAvailable(){
+                        //                            checkinModelObject.postCheckin()
+                        //                        }
                         
                     }
                 })

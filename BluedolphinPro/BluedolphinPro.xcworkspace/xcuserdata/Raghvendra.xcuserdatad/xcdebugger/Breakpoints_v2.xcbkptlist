@@ -772,7 +772,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/CreateAssignmentViewController.swift"
-                  timestampString = "509442121.967866"
+                  timestampString = "510153772.562899"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "124"
@@ -787,7 +787,7 @@
                   moduleName = "BluedolphinPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/CreateAssignmentViewController.swift"
-                  timestampString = "509442121.969259"
+                  timestampString = "510153772.564353"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "124"
@@ -803,77 +803,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BluedolphinPro/Controllers/AssignmentDetailViewController.swift"
-            timestampString = "509366752.816481"
+            filePath = "BluedolphinPro/Controllers/VirtualViewController.swift"
+            timestampString = "509888782.981304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "524"
-            endingLineNumber = "524"
-            landmarkName = "openGoogleMap()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BluedolphinPro/Controllers/AssignmentViewController.swift"
-            timestampString = "509028455.363821"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
-            landmarkName = "fetchnewAssignment()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.AssignmentViewController.fetchnewAssignment () -&gt; ()"
-                  moduleName = "BluedolphinPro"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/AssignmentViewController.swift"
-                  timestampString = "509442121.974593"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "279"
-                  endingLineNumber = "279"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BluedolphinPro.AssignmentViewController.(fetchnewAssignment () -&gt; ()).(closure #1)"
-                  moduleName = "BluedolphinPro"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/raghvendra/Documents/AirFolder/github/bluedolphin-ios/BluedolphinPro/BluedolphinPro/Controllers/AssignmentViewController.swift"
-                  timestampString = "509442121.97599"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "280"
-                  endingLineNumber = "280"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BluedolphinPro/Sdk/Assignments/AssignmentModel.swift"
-            timestampString = "509028462.566405"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "getAssignments(status:completion:)"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "broadcastBeacon(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

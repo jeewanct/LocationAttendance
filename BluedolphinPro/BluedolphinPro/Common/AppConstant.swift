@@ -35,6 +35,7 @@ struct APPCOLOR {
 enum LocalNotifcation:String{
     case Profile = "MyProfile"
     case Assignment = "MyAssignments"
+    case VirtualBeacon = "VirtualBeacon"
     case Pushreceived = "Pushreceived"
     case NewAssignment = "NewAssignment"
 }

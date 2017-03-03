@@ -173,7 +173,7 @@ extension AddressSearchViewController:LocateOnTheMap {
         
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
             if((error) != nil){
-                print("Error", error)
+                print("Error", error ?? "Not able to fetch")
             }
             if let placemark = placemarks?.first {
                 let location:CLLocation = placemark.location!
