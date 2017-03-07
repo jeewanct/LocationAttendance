@@ -11,11 +11,15 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
+open
+
+
+
 class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
-    typealias Object = List<T>
-    typealias JSON = Array<AnyObject>
+    public typealias Object = List<T>
+    public typealias JSON = Array<AnyObject>
     
-    func transformFromJSON(_ value: Any?) -> List<T>? {
+    public func transformFromJSON(_ value: Any?) -> List<T>? {
         let realmList = List<T>()
         
         if let jsonArray = value as? Array<Any> {
@@ -29,7 +33,7 @@ class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
         return realmList
     }
     
-    func transformToJSON(_ value: List<T>?) -> Array<AnyObject>? {
+    public func transformToJSON(_ value: List<T>?) -> Array<AnyObject>? {
         
         guard let realmList = value, realmList.count > 0 else { return nil }
         
@@ -45,7 +49,7 @@ class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
 
 
 
-class AssignmentObject:Object,Mappable{
+open class AssignmentObject:Object,Mappable{
     
     
    dynamic var assignmentId:String?
@@ -62,17 +66,17 @@ class AssignmentObject:Object,Mappable{
     dynamic var time :String?
     
     dynamic var assignmentDetails:String?
-    override static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "assignmentId"
         
     }
     
     //Impl. of Mappable protocol
-    required convenience init?(map: Map) {
+    required convenience public init?(map: Map) {
         self.init()
     }
     
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         latitude    <- map["latitude"]
         longitude <- map["longitude"]
         accuracy <- map["accuracy"]
@@ -95,7 +99,7 @@ class AssignmentObject:Object,Mappable{
 }
 
 
-class RMCAssignmentObject :Object,Mappable {
+open class RMCAssignmentObject :Object,Mappable {
     dynamic var assignmentId:String?
     dynamic var addedOn:String?
     dynamic var time:String?
@@ -116,14 +120,14 @@ class RMCAssignmentObject :Object,Mappable {
     dynamic var downloadedOn:Date?
     dynamic var submittedOn:Date?
     dynamic var newAssignment :String?
-    override static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "assignmentId"
         
     }
-    required convenience init?(map: Map) {
+    required convenience public init?(map: Map) {
         self.init()
     }
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         addedOn    <- map["addedOn"]
         time <- map["time"]
         updatedOn <- map["updatedOn"]
@@ -149,37 +153,37 @@ class RMCAssignmentObject :Object,Mappable {
 }
 
 
-class RMCAssignee :Object,Mappable{
+open class RMCAssignee :Object,Mappable{
     dynamic var userId:String?;
     dynamic var organizationId:String?;
     
-    required convenience init?(map: Map) {
+    required convenience public init?(map: Map) {
         self.init()
     }
     //    override static func primaryKey() -> String? {
     //        return "userId"
     //
     //    }
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         userId    <- map["userId"]
         organizationId <- map["organizationId"]
     }
 }
-class assignmentLog:Object{
+open class assignmentLog:Object{
     dynamic var status :String?
     dynamic var time:String?
     dynamic var checkinId:String?
 }
 
-class RMCLocation:Object,Mappable{
+open class RMCLocation:Object,Mappable{
     dynamic var latitude:String?
     dynamic var longitude:String?
     dynamic var altitude:String?
     dynamic var accuracy:String?
-    required convenience init?(map: Map) {
+    required convenience public init?(map: Map) {
         self.init()
     }
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         latitude    <- map["latitude"]
         longitude <- map["longitude"]
         accuracy <- map["accuracy"]
@@ -188,7 +192,7 @@ class RMCLocation:Object,Mappable{
     
 }
 
-class AssignmentHolder:NSObject{
+open class AssignmentHolder:NSObject{
     
     
     var assignmentId:String?

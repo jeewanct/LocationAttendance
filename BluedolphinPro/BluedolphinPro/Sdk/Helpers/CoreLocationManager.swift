@@ -19,9 +19,9 @@ struct CurrentLocation {
     static var time = Date()
 }
 
-import CoreLocation
 
-class CoreLocationController : NSObject, CLLocationManagerDelegate {
+
+open class CoreLocationController : NSObject, CLLocationManagerDelegate {
     
     var locationManager:CLLocationManager = CLLocationManager()
     
@@ -46,7 +46,7 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("didChangeAuthorizationStatus")
         
         switch status {
@@ -70,7 +70,7 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         
         let location = locations.last! as CLLocation
@@ -82,7 +82,7 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         print(CurrentLocation.time)
         
     }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error while updating location " + error.localizedDescription)
     }
     

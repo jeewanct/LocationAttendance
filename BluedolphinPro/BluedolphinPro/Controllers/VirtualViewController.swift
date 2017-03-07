@@ -22,7 +22,7 @@ var menuView: CustomNavigationDropdownMenu!
         powerStepper.maximumValue = -10.0
     
         powerStepper.minimumValue = -127.0
-        
+        powerStepper.isHidden = true
         powerLabel.text = "Power(dBm) \(powerStepper.value)"
         // Do any additional setup after loading the view.
     }

@@ -11,14 +11,14 @@ import Foundation
 import RealmSwift
 
 
-class OauthModel :Meta{
+open class OauthModel :Meta{
     
     internal static func url() -> String {
         return   APIURL + ModuleUrl.Oauth.rawValue
     }
     
     
-    func getToken(userObject:[String:Any],completion: @escaping (_ result: String) -> Void){
+   public func getToken(userObject:[String:Any],completion: @escaping (_ result: String) -> Void){
         
         
         let headers = [
@@ -91,7 +91,7 @@ class OauthModel :Meta{
     }
     
     
-    func updateToken(){
+  public  func updateToken(){
          let realm = try! Realm()
         var today : Bool?
         if let todayDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.startDate.rawValue) as? Date {

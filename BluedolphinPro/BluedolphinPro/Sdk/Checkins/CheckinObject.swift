@@ -12,7 +12,7 @@ import RealmSwift
 import ObjectMapper
 
 
-class RMCCheckin:Object,Mappable{
+open class RMCCheckin:Object,Mappable{
     
     dynamic var latitude:String?
     dynamic var longitude:String?
@@ -26,25 +26,23 @@ class RMCCheckin:Object,Mappable{
     dynamic var checkinDetails:String?
     dynamic var imageUrl:String?
     dynamic var assignmentId:String?
-    
-    
-    
     dynamic var imageName:String?
     dynamic var relativeUrl:String?
     dynamic var jobNumber:String?
-    
     var beaconProximity  = List<RMCBeacon>()
-    override static func primaryKey() -> String? {
+    
+    
+    override open static func primaryKey() -> String? {
         return "checkinId"
         
     }
     
     //Impl. of Mappable protocol
-    required convenience init?(map: Map) {
+    required convenience public  init?(map: Map) {
         self.init()
     }
     
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         latitude    <- map["latitude"]
         longitude <- map["longitude"]
         accuracy <- map["accuracy"]

@@ -8,19 +8,19 @@
 
 import Foundation
 import RealmSwift
-enum BeaconScanning:String{
+public enum BeaconScanning:String{
   case StartScanning
   case NoScanning
   case Failure
 }
 
-class VicinityManager {
+open class VicinityManager {
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Organisation.rawValue + SDKSingleton.sharedInstance.organizationId 
     }
     
     
-    func getHeader()->[String:String]{
+  public  func getHeader()->[String:String]{
         let headers = [
             "Content-Type":"application/json",
             "Accept-Encoding":"application/gzip",
@@ -32,7 +32,7 @@ class VicinityManager {
         return headers
     }
     
-    func getNearByBeacons(completion: @escaping (_ result: BeaconScanning) -> Void){
+   public func getNearByBeacons(completion: @escaping (_ result: BeaconScanning) -> Void){
         let url = VicinityManager.url() + "/beacon?vicinity=\(CurrentLocation.coordinate.latitude),\(CurrentLocation.coordinate.longitude)&maxDistance=2000"
         print(url)
         NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
@@ -65,7 +65,7 @@ class VicinityManager {
         }
     }
     
-    func saveBeacons(data:NSDictionary){
+   public func saveBeacons(data:NSDictionary){
         let vicintyBeacon = VicinityBeacon()
         if let beaconData = data["beaconData"] as? NSDictionary {
             if let beaconlocation = beaconData["location"] as? NSDictionary{
@@ -126,7 +126,8 @@ class VicinityManager {
             realm.add(vicintyBeacon,update:true)
         }
     }
-    func fetchBeaconsFromDb() ->Results<VicinityBeacon>{
+    
+   public func fetchBeaconsFromDb() ->Results<VicinityBeacon>{
         let realm = try! Realm()
         let beacons = realm.objects(VicinityBeacon.self)
         return beacons

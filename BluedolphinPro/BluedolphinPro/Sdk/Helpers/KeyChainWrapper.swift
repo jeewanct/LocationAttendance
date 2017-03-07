@@ -10,7 +10,7 @@
 import Foundation
 import Security
 
-class KeychainService: NSObject {
+open class KeychainService: NSObject {
     
     var service = "Service"
     var keychainQuery :[NSString: AnyObject]! = nil

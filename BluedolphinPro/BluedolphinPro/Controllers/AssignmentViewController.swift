@@ -335,7 +335,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     func createMapView(){
         DispatchQueue.main.async {
-            googleMapUsage.sharedInstance.globalMapView = GMSMapView(frame: CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.mapView.frame.height))
+            googleMapUsage.sharedInstance.globalMapView = GMSMapView(frame: CGRect(x: 0, y: 2, width: self.view.frame.width, height: self.mapView.frame.height - 2))
             self.mapView.addSubview(googleMapUsage.sharedInstance.globalMapView)
             googleMapUsage.sharedInstance.globalMapView.delegate=self
             googleMapUsage.sharedInstance.globalMapView.animate(toZoom: 10)
@@ -378,7 +378,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
                 
             }
             
-            googleMapUsage.sharedInstance.globalMapView.animate(with: GMSCameraUpdate.fit(bounds))
+            googleMapUsage.sharedInstance.globalMapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 30.0))
         })
     }
     func createViewPager(){

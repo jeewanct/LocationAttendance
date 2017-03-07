@@ -18,15 +18,15 @@ func ChangeRootVC(_ presentViewController: UIViewController,destinationView: UIV
 }
 
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-    Swift.print(items[0], separator:separator, terminator: terminator)
+    //Swift.print(items[0], separator:separator, terminator: terminator)
 }
 
-func getCurrentDate()->Date{
+public func getCurrentDate()->Date{
     return TrueTimeClient.sharedInstance.referenceTime?.time ?? Date()
         //Date()
 }
 
-func currenViewController() -> UIViewController {
+public func currenViewController() -> UIViewController {
     
     let window = UIApplication.shared.windows[0]
     
@@ -43,7 +43,7 @@ func currenViewController() -> UIViewController {
     
 }
 
-func toDictionary(text: String) -> AnyObject? {
+public func toDictionary(text: String) -> AnyObject? {
     if let data = text.data(using: String.Encoding.utf8) {
         do {
             return try JSONSerialization.jsonObject(with: data, options: []) as AnyObject
@@ -54,7 +54,7 @@ func toDictionary(text: String) -> AnyObject? {
     return nil
 }
 
-func toJsonString(_ dict:AnyObject)->String{
+public func toJsonString(_ dict:AnyObject)->String{
     
     var tempJson : String = ""
     do {
@@ -68,7 +68,7 @@ func toJsonString(_ dict:AnyObject)->String{
 }
 
 
-func getUserData(){
+public func getUserData(){
     let realm = try! Realm()
     let storage = UserDefaults.standard
     if let organizationId = storage.value(forKey: UserDefaultsKeys.organizationId.rawValue) as? String{

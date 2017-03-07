@@ -12,6 +12,8 @@ import GoogleMaps
 import IQKeyboardManagerSwift
 import RealmSwift
 import TrueTime
+import Fabric
+import Crashlytics
 
 
 @UIApplicationMain
@@ -43,7 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        postTransientCheckin()
+        if !SDKSingleton.sharedInstance.userId.isBlank{
+            postTransientCheckin()
+        }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
@@ -69,6 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func startUpTask(){
         TrueTimeClient.sharedInstance.start()
+        Fabric.with([Crashlytics.self])
         updateRealmConfiguration()
         self.coreLocationController  = CoreLocationController()
         IQKeyboardManager.sharedManager().enable = true

@@ -9,11 +9,11 @@
 import Foundation
 import RealmSwift
 
-func getUUIDString()->String{
+public func getUUIDString()->String{
     return UUID().uuidString
 }
 
-class CheckinModel:Meta{
+open class CheckinModel:Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Organisation.rawValue + SDKSingleton.sharedInstance.organizationId + ModuleUrl.Checkin.rawValue
     }
@@ -33,7 +33,7 @@ class CheckinModel:Meta{
     
     
     
-    func postCheckin(checkinId:String = ""){
+   public func postCheckin(checkinId:String = ""){
         let realm = try! Realm()
         var checkins = realm.objects(RMCCheckin.self)
         if checkinId != "" {
@@ -84,6 +84,7 @@ class CheckinModel:Meta{
             sendCheckin(data:elements )
         }
     }
+    
     func sendCheckin(data:[NSDictionary]){
         let param = [
             //"userId":SDKSingleton.sharedInstance.userId,
@@ -122,7 +123,7 @@ class CheckinModel:Meta{
             return
         }
         switch statusCode{
-        case 200,409:
+        case 200,400:
             if let checkinId = data["checkinId"] as? String{
                 let realm = try! Realm()
                 guard let checkin = realm.objects(RMCCheckin.self).filter("checkinId = %@",checkinId).first  else {
@@ -132,10 +133,6 @@ class CheckinModel:Meta{
                     realm.delete(checkin)
                 }
             }
-            
-            
-            
-            
         default:
             break;
         }
@@ -144,7 +141,7 @@ class CheckinModel:Meta{
         
     }
     
-    func createCheckin(checkinData:CheckinHolder){
+   public func createCheckin(checkinData:CheckinHolder){
         let realm = try! Realm()
         let checkin = RMCCheckin()
         var checkinDetails = checkinData.checkinDetails!
@@ -179,24 +176,18 @@ class CheckinModel:Meta{
                 beconList.append(beconObject)
                 
             }
-            
             checkin.beaconProximity = beconList
         }
-        
-        
         try! realm.write {
             realm.add(checkin, update: true)
         }
-        
-
-        
-        
 
     }
-    func updatePhotoCheckin(){
+   
+    
+    public func updatePhotoCheckin(){
         let realm = try! Realm()
-         var checkins = realm.objects(RMCCheckin.self)
-        print(checkins)
+        var checkins = realm.objects(RMCCheckin.self)
         var customAlbum :CustomPhotoAlbum?
         var checkinId = String()
         checkins = checkins.filter("checkinType=%@",CheckinType.PhotoCheckin.rawValue)
@@ -204,7 +195,6 @@ class CheckinModel:Meta{
             if let checkinDetails = data.checkinDetails?.parseJSONString as? NSDictionary{
                 if let number = checkinDetails["jobNumber"] as? String{
                     customAlbum = CustomPhotoAlbum(name: number)
-                    //data.jobNumber
                 }
             }
             checkinId = data.checkinId!
@@ -226,10 +216,7 @@ class CheckinModel:Meta{
                     
                 })
             }
-            
-           
-            
-            
+
         }
         
         

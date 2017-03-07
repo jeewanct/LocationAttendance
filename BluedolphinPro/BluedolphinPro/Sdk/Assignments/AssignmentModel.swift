@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class AssignmentModel :Meta{
+open class AssignmentModel :Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Organisation.rawValue
     }
@@ -27,7 +27,7 @@ class AssignmentModel :Meta{
     }
     
     
-    func getAssignments(assignmentId:String,completion: @escaping (_ result: String) -> Void){
+   public func getAssignments(assignmentId:String,completion: @escaping (_ result: String) -> Void){
         let url = AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment?assignmentId=" + assignmentId
         print(url)
         NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
@@ -58,7 +58,7 @@ class AssignmentModel :Meta{
     
     
     
-    func getAssignments(status:String,completion: @escaping (_ result: String) -> Void){
+   public func getAssignments(status:String,completion: @escaping (_ result: String) -> Void){
         let url = AssignmentModel.url() + SDKSingleton.sharedInstance.organizationId + "/assignment?assigneeId=" + SDKSingleton.sharedInstance.userId + "&status=" + status
         print(url)
         NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
@@ -96,7 +96,7 @@ class AssignmentModel :Meta{
         
     }
     
-    func postdbAssignments(){
+   public func postdbAssignments(){
         let realm = try! Realm()
         let checkins = realm.objects(AssignmentObject.self)
         var data = [NSDictionary]()
@@ -152,7 +152,7 @@ class AssignmentModel :Meta{
     }
     
     
-    func postAssignments(assignment:NSObject){
+   public func postAssignments(assignment:NSObject){
        
         var data = [NSDictionary]()
       
@@ -200,7 +200,7 @@ class AssignmentModel :Meta{
     
     
     
-    func createAssignment(assignmentData:AssignmentHolder){
+  public func createAssignment(assignmentData:AssignmentHolder){
         
         saveSelfAssignment(assignmentData: assignmentData)
         
@@ -227,7 +227,7 @@ class AssignmentModel :Meta{
         
     }
     
-    func getAssignmentFromDb(assignmentId:String)->Results<RMCAssignmentObject>{
+   public func getAssignmentFromDb(assignmentId:String)->Results<RMCAssignmentObject>{
         let realm = try! Realm()
         let assignments = realm.objects(RMCAssignmentObject.self).filter("assignmentId= %@",assignmentId)
         return assignments
@@ -393,7 +393,7 @@ class AssignmentModel :Meta{
     
 
     
-    func updateAssignment(id:String,type:AssignmentWork,value:String,status:CheckinType){
+   public func updateAssignment(id:String,type:AssignmentWork,value:String,status:CheckinType){
         let realm = try! Realm()
         let assignment = realm.objects(RMCAssignmentObject.self).filter("assignmentId = %@",id).first
             try! realm.write {

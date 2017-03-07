@@ -10,6 +10,15 @@ import Foundation
 
 import Photos
 
+extension PHAssetCollection {
+    var photosCount: Int {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
+        let result = PHAsset.fetchAssets(in: self, options: fetchOptions)
+        return result.count
+    }
+}
+
 class CustomPhotoAlbum {
     
     var albumName = "Flashpod"
@@ -55,7 +64,7 @@ class CustomPhotoAlbum {
         PHPhotoLibrary.shared().performChanges({
             if #available(iOS 9.0, *) {
                 let options = PHAssetResourceCreationOptions()
-                options.originalFilename = "BD_Signature" + Date().timeStamp()
+                options.originalFilename = "BD_Signature" + getCurrentDate().timeStamp()
                 let newcreation:PHAssetCreationRequest = PHAssetCreationRequest.forAsset()
                 newcreation.addResource(with: PHAssetResourceType.photo, data:UIImageJPEGRepresentation(image, 1)!, options: options)
                 assetPlaceholder = newcreation.placeholderForCreatedAsset
@@ -169,7 +178,10 @@ class CustomPhotoAlbum {
     }
     
     func imageCountInAlbum() ->Int{
-        return assetCollection.estimatedAssetCount
+        if let assets = assetCollection {
+        return assets.photosCount
+        }
+        return 0
     }
     
     

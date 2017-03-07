@@ -59,7 +59,7 @@ class AlertView: UIView {
         loadingView.addSubview(label)
         loadingView.addSubview(activityIndicator)
         container.addSubview(loadingView)
-        uiView.addSubview(container)
+        uiView.window?.addSubview(container)
         container.tag = 1000000
         activityIndicator.startAnimating()
         container.tag = 10000;

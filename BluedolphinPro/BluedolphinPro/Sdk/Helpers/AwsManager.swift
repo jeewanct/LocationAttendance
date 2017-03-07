@@ -10,7 +10,7 @@ import Foundation
 
 import AWSS3
 
-class AWSS3Manager {
+open class AWSS3Manager {
     var CognitoPoolID = String()
     var Region : AWSRegionType?
     var S3BucketName:String?

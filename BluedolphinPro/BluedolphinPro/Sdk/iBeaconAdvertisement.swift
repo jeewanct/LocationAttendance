@@ -16,7 +16,7 @@ import CoreBluetooth
 let IBeaconBroadcasterSharedInstance = IBeaconBroadcaster()
 
 
-class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
+open class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
     // Dictionary to hold the beacon config paramaters
     
@@ -214,7 +214,7 @@ class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
      *
      */
     
-    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+    public func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         
         if (peripheral.state == .poweredOn) {
             
