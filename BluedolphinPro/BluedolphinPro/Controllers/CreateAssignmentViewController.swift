@@ -28,13 +28,14 @@ class CreateAssignmentViewController: UIViewController {
     let datePicker = UIDatePicker()
     var selectedLocation = CLLocation()
     var assignmentAddress = String()
+    var tabView:ViewPagerControl!
    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Create Assignments"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(CreateAssignmentViewController.cancelPressed(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(CreateAssignmentViewController.savePressed(_:)))
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(CreateAssignmentViewController.savePressed(_:)))
         setDelegate()
         // Do any additional setup after loading the view.
     }
@@ -65,15 +66,62 @@ class CreateAssignmentViewController: UIViewController {
         self.addressButton.layer.cornerRadius = 5
         self.addressButton.titleLabel?.numberOfLines = 2
         addressButton.addTarget(self, action: #selector(addressButtonAction), for: UIControlEvents.touchUpInside)
+        //createTabbarView()
         
         
+    }
+    
+    func createTabbarView(){
+        
+       let data = ["Save as Draft","Save"]
+        tabView = ViewPagerControl(items: data)
+        tabView.type = .text
+        tabView.frame = CGRect(x: 0, y: ScreenConstant.height - 114, width: ScreenConstant.width, height: 50)
+        
+        
+        tabView.selectionIndicatorColor = UIColor.white
+        //tabView.showSelectionIndication = false
+        self.view.addSubview(tabView)
+        
+        tabView.indexChangedHandler = { index in
+            
+            self.tabChanger(segment: index)
+            
+        }
+        
+    }
+    
+    @IBAction func saveAction(_ sender: UIButton) {
+        switch sender.tag{
+        case 1001:
+            break
+            
+        case 1002:
+            savePressed()
+        default:break
+            
+        }
+        
+    }
+    
+    func tabChanger(segment:Int){
+        switch segment {
+        case 0:
+            break
+        case 1:
+           savePressed()
+            
+            
+        default:
+            break
+        }
     }
     func cancelPressed(_:UIButton){
         self.dismiss(animated: true, completion: nil)
         
     }
     
-    func savePressed(_:UIButton){
+    func savePressed(){
         //        if placeNameTextfield.text!.isBlank{
         //            self.showAlert(SelfAssignmentError.placeNameError.rawValue)
         //        }else
