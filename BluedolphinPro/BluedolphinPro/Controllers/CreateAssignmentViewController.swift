@@ -66,7 +66,7 @@ class CreateAssignmentViewController: UIViewController {
         self.addressButton.layer.cornerRadius = 5
         self.addressButton.titleLabel?.numberOfLines = 2
         addressButton.addTarget(self, action: #selector(addressButtonAction), for: UIControlEvents.touchUpInside)
-        //createTabbarView()
+        createTabbarView()
         
         
     }
@@ -76,7 +76,7 @@ class CreateAssignmentViewController: UIViewController {
        let data = ["Save as Draft","Save"]
         tabView = ViewPagerControl(items: data)
         tabView.type = .text
-        tabView.frame = CGRect(x: 0, y: ScreenConstant.height - 114, width: ScreenConstant.width, height: 50)
+        tabView.frame = CGRect(x: 0, y: ScreenConstant.height - 50, width: ScreenConstant.width, height: 50)
         
         
         tabView.selectionIndicatorColor = UIColor.white

@@ -57,6 +57,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     var sortChanger:ListSelection?
     
     
+    @IBOutlet weak var bottomStackView: UIStackView!
     
     func setbuttonImage(){
         listButton.setImage(#imageLiteral(resourceName: "list_active"), for: UIControlState.selected)
@@ -323,6 +324,14 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         popListView.delegate = self
         popListView.isHidden = true
         setbuttonImage()
+        
+        self.bottomStackView.layer.masksToBounds = false
+        let shadowPath = UIBezierPath(roundedRect: self.bottomStackView.bounds, cornerRadius: 2)
+        self.bottomStackView.backgroundColor = UIColor.gray
+        self.bottomStackView.layer.shadowColor = UIColor.black.cgColor
+        self.bottomStackView.layer.shadowOffset = CGSize(width: 0, height: 1);
+        self.bottomStackView.layer.shadowOpacity = 0.3
+        self.bottomStackView.layer.shadowPath = shadowPath.cgPath
     }
     
     func notificationAction(_:Any){

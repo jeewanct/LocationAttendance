@@ -223,7 +223,7 @@ class ViewPagerControl: UIControl {
             let attributedTitle = NSAttributedString(string: item, attributes: titleTextAttributes)
             button.setAttributedTitle(attributedTitle, for: .normal)
         } else {
-            button.setTitleColor(.black, for: .normal)
+            button.setTitleColor(APPCOLOR.navColor, for: .normal)
         }
         
         if let selectedTitleTextAttributes = selectedTitleTextAttributes {
