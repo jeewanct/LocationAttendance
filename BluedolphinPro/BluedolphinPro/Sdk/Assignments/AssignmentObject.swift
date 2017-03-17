@@ -11,11 +11,7 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-open
-
-
-
-class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
+open class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
     public typealias Object = List<T>
     public typealias JSON = Array<AnyObject>
     

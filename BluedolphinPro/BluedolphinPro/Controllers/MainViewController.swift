@@ -32,6 +32,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Draft.rawValue), object: nil)
     }
     
     func getNearByBeacons(){
@@ -136,6 +137,8 @@ class MainViewController: UIViewController {
     
 }
 
+draftNav
+
 extension MainViewController {
     func ShowController (sender : NSNotification) {
         switch (sender.name.rawValue) {
@@ -206,6 +209,27 @@ extension MainViewController {
             
             lastController?.removeFromParentViewController()
             let destVc = self.storyboard?.instantiateViewController(withIdentifier: "VirtualBeacon") as! UINavigationController
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainerView.frame
+            self.mainContainerView.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
+        case LocalNotifcation.Draft.rawValue:
+            
+            
+            var lastController: AnyObject?
+            
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainerView.subviews {
+                views.removeFromSuperview()
+            }
+            lastController?.willMove(toParentViewController: nil)
+            
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "draftNav") as! UINavigationController
             self.addChildViewController(destVc)
             destVc.view.frame = self.mainContainerView.frame
             self.mainContainerView.addSubview(destVc.view)
@@ -304,7 +328,7 @@ extension MainViewController {
             }
             if beaconSentflag {
                 beaconSentflag = false
-                let delay = 600.0 * Double(NSEC_PER_SEC)
+                let delay = 60.0 * Double(NSEC_PER_SEC)
                 let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: time, execute: {
                     self.beaconSentflag = true
@@ -324,9 +348,9 @@ extension MainViewController {
                         //        checkin.relativeUrl = imageId
                         let checkinModelObject = CheckinModel()
                         checkinModelObject.createCheckin(checkinData: checkin)
-                        //                        if isInternetAvailable(){
-                        //                            checkinModelObject.postCheckin()
-                        //                        }
+                                                if isInternetAvailable(){
+                                                    checkinModelObject.postCheckin()
+                                                }
                         
                     }
                 })

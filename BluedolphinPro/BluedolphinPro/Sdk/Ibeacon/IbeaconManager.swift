@@ -52,7 +52,7 @@ open class IBeaconManager: NSObject, CLLocationManagerDelegate {
         //        bluetoothManager.callback = bluetoothUpdate
         locationManager.delegate = self
         registerNotifications()
-        //locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
         //test if enabled
     }
     
@@ -252,7 +252,7 @@ open class IBeaconManager: NSObject, CLLocationManagerDelegate {
         }
         //if we are outside stop ranging
         if state == .outside{
-            manager.stopRangingBeacons(in: region as! CLBeaconRegion)
+         manager.stopRangingBeacons(in: region as! CLBeaconRegion)
         }
         if state == .inside{
             manager.startRangingBeacons(in: region as! CLBeaconRegion)

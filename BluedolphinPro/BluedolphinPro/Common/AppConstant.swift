@@ -38,6 +38,7 @@ enum LocalNotifcation:String{
     case VirtualBeacon = "VirtualBeacon"
     case Pushreceived = "Pushreceived"
     case NewAssignment = "NewAssignment"
+    case Draft = "Draft"
 }
 enum NotificationType:String{
     case NewAssignment = "New-Assignment"

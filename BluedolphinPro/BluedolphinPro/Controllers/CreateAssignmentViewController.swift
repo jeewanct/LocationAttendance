@@ -22,6 +22,7 @@ class CreateAssignmentViewController: UIViewController {
     @IBOutlet weak var addressButton: UIButton!
     var uuidString = String()
     var activeTextfield = UITextField()
+    var alertTextfield = UITextField()
      var changeSegment : SegmentChanger?
     var assignmentStartdate = String()
     var assignmentEnddate = String()
@@ -107,7 +108,12 @@ class CreateAssignmentViewController: UIViewController {
     func tabChanger(segment:Int){
         switch segment {
         case 0:
-            break
+            if assignmentEnddate.isBlank && assignmentStartdate.isBlank && assignmentAddress.isBlank && contactPersonTextfield.text!.isBlank && phoneNumberTextfield.text!.isBlank &&emailTextfield.text!.isBlank {
+                self.showAlert("Please fill fields to save as draft")
+            }else {
+                showTextfieldAlert()
+            }
+            
         case 1:
            savePressed()
             
@@ -176,6 +182,48 @@ class CreateAssignmentViewController: UIViewController {
         
     }
     
+    
+    func createDraft(description:String){
+        let draft = DraftAssignmentObject()
+        if !assignmentAddress.isBlank{
+        draft.assignmentAddress = assignmentAddress
+            draft.accuracy = String(selectedLocation.horizontalAccuracy)
+            draft.altitude = String(selectedLocation.altitude)
+            draft.longitude = String(selectedLocation.coordinate.longitude)
+            draft.latitude = String(selectedLocation.coordinate.latitude)
+        }
+        if !emailTextfield.text!.isBlank{
+            draft.email = emailTextfield.text
+        }
+        if !contactPersonTextfield.text!.isBlank{
+            draft.contactPerson = contactPersonTextfield.text
+        }
+        if !phoneNumberTextfield.text!.isBlank{
+            draft.mobile = phoneNumberTextfield.text
+        }
+        if !contactPersonTextfield.text!.isBlank{
+            draft.contactPerson = contactPersonTextfield.text
+        }
+        if !assignmentEnddate.isBlank{
+            draft.assignmentDeadline = assignmentEnddate
+        }
+        if !assignmentStartdate.isBlank{
+            draft.assignmentStartTime = assignmentStartdate
+        }
+        uuidString = getUUIDString()
+        draft.assignmentId = uuidString
+        draft.jobNumber = getJobNumber()
+        draft.draftDescription = description
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(draft,update:true)
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    
+    }
+
     func createAssignment(){
         uuidString = getUUIDString()
         let assignmentObject = AssignmentHolder()
@@ -223,6 +271,50 @@ class CreateAssignmentViewController: UIViewController {
         }
         
     }
+    
+    
+    //Textfield Alert
+    func configurationTextField(_ textField: UITextField!)
+    {
+        print("configurat hire the TextField")
+        
+        if let tField = textField {
+            
+            self.alertTextfield = tField        //Save reference to the UITextField
+            self.alertTextfield.placeholder = "Enter description"
+        }
+    }
+    
+    
+    func handleCancel(_ alertView: UIAlertAction!)
+    {
+        print("User click Cancel button")
+        print(self.alertTextfield.text!)
+    }
+    
+    func showTextfieldAlert(){
+        let alert = UIAlertController(title: "Enter Description", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addTextField(configurationHandler: configurationTextField)
+        
+        alert.addAction(UIAlertAction(title: "Discard", style: UIAlertActionStyle.cancel, handler:handleCancel))
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler:{ (UIAlertAction)in
+            print("User click Ok button")
+            print(self.alertTextfield.text!)
+            if self.alertTextfield.text!.isBlank {
+                
+                
+            }else {
+                self.createDraft(description: self.alertTextfield.text!)
+            }
+            
+        }))
+        self.present(alert, animated: true, completion: {
+            
+            print("completion block")
+        })
+    }
+    
     
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)

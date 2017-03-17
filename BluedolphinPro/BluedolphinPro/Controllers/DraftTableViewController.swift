@@ -1,89 +1,32 @@
 //
-//  VirtualViewController.swift
+//  DraftTableViewController.swift
 //  BluedolphinPro
 //
-//  Created by Raghvendra on 22/02/17.
+//  Created by Raghvendra on 17/03/17.
 //  Copyright © 2017 raremediacompany. All rights reserved.
 //
 
 import UIKit
 
-class VirtualViewController: UIViewController {
-var menuView: CustomNavigationDropdownMenu!
-    
-    @IBOutlet weak var powerStepper: UIStepper!
-   // @IBOutlet weak var powerSlider: UISlider!
-    var major  = 65535
-    @IBOutlet weak var powerLabel: UILabel!
-    
+class DraftTableViewController: UITableViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        createNavView()
-        powerStepper.value = -78.0
-        powerStepper.maximumValue = -10.0
-    
-        powerStepper.minimumValue = -127.0
-        powerStepper.isHidden = true
-        powerLabel.text = "Power(dBm) \(powerStepper.value)"
-        // Do any additional setup after loading the view.
-    }
-    @IBAction func broadcastBeacon(_ sender: UIButton) {
-//        if sender.isSelected{
-//        
-//            sender.setImage(#imageLiteral(resourceName: "submitted"), for: UIControlState.normal)
-//        }else{
-//            
-//            IBeaconBroadcaster.sharedInstance.setBeacon(uuid: SDKSingleton.sharedInstance.userId, major: NSNumber(integerLiteral: major), minor: 65535, power:  NSNumber(floatLiteral: powerStepper.value))
-//            print(IBeaconBroadcaster.sharedInstance.startBeacon())
-//            sender.setImage(#imageLiteral(resourceName: "signature-placeholder"), for: UIControlState.normal)
-//        
-//
-//        }
-//        
-//       sender.isSelected = !sender.isSelected
-    
-        IBeaconBroadcaster.sharedInstance.setBeacon(uuid: SDKSingleton.sharedInstance.userId, major: NSNumber(integerLiteral: major), minor: 65535, power:  NSNumber(floatLiteral: powerStepper.value))
-        print(IBeaconBroadcaster.sharedInstance.startBeacon())
-        
-        let delay = 1.0 * Double(NSEC_PER_SEC)
-        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: time, execute: {
-        print(IBeaconBroadcaster.sharedInstance.stopBeacon())
-        })
-        
-    }
-    
-    @IBAction func segmentAction(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            major = 65535
-        case 1:
-            major = 65534
-        case 2:
-            major = 65533
-        case 3:
-            major = 65532
-        default:
-            major = 65535
-        }
-        
-    }
-    
-    
-//    @IBAction func power(_ sender: UISlider) {
-//        powerLabel.text = "Power(dBm) \(sender.value)"
-//        
-//        
-//    }
 
-    @IBAction func power(_ sender: UIStepper) {
-        
-        powerLabel.text = "Power(dBm) \(sender.value)"
+         createNavView()
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    
     func createNavView(){
         let items = [ "Assignments", "Profile","VirtualBeacon","Drafts"]
         
@@ -92,7 +35,7 @@ var menuView: CustomNavigationDropdownMenu!
         //UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         
-        menuView = CustomNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "VirtualBeacon", items: items as [AnyObject])
+        menuView = CustomNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Draft", items: items as [AnyObject])
         menuView.cellHeight = 50
         menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
         
@@ -130,6 +73,64 @@ var menuView: CustomNavigationDropdownMenu!
             break
         }
     }
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 0
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return 0
+    }
+
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "draftCell", for: indexPath)
+        cell.textLabel.text = "TEST-090"
+        cell.detailTextLabel.text = "Loreal ipsum"
+
+        // Configure the cell...
+
+        return cell
+    }
+
+
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
 
     /*
     // MARK: - Navigation
