@@ -799,7 +799,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremediacompany.BluedolphinPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "718a0c11-b0e2-4b46-b02f-807bfe4c33bc";
+				PROVISIONING_PROFILE = "2abc92d4-64a4-4725-a67a-c7b72a4116ba";
 				PROVISIONING_PROFILE_SPECIFIER = BluedolphinProDev;
 				SWIFT_OBJC_BRIDGING_HEADER = "BluedolphinPro/Wired/BluedolphinPro-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

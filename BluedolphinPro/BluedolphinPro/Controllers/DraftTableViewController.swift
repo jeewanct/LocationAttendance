@@ -7,20 +7,33 @@
 //
 
 import UIKit
+import RealmSwift
 
 class DraftTableViewController: UITableViewController {
-
+    var drafts : Results<DraftAssignmentObject>!
+    var menuView :CustomNavigationDropdownMenu!
     override func viewDidLoad() {
         super.viewDidLoad()
 
          createNavView()
+        
+        self.tableView.tableFooterView = UIView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    func getDrafts(){
+        let realm = try! Realm()
+        drafts = realm.objects(DraftAssignmentObject.self)
+        tableView.reloadData()
+        
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        getDrafts()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -35,7 +48,7 @@ class DraftTableViewController: UITableViewController {
         //UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         
-        menuView = CustomNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Draft", items: items as [AnyObject])
+        menuView = CustomNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Drafts", items: items as [AnyObject])
         menuView.cellHeight = 50
         menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
         
@@ -77,25 +90,46 @@ class DraftTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        if let data = drafts{
+           return data.count
+        }else{
+            return 0
+        }
     }
-
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "draftCell", for: indexPath)
-        cell.textLabel.text = "TEST-090"
-        cell.detailTextLabel.text = "Loreal ipsum"
-
+        let draftObject = drafts[indexPath.row]
+        cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.font = UIFont(name: "SourceSansPro-Regular", size: 17)
+        cell.detailTextLabel?.textColor = UIColor.black
+        cell.detailTextLabel?.font = UIFont(name: "SourceSansPro-Regular", size: 17)
+        cell.detailTextLabel?.numberOfLines = 3
+        cell.textLabel?.text = draftObject.jobNumber
+        cell.detailTextLabel?.text = draftObject.draftDescription?.toProper
+        
         // Configure the cell...
 
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let object = drafts[indexPath.row]
+        let navController = self.storyboard?.instantiateViewController(withIdentifier: "selfAssignNav") as! UINavigationController
+        let controller = navController.topViewController as! CreateAssignmentViewController
+        controller.draftObject = object
+        controller.draftFlag = true
+        self.present(navController, animated: true, completion: nil)
+    }
 
     /*
     // Override to support conditional editing of the table view.

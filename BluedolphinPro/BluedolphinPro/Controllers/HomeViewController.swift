@@ -160,7 +160,7 @@ class HomeViewController: UIViewController {
             break
         }
     }
-    }
+    
 
 //    func createNavView(){
 //        let items = ["My Dashboard", "Assignments", "Calendar", "Call History", "Profile"]

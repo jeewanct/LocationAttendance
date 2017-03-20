@@ -65,6 +65,12 @@ extension UILabel {
 }
 
 extension String {
+    var toProper:String {
+        if self.characters.count == 0 {
+            return self
+        }
+            return String(self[self.startIndex]).capitalized + String(self.characters.dropFirst())
+        }
     subscript (r: Range<Int>) -> String {
         get {
             let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import UserNotifications
+import UserNotificationsUI
 
 class MainViewController: UIViewController {
     @IBOutlet weak var mainContainerView: UIView!
@@ -137,7 +138,6 @@ class MainViewController: UIViewController {
     
 }
 
-draftNav
 
 extension MainViewController {
     func ShowController (sender : NSNotification) {
@@ -305,6 +305,33 @@ extension MainViewController {
             print("Error Messages \(messages)")
         }
     }
+    
+   
+    
+    
+    func sendNotification() {
+       
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
+                                                        repeats: false)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Bluedolphin ALert"
+        content.subtitle = ""
+        content.body = "Your attendance has been marked"
+        content.badge = 0
+   
+        content.sound = UNNotificationSound.default()
+        
+        let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
+        
+        //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().add(request) {(error) in
+            if let error = error {
+                print("Uh oh! We had an error: \(error)")
+            }
+        }
+    }
     /**Called when the beacons are ranged*/
     func beaconsRanged(notification:NSNotification){
         if let visibleIbeacons = notification.object as? [iBeacon]{
@@ -328,6 +355,7 @@ extension MainViewController {
             }
             if beaconSentflag {
                 beaconSentflag = false
+                sendNotification()
                 let delay = 60.0 * Double(NSEC_PER_SEC)
                 let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: time, execute: {

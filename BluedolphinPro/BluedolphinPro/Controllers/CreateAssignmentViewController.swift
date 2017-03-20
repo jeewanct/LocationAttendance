@@ -20,16 +20,18 @@ class CreateAssignmentViewController: UIViewController {
     @IBOutlet weak var contactPersonTextfield: UITextField!
    
     @IBOutlet weak var addressButton: UIButton!
-    var uuidString = String()
-    var activeTextfield = UITextField()
-    var alertTextfield = UITextField()
-     var changeSegment : SegmentChanger?
-    var assignmentStartdate = String()
-    var assignmentEnddate = String()
-    let datePicker = UIDatePicker()
-    var selectedLocation = CLLocation()
-    var assignmentAddress = String()
-    var tabView:ViewPagerControl!
+    fileprivate var uuidString = String()
+   fileprivate var activeTextfield = UITextField()
+    fileprivate var alertTextfield = UITextField()
+    var changeSegment : SegmentChanger?
+    fileprivate var assignmentStartdate = String()
+    fileprivate var assignmentEnddate = String()
+    fileprivate let datePicker = UIDatePicker()
+   fileprivate var selectedLocation = CLLocation()
+   fileprivate var assignmentAddress = String()
+   fileprivate var tabView:ViewPagerControl!
+    var draftObject :DraftAssignmentObject?
+    var draftFlag = false
    
 
     override func viewDidLoad() {
@@ -68,10 +70,48 @@ class CreateAssignmentViewController: UIViewController {
         self.addressButton.titleLabel?.numberOfLines = 2
         addressButton.addTarget(self, action: #selector(addressButtonAction), for: UIControlEvents.touchUpInside)
         createTabbarView()
+        setDraftForm()
+        
         
         
     }
     
+    func setDraftForm(){
+        if draftFlag {
+            if let data = draftObject?.assignmentAddress {
+                assignmentAddress = data
+                addressButton.setTitle(assignmentAddress, for: UIControlState.normal)
+                
+            }
+            if let data = draftObject?.email {
+                emailTextfield.text = data
+                
+            }
+            if let data = draftObject?.assignmentId {
+                uuidString = data
+                
+            }
+            if let data = draftObject?.mobile {
+                phoneNumberTextfield.text = data
+                
+            }
+            if let data = draftObject?.contactPerson {
+                contactPersonTextfield.text = data
+                
+            }
+            if let data = draftObject?.assignmentStartTime {
+                assignmentStartdate = data
+                startDateTextfield.text = data.asDate.formatted
+                
+            }
+            if let data = draftObject?.assignmentDeadline {
+                assignmentEnddate = data
+                endDateTextfield.text = data.asDate.formatted
+                
+            }
+            
+        }
+    }
     func createTabbarView(){
         
        let data = ["Save as Draft","Save"]
@@ -108,7 +148,7 @@ class CreateAssignmentViewController: UIViewController {
     func tabChanger(segment:Int){
         switch segment {
         case 0:
-            if assignmentEnddate.isBlank && assignmentStartdate.isBlank && assignmentAddress.isBlank && contactPersonTextfield.text!.isBlank && phoneNumberTextfield.text!.isBlank &&emailTextfield.text!.isBlank {
+            if assignmentEnddate.isBlank && assignmentStartdate.isBlank && assignmentAddress.isBlank && contactPersonTextfield.text!.isBlank && phoneNumberTextfield.text!.isBlank && emailTextfield.text!.isBlank {
                 self.showAlert("Please fill fields to save as draft")
             }else {
                 showTextfieldAlert()
@@ -210,7 +250,10 @@ class CreateAssignmentViewController: UIViewController {
         if !assignmentStartdate.isBlank{
             draft.assignmentStartTime = assignmentStartdate
         }
-        uuidString = getUUIDString()
+        if uuidString.isBlank{
+           uuidString = getUUIDString()
+        }
+        
         draft.assignmentId = uuidString
         draft.jobNumber = getJobNumber()
         draft.draftDescription = description
@@ -225,7 +268,9 @@ class CreateAssignmentViewController: UIViewController {
     }
 
     func createAssignment(){
-        uuidString = getUUIDString()
+        if uuidString.isBlank{
+            uuidString = getUUIDString()
+        }
         let assignmentObject = AssignmentHolder()
         assignmentObject.accuracy = String(selectedLocation.horizontalAccuracy)
         assignmentObject.altitude = String(selectedLocation.altitude)
