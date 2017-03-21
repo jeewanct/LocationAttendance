@@ -39,6 +39,7 @@ enum LocalNotifcation:String{
     case Pushreceived = "Pushreceived"
     case NewAssignment = "NewAssignment"
     case Draft = "Draft"
+    case BaseAnalytics 
 }
 enum NotificationType:String{
     case NewAssignment = "New-Assignment"

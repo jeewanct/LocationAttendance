@@ -479,6 +479,25 @@
             </objects>
             <point key="canvasLocation" x="5079.375" y="-282.04225352112678"/>
         </scene>
+        <!--Base Analtics View Controller-->
+        <scene sceneID="tIO-gm-8q1">
+            <objects>
+                <viewController id="lrC-gX-6SH" customClass="BaseAnalticsViewController" customModule="BluedolphinPro" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z9f-7C-w8T"/>
+                        <viewControllerLayoutGuide type="bottom" id="Auc-zf-mFY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r3d-Dz-Yrf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KwA-fr-pT8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z4R-BX-x69" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8514.375" y="347.53521126760563"/>
+        </scene>
         <!--Assignment Detail View Controller-->
         <scene sceneID="U7H-to-Vtd">
             <objects>
@@ -1820,7 +1839,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Signature Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJY-vu-1Em">
-                                <rect key="frame" x="80" y="306" width="160.5" height="21.5"/>
+                                <rect key="frame" x="80.5" y="305.5" width="160.5" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2244,6 +2263,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rcD-0W-KPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5469.375" y="-2717.9577464788731"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="twv-vw-4Ri">
+            <objects>
+                <navigationController storyboardIdentifier="baseNav" automaticallyAdjustsScrollViewInsets="NO" id="Eby-TJ-MZU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c7w-7H-wzZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lrC-gX-6SH" kind="relationship" relationship="rootViewController" id="EFl-58-nhs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SJV-JF-ZAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7516.875" y="347.53521126760563"/>
         </scene>
     </scenes>
     <resources>

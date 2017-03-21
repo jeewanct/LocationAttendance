@@ -125,6 +125,12 @@ extension Foundation.Date {
         if difference.second! > 0 { return seconds }
         return ""
     }
+    func dayOfWeek() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: self).capitalized
+        // or capitalized(with: locale)
+    }
     
     func dateDiff(_ date:Foundation.Date) -> String {
         let calendar: Calendar = Calendar.current
@@ -191,6 +197,7 @@ extension Foundation.Date {
         return timeAgo;
     }
     
+    
     func dayStart() -> Foundation.Date? {
             let comp :DateComponents = Calendar.current.dateComponents([.year, .month,.day], from: self)
         
@@ -256,6 +263,10 @@ extension Date {
         formatter.dateFormat = format
         formatter.timeZone = NSTimeZone.system
         return formatter.string(from: self )
+    }
+    func getDateFromCurrent(val:Int) ->String{
+        
+        return Calendar.current.date(byAdding: .day, value: val, to: self)!.formattedISO8601
     }
 }
 

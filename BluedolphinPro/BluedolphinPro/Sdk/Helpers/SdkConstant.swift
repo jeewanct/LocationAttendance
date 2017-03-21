@@ -31,6 +31,7 @@ enum ModuleUrl :String{
     case Assignment = "/assignment"
     case UpdatePassword = "user/updateotp"
     case GetOtp = "user/otp?mobile="
+    
 }
 
 

@@ -115,7 +115,7 @@ class HomeViewController: UIViewController {
     }
     
     func createNavView(){
-        let items = [ "Assignments", "Profile","VirtualBeacon","Drafts"]
+        let items = ["My DashBoard", "Assignments", "Profile","VirtualBeacon","Drafts",]
         
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor.white
@@ -148,14 +148,17 @@ class HomeViewController: UIViewController {
     func menuChanger(segment:Int){
         switch segment {
         case 0:
+            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.BaseAnalytics.rawValue) , object: nil)
+        case 1:
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue) , object: nil)
             
-        case 1:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
         case 2:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue) , object: nil)
+            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
         case 3:
+            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue) , object: nil)
+        case 4:
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Draft.rawValue) , object: nil)
+        
         default:
             break
         }
