@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
         setObservers()
         getNearByBeacons()
         postdbAssignment()
-       
+        
         //        postTransientCheckin()
         // Do any additional setup after loading the view.
     }
@@ -328,21 +328,25 @@ extension MainViewController {
         }
     }
     
-   
     
     
-    func sendNotification() {
-       
+    
+    func sendNotification(id:String) {
+        var address = String()
+        let beacon = VicinityManager().fetchBeaconsFromDb(uuid: id)
+        for data in beacon{
+            address = data.address!
+        }
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
                                                         repeats: false)
         
         let content = UNMutableNotificationContent()
-        content.title = "Bluedolphin ALert"
+        content.title = "Bluedolphin Alert"
         content.subtitle = ""
-        content.body = "Your attendance has been marked"
+        content.body = "Your entered a location \(address)"
         content.badge = 0
-   
+        
         content.sound = UNNotificationSound.default()
         
         let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
@@ -356,6 +360,7 @@ extension MainViewController {
     }
     /**Called when the beacons are ranged*/
     func beaconsRanged(notification:NSNotification){
+        var beconId = String()
         if let visibleIbeacons = notification.object as? [iBeacon]{
             
             
@@ -372,12 +377,13 @@ extension MainViewController {
                     "lastseen" : getCurrentDate().formattedISO8601
                     
                 ]
+                beconId = beacon.UUID
                 seanbeacons.addEntries(from: [beacon.major! :dict])
                 print(dict)
             }
             if beaconSentflag {
                 beaconSentflag = false
-                sendNotification()
+                sendNotification(id: beconId)
                 let delay = 60.0 * Double(NSEC_PER_SEC)
                 let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: time, execute: {
@@ -398,9 +404,9 @@ extension MainViewController {
                         //        checkin.relativeUrl = imageId
                         let checkinModelObject = CheckinModel()
                         checkinModelObject.createCheckin(checkinData: checkin)
-                                                if isInternetAvailable(){
-                                                    checkinModelObject.postCheckin()
-                                                }
+                        if isInternetAvailable(){
+                            checkinModelObject.postCheckin()
+                        }
                         
                     }
                 })

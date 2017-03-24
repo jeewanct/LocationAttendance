@@ -47,16 +47,16 @@ class AssignmentTableCell: UITableViewCell {
         if let endtime = task.assignmentDeadline {
             startTimeLabel.text =   startTimeLabel.text! + " to " + endtime.formatted
         }
-        if let newAssignment = task.newAssignment{
-            if newAssignment == "true"{
-                newAssignmentLabel.backgroundColor =  APPCOLOR.navColor
-            }else{
-                newAssignmentLabel.backgroundColor = UIColor.white
-            }
-            
-        }else {
-            newAssignmentLabel.backgroundColor = UIColor.white
-        }
+//        if let newAssignment = task.newAssignment{
+//            if newAssignment == "true"{
+//                newAssignmentLabel.backgroundColor =  APPCOLOR.navColor
+//            }else{
+//                newAssignmentLabel.backgroundColor = UIColor.white
+//            }
+//            
+//        }else {
+//            newAssignmentLabel.backgroundColor = UIColor.white
+//        }
         
         bookMarkButton.setImage(#imageLiteral(resourceName: "inactive ribbon"), for: UIControlState.normal)
     }

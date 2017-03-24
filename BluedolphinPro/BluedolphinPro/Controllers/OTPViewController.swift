@@ -115,11 +115,8 @@ class OTPViewController: UIViewController {
                 self.showAlert("Otp Sent")
             case APIResult.InvalidCredentials.rawValue:
                 self.showAlert(ErrorMessage.UserNotFound.rawValue)
-                
             case APIResult.InternalServer.rawValue:
                 self.showAlert(ErrorMessage.InternalServer.rawValue)
-                
-                
             case APIResult.InvalidData.rawValue:
                 self.showAlert(ErrorMessage.NotValidData.rawValue)
             default:

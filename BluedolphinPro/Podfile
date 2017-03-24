@@ -9,6 +9,7 @@ target 'BluedolphinPro' do
 
 pod 'Alamofire'
 pod 'RealmSwift'
+pod 'Charts'
 pod 'AlamofireObjectMapper'
 pod 'GoogleMaps'
 pod 'IQKeyboardManagerSwift'

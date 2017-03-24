@@ -127,7 +127,7 @@ extension Foundation.Date {
     }
     func dayOfWeek() -> String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.dateFormat = "EE"
         return dateFormatter.string(from: self).capitalized
         // or capitalized(with: locale)
     }

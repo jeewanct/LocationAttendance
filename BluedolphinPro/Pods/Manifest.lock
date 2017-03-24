@@ -6,6 +6,9 @@ PODS:
   - AWSCore (2.4.16)
   - AWSS3 (2.4.16):
     - AWSCore (= 2.4.16)
+  - Charts (3.0.1):
+    - Charts/Core (= 3.0.1)
+  - Charts/Core (3.0.1)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
@@ -32,6 +35,7 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
   - AWSS3
+  - Charts
   - Crashlytics
   - Fabric
   - GoogleMaps
@@ -46,6 +50,7 @@ SPEC CHECKSUMS:
   AlamofireObjectMapper: 842d2eed43a4d0593ff0110d54ac86a170c4519c
   AWSCore: 7c3c129991e6387bcbad7132bc3661e7135754db
   AWSS3: fef6aa8f8f625df8f67f1b6574fe761f3a4ddc99
+  Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
@@ -58,6 +63,6 @@ SPEC CHECKSUMS:
   TrueTime: 7924bbe03d015c22a5b59f28001f879f1b4cb183
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: 92f12e31937c28383d772b4e1bd362208171e432
+PODFILE CHECKSUM: 562691ac044b927b97c3ff844a15790d469243db
 
 COCOAPODS: 1.2.0

@@ -37,6 +37,8 @@
 		991B468E1DF027FA0012D8DC /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B468D1DF027FA0012D8DC /* Loader.swift */; };
 		991DCD0C1E7FF51D00A45E2E /* BaseAnaltyics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991DCD0B1E7FF51D00A45E2E /* BaseAnaltyics.swift */; };
 		991DCD0E1E7FF6A800A45E2E /* BaseAnalticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991DCD0D1E7FF6A800A45E2E /* BaseAnalticsViewController.swift */; };
+		991DCD131E8115E300A45E2E /* BarGraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991DCD111E8115E300A45E2E /* BarGraphTableViewCell.swift */; };
+		991DCD141E8115E300A45E2E /* BarGraphTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991DCD121E8115E300A45E2E /* BarGraphTableViewCell.xib */; };
 		991EE2641E3F0D1300E4A00D /* VicinityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2631E3F0D1300E4A00D /* VicinityManager.swift */; };
 		991F09331E0B069200539473 /* CreateAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991F09321E0B069200539473 /* CreateAssignmentViewController.swift */; };
 		992086A71DCCC0850055C6BF /* GlobalSDKFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */; };
@@ -118,6 +120,8 @@
 		991B468D1DF027FA0012D8DC /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		991DCD0B1E7FF51D00A45E2E /* BaseAnaltyics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAnaltyics.swift; sourceTree = "<group>"; };
 		991DCD0D1E7FF6A800A45E2E /* BaseAnalticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAnalticsViewController.swift; sourceTree = "<group>"; };
+		991DCD111E8115E300A45E2E /* BarGraphTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarGraphTableViewCell.swift; sourceTree = "<group>"; };
+		991DCD121E8115E300A45E2E /* BarGraphTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarGraphTableViewCell.xib; sourceTree = "<group>"; };
 		991EE2631E3F0D1300E4A00D /* VicinityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicinityManager.swift; sourceTree = "<group>"; };
 		991F09321E0B069200539473 /* CreateAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAssignmentViewController.swift; sourceTree = "<group>"; };
 		992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSDKFunction.swift; sourceTree = "<group>"; };
@@ -281,6 +285,8 @@
 				990411481E027655002FCF53 /* GalleryCollectionViewCell.swift */,
 				990411491E027655002FCF53 /* GalleryCollectionViewCell.xib */,
 				991A6D8A1DEEAEDB004D1355 /* TimeLineTableViewCell.swift */,
+				991DCD111E8115E300A45E2E /* BarGraphTableViewCell.swift */,
+				991DCD121E8115E300A45E2E /* BarGraphTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -503,6 +509,7 @@
 				99CACFE21DB8A1590099AA00 /* LaunchScreen.storyboard in Resources */,
 				99CACFDF1DB8A1590099AA00 /* Assets.xcassets in Resources */,
 				99CACFDD1DB8A1590099AA00 /* Main.storyboard in Resources */,
+				991DCD141E8115E300A45E2E /* BarGraphTableViewCell.xib in Resources */,
 				9919E14D1E2CF94C00AB4944 /* PopUpListView.xib in Resources */,
 				9904114B1E027655002FCF53 /* GalleryCollectionViewCell.xib in Resources */,
 				991536C51DEBFF810046254C /* SourceSansPro-Bold.ttf in Resources */,
@@ -616,6 +623,7 @@
 				991536991DE6F95D0046254C /* AppConstant.swift in Sources */,
 				99A721B91DF7FF370059DFBB /* SearchViewController.swift in Sources */,
 				99927C311DFFC8C800131027 /* ScratchPad.swift in Sources */,
+				991DCD131E8115E300A45E2E /* BarGraphTableViewCell.swift in Sources */,
 				9904114A1E027655002FCF53 /* GalleryCollectionViewCell.swift in Sources */,
 				99A273261E44B54C00ABE746 /* GoogleHelper.swift in Sources */,
 				99A721BC1DF83D890059DFBB /* AssignmentTableCell.swift in Sources */,

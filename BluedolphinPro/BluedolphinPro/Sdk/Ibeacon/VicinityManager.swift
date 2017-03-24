@@ -127,9 +127,12 @@ open class VicinityManager {
         }
     }
     
-   public func fetchBeaconsFromDb() ->Results<VicinityBeacon>{
+    open  func fetchBeaconsFromDb(uuid:String="") ->Results<VicinityBeacon>{
         let realm = try! Realm()
-        let beacons = realm.objects(VicinityBeacon.self)
+        var beacons = realm.objects(VicinityBeacon.self)
+        if !uuid.isBlank{
+            beacons = beacons.filter("uuid= %@",uuid)
+        }
         return beacons
     }
     

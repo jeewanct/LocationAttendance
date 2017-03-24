@@ -8,22 +8,37 @@
 
 import UIKit
 
-func getDateFromcomponent(day:Int,month:Int,year:Int)->(date:Date,weekday:String){
+class GraphValue {
+    var date:Date?
+    var completedData:Int
+    init(date:Date,complete:Int) {
+      self.date = date
+    self.completedData = complete
+    }
+}
+
+func getDateFromcomponent(day:Int,month:Int,year:Int)->Date{
     var component = DateComponents()
     component.day = day
     component.month = month
     component.year = year
     component.timeZone = TimeZone(abbreviation: "UTC")
     let date = Calendar.current.date(from: component)
-    return (date!,date!.dayOfWeek()!)
+    return date!
     
 }
 class BaseAnalticsViewController: UIViewController {
     var menuView: CustomNavigationDropdownMenu!
+    var graphDataArray = [GraphValue]()
+    
+    @IBOutlet weak var graphTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createNavView()
+        graphTableView.delegate = self
+        graphTableView.dataSource = self
+        graphTableView.register(UINib(nibName: "BarGraphTableViewCell", bundle: nil), forCellReuseIdentifier: "barChart")
         let model = BaseAnalytics()
        model.getBaseAnaltics { (result) in
         for data in result{
@@ -41,8 +56,18 @@ class BaseAnalticsViewController: UIViewController {
             guard let year = idDict["year"] as? Int else {
                 return
             }
-            print(getDateFromcomponent(day: day, month: month, year: year))
+            
+            for i in 0...7{
+                let graphValue = GraphValue(date: Date().getDateFromCurrent(val: -i).asDate, complete: i+7)
+                self.graphDataArray.append(graphValue)
+            }
+//            let dateValue = getDateFromcomponent(day: day, month: month, year: year)
+//            if let completed = dataDict["completed"] as? Int {
+//                let graphValue = GraphValue(date: dateValue, complete: completed)
+//                self.graphDataArray.append(graphValue)
+//            }
         }
+        self.graphTableView.reloadData()
         
         }
 
@@ -114,4 +139,28 @@ class BaseAnalticsViewController: UIViewController {
     }
     */
 
+}
+extension BaseAnalticsViewController:UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 317.0
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        let cell = tableView.dequeueReusableCell(withIdentifier: "barChart") as! BarGraphTableViewCell
+        cell.configureCell(title: "Assignment Completed", dateString: " March 14 to March 21", barData: graphDataArray)
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //self.performSegue(withIdentifier: "showDetails", sender: self)
+//        let controller = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentDetail") as? AssignmentDetailViewController
+//        controller?.assignment = tasks[indexPath.row]
+//        controller?.changeSegment = self
+//        self.navigationController?.pushViewController(controller!, animated: true)
+    }
+    
 }

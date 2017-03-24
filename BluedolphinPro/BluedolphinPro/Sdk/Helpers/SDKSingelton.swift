@@ -19,7 +19,6 @@ open class SDKSingleton {
     var userName = String()
     var mobileNumber = String()
     func batteryLevel() -> Float {
-        
         return UIDevice.current.batteryLevel
     }
     
