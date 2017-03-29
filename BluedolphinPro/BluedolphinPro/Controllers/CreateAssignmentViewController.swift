@@ -310,10 +310,10 @@ class CreateAssignmentViewController: UIViewController {
 
     
     func deleteDraft(){
-        if draftObject != nil{
+        if let draft = draftObject{
             let realm = try! Realm()
             try! realm.write {
-                realm.delete(draftObject)
+                realm.delete(draft)
             }
         }
         
