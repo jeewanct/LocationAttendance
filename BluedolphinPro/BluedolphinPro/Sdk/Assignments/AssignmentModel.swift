@@ -98,9 +98,9 @@ open class AssignmentModel :Meta{
     
    public func postdbAssignments(){
         let realm = try! Realm()
-        let checkins = realm.objects(AssignmentObject.self)
+        let assignments = realm.objects(AssignmentObject.self)
         var data = [NSDictionary]()
-        for value in checkins{
+        for value in assignments{
             let assignmentholder = AssignmentHolder()
             assignmentholder.accuracy = value.accuracy
             assignmentholder.altitude = value.altitude
@@ -186,16 +186,9 @@ open class AssignmentModel :Meta{
                     realm.delete(checkin)
                 }
             }
-            
-            
-            
-            
         default:
             break;
         }
-        
-        
-        
     }
     
     

@@ -8,6 +8,8 @@
 
 import Foundation
 import RealmSwift
+
+
 public enum BeaconScanning:String{
   case StartScanning
   case NoScanning

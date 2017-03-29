@@ -227,10 +227,10 @@ open class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
                 if (shouldBroadcast == true) {
                     startBeacon()
                     
-                    // NotificationCenter.defaultCenter.postNotificationName("iBeaconBroadcastStatus", object: nil, userInfo: notificationPayload)
+                     NotificationCenter.defaultCenter.postNotificationName("iBeaconBroadcastStatus", object: nil, userInfo: notificationPayload)
                 } else {
                     stopBeacon()
-                    //NotificationCenter.defaultCenter.postNotificationName("iBeaconBroadcastStatus", object: nil, userInfo: notificationPayload)
+                    NotificationCenter.defaultCenter.postNotificationName("iBeaconBroadcastStatus", object: nil, userInfo: notificationPayload)
                 }
             }
         }

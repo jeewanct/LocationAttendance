@@ -293,14 +293,30 @@ class CreateAssignmentViewController: UIViewController {
             "jobNumber":getJobNumber()
             
         ]
+
+        deleteDraft()
+        
+        
         let assignmentModel = AssignmentModel()
-       assignmentModel.createAssignment(assignmentData: assignmentObject)
+        assignmentModel.createAssignment(assignmentData: assignmentObject)
         assignmentModel.postdbAssignments()
         
         if let delegate = self.changeSegment {
             delegate.moveToSegment(CheckinType.Downloaded.rawValue)
         }
         self.dismiss(animated: true, completion: nil)
+    }
+
+
+    
+    func deleteDraft(){
+        if draftObject != nil{
+            let realm = try! Realm()
+            try! realm.write {
+                realm.delete(draftObject)
+            }
+        }
+        
     }
     func dateChanged(sender:UIDatePicker){
         activeTextfield.text = sender.date.formatted
