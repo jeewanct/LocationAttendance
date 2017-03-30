@@ -10,7 +10,7 @@ import Foundation
 import  UIKit
 
 
-let AppVersion = "1.0"
+let AppVersion = "1.2"
 let deviceType = "ios"
 
 let TARGET_DEVICE_SIZE = CGSize(width: 414,height: 736)
@@ -39,7 +39,8 @@ enum LocalNotifcation:String{
     case Pushreceived = "Pushreceived"
     case NewAssignment = "NewAssignment"
     case Draft = "Draft"
-    case BaseAnalytics 
+    case BaseAnalytics
+    case Attendance
 }
 enum NotificationType:String{
     case NewAssignment = "New-Assignment"

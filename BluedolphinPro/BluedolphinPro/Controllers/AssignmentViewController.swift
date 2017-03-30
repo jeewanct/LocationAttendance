@@ -483,7 +483,7 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
     
     
     func createNavView(){
-        let items = ["My DashBoard", "Assignments", "Profile","VirtualBeacon","Drafts",]
+        let items = ["My DashBoard", "Assignments", "Profile","VirtualBeacon","Drafts","Attendence"]
         
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor.white
@@ -526,6 +526,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue) , object: nil)
         case 4:
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Draft.rawValue) , object: nil)
+        case 5:
+            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Attendance.rawValue) , object: nil)
             
         default:
             break

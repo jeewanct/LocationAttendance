@@ -35,6 +35,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Draft.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.BaseAnalytics.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Attendance.rawValue), object: nil)
     }
     
     func getNearByBeacons(){
@@ -42,8 +43,8 @@ class MainViewController: UIViewController {
         if isInternetAvailable() {
             vicinityManager.getNearByBeacons { (value) in
                 switch value {
-                case .StartScanning:
-                    self.startScanning()
+                case .StartScanning: break
+                    //self.startScanning()
                 case .Failure,.NoScanning:
                     break;
                     
@@ -256,6 +257,28 @@ extension MainViewController {
             destVc.view.frame = self.mainContainerView.frame
             self.mainContainerView.addSubview(destVc.view)
             destVc.didMove(toParentViewController: self)
+        case LocalNotifcation.Attendance.rawValue:
+            
+            
+            var lastController: AnyObject?
+            
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainerView.subviews {
+                views.removeFromSuperview()
+            }
+            lastController?.willMove(toParentViewController: nil)
+            
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "markAttendance") as! UINavigationController
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainerView.frame
+            self.mainContainerView.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
+        
             
         default:
             /* let destVc = self.storyboard?.instantiateViewControllerWithIdentifier("blue") as! UINavigationController
@@ -317,6 +340,7 @@ extension MainViewController {
             beaconArray.append(ibeacon)
         }
         
+        print("Beacons count \(beaconArray.count)")
         beaconManager.registerBeacons(beaconArray)
         //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
@@ -383,7 +407,7 @@ extension MainViewController {
             }
             if beaconSentflag {
                 beaconSentflag = false
-                sendNotification(id: beconId)
+                //sendNotification(id: beconId)
                 let delay = 60.0 * Double(NSEC_PER_SEC)
                 let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: time, execute: {

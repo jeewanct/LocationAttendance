@@ -86,6 +86,7 @@
 		99EB0EB01E373354000CF3B1 /* ProjectSingelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB0EAF1E373354000CF3B1 /* ProjectSingelton.swift */; };
 		99EBC8A31E7A71DF00D02EC0 /* DraftObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EBC8A21E7A71DF00D02EC0 /* DraftObject.swift */; };
 		99EBC8A51E7BB67300D02EC0 /* DraftTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EBC8A41E7BB67300D02EC0 /* DraftTableViewController.swift */; };
+		99F2CD141E8BB0DD00B2ECA7 /* MarkAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F2CD131E8BB0DD00B2ECA7 /* MarkAttendanceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,6 +173,7 @@
 		99EB0EAF1E373354000CF3B1 /* ProjectSingelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSingelton.swift; sourceTree = "<group>"; };
 		99EBC8A21E7A71DF00D02EC0 /* DraftObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftObject.swift; sourceTree = "<group>"; };
 		99EBC8A41E7BB67300D02EC0 /* DraftTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftTableViewController.swift; sourceTree = "<group>"; };
+		99F2CD131E8BB0DD00B2ECA7 /* MarkAttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarkAttendanceViewController.swift; path = BluedolphinPro/Controllers/MarkAttendanceViewController.swift; sourceTree = SOURCE_ROOT; };
 		AE78BE1830F43DAE65AB796C /* Pods_BluedolphinPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BluedolphinPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E49E2482600D4C1E724C7E /* Pods-BluedolphinPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluedolphinPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-BluedolphinPro/Pods-BluedolphinPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -241,6 +243,7 @@
 				990411441E02738E002FCF53 /* PhotoViewController.swift */,
 				990BE86A1E040BC10038F0AF /* RootViewController.swift */,
 				99A721B81DF7FF370059DFBB /* SearchViewController.swift */,
+				99F2CD131E8BB0DD00B2ECA7 /* MarkAttendanceViewController.swift */,
 				9971974A1DFE7E82008834DD /* SelfAssignmentViewController.swift */,
 				99927C341DFFD91700131027 /* SignatureViewController.swift */,
 				99CACFD91DB8A1590099AA00 /* ViewController.swift */,
@@ -642,6 +645,7 @@
 				9918E8831DDD7C4E000376CF /* KeyChainWrapper.swift in Sources */,
 				991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */,
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
+				99F2CD141E8BB0DD00B2ECA7 /* MarkAttendanceViewController.swift in Sources */,
 				991F09331E0B069200539473 /* CreateAssignmentViewController.swift in Sources */,
 				99CBC7BC1E23A630005F0D67 /* Ibeacon.swift in Sources */,
 				99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */,

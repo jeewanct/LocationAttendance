@@ -22,8 +22,8 @@ func print(_ items: Any..., separator: String = " ", terminator: String = "\n") 
 }
 
 public func getCurrentDate()->Date{
-    return TrueTimeClient.sharedInstance.referenceTime?.time ?? Date()
-        //Date()
+   // return TrueTimeClient.sharedInstance.referenceTime?.time ?? Date()
+  return Date()
 }
 
 public func currenViewController() -> UIViewController {

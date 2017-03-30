@@ -965,6 +965,56 @@
             </objects>
             <point key="canvasLocation" x="3920.625" y="1070.0704225352113"/>
         </scene>
+        <!--Mark Attendance View Controller-->
+        <scene sceneID="Ted-qQ-J2T">
+            <objects>
+                <viewController id="22f-lC-5a8" customClass="MarkAttendanceViewController" customModule="BluedolphinPro" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lm5-Kb-QcS"/>
+                        <viewControllerLayoutGuide type="bottom" id="Deo-GC-OGd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="70t-ZY-x1F">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPj-7l-YbN">
+                                <rect key="frame" x="110" y="234" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="B2m-rU-7BX"/>
+                                    <constraint firstAttribute="width" constant="100" id="NXW-mW-215"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="ButtonAction:" destination="22f-lC-5a8" eventType="touchUpInside" id="tyQ-AB-rpZ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gug-cu-x3w">
+                                <rect key="frame" x="23" y="190" width="274" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gug-cu-x3w" firstAttribute="centerX" secondItem="mPj-7l-YbN" secondAttribute="centerX" id="Dh2-RD-7Sv"/>
+                            <constraint firstItem="gug-cu-x3w" firstAttribute="leading" secondItem="70t-ZY-x1F" secondAttribute="leading" constant="23" id="L8X-ID-oOb"/>
+                            <constraint firstItem="mPj-7l-YbN" firstAttribute="centerY" secondItem="70t-ZY-x1F" secondAttribute="centerY" id="Wjn-kn-pOf"/>
+                            <constraint firstAttribute="trailing" secondItem="gug-cu-x3w" secondAttribute="trailing" constant="23" id="YAu-Fp-Z9D"/>
+                            <constraint firstItem="mPj-7l-YbN" firstAttribute="top" secondItem="gug-cu-x3w" secondAttribute="bottom" constant="23" id="b86-xD-CGY"/>
+                            <constraint firstItem="mPj-7l-YbN" firstAttribute="centerX" secondItem="70t-ZY-x1F" secondAttribute="centerX" id="ivh-iG-KkD"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="JUq-WU-hRW"/>
+                    <connections>
+                        <outlet property="OfficeLabel" destination="gug-cu-x3w" id="tXD-MF-6Q2"/>
+                        <outlet property="checkinButton" destination="mPj-7l-YbN" id="eZH-Qm-6Bg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dvv-NU-91f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6933.75" y="1337.323943661972"/>
+        </scene>
         <!--Virtual View Controller-->
         <scene sceneID="YIF-j7-90P">
             <objects>
@@ -2296,6 +2346,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SJV-JF-ZAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7516.875" y="347.53521126760563"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FdC-ay-n0Z">
+            <objects>
+                <navigationController storyboardIdentifier="markAttendance" automaticallyAdjustsScrollViewInsets="NO" id="J1K-M4-PHL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vjL-id-c2T">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="22f-lC-5a8" kind="relationship" relationship="rootViewController" id="5Li-Qf-c4E"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gt2-lO-yCU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5936.25" y="1337.323943661972"/>
         </scene>
     </scenes>
     <resources>
