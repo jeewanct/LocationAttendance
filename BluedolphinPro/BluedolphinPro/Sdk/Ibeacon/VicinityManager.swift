@@ -133,7 +133,7 @@ open class VicinityManager {
         let realm = try! Realm()
         var beacons = realm.objects(VicinityBeacon.self)
         if !uuid.isBlank{
-            beacons = beacons.filter("uuid= %@",uuid)
+            beacons = beacons.filter("major= %@",uuid)
         }
         return beacons
     }

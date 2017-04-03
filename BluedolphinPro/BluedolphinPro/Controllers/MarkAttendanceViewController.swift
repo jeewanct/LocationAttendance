@@ -11,9 +11,14 @@ import UIKit
 class MarkAttendanceViewController: UIViewController {
 var menuView :CustomNavigationDropdownMenu!
     var seanbeacons = NSMutableDictionary()
-    //var beaconManager: IBeaconManager!
+    var beaconManager: IBeaconManager!
     var checkinString = "I am in"
+    var addressString = "Raremediacompany"
+    var beaconId = String()
     
+    var container: UIView = UIView()
+    var loadingView: UIView = UIView()
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBOutlet weak var OfficeLabel: UILabel!
     @IBOutlet weak var checkinButton: UIButton!
@@ -30,7 +35,7 @@ var menuView :CustomNavigationDropdownMenu!
         if let buttonString = UserDefaults.standard.value(forKey: "CheckinString") as? String{
             checkinString = buttonString
         }
-        startScanning()
+        //startScanning()
     }
     
     func scanPressed(){
@@ -42,8 +47,16 @@ var menuView :CustomNavigationDropdownMenu!
         OfficeLabel.isHidden = true
     }
     func showButton(){
+        print("=====================")
+        print(beaconId)
+        let beacon = VicinityManager().fetchBeaconsFromDb(uuid: beaconId)
+        for data in beacon{
+            addressString = data.address!
+        }
+        OfficeLabel.numberOfLines = 3
+        OfficeLabel.clipsToBounds = true
         checkinButton.setTitle(checkinString, for: UIControlState.normal)
-        OfficeLabel.text = "You are in Raremediacompany"
+        OfficeLabel.text = "You are in \(addressString)"
         checkinButton.isHidden = false
         OfficeLabel.isHidden = false
         
@@ -59,8 +72,8 @@ var menuView :CustomNavigationDropdownMenu!
     }
     
     func createNavView(){
-        let items = ["My DashBoard", "Assignments", "Profile","VirtualBeacon","Drafts","Attendence"]
-        
+       // let items = ["My DashBoard", "Assignments", "Profile","VirtualBeacon","Drafts","Attendence"]
+        let items = ["Attendence"]
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         //UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
@@ -91,22 +104,26 @@ var menuView :CustomNavigationDropdownMenu!
     
     func menuChanger(segment:Int){
         switch segment {
+//        case 0:
+//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.BaseAnalytics.rawValue) , object: nil)
+//        case 1:
+//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue) , object: nil)
+//            
+//        case 2:
+//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
+//        case 3:
+//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue) , object: nil)
+//        case 4:
+//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Draft.rawValue) , object: nil)
+//        case 5:
+//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Attendance.rawValue) , object: nil)
+//            
         case 0:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.BaseAnalytics.rawValue) , object: nil)
-        case 1:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue) , object: nil)
-            
-        case 2:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
-        case 3:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue) , object: nil)
-        case 4:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Draft.rawValue) , object: nil)
-        case 5:
             NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Attendance.rawValue) , object: nil)
             
-        default:
-            break
+                    default:
+                        break
+
         }
     }
 
@@ -170,24 +187,31 @@ extension MarkAttendanceViewController {
     
     
     func startScanning(){
-        let beaconManager = IBeaconManager()
+        beaconManager = IBeaconManager()
         var beaconArray = [iBeacon]()
         let vicinityManager = VicinityManager()
         
         let beaconsData = vicinityManager.fetchBeaconsFromDb()
         for beaconObject in beaconsData{
+            print(beaconObject)
             let ibeacon =
                 iBeacon(minor: beaconObject.minor, major: beaconObject.major, proximityId: beaconObject.uuid!, id: beaconObject.beaconId!)
             beaconArray.append(ibeacon)
         }
-        beaconManager.registerBeacons(beaconArray)
-        NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         
+        beaconManager.registerBeacons(beaconArray)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
+//        AlertView.sharedInstance.setLabelText("Scanning")
+//        AlertView.sharedInstance.showActivityIndicator(self.view)
+        //showLoader()
+        showActivityIndicator(uiView: self.view)
         beaconManager.startMonitoring({
             
         }) { (messages) in
             print("Error Messages \(messages)")
         }
+        beaconManager.stopMonitoring()
     }
     
     
@@ -212,8 +236,13 @@ extension MarkAttendanceViewController {
                     "lastseen" : getCurrentDate().formattedISO8601
                     
                 ]
-                seanbeacons.addEntries(from: [beacon.major! :dict])
-                print(dict)
+                print(beacon.proximity.rawValue)
+//                if beacon.proximity.rawValue == 2{
+                    beaconId = String(describing: beacon.major!)
+                    seanbeacons.addEntries(from: [beacon.major! :dict])
+                    //print(dict)
+//                }
+                
                 
             }
             
@@ -221,11 +250,71 @@ extension MarkAttendanceViewController {
             
             }
         if seanbeacons.count != 0{
+            hideActivityIndicator(uiView: self.view)
+            //AlertView.sharedInstance.hideActivityIndicator(self.view)
             showButton()
-            //beaconManager.stopMonitoring()
+            
         }
         
         }
     
+    func showActivityIndicator(uiView: UIView) {
+        container.frame =  UIScreen.main.bounds
+        container.center = uiView.center
+        container.backgroundColor = UIColorFromHex(rgbValue: 0xffffff, alpha: 0.3)
+        
+        loadingView.frame = CGRect(x:0, y:0, width:80,height: 80)
+        loadingView.center = uiView.center
+        loadingView.backgroundColor = UIColorFromHex(rgbValue: 0x444444, alpha: 0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        activityIndicator.frame = CGRect(x:0.0, y:0.0, width:40.0, height:40.0);
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        activityIndicator.center = CGPoint(x:loadingView.frame.size.width / 2, y:loadingView.frame.size.height / 2);
+        
+        loadingView.addSubview(activityIndicator)
+        
+        container.addSubview(loadingView)
+        uiView.addSubview(container)
+        activityIndicator.startAnimating()
+    }
+    
+    /*
+     Hide activity indicator
+     Actually remove activity indicator from its super view
+     
+     @param uiView - remove activity indicator from this view
+     */
+    func hideActivityIndicator(uiView: UIView) {
+        activityIndicator.stopAnimating()
+        container.removeFromSuperview()
+    }
+    
+    /*
+     Define UIColor from hex value
+     
+     @param rgbValue - hex color value
+     @param alpha - transparency level
+     */
+    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
+    }
+
+    
+    
+    func showLoader(){
+        AlertView.sharedInstance.setLabelText("Scanning")
+        AlertView.sharedInstance.showActivityIndicator(self.view)
+        let delay = 2.0 * Double(NSEC_PER_SEC)
+        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {
+            AlertView.sharedInstance.hideActivityIndicator(self.view)
+            self.showButton()
+        })
+    }
  
     }

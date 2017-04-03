@@ -39,7 +39,7 @@ class AlertView: UIView {
     func showActivityIndicator(_ uiView: UIView) {
         //AlertView().showActivityIndicator(self.view)
         
-        container.frame = uiView.frame
+        container  = uiView
         container.center = uiView.center
         container.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
         //UIColorFromHex(0xd3d3d3, alpha: 0.1)
