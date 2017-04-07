@@ -8,6 +8,8 @@
 
 import Foundation
 import RealmSwift
+//import TrueTime
+
 
 
 
@@ -16,7 +18,14 @@ func print(_ items: Any..., separator: String = " ", terminator: String = "\n") 
     Swift.print(items[0], separator:separator, terminator: terminator)
 }
 
-func toDictionary(text: String) -> AnyObject? {
+public func getCurrentDate()->Date{
+   // return TrueTimeClient.sharedInstance.referenceTime?.time ?? Date()
+  return Date()
+}
+
+
+
+public func toDictionary(text: String) -> AnyObject? {
     if let data = text.data(using: String.Encoding.utf8) {
         do {
             return try JSONSerialization.jsonObject(with: data, options: []) as AnyObject
@@ -27,7 +36,7 @@ func toDictionary(text: String) -> AnyObject? {
     return nil
 }
 
-func toJsonString(_ dict:AnyObject)->String{
+public func toJsonString(_ dict:AnyObject)->String{
     
     var tempJson : String = ""
     do {
@@ -41,12 +50,7 @@ func toJsonString(_ dict:AnyObject)->String{
 }
 
 
-
-func getOrganization(){
-    
-}
-
-func getUserData(){
+public func getUserData(){
     let realm = try! Realm()
     let storage = UserDefaults.standard
     if let organizationId = storage.value(forKey: UserDefaultsKeys.organizationId.rawValue) as? String{
@@ -58,10 +62,11 @@ func getUserData(){
         print("mobile id = \(mobile)")
     }
     if let tokenData = realm.objects(AccessTokenObject.self).filter("organizationId = %@",SDKSingleton.sharedInstance.organizationId).first {
-        SDKSingleton.sharedInstance.userId = tokenData.userId!
+        print(tokenData)
+        SDKSingleton.sharedInstance.userId = tokenData.userId
         print("user id = \(SDKSingleton.sharedInstance.userId)")
         SDKSingleton.sharedInstance.userName = tokenData.userName!
-        SDKSingleton.sharedInstance.accessToken = tokenData.token!
+        SDKSingleton.sharedInstance.accessToken = tokenData.token
         print("accessToken id = \(SDKSingleton.sharedInstance.accessToken)")
     }
     

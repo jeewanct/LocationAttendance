@@ -11,7 +11,7 @@ import Foundation
 import Foundation
 import CoreBluetooth
 /**Bluetooth manager - responsible for getting the status of Bluetooth.*/
-class BluetoothManager: NSObject, CBCentralManagerDelegate {
+open class BluetoothManager: NSObject, CBCentralManagerDelegate {
     
     var centralManager:CBCentralManager!
     var blueToothReady = false
@@ -29,7 +29,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate {
         self.callback = callback
         
     }
-    @objc func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    @objc public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn{
             enabled = true
             callback(true)

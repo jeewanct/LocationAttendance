@@ -9,11 +9,11 @@
 import Foundation
 import RealmSwift
 
-func getUUIDString()->String{
+public func getUUIDString()->String{
     return UUID().uuidString
 }
 
-class CheckinModel:Meta{
+open class CheckinModel:NSObject, Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Organisation.rawValue + SDKSingleton.sharedInstance.organizationId + ModuleUrl.Checkin.rawValue
     }
@@ -33,7 +33,7 @@ class CheckinModel:Meta{
     
     
     
-    func postCheckin(checkinId:String = ""){
+   public func postCheckin(checkinId:String = ""){
         let realm = try! Realm()
         var checkins = realm.objects(RMCCheckin.self)
         if checkinId != "" {
@@ -76,7 +76,6 @@ class CheckinModel:Meta{
             
             
         }
-        print (checkinsDataArray)
         if checkinsDataArray.count == 0 {
             return
         }
@@ -85,6 +84,7 @@ class CheckinModel:Meta{
             sendCheckin(data:elements )
         }
     }
+    
     func sendCheckin(data:[NSDictionary]){
         let param = [
             //"userId":SDKSingleton.sharedInstance.userId,
@@ -92,6 +92,7 @@ class CheckinModel:Meta{
             
             ] as [String : Any]
         print(param)
+        
         NetworkModel.submitData(CheckinModel.url(), method: .post, params: param as [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
             guard let statusCode = responseData["statusCode"] as? Int else {
                 return
@@ -133,10 +134,6 @@ class CheckinModel:Meta{
                     realm.delete(checkin)
                 }
             }
-            
-            
-            
-            
         default:
             break;
         }
@@ -145,10 +142,14 @@ class CheckinModel:Meta{
         
     }
     
-    func createCheckin(checkinData:CheckinHolder){
+   public func createCheckin(checkinData:CheckinHolder){
         let realm = try! Realm()
         let checkin = RMCCheckin()
-        checkin.checkinDetails = toJsonString(checkinData.checkinDetails as AnyObject)
+        var checkinDetails = checkinData.checkinDetails!
+        checkinDetails[AssignmentWork.AppVersion.rawValue] = AppVersion as AnyObject?
+        checkinDetails[AssignmentWork.UserAgent.rawValue] = deviceType as AnyObject?
+        
+        checkin.checkinDetails = toJsonString(checkinDetails as AnyObject)
         checkin.accuracy = CurrentLocation.accuracy
         checkin.altitude = CurrentLocation.altitude
         checkin.latitude = String(CurrentLocation.coordinate.latitude)
@@ -159,7 +160,7 @@ class CheckinModel:Meta{
         checkin.organizationId = SDKSingleton.sharedInstance.organizationId
         checkin.checkinType = checkinData.checkinType
         checkin.jobNumber = checkinData.jobNumber
-        checkin.time = Date().formattedISO8601
+        checkin.time = getCurrentDate().formattedISO8601
         if checkin.checkinType == CheckinType.PhotoCheckin.rawValue {
             checkin.imageName = checkinData.imageName
             checkin.relativeUrl = checkinData.relativeUrl
@@ -167,70 +168,70 @@ class CheckinModel:Meta{
         }else if checkin.checkinType == CheckinType.Beacon.rawValue {
             let beconList = List<RMCBeacon>()
             for data in checkinData.beaconProximities!{
-                let beconObject = RMCBeacon.mapToRMCBeacon(dict: data as! NSDictionary)
-                
-            let vicinitybeacon =  realm.objects(VicinityBeacon.self).filter("major = %@",beconObject.major!)
-                for vicinityObject in vicinitybeacon{
-                    beconObject.beaconId = vicinityObject.beaconId
+                if let dataDict = data as? [String:Any] {
+                    let major = dataDict["major"] as! String
+                    let minor = dataDict["minor"] as! String
+                    let uuid = (dataDict["uuid"] as! String).lowercased()
+                    if let vicinitybeacon =  realm.objects(VicinityBeacon.self).filter("major = %@ AND minor = %@ AND uuid = %@",major,minor,uuid).first  {
+                        print(vicinitybeacon)
+                        let beconObject = RMCBeacon()
+                        beconObject.beaconId = vicinitybeacon.beaconId
+                        beconObject.major = vicinitybeacon.major
+                        beconObject.minor = vicinitybeacon.minor
+                        beconObject.uuid = vicinitybeacon.uuid
+                        beconObject.rssi = dataDict["rssi"] as? String
+                        beconObject.distance = dataDict["distance"] as? String
+                        beconObject.lastseen = dataDict["lastseen"] as? String
+                        beconList.append(beconObject)
+                    }
                 }
-                beconList.append(beconObject)
                 
             }
-            
             checkin.beaconProximity = beconList
         }
-        
-        
         try! realm.write {
             realm.add(checkin, update: true)
         }
-        
-
-        
-        
 
     }
-    func updatePhotoCheckin(){
-        let realm = try! Realm()
-         var checkins = realm.objects(RMCCheckin.self)
-        print(checkins)
-        var customAlbum :CustomPhotoAlbum?
-        var checkinId = String()
-        checkins = checkins.filter("checkinType=%@",CheckinType.PhotoCheckin.rawValue)
-        for data in checkins {
-            if let checkinDetails = data.checkinDetails?.parseJSONString as? NSDictionary{
-                if let number = checkinDetails["jobNumber"] as? String{
-                    customAlbum = CustomPhotoAlbum(name: number)
-                    //data.jobNumber
-                }
-            }
-            checkinId = data.checkinId!
-            if let id = data.relativeUrl
-            {
-                customAlbum?.fetchPhoto(localIdentifier: id, completion: { (image) in
-                    let manager = AWSS3Manager()
-                    manager.configAwsManager()
-                    manager.sendFile(imageName: data.imageName!, image: image, extention: "png", completion: { (url) in
-                        let realm = try! Realm()
-                        if let currentcheckin = realm.objects(RMCCheckin.self).filter("checkinId=%@",checkinId).first{
-                            try! realm.write {
-                                currentcheckin.imageUrl = url
-                                currentcheckin.relativeUrl = ""
-                            }
-                        }
-                        
-                    })
-                    
-                })
-            }
-            
-           
-            
-            
-        }
-        
-        
-    }
+   
+    
+//    public func updatePhotoCheckin(){
+//        let realm = try! Realm()
+//        var checkins = realm.objects(RMCCheckin.self)
+//        var customAlbum :CustomPhotoAlbum?
+//        var checkinId = String()
+//        checkins = checkins.filter("checkinType=%@",CheckinType.PhotoCheckin.rawValue)
+//        for data in checkins {
+//            if let checkinDetails = data.checkinDetails?.parseJSONString as? NSDictionary{
+//                if let number = checkinDetails["jobNumber"] as? String{
+//                    customAlbum = CustomPhotoAlbum(name: number)
+//                }
+//            }
+//            checkinId = data.checkinId!
+//            if let id = data.relativeUrl
+//            {
+//                customAlbum?.fetchPhoto(localIdentifier: id, completion: { (image) in
+//                    let manager = AWSS3Manager()
+//                    manager.configAwsManager()
+//                    manager.sendFile(imageName: data.imageName!, image: image, extention: "jpg", completion: { (url) in
+//                        let realm = try! Realm()
+//                        if let currentcheckin = realm.objects(RMCCheckin.self).filter("checkinId=%@",checkinId).first{
+//                            try! realm.write {
+//                                currentcheckin.imageUrl = url
+//                                currentcheckin.relativeUrl = ""
+//                            }
+//                        }
+//                        
+//                    })
+//                    
+//                })
+//            }
+//
+//        }
+//        
+//        
+//    }
     
     
     

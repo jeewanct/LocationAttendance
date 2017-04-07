@@ -10,13 +10,16 @@ import Foundation
 
 import AWSS3
 
-class AWSS3Manager {
+open class AWSS3Manager {
     var CognitoPoolID = String()
     var Region : AWSRegionType?
     var S3BucketName:String?
     var cdnUrl:String?
+    
+   
+    
     var s3Url = String()
-    init(poolId:String = "ap-northeast-1:a0c55baf-0ee2-4ffa-90e8-901d3b14c45b",region:AWSRegionType = AWSRegionType.apNortheast1,bucket:String = "bd-bucket-tokyo",url:String = "http://d1avfl80klu0z8.cloudfront.net/") {
+    init(poolId:String = "ap-northeast-1:a0c55baf-0ee2-4ffa-90e8-901d3b14c45b",region:AWSRegionType = AWSRegionType.apNortheast1,bucket:String = "bd-bucket-tokyo",url:String = "http://di4woccwc7kdj.cloudfront.net/") {
         CognitoPoolID = poolId
         Region = region
         cdnUrl = url
@@ -46,7 +49,8 @@ class AWSS3Manager {
         do {
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             let fileURL = documentsURL.appendingPathComponent(fileName)
-            if let pngImageData = UIImagePNGRepresentation(image) {
+            UIImageJPEGRepresentation(image, 0.9)
+            if let pngImageData =  UIImageJPEGRepresentation(image, 0.9) {
                 try pngImageData.write(to: fileURL, options: .atomic)
             }
             

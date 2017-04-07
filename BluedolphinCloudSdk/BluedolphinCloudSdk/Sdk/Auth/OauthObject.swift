@@ -14,29 +14,29 @@ import ObjectMapper
 
 
 
-class AccessTokenObject :Object,Mappable {
-    dynamic var organizationId:String?
-    dynamic var token:String?
-    dynamic var userId:String?
-    dynamic var organizationName:String?
+open class AccessTokenObject :Object,Mappable {
+     dynamic var organizationId:String = ""
+     dynamic var token:String = ""
+     dynamic var userId:String = ""
+    dynamic var organizationName:String = ""
     dynamic var expires  = 0
     dynamic var userName:String?
     //dynamic var primeKey :String?
     //Impl. of Mappable protocol
-    required convenience init?(map: Map) {
+    required convenience public init?(map: Map) {
         self.init()
     }
     
     
     
     
-    override static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "organizationId"
     }
     
     
     
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         organizationId <- map["organizationId"]
         token <- map["token"]
         userId <- map["userId"]
@@ -48,23 +48,23 @@ class AccessTokenObject :Object,Mappable {
     
     
 }
-class RefreshTokenObject :Object,Mappable {
+open class RefreshTokenObject :Object,Mappable {
     
-    dynamic var token:String?
-    dynamic var userId:String?
+    dynamic var token:String = ""
+    dynamic var userId:String = ""
     dynamic var expires  = 0
     //Impl. of Mappable protocol
-    required convenience init?(map: Map) {
+    required convenience public init?(map: Map) {
         self.init()
     }
     
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         
         token <- map["token"]
         userId <- map["userId"]
         expires <- map["expires"]
     }
-    override static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "userId"
     }
     

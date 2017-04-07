@@ -9,29 +9,30 @@
 import Foundation
 
 
-enum UserDefaultsKeys:String{
+public enum UserDefaultsKeys:String{
     case userId = "CurrentUserId"
     case organizationId = "CurrentOrganizationId"
     case accessToken =  "CurrentAccessToken"
     case deviceToken = "DeviceToken"
     case startDate = "START_DATE"
     case FeCode = "Fecode"
+    case secretKey 
     
 }
-enum APIResult:String{
+public enum APIResult:String{
     case Success = "Success"
     case InvalidCredentials = "InvalidCredentials"
     case InternalServer = "InternalServerError"
     case InvalidData = "InvalidData"
     case Fail = "Fail"
 }
-enum CheckinCategory:String{
+public enum CheckinCategory:String{
     case Transient = "Transient"
     case NonTransient = "Non-Transient"
     case Data = "Data"
 }
 
-enum CheckinType:String{
+public enum CheckinType:String{
     case PhotoCheckin = "Photo"
     case Inprogress = "In-Progress"
     case Downloaded = "Downloaded"
@@ -42,11 +43,11 @@ enum CheckinType:String{
     case Data = "Data"
     case Beacon = "Beacon"
 }
-enum ImageStatus:String{
+public enum ImageStatus:String{
     case Uploaded = "Uploaded"
     case NotUploaded = "NotUploaded"
 }
-enum AssignmentWork:String{
+public enum AssignmentWork:String{
     case notes = "notes"
     case location = "location"
     case Photo = "imageUrl"
@@ -54,4 +55,7 @@ enum AssignmentWork:String{
     case JobNumber = "jobNumber"
     case Submission = "submission"
     case Downloaded = "downloaded"
+    case AppVersion = "versionName"
+    case UserAgent = "userAgent"
+    case Created = "Created"
 }

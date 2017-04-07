@@ -15,7 +15,7 @@ protocol Meta {
 
 
 
-class RMCUser :Object ,Mappable{
+open class RMCUser :Object ,Mappable{
     
 
     dynamic var mobile:String?
@@ -30,11 +30,11 @@ class RMCUser :Object ,Mappable{
     
     
     //Impl. of Mappable protocol
-    required convenience init?(map: Map) {
+    required convenience public init?(map: Map) {
         self.init()
     }
     
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         mobile    <- map["mobile"]
         otpToken <- map["otpToken"]
         firstName <- map["firstName"]
@@ -46,7 +46,7 @@ class RMCUser :Object ,Mappable{
         
         
     }
-    override static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "mobile"
     }
     
@@ -54,7 +54,7 @@ class RMCUser :Object ,Mappable{
     
 }
 
-class UserDataModel :Meta{
+open class UserDataModel :Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.User.rawValue
     }
@@ -69,7 +69,7 @@ class UserDataModel :Meta{
     }
     
     
-    func userSignUp(mobile:String){
+   public func userSignUp(mobile:String){
         let realm = try! Realm()
         let user = realm.objects(RMCUser.self).filter("mobile=%@",mobile).first
         let param = user?.toDictionary()

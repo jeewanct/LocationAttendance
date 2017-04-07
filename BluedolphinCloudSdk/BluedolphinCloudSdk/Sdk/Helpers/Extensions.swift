@@ -125,6 +125,12 @@ extension Foundation.Date {
         if difference.second! > 0 { return seconds }
         return ""
     }
+    func dayOfWeek() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EE"
+        return dateFormatter.string(from: self).capitalized
+        // or capitalized(with: locale)
+    }
     
     func dateDiff(_ date:Foundation.Date) -> String {
         let calendar: Calendar = Calendar.current
@@ -191,6 +197,7 @@ extension Foundation.Date {
         return timeAgo;
     }
     
+    
     func dayStart() -> Foundation.Date? {
             let comp :DateComponents = Calendar.current.dateComponents([.year, .month,.day], from: self)
         
@@ -233,6 +240,98 @@ extension String {
         styler.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         return styler.date(from: self)! as Date!
     }
+    func asDateFormat(format:String = "dd/MM/yyyy HH:mm") -> Date! {
+        let styler = DateFormatter()
+        styler.dateFormat = format
+        styler.timeZone = NSTimeZone.system
+        return styler.date(from: self)! as Date!
+    }
+    
+}
+
+extension Date {
+    var formatted:String {
+        let formatter = DateFormatter()
+        formatter.timeZone = NSTimeZone.system
+//        formatter.dateStyle = .medium
+//        formatter.timeStyle = .medium
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        return formatter.string(from: self )
+    }
+    func formattedWith(format:String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.timeZone = NSTimeZone.system
+        return formatter.string(from: self )
+    }
+    func getDateFromCurrent(val:Int) ->String{
+        
+        return Calendar.current.date(byAdding: .day, value: val, to: self)!.formattedISO8601
+    }
+}
+
+extension String {
+    var toProper:String {
+        if self.characters.count == 0 {
+            return self
+        }
+        return String(self[self.startIndex]).capitalized + String(self.characters.dropFirst())
+    }
+    subscript (r: Range<Int>) -> String {
+        get {
+            let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
+            let endIndex = self.characters.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
+            
+            return self[startIndex..<endIndex]
+        }
+    }
+    
+    //To check text field or String is blank or not
+    var isBlank: Bool {
+        get {
+            let trimmed = trimmingCharacters(in: CharacterSet.whitespaces)
+            return trimmed.isEmpty
+        }
+    }
+    
+    //Validate Email
+    var isEmail: Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
+            return regex.firstMatch(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.characters.count)) != nil
+        } catch {
+            return false
+        }
+    }
+    
+    //validate PhoneNumber
+    var isPhoneNumber: Bool {
+        
+        let charcter  = CharacterSet(charactersIn: "+0123456789").inverted
+        var filtered:String!
+        
+        let inputString:[String] = self.components(separatedBy: charcter)
+        
+        
+        filtered = inputString.joined(separator: "") as String!
+        return  self == filtered
+        
+    }
+    var isMobile:Bool{
+        let phoneRegExp = "[0123456789][0-9]{9}"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegExp)
+        if phoneTest.evaluate(with: self) {
+            
+            if (self as NSString).hasPrefix("0") {
+                
+                return false
+            }
+            
+            return true
+        }
+        return false
+    }
+    
     var parseJSONString: AnyObject?
     {
         
@@ -268,22 +367,12 @@ extension String {
         }
     }
     
-}
-
-extension Date {
-    var formatted:String {
-        let formatter = DateFormatter()
-        formatter.timeZone = NSTimeZone.system
-//        formatter.dateStyle = .medium
-//        formatter.timeStyle = .medium
-        formatter.dateFormat = "dd/MM/yyyy HH:mm"
-        return formatter.string(from: self )
-    }
-    func formattedWith(format:String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        formatter.timeZone = NSTimeZone.system
-        return formatter.string(from: self )
+    
+    func stringByAddingPercentEncodingForRFC3986() -> String? {
+        //        let unreserved = "-._~/?"
+        //        let allowed = NSMutableCharacterSet.alphanumericCharacterSet()
+        //        allowed.addCharactersInString(unreserved)
+        //        urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        return addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
     }
 }
-

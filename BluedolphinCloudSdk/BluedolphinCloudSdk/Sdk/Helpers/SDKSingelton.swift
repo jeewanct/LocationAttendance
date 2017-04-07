@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-class SDKSingleton {
+open class SDKSingleton {
     
     static let sharedInstance: SDKSingleton = SDKSingleton()
     
@@ -19,7 +19,6 @@ class SDKSingleton {
     var userName = String()
     var mobileNumber = String()
     func batteryLevel() -> Float {
-        
         return UIDevice.current.batteryLevel
     }
     

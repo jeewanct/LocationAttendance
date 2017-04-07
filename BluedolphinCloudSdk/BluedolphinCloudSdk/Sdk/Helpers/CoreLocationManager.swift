@@ -13,14 +13,15 @@ import UIKit
 
 struct CurrentLocation {
     static var coordinate = CLLocationCoordinate2D(latitude: 28.63, longitude: 77.23)
-    static var accuracy = String()
-    static var altitude = String()
+    static var accuracy = "10"
+    static var altitude = "101.23"
     static var address = String()
+    static var time = Date()
 }
 
-import CoreLocation
 
-class CoreLocationController : NSObject, CLLocationManagerDelegate {
+
+open class CoreLocationController : NSObject, CLLocationManagerDelegate {
     
     var locationManager:CLLocationManager = CLLocationManager()
     
@@ -33,18 +34,19 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.distanceFilter  = 3000 // Must move at least 3km
+            locationManager.startMonitoringSignificantLocationChanges()
             //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
             
         }
         else {
-//            showAlert("This app does not have access to Location service,You can enable access in Settings->Privacy->Location->Location Services ")
+           // showAlert("This app does not have access to Location service,You can enable access in Settings->Privacy->Location->Location Services ")
         }
         
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("didChangeAuthorizationStatus")
         
         switch status {
@@ -68,7 +70,7 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         
         let location = locations.last! as CLLocation
@@ -76,8 +78,11 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         CurrentLocation.coordinate = location.coordinate
         CurrentLocation.accuracy = String(location.horizontalAccuracy)
         CurrentLocation.altitude = String(location.altitude)
+        CurrentLocation.time = location.timestamp
+        print(CurrentLocation.time)
+        
     }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error while updating location " + error.localizedDescription)
     }
     
@@ -110,7 +115,7 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
 //        currenViewController().present(alertController, animated: true) {
 //        }
 //    }
-    
+//    
     
     
     

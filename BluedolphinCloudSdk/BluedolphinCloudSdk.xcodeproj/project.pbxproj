@@ -33,9 +33,16 @@
 		991EE29F1E40BF5C00E4A00D /* VicinityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2841E40BF5B00E4A00D /* VicinityManager.swift */; };
 		991EE2A01E40BF5C00E4A00D /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2861E40BF5B00E4A00D /* LoginModel.swift */; };
 		991EE2A11E40BF5C00E4A00D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2871E40BF5B00E4A00D /* UserModel.swift */; };
-		991EE2A31E40C19800E4A00D /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991EE2A21E40C19800E4A00D /* CustomPhotoAlbum.swift */; };
 		99339D131DE32AD200F3C770 /* BluedolphinCloudSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 99339D111DE32AD200F3C770 /* BluedolphinCloudSdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A1ADEA9532F07BD836A6FF8E /* Pods_BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D771F3BC31D3C77084C535 /* Pods_BluedolphinCloudSdk.framework */; };
+		994509D61E9256F9002921D9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509BE1E922E94002921D9 /* Alamofire.framework */; };
+		994509D71E9256F9002921D9 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509BF1E922E94002921D9 /* AlamofireObjectMapper.framework */; };
+		994509D81E9256F9002921D9 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C01E922E94002921D9 /* AWSCore.framework */; };
+		994509D91E9256F9002921D9 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C11E922E94002921D9 /* AWSS3.framework */; };
+		994509DA1E9256F9002921D9 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C21E922E94002921D9 /* ObjectMapper.framework */; };
+		994509DB1E9256F9002921D9 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C31E922E94002921D9 /* Realm.framework */; };
+		994509DC1E9256F9002921D9 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C41E922E94002921D9 /* RealmSwift.framework */; };
+		997C638D1E9283120019740A /* BlueDolphinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997C638C1E9283120019740A /* BlueDolphinManager.swift */; };
+		A1ADEA9532F07BD836A6FF8E /* Pods_BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D771F3BC31D3C77084C535 /* Pods_BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,10 +75,17 @@
 		991EE2841E40BF5B00E4A00D /* VicinityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicinityManager.swift; sourceTree = "<group>"; };
 		991EE2861E40BF5B00E4A00D /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		991EE2871E40BF5B00E4A00D /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		991EE2A21E40C19800E4A00D /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
 		99339D0E1DE32AD200F3C770 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BluedolphinCloudSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99339D111DE32AD200F3C770 /* BluedolphinCloudSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BluedolphinCloudSdk.h; sourceTree = "<group>"; };
 		99339D121DE32AD200F3C770 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		994509BE1E922E94002921D9 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		994509BF1E922E94002921D9 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/AlamofireObjectMapper/AlamofireObjectMapper.framework"; sourceTree = "<group>"; };
+		994509C01E922E94002921D9 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/AWSCore/AWSCore.framework"; sourceTree = "<group>"; };
+		994509C11E922E94002921D9 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/AWSS3/AWSS3.framework"; sourceTree = "<group>"; };
+		994509C21E922E94002921D9 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
+		994509C31E922E94002921D9 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/Realm/Realm.framework"; sourceTree = "<group>"; };
+		994509C41E922E94002921D9 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
+		997C638C1E9283120019740A /* BlueDolphinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueDolphinManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +93,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994509D61E9256F9002921D9 /* Alamofire.framework in Frameworks */,
+				994509D71E9256F9002921D9 /* AlamofireObjectMapper.framework in Frameworks */,
+				994509D81E9256F9002921D9 /* AWSCore.framework in Frameworks */,
+				994509D91E9256F9002921D9 /* AWSS3.framework in Frameworks */,
+				994509DA1E9256F9002921D9 /* ObjectMapper.framework in Frameworks */,
+				994509DB1E9256F9002921D9 /* Realm.framework in Frameworks */,
+				994509DC1E9256F9002921D9 /* RealmSwift.framework in Frameworks */,
 				A1ADEA9532F07BD836A6FF8E /* Pods_BluedolphinCloudSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +125,7 @@
 				991EE2731E40BF5B00E4A00D /* Helpers */,
 				991EE27F1E40BF5B00E4A00D /* Ibeacon */,
 				991EE2851E40BF5B00E4A00D /* Login */,
+				997C638C1E9283120019740A /* BlueDolphinManager.swift */,
 			);
 			path = Sdk;
 			sourceTree = "<group>";
@@ -140,7 +162,6 @@
 		991EE2731E40BF5B00E4A00D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				991EE2A21E40C19800E4A00D /* CustomPhotoAlbum.swift */,
 				991EE2741E40BF5B00E4A00D /* AwsManager.swift */,
 				991EE2751E40BF5B00E4A00D /* CoreLocationManager.swift */,
 				991EE2761E40BF5B00E4A00D /* Enums.swift */,
@@ -208,6 +229,13 @@
 		D7A3B6048825B4A1769EFA0C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				994509BE1E922E94002921D9 /* Alamofire.framework */,
+				994509BF1E922E94002921D9 /* AlamofireObjectMapper.framework */,
+				994509C01E922E94002921D9 /* AWSCore.framework */,
+				994509C11E922E94002921D9 /* AWSS3.framework */,
+				994509C21E922E94002921D9 /* ObjectMapper.framework */,
+				994509C31E922E94002921D9 /* Realm.framework */,
+				994509C41E922E94002921D9 /* RealmSwift.framework */,
 				09D771F3BC31D3C77084C535 /* Pods_BluedolphinCloudSdk.framework */,
 			);
 			name = Frameworks;
@@ -258,7 +286,7 @@
 				TargetAttributes = {
 					99339D0D1DE32AD200F3C770 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = F2HTKMZH3R;
+						DevelopmentTeam = WM5336KTVY;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
@@ -335,7 +363,6 @@
 				991EE2A11E40BF5C00E4A00D /* UserModel.swift in Sources */,
 				991EE28F1E40BF5B00E4A00D /* CheckinObject.swift in Sources */,
 				991EE2911E40BF5B00E4A00D /* CoreLocationManager.swift in Sources */,
-				991EE2A31E40C19800E4A00D /* CustomPhotoAlbum.swift in Sources */,
 				991EE2891E40BF5B00E4A00D /* AssignmentModel.swift in Sources */,
 				991EE28B1E40BF5B00E4A00D /* OauthModel.swift in Sources */,
 				991EE2991E40BF5C00E4A00D /* SdkConstant.swift in Sources */,
@@ -345,6 +372,7 @@
 				991EE2901E40BF5B00E4A00D /* AwsManager.swift in Sources */,
 				991EE29E1E40BF5C00E4A00D /* IbeaconManager.swift in Sources */,
 				991EE2971E40BF5C00E4A00D /* NetworkClass.swift in Sources */,
+				997C638D1E9283120019740A /* BlueDolphinManager.swift in Sources */,
 				991EE2951E40BF5C00E4A00D /* GlobalSDKFunction.swift in Sources */,
 				991EE2921E40BF5C00E4A00D /* Enums.swift in Sources */,
 				991EE2931E40BF5C00E4A00D /* ErrorMessage.swift in Sources */,
@@ -465,10 +493,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 821133109368509D4BF09B66 /* Pods-BluedolphinCloudSdk.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = F2HTKMZH3R;
+				DEVELOPMENT_TEAM = WM5336KTVY;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -488,10 +517,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0B952A282A3EBE68EF75E3CB /* Pods-BluedolphinCloudSdk.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = F2HTKMZH3R;
+				DEVELOPMENT_TEAM = WM5336KTVY;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
