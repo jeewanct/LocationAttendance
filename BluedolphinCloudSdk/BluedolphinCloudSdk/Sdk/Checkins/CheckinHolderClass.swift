@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class CheckinHolder:NSObject{
+ class CheckinHolder:NSObject{
      var latitude:String?
      var longitude:String?
      var accuracy:String?

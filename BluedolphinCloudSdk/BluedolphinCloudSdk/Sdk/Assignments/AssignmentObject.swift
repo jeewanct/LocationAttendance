@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-open class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
+ class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
     public typealias Object = List<T>
     public typealias JSON = Array<AnyObject>
     
@@ -44,7 +44,7 @@ open class ArrayTransform<T:RealmSwift.Object> : TransformType where T:Mappable 
 
 
 
-open class AssignmentObject:Object,Mappable{
+ class AssignmentObject:Object,Mappable{
     
     
    dynamic var assignmentId:String?
@@ -94,7 +94,7 @@ open class AssignmentObject:Object,Mappable{
 }
 
 
-open class RMCAssignmentObject :Object,Mappable {
+ class RMCAssignmentObject :Object,Mappable {
     dynamic var assignmentId:String?
     dynamic var addedOn:String?
     dynamic var time:String?
@@ -148,7 +148,7 @@ open class RMCAssignmentObject :Object,Mappable {
 }
 
 
-open class RMCAssignee :Object,Mappable{
+ class RMCAssignee :Object,Mappable{
     dynamic var userId:String?;
     dynamic var organizationId:String?;
     
@@ -164,13 +164,13 @@ open class RMCAssignee :Object,Mappable{
         organizationId <- map["organizationId"]
     }
 }
-open class assignmentLog:Object{
+ class assignmentLog:Object{
     dynamic var status :String?
     dynamic var time:String?
     dynamic var checkinId:String?
 }
 
-open class RMCLocation:Object,Mappable{
+ class RMCLocation:Object,Mappable{
     dynamic var latitude:String?
     dynamic var longitude:String?
     dynamic var altitude:String?
@@ -187,7 +187,7 @@ open class RMCLocation:Object,Mappable{
     
 }
 
-open class AssignmentHolder:NSObject{
+ class AssignmentHolder:NSObject{
     
     
     var assignmentId:String?

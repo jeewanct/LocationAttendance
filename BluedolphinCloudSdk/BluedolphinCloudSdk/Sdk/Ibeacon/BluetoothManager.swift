@@ -11,7 +11,7 @@ import Foundation
 import Foundation
 import CoreBluetooth
 /**Bluetooth manager - responsible for getting the status of Bluetooth.*/
-open class BluetoothManager: NSObject, CBCentralManagerDelegate {
+ class BluetoothManager: NSObject, CBCentralManagerDelegate {
     
     var centralManager:CBCentralManager!
     var blueToothReady = false

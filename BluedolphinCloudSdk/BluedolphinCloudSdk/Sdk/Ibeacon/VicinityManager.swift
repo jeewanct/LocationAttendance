@@ -16,7 +16,7 @@ public enum BeaconScanning:String{
   case Failure
 }
 
-open class VicinityManager {
+ class VicinityManager {
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Organisation.rawValue + SDKSingleton.sharedInstance.organizationId 
     }
@@ -130,7 +130,7 @@ open class VicinityManager {
         }
     }
     
-    open  func fetchBeaconsFromDb(uuid:String="") ->Results<VicinityBeacon>{
+      func fetchBeaconsFromDb(uuid:String="") ->Results<VicinityBeacon>{
         let realm = try! Realm()
         var beacons = realm.objects(VicinityBeacon.self)
         if !uuid.isBlank{

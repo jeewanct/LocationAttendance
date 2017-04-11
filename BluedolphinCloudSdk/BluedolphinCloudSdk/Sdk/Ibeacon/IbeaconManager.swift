@@ -24,7 +24,7 @@ public enum iBeaconNotifications:String{
 }
 
 /**Interacting with the iBeacons*/
-open class IBeaconManager: NSObject, CLLocationManagerDelegate {
+ class IBeaconManager: NSObject, CLLocationManagerDelegate {
     
     let locationManager:CLLocationManager = CLLocationManager()
     //    private var beacons = [iBeacon]() // Currently unused

@@ -7,12 +7,18 @@
 //
 
 import Foundation
-
+enum InitilizationError : Error {
+    case SecretKeyError
+    case OrganizationIdError
+    case EmailError
+    case firstNameError
+    case lastNameError
+}
 
 open class BlueDolphinManager:NSObject {
     public static let manager: BlueDolphinManager = BlueDolphinManager()
     var secretKey:String = String()
-    var organisationId:String  = String()
+    var organizationId:String  = String()
     var emailId:String  = String()
     var coreLocationController:CoreLocationController?
     
@@ -20,20 +26,27 @@ open class BlueDolphinManager:NSObject {
     var beaconSentflag = true
     let beaconManager = IBeaconManager()
     
-    public func setConfig(secretKey:String,orgnisationId:String){
+    public func initialize(secretKey:String?,organizationId:String?,email:String?,firstName:String?,lastName:String?,metaInfo:NSDictionary?) {
+        
+        setConfig(secretKey:secretKey!,organizationId:organizationId!)
+        authorizeUser(email: email!, firstName: firstName!, lastName: lastName!, metaInfo: metaInfo!)
+    
+    }
+    
+     func setConfig(secretKey:String,organizationId:String){
        self.secretKey = secretKey
-       self.organisationId = orgnisationId
+       self.organizationId = organizationId
        self.coreLocationController  = CoreLocationController()
         
     }
-    public func authorizeUser(email:String,firstName:String,lastName:String = "",metaInfo:NSDictionary){
+     func authorizeUser(email:String,firstName:String,lastName:String = "",metaInfo:NSDictionary){
         self.emailId = email
         let object = [
             "grantType":"accessToken",
             "loginType":"secretKey",
             "selfRequest":true,
             "secretKey":self.secretKey,
-            "organizationId":self.organisationId,
+            "organizationId":self.organizationId,
             "email": self.emailId,
             "firstName":firstName,
             "lastName":lastName
@@ -44,6 +57,7 @@ open class BlueDolphinManager:NSObject {
             case APIResult.Success.rawValue:
                getUserData()
                self.postTransientCheckin(metaInfo: metaInfo as! [String : AnyObject])
+               self.getNearByBeacons()
                 
             case APIResult.InvalidCredentials.rawValue:
                break
@@ -57,6 +71,8 @@ open class BlueDolphinManager:NSObject {
             }
         }
     }
+    
+    
      func postTransientCheckin(metaInfo:[String:AnyObject]){
         
         let checkin = CheckinHolder()
@@ -64,8 +80,8 @@ open class BlueDolphinManager:NSObject {
         details[AssignmentWork.AppVersion.rawValue] = AppVersion as AnyObject
         details[AssignmentWork.UserAgent.rawValue] = deviceType as AnyObject
         checkin.checkinDetails = details
-        checkin.checkinCategory = CheckinCategory.Transient.rawValue
-        checkin.checkinType = CheckinType.Location.rawValue
+        checkin.checkinCategory = CheckinCategory.Data.rawValue
+        checkin.checkinType = CheckinType.Data.rawValue
         
         let checkinModelObject = CheckinModel()
         checkinModelObject.createCheckin(checkinData: checkin)
@@ -74,8 +90,7 @@ open class BlueDolphinManager:NSObject {
         }
     }
     
-   public func getNearByBeacons(){
-        getUserData()
+    func getNearByBeacons(){
         let vicinityManager = VicinityManager()
         if isInternetAvailable() {
             vicinityManager.getNearByBeacons { (value) in
@@ -117,7 +132,7 @@ open class BlueDolphinManager:NSObject {
         }
     }
     
-    public func updateToken(){
+     func updateToken(){
        getUserData()
        let oauth = OauthModel()
        oauth.updateToken()
@@ -135,8 +150,8 @@ open class BlueDolphinManager:NSObject {
                 "major": String(describing: beacon.major!),
                 "minor" : String(describing: beacon.minor!),
                 //"proximity" :  String(describing: beacon.proximity),
-                "rssi" : beacon.rssi,
-                "distance" :beacon.accuracy,
+                "rssi" : beacon.rssi != "" ? beacon.rssi: "-88",
+                "distance" :beacon.accuracy != "" ? beacon.accuracy: "3.089",
                 "lastseen" : getCurrentDate().formattedISO8601
                 
             ]
@@ -163,8 +178,8 @@ open class BlueDolphinManager:NSObject {
                 "major": String(describing: beacon.major!),
                 "minor" : String(describing: beacon.minor!),
                 //"proximity" :  String(describing: beacon.proximity),
-                "rssi" : beacon.rssi,
-                "distance" :beacon.accuracy,
+                "rssi" : beacon.rssi != "" ? beacon.rssi: "-88",
+                "distance" :beacon.accuracy != "" ? beacon.accuracy: "3.089",
                 "lastseen" : getCurrentDate().formattedISO8601
                 
             ]
@@ -183,9 +198,10 @@ open class BlueDolphinManager:NSObject {
                 checkinModelObject.postCheckin()
             }
         }
-        
-        
+
     }
+    
+    
     /**Called when the beacons are ranged*/
     func beaconsRanged(notification:NSNotification){
         if let visibleIbeacons = notification.object as? [iBeacon]{
@@ -238,8 +254,6 @@ open class BlueDolphinManager:NSObject {
             if isInternetAvailable(){
                 checkinModelObject.postCheckin()
             }
-            
-        
     }
     
 }

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 
-open class NetworkModel: NSObject {
+ class NetworkModel: NSObject {
     class func fetchData(_ strURL: String,header:NSDictionary, success:@escaping (NSDictionary) -> Void, failure:@escaping (Error) -> Void) {
         Alamofire.request(strURL,headers: header as? HTTPHeaders).responseJSON { (responseObject) -> Void in
             

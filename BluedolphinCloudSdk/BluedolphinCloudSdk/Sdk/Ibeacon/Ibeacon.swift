@@ -25,7 +25,7 @@ public extension CLProximity {
 }
 
 /**iBeacon*/
-open class iBeacon : NSObject {
+class iBeacon : NSObject {
     
     /// iBeacon Minor
     open let minor:UInt16?

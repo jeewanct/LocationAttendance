@@ -13,7 +13,7 @@ public func getUUIDString()->String{
     return UUID().uuidString
 }
 
-open class CheckinModel:NSObject, Meta{
+ class CheckinModel:NSObject, Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Organisation.rawValue + SDKSingleton.sharedInstance.organizationId + ModuleUrl.Checkin.rawValue
     }
@@ -171,7 +171,7 @@ open class CheckinModel:NSObject, Meta{
                 if let dataDict = data as? [String:Any] {
                     let major = dataDict["major"] as! String
                     let minor = dataDict["minor"] as! String
-                    let uuid = (dataDict["uuid"] as! String).lowercased()
+                    let uuid = (dataDict["uuid"] as! String).uppercased()
                     if let vicinitybeacon =  realm.objects(VicinityBeacon.self).filter("major = %@ AND minor = %@ AND uuid = %@",major,minor,uuid).first  {
                         print(vicinitybeacon)
                         let beconObject = RMCBeacon()

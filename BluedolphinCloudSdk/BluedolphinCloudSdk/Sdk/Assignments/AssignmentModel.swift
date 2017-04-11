@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-open class AssignmentModel :NSObject, Meta{
+ class AssignmentModel :NSObject, Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Organisation.rawValue
     }

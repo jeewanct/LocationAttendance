@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import  ObjectMapper
 
-open class RMCBeacon :Object,Mappable{
+ class RMCBeacon :Object,Mappable{
     dynamic var lastseen:String?
     dynamic var distance:String?
     dynamic var rssi:String?
@@ -42,7 +42,7 @@ open class RMCBeacon :Object,Mappable{
     
 }
 
-open class VicinityBeacon:Object{
+ class VicinityBeacon:Object{
     
     dynamic var addedOn:String?
     dynamic var updatedOn:String?

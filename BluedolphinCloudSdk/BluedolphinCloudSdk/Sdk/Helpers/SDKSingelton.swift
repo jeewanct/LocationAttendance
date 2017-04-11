@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-open class SDKSingleton {
+ class SDKSingleton {
     
     static let sharedInstance: SDKSingleton = SDKSingleton()
     

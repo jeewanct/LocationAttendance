@@ -15,7 +15,7 @@ protocol Meta {
 
 
 
-open class RMCUser :Object ,Mappable{
+ class RMCUser :Object ,Mappable{
     
 
     dynamic var mobile:String?
@@ -54,7 +54,7 @@ open class RMCUser :Object ,Mappable{
     
 }
 
-open class UserDataModel :Meta{
+ class UserDataModel :Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.User.rawValue
     }

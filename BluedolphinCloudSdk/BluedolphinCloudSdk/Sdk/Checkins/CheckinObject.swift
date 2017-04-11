@@ -12,7 +12,7 @@ import RealmSwift
 import ObjectMapper
 
 
-open class RMCCheckin:Object,Mappable{
+ class RMCCheckin:Object,Mappable{
     
     dynamic var latitude:String?
     dynamic var longitude:String?

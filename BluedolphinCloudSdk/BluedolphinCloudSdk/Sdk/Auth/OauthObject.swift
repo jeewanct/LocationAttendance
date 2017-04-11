@@ -14,7 +14,7 @@ import ObjectMapper
 
 
 
-open class AccessTokenObject :Object,Mappable {
+ class AccessTokenObject :Object,Mappable {
      dynamic var organizationId:String = ""
      dynamic var token:String = ""
      dynamic var userId:String = ""
@@ -48,7 +48,7 @@ open class AccessTokenObject :Object,Mappable {
     
     
 }
-open class RefreshTokenObject :Object,Mappable {
+ class RefreshTokenObject :Object,Mappable {
     
     dynamic var token:String = ""
     dynamic var userId:String = ""

@@ -11,7 +11,7 @@ import Foundation
 import RealmSwift
 
 
-open class OauthModel :NSObject, Meta{
+ class OauthModel :NSObject, Meta{
     
     internal static func url() -> String {
         return   APIURL + ModuleUrl.Oauth.rawValue

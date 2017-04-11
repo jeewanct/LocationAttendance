@@ -21,7 +21,7 @@ struct CurrentLocation {
 
 
 
-open class CoreLocationController : NSObject, CLLocationManagerDelegate {
+ class CoreLocationController : NSObject, CLLocationManagerDelegate {
     
     var locationManager:CLLocationManager = CLLocationManager()
     
@@ -36,7 +36,7 @@ open class CoreLocationController : NSObject, CLLocationManagerDelegate {
             locationManager.distanceFilter  = 3000 // Must move at least 3km
             locationManager.startMonitoringSignificantLocationChanges()
             //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
             
         }
