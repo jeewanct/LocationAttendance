@@ -83,6 +83,7 @@
 		99CBC7BC1E23A630005F0D67 /* Ibeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBC7B91E23A630005F0D67 /* Ibeacon.swift */; };
 		99CBC7BD1E23A630005F0D67 /* IbeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBC7BA1E23A630005F0D67 /* IbeaconManager.swift */; };
 		99DDC1A31DF6BA4B001BD0DB /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */; };
+		99DE94781E9C9E0C00590047 /* BluedolphinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DE94771E9C9E0C00590047 /* BluedolphinManager.swift */; };
 		99EB0EB01E373354000CF3B1 /* ProjectSingelton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB0EAF1E373354000CF3B1 /* ProjectSingelton.swift */; };
 		99EBC8A31E7A71DF00D02EC0 /* DraftObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EBC8A21E7A71DF00D02EC0 /* DraftObject.swift */; };
 		99EBC8A51E7BB67300D02EC0 /* DraftTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EBC8A41E7BB67300D02EC0 /* DraftTableViewController.swift */; };
@@ -170,6 +171,7 @@
 		99CBC7B91E23A630005F0D67 /* Ibeacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ibeacon.swift; sourceTree = "<group>"; };
 		99CBC7BA1E23A630005F0D67 /* IbeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IbeaconManager.swift; sourceTree = "<group>"; };
 		99DDC1A21DF6BA4B001BD0DB /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
+		99DE94771E9C9E0C00590047 /* BluedolphinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BluedolphinManager.swift; path = ../../Controllers/BluedolphinManager.swift; sourceTree = "<group>"; };
 		99EB0EAF1E373354000CF3B1 /* ProjectSingelton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSingelton.swift; sourceTree = "<group>"; };
 		99EBC8A21E7A71DF00D02EC0 /* DraftObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftObject.swift; sourceTree = "<group>"; };
 		99EBC8A41E7BB67300D02EC0 /* DraftTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftTableViewController.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 		99CBC7BE1E23A638005F0D67 /* Ibeacon */ = {
 			isa = PBXGroup;
 			children = (
+				99DE94771E9C9E0C00590047 /* BluedolphinManager.swift */,
 				9931B53E1E5C6BCF002B79E6 /* iBeaconAdvertisement.swift */,
 				9919E1481E2CA0B800AB4944 /* BeaconObject.swift */,
 				99CBC7B81E23A630005F0D67 /* BluetoothManager.swift */,
@@ -646,6 +649,7 @@
 				991A6D871DED5028004D1355 /* CommonFunction.swift in Sources */,
 				9918E87E1DDC2C30000376CF /* CheckinHolderClass.swift in Sources */,
 				99F2CD141E8BB0DD00B2ECA7 /* MarkAttendanceViewController.swift in Sources */,
+				99DE94781E9C9E0C00590047 /* BluedolphinManager.swift in Sources */,
 				991F09331E0B069200539473 /* CreateAssignmentViewController.swift in Sources */,
 				99CBC7BC1E23A630005F0D67 /* Ibeacon.swift in Sources */,
 				99927C331DFFD38C00131027 /* AddNotesViewController.swift in Sources */,

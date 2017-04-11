@@ -26,7 +26,7 @@ var menuView :CustomNavigationDropdownMenu!
         super.viewDidLoad()
         createNavView()
         hideButtons()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Scan", style: UIBarButtonItemStyle.plain, target: self, action: #selector(scanPressed))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Scan", style: UIBarButtonItemStyle.plain, target: self, action: #selector(scanPressed))
         
         
         // Do any additional setup after loading the view.

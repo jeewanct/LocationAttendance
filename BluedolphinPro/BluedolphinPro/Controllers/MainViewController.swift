@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
         oauth.updateToken()
         Singleton.sharedInstance.sortBy = SortEnum.ClearSort.rawValue
         setObservers()
-        getNearByBeacons()
+        BlueDolphinManager.manager.getNearByBeacons()
         postdbAssignment()
         
         //        postTransientCheckin()

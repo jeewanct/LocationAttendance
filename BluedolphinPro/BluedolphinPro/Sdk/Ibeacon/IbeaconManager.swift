@@ -18,11 +18,13 @@ public enum iBeaconNotifications:String{
     case Location // new location discoverd
     case iBeaconEnabled
     case iBeaconDisabled
+    case BeaconExit
+    case BeaconEntry
     
 }
 
 /**Interacting with the iBeacons*/
-open class IBeaconManager: NSObject, CLLocationManagerDelegate {
+class IBeaconManager: NSObject, CLLocationManagerDelegate {
     
     let locationManager:CLLocationManager = CLLocationManager()
     //    private var beacons = [iBeacon]() // Currently unused
@@ -194,7 +196,7 @@ open class IBeaconManager: NSObject, CLLocationManagerDelegate {
             locationManager.startRangingBeacons(in: beaconRegion)
             //FIXME: check if needed [self.locationManager performSelector:@selector(requestStateForRegion:) withObject:beaconRegion afterDelay:1];
             //FIXME: added more validation for the ibeacons permission matrix
-        
+            
         }
         
     }
@@ -252,7 +254,7 @@ open class IBeaconManager: NSObject, CLLocationManagerDelegate {
         }
         //if we are outside stop ranging
         if state == .outside{
-         manager.stopRangingBeacons(in: region as! CLBeaconRegion)
+            manager.stopRangingBeacons(in: region as! CLBeaconRegion)
         }
         if state == .inside{
             manager.startRangingBeacons(in: region as! CLBeaconRegion)
@@ -297,9 +299,9 @@ open class IBeaconManager: NSObject, CLLocationManagerDelegate {
         
         
         for beacon in beacons{
-            if logging {
-                print("Did Range Beacon \(beacon)")
-            }
+            //            if logging {
+            //                print("Did Range Beacon \(beacon)")
+            //            }
             if let callback = self.rangeCallback{
                 //convert it to the internal type of the beacon
                 let ibeacon =  iBeacon(minor: beacon.minor.uint16Value, major: beacon.major.uint16Value, proximityId: beacon.proximityUUID.uuidString)
@@ -344,8 +346,13 @@ open class IBeaconManager: NSObject, CLLocationManagerDelegate {
     open func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion)
     {
         if region is CLBeaconRegion{
+            let beacon = region as! CLBeaconRegion
+            let ibeacon =  iBeacon(minor: beacon.minor?.uint16Value, major: beacon.major?.uint16Value, proximityId: beacon.proximityUUID.uuidString)
+            ibeacon.proximity = CLProximity(rawValue: 1)!
+            NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.BeaconEntry.rawValue), object: ibeacon)
             if logging {
                 print("Region Entered! \(region) ")
+                
                 manager.startRangingBeacons(in: region as! CLBeaconRegion)
             }
         }
@@ -361,10 +368,16 @@ open class IBeaconManager: NSObject, CLLocationManagerDelegate {
     open func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion)
     {
         if region is CLBeaconRegion{
+            let beacon = region as! CLBeaconRegion
+            let ibeacon =  iBeacon(minor: beacon.minor?.uint16Value, major: beacon.major?.uint16Value, proximityId: beacon.proximityUUID.uuidString)
+            ibeacon.proximity = CLProximity(rawValue: 1)!
+            NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.BeaconExit.rawValue), object: ibeacon)
             if logging {
+                
                 print("Exit Region! \(region) ")
                 manager.stopRangingBeacons(in: region as! CLBeaconRegion)
             }
+            
         }
     }
     /*

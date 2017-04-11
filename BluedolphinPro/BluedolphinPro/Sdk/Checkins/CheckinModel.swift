@@ -123,7 +123,7 @@ open class CheckinModel:Meta{
             return
         }
         switch statusCode{
-        case 200,400:
+        case 200,400,409:
             if let checkinId = data["checkinId"] as? String{
                 let realm = try! Realm()
                 guard let checkin = realm.objects(RMCCheckin.self).filter("checkinId = %@",checkinId).first  else {
@@ -167,13 +167,23 @@ open class CheckinModel:Meta{
         }else if checkin.checkinType == CheckinType.Beacon.rawValue {
             let beconList = List<RMCBeacon>()
             for data in checkinData.beaconProximities!{
-                let beconObject = RMCBeacon.mapToRMCBeacon(dict: data as! NSDictionary)
-                
-            let vicinitybeacon =  realm.objects(VicinityBeacon.self).filter("major = %@",beconObject.major!)
-                for vicinityObject in vicinitybeacon{
-                    beconObject.beaconId = vicinityObject.beaconId
+                if let dataDict = data as? [String:Any] {
+                    let major = dataDict["major"] as! String
+                    let minor = dataDict["minor"] as! String
+                    let uuid = (dataDict["uuid"] as! String).uppercased()
+                    if let vicinitybeacon =  realm.objects(VicinityBeacon.self).filter("major = %@ AND minor = %@ AND uuid = %@",major,minor,uuid).first  {
+                        print(vicinitybeacon)
+                        let beconObject = RMCBeacon()
+                        beconObject.beaconId = vicinitybeacon.beaconId
+                        beconObject.major = vicinitybeacon.major
+                        beconObject.minor = vicinitybeacon.minor
+                        beconObject.uuid = vicinitybeacon.uuid
+                        beconObject.rssi = dataDict["rssi"] as? String
+                        beconObject.distance = dataDict["distance"] as? String
+                        beconObject.lastseen = dataDict["lastseen"] as? String
+                        beconList.append(beconObject)
+                    }
                 }
-                beconList.append(beconObject)
                 
             }
             checkin.beaconProximity = beconList

@@ -18,7 +18,7 @@ func ChangeRootVC(_ presentViewController: UIViewController,destinationView: UIV
 }
 
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-    Swift.print(items[0], separator:separator, terminator: terminator)
+   // Swift.print(items[0], separator:separator, terminator: terminator)
 }
 
 public func getCurrentDate()->Date{
@@ -72,7 +72,8 @@ public func getUserData(){
     let realm = try! Realm()
     let storage = UserDefaults.standard
     if let organizationId = storage.value(forKey: UserDefaultsKeys.organizationId.rawValue) as? String{
-        SDKSingleton.sharedInstance.organizationId = organizationId
+        SDKSingleton.sharedInstance.organizationId = "af39bc69-1938-4149-b9f7-f101fd9baf73"
+        //organizationId
         print("organisation id = \(organizationId)")
     }
     if let mobile = storage.value(forKey: UserDefaultsKeys.FeCode.rawValue) as? String{

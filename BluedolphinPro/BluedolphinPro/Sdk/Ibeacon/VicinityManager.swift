@@ -47,10 +47,12 @@ open class VicinityManager {
                     return
                 }
                 if let documents = responseData["documents"] as? NSArray {
-                    for beacon in documents{
-                        self.saveBeacons(data: beacon as! NSDictionary)
-                    }
+                    
                     if documents.count != 0{
+                        self.deleteBeacons()
+                        for beacon in documents{
+                            self.saveBeacons(data: beacon as! NSDictionary)
+                        }
                         completion(.StartScanning)
 
                     }else {
@@ -126,6 +128,14 @@ open class VicinityManager {
         let realm = try! Realm()
         try! realm.write {
             realm.add(vicintyBeacon,update:true)
+        }
+    }
+    
+    func deleteBeacons(){
+        let realm = try! Realm()
+        let beacons = realm.objects(VicinityBeacon.self)
+        try! realm.write {
+            realm.delete(beacons)
         }
     }
     
