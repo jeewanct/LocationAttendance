@@ -143,6 +143,7 @@ public func getUUIDString()->String{
     }
     
    public func createCheckin(checkinData:CheckinHolder){
+    
         let realm = try! Realm()
         let checkin = RMCCheckin()
         var checkinDetails = checkinData.checkinDetails!

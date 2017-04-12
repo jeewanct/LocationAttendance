@@ -16,8 +16,8 @@ public enum UserDefaultsKeys:String{
     case deviceToken = "DeviceToken"
     case startDate = "START_DATE"
     case FeCode = "Fecode"
-    case secretKey 
-    
+    case CheckinLastDate
+ 
 }
 public enum APIResult:String{
     case Success = "Success"

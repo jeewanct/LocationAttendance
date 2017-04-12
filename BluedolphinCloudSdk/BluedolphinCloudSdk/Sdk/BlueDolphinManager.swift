@@ -122,6 +122,7 @@ open class BlueDolphinManager:NSObject {
         print("Beacons count \(beaconArray.count)")
         beaconManager.registerBeacons(beaconArray)
         //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
+        NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsEntry(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconEntry.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsExit(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconExit.rawValue), object: nil)
@@ -140,7 +141,7 @@ open class BlueDolphinManager:NSObject {
     
     public func stopScanning(){
         beaconManager.stopMonitoring()
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func beaconsEntry(notification:NSNotification){

@@ -48,12 +48,14 @@ public enum BeaconScanning:String{
                     return
                 }
                 if let documents = responseData["documents"] as? NSArray {
-                    for beacon in documents{
-                        self.saveBeacons(data: beacon as! NSDictionary)
-                    }
+                    
                     if documents.count != 0{
+                        self.deleteBeacons()
+                        for beacon in documents{
+                            self.saveBeacons(data: beacon as! NSDictionary)
+                        }
                         completion(.StartScanning)
-
+                        
                     }else {
                         completion(.NoScanning)
                     }
@@ -111,7 +113,7 @@ public enum BeaconScanning:String{
                 vicintyBeacon.minor = minor
             }
             if let uuid = beaconData["uuid"] as? String {
-                vicintyBeacon.uuid = uuid
+                vicintyBeacon.uuid = uuid.uppercased()
             }
             
         }
@@ -130,6 +132,14 @@ public enum BeaconScanning:String{
         }
     }
     
+    
+    func deleteBeacons(){
+        let realm = try! Realm()
+        let beacons = realm.objects(VicinityBeacon.self)
+        try! realm.write {
+            realm.delete(beacons)
+        }
+    }
       func fetchBeaconsFromDb(uuid:String="") ->Results<VicinityBeacon>{
         let realm = try! Realm()
         var beacons = realm.objects(VicinityBeacon.self)
