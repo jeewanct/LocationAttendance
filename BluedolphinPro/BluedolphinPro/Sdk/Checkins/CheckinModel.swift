@@ -142,6 +142,12 @@ open class CheckinModel:Meta{
     }
     
    public func createCheckin(checkinData:CheckinHolder){
+    if let lastTimeStamp = UserDefaults.standard.value(forKey: UserDefaultsKeys.CheckinLastDate.rawValue) as? Date{
+        if getCurrentDate().minuteFrom(lastTimeStamp) < 1 {
+            return
+        }
+    }
+    UserDefaults.standard.set(getCurrentDate(), forKey: UserDefaultsKeys.CheckinLastDate.rawValue)
         let realm = try! Realm()
         let checkin = RMCCheckin()
         var checkinDetails = checkinData.checkinDetails!
@@ -188,6 +194,8 @@ open class CheckinModel:Meta{
             }
             checkin.beaconProximity = beconList
         }
+    
+    
         try! realm.write {
             realm.add(checkin, update: true)
         }

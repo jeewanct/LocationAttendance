@@ -8,10 +8,6 @@
 
 import Foundation
 
-
-
-
-import Foundation
 enum InitilizationError : Error {
     case SecretKeyError
     case OrganizationIdError
@@ -31,10 +27,10 @@ open class BlueDolphinManager:NSObject {
     var beaconSentflag = true
     let beaconManager = IBeaconManager()
     
-    public func initialize(secretKey:String?,organizationId:String?,email:String?,firstName:String?,lastName:String?,metaInfo:NSDictionary?) {
+    public func initialize(secretKey:String,organizationId:String,email:String,firstName:String,lastName:String,metaInfo:NSDictionary) {
         
-        setConfig(secretKey:secretKey!,organizationId:organizationId!)
-        authorizeUser(email: email!, firstName: firstName!, lastName: lastName!, metaInfo: metaInfo!)
+        setConfig(secretKey:secretKey,organizationId:organizationId)
+        authorizeUser(email: email, firstName: firstName, lastName: lastName, metaInfo: metaInfo)
         
     }
     
@@ -127,6 +123,7 @@ open class BlueDolphinManager:NSObject {
         print("Beacons count \(beaconArray.count)")
         beaconManager.registerBeacons(beaconArray)
         //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
+        NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsEntry(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconEntry.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsExit(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconExit.rawValue), object: nil)
@@ -230,7 +227,7 @@ open class BlueDolphinManager:NSObject {
             }
             if beaconSentflag {
                 beaconSentflag = false
-                let delay = 120.0 * Double(NSEC_PER_SEC)
+                let delay = 60.0 * Double(NSEC_PER_SEC)
                 let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: time, execute: {
                     self.beaconSentflag = true
