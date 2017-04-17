@@ -794,6 +794,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BluedolphinPro/Wired/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -818,6 +822,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BluedolphinPro/Wired/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
