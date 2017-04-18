@@ -14,6 +14,14 @@
 		99BD39AC1EA49B7100B6942B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99BD39AA1EA49B7100B6942B /* LaunchScreen.storyboard */; };
 		99BD39B71EA49B7100B6942B /* bdAttendenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39B61EA49B7100B6942B /* bdAttendenceTests.swift */; };
 		99BD39C21EA49B7100B6942B /* bdAttendenceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39C11EA49B7100B6942B /* bdAttendenceUITests.swift */; };
+		99BD39D01EA4A23800B6942B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39CF1EA4A23800B6942B /* CustomButton.swift */; };
+		99BD39D21EA4A50700B6942B /* ErrorCheckinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39D11EA4A50700B6942B /* ErrorCheckinView.swift */; };
+		99BD39D41EA4A92F00B6942B /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39D31EA4A92F00B6942B /* WelcomeViewController.swift */; };
+		99BD39D61EA5E18C00B6942B /* CheckinErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39D51EA5E18C00B6942B /* CheckinErrorViewController.swift */; };
+		99BD39D81EA5E19B00B6942B /* CheckinSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39D71EA5E19B00B6942B /* CheckinSuccessViewController.swift */; };
+		99BD39DA1EA5E1F800B6942B /* CheckOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39D91EA5E1F800B6942B /* CheckOutViewController.swift */; };
+		99BD39DE1EA5EB7A00B6942B /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */; };
+		99BD39E01EA5F83800B6942B /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39DF1EA5F83800B6942B /* CommonFunction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +55,14 @@
 		99BD39BD1EA49B7100B6942B /* bdAttendenceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bdAttendenceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BD39C11EA49B7100B6942B /* bdAttendenceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bdAttendenceUITests.swift; sourceTree = "<group>"; };
 		99BD39C31EA49B7100B6942B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99BD39CF1EA4A23800B6942B /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		99BD39D11EA4A50700B6942B /* ErrorCheckinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCheckinView.swift; sourceTree = "<group>"; };
+		99BD39D31EA4A92F00B6942B /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		99BD39D51EA5E18C00B6942B /* CheckinErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinErrorViewController.swift; sourceTree = "<group>"; };
+		99BD39D71EA5E19B00B6942B /* CheckinSuccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinSuccessViewController.swift; sourceTree = "<group>"; };
+		99BD39D91EA5E1F800B6942B /* CheckOutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutViewController.swift; sourceTree = "<group>"; };
+		99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressBar.swift; path = ../ProgressBar.swift; sourceTree = "<group>"; };
+		99BD39DF1EA5F83800B6942B /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +114,16 @@
 			isa = PBXGroup;
 			children = (
 				99BD39A11EA49B7100B6942B /* AppDelegate.swift */,
+				99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */,
 				99BD39A31EA49B7100B6942B /* ViewController.swift */,
 				99BD39A51EA49B7100B6942B /* Main.storyboard */,
+				99BD39DF1EA5F83800B6942B /* CommonFunction.swift */,
+				99BD39D51EA5E18C00B6942B /* CheckinErrorViewController.swift */,
+				99BD39D71EA5E19B00B6942B /* CheckinSuccessViewController.swift */,
+				99BD39D91EA5E1F800B6942B /* CheckOutViewController.swift */,
+				99BD39D31EA4A92F00B6942B /* WelcomeViewController.swift */,
+				99BD39D11EA4A50700B6942B /* ErrorCheckinView.swift */,
+				99BD39CF1EA4A23800B6942B /* CustomButton.swift */,
 				99BD39A81EA49B7100B6942B /* Assets.xcassets */,
 				99BD39AA1EA49B7100B6942B /* LaunchScreen.storyboard */,
 				99BD39AD1EA49B7100B6942B /* Info.plist */,
@@ -193,6 +217,7 @@
 				TargetAttributes = {
 					99BD399D1EA49B7100B6942B = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = WM5336KTVY;
 						ProvisioningStyle = Automatic;
 					};
 					99BD39B11EA49B7100B6942B = {
@@ -259,8 +284,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99BD39E01EA5F83800B6942B /* CommonFunction.swift in Sources */,
 				99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */,
+				99BD39D41EA4A92F00B6942B /* WelcomeViewController.swift in Sources */,
 				99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */,
+				99BD39D81EA5E19B00B6942B /* CheckinSuccessViewController.swift in Sources */,
+				99BD39DE1EA5EB7A00B6942B /* ProgressBar.swift in Sources */,
+				99BD39DA1EA5E1F800B6942B /* CheckOutViewController.swift in Sources */,
+				99BD39D01EA4A23800B6942B /* CustomButton.swift in Sources */,
+				99BD39D61EA5E18C00B6942B /* CheckinErrorViewController.swift in Sources */,
+				99BD39D21EA4A50700B6942B /* ErrorCheckinView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,7 +447,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = WM5336KTVY;
 				INFOPLIST_FILE = bdAttendence/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rmc.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -426,7 +461,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = WM5336KTVY;
 				INFOPLIST_FILE = bdAttendence/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rmc.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -507,6 +544,7 @@
 				99BD39C81EA49B7100B6942B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		99BD39C91EA49B7100B6942B /* Build configuration list for PBXNativeTarget "bdAttendenceTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +553,7 @@
 				99BD39CB1EA49B7100B6942B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		99BD39CC1EA49B7100B6942B /* Build configuration list for PBXNativeTarget "bdAttendenceUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +562,7 @@
 				99BD39CE1EA49B7100B6942B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
