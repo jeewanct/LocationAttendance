@@ -7,18 +7,33 @@
 //
 
 import UIKit
+import BluedolphinCloudSdk
 
 class WelcomeViewController: UIViewController {
 
+    @IBOutlet weak var nameLabel: UILabel!
     @IBAction func checkinAction(_ sender: Any) {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "errorView") as? CheckinErrorViewController
+        if BlueDolphinManager.manager.seanbeacons.count != 0 {
+            BlueDolphinManager.manager.sendCheckins()
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "successView") as? CheckinSuccessViewController
+            self.show(controller!, sender: nil)
+        }else{
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "errorView") as? CheckinErrorViewController
+            
+            self.show(controller!, sender: nil)
+        }
         
-        self.present(controller!, animated: true, completion: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-
+        if isInternetAvailable() {
+            BlueDolphinManager.manager.updateToken()
+            BlueDolphinManager.manager.getNearByBeacons()
+        }
+       
+        BlueDolphinManager.manager.startScanning()
+        nameLabel.text  =  "Hi \(SDKSingleton.sharedInstance.userName.capitalized)"
         // Do any additional setup after loading the view.
     }
 

@@ -12,7 +12,8 @@ class CheckinSuccessViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        delayWithSeconds(3.0) {
+        UserDefaults.standard.set("true", forKey: "AlreadyCheckin")
+        delayWithSeconds(2.0) {
             self.moveToCheckout()
         }
 

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import BluedolphinCloudSdk
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        BlueDolphinManager.manager.setConfig(secretKey: "BRa06GxNCwlkpZkjImFl0ytWY0L3OsEzy8ErE4wN", organizationId: "a0ec2920-1927-11e7-b7e2-b3da29af52ca")
+          checkLogin()
         // Override point for customization after application launch.
         return true
     }
@@ -40,6 +42,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func startUpTask(){
+    
+        checkLogin()
+        
+    }
+    
+    func checkLogin(){
+        getUserData()
+        
+        
+        if !SDKSingleton.sharedInstance.userId.isBlank{
+            
+            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+                if screenFlag == "true"{
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let destVC = storyboard.instantiateViewController(withIdentifier: "home") as! UINavigationController
+                    if self.window != nil {
+                        self.window?.rootViewController = destVC
+                    }
+                }
+                else{
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+                    if self.window != nil {
+                        self.window?.rootViewController = destVC
+                    }
+                }
+            }else{
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+                if self.window != nil {
+                    self.window?.rootViewController = destVC
+                }
+            }
+           
+        }
+        
+    }
+   
+    
+    
+
 
 
 }
