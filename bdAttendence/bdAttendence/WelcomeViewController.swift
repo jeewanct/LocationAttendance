@@ -14,7 +14,7 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBAction func checkinAction(_ sender: Any) {
         if BlueDolphinManager.manager.seanbeacons.count != 0 {
-            BlueDolphinManager.manager.sendCheckins()
+            sendCheckins()
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "successView") as? CheckinSuccessViewController
             self.show(controller!, sender: nil)
         }else{
@@ -28,13 +28,43 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         if isInternetAvailable() {
+             showLoader()
             BlueDolphinManager.manager.updateToken()
             BlueDolphinManager.manager.getNearByBeacons()
+        }else{
+            BlueDolphinManager.manager.startScanning()
         }
        
-        BlueDolphinManager.manager.startScanning()
-        nameLabel.text  =  "Hi \(SDKSingleton.sharedInstance.userName.capitalized)"
+       
+        nameLabel.text  =  "Hi \(SDKSingleton.sharedInstance.userName.capitalized.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)),"
+        
         // Do any additional setup after loading the view.
+    }
+    
+    
+    func sendCheckins(){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject, "status": "Checked-In" as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Data.rawValue
+        checkin.checkinType = CheckinType.Data.rawValue
+                     //
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        if isInternetAvailable(){
+            checkinModelObject.postCheckin()
+        }
+    }
+    
+    func showLoader(text:String = "Updating User data" ){
+        AlertView.sharedInstance.setLabelText(text)
+        AlertView.sharedInstance.showActivityIndicator(self.view)
+        let delay = 3.0 * Double(NSEC_PER_SEC)
+        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {
+            AlertView.sharedInstance.hideActivityIndicator(self.view)
+            BlueDolphinManager.manager.startScanning()
+        })
     }
 
     override func didReceiveMemoryWarning() {

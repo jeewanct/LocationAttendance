@@ -162,6 +162,22 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BlueDolphinM
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk13CheckinHolder")
 @interface CheckinHolder : NSObject
+@property (nonatomic, copy) NSString * _Nullable latitude;
+@property (nonatomic, copy) NSString * _Nullable longitude;
+@property (nonatomic, copy) NSString * _Nullable accuracy;
+@property (nonatomic, copy) NSString * _Nullable altitude;
+@property (nonatomic, copy) NSString * _Nullable organizationId;
+@property (nonatomic, copy) NSString * _Nullable checkinId;
+@property (nonatomic, copy) NSString * _Nullable time;
+@property (nonatomic, copy) NSString * _Nullable checkinCategory;
+@property (nonatomic, copy) NSString * _Nullable checkinType;
+@property (nonatomic, copy) NSDictionary<NSString *, id> * _Nullable checkinDetails;
+@property (nonatomic, copy) NSString * _Nullable imageUrl;
+@property (nonatomic, copy) NSString * _Nullable assignmentId;
+@property (nonatomic, copy) NSString * _Nullable imageName;
+@property (nonatomic, copy) NSString * _Nullable relativeUrl;
+@property (nonatomic, copy) NSString * _Nullable jobNumber;
+@property (nonatomic, copy) NSArray * _Nullable beaconProximities;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

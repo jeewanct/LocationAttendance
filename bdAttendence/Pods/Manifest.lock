@@ -6,6 +6,7 @@ PODS:
   - AWSCore (2.5.3)
   - AWSS3 (2.5.3):
     - AWSCore (= 2.5.3)
+  - IQKeyboardManagerSwift (4.0.9)
   - ObjectMapper (2.2.5)
   - Realm (2.0.4):
     - Realm/Headers (= 2.0.4)
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
   - AWSS3
+  - IQKeyboardManagerSwift
   - RealmSwift (~> 2.0.2)
 
 SPEC CHECKSUMS:
@@ -24,10 +26,11 @@ SPEC CHECKSUMS:
   AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
   AWSCore: 344e21892790650cf902246d436402257a545bde
   AWSS3: 88095d68f9d588eaa042d7f502f350234f98f606
+  IQKeyboardManagerSwift: 2eefe6c429b86aa08bfbc1b5c891164d754adf91
   ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
   Realm: 9da97f48365f8b99dd95c28d45ad8222d62e1775
   RealmSwift: 01e8db006035f16003e6307ae8eae1adccce68db
 
-PODFILE CHECKSUM: ca26ff2b6b304afa4c5b56c363a74ccb4005a8ab
+PODFILE CHECKSUM: 08300d4028dcf58f3457162b33b0a1c325ca0b2b
 
 COCOAPODS: 1.2.0

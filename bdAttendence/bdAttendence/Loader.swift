@@ -39,7 +39,7 @@ class AlertView: UIView {
     func showActivityIndicator(_ uiView: UIView) {
         //AlertView().showActivityIndicator(self.view)
         
-        container  = uiView
+        container.frame = uiView.frame
         container.center = uiView.center
         container.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
         //UIColorFromHex(0xd3d3d3, alpha: 0.1)
@@ -59,7 +59,7 @@ class AlertView: UIView {
         loadingView.addSubview(label)
         loadingView.addSubview(activityIndicator)
         container.addSubview(loadingView)
-        uiView.window?.addSubview(container)
+         uiView.addSubview(container)
         container.tag = 1000000
         activityIndicator.startAnimating()
         container.tag = 10000;

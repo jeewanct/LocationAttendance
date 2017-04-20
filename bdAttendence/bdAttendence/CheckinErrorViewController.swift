@@ -13,6 +13,7 @@ class CheckinErrorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    self.navigationController?.isNavigationBarHidden = true
      BlueDolphinManager.manager.startScanning()
         // Do any additional setup after loading the view.
     }
@@ -20,7 +21,7 @@ class CheckinErrorViewController: UIViewController {
     @IBAction func checkinButton(_ sender: Any) {
         
         if BlueDolphinManager.manager.seanbeacons.count != 0 {
-            BlueDolphinManager.manager.sendCheckins()
+         self.sendCheckins()
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "successView") as? CheckinSuccessViewController
             self.show(controller!, sender: nil)
         }else{
@@ -36,6 +37,19 @@ class CheckinErrorViewController: UIViewController {
             return        }
         alertController.addAction(OkAction)
         self.present(alertController, animated: true) {
+        }
+    }
+    func sendCheckins(){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject, "status": "Checked-In" as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Data.rawValue
+        checkin.checkinType = CheckinType.Data.rawValue
+        //
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        if isInternetAvailable(){
+            checkinModelObject.postCheckin()
         }
     }
     override func didReceiveMemoryWarning() {

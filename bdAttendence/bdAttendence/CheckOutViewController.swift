@@ -31,7 +31,7 @@ class CheckOutViewController: UIViewController {
         BlueDolphinManager.manager.startScanning()
         
         self.lastCheckinLabel.text = "Your last check in \(currentTime())"
-        self.welcomeLabel.text = "Hi \(SDKSingleton.sharedInstance.userName.capitalized) How's it going"
+        self.welcomeLabel.text = "Hi \(SDKSingleton.sharedInstance.userName.capitalized.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)), How's it going"
         progressBar.maxValue = 540
         let value = 220
         progressBar.setProgress(value: CGFloat(value), animationDuration: 5.0) {
@@ -63,6 +63,20 @@ class CheckOutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func sendCheckins(){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject, "status": "Checked-Out" as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Data.rawValue
+        checkin.checkinType = CheckinType.Data.rawValue
+        //
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        if isInternetAvailable(){
+            checkinModelObject.postCheckin()
+        }
+    }
+
     func currentTime() -> String {
         let date = Date()
         let calendar = Calendar.current

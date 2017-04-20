@@ -73,6 +73,7 @@
                     <navigationItem key="navigationItem" id="qQx-x7-B6Y"/>
                     <connections>
                         <outlet property="nameLabel" destination="YPc-gi-khZ" id="dvP-zi-6P6"/>
+                        <segue destination="1Y0-0n-LWc" kind="show" id="NPA-Lr-mfB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -159,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhB-GQ-AvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3812" y="109.29535232383809"/>
+            <point key="canvasLocation" x="3241" y="79"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="gKB-JS-8hC">
@@ -297,12 +298,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuO-1I-IZ5" customClass="UICircularProgressRingView" customModule="bdAttendence" customModuleProvider="target">
-                                <rect key="frame" x="87" y="133.5" width="200" height="200"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuO-1I-IZ5" customClass="UICircularProgressRingView" customModule="bdAttendence" customModuleProvider="target">
+                                <rect key="frame" x="87" y="173.5" width="200" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="N7o-OA-lOS"/>
-                                    <constraint firstAttribute="height" constant="200" id="bTD-kB-Cyv"/>
+                                    <constraint firstAttribute="height" constant="80" id="bTD-kB-Cyv"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="guideColor">
@@ -360,18 +361,18 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00 hours" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6B-h0-3fr">
-                                <rect key="frame" x="147.5" y="204" width="80" height="60"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00 hours" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6B-h0-3fr">
+                                <rect key="frame" x="147.5" y="204" width="80" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="YYv-04-PaV"/>
-                                    <constraint firstAttribute="height" constant="60" id="iGv-ES-7tj"/>
+                                    <constraint firstAttribute="height" constant="20" id="iGv-ES-7tj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th7-Ub-shM">
-                                <rect key="frame" x="45" y="343.5" width="285" height="80"/>
+                                <rect key="frame" x="45" y="263.5" width="285" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="rPn-Oh-OwR"/>
                                 </constraints>
@@ -388,13 +389,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your last check in : 17:05 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YfK-Mc-0H0">
-                                <rect key="frame" x="95" y="428.5" width="185" height="17"/>
+                                <rect key="frame" x="95" y="348.5" width="185" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lbW-F4-QES" customClass="FlatButton" customModule="bdAttendence" customModuleProvider="target">
-                                <rect key="frame" x="127" y="460.5" width="120" height="40"/>
+                                <rect key="frame" x="127" y="380.5" width="120" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="5hO-G6-cgy"/>
                                     <constraint firstAttribute="height" constant="40" id="vSQ-Ab-DUj"/>
@@ -430,7 +431,7 @@
                             <constraint firstItem="YfK-Mc-0H0" firstAttribute="centerX" secondItem="th7-Ub-shM" secondAttribute="centerX" id="enS-oP-IS4"/>
                             <constraint firstItem="f6B-h0-3fr" firstAttribute="centerX" secondItem="wuO-1I-IZ5" secondAttribute="centerX" id="wnP-2w-6Lr"/>
                             <constraint firstItem="th7-Ub-shM" firstAttribute="leading" secondItem="7qh-11-2uT" secondAttribute="leading" constant="45" id="z7F-PE-Opy"/>
-                            <constraint firstItem="wuO-1I-IZ5" firstAttribute="centerY" secondItem="7qh-11-2uT" secondAttribute="centerY" constant="-100" id="zVG-EB-11d"/>
+                            <constraint firstItem="wuO-1I-IZ5" firstAttribute="centerY" secondItem="7qh-11-2uT" secondAttribute="centerY" constant="-120" id="zVG-EB-11d"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6eE-i2-MjQ"/>
@@ -444,24 +445,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u2p-f8-yrz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6812" y="95.802098950524751"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dBY-vQ-wa5">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="tQs-8U-wjm" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bjC-vW-NgX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="1Y0-0n-LWc" kind="relationship" relationship="rootViewController" id="qfA-c8-FNb"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X9W-bb-adR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2872.8000000000002" y="109.29535232383809"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="z4A-pZ-dWI">

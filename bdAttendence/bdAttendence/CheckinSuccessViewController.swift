@@ -12,6 +12,7 @@ class CheckinSuccessViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.navigationController?.isNavigationBarHidden = true
         UserDefaults.standard.set("true", forKey: "AlreadyCheckin")
         delayWithSeconds(2.0) {
             self.moveToCheckout()

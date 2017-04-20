@@ -28,8 +28,8 @@
 		99BD39E71EA72BE100B6942B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39E61EA72BE100B6942B /* LoginViewController.swift */; };
 		99BD39ED1EA7414D00B6942B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39EC1EA7414D00B6942B /* Extensions.swift */; };
 		99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39EE1EA7453A00B6942B /* Loader.swift */; };
-		99BD39FA1EA74D6E00B6942B /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BD39F81EA74D6400B6942B /* BluedolphinCloudSdk.framework */; };
-		99BD39FB1EA74D6E00B6942B /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99BD39F81EA74D6400B6942B /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		99BD39FE1EA7E44D00B6942B /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BD39FC1EA7E26D00B6942B /* BluedolphinCloudSdk.framework */; };
+		99BD39FF1EA7E44D00B6942B /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99BD39FC1EA7E26D00B6942B /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99BD39FB1EA74D6E00B6942B /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				99BD39FF1EA7E44D00B6942B /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,7 +93,7 @@
 		99BD39E61EA72BE100B6942B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99BD39EC1EA7414D00B6942B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		99BD39EE1EA7453A00B6942B /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
-		99BD39F81EA74D6400B6942B /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		99BD39FC1EA7E26D00B6942B /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		A84808C944901ADB85F779C1 /* Pods_bdAttendenceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendenceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA16F440FB1D36F09387FB10 /* Pods-bdAttendenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendenceUITests/Pods-bdAttendenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D31BC022915AA05FF0E1E696 /* Pods_bdAttendence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99BD39FA1EA74D6E00B6942B /* BluedolphinCloudSdk.framework in Frameworks */,
+				99BD39FE1EA7E44D00B6942B /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,7 +132,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				99BD39F81EA74D6400B6942B /* BluedolphinCloudSdk.framework */,
+				99BD39FC1EA7E26D00B6942B /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -591,8 +591,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
@@ -615,7 +615,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "0e86e5a6-840a-406d-a1d8-dfe50082cffd";
+				PROVISIONING_PROFILE = "2aa7949f-bbaf-480b-a3a5-a1c63259bb2d";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -645,8 +645,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
@@ -662,7 +662,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "0e86e5a6-840a-406d-a1d8-dfe50082cffd";
+				PROVISIONING_PROFILE = "2aa7949f-bbaf-480b-a3a5-a1c63259bb2d";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
