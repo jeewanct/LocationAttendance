@@ -114,10 +114,10 @@ extension Foundation.Date {
         let dayHourMinuteSecond: NSCalendar.Unit = [.day, .hour, .minute, .second]
         let difference = (Calendar.current as NSCalendar).components(dayHourMinuteSecond, from: date, to: self, options: [])
         
-        let seconds = "\(difference.second)s"
-        let minutes = "\(difference.minute)m" + " " + seconds
-        let hours = "\(difference.hour)h" + " " + minutes
-        let days = "\(difference.day)d" + " " + hours
+        let seconds = "\(String(describing: difference.second))s"
+        let minutes = "\(String(describing: difference.minute))m" + " " + seconds
+        let hours = "\(String(describing: difference.hour))h" + " " + minutes
+        let days = "\(String(describing: difference.day))d" + " " + hours
         
         if difference.day!    > 0 { return days }
         if difference.hour!   > 0 { return hours }

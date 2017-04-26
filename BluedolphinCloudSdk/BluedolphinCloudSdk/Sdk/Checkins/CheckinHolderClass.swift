@@ -8,22 +8,22 @@
 
 import Foundation
 
- class CheckinHolder:NSObject{
-     var latitude:String?
-     var longitude:String?
-     var accuracy:String?
-     var altitude:String?
-     var organizationId:String?
-     var checkinId:String?
-     var time:String?
-     var checkinCategory:String?
-     var checkinType:String?
-     var checkinDetails:[String:AnyObject]?
-     var imageUrl:String?
-     var assignmentId:String?
-     var imageName:String?
-     var relativeUrl:String?
-     var jobNumber:String?
-     var beaconProximities:Array<Any>?
+open class CheckinHolder:NSObject{
+    public var latitude:String?
+    public var longitude:String?
+    public var accuracy:String?
+    public var altitude:String?
+    public var organizationId:String?
+    public var checkinId:String?
+    public var time:String?
+    public var checkinCategory:String?
+    public var checkinType:String?
+    public var checkinDetails:[String:AnyObject]?
+    public var imageUrl:String?
+    public var assignmentId:String?
+    public var imageName:String?
+    public var relativeUrl:String?
+    public var jobNumber:String?
+    public var beaconProximities:Array<Any>?
     
 }

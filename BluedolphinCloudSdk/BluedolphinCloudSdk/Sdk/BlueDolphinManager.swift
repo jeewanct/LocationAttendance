@@ -19,12 +19,13 @@ open class BlueDolphinManager:NSObject {
     public static let manager: BlueDolphinManager = BlueDolphinManager()
     var secretKey:String = String()
     var organizationId:String  = String()
-    var emailId:String  = String()
+    public var emailId:String  = String()
     var coreLocationController:CoreLocationController?
     
-    var seanbeacons = NSMutableDictionary()
+    public var seanbeacons = NSMutableDictionary()
     var beaconSentflag = true
     let beaconManager = IBeaconManager()
+    let semaphore = DispatchSemaphore(value: 1)
     
     public func initialize(secretKey:String?,organizationId:String?,email:String?,firstName:String?,lastName:String?,metaInfo:NSDictionary?) {
         
@@ -33,13 +34,13 @@ open class BlueDolphinManager:NSObject {
     
     }
     
-     func setConfig(secretKey:String,organizationId:String){
+    public func setConfig(secretKey:String,organizationId:String){
        self.secretKey = secretKey
        self.organizationId = organizationId
        self.coreLocationController  = CoreLocationController()
         
     }
-     func authorizeUser(email:String,firstName:String,lastName:String = "",metaInfo:NSDictionary){
+    public func authorizeUser(email:String,firstName:String,lastName:String = "",metaInfo:NSDictionary){
         self.emailId = email
         let object = [
             "grantType":"accessToken",
@@ -57,7 +58,7 @@ open class BlueDolphinManager:NSObject {
             case APIResult.Success.rawValue:
                getUserData()
                self.postTransientCheckin(metaInfo: metaInfo as! [String : AnyObject])
-               self.getNearByBeacons()
+               //self.getNearByBeacons()
                 
             case APIResult.InvalidCredentials.rawValue:
                break
@@ -73,7 +74,7 @@ open class BlueDolphinManager:NSObject {
     }
     
     
-     func postTransientCheckin(metaInfo:[String:AnyObject]){
+    public func postTransientCheckin(metaInfo:[String:AnyObject]){
         
         let checkin = CheckinHolder()
         var details = metaInfo
@@ -90,7 +91,7 @@ open class BlueDolphinManager:NSObject {
         }
     }
     
-    func getNearByBeacons(){
+   public func getNearByBeacons(){
         let vicinityManager = VicinityManager()
         if isInternetAvailable() {
             vicinityManager.getNearByBeacons { (value) in
@@ -107,7 +108,7 @@ open class BlueDolphinManager:NSObject {
     }
     
     
-    func startScanning(){
+   public func startScanning(){
     
         var beaconArray = [iBeacon]()
         let vicinityManager = VicinityManager()
@@ -133,7 +134,7 @@ open class BlueDolphinManager:NSObject {
         }
     }
     
-     func updateToken(){
+    public func updateToken(){
        getUserData()
        let oauth = OauthModel()
        oauth.updateToken()
@@ -229,17 +230,20 @@ open class BlueDolphinManager:NSObject {
                 let delay = 60.0 * Double(NSEC_PER_SEC)
                 let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: time, execute: {
-                    self.beaconSentflag = true
-                     if self.seanbeacons.count != 0 {
-                    self.sendCheckins()
+                    
+                    if self.seanbeacons.count != 0 {
+                        self.sendCheckins()
                     }
+                    self.beaconSentflag = true
                 })
             }
+            
+            
   
         }
     }
     
-    func sendCheckins(){
+  public  func sendCheckins(){
             let checkin = CheckinHolder()
             var beaconArray = Array<Any>()
             for (_,value) in self.seanbeacons {

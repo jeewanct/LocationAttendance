@@ -13,7 +13,7 @@ public func getUUIDString()->String{
     return UUID().uuidString
 }
 
- class CheckinModel:NSObject, Meta{
+ open class CheckinModel:NSObject, Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Organisation.rawValue + SDKSingleton.sharedInstance.organizationId + ModuleUrl.Checkin.rawValue
     }

@@ -110,7 +110,7 @@ class iBeacon : NSObject {
      - Returns: A Unique ID
      */
     func generateId() -> String {
-        return "\(self.UUID)m\(self.major)m\(self.minor)"
+        return "\(self.UUID)m\(self.major)m\(String(describing: self.minor))"
     }
     
     override open var description:String {
@@ -119,7 +119,7 @@ class iBeacon : NSObject {
     
     override open var debugDescription:String{
         
-        return "\(self.UUID)--\(self.major)--\(self.minor)"
+        return "\(self.UUID)--\(self.major)--\(String(describing: self.minor))"
     }
     
     override open func isEqual(_ object: Any?) -> Bool {

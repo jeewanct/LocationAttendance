@@ -188,7 +188,7 @@ public enum iBeaconNotifications:String{
     /**Starts monitoring beacons*/
     func startMonitoring(){
         locationManager.startUpdatingLocation()
-        locationManager.distanceFilter  = 10
+        locationManager.distanceFilter  = 1000
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
         for beaconRegion in regions{
@@ -273,6 +273,42 @@ public enum iBeaconNotifications:String{
      *    by the device.
      */
     
+    var newBeacon = [String:TimeInterval]()
+    
+    func beaconScanning(beacons:[CLBeacon]) {
+        objc_sync_enter(self);
+         defer {
+            
+            //convert it to our iBeacons
+            var myBeacons = [iBeacon]()
+            for beacon in beacons{
+                if beacon.proximity != .unknown{
+                    let myBeacon = iBeacon(beacon: beacon)
+                    if let value = newBeacon[myBeacon.id]  {
+                        let time = value - NSDate.timeIntervalSinceReferenceDate
+                        if time >= 60{
+                            newBeacon.removeValue(forKey: myBeacon.id)
+                    
+                        }
+                        
+                        
+                    }else{
+                        newBeacon[myBeacon.id] = NSDate.timeIntervalSinceReferenceDate
+                        myBeacons.append(myBeacon)
+                        
+                    }
+                    
+                   
+                }
+            }
+            
+            myBeacons.sort(by: {$0.proximity.sortIndex < $1.proximity.sortIndex})
+            
+            NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: myBeacons)
+        objc_sync_exit(self);
+        }
+    }
+    
     open func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion)
     {
         //Notify the delegates and etc that we know how far are we from the iBeacon
@@ -281,8 +317,10 @@ public enum iBeaconNotifications:String{
         }
         
         if broadcasting{
+            //beaconScanning(beacons: beacons)
             //broadcast notification
             //convert CLBeacon to iBeacon
+            
             var myBeacons = [iBeacon]()
             //convert it to our iBeacons
             for beacon in beacons{
