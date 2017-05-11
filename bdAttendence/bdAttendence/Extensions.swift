@@ -8,6 +8,23 @@
 
 import Foundation
 
+enum NotificationType:String{
+    case NewAssignment = "New-Assignment"
+    case Welcome = "Welcome-Message"
+    case UpdatedAssignment = "Updated-Assignment"
+}
+
+enum LocalNotifcation:String{
+    case Profile = "MyProfile"
+    case Assignment = "MyAssignments"
+    case VirtualBeacon = "VirtualBeacon"
+    case Pushreceived = "Pushreceived"
+    case NewAssignment = "NewAssignment"
+    case Draft = "Draft"
+    case BaseAnalytics
+    case Attendance
+    case Background
+}
 enum ErrorMessage:String{
     case UserNotFound = "User not found with that phone number in system,Please contact your administrator"
     case InternalServer = "We are facing some internal issue please try again after sometime"

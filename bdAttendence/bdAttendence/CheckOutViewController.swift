@@ -18,6 +18,7 @@ class CheckOutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          self.navigationController?.isNavigationBarHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(CheckOutViewController.updateDate(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: nil)
         
         updateTask()
         // Do any additional setup after loading the view.
@@ -38,7 +39,9 @@ class CheckOutViewController: UIViewController {
             self.progressLabel.text = "\(value/60) hours"
         }
     }
-
+    func updateDate(sender:Notification){
+        self.lastCheckinLabel.text = "Your last check in \(currentTime())"
+    }
     @IBAction func checkoutAction(_ sender: Any) {
         if BlueDolphinManager.manager.seanbeacons.count != 0{
             moveToWelcome()
@@ -78,7 +81,10 @@ class CheckOutViewController: UIViewController {
     }
 
     func currentTime() -> String {
-        let date = Date()
+        var date = Date()
+        if let value = UserDefaults.standard.value(forKey: "LastCheckinTime") as? Date {
+            date = value
+        }
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
         let minutes = calendar.component(.minute, from: date)

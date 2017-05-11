@@ -189,12 +189,43 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk12CheckinModel")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSString;
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk15KeychainService")
+@interface KeychainService : NSObject
+- (NSString * _Nullable)loadWithName:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 @interface NSObject (SWIFT_EXTENSION(BluedolphinCloudSdk))
 @end
 
 
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk8OTPModel")
+@interface OTPModel : NSObject
+- (void)getOtpWithMobile:(NSString * _Nonnull)mobile completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk10OauthModel")
+@interface OauthModel : NSObject
+- (void)getTokenWithUserObject:(NSDictionary<NSString *, id> * _Nonnull)userObject completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
+- (void)updateToken;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 @interface RealmSwiftObject (SWIFT_EXTENSION(BluedolphinCloudSdk))
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk13UserDataModel")
+@interface UserDataModel : NSObject
+- (void)userSignUpWithMobile:(NSString * _Nonnull)mobile;
+- (void)createUserDataWithUserObject:(NSDictionary<NSString *, NSString *> * _Nonnull)userObject;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #pragma clang diagnostic pop

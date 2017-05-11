@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HgR-rQ-eLy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YMg-sB-rlu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Welcome View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -480,12 +485,184 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ETK-mO-wKR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-862" y="126"/>
+            <point key="canvasLocation" x="-1018" y="126"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="B4G-2H-R86">
+            <objects>
+                <viewController id="0o1-wT-utr" customClass="RootViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qiH-Rj-UtF"/>
+                        <viewControllerLayoutGuide type="bottom" id="l9u-s0-Q6M"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9Ki-Rh-Omz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your 10 digit mobile number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjg-9P-yue">
+                                <rect key="frame" x="15" y="164" width="345" height="20"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tr1-nj-Exk">
+                                <rect key="frame" x="80" y="224" width="255" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UOH-BQ-adt"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thx-d7-RwS">
+                                <rect key="frame" x="104.5" y="311" width="166" height="49"/>
+                                <state key="normal" backgroundImage="send_otp"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Twh-aH-NEW">
+                                <rect key="frame" x="40" y="223" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="WP7-T1-RIJ"/>
+                                    <constraint firstAttribute="height" constant="40" id="wBl-j5-0lL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRR-e3-E5i">
+                                <rect key="frame" x="40" y="264" width="295" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="ouE-Zk-fUZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Twh-aH-NEW" firstAttribute="leading" secondItem="9Ki-Rh-Omz" secondAttribute="leading" constant="40" id="3hZ-Bd-qSw"/>
+                            <constraint firstAttribute="trailing" secondItem="Wjg-9P-yue" secondAttribute="trailing" constant="15" id="3sm-1a-OK0"/>
+                            <constraint firstItem="tr1-nj-Exk" firstAttribute="centerY" secondItem="Twh-aH-NEW" secondAttribute="centerY" constant="1" id="B4Q-sx-u9T"/>
+                            <constraint firstItem="Wjg-9P-yue" firstAttribute="top" secondItem="qiH-Rj-UtF" secondAttribute="bottom" constant="100" id="EAn-sT-WdS"/>
+                            <constraint firstItem="hRR-e3-E5i" firstAttribute="trailing" secondItem="tr1-nj-Exk" secondAttribute="trailing" id="KpY-35-O8E"/>
+                            <constraint firstItem="hRR-e3-E5i" firstAttribute="top" secondItem="tr1-nj-Exk" secondAttribute="bottom" id="Q2R-8S-jxi"/>
+                            <constraint firstAttribute="trailing" secondItem="tr1-nj-Exk" secondAttribute="trailing" constant="40" id="RSv-zP-VM1"/>
+                            <constraint firstItem="hRR-e3-E5i" firstAttribute="leading" secondItem="Twh-aH-NEW" secondAttribute="leading" id="TMx-Ow-qI9"/>
+                            <constraint firstItem="tr1-nj-Exk" firstAttribute="top" secondItem="Wjg-9P-yue" secondAttribute="bottom" constant="40" id="UOU-b0-Ufg"/>
+                            <constraint firstItem="tr1-nj-Exk" firstAttribute="leading" secondItem="Twh-aH-NEW" secondAttribute="trailing" id="YKE-Jf-pdR"/>
+                            <constraint firstItem="thx-d7-RwS" firstAttribute="centerX" secondItem="9Ki-Rh-Omz" secondAttribute="centerX" id="ZHL-j5-6YK"/>
+                            <constraint firstItem="Wjg-9P-yue" firstAttribute="leading" secondItem="9Ki-Rh-Omz" secondAttribute="leading" constant="15" id="lQl-iM-Eb3"/>
+                            <constraint firstItem="thx-d7-RwS" firstAttribute="top" secondItem="tr1-nj-Exk" secondAttribute="bottom" constant="47" id="tZG-Dl-PNO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="fPI-Tn-Zt0"/>
+                    <connections>
+                        <outlet property="mobileTextField" destination="tr1-nj-Exk" id="gBg-wE-V0W"/>
+                        <outlet property="sendOtpButton" destination="thx-d7-RwS" id="vBa-h0-Feh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xNA-fE-0sO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1303.125" y="-924.29577464788736"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Iw1-Z0-SR2">
+            <objects>
+                <viewController storyboardIdentifier="otpScreen" id="zAM-jS-JUQ" customClass="OTPViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yNl-dn-PNN"/>
+                        <viewControllerLayoutGuide type="bottom" id="tM4-PS-tJe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lWZ-Pv-dbR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter 6-digit OTP received" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pik-Jj-A7k">
+                                <rect key="frame" x="99" y="107.5" width="177.5" height="17.5"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S97-pl-bo3">
+                                <rect key="frame" x="37.5" y="148" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.93976046950000003" green="0.93976046950000003" blue="0.93976046950000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7ak-ip-wqq"/>
+                                    <constraint firstAttribute="width" constant="300" id="hFf-cK-OYn"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Having troubling receiving the OTP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vuc-f2-LzX">
+                                <rect key="frame" x="23" y="221" width="329" height="19"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1d-x2-i87">
+                                <rect key="frame" x="15" y="245" width="345" height="29"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                                <state key="normal" title="Click here to resend"/>
+                                <connections>
+                                    <action selector="resendButton:" destination="zAM-jS-JUQ" eventType="touchUpInside" id="HiV-gf-WNq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptX-Ag-rql">
+                                <rect key="frame" x="169.5" y="70" width="37" height="17.5"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93976046950000003" green="0.93976046950000003" blue="0.93976046950000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ptX-Ag-rql" firstAttribute="top" secondItem="yNl-dn-PNN" secondAttribute="bottom" constant="50" id="0Gj-bU-EXK"/>
+                            <constraint firstItem="S97-pl-bo3" firstAttribute="centerX" secondItem="lWZ-Pv-dbR" secondAttribute="centerX" id="7hI-2Z-JBP"/>
+                            <constraint firstItem="pik-Jj-A7k" firstAttribute="centerX" secondItem="lWZ-Pv-dbR" secondAttribute="centerX" id="Dlu-k9-pe1"/>
+                            <constraint firstItem="P1d-x2-i87" firstAttribute="top" secondItem="Vuc-f2-LzX" secondAttribute="bottom" constant="5" id="DrS-zv-r7c"/>
+                            <constraint firstAttribute="trailing" secondItem="P1d-x2-i87" secondAttribute="trailing" constant="15" id="Qcx-Gu-dT2"/>
+                            <constraint firstItem="S97-pl-bo3" firstAttribute="top" secondItem="pik-Jj-A7k" secondAttribute="bottom" constant="23" id="QoX-eK-fhf"/>
+                            <constraint firstItem="P1d-x2-i87" firstAttribute="leading" secondItem="lWZ-Pv-dbR" secondAttribute="leading" constant="15" id="VbG-X3-Tdb"/>
+                            <constraint firstItem="Vuc-f2-LzX" firstAttribute="top" secondItem="S97-pl-bo3" secondAttribute="bottom" constant="23" id="bR8-cr-O1F"/>
+                            <constraint firstItem="Vuc-f2-LzX" firstAttribute="leading" secondItem="lWZ-Pv-dbR" secondAttribute="leading" constant="23" id="ih0-CU-iaD"/>
+                            <constraint firstItem="pik-Jj-A7k" firstAttribute="top" secondItem="ptX-Ag-rql" secondAttribute="bottom" constant="20" id="j1m-fQ-Gp7"/>
+                            <constraint firstAttribute="trailing" secondItem="Vuc-f2-LzX" secondAttribute="trailing" constant="23" id="jGb-IH-GCh"/>
+                            <constraint firstItem="ptX-Ag-rql" firstAttribute="centerX" secondItem="lWZ-Pv-dbR" secondAttribute="centerX" id="pJN-yh-euu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="otpLabel" destination="ptX-Ag-rql" id="Rub-ex-kdE"/>
+                        <outlet property="otpView" destination="S97-pl-bo3" id="TwZ-cj-Vah"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Rj-6j-GqY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-478.125" y="-924.29577464788736"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ovZ-7k-5xF">
+            <objects>
+                <navigationController storyboardIdentifier="root" automaticallyAdjustsScrollViewInsets="NO" id="YMg-sB-rlu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gfQ-bg-uAT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="GnI-9I-5at">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="0o1-wT-utr" kind="relationship" relationship="rootViewController" id="xX6-zy-Gab"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mw0-ge-0hw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2300.625" y="-924.29577464788736"/>
         </scene>
     </scenes>
     <resources>
         <image name="LoginLogo" width="105" height="138"/>
         <image name="error" width="179" height="179"/>
+        <image name="send_otp" width="166" height="49"/>
         <image name="success" width="179" height="179"/>
     </resources>
 </document>
