@@ -13,15 +13,17 @@ class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBAction func checkinAction(_ sender: Any) {
-        if BlueDolphinManager.manager.seanbeacons.count != 0 {
+        //if BlueDolphinManager.manager.seanbeacons.count != 0 {
+        
+           BlueDolphinManager.manager.startScanning()
             sendCheckins()
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "successView") as? CheckinSuccessViewController
             self.show(controller!, sender: nil)
-        }else{
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "errorView") as? CheckinErrorViewController
-            
-            self.show(controller!, sender: nil)
-        }
+//        }else{
+//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "errorView") as? CheckinErrorViewController
+//            
+//            self.show(controller!, sender: nil)
+//        }
         
     }
     override func viewDidLoad() {
@@ -31,9 +33,10 @@ class WelcomeViewController: UIViewController {
              showLoader()
             BlueDolphinManager.manager.updateToken()
             BlueDolphinManager.manager.getNearByBeacons()
-        }else{
-            BlueDolphinManager.manager.startScanning()
         }
+//            else{
+//            BlueDolphinManager.manager.startScanning()
+//        }
        
        
         nameLabel.text  =  "Hi \(SDKSingleton.sharedInstance.userName.capitalized.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)),"

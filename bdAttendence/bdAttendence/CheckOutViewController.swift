@@ -43,13 +43,14 @@ class CheckOutViewController: UIViewController {
         self.lastCheckinLabel.text = "Your last check in \(currentTime())"
     }
     @IBAction func checkoutAction(_ sender: Any) {
-        if BlueDolphinManager.manager.seanbeacons.count != 0{
+        //if BlueDolphinManager.manager.seanbeacons.count != 0{
+            BlueDolphinManager.manager.stopScanning()
             moveToWelcome()
             BlueDolphinManager.manager.sendCheckins()
             UserDefaults.standard.set("false", forKey: "AlreadyCheckin")
-        }else{
-            self.showAlert("Please make sure you are in office premises")
-        }
+//        }else{
+//            self.showAlert("Please make sure you are in office premises")
+//        }
         
     }
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import BluedolphinCloudSdk
+import RealmSwift
 
 class OTPViewController: UIViewController {
     
@@ -79,11 +80,21 @@ class OTPViewController: UIViewController {
                 switch (result){
                 case APIResult.Success.rawValue:
                     self.updateUser()
-                    getUserData()
-                    
                     UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
-                    let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                    UIApplication.shared.keyWindow?.rootViewController = destVC
+                    let realm = try! Realm()
+                    let tokensList = realm.objects(AccessTokenObject.self)
+                    if tokensList.count > 1{
+                        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "orgList") as! UINavigationController
+                        let topController = destVC.topViewController as! OrganisationListViewController
+                        topController.accessTokensList = tokensList
+                        UIApplication.shared.keyWindow?.rootViewController = destVC
+                        
+                    }else{
+                        getUserData()
+                        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+                        UIApplication.shared.keyWindow?.rootViewController = destVC
+                    }
+                    
                 case APIResult.InvalidCredentials.rawValue:
                     self.showAlert(ErrorMessage.InvalidOtp.rawValue)
                     
