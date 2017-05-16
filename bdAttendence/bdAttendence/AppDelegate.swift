@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         registerForRemoteNotification()
        
-          checkLogin()
+         startUpTask()
        
         
         // Override point for customization after application launch.

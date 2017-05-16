@@ -13,17 +13,13 @@ class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBAction func checkinAction(_ sender: Any) {
-        //if BlueDolphinManager.manager.seanbeacons.count != 0 {
+  
         
            BlueDolphinManager.manager.startScanning()
             sendCheckins()
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "successView") as? CheckinSuccessViewController
             self.show(controller!, sender: nil)
-//        }else{
-//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "errorView") as? CheckinErrorViewController
-//            
-//            self.show(controller!, sender: nil)
-//        }
+
         
     }
     override func viewDidLoad() {
@@ -41,9 +37,40 @@ class WelcomeViewController: UIViewController {
        
         nameLabel.text  =  "Hi \(SDKSingleton.sharedInstance.userName.capitalized.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)),"
         
+        //NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
+        
         // Do any additional setup after loading the view.
     }
-    
+    func bluetoothDisabled(sender:NSNotification){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,"deviceStatus":"Bluetooth is off" as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Transient.rawValue
+        checkin.checkinType = CheckinType.Location.rawValue
+        //
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        if isInternetAvailable(){
+            checkinModelObject.postCheckin()
+        }
+        self.showAlert("Please enable bluetooth for indoor location monitoring")
+        
+    }
+    func locationCheckin(sender:NSNotification){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Transient.rawValue
+        checkin.checkinType = CheckinType.Location.rawValue
+        //
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        if isInternetAvailable(){
+            checkinModelObject.postCheckin()
+        }
+        
+    }
     
     func sendCheckins(){
         let checkin = CheckinHolder()
@@ -74,7 +101,14 @@ class WelcomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func showAlert(_ message : String) {
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+            return        }
+        alertController.addAction(OkAction)
+        self.present(alertController, animated: true) {
+        }
+    }
 
     /*
     // MARK: - Navigation

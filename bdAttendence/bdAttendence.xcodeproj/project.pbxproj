@@ -10,6 +10,11 @@
 		419EFA8AA35C4A224D53A6E7 /* Pods_bdAttendenceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84808C944901ADB85F779C1 /* Pods_bdAttendenceUITests.framework */; };
 		787D118106469ECFDE39FB93 /* Pods_bdAttendenceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 705EFBD76E06AFBFB1CF3729 /* Pods_bdAttendenceTests.framework */; };
 		7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31BC022915AA05FF0E1E696 /* Pods_bdAttendence.framework */; };
+		9917C77E1EC9904D00C9D38A /* OrganisationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9917C77D1EC9904D00C9D38A /* OrganisationCell.swift */; };
+		991A0EC61ECB1A0500513373 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 991A0EC41ECB19F600513373 /* BluedolphinCloudSdk.framework */; };
+		991A0EC71ECB1A0500513373 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 991A0EC41ECB19F600513373 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		991A0EC91ECB1FCD00513373 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A0EC81ECB1FCD00513373 /* LocationManager.swift */; };
+		99B936911EC98706008E12C4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B936901EC98706008E12C4 /* CardView.swift */; };
 		99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39A11EA49B7100B6942B /* AppDelegate.swift */; };
 		99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39A31EA49B7100B6942B /* ViewController.swift */; };
 		99BD39A71EA49B7100B6942B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99BD39A51EA49B7100B6942B /* Main.storyboard */; };
@@ -33,8 +38,6 @@
 		99D617321EBA07BC00E7E05F /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D617311EBA07BC00E7E05F /* OTPViewController.swift */; };
 		99F1FD311EBC6AA500A516C2 /* UserBasedLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD301EBC6AA500A516C2 /* UserBasedLoginViewController.swift */; };
 		99F1FD771EC5D01E00A516C2 /* OrganisationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD761EC5D01E00A516C2 /* OrganisationListViewController.swift */; };
-		99F1FD7A1EC5D1F600A516C2 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F1FD781EC5D1E900A516C2 /* BluedolphinCloudSdk.framework */; };
-		99F1FD7B1EC5D1F600A516C2 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99F1FD781EC5D1E900A516C2 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +64,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99F1FD7B1EC5D1F600A516C2 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				991A0EC71ECB1A0500513373 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +77,10 @@
 		70323FBB1E8B6C109AC2505C /* Pods-bdAttendenceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendenceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendenceUITests/Pods-bdAttendenceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		705EFBD76E06AFBFB1CF3729 /* Pods_bdAttendenceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendenceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AE9D8E83427C8914FFBC505 /* Pods-bdAttendence.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendence.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendence/Pods-bdAttendence.release.xcconfig"; sourceTree = "<group>"; };
+		9917C77D1EC9904D00C9D38A /* OrganisationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganisationCell.swift; sourceTree = "<group>"; };
+		991A0EC41ECB19F600513373 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		991A0EC81ECB1FCD00513373 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		99B936901EC98706008E12C4 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		99BD399E1EA49B7100B6942B /* bdAttendence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bdAttendence.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BD39A11EA49B7100B6942B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99BD39A31EA49B7100B6942B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,7 +111,6 @@
 		99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bdAttendence.entitlements; sourceTree = "<group>"; };
 		99F1FD301EBC6AA500A516C2 /* UserBasedLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBasedLoginViewController.swift; sourceTree = "<group>"; };
 		99F1FD761EC5D01E00A516C2 /* OrganisationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganisationListViewController.swift; sourceTree = "<group>"; };
-		99F1FD781EC5D1E900A516C2 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		A84808C944901ADB85F779C1 /* Pods_bdAttendenceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendenceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA16F440FB1D36F09387FB10 /* Pods-bdAttendenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendenceUITests/Pods-bdAttendenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D31BC022915AA05FF0E1E696 /* Pods_bdAttendence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99F1FD7A1EC5D1F600A516C2 /* BluedolphinCloudSdk.framework in Frameworks */,
+				991A0EC61ECB1A0500513373 /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,7 +149,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				99F1FD781EC5D1E900A516C2 /* BluedolphinCloudSdk.framework */,
+				991A0EC41ECB19F600513373 /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -170,9 +176,12 @@
 				99D6172D1EBA075800E7E05F /* OTPView.swift */,
 				99BD39EE1EA7453A00B6942B /* Loader.swift */,
 				99BD39A11EA49B7100B6942B /* AppDelegate.swift */,
+				991A0EC81ECB1FCD00513373 /* LocationManager.swift */,
 				99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */,
+				99B936901EC98706008E12C4 /* CardView.swift */,
 				99BD39A31EA49B7100B6942B /* ViewController.swift */,
 				99BD39A51EA49B7100B6942B /* Main.storyboard */,
+				9917C77D1EC9904D00C9D38A /* OrganisationCell.swift */,
 				99F1FD761EC5D01E00A516C2 /* OrganisationListViewController.swift */,
 				99F1FD301EBC6AA500A516C2 /* UserBasedLoginViewController.swift */,
 				99D617311EBA07BC00E7E05F /* OTPViewController.swift */,
@@ -534,6 +543,7 @@
 				99F1FD771EC5D01E00A516C2 /* OrganisationListViewController.swift in Sources */,
 				99D617321EBA07BC00E7E05F /* OTPViewController.swift in Sources */,
 				99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */,
+				99B936911EC98706008E12C4 /* CardView.swift in Sources */,
 				99D617301EBA079B00E7E05F /* RootViewController.swift in Sources */,
 				99BD39D81EA5E19B00B6942B /* CheckinSuccessViewController.swift in Sources */,
 				99BD39DE1EA5EB7A00B6942B /* ProgressBar.swift in Sources */,
@@ -541,7 +551,9 @@
 				99BD39ED1EA7414D00B6942B /* Extensions.swift in Sources */,
 				99BD39D01EA4A23800B6942B /* CustomButton.swift in Sources */,
 				99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */,
+				9917C77E1EC9904D00C9D38A /* OrganisationCell.swift in Sources */,
 				99BD39D61EA5E18C00B6942B /* CheckinErrorViewController.swift in Sources */,
+				991A0EC91ECB1FCD00513373 /* LocationManager.swift in Sources */,
 				99BD39D21EA4A50700B6942B /* ErrorCheckinView.swift in Sources */,
 				99BD39E71EA72BE100B6942B /* LoginViewController.swift in Sources */,
 				99F1FD311EBC6AA500A516C2 /* UserBasedLoginViewController.swift in Sources */,
@@ -713,6 +725,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/bdAttendence",
 				);
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -739,6 +752,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/bdAttendence",
 				);
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

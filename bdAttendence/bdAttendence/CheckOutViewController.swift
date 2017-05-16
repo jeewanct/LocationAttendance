@@ -18,10 +18,41 @@ class CheckOutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          self.navigationController?.isNavigationBarHidden = true
-        NotificationCenter.default.addObserver(self, selector: #selector(CheckOutViewController.updateDate(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: nil)
-        
         updateTask()
+        NotificationCenter.default.addObserver(self, selector: #selector(CheckOutViewController.updateDate(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
+        
         // Do any additional setup after loading the view.
+    }
+    func bluetoothDisabled(sender:NSNotification){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,"deviceStatus":"Bluetooth is off" as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Transient.rawValue
+        checkin.checkinType = CheckinType.Location.rawValue
+        //
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        if isInternetAvailable(){
+            checkinModelObject.postCheckin()
+        }
+        self.showAlert("Please enable bluetooth for indoor location monitoring")
+        
+    }
+    func locationCheckin(sender:NSNotification){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Transient.rawValue
+        checkin.checkinType = CheckinType.Location.rawValue
+        //
+        let checkinModelObject = CheckinModel()
+        checkinModelObject.createCheckin(checkinData: checkin)
+        if isInternetAvailable(){
+            checkinModelObject.postCheckin()
+        }
+        
     }
     func updateTask(){
         if isInternetAvailable() {

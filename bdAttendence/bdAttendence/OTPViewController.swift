@@ -90,6 +90,10 @@ class OTPViewController: UIViewController {
                         UIApplication.shared.keyWindow?.rootViewController = destVC
                         
                     }else{
+                        for token in tokensList{
+                          UserDefaults.standard.set(token.organizationId, forKey: UserDefaultsKeys.organizationId.rawValue)
+                        }
+                        
                         getUserData()
                         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
                         UIApplication.shared.keyWindow?.rootViewController = destVC

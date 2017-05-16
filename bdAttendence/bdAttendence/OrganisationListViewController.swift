@@ -49,9 +49,11 @@ extension OrganisationListViewController:UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let task = accessTokensList[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "organisationCell")!
-        cell.textLabel?.text = task.organizationName.capitalized
-        cell.textLabel?.textAlignment = .center
+        let cell = tableView.dequeueReusableCell(withIdentifier: "organisationCell") as! OrganisationCell
+        //setCardView(view: cell)
+        //cell.accessoryType = .disclosureIndicator
+        cell.organisationNameLabel.text = task.organizationName.capitalized
+        //cell.textLabel?.textAlignment = .center
         return cell
         
     }
@@ -68,4 +70,15 @@ extension OrganisationListViewController:UITableViewDelegate,UITableViewDataSour
         //self.performSegue(withIdentifier: "showDetails", sender: self)
         
     }
+    func setCardView(view : UIView){
+        
+        view.layer.masksToBounds = false
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.cornerRadius = 1;
+        view.layer.shadowRadius = 1;
+        view.layer.shadowOpacity = 0.5;
+        
+    }
 }
+
+

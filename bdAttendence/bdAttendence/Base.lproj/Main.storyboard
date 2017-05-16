@@ -656,30 +656,73 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lah-TM-NOd">
-                                <rect key="frame" x="0.0" y="187" width="375" height="480"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="109" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lah-TM-NOd">
+                                <rect key="frame" x="30" y="187" width="315" height="380"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="organisationCell" id="Bep-ho-JNV">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="organisationCell" rowHeight="109" id="Bep-ho-JNV" customClass="OrganisationCell" customModule="bdAttendence" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="315" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bep-ho-JNV" id="0Ch-36-E6e">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="109"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDX-eD-yOU" customClass="CardView" customModule="bdAttendence" customModuleProvider="target">
+                                                    <rect key="frame" x="10" y="10" width="295" height="89"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yH4-Rb-qRM">
+                                                            <rect key="frame" x="10" y="34" width="257" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="RBE-DE-5pe">
+                                                            <rect key="frame" x="275" y="39.5" width="10" height="10"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="10" id="IIs-SQ-ssh"/>
+                                                                <constraint firstAttribute="height" constant="10" id="frQ-MU-aVD"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="RBE-DE-5pe" firstAttribute="centerY" secondItem="yH4-Rb-qRM" secondAttribute="centerY" id="Ho2-Xz-nOd"/>
+                                                        <constraint firstItem="yH4-Rb-qRM" firstAttribute="leading" secondItem="NDX-eD-yOU" secondAttribute="leading" constant="10" id="hDQ-cD-KHm"/>
+                                                        <constraint firstAttribute="trailing" secondItem="RBE-DE-5pe" secondAttribute="trailing" constant="10" id="pTj-PI-31b"/>
+                                                        <constraint firstItem="yH4-Rb-qRM" firstAttribute="centerY" secondItem="NDX-eD-yOU" secondAttribute="centerY" id="reR-rN-4tm"/>
+                                                        <constraint firstItem="RBE-DE-5pe" firstAttribute="leading" secondItem="yH4-Rb-qRM" secondAttribute="trailing" constant="8" id="sxU-G1-Zxg"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                            <constraints>
+                                                <constraint firstItem="NDX-eD-yOU" firstAttribute="top" secondItem="0Ch-36-E6e" secondAttribute="top" constant="10" id="EEd-GB-Cz8"/>
+                                                <constraint firstItem="NDX-eD-yOU" firstAttribute="leading" secondItem="0Ch-36-E6e" secondAttribute="leading" constant="10" id="Q10-ua-f1P"/>
+                                                <constraint firstAttribute="trailing" secondItem="NDX-eD-yOU" secondAttribute="trailing" constant="10" id="gmX-U6-T30"/>
+                                                <constraint firstAttribute="bottom" secondItem="NDX-eD-yOU" secondAttribute="bottom" constant="10" id="q3i-sO-SnW"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="organisationNameLabel" destination="yH4-Rb-qRM" id="y9f-yV-J8T"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="lah-TM-NOd" firstAttribute="top" secondItem="lk5-mh-Ued" secondAttribute="bottom" constant="23" id="3Zc-38-uAQ"/>
                             <constraint firstItem="lk5-mh-Ued" firstAttribute="leading" secondItem="4Is-D3-z0i" secondAttribute="leading" constant="23" id="3qC-Se-Y5g"/>
                             <constraint firstAttribute="trailing" secondItem="lk5-mh-Ued" secondAttribute="trailing" constant="23" id="JrX-Mp-rFu"/>
-                            <constraint firstItem="lah-TM-NOd" firstAttribute="leading" secondItem="4Is-D3-z0i" secondAttribute="leading" id="O4o-4m-cLn"/>
+                            <constraint firstItem="lah-TM-NOd" firstAttribute="leading" secondItem="4Is-D3-z0i" secondAttribute="leading" constant="30" id="O4o-4m-cLn"/>
                             <constraint firstItem="lk5-mh-Ued" firstAttribute="top" secondItem="SVS-Ls-YEg" secondAttribute="bottom" constant="60" id="OXd-e3-gCW"/>
-                            <constraint firstItem="cfd-gZ-AlQ" firstAttribute="top" secondItem="lah-TM-NOd" secondAttribute="bottom" id="WUE-tt-5Jw"/>
-                            <constraint firstAttribute="trailing" secondItem="lah-TM-NOd" secondAttribute="trailing" id="n0m-AJ-7SJ"/>
+                            <constraint firstItem="cfd-gZ-AlQ" firstAttribute="top" secondItem="lah-TM-NOd" secondAttribute="bottom" constant="100" id="WUE-tt-5Jw"/>
+                            <constraint firstAttribute="trailing" secondItem="lah-TM-NOd" secondAttribute="trailing" constant="30" id="n0m-AJ-7SJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Xud-dl-g4u"/>
@@ -735,6 +778,7 @@
     </scenes>
     <resources>
         <image name="LoginLogo" width="105" height="138"/>
+        <image name="chevron" width="6" height="10"/>
         <image name="error" width="179" height="179"/>
         <image name="send_otp" width="166" height="49"/>
         <image name="success" width="179" height="179"/>
