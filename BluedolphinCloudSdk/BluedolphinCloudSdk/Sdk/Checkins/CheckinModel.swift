@@ -193,6 +193,7 @@ public func getUUIDString()->String{
         try! realm.write {
             realm.add(checkin, update: true)
         }
+        UserDefaults.standard.set(Date(), forKey: "LastCheckinTime")
 
     }
    

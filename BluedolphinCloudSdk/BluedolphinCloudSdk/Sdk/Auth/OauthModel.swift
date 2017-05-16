@@ -11,7 +11,7 @@ import Foundation
 import RealmSwift
 
 
- class OauthModel :NSObject, Meta{
+open class OauthModel :NSObject, Meta{
     
     internal static func url() -> String {
         return   APIURL + ModuleUrl.Oauth.rawValue
@@ -50,7 +50,7 @@ import RealmSwift
                                         }
                                         let data = val as! NSDictionary
                                         if let organizationId = data["organizationId"] as? String{
-                                            UserDefaults.standard.set(organizationId, forKey: UserDefaultsKeys.organizationId.rawValue)
+                                            
                                         }
                                     }
                                     

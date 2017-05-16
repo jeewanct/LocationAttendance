@@ -27,11 +27,11 @@ enum ModuleUrl :String{
 
 
 
-let APIURL = "https://0uvkmcic37.execute-api.ap-south-1.amazonaws.com/bd/live/"
+//let APIURL = "https://0uvkmcic37.execute-api.ap-south-1.amazonaws.com/bd/live/"
 //Staging server 
 
 
-//let APIURL = "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/"
+let APIURL = "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/"
 
 
 //dev Server

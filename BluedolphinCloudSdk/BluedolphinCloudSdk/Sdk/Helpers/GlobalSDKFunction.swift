@@ -14,9 +14,9 @@ import RealmSwift
 
 
 
-func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-    Swift.print(items[0], separator:separator, terminator: terminator)
-}
+//func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+//    Swift.print(items[0], separator:separator, terminator: terminator)
+//}
 
 public func getCurrentDate()->Date{
    // return TrueTimeClient.sharedInstance.referenceTime?.time ?? Date()
@@ -55,6 +55,7 @@ public func getUserData(){
     let storage = UserDefaults.standard
     if let organizationId = storage.value(forKey: UserDefaultsKeys.organizationId.rawValue) as? String{
         SDKSingleton.sharedInstance.organizationId = organizationId
+        //"af39bc69-1938-4149-b9f7-f101fd9baf73"
         print("organisation id = \(organizationId)")
     }
     if let mobile = storage.value(forKey: UserDefaultsKeys.FeCode.rawValue) as? String{

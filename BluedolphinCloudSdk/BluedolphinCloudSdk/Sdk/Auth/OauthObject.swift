@@ -14,13 +14,13 @@ import ObjectMapper
 
 
 
- class AccessTokenObject :Object,Mappable {
-     dynamic var organizationId:String = ""
-     dynamic var token:String = ""
-     dynamic var userId:String = ""
-    dynamic var organizationName:String = ""
-    dynamic var expires  = 0
-    dynamic var userName:String?
+open class AccessTokenObject :Object,Mappable {
+   public  dynamic var organizationId:String = ""
+     public dynamic var token:String = ""
+    public  dynamic var userId:String = ""
+   public dynamic var organizationName:String = ""
+   public dynamic var expires  = 0
+   public dynamic var userName:String?
     //dynamic var primeKey :String?
     //Impl. of Mappable protocol
     required convenience public init?(map: Map) {

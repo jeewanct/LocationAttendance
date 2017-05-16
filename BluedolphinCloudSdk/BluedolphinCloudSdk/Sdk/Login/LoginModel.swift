@@ -9,7 +9,7 @@
 import Foundation
 
 
- class OTPModel: Meta {
+open class OTPModel: NSObject, Meta {
     internal static func url() -> String {
         return  APIURL + ModuleUrl.GetOtp.rawValue
     }

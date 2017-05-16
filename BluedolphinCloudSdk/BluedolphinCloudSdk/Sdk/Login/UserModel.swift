@@ -54,7 +54,7 @@ protocol Meta {
     
 }
 
- class UserDataModel :Meta{
+open class UserDataModel :NSObject, Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.User.rawValue
     }
@@ -73,7 +73,7 @@ protocol Meta {
         let realm = try! Realm()
         let user = realm.objects(RMCUser.self).filter("mobile=%@",mobile).first
         let param = user?.toDictionary()
-        
+        print(param!)
         
                 NetworkModel.submitData(UserDataModel.url(), method: .put, params: param as? [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
                     
@@ -111,7 +111,7 @@ protocol Meta {
     }
     
     
-    func createUserData(userObject:[String:String]){
+   public func createUserData(userObject:[String:String]){
         let user = RMCUser()
         user.mobile = userObject["mobile"]
         user.firstName = userObject["firstName"]

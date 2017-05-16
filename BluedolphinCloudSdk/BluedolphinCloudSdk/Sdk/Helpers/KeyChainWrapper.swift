@@ -10,12 +10,12 @@
 import Foundation
 import Security
 
- class KeychainService: NSObject {
+ open class KeychainService: NSObject {
     
     var service = "Service"
     var keychainQuery :[NSString: AnyObject]! = nil
     
-    func save(name: NSString, value: NSString) -> OSStatus? {
+   public func save(name: NSString, value: NSString) -> OSStatus? {
         let statusAdd :OSStatus?
         
         guard let dataFromString: Data = value.data(using: String.Encoding.utf8.rawValue) else {
@@ -38,7 +38,7 @@ import Security
         return statusAdd;
     }
     
-    func load(name: NSString) -> String? {
+   public func load(name: NSString) -> String? {
         var contentsOfKeychain :String?
         
         keychainQuery = [
