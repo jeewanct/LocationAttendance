@@ -32,9 +32,10 @@ struct CurrentLocation {
             
             locationManager = CLLocationManager()
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.distanceFilter  = 3000 // Must move at least 3km
             locationManager.startMonitoringSignificantLocationChanges()
+            locationManager.pausesLocationUpdatesAutomatically = true
             //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()

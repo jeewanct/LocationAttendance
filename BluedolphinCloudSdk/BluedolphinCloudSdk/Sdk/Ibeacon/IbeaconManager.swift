@@ -126,6 +126,9 @@ public enum iBeaconNotifications:String{
             }
             messages.append("Location Services Must be Authorized.")
             check = false
+        }else{
+            
+            locationManager.startUpdatingLocation()
         }
         
         if !CLLocationManager.isMonitoringAvailable(for: CLRegion.self){
@@ -187,9 +190,10 @@ public enum iBeaconNotifications:String{
     
     /**Starts monitoring beacons*/
     func startMonitoring(){
+        locationManager.distanceFilter  = 1000
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
-        locationManager.distanceFilter  = 100
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        
         
         for beaconRegion in regions{
             locationManager.startMonitoring(for: beaconRegion)

@@ -128,7 +128,11 @@ open class BlueDolphinManager:NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsEntry(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconEntry.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsExit(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconExit.rawValue), object: nil)
-       beaconManager.startMonitoring()
+       beaconManager.startMonitoring({
+        print("Sucesss")
+       }) { (error) in
+        print(error)
+    }
     }
     
     public func updateToken(){
