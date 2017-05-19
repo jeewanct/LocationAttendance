@@ -28,7 +28,7 @@ class CheckOutViewController: UIViewController {
     func bluetoothDisabled(sender:NSNotification){
         let checkin = CheckinHolder()
         
-        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,"deviceStatus":"Bluetooth is off" as AnyObject]
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,"deviceStatus":"Bluetooth is off" as AnyObject]
         checkin.checkinCategory = CheckinCategory.Transient.rawValue
         checkin.checkinType = CheckinType.Location.rawValue
         //
@@ -43,7 +43,7 @@ class CheckOutViewController: UIViewController {
     func locationCheckin(sender:NSNotification){
         let checkin = CheckinHolder()
         
-        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
         checkin.checkinCategory = CheckinCategory.Transient.rawValue
         checkin.checkinType = CheckinType.Location.rawValue
         //
@@ -101,7 +101,7 @@ class CheckOutViewController: UIViewController {
     func sendCheckins(){
         let checkin = CheckinHolder()
         
-        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:"1.0" as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject, "status": "Checked-Out" as AnyObject]
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject, "status": "Checked-Out" as AnyObject]
         checkin.checkinCategory = CheckinCategory.Data.rawValue
         checkin.checkinType = CheckinType.Data.rawValue
         //

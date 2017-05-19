@@ -12,7 +12,21 @@ func print(_ items: Any..., separator: String = " ", terminator: String = "\n") 
     Swift.print(items[0], separator:separator, terminator: terminator)
 }
 
-
+public extension DispatchQueue {
+    
+    private static var _onceTracker = [String]()
+    
+    public class func once(token: String, block:(Void)->Void) {
+        objc_sync_enter(self); defer { objc_sync_exit(self) }
+        
+        if _onceTracker.contains(token) {
+            return
+        }
+        
+        _onceTracker.append(token)
+        block()
+    }
+}
 enum NotificationType:String{
     case NewAssignment = "New-Assignment"
     case Welcome = "Welcome-Message"
