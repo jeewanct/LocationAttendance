@@ -86,7 +86,7 @@ extension Object {
 }
 
 
-public extension Foundation.Date {
+extension Foundation.Date {
     struct Date {
         static let formatterISO8601: DateFormatter = {
             let formatter = DateFormatter()

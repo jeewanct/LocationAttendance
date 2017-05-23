@@ -19,8 +19,9 @@ class CheckOutViewController: UIViewController {
         super.viewDidLoad()
          self.navigationController?.isNavigationBarHidden = true
         updateTask()
+        NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutViewController.updateDate(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: nil)
-        //NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
         
         // Do any additional setup after loading the view.
@@ -41,17 +42,27 @@ class CheckOutViewController: UIViewController {
         
     }
     func locationCheckin(sender:NSNotification){
-        let checkin = CheckinHolder()
-        
-        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
-        checkin.checkinCategory = CheckinCategory.Transient.rawValue
-        checkin.checkinType = CheckinType.Location.rawValue
-        //
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
-        if isInternetAvailable(){
-            checkinModelObject.postCheckin()
+        if let lastLocationCheckin = UserDefaults.standard.value(forKeyPath: "lastLocationCheckin") as? Date {
+            print( "Difference last \(lastLocationCheckin.minuteFrom(Date()))")
+            if Date().minuteFrom(lastLocationCheckin) > 2{
+                let checkin = CheckinHolder()
+                
+                checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
+                checkin.checkinCategory = CheckinCategory.Transient.rawValue
+                checkin.checkinType = CheckinType.Location.rawValue
+                //
+                let checkinModelObject = CheckinModel()
+                checkinModelObject.createCheckin(checkinData: checkin)
+                UserDefaults.standard.set(Date(), forKey: "lastLocationCheckin")
+                if isInternetAvailable(){
+                    checkinModelObject.postCheckin()
+                }
+            }
+        } else{
+            UserDefaults.standard.set(Date(), forKey: "lastLocationCheckin")
         }
+        
+        
         
     }
     func updateTask(){

@@ -190,10 +190,8 @@ public enum iBeaconNotifications:String{
     
     /**Starts monitoring beacons*/
     func startMonitoring(){
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.distanceFilter  = 100 // Must move at least 3km
-        locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.pausesLocationUpdatesAutomatically = true
+        locationManager.distanceFilter  = 1000
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         
         
@@ -361,11 +359,7 @@ public enum iBeaconNotifications:String{
         
         if let location = locations.last{
             print("Update Location to \(location)")
-            print(location.horizontalAccuracy)
-            if location.horizontalAccuracy <= locationManager.desiredAccuracy {
-               NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.Location.rawValue),  object: location)
-            }
-            
+            NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.Location.rawValue),  object: location)
         }
     }
     

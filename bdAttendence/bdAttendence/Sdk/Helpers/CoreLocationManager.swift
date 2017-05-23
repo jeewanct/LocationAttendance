@@ -13,8 +13,8 @@ import UIKit
 
 struct CurrentLocation {
     static var coordinate = CLLocationCoordinate2D(latitude: 28.63, longitude: 77.23)
-    static var accuracy = "11"
-    static var altitude = "102.23"
+    static var accuracy = "10"
+    static var altitude = "101.23"
     static var address = String()
     static var time = Date()
 }
@@ -32,8 +32,8 @@ struct CurrentLocation {
             
             locationManager = CLLocationManager()
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.distanceFilter  = 100 // Must move at least 3km
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.distanceFilter  = 3000 // Must move at least 3km
             locationManager.startMonitoringSignificantLocationChanges()
             locationManager.pausesLocationUpdatesAutomatically = true
             //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
@@ -75,16 +75,12 @@ struct CurrentLocation {
     {
         
         let location = locations.last! as CLLocation
-       
-            geoCode(location)
-            
-            CurrentLocation.coordinate = location.coordinate
-            CurrentLocation.accuracy = String(location.horizontalAccuracy)
-            CurrentLocation.altitude = String(location.altitude)
-            CurrentLocation.time = location.timestamp
-            print(CurrentLocation.time)
-        
-        
+        geoCode(location)
+        CurrentLocation.coordinate = location.coordinate
+        CurrentLocation.accuracy = String(location.horizontalAccuracy)
+        CurrentLocation.altitude = String(location.altitude)
+        CurrentLocation.time = location.timestamp
+        print(CurrentLocation.time)
         
     }
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
