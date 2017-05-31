@@ -15,7 +15,7 @@ class WelcomeViewController: UIViewController {
     @IBAction func checkinAction(_ sender: Any) {
   
         
-           BlueDolphinManager.manager.startScanning()
+           //BlueDolphinManager.manager.startScanning()
             sendCheckins()
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "successView") as? CheckinSuccessViewController
             self.show(controller!, sender: nil)
@@ -31,9 +31,9 @@ class WelcomeViewController: UIViewController {
             BlueDolphinManager.manager.updateToken()
             BlueDolphinManager.manager.getNearByBeacons()
         }
-//            else{
-//            BlueDolphinManager.manager.startScanning()
-//        }
+            else{
+           
+        }
        
        
         nameLabel.text  =  "Hi \(SDKSingleton.sharedInstance.userName.capitalized.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)),"
@@ -110,6 +110,7 @@ class WelcomeViewController: UIViewController {
         self.present(alertController, animated: true) {
         }
     }
+    
 
     /*
     // MARK: - Navigation

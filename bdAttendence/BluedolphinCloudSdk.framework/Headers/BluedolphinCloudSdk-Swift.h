@@ -205,6 +205,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk12CheckinModel")
 @interface CheckinModel : NSObject
 - (void)postCheckinWithCheckinId:(NSString * _Nonnull)checkinId;
 - (void)createCheckinWithCheckinData:(CheckinHolder * _Nonnull)checkinData;
+- (void)calcluateTotalTimeWithTimeLag:(NSInteger)timeLag;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

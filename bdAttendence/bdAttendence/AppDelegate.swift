@@ -23,11 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         }
+        setAppVersion(appVersion: APPVERSION)
+        
          //
         IQKeyboardManager.sharedManager().enable = true
         registerForRemoteNotification()
-       
-         startUpTask()
+        //updateRealmConfiguration()
+        startUpTask()
        
         
         // Override point for customization after application launch.
@@ -124,6 +126,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
    
+//    func updateRealmConfiguration(){
+//        let config =     Realm.Configuration(
+//            // Set the new schema version. This must be greater than the previously used
+//            // version (if you've never set a schema version before, the version is 0).
+//            schemaVersion: 1,
+//            
+//            // Set the block which will be called automatically when opening a Realm with
+//            // a schema version lower than the one set above
+//            migrationBlock: { migration, oldSchemaVersion in
+//                
+//                if oldSchemaVersion < 1 {
+//                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
+//                        
+//                    }    }
+//        }
+//            
+//        )
+//        Realm.Configuration.defaultConfiguration = config
+//    }
     
     
 

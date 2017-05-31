@@ -86,7 +86,7 @@ class CheckOutViewController: UIViewController {
     }
     @IBAction func checkoutAction(_ sender: Any) {
         //if BlueDolphinManager.manager.seanbeacons.count != 0{
-            BlueDolphinManager.manager.stopScanning()
+            //BlueDolphinManager.manager.stopScanning()
             moveToWelcome()
             BlueDolphinManager.manager.sendCheckins()
             UserDefaults.standard.set("false", forKey: "AlreadyCheckin")
