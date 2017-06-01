@@ -77,6 +77,7 @@ class MapViewController: UIViewController {
         timeLabel.backgroundColor = APPColor.green
         timeLabel.textColor = UIColor.white
         timeLabel.textAlignment = .center
+        timeLabel.text = "00:00 hrs"
         
         locationTitleLabel.textColor = UIColor.white
         locationTitleLabel.text = "Current Location"

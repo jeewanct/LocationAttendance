@@ -11,7 +11,7 @@ import RealmSwift
 import  ObjectMapper
 
  class RMCBeacon :Object,Mappable{
-    dynamic var lastseen:String?
+    dynamic var lastSeen:String?
     dynamic var distance:String?
     dynamic var rssi:String?
     dynamic var major:String?
@@ -30,7 +30,7 @@ import  ObjectMapper
 //
 //    }
     public func mapping(map: Map) {
-        lastseen    <- map["lastseen"]
+        lastSeen    <- map["lastSeen"]
         distance <- map["distance"]
         rssi <- map["rssi"]
         major <- map["major"]

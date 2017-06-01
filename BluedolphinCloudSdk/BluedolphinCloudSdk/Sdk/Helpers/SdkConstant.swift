@@ -9,7 +9,7 @@
 import Foundation
 
 
-let AppVersion = "1.1"
+var AppVersion = "1.0"
 let deviceType = "ios"
 
 
@@ -31,7 +31,7 @@ enum ModuleUrl :String{
 //Staging server 
 
 
-let APIURL = "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/"
+var APIURL = "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/"
 
 
 //dev Server

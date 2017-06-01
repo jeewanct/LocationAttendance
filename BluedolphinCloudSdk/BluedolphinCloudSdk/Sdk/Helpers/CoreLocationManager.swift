@@ -11,12 +11,12 @@ import CoreLocation
 import UIKit
 
 
-struct CurrentLocation {
-    static var coordinate = CLLocationCoordinate2D(latitude: 28.63, longitude: 77.23)
-    static var accuracy = "11"
-    static var altitude = "102.23"
-    static var address = String()
-    static var time = Date()
+public struct CurrentLocation {
+   public static var coordinate = CLLocationCoordinate2D(latitude: 28.63, longitude: 77.23)
+   public static var accuracy = "11"
+   public static var altitude = "102.23"
+   public static var address = String()
+   public static var time = Date()
 }
 
 
@@ -35,6 +35,7 @@ struct CurrentLocation {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.distanceFilter  = 100 // Must move at least 3km
             locationManager.startMonitoringSignificantLocationChanges()
+            locationManager.allowsBackgroundLocationUpdates = true
             locationManager.pausesLocationUpdatesAutomatically = true
             //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.requestAlwaysAuthorization()
@@ -107,6 +108,7 @@ struct CurrentLocation {
             let address = addrList.joined(separator: ", ")
             print(address)
             CurrentLocation.address = address
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationUpdate"), object: self, userInfo: nil)
             
         })
         

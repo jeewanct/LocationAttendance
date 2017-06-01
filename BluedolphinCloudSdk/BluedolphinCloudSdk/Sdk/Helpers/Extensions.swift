@@ -106,6 +106,9 @@ public extension Foundation.Date {
     func minuteFrom(_ date:Foundation.Date) -> Int{
         return (Calendar.current as NSCalendar).components(NSCalendar.Unit.minute, from: date, to: self, options: []).minute!
     }
+    func secondsFrom(_ date:Foundation.Date) -> Int{
+        return (Calendar.current as NSCalendar).components(NSCalendar.Unit.second, from: date, to: self, options: []).second!
+    }
     func timeStamp()->String {
         return "\(self.timeIntervalSince1970 * 1000)"
     }

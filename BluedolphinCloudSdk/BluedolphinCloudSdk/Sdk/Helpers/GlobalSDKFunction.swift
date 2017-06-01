@@ -13,7 +13,6 @@ import RealmSwift
 
 
 
-
 //func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
 //    Swift.print(items[0], separator:separator, terminator: terminator)
 //}
@@ -23,8 +22,14 @@ public func getCurrentDate()->Date{
   return Date()
 }
 
+public func setAppVersion(appVersion:String){
+    AppVersion = appVersion
+    
+}
 
-
+public func setAPIURL(url:String){
+    APIURL = url
+}
 public func toDictionary(text: String) -> AnyObject? {
     if let data = text.data(using: String.Encoding.utf8) {
         do {

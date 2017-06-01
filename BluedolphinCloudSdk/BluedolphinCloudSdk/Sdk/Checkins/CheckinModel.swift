@@ -167,8 +167,10 @@ public func getUUIDString()->String{
             checkin.relativeUrl = checkinData.relativeUrl
             
         }else if checkin.checkinType == CheckinType.Beacon.rawValue {
+            calcluateTotalTime()
             let beconList = List<RMCBeacon>()
             for data in checkinData.beaconProximities!{
+                
                 if let dataDict = data as? [String:Any] {
                     let major = dataDict["major"] as! String
                     let minor = dataDict["minor"] as! String
@@ -182,13 +184,14 @@ public func getUUIDString()->String{
                         beconObject.uuid = vicinitybeacon.uuid
                         beconObject.rssi = dataDict["rssi"] as? String
                         beconObject.distance = dataDict["distance"] as? String
-                        beconObject.lastseen = dataDict["lastseen"] as? String
+                        beconObject.lastSeen = dataDict["lastSeen"] as? String
                         beconList.append(beconObject)
                     }
                 }
                 
             }
             checkin.beaconProximity = beconList
+            
         }
         try! realm.write {
             realm.add(checkin, update: true)
@@ -197,6 +200,36 @@ public func getUUIDString()->String{
 
     }
    
+   public func calcluateTotalTime(timeLag:Int = 1800){
+        var lastBeaconTime = Date()
+        if let value = UserDefaults.standard.value(forKey: "LastBeaconCheckinTime") as? Date {
+            lastBeaconTime = value
+            if !Calendar.current.isDateInToday(lastBeaconTime){
+                UserDefaults.standard.set(0, forKey: "TotalTime")
+            }else{
+                let checkinDiff =   Date().secondsFrom(lastBeaconTime)
+                if checkinDiff <= timeLag {
+                    var localTime = Int()
+                    if let totalTime = UserDefaults.standard.value(forKey: "TotalTime") as? Int{
+                        localTime = totalTime + checkinDiff
+                        UserDefaults.standard.set(localTime, forKey: "TotalTime")
+                    }else{
+                        localTime = checkinDiff
+                        UserDefaults.standard.set(localTime, forKey: "TotalTime")
+                    }
+                    
+                    
+                }
+            }
+        
+        }
+    
+    
+    UserDefaults.standard.set(Date(), forKey: "LastBeaconCheckinTime")
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "TimeUpdate"), object: self, userInfo: nil)
+        
+    }
+
     
 //    public func updatePhotoCheckin(){
 //        let realm = try! Realm()

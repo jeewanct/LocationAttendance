@@ -709,7 +709,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptX-Ag-rql">
-                                <rect key="frame" x="170.5" y="70" width="34.5" height="19"/>
+                                <rect key="frame" x="171" y="70" width="34.5" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -867,7 +867,7 @@
             <objects>
                 <navigationController storyboardIdentifier="orgList" automaticallyAdjustsScrollViewInsets="NO" id="k1e-2M-BbV" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yVh-Ux-BBA">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yVh-Ux-BBA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

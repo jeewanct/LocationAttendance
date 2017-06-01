@@ -220,7 +220,7 @@ open class BlueDolphinManager:NSObject {
                     //"proximity" :  String(describing: beacon.proximity),
                     "rssi" : beacon.rssi,
                     "distance" :beacon.accuracy,
-                    "lastseen" : getCurrentDate().formattedISO8601
+                    "lastSeen" : getCurrentDate().formattedISO8601
                     
                 ]
                 seanbeacons.addEntries(from: [beacon.major! :dict])
