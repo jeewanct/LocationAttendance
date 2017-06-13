@@ -15,16 +15,16 @@ var menuView: CustomNavigationDropdownMenu!
    // @IBOutlet weak var powerSlider: UISlider!
     var major  = 65535
     @IBOutlet weak var powerLabel: UILabel!
-    
+    var powerValue = -10.0
     override func viewDidLoad() {
         super.viewDidLoad()
         createNavView()
-        powerStepper.value = -78.0
-        powerStepper.maximumValue = -10.0
-    
-        powerStepper.minimumValue = -127.0
-        powerStepper.isHidden = true
-        powerLabel.text = "Power(dBm) \(powerStepper.value)"
+//        powerStepper.value = -78.0
+//        powerStepper.maximumValue = -10.0
+//    
+//        powerStepper.minimumValue = -127.0
+//        powerStepper.isHidden = true
+//        powerLabel.text = "Power(dBm) \(powerStepper.value)"
         // Do any additional setup after loading the view.
     }
     @IBAction func broadcastBeacon(_ sender: UIButton) {
@@ -42,7 +42,7 @@ var menuView: CustomNavigationDropdownMenu!
 //        
 //       sender.isSelected = !sender.isSelected
     
-        IBeaconBroadcaster.sharedInstance.setBeacon(uuid: SDKSingleton.sharedInstance.userId, major: NSNumber(integerLiteral: major), minor: 65535, power:  NSNumber(floatLiteral: powerStepper.value))
+        IBeaconBroadcaster.sharedInstance.setBeacon(uuid: SDKSingleton.sharedInstance.userId, major: NSNumber(integerLiteral: major), minor: 65535, power:  NSNumber(floatLiteral: powerValue))
         print(IBeaconBroadcaster.sharedInstance.startBeacon())
         
         let delay = 1.0 * Double(NSEC_PER_SEC)

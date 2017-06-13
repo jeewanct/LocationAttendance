@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import  ObjectMapper
 
- class RMCBeacon :Object,Mappable{
+ open class RMCBeacon :Object,Mappable{
     dynamic var lastSeen:String?
     dynamic var distance:String?
     dynamic var rssi:String?
@@ -21,10 +21,10 @@ import  ObjectMapper
     required convenience public init?(map : Map){
         self.init()
     }
-    override open static func primaryKey() -> String? {
-        return "beaconId"
-        
-    }
+//    override open static func primaryKey() -> String? {
+//        return "beaconId"
+//        
+//    }
 //    static func mapToRMCBeacon(dict:NSDictionary) -> RMCBeacon{
 //     return Mapper<RMCBeacon>().map(JSONObject: dict)!
 //

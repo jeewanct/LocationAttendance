@@ -40,6 +40,8 @@ open class BlueDolphinManager:NSObject {
        self.coreLocationController  = CoreLocationController()
         
     }
+    
+   
     public func authorizeUser(email:String,firstName:String,lastName:String = "",metaInfo:NSDictionary){
         self.emailId = email
         let object = [
@@ -251,7 +253,7 @@ open class BlueDolphinManager:NSObject {
                 beaconArray.append(value)
             }
             checkin.beaconProximities = beaconArray
-            checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
             checkin.checkinCategory = CheckinCategory.Transient.rawValue
             checkin.checkinType = CheckinType.Beacon.rawValue
             self.seanbeacons = NSMutableDictionary()                //

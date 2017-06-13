@@ -610,7 +610,7 @@
                                                         <rect key="frame" x="10" y="8" width="26" height="34"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7O-xk-dzG">
-                                                        <rect key="frame" x="46" y="17" width="42.5" height="18"/>
+                                                        <rect key="frame" x="46" y="16.5" width="42.5" height="18"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1013,7 +1013,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dvv-NU-91f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6467" y="641"/>
+            <point key="canvasLocation" x="4298" y="448"/>
         </scene>
         <!--Virtual View Controller-->
         <scene sceneID="YIF-j7-90P">
@@ -1028,64 +1028,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9B-Sh-ke3">
-                                <rect key="frame" x="110" y="234" width="100" height="100"/>
+                                <rect key="frame" x="23" y="259" width="274" height="50"/>
+                                <color key="backgroundColor" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="geb-Y0-s6Y"/>
-                                    <constraint firstAttribute="width" constant="100" id="ydL-r5-Bda"/>
+                                    <constraint firstAttribute="height" constant="50" id="FgU-6S-S2a"/>
                                 </constraints>
-                                <state key="normal" image="submitted"/>
+                                <state key="normal" title="Check-In"/>
                                 <connections>
                                     <action selector="broadcastBeacon:" destination="slH-GN-wzA" eventType="touchUpInside" id="K6D-h1-Jea"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAu-M7-Hdt">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAu-M7-Hdt">
                                 <rect key="frame" x="39" y="437" width="242" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="78" maximumValue="100" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="5wa-nN-x6p">
-                                <rect key="frame" x="113" y="387" width="94" height="29"/>
-                                <connections>
-                                    <action selector="power:" destination="slH-GN-wzA" eventType="valueChanged" id="ahW-yW-QGd"/>
-                                </connections>
-                            </stepper>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="w3c-ZF-s0h">
-                                <rect key="frame" x="53" y="198" width="215" height="29"/>
-                                <segments>
-                                    <segment title="Blue"/>
-                                    <segment title="Yellow"/>
-                                    <segment title="Cyan"/>
-                                    <segment title="White"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentAction:" destination="slH-GN-wzA" eventType="valueChanged" id="WtI-YK-apl"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="w3c-ZF-s0h" firstAttribute="centerX" secondItem="j9B-Sh-ke3" secondAttribute="centerX" id="13o-Lq-3a1"/>
+                            <constraint firstAttribute="trailing" secondItem="j9B-Sh-ke3" secondAttribute="trailing" constant="23" id="CzN-RO-S0X"/>
                             <constraint firstItem="DAu-M7-Hdt" firstAttribute="leading" secondItem="ax0-0Q-dY8" secondAttribute="leadingMargin" constant="23" id="H7Z-rI-8vx"/>
-                            <constraint firstItem="DAu-M7-Hdt" firstAttribute="top" secondItem="5wa-nN-x6p" secondAttribute="bottom" constant="21" id="RdV-ih-Zxw"/>
                             <constraint firstItem="j9B-Sh-ke3" firstAttribute="centerY" secondItem="ax0-0Q-dY8" secondAttribute="centerY" id="f7p-tZ-feh"/>
                             <constraint firstItem="j9B-Sh-ke3" firstAttribute="centerX" secondItem="ax0-0Q-dY8" secondAttribute="centerX" id="fIE-WD-maB"/>
-                            <constraint firstItem="j9B-Sh-ke3" firstAttribute="top" secondItem="w3c-ZF-s0h" secondAttribute="bottom" constant="8" id="jag-aB-gsw"/>
-                            <constraint firstItem="5wa-nN-x6p" firstAttribute="centerX" secondItem="j9B-Sh-ke3" secondAttribute="centerX" id="o8X-nS-zFz"/>
+                            <constraint firstItem="j9B-Sh-ke3" firstAttribute="leading" secondItem="ax0-0Q-dY8" secondAttribute="leading" constant="23" id="oHx-RK-get"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DAu-M7-Hdt" secondAttribute="trailing" constant="23" id="rUS-UA-MCF"/>
-                            <constraint firstItem="5wa-nN-x6p" firstAttribute="top" secondItem="j9B-Sh-ke3" secondAttribute="bottom" constant="53" id="z3E-vW-eGx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="55M-zA-obj"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="powerLabel" destination="DAu-M7-Hdt" id="DeC-ZT-AiH"/>
-                        <outlet property="powerStepper" destination="5wa-nN-x6p" id="A13-nS-tB1"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQV-Oj-cJV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5730" y="2204.5774647887324"/>
+            <point key="canvasLocation" x="2042" y="1124"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="jFt-Js-pNs">
@@ -1204,7 +1179,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nb4-3i-vDM">
-                                <rect key="frame" x="143.5" y="70" width="34.5" height="19"/>
+                                <rect key="frame" x="143" y="70" width="34.5" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1287,7 +1262,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UFv-ay-IPS">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
-                                    <segue destination="J1K-M4-PHL" kind="embed" id="Y5D-2A-emm"/>
+                                    <segue destination="0nd-x1-EV0" kind="embed" id="OjE-Kh-0Hv"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -1904,7 +1879,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Signature Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJY-vu-1Em">
-                                <rect key="frame" x="80.5" y="305.5" width="160.5" height="21.5"/>
+                                <rect key="frame" x="80" y="306" width="160.5" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2309,7 +2284,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="doo-LT-fT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4732.5" y="2204.5774647887324"/>
+            <point key="canvasLocation" x="1179" y="1084"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vQ0-Hq-P2i">
@@ -2384,6 +2359,5 @@
         <image name="selected" width="26" height="26"/>
         <image name="send_otp" width="166" height="49"/>
         <image name="sort" width="19" height="19"/>
-        <image name="submitted" width="44" height="44"/>
     </resources>
 </document>

@@ -803,7 +803,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremediacompany.BluedolphinPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "444006e9-70a2-4f89-ac3c-703ff405e34d";
+				PROVISIONING_PROFILE = "b1649279-4b3a-467e-adfd-27e6f20c3f65";
 				PROVISIONING_PROFILE_SPECIFIER = BluedolphinProDev;
 				SWIFT_OBJC_BRIDGING_HEADER = "BluedolphinPro/Wired/BluedolphinPro-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -831,7 +831,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremediacompany.BluedolphinPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "444006e9-70a2-4f89-ac3c-703ff405e34d";
+				PROVISIONING_PROFILE = "b1649279-4b3a-467e-adfd-27e6f20c3f65";
 				PROVISIONING_PROFILE_SPECIFIER = BluedolphinProDev;
 				SWIFT_OBJC_BRIDGING_HEADER = "BluedolphinPro/Wired/BluedolphinPro-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

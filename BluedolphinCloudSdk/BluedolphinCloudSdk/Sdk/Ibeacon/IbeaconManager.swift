@@ -190,7 +190,7 @@ public enum iBeaconNotifications:String{
     
     /**Starts monitoring beacons*/
     func startMonitoring(){
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.distanceFilter  = 100 // Must move at least 3km
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.pausesLocationUpdatesAutomatically = true

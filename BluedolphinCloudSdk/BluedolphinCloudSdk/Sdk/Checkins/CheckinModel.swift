@@ -149,6 +149,7 @@ public func getUUIDString()->String{
         var checkinDetails = checkinData.checkinDetails!
         checkinDetails[AssignmentWork.AppVersion.rawValue] = AppVersion as AnyObject?
         checkinDetails[AssignmentWork.UserAgent.rawValue] = deviceType as AnyObject?
+        checkinDetails[AssignmentWork.batteryLevel.rawValue] = "\(SDKSingleton.sharedInstance.batteryLevel()*100)" as AnyObject?
         
         checkin.checkinDetails = toJsonString(checkinDetails as AnyObject)
         checkin.accuracy = CurrentLocation.accuracy
@@ -161,7 +162,7 @@ public func getUUIDString()->String{
         checkin.organizationId = SDKSingleton.sharedInstance.organizationId
         checkin.checkinType = checkinData.checkinType
         checkin.jobNumber = checkinData.jobNumber
-        checkin.time = getCurrentDate().formattedISO8601
+    
         if checkin.checkinType == CheckinType.PhotoCheckin.rawValue {
             checkin.imageName = checkinData.imageName
             checkin.relativeUrl = checkinData.relativeUrl
@@ -193,9 +194,13 @@ public func getUUIDString()->String{
             checkin.beaconProximity = beconList
             
         }
+    
+        checkin.time = getCurrentDate().formattedISO8601
         try! realm.write {
             realm.add(checkin, update: true)
         }
+    
+    
         UserDefaults.standard.set(Date(), forKey: "LastCheckinTime")
 
     }

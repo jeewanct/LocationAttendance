@@ -58,4 +58,5 @@ public enum AssignmentWork:String{
     case AppVersion = "versionName"
     case UserAgent = "userAgent"
     case Created = "Created"
+    case batteryLevel
 }
