@@ -27,8 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
          //
         IQKeyboardManager.sharedManager().enable = true
+         UIDevice.current.isBatteryMonitoringEnabled = true
         registerForRemoteNotification()
-        //updateRealmConfiguration()
+        updateRealmConfiguration()
         startUpTask()
        
         
@@ -126,25 +127,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
    
-//    func updateRealmConfiguration(){
-//        let config =     Realm.Configuration(
-//            // Set the new schema version. This must be greater than the previously used
-//            // version (if you've never set a schema version before, the version is 0).
-//            schemaVersion: 1,
-//            
-//            // Set the block which will be called automatically when opening a Realm with
-//            // a schema version lower than the one set above
-//            migrationBlock: { migration, oldSchemaVersion in
-//                
-//                if oldSchemaVersion < 1 {
-//                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
-//                        
-//                    }    }
-//        }
-//            
-//        )
-//        Realm.Configuration.defaultConfiguration = config
-//    }
+    func updateRealmConfiguration(){
+        let config =     Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            schemaVersion: 1,
+            
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+                
+                if oldSchemaVersion < 1 {
+                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
+                        
+                    }    }
+        }
+            
+        )
+        Realm.Configuration.defaultConfiguration = config
+    }
     
     
 

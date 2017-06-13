@@ -112,6 +112,7 @@ class MapViewController: UIViewController {
         ProjectSingleton.sharedInstance.bluetoothAvaliable = false
     }
     func checkPermissionStatus(sender:NSNotification){
+        BlueDolphinManager.manager.updateToken()
             if CLLocationManager.locationServicesEnabled() {
                 switch(CLLocationManager.authorizationStatus()) {
                 case .notDetermined, .restricted, .denied:
