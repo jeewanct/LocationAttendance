@@ -279,6 +279,7 @@
 				BE12DAB159A486021F77D987 /* [CP] Embed Pods Frameworks */,
 				89B6EA88FBA43767DC8F52BF /* [CP] Copy Pods Resources */,
 				99BD39E51EA6477500B6942B /* Embed Frameworks */,
+				99F41E931EEFD70F00E01960 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -508,6 +509,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bdAttendence/Pods-bdAttendence-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		99F41E931EEFD70F00E01960 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 5857ec4ab63bb27747170de227ce1939eef5164d 786f0ec1cd14458056d598836a7c3b368cad85e34e725bb0bc1fd6cb32de0efa";
 		};
 		BE12DAB159A486021F77D987 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

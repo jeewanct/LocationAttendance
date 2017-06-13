@@ -11,6 +11,9 @@ import BluedolphinCloudSdk
 import IQKeyboardManagerSwift
 import UserNotifications
 import RealmSwift
+import Fabric
+import Crashlytics
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         setAppVersion(appVersion: APPVERSION)
         
-         //
+        Fabric.with([Crashlytics.self])
+
         IQKeyboardManager.sharedManager().enable = true
          UIDevice.current.isBatteryMonitoringEnabled = true
         registerForRemoteNotification()

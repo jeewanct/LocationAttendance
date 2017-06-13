@@ -20,12 +20,32 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>0.5</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>5857ec4ab63bb27747170de227ce1939eef5164d</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Want to access near by beacons</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Want to access near by location to track your indoor location</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SourceSansPro-Black.ttf</string>
+		<string>SourceSansPro-Regular.ttf</string>
+		<string>SourceSansPro-Semibold.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
@@ -50,12 +70,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SourceSansPro-Black.ttf</string>
-		<string>SourceSansPro-Regular.ttf</string>
-		<string>SourceSansPro-Semibold.ttf</string>
 	</array>
 </dict>
 </plist>

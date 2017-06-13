@@ -11,6 +11,8 @@ pod 'AlamofireObjectMapper'
 pod 'AWSS3'
 pod 'RealmSwift','~> 2.0.2'
 pod 'IQKeyboardManagerSwift'
+pod 'Fabric'
+pod 'Crashlytics'
   target 'bdAttendenceTests' do
     inherit! :search_paths
     # Pods for testing
