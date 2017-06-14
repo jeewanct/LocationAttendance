@@ -68,6 +68,7 @@ enum LocalNotifcation:String{
     case Background
     case TimeUpdate
     case LocationUpdate
+    case FirstBeaconCheckin
 }
 enum ErrorMessage:String{
     case UserNotFound = "User not found with that phone number in system,Please contact your administrator"

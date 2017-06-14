@@ -46,10 +46,9 @@ class CheckinErrorViewController: UIViewController {
         checkin.checkinCategory = CheckinCategory.Data.rawValue
         checkin.checkinType = CheckinType.Data.rawValue
         //
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
+        CheckinModel.createCheckin(checkinData: checkin)
         if isInternetAvailable(){
-            checkinModelObject.postCheckin()
+            CheckinModel.postCheckin()
         }
     }
     override func didReceiveMemoryWarning() {

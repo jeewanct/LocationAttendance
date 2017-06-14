@@ -60,12 +60,14 @@ class MapViewController: UIViewController {
         
         BlueDolphinManager.manager.startScanning()
         NotificationCenter.default.removeObserver(self)
-        NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
-        //NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.updateLocation(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.updateLocation(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.checkPermissionStatus(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.firstCheckin(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.FirstBeaconCheckin.rawValue), object: nil)
          NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
          NotificationCenter.default.addObserver(self, selector: #selector(bluetoothEnabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconEnabled.rawValue), object: nil)
+        
         nameLabel.textColor = UIColor(hex: "74a8da")
         nameLabel.font = SourceFont.black
         nameLabel.text = "Hi \(SDKSingleton.sharedInstance.userName.capitalized.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
@@ -88,7 +90,7 @@ class MapViewController: UIViewController {
         locationLabel.font = SourceFont.regular
         locationLabel.numberOfLines = 0
         if isInternetAvailable(){
-            locationLabel.text = "Please Wait fetching Location"
+            locationLabel.text = CurrentLocation.address
         }else{
             locationLabel.text = "No internet Connection"
         }
@@ -104,6 +106,15 @@ class MapViewController: UIViewController {
         
 
     }
+    func firstCheckin(sender:NSNotification){
+        let notification = UILocalNotification()
+        notification.fireDate = NSDate(timeIntervalSinceNow: 1) as Date
+        notification.alertBody = "Your today's entry has been marked"
+        notification.alertAction = "be awesome!"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["CustomField1": "w00t"]
+        UIApplication.shared.scheduleLocalNotification(notification)
+    }
     
     func bluetoothEnabled(){
         ProjectSingleton.sharedInstance.bluetoothAvaliable = true
@@ -112,7 +123,7 @@ class MapViewController: UIViewController {
         ProjectSingleton.sharedInstance.bluetoothAvaliable = false
     }
     func checkPermissionStatus(sender:NSNotification){
-        BlueDolphinManager.manager.updateToken()
+                updateTask()
             if CLLocationManager.locationServicesEnabled() {
                 switch(CLLocationManager.authorizationStatus()) {
                 case .notDetermined, .restricted, .denied:
@@ -166,11 +177,11 @@ class MapViewController: UIViewController {
                 checkin.checkinCategory = CheckinCategory.Transient.rawValue
                 checkin.checkinType = CheckinType.Location.rawValue
                 //
-                let checkinModelObject = CheckinModel()
-                checkinModelObject.createCheckin(checkinData: checkin)
+                
+                CheckinModel.createCheckin(checkinData: checkin)
                 UserDefaults.standard.set(Date(), forKey: "lastLocationCheckin")
                 if isInternetAvailable(){
-                    checkinModelObject.postCheckin()
+                    CheckinModel.postCheckin()
                 }
             }
         } else{
@@ -186,7 +197,7 @@ class MapViewController: UIViewController {
     func timeText(_ s: Int) -> String {
         return s < 10 ? "0\(s)" : "\(s)"
     }
-    func showLoader(text:String = "Updating User data" ){
+    func showLoader(text:String = "Updating User details" ){
         AlertView.sharedInstance.setLabelText(text)
         AlertView.sharedInstance.showActivityIndicator(self.view)
         let delay = 3.0 * Double(NSEC_PER_SEC)

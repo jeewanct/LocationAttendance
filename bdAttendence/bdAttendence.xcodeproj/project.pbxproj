@@ -43,8 +43,8 @@
 		99D617321EBA07BC00E7E05F /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D617311EBA07BC00E7E05F /* OTPViewController.swift */; };
 		99F1FD311EBC6AA500A516C2 /* UserBasedLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD301EBC6AA500A516C2 /* UserBasedLoginViewController.swift */; };
 		99F1FD771EC5D01E00A516C2 /* OrganisationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD761EC5D01E00A516C2 /* OrganisationListViewController.swift */; };
-		99F41E911EEE8C4B00E01960 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F41E8F1EEE8C4100E01960 /* BluedolphinCloudSdk.framework */; };
-		99F41E921EEE8C4B00E01960 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99F41E8F1EEE8C4100E01960 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		99F41E9A1EF0207000E01960 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F41E981EF01F2B00E01960 /* BluedolphinCloudSdk.framework */; };
+		99F41E9B1EF0207000E01960 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99F41E981EF01F2B00E01960 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99F41E921EEE8C4B00E01960 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				99F41E9B1EF0207000E01960 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,7 +124,7 @@
 		99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bdAttendence.entitlements; sourceTree = "<group>"; };
 		99F1FD301EBC6AA500A516C2 /* UserBasedLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBasedLoginViewController.swift; sourceTree = "<group>"; };
 		99F1FD761EC5D01E00A516C2 /* OrganisationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganisationListViewController.swift; sourceTree = "<group>"; };
-		99F41E8F1EEE8C4100E01960 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		99F41E981EF01F2B00E01960 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		A84808C944901ADB85F779C1 /* Pods_bdAttendenceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendenceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA16F440FB1D36F09387FB10 /* Pods-bdAttendenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendenceUITests/Pods-bdAttendenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D31BC022915AA05FF0E1E696 /* Pods_bdAttendence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9982461E1ED55BBE006CA0E4 /* MapKit.framework in Frameworks */,
-				99F41E911EEE8C4B00E01960 /* BluedolphinCloudSdk.framework in Frameworks */,
+				99F41E9A1EF0207000E01960 /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,7 +164,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				99F41E8F1EEE8C4100E01960 /* BluedolphinCloudSdk.framework */,
+				99F41E981EF01F2B00E01960 /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,

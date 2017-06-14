@@ -45,9 +45,9 @@ class RootViewController: UIViewController {
     }
     
     func sendOTP(){
-        let otpmodel = OTPModel()
+        
         showLoader()
-        otpmodel.getOtp(mobile: mobileTextField.text!) { (result) in
+        OTPModel.getOtp(mobile: mobileTextField.text!) { (result) in
             switch (result){
             case APIResult.Success.rawValue:
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? OTPViewController

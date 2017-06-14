@@ -50,10 +50,10 @@ class WelcomeViewController: UIViewController {
         checkin.checkinCategory = CheckinCategory.Transient.rawValue
         checkin.checkinType = CheckinType.Location.rawValue
         //
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
+   
+        CheckinModel.createCheckin(checkinData: checkin)
         if isInternetAvailable(){
-            checkinModelObject.postCheckin()
+            CheckinModel.postCheckin()
         }
         self.showAlert("Please enable bluetooth for indoor location monitoring")
         
@@ -80,10 +80,9 @@ class WelcomeViewController: UIViewController {
         checkin.checkinCategory = CheckinCategory.Data.rawValue
         checkin.checkinType = CheckinType.Data.rawValue
                      //
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
+        CheckinModel.createCheckin(checkinData: checkin)
         if isInternetAvailable(){
-            checkinModelObject.postCheckin()
+            CheckinModel.postCheckin()
         }
     }
     

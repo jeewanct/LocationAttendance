@@ -58,9 +58,9 @@ class OTPViewController: UIViewController {
             
         ]
         
-        let userData = UserDataModel()
-        userData.createUserData(userObject: objectdata)
-        userData.userSignUp(mobile: mobileNumber)
+  
+        UserDataModel.createUserData(userObject: objectdata)
+        UserDataModel.userSignUp(mobile: mobileNumber)
     }
     
     
@@ -74,8 +74,7 @@ class OTPViewController: UIViewController {
             ] as [String : Any]
         if isInternetAvailable() {
             showLoader(text: "Checking Info")
-            let oauth = OauthModel()
-            oauth.getToken(userObject: param) { (result) in
+            OauthModel.getToken(userObject: param) { (result) in
                 
                 switch (result){
                 case APIResult.Success.rawValue:
@@ -123,9 +122,9 @@ class OTPViewController: UIViewController {
     
     
     func sendOTP(){
-        let otpmodel = OTPModel()
+    
         showLoader()
-        otpmodel.getOtp(mobile: mobileNumber) { (result) in
+        OTPModel.getOtp(mobile: mobileNumber) { (result) in
             switch (result){
             case APIResult.Success.rawValue:
                 self.showAlert("Otp Sent")

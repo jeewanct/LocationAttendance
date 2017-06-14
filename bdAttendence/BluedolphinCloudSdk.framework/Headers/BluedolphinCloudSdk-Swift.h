@@ -203,9 +203,8 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk13CheckinHolder")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk12CheckinModel")
 @interface CheckinModel : NSObject
-- (void)postCheckinWithCheckinId:(NSString * _Nonnull)checkinId;
-- (void)createCheckinWithCheckinData:(CheckinHolder * _Nonnull)checkinData;
-- (void)calcluateTotalTimeWithTimeLag:(NSInteger)timeLag;
++ (void)postCheckinWithCheckinId:(NSString * _Nonnull)checkinId;
++ (void)createCheckinWithCheckinData:(CheckinHolder * _Nonnull)checkinData;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -224,15 +223,15 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk15KeychainService")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk8OTPModel")
 @interface OTPModel : NSObject
-- (void)getOtpWithMobile:(NSString * _Nonnull)mobile completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)getOtpWithMobile:(NSString * _Nonnull)mobile completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk10OauthModel")
 @interface OauthModel : NSObject
-- (void)getTokenWithUserObject:(NSDictionary<NSString *, id> * _Nonnull)userObject completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
-- (void)updateToken;
++ (void)getTokenWithUserObject:(NSDictionary<NSString *, id> * _Nonnull)userObject completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)updateToken;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -252,8 +251,8 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk9RMCBeacon")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk13UserDataModel")
 @interface UserDataModel : NSObject
-- (void)userSignUpWithMobile:(NSString * _Nonnull)mobile;
-- (void)createUserDataWithUserObject:(NSDictionary<NSString *, NSString *> * _Nonnull)userObject;
++ (void)userSignUpWithMobile:(NSString * _Nonnull)mobile;
++ (void)createUserDataWithUserObject:(NSDictionary<NSString *, NSString *> * _Nonnull)userObject;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
