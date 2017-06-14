@@ -53,9 +53,9 @@ open class BlueDolphinManager:NSObject {
             "email": self.emailId,
             "firstName":firstName,
             "lastName":lastName
-        ] as [String : Any]
-        let oauth = OauthModel()
-        oauth.getToken(userObject: object) { (result) in
+            ] as [String : Any]
+  
+        OauthModel.getToken(userObject: object) { (result) in
             switch (result){
             case APIResult.Success.rawValue:
                getUserData()
@@ -86,10 +86,10 @@ open class BlueDolphinManager:NSObject {
         checkin.checkinCategory = CheckinCategory.Data.rawValue
         checkin.checkinType = CheckinType.Data.rawValue
         
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
+      
+        CheckinModel.createCheckin(checkinData: checkin)
         if isInternetAvailable() {
-            checkinModelObject.postCheckin()
+            CheckinModel.postCheckin()
         }
     }
     
@@ -139,8 +139,7 @@ open class BlueDolphinManager:NSObject {
     
     public func updateToken(){
        getUserData()
-       let oauth = OauthModel()
-       oauth.updateToken()
+       OauthModel.updateToken()
     }
     
     public func stopScanning(){
@@ -257,10 +256,9 @@ open class BlueDolphinManager:NSObject {
             checkin.checkinCategory = CheckinCategory.Transient.rawValue
             checkin.checkinType = CheckinType.Beacon.rawValue
             self.seanbeacons = NSMutableDictionary()                //
-            let checkinModelObject = CheckinModel()
-            checkinModelObject.createCheckin(checkinData: checkin)
+            CheckinModel.createCheckin(checkinData: checkin)
             if isInternetAvailable(){
-                checkinModelObject.postCheckin()
+                CheckinModel.postCheckin()
             }
     }
     

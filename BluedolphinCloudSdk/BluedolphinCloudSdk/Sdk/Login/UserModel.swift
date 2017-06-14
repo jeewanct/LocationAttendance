@@ -58,7 +58,7 @@ open class UserDataModel :NSObject, Meta{
     internal static func url() -> String {
         return  APIURL + ModuleUrl.User.rawValue
     }
-    func getHeader()->[String:String]{
+    class func getHeader()->[String:String]{
         let headers = [
             "Content-Type":"application/json",
             "Accept-Encoding":"application/gzip",
@@ -69,7 +69,7 @@ open class UserDataModel :NSObject, Meta{
     }
     
     
-   public func userSignUp(mobile:String){
+   public class func userSignUp(mobile:String){
         let realm = try! Realm()
         let user = realm.objects(RMCUser.self).filter("mobile=%@",mobile).first
         let param = user?.toDictionary()
@@ -111,7 +111,7 @@ open class UserDataModel :NSObject, Meta{
     }
     
     
-   public func createUserData(userObject:[String:String]){
+   public class func  createUserData(userObject:[String:String]){
         let user = RMCUser()
         user.mobile = userObject["mobile"]
         user.firstName = userObject["firstName"]

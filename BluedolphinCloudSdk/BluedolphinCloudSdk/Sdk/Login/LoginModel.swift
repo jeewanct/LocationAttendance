@@ -13,7 +13,7 @@ open class OTPModel: NSObject, Meta {
     internal static func url() -> String {
         return  APIURL + ModuleUrl.GetOtp.rawValue
     }
-    public func getOtp(mobile:String,completion: @escaping (_ result: String) -> Void){
+    public class func getOtp(mobile:String,completion: @escaping (_ result: String) -> Void){
         let headers = [
             "Content-Type":"application/json",
             "Accept-Encoding":"application/json",

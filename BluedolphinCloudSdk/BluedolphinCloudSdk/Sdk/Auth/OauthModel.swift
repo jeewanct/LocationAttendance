@@ -18,7 +18,7 @@ open class OauthModel :NSObject, Meta{
     }
     
     
-   public func getToken(userObject:[String:Any],completion: @escaping (_ result: String) -> Void){
+   public class func getToken(userObject:[String:Any],completion: @escaping (_ result: String) -> Void){
         
         
         let headers = [
@@ -91,7 +91,7 @@ open class OauthModel :NSObject, Meta{
     }
     
     
-  public  func updateToken(){
+  public class func updateToken(){
          let realm = try! Realm()
         var today : Bool?
         if let todayDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.startDate.rawValue) as? Date {
@@ -152,7 +152,8 @@ open class OauthModel :NSObject, Meta{
                     }
                     getUserData()
                 }
-            case 400...449:
+            case 403:
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshTokenExpire"), object: self, userInfo: nil)
                 break;
             case 500...502:
                 break

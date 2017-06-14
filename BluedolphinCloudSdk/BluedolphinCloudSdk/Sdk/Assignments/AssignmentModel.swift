@@ -371,10 +371,10 @@ import RealmSwift
         checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
         checkin.checkinType = CheckinType.Downloaded.rawValue
         checkin.assignmentId = assignmentId
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
+        
+        CheckinModel.createCheckin(checkinData: checkin)
         if isInternetAvailable(){
-            checkinModelObject.postCheckin()
+            CheckinModel.postCheckin()
         }
         let delay = 3.0 * Double(NSEC_PER_SEC)
         let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)

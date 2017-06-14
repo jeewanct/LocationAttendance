@@ -18,7 +18,7 @@ public func getUUIDString()->String{
         return  APIURL + ModuleUrl.Organisation.rawValue + SDKSingleton.sharedInstance.organizationId + ModuleUrl.Checkin.rawValue
     }
     
-    func getHeader()->[String:String]{
+   class func getHeader()->[String:String]{
         let headers = [
             "Content-Type":"application/json",
             "Accept-Encoding":"application/gzip",
@@ -33,7 +33,7 @@ public func getUUIDString()->String{
     
     
     
-   public func postCheckin(checkinId:String = ""){
+   public class func postCheckin(checkinId:String = ""){
         let realm = try! Realm()
         var checkins = realm.objects(RMCCheckin.self)
         if checkinId != "" {
@@ -85,7 +85,7 @@ public func getUUIDString()->String{
         }
     }
     
-    func sendCheckin(data:[NSDictionary]){
+   class func sendCheckin(data:[NSDictionary]){
         let param = [
             //"userId":SDKSingleton.sharedInstance.userId,
             "data":data
@@ -104,6 +104,8 @@ public func getUUIDString()->String{
                         self.checkCheckinData(data: checkin as! NSDictionary )
                     }
                 }
+            case 403:
+                OauthModel.updateToken()
                 
             default:
                 break;
@@ -119,7 +121,7 @@ public func getUUIDString()->String{
     }
     
     
-    func checkCheckinData(data:NSDictionary){
+   class func checkCheckinData(data:NSDictionary){
         guard let statusCode = data["statusCode"] as? Int else {
             return
         }
@@ -142,7 +144,7 @@ public func getUUIDString()->String{
         
     }
     
-   public func createCheckin(checkinData:CheckinHolder){
+   public class func createCheckin(checkinData:CheckinHolder){
     
         let realm = try! Realm()
         let checkin = RMCCheckin()
@@ -205,11 +207,12 @@ public func getUUIDString()->String{
 
     }
    
-   public func calcluateTotalTime(timeLag:Int = 1800){
+    class func calcluateTotalTime(timeLag:Int = 1800){
         var lastBeaconTime = Date()
         if let value = UserDefaults.standard.value(forKey: "LastBeaconCheckinTime") as? Date {
             lastBeaconTime = value
             if !Calendar.current.isDateInToday(lastBeaconTime){
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FirstBeaconCheckin"), object: self, userInfo: nil)
                 UserDefaults.standard.set(0, forKey: "TotalTime")
             }else{
                 let checkinDiff =   Date().secondsFrom(lastBeaconTime)
