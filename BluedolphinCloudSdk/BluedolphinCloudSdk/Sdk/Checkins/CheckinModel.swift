@@ -230,6 +230,8 @@ public func getUUIDString()->String{
                 }
             }
         
+        }else{
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FirstBeaconCheckin"), object: self, userInfo: nil)
         }
     
     

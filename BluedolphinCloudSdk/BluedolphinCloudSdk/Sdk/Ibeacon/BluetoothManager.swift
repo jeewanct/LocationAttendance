@@ -30,7 +30,9 @@ import CoreBluetooth
         
     }
     @objc public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn{
+        
+        print("Bluetooth state \(central.state.rawValue)")
+        if central.state == .poweredOn {
             enabled = true
             callback(true)
         }
@@ -38,6 +40,8 @@ import CoreBluetooth
             enabled = false
             callback(false)
         }
+        
+        
     }
     
 }

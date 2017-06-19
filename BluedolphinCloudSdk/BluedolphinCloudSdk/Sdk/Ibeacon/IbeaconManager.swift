@@ -51,7 +51,6 @@ public enum iBeaconNotifications:String{
     override public init(){
         
         super.init()
-        //        bluetoothManager.callback = bluetoothUpdate
         locationManager.delegate = self
         registerNotifications()
         locationManager.startUpdatingLocation()
@@ -69,10 +68,17 @@ public enum iBeaconNotifications:String{
     /**Checks the status of the application*/
     func checkStatus(){
         //starts from Bluetooth
+  
         if let _ = self.bluetoothManager{
+              if let LastBeaconCheckinTime = UserDefaults.standard.value(forKeyPath: "LastBeaconCheckinTime") as? Date {
+              }else{
+                bluetoothManager = BluetoothManager()
+                bluetoothManager?.callback = bluetoothUpdate
+            }
             
         }
         else{
+    
             bluetoothManager = BluetoothManager()
             bluetoothManager?.callback = bluetoothUpdate
         }
@@ -84,6 +90,7 @@ public enum iBeaconNotifications:String{
     
     /**Check Bluetooth*/
     fileprivate func bluetoothUpdate(_ status:Bool)->Void{
+        
         if status == true{
             bluetoothDisabled = false
             //rund additional status check
@@ -95,6 +102,7 @@ public enum iBeaconNotifications:String{
                 
             }
             else{
+                print("no bluetooth status")
                 self.errorCallback?(tuple.messages)
                 NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: tuple.messages)
             }
@@ -213,7 +221,7 @@ public enum iBeaconNotifications:String{
             locationManager.stopMonitoring(for: beaconRegion)
             locationManager.stopRangingBeacons(in: beaconRegion)
         }
-        locationManager.stopUpdatingLocation()
+        //locationManager.stopUpdatingLocation()
     }
     
     

@@ -11,6 +11,7 @@ import Foundation
 
 var AppVersion = "1.0"
 let deviceType = "ios"
+var CheckinInterVal = 300
 
 
 enum ModuleUrl :String{
