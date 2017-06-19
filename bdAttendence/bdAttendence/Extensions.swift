@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-    Swift.print(items[0], separator:separator, terminator: terminator)
+    //Swift.print(items[0], separator:separator, terminator: terminator)
 }
 extension UIColor {
     convenience init(hex: String) {
@@ -54,6 +54,9 @@ enum NotificationType:String{
     case NewAssignment = "New-Assignment"
     case Welcome = "Welcome-Message"
     case UpdatedAssignment = "Updated-Assignment"
+    case FirstCheckin
+    case NoCheckin
+
 }
 
 enum LocalNotifcation:String{
@@ -79,6 +82,9 @@ enum ErrorMessage:String{
     case NetError = "Could not connect to internet please try again."
     case InvalidFECode = "Please enter valid mobile  number"
     case InvalidOtp = "Please enter valid otpcode"
+}
+enum NotificationMessage:String{
+    case AttendanceMarked  = "We've marked you present for today. Have a wonderful day!"
 }
 
 extension String {

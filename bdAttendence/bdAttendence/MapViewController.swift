@@ -67,7 +67,6 @@ class MapViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.firstCheckin(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.FirstBeaconCheckin.rawValue), object: nil)
          NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
          NotificationCenter.default.addObserver(self, selector: #selector(bluetoothEnabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconEnabled.rawValue), object: nil)
-        
         nameLabel.textColor = UIColor(hex: "74a8da")
         nameLabel.font = SourceFont.black
         nameLabel.text = "Hi \(SDKSingleton.sharedInstance.userName.capitalized.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
@@ -106,14 +105,25 @@ class MapViewController: UIViewController {
         
 
     }
+    
+   
     func firstCheckin(sender:NSNotification){
-        let notification = UILocalNotification()
-        notification.fireDate = NSDate(timeIntervalSinceNow: 1) as Date
-        notification.alertBody = "Your today's entry has been marked"
-        notification.alertAction = "be awesome!"
-        notification.soundName = UILocalNotificationDefaultSoundName
-        notification.userInfo = ["CustomField1": "w00t"]
-        UIApplication.shared.scheduleLocalNotification(notification)
+        let state = UIApplication.shared.applicationState
+        if state == .background {
+            let notification = UILocalNotification()
+            notification.fireDate = NSDate(timeIntervalSinceNow: 10) as Date
+            notification.alertBody = NotificationMessage.AttendanceMarked.rawValue
+            notification.soundName = UILocalNotificationDefaultSoundName
+            notification.userInfo = ["notificationType": "FirstCheckin"]
+            UIApplication.shared.scheduleLocalNotification(notification)
+        }else if state == .active{
+            delayWithSeconds(3, completion: {
+               self.showAlert(NotificationMessage.AttendanceMarked.rawValue)
+            })
+            
+        }
+        
+       
     }
     
     func bluetoothEnabled(){
@@ -197,7 +207,7 @@ class MapViewController: UIViewController {
     func timeText(_ s: Int) -> String {
         return s < 10 ? "0\(s)" : "\(s)"
     }
-    func showLoader(text:String = "Updating User details" ){
+    func showLoader(text:String = "Updating your details" ){
         AlertView.sharedInstance.setLabelText(text)
         AlertView.sharedInstance.showActivityIndicator(self.view)
         let delay = 3.0 * Double(NSEC_PER_SEC)
@@ -209,7 +219,14 @@ class MapViewController: UIViewController {
     }
     
    
-
+    func showAlert(_ message : String) {
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+            return        }
+        alertController.addAction(OkAction)
+        self.present(alertController, animated: true) {
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

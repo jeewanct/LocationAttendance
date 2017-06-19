@@ -73,7 +73,7 @@ class OTPViewController: UIViewController {
             "otpToken":otpToken
             ] as [String : Any]
         if isInternetAvailable() {
-            showLoader(text: "Checking Info")
+            showLoader(text: "Verifying")
             OauthModel.getToken(userObject: param) { (result) in
                 
                 switch (result){
@@ -153,7 +153,7 @@ class OTPViewController: UIViewController {
         }
     }
     
-    func showLoader(text:String = "Requesting OTP" ){
+    func showLoader(text:String = "Sending OTP" ){
         AlertView.sharedInstance.setLabelText(text)
         AlertView.sharedInstance.showActivityIndicator(self.view)
         let delay = 3.0 * Double(NSEC_PER_SEC)

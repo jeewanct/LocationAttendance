@@ -22,10 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        DispatchQueue.once(token: "com.raremedia.bdAttendence.1") {
+
             
             BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
-        }
+    
         setAppVersion(appVersion: APPVERSION)
         
         Fabric.with([Crashlytics.self])
@@ -174,12 +174,14 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             switch type {
             case .Welcome:
                 break
-            case .NewAssignment:
+            case .NewAssignment,.FirstCheckin:
                 //self.showLocalNotification(userInfo)
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
-            case .UpdatedAssignment:
+            case .UpdatedAssignment,.NoCheckin:
                 break;
+                
+            
                 
             }
             //

@@ -83,7 +83,7 @@ class RootViewController: UIViewController {
         }
     }
     
-    func showLoader(text:String = "Requesting OTP" ){
+    func showLoader(text:String = "Sending OTP" ){
         AlertView.sharedInstance.setLabelText(text)
         AlertView.sharedInstance.showActivityIndicator(self.view)
         let delay = 3.0 * Double(NSEC_PER_SEC)
