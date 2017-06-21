@@ -69,7 +69,7 @@ open class UserDataModel :NSObject, Meta{
     }
     
     
-   public class func userSignUp(mobile:String){
+   public class func userSignUp(mobile:String,completion: @escaping (_ result: String) -> Void){
         let realm = try! Realm()
         let user = realm.objects(RMCUser.self).filter("mobile=%@",mobile).first
         let param = user?.toDictionary()
@@ -82,21 +82,14 @@ open class UserDataModel :NSObject, Meta{
                     }
                     switch status {
                     case 200:
-                        print(responseData)
-                        
-                        
-                        
-
-                    case 400:
-                        print(responseData)
+                        completion(APIResult.Success.rawValue)
+                    case 401:
+                    
+                        completion(APIResult.InvalidCredentials.rawValue)
                     case 409:
-                        
-                        
-                        print(responseData)
-                        break;
+                        completion(APIResult.InvalidData.rawValue)
                     case 500...502:
-                        break
-                        
+                        completion(APIResult.InternalServer.rawValue)
                         
                     default:break
                     }

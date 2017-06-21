@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
     
         setAppVersion(appVersion: APPVERSION)
+        //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
         Fabric.with([Crashlytics.self])
 

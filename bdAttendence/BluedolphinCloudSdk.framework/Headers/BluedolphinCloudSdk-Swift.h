@@ -251,7 +251,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk9RMCBeacon")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk13UserDataModel")
 @interface UserDataModel : NSObject
-+ (void)userSignUpWithMobile:(NSString * _Nonnull)mobile;
++ (void)userSignUpWithMobile:(NSString * _Nonnull)mobile completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 + (void)createUserDataWithUserObject:(NSDictionary<NSString *, NSString *> * _Nonnull)userObject;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end

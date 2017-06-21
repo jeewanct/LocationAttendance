@@ -13,9 +13,9 @@ import RealmSwift
 
 
 
-func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-    //Swift.print(items[0], separator:separator, terminator: terminator)
-}
+//func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+//    //Swift.print(items[0], separator:separator, terminator: terminator)
+//}
 
 public func getCurrentDate()->Date{
    // return TrueTimeClient.sharedInstance.referenceTime?.time ?? Date()

@@ -47,7 +47,7 @@ class OTPViewController: UIViewController {
     }
     
     
-    func updateUser(){
+    func updateUser() {
         let objectdata = ["loginType":"mobile",
                           "mobile":mobileNumber,
                           "otpToken":otpToken,
@@ -60,7 +60,9 @@ class OTPViewController: UIViewController {
         
   
         UserDataModel.createUserData(userObject: objectdata)
-        UserDataModel.userSignUp(mobile: mobileNumber)
+        UserDataModel.userSignUp(mobile: mobileNumber) { (result) in
+            
+        }
     }
     
     

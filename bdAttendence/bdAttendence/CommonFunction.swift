@@ -13,3 +13,12 @@ func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
         completion()
     }
 }
+func isShiftStart(time:String)->Bool{
+    
+    return false
+    
+}
+func isShiftEnd(time:String)->Bool{
+    return false
+    
+}
