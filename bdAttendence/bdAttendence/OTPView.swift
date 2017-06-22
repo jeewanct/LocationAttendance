@@ -38,6 +38,7 @@ public class CodeInputView: UIView, UIKeyInput {
             digitLabel.font = UIFont.systemFont(ofSize: 42)
             digitLabel.tag = index
             digitLabel.text = "–"
+            digitLabel.textColor = UIColor.white
             digitLabel.textAlignment = .center
             addSubview(digitLabel)
             frame.origin.x += frame.width + 10

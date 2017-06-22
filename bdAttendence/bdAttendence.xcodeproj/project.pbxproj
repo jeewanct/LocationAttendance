@@ -12,6 +12,12 @@
 		7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31BC022915AA05FF0E1E696 /* Pods_bdAttendence.framework */; };
 		990CBCE71EF9593800F56E38 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990CBCE51EF9592F00F56E38 /* BluedolphinCloudSdk.framework */; };
 		990CBCE81EF9593800F56E38 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 990CBCE51EF9592F00F56E38 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		990CBCEB1EFA3F3A00F56E38 /* NewDesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 990CBCE91EFA3F3900F56E38 /* NewDesign.storyboard */; };
+		990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCEC1EFA422000F56E38 /* GradientView.swift */; };
+		990CBCEF1EFA47F700F56E38 /* NewLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCEE1EFA47F700F56E38 /* NewLoginViewController.swift */; };
+		990CBCF11EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCF01EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift */; };
+		990CBCF31EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCF21EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift */; };
+		990CBCF71EFAA40300F56E38 /* NewOtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCF61EFAA40300F56E38 /* NewOtpViewController.swift */; };
 		9917C77E1EC9904D00C9D38A /* OrganisationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9917C77D1EC9904D00C9D38A /* OrganisationCell.swift */; };
 		991A0ECB1ECC259D00513373 /* ProjectConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A0ECA1ECC259D00513373 /* ProjectConstant.swift */; };
 		9982461E1ED55BBE006CA0E4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9982461D1ED55BBE006CA0E4 /* MapKit.framework */; };
@@ -85,6 +91,12 @@
 		705EFBD76E06AFBFB1CF3729 /* Pods_bdAttendenceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendenceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AE9D8E83427C8914FFBC505 /* Pods-bdAttendence.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendence.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendence/Pods-bdAttendence.release.xcconfig"; sourceTree = "<group>"; };
 		990CBCE51EF9592F00F56E38 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		990CBCEA1EFA3F3900F56E38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NewDesign.storyboard; sourceTree = "<group>"; };
+		990CBCEC1EFA422000F56E38 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		990CBCEE1EFA47F700F56E38 /* NewLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewLoginViewController.swift; sourceTree = "<group>"; };
+		990CBCF01EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOrganisationSelectViewController.swift; sourceTree = "<group>"; };
+		990CBCF21EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationCollectionViewCell.swift; sourceTree = "<group>"; };
+		990CBCF61EFAA40300F56E38 /* NewOtpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOtpViewController.swift; sourceTree = "<group>"; };
 		9917C77D1EC9904D00C9D38A /* OrganisationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganisationCell.swift; sourceTree = "<group>"; };
 		991A0ECA1ECC259D00513373 /* ProjectConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectConstant.swift; sourceTree = "<group>"; };
 		9982461D1ED55BBE006CA0E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -161,6 +173,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		990CBCF41EFAA20200F56E38 /* NewDesign */ = {
+			isa = PBXGroup;
+			children = (
+				990CBCEE1EFA47F700F56E38 /* NewLoginViewController.swift */,
+				990CBCF21EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift */,
+				990CBCF01EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift */,
+				990CBCF61EFAA40300F56E38 /* NewOtpViewController.swift */,
+			);
+			name = NewDesign;
+			sourceTree = "<group>";
+		};
+		990CBCF51EFAA21A00F56E38 /* OldDesign */ = {
+			isa = PBXGroup;
+			children = (
+				9917C77D1EC9904D00C9D38A /* OrganisationCell.swift */,
+				9982461F1ED56246006CA0E4 /* MapViewController.swift */,
+				99F1FD761EC5D01E00A516C2 /* OrganisationListViewController.swift */,
+				99F1FD301EBC6AA500A516C2 /* UserBasedLoginViewController.swift */,
+				99D617311EBA07BC00E7E05F /* OTPViewController.swift */,
+				99D6172F1EBA079B00E7E05F /* RootViewController.swift */,
+				99BD39E61EA72BE100B6942B /* LoginViewController.swift */,
+				99BD39D51EA5E18C00B6942B /* CheckinErrorViewController.swift */,
+				99BD39D71EA5E19B00B6942B /* CheckinSuccessViewController.swift */,
+				99BD39D91EA5E1F800B6942B /* CheckOutViewController.swift */,
+				99BD39D31EA4A92F00B6942B /* WelcomeViewController.swift */,
+				9982469C1EDC3963006CA0E4 /* PermissionViewController.swift */,
+			);
+			name = OldDesign;
+			sourceTree = "<group>";
+		};
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
@@ -189,30 +231,22 @@
 			children = (
 				99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */,
 				99D6172D1EBA075800E7E05F /* OTPView.swift */,
+				990CBCEC1EFA422000F56E38 /* GradientView.swift */,
+				990CBCF41EFAA20200F56E38 /* NewDesign */,
 				99BD39EE1EA7453A00B6942B /* Loader.swift */,
 				99BD39A11EA49B7100B6942B /* AppDelegate.swift */,
 				99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */,
 				99B936901EC98706008E12C4 /* CardView.swift */,
 				99BD39A31EA49B7100B6942B /* ViewController.swift */,
 				99BD39A51EA49B7100B6942B /* Main.storyboard */,
-				9982461F1ED56246006CA0E4 /* MapViewController.swift */,
+				990CBCE91EFA3F3900F56E38 /* NewDesign.storyboard */,
 				9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */,
-				9917C77D1EC9904D00C9D38A /* OrganisationCell.swift */,
-				99F1FD761EC5D01E00A516C2 /* OrganisationListViewController.swift */,
-				99F1FD301EBC6AA500A516C2 /* UserBasedLoginViewController.swift */,
-				99D617311EBA07BC00E7E05F /* OTPViewController.swift */,
-				99D6172F1EBA079B00E7E05F /* RootViewController.swift */,
-				99BD39E61EA72BE100B6942B /* LoginViewController.swift */,
+				990CBCF51EFAA21A00F56E38 /* OldDesign */,
 				99BD39DF1EA5F83800B6942B /* CommonFunction.swift */,
-				99BD39D51EA5E18C00B6942B /* CheckinErrorViewController.swift */,
-				99BD39D71EA5E19B00B6942B /* CheckinSuccessViewController.swift */,
-				99BD39D91EA5E1F800B6942B /* CheckOutViewController.swift */,
-				99BD39D31EA4A92F00B6942B /* WelcomeViewController.swift */,
 				991A0ECA1ECC259D00513373 /* ProjectConstant.swift */,
 				99BD39D11EA4A50700B6942B /* ErrorCheckinView.swift */,
 				99BD39CF1EA4A23800B6942B /* CustomButton.swift */,
 				99BD39A81EA49B7100B6942B /* Assets.xcassets */,
-				9982469C1EDC3963006CA0E4 /* PermissionViewController.swift */,
 				99BD39AA1EA49B7100B6942B /* LaunchScreen.storyboard */,
 				99BD39AD1EA49B7100B6942B /* Info.plist */,
 				99BD39EC1EA7414D00B6942B /* Extensions.swift */,
@@ -394,6 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				990CBCEB1EFA3F3A00F56E38 /* NewDesign.storyboard in Resources */,
 				9982462F1ED5BEAD006CA0E4 /* SourceSansPro-Regular.ttf in Resources */,
 				998246301ED5BEAD006CA0E4 /* SourceSansPro-Black.ttf in Resources */,
 				998246311ED5BEAD006CA0E4 /* SourceSansPro-Semibold.ttf in Resources */,
@@ -578,12 +613,16 @@
 				99D6172E1EBA075800E7E05F /* OTPView.swift in Sources */,
 				9982469D1EDC3963006CA0E4 /* PermissionViewController.swift in Sources */,
 				99BD39E01EA5F83800B6942B /* CommonFunction.swift in Sources */,
+				990CBCF31EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift in Sources */,
 				99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */,
 				99BD39D41EA4A92F00B6942B /* WelcomeViewController.swift in Sources */,
 				99F1FD771EC5D01E00A516C2 /* OrganisationListViewController.swift in Sources */,
 				9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */,
 				99D617321EBA07BC00E7E05F /* OTPViewController.swift in Sources */,
 				99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */,
+				990CBCF11EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift in Sources */,
+				990CBCEF1EFA47F700F56E38 /* NewLoginViewController.swift in Sources */,
+				990CBCF71EFAA40300F56E38 /* NewOtpViewController.swift in Sources */,
 				99B936911EC98706008E12C4 /* CardView.swift in Sources */,
 				99D617301EBA079B00E7E05F /* RootViewController.swift in Sources */,
 				998246201ED56246006CA0E4 /* MapViewController.swift in Sources */,
@@ -597,6 +636,7 @@
 				99BD39D61EA5E18C00B6942B /* CheckinErrorViewController.swift in Sources */,
 				99BD39D21EA4A50700B6942B /* ErrorCheckinView.swift in Sources */,
 				99BD39E71EA72BE100B6942B /* LoginViewController.swift in Sources */,
+				990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */,
 				99F1FD311EBC6AA500A516C2 /* UserBasedLoginViewController.swift in Sources */,
 				991A0ECB1ECC259D00513373 /* ProjectConstant.swift in Sources */,
 			);
@@ -634,6 +674,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		990CBCE91EFA3F3900F56E38 /* NewDesign.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				990CBCEA1EFA3F3900F56E38 /* Base */,
+			);
+			name = NewDesign.storyboard;
+			sourceTree = "<group>";
+		};
 		99BD39A51EA49B7100B6942B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
