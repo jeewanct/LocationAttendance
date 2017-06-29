@@ -46,15 +46,15 @@ class AlertView: UIView {
         
         loadingView.frame = CGRect(x: 0, y: 0, width: container.frame.size.width-100, height: 80)
         loadingView.center = uiView.center
-        loadingView.backgroundColor = UIColor.lightGray
+        loadingView.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
         
         
         
         activityIndicator.frame = CGRect(x: 0.0, y: 20.0, width: 40.0, height: 40.0);
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
-        //        activityIndicator.center = CGPointMake(loadingView.frame.size.width / 2, (loadingView.frame.size.height / 2) - 40);
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        //activityIndicator.center = CGPointMake(loadingView.frame.size.width / 2, (loadingView.frame.size.height / 2) - 40);
         
         loadingView.addSubview(label)
         loadingView.addSubview(activityIndicator)

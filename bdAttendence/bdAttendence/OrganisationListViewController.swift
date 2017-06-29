@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import BluedolphinCloudSdk
-import RealmSwift
 
+import RealmSwift
+import BluedolphinCloudSdk
 class OrganisationListViewController: UIViewController {
 
     @IBOutlet weak var organisationList: UITableView!

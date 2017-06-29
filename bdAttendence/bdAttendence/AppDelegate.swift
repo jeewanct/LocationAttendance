@@ -107,21 +107,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
                 if screenFlag == "true"{
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
                     let destVC = storyboard.instantiateViewController(withIdentifier: "home") as! UINavigationController
                     if self.window != nil {
                         self.window?.rootViewController = destVC
                     }
                 }
                 else{
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
                     let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
                     if self.window != nil {
                         self.window?.rootViewController = destVC
                     }
                 }
             }else{
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
                 let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
                 if self.window != nil {
                     self.window?.rootViewController = destVC

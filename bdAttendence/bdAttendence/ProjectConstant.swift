@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let APPVERSION = "1.1.3"
+let APPVERSION = "1.2.1"
 
 struct SourceFont {
    static var regular = UIFont(name: "SourceSansPro-Regular", size: 15.0)

@@ -8,60 +8,61 @@
 
 import UIKit
 import BluedolphinCloudSdk
+import RealmSwift
 
-class CenterCellCollectionViewFlowLayout: UICollectionViewFlowLayout {
-    
-    var mostRecentOffset : CGPoint = CGPoint()
-    
-    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        
-        if velocity.x == 0 {
-            return mostRecentOffset
-        }
-        
-        if let cv = self.collectionView {
-            
-            let cvBounds = cv.bounds
-            let halfWidth = cvBounds.size.width * 0.5;
-            
-            
-            if let attributesForVisibleCells = self.layoutAttributesForElements(in: cvBounds) {
-                
-                var candidateAttributes : UICollectionViewLayoutAttributes?
-                for attributes in attributesForVisibleCells {
-                    
-                    // == Skip comparison with non-cell items (headers and footers) == //
-                    if attributes.representedElementCategory != UICollectionElementCategory.cell {
-                        continue
-                    }
-                    
-                    if (attributes.center.x == 0) || (attributes.center.x > (cv.contentOffset.x + halfWidth) && velocity.x < 0) {
-                        continue
-                    }
-                    candidateAttributes = attributes
-                }
-                
-                // Beautification step , I don't know why it works!
-                if(proposedContentOffset.x == -(cv.contentInset.left)) {
-                    return proposedContentOffset
-                }
-                
-                guard let _ = candidateAttributes else {
-                    return mostRecentOffset
-                }
-                mostRecentOffset = CGPoint(x: floor(candidateAttributes!.center.x - halfWidth), y: proposedContentOffset.y)
-                return mostRecentOffset
-                
-            }
-        }
-        
-        // fallback
-        mostRecentOffset = super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
-        return mostRecentOffset
-    }
-    
-    
-}
+//class CenterCellCollectionViewFlowLayout: UICollectionViewFlowLayout {
+//    
+//    var mostRecentOffset : CGPoint = CGPoint()
+//    
+//    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+//        
+//        if velocity.x == 0 {
+//            return mostRecentOffset
+//        }
+//        
+//        if let cv = self.collectionView {
+//            
+//            let cvBounds = cv.bounds
+//            let halfWidth = cvBounds.size.width * 0.5;
+//            
+//            
+//            if let attributesForVisibleCells = self.layoutAttributesForElements(in: cvBounds) {
+//                
+//                var candidateAttributes : UICollectionViewLayoutAttributes?
+//                for attributes in attributesForVisibleCells {
+//                    
+//                    // == Skip comparison with non-cell items (headers and footers) == //
+//                    if attributes.representedElementCategory != UICollectionElementCategory.cell {
+//                        continue
+//                    }
+//                    
+//                    if (attributes.center.x == 0) || (attributes.center.x > (cv.contentOffset.x + halfWidth) && velocity.x < 0) {
+//                        continue
+//                    }
+//                    candidateAttributes = attributes
+//                }
+//                
+//                // Beautification step , I don't know why it works!
+//                if(proposedContentOffset.x == -(cv.contentInset.left)) {
+//                    return proposedContentOffset
+//                }
+//                
+//                guard let _ = candidateAttributes else {
+//                    return mostRecentOffset
+//                }
+//                mostRecentOffset = CGPoint(x: floor(candidateAttributes!.center.x - halfWidth), y: proposedContentOffset.y)
+//                return mostRecentOffset
+//                
+//            }
+//        }
+//        
+//        // fallback
+//        mostRecentOffset = super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
+//        return mostRecentOffset
+//    }
+//    
+//    
+//}
 
 public enum UPCarouselFlowLayoutSpacingMode {
     case fixed(spacing: CGFloat)
@@ -194,8 +195,8 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
 class NewOrganisationSelectViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-     //var accessTokensList:Results<AccessTokenObject>!
-    var dataList = ["RaremediaCompany Pvt Ltd","Bluedolphin Pvt Ltd","Timda","Test"]
+     var accessTokensList:Results<AccessTokenObject>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
@@ -232,19 +233,19 @@ class NewOrganisationSelectViewController: UIViewController {
 
 extension NewOrganisationSelectViewController:UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.dataList.count
+        return self.accessTokensList.count
     }
     
     // make a cell for each cell index path
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+          let task = accessTokensList[indexPath.row]
         // get a reference to our storyboard cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "organisationCell", for: indexPath as IndexPath) as! OrganizationCollectionViewCell
         
-        
+    
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
         cell.organizationNameLabel.numberOfLines = 0
-        cell.organizationNameLabel.text = self.dataList[indexPath.item]
+        cell.organizationNameLabel.text = task.organizationName.capitalized
         cell.backgroundColor = UIColor.white // make cell more visible in our example project
         
         return cell
@@ -256,6 +257,11 @@ extension NewOrganisationSelectViewController:UICollectionViewDelegate,UICollect
         // handle tap events
          let cell = collectionView.cellForItem(at: indexPath) as! OrganizationCollectionViewCell
         cell.checkImage.image = #imageLiteral(resourceName: "org_selection")
-        print("You selected cell #\(indexPath.item)!")
+        let task = accessTokensList[indexPath.row]
+        let orgId  = task.organizationId
+        UserDefaults.standard.set(orgId, forKey: UserDefaultsKeys.organizationId.rawValue)
+        getUserData()
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+        UIApplication.shared.keyWindow?.rootViewController = destVC
     }
 }

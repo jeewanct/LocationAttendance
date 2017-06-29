@@ -10,8 +10,6 @@
 		419EFA8AA35C4A224D53A6E7 /* Pods_bdAttendenceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84808C944901ADB85F779C1 /* Pods_bdAttendenceUITests.framework */; };
 		787D118106469ECFDE39FB93 /* Pods_bdAttendenceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 705EFBD76E06AFBFB1CF3729 /* Pods_bdAttendenceTests.framework */; };
 		7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31BC022915AA05FF0E1E696 /* Pods_bdAttendence.framework */; };
-		990CBCE71EF9593800F56E38 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990CBCE51EF9592F00F56E38 /* BluedolphinCloudSdk.framework */; };
-		990CBCE81EF9593800F56E38 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 990CBCE51EF9592F00F56E38 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		990CBCEB1EFA3F3A00F56E38 /* NewDesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 990CBCE91EFA3F3900F56E38 /* NewDesign.storyboard */; };
 		990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCEC1EFA422000F56E38 /* GradientView.swift */; };
 		990CBCEF1EFA47F700F56E38 /* NewLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCEE1EFA47F700F56E38 /* NewLoginViewController.swift */; };
@@ -46,11 +44,17 @@
 		99BD39E71EA72BE100B6942B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39E61EA72BE100B6942B /* LoginViewController.swift */; };
 		99BD39ED1EA7414D00B6942B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39EC1EA7414D00B6942B /* Extensions.swift */; };
 		99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39EE1EA7453A00B6942B /* Loader.swift */; };
+		99CA96EC1F03BC5800E2813B /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CA96EA1F03BC4C00E2813B /* BluedolphinCloudSdk.framework */; };
+		99CA96ED1F03BC5800E2813B /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99CA96EA1F03BC4C00E2813B /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		99D6172E1EBA075800E7E05F /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6172D1EBA075800E7E05F /* OTPView.swift */; };
 		99D617301EBA079B00E7E05F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6172F1EBA079B00E7E05F /* RootViewController.swift */; };
 		99D617321EBA07BC00E7E05F /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D617311EBA07BC00E7E05F /* OTPViewController.swift */; };
 		99F1FD311EBC6AA500A516C2 /* UserBasedLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD301EBC6AA500A516C2 /* UserBasedLoginViewController.swift */; };
 		99F1FD771EC5D01E00A516C2 /* OrganisationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD761EC5D01E00A516C2 /* OrganisationListViewController.swift */; };
+		99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */; };
+		99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C91EFBCB840022AF61 /* SuperViewController.swift */; };
+		99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */; };
+		99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +81,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				990CBCE81EF9593800F56E38 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				99CA96ED1F03BC5800E2813B /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,7 +94,6 @@
 		70323FBB1E8B6C109AC2505C /* Pods-bdAttendenceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendenceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendenceUITests/Pods-bdAttendenceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		705EFBD76E06AFBFB1CF3729 /* Pods_bdAttendenceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendenceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AE9D8E83427C8914FFBC505 /* Pods-bdAttendence.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendence.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendence/Pods-bdAttendence.release.xcconfig"; sourceTree = "<group>"; };
-		990CBCE51EF9592F00F56E38 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		990CBCEA1EFA3F3900F56E38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NewDesign.storyboard; sourceTree = "<group>"; };
 		990CBCEC1EFA422000F56E38 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		990CBCEE1EFA47F700F56E38 /* NewLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewLoginViewController.swift; sourceTree = "<group>"; };
@@ -131,12 +134,17 @@
 		99BD39E61EA72BE100B6942B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99BD39EC1EA7414D00B6942B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		99BD39EE1EA7453A00B6942B /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		99CA96EA1F03BC4C00E2813B /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		99D6172D1EBA075800E7E05F /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		99D6172F1EBA079B00E7E05F /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		99D617311EBA07BC00E7E05F /* OTPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bdAttendence.entitlements; sourceTree = "<group>"; };
 		99F1FD301EBC6AA500A516C2 /* UserBasedLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBasedLoginViewController.swift; sourceTree = "<group>"; };
 		99F1FD761EC5D01E00A516C2 /* OrganisationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganisationListViewController.swift; sourceTree = "<group>"; };
+		99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		99FCB0C91EFBCB840022AF61 /* SuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperViewController.swift; sourceTree = "<group>"; };
+		99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCheckinViewController.swift; sourceTree = "<group>"; };
+		99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCheckoutViewController.swift; sourceTree = "<group>"; };
 		A84808C944901ADB85F779C1 /* Pods_bdAttendenceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendenceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA16F440FB1D36F09387FB10 /* Pods-bdAttendenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendenceUITests/Pods-bdAttendenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D31BC022915AA05FF0E1E696 /* Pods_bdAttendence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,7 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9982461E1ED55BBE006CA0E4 /* MapKit.framework in Frameworks */,
-				990CBCE71EF9593800F56E38 /* BluedolphinCloudSdk.framework in Frameworks */,
+				99CA96EC1F03BC5800E2813B /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,10 +184,14 @@
 		990CBCF41EFAA20200F56E38 /* NewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				99FCB0C91EFBCB840022AF61 /* SuperViewController.swift */,
+				99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */,
+				99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */,
 				990CBCEE1EFA47F700F56E38 /* NewLoginViewController.swift */,
 				990CBCF21EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift */,
 				990CBCF01EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift */,
 				990CBCF61EFAA40300F56E38 /* NewOtpViewController.swift */,
+				99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */,
 			);
 			name = NewDesign;
 			sourceTree = "<group>";
@@ -206,7 +218,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				990CBCE51EF9592F00F56E38 /* BluedolphinCloudSdk.framework */,
+				99CA96EA1F03BC4C00E2813B /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -229,30 +241,13 @@
 		99BD39A01EA49B7100B6942B /* bdAttendence */ = {
 			isa = PBXGroup;
 			children = (
-				99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */,
-				99D6172D1EBA075800E7E05F /* OTPView.swift */,
-				990CBCEC1EFA422000F56E38 /* GradientView.swift */,
-				990CBCF41EFAA20200F56E38 /* NewDesign */,
-				99BD39EE1EA7453A00B6942B /* Loader.swift */,
-				99BD39A11EA49B7100B6942B /* AppDelegate.swift */,
-				99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */,
-				99B936901EC98706008E12C4 /* CardView.swift */,
-				99BD39A31EA49B7100B6942B /* ViewController.swift */,
-				99BD39A51EA49B7100B6942B /* Main.storyboard */,
-				990CBCE91EFA3F3900F56E38 /* NewDesign.storyboard */,
-				9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */,
 				990CBCF51EFAA21A00F56E38 /* OldDesign */,
-				99BD39DF1EA5F83800B6942B /* CommonFunction.swift */,
-				991A0ECA1ECC259D00513373 /* ProjectConstant.swift */,
-				99BD39D11EA4A50700B6942B /* ErrorCheckinView.swift */,
-				99BD39CF1EA4A23800B6942B /* CustomButton.swift */,
-				99BD39A81EA49B7100B6942B /* Assets.xcassets */,
-				99BD39AA1EA49B7100B6942B /* LaunchScreen.storyboard */,
-				99BD39AD1EA49B7100B6942B /* Info.plist */,
-				99BD39EC1EA7414D00B6942B /* Extensions.swift */,
-				9982462E1ED5BD64006CA0E4 /* SourceSansPro-Regular.ttf */,
-				9982462D1ED5BD35006CA0E4 /* SourceSansPro-Black.ttf */,
-				9982462C1ED5BD04006CA0E4 /* SourceSansPro-Semibold.ttf */,
+				99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */,
+				99CA967B1F021E2A00E2813B /* Storyboard */,
+				99CA967C1F021E4300E2813B /* Helpers */,
+				990CBCF41EFAA20200F56E38 /* NewDesign */,
+				99CA967D1F021E5B00E2813B /* Assets */,
+				99BD39A31EA49B7100B6942B /* ViewController.swift */,
 			);
 			path = bdAttendence;
 			sourceTree = "<group>";
@@ -273,6 +268,55 @@
 				99BD39C31EA49B7100B6942B /* Info.plist */,
 			);
 			path = bdAttendenceUITests;
+			sourceTree = "<group>";
+		};
+		99CA967A1F021E1D00E2813B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9982462E1ED5BD64006CA0E4 /* SourceSansPro-Regular.ttf */,
+				9982462D1ED5BD35006CA0E4 /* SourceSansPro-Black.ttf */,
+				9982462C1ED5BD04006CA0E4 /* SourceSansPro-Semibold.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		99CA967B1F021E2A00E2813B /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				99BD39A51EA49B7100B6942B /* Main.storyboard */,
+				990CBCE91EFA3F3900F56E38 /* NewDesign.storyboard */,
+				99BD39AA1EA49B7100B6942B /* LaunchScreen.storyboard */,
+				99CA967A1F021E1D00E2813B /* Fonts */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		99CA967C1F021E4300E2813B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				99BD39DF1EA5F83800B6942B /* CommonFunction.swift */,
+				9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */,
+				99D6172D1EBA075800E7E05F /* OTPView.swift */,
+				990CBCEC1EFA422000F56E38 /* GradientView.swift */,
+				99BD39EE1EA7453A00B6942B /* Loader.swift */,
+				99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */,
+				99B936901EC98706008E12C4 /* CardView.swift */,
+				991A0ECA1ECC259D00513373 /* ProjectConstant.swift */,
+				99BD39D11EA4A50700B6942B /* ErrorCheckinView.swift */,
+				99BD39CF1EA4A23800B6942B /* CustomButton.swift */,
+				99BD39EC1EA7414D00B6942B /* Extensions.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		99CA967D1F021E5B00E2813B /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				99BD39A11EA49B7100B6942B /* AppDelegate.swift */,
+				99BD39A81EA49B7100B6942B /* Assets.xcassets */,
+				99BD39AD1EA49B7100B6942B /* Info.plist */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 		C651DF381E775D951C454493 /* Pods */ = {
@@ -615,6 +659,7 @@
 				99BD39E01EA5F83800B6942B /* CommonFunction.swift in Sources */,
 				990CBCF31EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift in Sources */,
 				99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */,
+				99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */,
 				99BD39D41EA4A92F00B6942B /* WelcomeViewController.swift in Sources */,
 				99F1FD771EC5D01E00A516C2 /* OrganisationListViewController.swift in Sources */,
 				9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */,
@@ -633,11 +678,14 @@
 				99BD39D01EA4A23800B6942B /* CustomButton.swift in Sources */,
 				99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */,
 				9917C77E1EC9904D00C9D38A /* OrganisationCell.swift in Sources */,
+				99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */,
 				99BD39D61EA5E18C00B6942B /* CheckinErrorViewController.swift in Sources */,
 				99BD39D21EA4A50700B6942B /* ErrorCheckinView.swift in Sources */,
 				99BD39E71EA72BE100B6942B /* LoginViewController.swift in Sources */,
+				99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */,
 				990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */,
 				99F1FD311EBC6AA500A516C2 /* UserBasedLoginViewController.swift in Sources */,
+				99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */,
 				991A0ECB1ECC259D00513373 /* ProjectConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -816,6 +864,15 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/bdAttendence",
+					"$(PROJECT_DIR)/ObjectMapper",
+					"$(PROJECT_DIR)/Release-iphonesimulator/Alamofire",
+					"$(PROJECT_DIR)/Release-iphonesimulator/AlamofireObjectMapper",
+					"$(PROJECT_DIR)/Release-iphonesimulator/AWSCore",
+					"$(PROJECT_DIR)/Release-iphonesimulator/AWSS3",
+					"$(PROJECT_DIR)/Release-iphonesimulator",
+					"$(PROJECT_DIR)/Release-iphonesimulator/ObjectMapper",
+					"$(PROJECT_DIR)/Release-iphonesimulator/Realm",
+					"$(PROJECT_DIR)/Release-iphonesimulator/RealmSwift",
 				);
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -843,6 +900,15 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/bdAttendence",
+					"$(PROJECT_DIR)/ObjectMapper",
+					"$(PROJECT_DIR)/Release-iphonesimulator/Alamofire",
+					"$(PROJECT_DIR)/Release-iphonesimulator/AlamofireObjectMapper",
+					"$(PROJECT_DIR)/Release-iphonesimulator/AWSCore",
+					"$(PROJECT_DIR)/Release-iphonesimulator/AWSS3",
+					"$(PROJECT_DIR)/Release-iphonesimulator",
+					"$(PROJECT_DIR)/Release-iphonesimulator/ObjectMapper",
+					"$(PROJECT_DIR)/Release-iphonesimulator/Realm",
+					"$(PROJECT_DIR)/Release-iphonesimulator/RealmSwift",
 				);
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

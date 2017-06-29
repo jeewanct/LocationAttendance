@@ -133,6 +133,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if defined(__has_feature) && __has_feature(modules)
 @import RealmSwift;
+@import Foundation;
 @import ObjectiveC;
 #endif
 
@@ -151,6 +152,36 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk17AccessTokenObject")
 @property (nonatomic) NSInteger expires;
 @property (nonatomic, copy) NSString * _Nullable userName;
 + (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk13AttendanceLog")
+@interface AttendanceLog : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable dayofWeek;
+@property (nonatomic, copy) NSDate * _Nullable timeStamp;
++ (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk10BeaconData")
+@interface BeaconData : RealmSwiftObject
+@property (nonatomic, copy) NSDate * _Nullable lastSeen;
+@property (nonatomic, copy) NSString * _Nullable distance;
+@property (nonatomic, copy) NSString * _Nullable rssi;
+@property (nonatomic, copy) NSString * _Nullable major;
+@property (nonatomic, copy) NSString * _Nullable minor;
+@property (nonatomic, copy) NSString * _Nullable uuid;
+@property (nonatomic, copy) NSString * _Nullable beaconId;
+@property (nonatomic, copy) NSString * _Nullable latitude;
+@property (nonatomic, copy) NSString * _Nullable longitude;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
