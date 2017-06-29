@@ -193,16 +193,18 @@ public func getUUIDString()->String{
                 }
                 
             }
+            
+            AttendanceLogModel.updateAttendanceLog(beaconList: beconList)
             checkin.beaconProximity = beconList
+           
             
         }
     
         checkin.time = getCurrentDate().formattedISO8601
+    
         try! realm.write {
             realm.add(checkin, update: true)
         }
-    
-    
         UserDefaults.standard.set(Date(), forKey: "LastCheckinTime")
 
     }

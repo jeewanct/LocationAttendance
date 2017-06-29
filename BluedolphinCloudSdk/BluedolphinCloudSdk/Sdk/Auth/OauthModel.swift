@@ -48,10 +48,7 @@ open class OauthModel :NSObject, Meta{
                                         try! realm.write {
                                       realm.create(AccessTokenObject.self, value: val, update: true)
                                         }
-                                        let data = val as! NSDictionary
-                                        if let organizationId = data["organizationId"] as? String{
-                                            
-                                        }
+                                       
                                     }
                                     
                                     

@@ -42,6 +42,7 @@
 		994509DB1E9256F9002921D9 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C31E922E94002921D9 /* Realm.framework */; };
 		994509DC1E9256F9002921D9 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C41E922E94002921D9 /* RealmSwift.framework */; };
 		997C638D1E9283120019740A /* BlueDolphinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997C638C1E9283120019740A /* BlueDolphinManager.swift */; };
+		99CA96811F037CF100E2813B /* AttendanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96801F037CF100E2813B /* AttendanceLog.swift */; };
 		A1ADEA9532F07BD836A6FF8E /* Pods_BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D771F3BC31D3C77084C535 /* Pods_BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		994509C31E922E94002921D9 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/Realm/Realm.framework"; sourceTree = "<group>"; };
 		994509C41E922E94002921D9 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		997C638C1E9283120019740A /* BlueDolphinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueDolphinManager.swift; sourceTree = "<group>"; };
+		99CA96801F037CF100E2813B /* AttendanceLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		991EE27F1E40BF5B00E4A00D /* Ibeacon */ = {
 			isa = PBXGroup;
 			children = (
+				99CA96801F037CF100E2813B /* AttendanceLog.swift */,
 				991EE2801E40BF5B00E4A00D /* BeaconObject.swift */,
 				991EE2811E40BF5B00E4A00D /* BluetoothManager.swift */,
 				991EE2821E40BF5B00E4A00D /* Ibeacon.swift */,
@@ -367,6 +370,7 @@
 				991EE2991E40BF5C00E4A00D /* SdkConstant.swift in Sources */,
 				991EE29A1E40BF5C00E4A00D /* SDKSingelton.swift in Sources */,
 				991EE28D1E40BF5B00E4A00D /* CheckinHolderClass.swift in Sources */,
+				99CA96811F037CF100E2813B /* AttendanceLog.swift in Sources */,
 				991EE28C1E40BF5B00E4A00D /* OauthObject.swift in Sources */,
 				991EE2901E40BF5B00E4A00D /* AwsManager.swift in Sources */,
 				991EE29E1E40BF5C00E4A00D /* IbeaconManager.swift in Sources */,

@@ -98,6 +98,7 @@ public extension Foundation.Date {
         }()
     }
     var formattedISO8601: String { return Date.formatterISO8601.string(from: self) }
+  
     
     
     func hoursFrom(_ date:Foundation.Date) -> Int{

@@ -70,7 +70,7 @@ public enum iBeaconNotifications:String{
         //starts from Bluetooth
   
         if let _ = self.bluetoothManager{
-              if let LastBeaconCheckinTime = UserDefaults.standard.value(forKeyPath: "LastBeaconCheckinTime") as? Date {
+              if (UserDefaults.standard.value(forKeyPath: "LastBeaconCheckinTime") as? Date) != nil {
               }else{
                 bluetoothManager = BluetoothManager()
                 bluetoothManager?.callback = bluetoothUpdate
