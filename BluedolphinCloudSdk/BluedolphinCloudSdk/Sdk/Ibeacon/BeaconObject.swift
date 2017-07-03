@@ -11,13 +11,13 @@ import RealmSwift
 import  ObjectMapper
 
  open class RMCBeacon :Object,Mappable{
-    dynamic var lastSeen:String?
-    dynamic var distance:String?
-    dynamic var rssi:String?
-    dynamic var major:String?
-    dynamic var minor:String?
-    dynamic var uuid:String?
-    dynamic var beaconId:String?
+   public dynamic var lastSeen:String?
+   public dynamic var distance:String?
+   public dynamic var rssi:String?
+   public dynamic var major:String?
+   public dynamic var minor:String?
+   public dynamic var uuid:String?
+   public dynamic var beaconId:String?
     required convenience public init?(map : Map){
         self.init()
     }
@@ -42,18 +42,18 @@ import  ObjectMapper
     
 }
 
- class VicinityBeacon:Object{
+ open class VicinityBeacon:Object{
     
-    dynamic var addedOn:String?
-    dynamic var updatedOn:String?
-    dynamic var uuid:String?
-    dynamic var major:String?
-    dynamic var minor:String?
-    dynamic var beaconId:String?
-    dynamic var address:String?
-    dynamic var organizationId:String?
-    dynamic var placeId:String?
-    dynamic var location:RMCLocation?
+   public dynamic var addedOn:String?
+   public dynamic var updatedOn:String?
+   public dynamic var uuid:String?
+   public dynamic var major:String?
+   public dynamic var minor:String?
+   public dynamic var beaconId:String?
+  public  dynamic var address:String?
+  public  dynamic var organizationId:String?
+  public  dynamic var placeId:String?
+  public  dynamic var location:RMCLocation?
     required convenience public init?(map : Map){
         self.init()
     }

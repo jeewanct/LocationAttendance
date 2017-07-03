@@ -170,11 +170,11 @@ import ObjectMapper
     dynamic var checkinId:String?
 }
 
- class RMCLocation:Object,Mappable{
-    dynamic var latitude:String?
-    dynamic var longitude:String?
-    dynamic var altitude:String?
-    dynamic var accuracy:String?
+open class RMCLocation:Object,Mappable{
+  public  dynamic var latitude:String?
+   public dynamic var longitude:String?
+   public dynamic var altitude:String?
+   public dynamic var accuracy:String?
     required convenience public init?(map: Map) {
         self.init()
     }

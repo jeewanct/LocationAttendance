@@ -20,6 +20,7 @@ open class BeaconData :Object,Mappable{
    public dynamic var beaconId:String?
    public dynamic var latitude:String?
    public dynamic var longitude:String?
+    public dynamic var beaconNumber:String?
     required convenience public init?(map : Map){
         self.init()
     }
@@ -33,6 +34,7 @@ open class BeaconData :Object,Mappable{
         beaconId <- map["beaconId"]
         latitude <- map["latitude"]
         longitude <- map["longitude"]
+        beaconNumber <- map["beaconNumber"]
         
     }
     
@@ -67,6 +69,7 @@ open class AttendanceLogModel {
     }
   public  class func updateAttendanceLog(beaconList:List<RMCBeacon>){
         let realm = try! Realm()
+        var count = 0
         for beaconData:RMCBeacon in beaconList{
             guard let beconLastSeen = beaconData.lastSeen!.asDate else{
                 print("Date Error")
@@ -77,13 +80,13 @@ open class AttendanceLogModel {
             let weekOfYear = Calendar.current.component(.weekOfYear, from: beconLastSeen)
             if let dayOfWeekData = realm.objects(AttendanceLog.self).filter("dayofWeek = %@","\(weekDay)").first {
                 if weekOfYear == Calendar.current.component(.weekOfYear, from: dayOfWeekData.timeStamp!){
-                    let newBeaconData = createBeaconData(beacon: beaconData)
+                    let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
                     try! realm.write {
                         dayOfWeekData.beaconList.append(newBeaconData)
                     }
                 }else{
                     let newbeaconList = List<BeaconData>()
-                    let newBeaconData = createBeaconData(beacon: beaconData)
+                    let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
                     newbeaconList.append(newBeaconData)
                     dayOfWeekData.beaconList = newbeaconList
                     dayOfWeekData.timeStamp = beconLastSeen
@@ -94,7 +97,7 @@ open class AttendanceLogModel {
             }else {
                 let dayOfWeekData = AttendanceLog()
                 let newbeaconList = List<BeaconData>()
-                let newBeaconData = createBeaconData(beacon: beaconData)
+                let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
                 newbeaconList.append(newBeaconData)
                 dayOfWeekData.beaconList = newbeaconList
                 dayOfWeekData.timeStamp = beconLastSeen
@@ -104,11 +107,12 @@ open class AttendanceLogModel {
                 }
                 
             }
+            count = count + 1
         }
         
     }
-        class
-            func createBeaconData(beacon:RMCBeacon)-> BeaconData{
+    
+    class func createBeaconData(beacon:RMCBeacon,beaconNumber :Int)-> BeaconData{
             
             let beaconData = BeaconData()
             beaconData.beaconId = beacon.beaconId
@@ -120,6 +124,7 @@ open class AttendanceLogModel {
             beaconData.major = beacon.major
             beaconData.minor = beacon.minor
             beaconData.uuid = beacon.uuid
+            beaconData.beaconNumber = "\(beaconNumber)"
             return beaconData
         }
         
