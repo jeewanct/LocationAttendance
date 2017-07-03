@@ -42,6 +42,9 @@ class SuperViewController: UIViewController {
             self.window!.rootViewController = self
         }
         
+        
+    
+    
     }
     func handleLeftGesture() {
         self.showMenuView()
@@ -53,14 +56,14 @@ class SuperViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = true
         setObservers()
-        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
     }
     
     func setObservers(){
         
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "HideSideMen"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: nil)
         
     }
     
@@ -121,9 +124,11 @@ class SuperViewController: UIViewController {
 
 extension SuperViewController {
     func ShowController (sender : NSNotification) {
+        self.slideMenuViewToLeft()
         switch (sender.name.rawValue) {
             
-        case LocalNotifcation.Assignment.rawValue:
+        case LocalNotifcation.Dashboard.rawValue:
+            
             var lastController: AnyObject?
             
             if let controller =  self.childViewControllers.first as? UINavigationController {
@@ -137,7 +142,18 @@ extension SuperViewController {
             lastController?.willMove(toParentViewController: nil)
             
             lastController?.removeFromParentViewController()
-            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "AssignmentScene") as! UINavigationController
+            var destVc = self.storyboard?.instantiateViewController(withIdentifier: "newCheckin") as! UINavigationController
+            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+                switch screenFlag {
+                case "1":
+                    destVc = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
+                case "2":
+                    destVc = self.storyboard?.instantiateViewController(withIdentifier: "newCheckin") as! UINavigationController
+                default:
+                    break
+                }
+            }
+            
             self.addChildViewController(destVc)
             destVc.view.frame = self.mainContainer.frame
             self.mainContainer.addSubview(destVc.view)

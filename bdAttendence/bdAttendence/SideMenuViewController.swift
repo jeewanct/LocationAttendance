@@ -98,8 +98,11 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
         
         switch (indexPath.row)
         {
-        
-        default: print("")
+        case 0:
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+            break
+        default:
+            break
             
         }
         

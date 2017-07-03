@@ -105,33 +105,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !SDKSingleton.sharedInstance.userId.isBlank{
             
-            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
-                if screenFlag == "true"{
-                    let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
-                    let destVC = storyboard.instantiateViewController(withIdentifier: "home") as! UINavigationController
-                    if self.window != nil {
-                        self.window?.rootViewController = destVC
-                    }
-                }
-                else{
-                    let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
-                    let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                    if self.window != nil {
-                        self.window?.rootViewController = destVC
-                    }
-                }
-            }else{
-                let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
-                let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                if self.window != nil {
-                    self.window?.rootViewController = destVC
-                }
+            let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
+            let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+            if self.window != nil {
+                self.window?.rootViewController = destVC
             }
            
         }
         
-    }
-   
+        }
+    
+    
+
     func updateRealmConfiguration(){
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used

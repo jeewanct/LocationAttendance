@@ -182,6 +182,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10BeaconData")
 @property (nonatomic, copy) NSString * _Nullable beaconId;
 @property (nonatomic, copy) NSString * _Nullable latitude;
 @property (nonatomic, copy) NSString * _Nullable longitude;
+@property (nonatomic, copy) NSString * _Nullable beaconNumber;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
@@ -273,6 +274,26 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10OauthModel")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk9RMCBeacon")
 @interface RMCBeacon : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable lastSeen;
+@property (nonatomic, copy) NSString * _Nullable distance;
+@property (nonatomic, copy) NSString * _Nullable rssi;
+@property (nonatomic, copy) NSString * _Nullable major;
+@property (nonatomic, copy) NSString * _Nullable minor;
+@property (nonatomic, copy) NSString * _Nullable uuid;
+@property (nonatomic, copy) NSString * _Nullable beaconId;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk11RMCLocation")
+@interface RMCLocation : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable latitude;
+@property (nonatomic, copy) NSString * _Nullable longitude;
+@property (nonatomic, copy) NSString * _Nullable altitude;
+@property (nonatomic, copy) NSString * _Nullable accuracy;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
@@ -285,6 +306,26 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk13UserDataModel")
 + (void)userSignUpWithMobile:(NSString * _Nonnull)mobile completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 + (void)createUserDataWithUserObject:(NSDictionary<NSString *, NSString *> * _Nonnull)userObject;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk14VicinityBeacon")
+@interface VicinityBeacon : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable addedOn;
+@property (nonatomic, copy) NSString * _Nullable updatedOn;
+@property (nonatomic, copy) NSString * _Nullable uuid;
+@property (nonatomic, copy) NSString * _Nullable major;
+@property (nonatomic, copy) NSString * _Nullable minor;
+@property (nonatomic, copy) NSString * _Nullable beaconId;
+@property (nonatomic, copy) NSString * _Nullable address;
+@property (nonatomic, copy) NSString * _Nullable organizationId;
+@property (nonatomic, copy) NSString * _Nullable placeId;
+@property (nonatomic, strong) RMCLocation * _Nullable location;
++ (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #pragma clang diagnostic pop

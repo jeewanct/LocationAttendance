@@ -44,8 +44,10 @@
 		99BD39E71EA72BE100B6942B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39E61EA72BE100B6942B /* LoginViewController.swift */; };
 		99BD39ED1EA7414D00B6942B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39EC1EA7414D00B6942B /* Extensions.swift */; };
 		99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39EE1EA7453A00B6942B /* Loader.swift */; };
-		99CA96EC1F03BC5800E2813B /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CA96EA1F03BC4C00E2813B /* BluedolphinCloudSdk.framework */; };
-		99CA96ED1F03BC5800E2813B /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99CA96EA1F03BC4C00E2813B /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		99CA96F41F0A0CC100E2813B /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CA96F21F0A0CAE00E2813B /* BluedolphinCloudSdk.framework */; };
+		99CA96F51F0A0CC100E2813B /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99CA96F21F0A0CAE00E2813B /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		99CA96F71F0A367A00E2813B /* DayCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */; };
+		99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */; };
 		99D6172E1EBA075800E7E05F /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6172D1EBA075800E7E05F /* OTPView.swift */; };
 		99D617301EBA079B00E7E05F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6172F1EBA079B00E7E05F /* RootViewController.swift */; };
 		99D617321EBA07BC00E7E05F /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D617311EBA07BC00E7E05F /* OTPViewController.swift */; };
@@ -81,7 +83,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99CA96ED1F03BC5800E2813B /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				99CA96F51F0A0CC100E2813B /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,7 +136,9 @@
 		99BD39E61EA72BE100B6942B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99BD39EC1EA7414D00B6942B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		99BD39EE1EA7453A00B6942B /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
-		99CA96EA1F03BC4C00E2813B /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		99CA96F21F0A0CAE00E2813B /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCheckoutViewController.swift; sourceTree = "<group>"; };
+		99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPermissionViewController.swift; sourceTree = "<group>"; };
 		99D6172D1EBA075800E7E05F /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		99D6172F1EBA079B00E7E05F /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		99D617311EBA07BC00E7E05F /* OTPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
@@ -157,7 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9982461E1ED55BBE006CA0E4 /* MapKit.framework in Frameworks */,
-				99CA96EC1F03BC5800E2813B /* BluedolphinCloudSdk.framework in Frameworks */,
+				99CA96F41F0A0CC100E2813B /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,6 +188,8 @@
 		990CBCF41EFAA20200F56E38 /* NewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */,
+				99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */,
 				99FCB0C91EFBCB840022AF61 /* SuperViewController.swift */,
 				99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */,
 				99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */,
@@ -218,7 +224,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				99CA96EA1F03BC4C00E2813B /* BluedolphinCloudSdk.framework */,
+				99CA96F21F0A0CAE00E2813B /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -671,6 +677,7 @@
 				99B936911EC98706008E12C4 /* CardView.swift in Sources */,
 				99D617301EBA079B00E7E05F /* RootViewController.swift in Sources */,
 				998246201ED56246006CA0E4 /* MapViewController.swift in Sources */,
+				99CA96F71F0A367A00E2813B /* DayCheckoutViewController.swift in Sources */,
 				99BD39D81EA5E19B00B6942B /* CheckinSuccessViewController.swift in Sources */,
 				99BD39DE1EA5EB7A00B6942B /* ProgressBar.swift in Sources */,
 				99BD39DA1EA5E1F800B6942B /* CheckOutViewController.swift in Sources */,
@@ -679,6 +686,7 @@
 				99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */,
 				9917C77E1EC9904D00C9D38A /* OrganisationCell.swift in Sources */,
 				99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */,
+				99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */,
 				99BD39D61EA5E18C00B6942B /* CheckinErrorViewController.swift in Sources */,
 				99BD39D21EA4A50700B6942B /* ErrorCheckinView.swift in Sources */,
 				99BD39E71EA72BE100B6942B /* LoginViewController.swift in Sources */,

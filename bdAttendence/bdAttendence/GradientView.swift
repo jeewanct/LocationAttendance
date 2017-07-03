@@ -48,3 +48,45 @@ extension UIView {
     }
     
 }
+
+class FrequencyGraphView :UIView {
+    var dataList = [CGRect]()
+    required init(coder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    init(frame: CGRect, data: [CGRect]) {
+        
+        super.init(frame: frame)
+        self.dataList = data
+        draw(frame)
+        
+    }
+    override func draw(_ rect: CGRect) {
+        self.backgroundColor = APPColor.newYellow
+        for data in dataList {
+            if let ctx = UIGraphicsGetCurrentContext()
+            {
+                ctx.setFillColor(APPColor.newGreen.cgColor)
+                ctx.setStrokeColor(APPColor.newGreen.cgColor)
+                ctx.setLineWidth(1)
+                
+                print(data)
+                ctx.addRect(data)
+                ctx.drawPath(using: .fillStroke)
+            }
+//            print(data)
+//            let color = APPColor.newGreen
+//            let bpath:UIBezierPath = UIBezierPath(rect: data)
+//            
+//            color.set()
+//            bpath.stroke()
+        }
+    }
+
+    
+}
