@@ -11,10 +11,37 @@ import UIKit
 
 let APPVERSION = "1.2.1"
 
-struct SourceFont {
-   static var regular = UIFont(name: "SourceSansPro-Regular", size: 15.0)
-   static var semibold = UIFont(name: "SourceSansPro-Semibold", size: 14.0)
-   static var black = UIFont(name: "SourceSansPro-Black", size: 17.0)
+struct APPFONT {
+//   static var regular = UIFont(name: "SourceSansPro-Regular", size: 15.0)
+//   static var semibold = UIFont(name: "SourceSansPro-Semibold", size: 17.0)
+//   static var black = UIFont(name: "SourceSansPro-Black", size: 17.0)
+    static var OTPBODY = UIFont(name: "SourceSansPro-Regular", size: 30.0)
+    static var OTPACTION = UIFont(name: "SourceSansPro-Semibold", size: 15.0)
+    static var OTPCONFIRMATION = UIFont(name: "SourceSansPro-Regular", size: 18.0)
+    static var HELPTEXT = UIFont(name: "SourceSansPro-Regular", size: 15.0)
+    static var HELPTEXTBUTTON = UIFont(name: "SourceSansPro-ExtraLight", size: 24.0)
+     static var BODYTEXT =  UIFont(name: "SourceSansPro-Regular", size: 15.0)
+    static var PERMISSIONHEADER =  UIFont(name: "SourceSansPro-Regular", size: 24.0)
+    static var PERMISSIONBODY =  UIFont(name: "SourceSansPro-Regular", size: 18.0)
+    static var PERMISSIONENABLED =  UIFont(name: "SourceSansPro-Regular", size: 24.0)
+    static var PERMISSIONDISABLED =  UIFont(name: "SourceSansPro-ExtraLight", size: 24.0)
+    static var DAYHEADER =  UIFont(name: "SourceSansPro-ExtraLight", size: 18.0)
+    static var DAYHOUR =  UIFont(name: "SourceSansPro-Semibold", size: 30.0)
+    static var DAYHOURTEXT =  UIFont(name: "SourceSansPro-Semibold", size: 15.0)
+    static var CHARTINFO =  UIFont(name: "SourceSansPro-Regular", size: 12.0)
+    static var FOOTERBODY =  UIFont(name: "SourceSansPro-Regular", size: 18.0)
+    static var MENUTEXT =  UIFont(name: "SourceSansPro-Light", size: 15.0)
+    static var VERSIONTEXT = UIFont(name: "SourceSansPro-Regular", size: 12.0)
+    
+
+
+    
+
+
+    
+
+
+
 }
 
 

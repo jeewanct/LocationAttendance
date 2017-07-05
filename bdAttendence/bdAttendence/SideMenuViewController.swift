@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import BluedolphinCloudSdk
 
 class SideMenuViewController: UIViewController  {
         
+    @IBOutlet weak var versionLabel: UILabel!
         @IBOutlet weak var sideMenuTable: UITableView!
         @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var userImageView: UIImageView!
@@ -24,8 +26,15 @@ class SideMenuViewController: UIViewController  {
                 userNameLabel.isUserInteractionEnabled = true
                 userNameLabel.addGestureRecognizer(tapGestureForLabel)
                 userImageView.addGestureRecognizer(tapGestureForImage)
-    
+                userNameLabel.text = SDKSingleton.sharedInstance.userName.capitalized
+                userNameLabel.textColor = UIColor.white
+                userNameLabel.font = APPFONT.MENUTEXT
+                versionLabel.textColor = UIColor.white
+                versionLabel.font = APPFONT.VERSIONTEXT
+                versionLabel.text = "AppVersion: V" + APPVERSION
+                versionLabel.textAlignment = .center
             }
+    
             //println(userData)
             
             
@@ -52,9 +61,10 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath)
         
         cell.textLabel!.text = sideMenuOptionsArray[indexPath.row]
-        cell.imageView?.image = UIImage()
+        //cell.imageView?.image = UIImage()
         cell.textLabel?.textColor = UIColor.white
-        cell.textLabel?.textAlignment = NSTextAlignment.left
+        cell.textLabel?.font = APPFONT.MENUTEXT
+        cell.textLabel?.textAlignment = NSTextAlignment.center
         return cell
     }
 

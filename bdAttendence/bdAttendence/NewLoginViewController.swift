@@ -22,6 +22,7 @@ class NewLoginViewController: UIViewController {
         self.sendOtpButton.layer.cornerRadius = 10.0
         self.sendOtpButton.clipsToBounds = true
         self.sendOtpButton.addTarget(self, action: #selector(sendOtpAction), for: UIControlEvents.touchUpInside)
+        self.mobileTextfield.font = APPFONT.BODYTEXT
         mobileTextfield.delegate = self
         // Do any additional setup after loading the view.
     }

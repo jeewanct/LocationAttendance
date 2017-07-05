@@ -563,7 +563,7 @@ class UICircularProgressRingLayer: CAShapeLayer {
      ## Author:
      Luis Padron
      */
-    @IBInspectable open var innerRingCapStyle: Int = 2 {
+    @IBInspectable open var innerRingCapStyle: Int = 0 {
         didSet {
             switch self.innerRingCapStyle {
             case 1:
@@ -575,6 +575,7 @@ class UICircularProgressRingLayer: CAShapeLayer {
             case 3:
                 self.inStyle = .square
                 self.ringLayer.innerCapStyle = .square
+                
             default:
                 self.inStyle = .butt
                 self.ringLayer.innerCapStyle = .butt

@@ -35,18 +35,18 @@ class NewPermissionViewController: UIViewController {
     
     func updateLayout(){
         if ProjectSingleton.sharedInstance.locationAvailable{
-            locationButton.setImage(UIImage(named: "location_enable"), for: UIControlState.normal)
+            locationButton.setImage(UIImage(named: "permission_location_enabled"), for: UIControlState.normal)
             locationButton.isUserInteractionEnabled = false
         }else{
             locationButton.isUserInteractionEnabled = true
-            locationButton.setImage(UIImage(named: "location_disable"), for: UIControlState.normal)
+            locationButton.setImage(UIImage(named: "permission_location_disabled"), for: UIControlState.normal)
         }
         if ProjectSingleton.sharedInstance.bluetoothAvaliable{
             bluetoothButton.isUserInteractionEnabled = false
-            bluetoothButton.setImage(UIImage(named: "bluetooth_enable"), for: UIControlState.normal)
+            bluetoothButton.setImage(UIImage(named: "permission_bluetooth_enabled"), for: UIControlState.normal)
         }else{
             bluetoothButton.isUserInteractionEnabled = true
-            bluetoothButton.setImage(UIImage(named: "bluetooth_disable"), for: UIControlState.normal)
+            bluetoothButton.setImage(UIImage(named: "permission_bluetooth_disabled"), for: UIControlState.normal)
         }
         if ProjectSingleton.sharedInstance.bluetoothAvaliable && ProjectSingleton.sharedInstance.locationAvailable{
             self.dismiss(animated: true, completion: nil)

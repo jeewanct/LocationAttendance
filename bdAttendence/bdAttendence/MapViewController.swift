@@ -68,7 +68,7 @@ class MapViewController: UIViewController {
          NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
          NotificationCenter.default.addObserver(self, selector: #selector(bluetoothEnabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconEnabled.rawValue), object: nil)
         nameLabel.textColor = UIColor(hex: "74a8da")
-        nameLabel.font = SourceFont.black
+        nameLabel.font = APPFONT.MENUTEXT
         nameLabel.text = "Hi \(SDKSingleton.sharedInstance.userName.capitalized.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
         timeLabel.clipsToBounds = true
         timeLabel.layer.cornerRadius = 18.0
@@ -83,10 +83,10 @@ class MapViewController: UIViewController {
         locationTitleLabel.textColor = UIColor.white
         locationTitleLabel.text = "Current Location"
         locationTitleLabel.textAlignment = .left
-        locationTitleLabel.font = SourceFont.regular
+        locationTitleLabel.font = APPFONT.MENUTEXT
         locationLabel.textColor = APPColor.yellow
         locationLabel.textAlignment = .left
-        locationLabel.font = SourceFont.regular
+        locationLabel.font = APPFONT.MENUTEXT
         locationLabel.numberOfLines = 0
         if isInternetAvailable(){
             locationLabel.text = CurrentLocation.address

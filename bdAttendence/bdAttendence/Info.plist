@@ -45,6 +45,8 @@
 		<string>SourceSansPro-Black.ttf</string>
 		<string>SourceSansPro-Regular.ttf</string>
 		<string>SourceSansPro-Semibold.ttf</string>
+		<string>SourceSansPro-Light.ttf</string>
+		<string>SourceSansPro-ExtraLight.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

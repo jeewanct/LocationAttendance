@@ -32,7 +32,14 @@ extension UIColor {
         )
     }
 }
-
+extension Date{
+    
+    func startOfWeek() -> Foundation.Date? {
+        let comp :DateComponents = Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        
+        return Calendar.current.date(from: comp)!
+    }
+}
 
 public extension DispatchQueue {
     

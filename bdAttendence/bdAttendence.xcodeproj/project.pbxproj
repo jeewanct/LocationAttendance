@@ -18,6 +18,7 @@
 		990CBCF71EFAA40300F56E38 /* NewOtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCF61EFAA40300F56E38 /* NewOtpViewController.swift */; };
 		9917C77E1EC9904D00C9D38A /* OrganisationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9917C77D1EC9904D00C9D38A /* OrganisationCell.swift */; };
 		991A0ECB1ECC259D00513373 /* ProjectConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A0ECA1ECC259D00513373 /* ProjectConstant.swift */; };
+		99576C071F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99576C061F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf */; };
 		9982461E1ED55BBE006CA0E4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9982461D1ED55BBE006CA0E4 /* MapKit.framework */; };
 		998246201ED56246006CA0E4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9982461F1ED56246006CA0E4 /* MapViewController.swift */; };
 		9982462F1ED5BEAD006CA0E4 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9982462E1ED5BD64006CA0E4 /* SourceSansPro-Regular.ttf */; };
@@ -104,6 +105,8 @@
 		990CBCF61EFAA40300F56E38 /* NewOtpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOtpViewController.swift; sourceTree = "<group>"; };
 		9917C77D1EC9904D00C9D38A /* OrganisationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganisationCell.swift; sourceTree = "<group>"; };
 		991A0ECA1ECC259D00513373 /* ProjectConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectConstant.swift; sourceTree = "<group>"; };
+		99576C051F0BBA0100A53A4C /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
+		99576C061F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-ExtraLight.ttf"; sourceTree = "<group>"; };
 		9982461D1ED55BBE006CA0E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9982461F1ED56246006CA0E4 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9982462C1ED5BD04006CA0E4 /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 		99CA967A1F021E1D00E2813B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				99576C061F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf */,
+				99576C051F0BBA0100A53A4C /* SourceSansPro-Light.ttf */,
 				9982462E1ED5BD64006CA0E4 /* SourceSansPro-Regular.ttf */,
 				9982462D1ED5BD35006CA0E4 /* SourceSansPro-Black.ttf */,
 				9982462C1ED5BD04006CA0E4 /* SourceSansPro-Semibold.ttf */,
@@ -478,6 +483,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99576C071F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf in Resources */,
 				990CBCEB1EFA3F3A00F56E38 /* NewDesign.storyboard in Resources */,
 				9982462F1ED5BEAD006CA0E4 /* SourceSansPro-Regular.ttf in Resources */,
 				998246301ED5BEAD006CA0E4 /* SourceSansPro-Black.ttf in Resources */,
