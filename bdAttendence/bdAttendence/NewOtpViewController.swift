@@ -30,6 +30,7 @@ class NewOtpViewController: UIViewController {
         
         codeInputView.becomeFirstResponder()
         otpLabel.text = "6-digit OTP send to \(mobileNumber)"
+        otpLabel.font = APPFONT.OTPCONFIRMATION
         //self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(backbuttonAction(sender:)))
         // Do any additional setup after loading the view.
     }

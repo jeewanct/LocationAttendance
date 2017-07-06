@@ -7,9 +7,12 @@
 //
 
 import UIKit
-
+import BluedolphinCloudSdk
 class DayCheckoutViewController: UIViewController {
+    @IBOutlet weak var swipeLabel: UILabel!
 
+    @IBOutlet weak var quoteLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -19,12 +22,19 @@ class DayCheckoutViewController: UIViewController {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeUp.direction = .up
         self.view.addGestureRecognizer(swipeUp)
+        nameLabel.font = APPFONT.DAYHOUR
+        nameLabel.text = "Hi " + SDKSingleton.sharedInstance.userName + ","
+        quoteLabel.font = APPFONT.PERMISSIONBODY
+        swipeLabel.font = APPFONT.FOOTERBODY
 
         // Do any additional setup after loading the view.
     }
     func handleGesture(sender:UIGestureRecognizer){
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+        BlueDolphinManager.manager.startScanning()
+        //self.dismiss(animated: true, completion: nil)
       self.navigationController?.popViewController(animated: true)
+      
     }
     
     func menuAction(sender:UIBarButtonItem){

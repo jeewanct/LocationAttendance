@@ -235,6 +235,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk13CheckinHolder")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk12CheckinModel")
 @interface CheckinModel : NSObject
++ (NSInteger)getBeaconCheckinCount SWIFT_WARN_UNUSED_RESULT;
 + (void)postCheckinWithCheckinId:(NSString * _Nonnull)checkinId;
 + (void)createCheckinWithCheckinData:(CheckinHolder * _Nonnull)checkinData;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;

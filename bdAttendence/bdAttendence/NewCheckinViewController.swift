@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import BluedolphinCloudSdk
 
 
 class NewCheckinViewController: UIViewController {
 
+    @IBOutlet weak var swipeLabel: UILabel!
+    @IBOutlet weak var quoteLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -20,15 +24,23 @@ class NewCheckinViewController: UIViewController {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeUp.direction = .up
         self.view.addGestureRecognizer(swipeUp)
+        nameLabel.font = APPFONT.DAYHOUR
+        nameLabel.text = "Hi " + SDKSingleton.sharedInstance.userName + ","
+        quoteLabel.font = APPFONT.PERMISSIONBODY
+        swipeLabel.font = APPFONT.FOOTERBODY
+        
         
        
         // Do any additional setup after loading the view.
     }
 
     func handleGesture(sender:UIGestureRecognizer){
+        BlueDolphinManager.manager.startScanning()
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "checkout") as? NewCheckoutViewController
-        self.show(controller!, sender: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+//        let controller = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as? UINavigationController
+//        self.present(controller!, animated: true, completion: nil)
+        //self.show(controller!, sender: nil)
     }
     
     func menuAction(sender:UIBarButtonItem){
