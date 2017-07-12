@@ -16,7 +16,11 @@ public enum UserDefaultsKeys:String{
     case deviceToken = "DeviceToken"
     case startDate = "START_DATE"
     case FeCode = "Fecode"
-    case CheckinLastDate
+    case LastSyncTime
+    case LastCheckinTime
+    case LastBeaconCheckinTime
+    case LastBeaconScanned
+    case TotalTime
  
 }
 public enum APIResult:String{

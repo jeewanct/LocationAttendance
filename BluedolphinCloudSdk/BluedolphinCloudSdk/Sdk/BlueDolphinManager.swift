@@ -144,7 +144,7 @@ open class BlueDolphinManager:NSObject {
     
     public func stopScanning(){
         beaconManager.stopMonitoring()
-        NotificationCenter.default.removeObserver(self)
+       // NotificationCenter.default.removeObserver(self)
     }
     
     func beaconsEntry(notification:NSNotification){
@@ -227,6 +227,8 @@ open class BlueDolphinManager:NSObject {
                 seanbeacons.addEntries(from: [beacon.major! :dict])
                 print(dict)
             }
+            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastBeaconScanned.rawValue)
+
             if beaconSentflag {
                 beaconSentflag = false
                 //                let delay = 60.0 * Double(NSEC_PER_SEC)
@@ -234,7 +236,7 @@ open class BlueDolphinManager:NSObject {
                 //                DispatchQueue.main.asyncAfter(deadline: time, execute: {
                 
                 if self.seanbeacons.count != 0 {
-                    if let LastBeaconCheckinTime = UserDefaults.standard.value(forKeyPath: "LastBeaconCheckinTime") as? Date {
+                    if let LastBeaconCheckinTime = UserDefaults.standard.value(forKeyPath: UserDefaultsKeys.LastBeaconCheckinTime.rawValue) as? Date {
                         print( "Difference LastBeaconCheckinTime \(LastBeaconCheckinTime.minuteFrom(Date()))")
                         if Date().secondsFrom(LastBeaconCheckinTime) > CheckinInterVal {
                             self.sendCheckins()

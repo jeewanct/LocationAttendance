@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16G24b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </array>
+        <array key="SourceSansPro-Semibold.ttf">
+            <string>SourceSansPro-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckinView" customModule="bdAttendence" customModuleProvider="target">
+            <connections>
+                <outlet property="customView" destination="1Ug-tv-cpd" id="W64-Si-a0L"/>
+                <outlet property="nameLabel" destination="WIf-Gr-aIg" id="eU7-AY-cLW"/>
+                <outlet property="quoteLabel" destination="YNP-hQ-NaN" id="ZQA-9x-hdk"/>
+                <outlet property="swipeLabel" destination="wGW-B7-mZO" id="8ef-gg-qT2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1Ug-tv-cpd">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIf-Gr-aIg">
+                    <rect key="frame" x="188" y="184.5" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="29"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quote" translatesAutoresizingMaskIntoConstraints="NO" id="DPm-Cr-VEb">
+                    <rect key="frame" x="40" y="284.5" width="21" height="19"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The only way to do great work is to love what you do" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNP-hQ-NaN">
+                    <rect key="frame" x="40" y="303.5" width="295" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="HdP-Cf-x5T"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unquote" translatesAutoresizingMaskIntoConstraints="NO" id="rK4-p6-3eC">
+                    <rect key="frame" x="314" y="363.5" width="21" height="19"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe up to start your day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wGW-B7-mZO">
+                    <rect key="frame" x="40" y="498" width="295" height="21.5"/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sX0-id-Czm">
+                    <rect key="frame" x="163" y="437" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="80M-Nb-Ebo"/>
+                        <constraint firstAttribute="width" constant="50" id="t9g-bW-tHB"/>
+                    </constraints>
+                    <state key="normal" image="swipe_up"/>
+                    <connections>
+                        <action selector="swipeAction:" destination="-1" eventType="touchUpInside" id="2UJ-ae-p0D"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="DPm-Cr-VEb" firstAttribute="leading" secondItem="YNP-hQ-NaN" secondAttribute="leading" id="23J-vm-i7J"/>
+                <constraint firstItem="sX0-id-Czm" firstAttribute="top" secondItem="rK4-p6-3eC" secondAttribute="bottom" constant="54.5" id="7il-0t-gPh"/>
+                <constraint firstItem="YNP-hQ-NaN" firstAttribute="centerX" secondItem="1Ug-tv-cpd" secondAttribute="centerX" id="8on-1Q-HdA"/>
+                <constraint firstItem="YNP-hQ-NaN" firstAttribute="centerY" secondItem="1Ug-tv-cpd" secondAttribute="centerY" id="Oei-3S-RaR"/>
+                <constraint firstItem="DPm-Cr-VEb" firstAttribute="top" secondItem="WIf-Gr-aIg" secondAttribute="bottom" constant="100" id="U9e-wL-kbA"/>
+                <constraint firstItem="YNP-hQ-NaN" firstAttribute="leading" secondItem="1Ug-tv-cpd" secondAttribute="leading" constant="40" id="Vdb-SD-jmz"/>
+                <constraint firstAttribute="trailing" secondItem="YNP-hQ-NaN" secondAttribute="trailing" constant="40" id="ZQ8-Pi-GQv"/>
+                <constraint firstItem="rK4-p6-3eC" firstAttribute="top" secondItem="YNP-hQ-NaN" secondAttribute="bottom" id="Zix-qP-LJC"/>
+                <constraint firstItem="YNP-hQ-NaN" firstAttribute="top" secondItem="DPm-Cr-VEb" secondAttribute="bottom" id="eU5-yN-ia8"/>
+                <constraint firstAttribute="trailing" secondItem="wGW-B7-mZO" secondAttribute="trailing" constant="40" id="f1V-2d-hzp"/>
+                <constraint firstItem="wGW-B7-mZO" firstAttribute="leading" secondItem="1Ug-tv-cpd" secondAttribute="leading" constant="40" id="gh7-Hw-DmH"/>
+                <constraint firstItem="rK4-p6-3eC" firstAttribute="trailing" secondItem="YNP-hQ-NaN" secondAttribute="trailing" id="itK-7h-0dU"/>
+                <constraint firstItem="sX0-id-Czm" firstAttribute="centerX" secondItem="YNP-hQ-NaN" secondAttribute="centerX" id="jcf-3y-lMe"/>
+                <constraint firstItem="wGW-B7-mZO" firstAttribute="top" secondItem="sX0-id-Czm" secondAttribute="bottom" constant="11" id="oeD-IK-xLd"/>
+                <constraint firstItem="WIf-Gr-aIg" firstAttribute="centerX" secondItem="1Ug-tv-cpd" secondAttribute="centerX" id="pvV-Tg-0lS"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="quote" width="21" height="19"/>
+        <image name="swipe_up" width="48" height="42"/>
+        <image name="unquote" width="21" height="19"/>
+    </resources>
+</document>

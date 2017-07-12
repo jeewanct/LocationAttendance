@@ -75,7 +75,7 @@ class FrequencyGraphView :UIView {
                 ctx.setStrokeColor(APPColor.newGreen.cgColor)
                 ctx.setLineWidth(1)
                 
-                print(data)
+               // print(data)
                 ctx.addRect(data)
                 ctx.drawPath(using: .fillStroke)
             }

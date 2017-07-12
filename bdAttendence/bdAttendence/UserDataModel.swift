@@ -60,7 +60,7 @@ class FrequencyBarGraphData :NSObject  {
     }
     
     public func getLastCheckinTime() ->TimeInterval?{
-        return lastCheckinTime ?? Date().timeIntervalSince1970
+        return lastCheckinTime 
     }
     
     public func setLastCheckinTime( lastCheckinTime:TimeInterval) {
@@ -68,7 +68,7 @@ class FrequencyBarGraphData :NSObject  {
     }
     
     public func getLastCheckInAddress()->String? {
-        return lastCheckInAddress;
+        return lastCheckInAddress ?? " "
     }
     
     public func setLastCheckInAddress( lastCheckInAddress:String) {
@@ -101,7 +101,7 @@ class UserDayData {
             if weekOfYear == Calendar.current.component(.weekOfYear, from: attendanceLogForToday.timeStamp!){
                 let beaconData = attendanceLogForToday.beaconList.sorted(byProperty: "lastSeen", ascending: true).filter("beaconNumber = %@","0")
                 print("============")
-                print(beaconData.count)
+                //print(beaconData)
                 for i in 0..<beaconData.count{
                     let beaconObject = beaconData[i]
                     let  frequencyStartTime = beaconObject.lastSeen?.timeIntervalSince1970

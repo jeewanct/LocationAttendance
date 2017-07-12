@@ -27,7 +27,7 @@ let officeEndMin = 0
 class NewCheckoutViewController: UIViewController {
     @IBOutlet weak var checkoutButton: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
-
+    
     @IBOutlet weak var lastCheckinLabel: UILabel!
     @IBOutlet weak var frequencyBarView: UIView!
     
@@ -46,7 +46,7 @@ class NewCheckoutViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
-      
+        
         let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeleft.direction = .left
         let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
@@ -54,7 +54,7 @@ class NewCheckoutViewController: UIViewController {
         
         self.view.addGestureRecognizer(swipeleft)
         self.view.addGestureRecognizer(swiperight)
-
+        
         let image: UIImage = UIImage(named: "swipe_up")!
         let imageRotated: UIImage =
             UIImage(cgImage: image.cgImage!, scale: 1, orientation: UIImageOrientation.down)
@@ -66,31 +66,38 @@ class NewCheckoutViewController: UIViewController {
         swipedown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipedown?.direction = .down
         pageControl.hidesForSinglePage = true
-      
-       
-       
+    
+        
+        
+        
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        processCurrentWeek()
+        let value = dataArray[pageControl.currentPage]
+        updateView(date: value)
+    }
+    
+    
     func updateTime(sender:NSNotification){
         processCurrentWeek()
-        updateView()
-
+        let value = dataArray[pageControl.currentPage]
+        updateView(date: value)
+        
         
     }
     func processCurrentWeek(){
+        dataArray = []
         let realm = try! Realm()
         guard  let firstdateofWeek = Date().startOfWeek() else {
-           return
+            return
         }
-    let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("timeStamp >= %@",firstdateofWeek).sorted(byProperty: "timeStamp", ascending: false)
+        let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("timeStamp >= %@",firstdateofWeek).sorted(byProperty: "timeStamp", ascending: false)
         
-    let totalCount = attendanceLogForToday.count
+        let totalCount = attendanceLogForToday.count
         if totalCount != 0{
             pageControl.numberOfPages = totalCount
-            
-           
-            
         }
         
         for attendance in attendanceLogForToday{
@@ -106,52 +113,45 @@ class NewCheckoutViewController: UIViewController {
         
     }
     
-//    func pageChanged(sender:UIPageControl){
-//        let date = dataArray[pageControl.currentPage]
-//        updateView(date: date)
-//        
-//    }
+    //    func pageChanged(sender:UIPageControl){
+    //        let date = dataArray[pageControl.currentPage]
+    //        updateView(date: date)
+    //
+    //    }
     func handleGesture(sender:UIGestureRecognizer){
+        print(dataArray)
         if let swipeGesture = sender as? UISwipeGestureRecognizer {
-        switch swipeGesture.direction{
-        case UISwipeGestureRecognizerDirection.down:
-            UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-            //BlueDolphinManager.manager.stopScanning()
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "day") as? DayCheckoutViewController
-           self.show(controller!, sender: nil)
-        case UISwipeGestureRecognizerDirection.left:
-            if pageControl.currentPage >= 0 {
-                pageControl.currentPage = pageControl.currentPage + 1
-                let date = dataArray[pageControl.currentPage]
-                updateView(date: date)
+            switch swipeGesture.direction{
+            case UISwipeGestureRecognizerDirection.down:
+                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                //BlueDolphinManager.manager.stopScanning()
+                let controller = self.storyboard?.instantiateViewController(withIdentifier: "day") as? DayCheckoutViewController
+                self.show(controller!, sender: nil)
+            case UISwipeGestureRecognizerDirection.left:
+                if pageControl.currentPage < dataArray.count {
+                    pageControl.currentPage = pageControl.currentPage + 1
+                    let value = dataArray[pageControl.currentPage]
+                    updateView(date: value)
+                }
+                
+                
+            case UISwipeGestureRecognizerDirection.right:
+                if pageControl.currentPage >= 0 {
+                    pageControl.currentPage = pageControl.currentPage - 1
+                    let value = dataArray[pageControl.currentPage]
+                    updateView(date: value)
+                }
+                
+                
+            default:
+                break
+                
             }
-           
-            
-        case UISwipeGestureRecognizerDirection.right:
-         
-                pageControl.currentPage = pageControl.currentPage - 1
-                let date = dataArray[pageControl.currentPage]
-                updateView(date: date)
-            //}
-            
-            
-        default:
-            break
             
         }
         
-        }
-        
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        processCurrentWeek()
-        updateView()
-    }
-    
-    
-    
-    
+
     
     func updateView(date:Date = Date()){
         
@@ -172,31 +172,46 @@ class NewCheckoutViewController: UIViewController {
         }
         
         
-       createFrequencybarView(date: date)
+        createFrequencybarView(date: date)
     }
     
     func createFrequencybarView(date:Date){
+        let queue = DispatchQueue.global(qos: .userInteractive)
+            
+            
+            
+        // submit a task to the queue for background execution
+        queue.async() {
         let object = UserDayData.getFrequencyBarData(date:date)
-        let totalTime = object.getElapsedTime()!
-        progressView.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
-          
+            DispatchQueue.main.async() {
+                let totalTime = object.getElapsedTime()!
+                self.progressView.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
+                    
+                }
+                let (hour,min,_) = self.secondsToHoursMinutesSeconds(seconds: Int(totalTime))
+                
+                let myMutableString =  NSMutableAttributedString(
+                    string: "\(self.timeText(hour)):\(self.timeText(min))",
+                    attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
+                let seconndMutableString =  NSMutableAttributedString(
+                    string: " Total hours",
+                    attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
+                myMutableString.append(seconndMutableString)
+                self.timeLabel.attributedText = myMutableString
+                self.startTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
+                self.endTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
+                if let lastCheckinTime = object.getLastCheckinTime() {
+                    self.lastCheckinLabel.text = "Last system check-in sent at \(self.currentTime(time: lastCheckinTime)) "
+                }else{
+                    self.lastCheckinLabel.text = ""
+                }
+                self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()
+                self.updateFrequencyBar(mData: object)
+            }
         }
-        let (hour,min,_) = self.secondsToHoursMinutesSeconds(seconds: Int(totalTime))
-        
-        let myMutableString =  NSMutableAttributedString(
-            string: "\(self.timeText(hour)):\(self.timeText(min))",
-            attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
-        let seconndMutableString =  NSMutableAttributedString(
-            string: " Total hours",
-            attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
-        myMutableString.append(seconndMutableString)
-        self.timeLabel.attributedText = myMutableString
-        self.startTimeLabel.text = getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
-         self.endTimeLabel.text = getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
-        
-        self.lastCheckinLabel.text = "Your last check in \(currentTime(time: object.getLastCheckinTime()!)) "
-       self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()
-        updateFrequencyBar(mData: object)
+       
+            
+            
         
     }
     
@@ -204,35 +219,35 @@ class NewCheckoutViewController: UIViewController {
         let timeFormatter = DateFormatter()
         timeFormatter.dateStyle = .none
         timeFormatter.timeStyle = .short
-       return timeFormatter.string(from:date)
+        return timeFormatter.string(from:date)
     }
+    
+    
     func updateFrequencyBar(mData:FrequencyBarGraphData) {
         var mRectList = [CGRect]()
-
-            let viewWidth = frequencyBarView.frame.size.width;
-            let viewHeight =
-                frequencyBarView.frame.size.height;
-            let maxDuration = mData.getEndTime()! - mData.getStartTime()!;
-            let widthPerDuration =  viewWidth / CGFloat(maxDuration);
-            for  duration in mData.graphData {
-               
-                let left = Int(widthPerDuration * CGFloat(duration.getStartTime() - mData.getStartTime()!));
-                var right = Int(CGFloat(left) + (widthPerDuration * CGFloat(duration.getEndTime() - duration.getStartTime())));
-                let top = 0;
-                let bottom = viewHeight;
-                right = right - left < 1 ?  1 :  right - left;
-                
-                let rect = CGRect(x: left, y: top, width: right, height: Int(bottom))
-                //print(rect)
-                mRectList.append(rect)
-            }
+        
+        let viewWidth = frequencyBarView.frame.size.width;
+        let viewHeight =
+            frequencyBarView.frame.size.height;
+        let maxDuration = mData.getEndTime()! - mData.getStartTime()!;
+        let widthPerDuration =  viewWidth / CGFloat(maxDuration);
+        for  duration in mData.graphData {
+            
+            let left = Int(widthPerDuration * CGFloat(duration.getStartTime() - mData.getStartTime()!));
+            var right = Int(CGFloat(left) + (widthPerDuration * CGFloat(duration.getEndTime() - duration.getStartTime())));
+            let top = 0;
+            let bottom = viewHeight;
+            right = right - left < 1 ?  1 :  right - left;
+            
+            let rect = CGRect(x: left, y: top, width: right, height: Int(bottom))
+            //print(rect)
+            mRectList.append(rect)
+        }
         let view = FrequencyGraphView(frame: CGRect(x: 0, y: 0, width: frequencyBarView.frame.width, height: frequencyBarView.frame.height), data: mRectList)
         frequencyBarView.addSubview(view)
         
     }
-    
-    
-    
+
     
     
     func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
@@ -243,10 +258,10 @@ class NewCheckoutViewController: UIViewController {
         return s < 10 ? "0\(s)" : "\(s)"
     }
     func currentTime(time:TimeInterval) -> String {
-       
-//        if let value = UserDefaults.standard.value(forKey: "LastCheckinTime") as? Date {
-//            date = value
-//        }
+        
+        //        if let value = UserDefaults.standard.value(forKey: "LastCheckinTime") as? Date {
+        //            date = value
+        //        }
         let date = Date(timeIntervalSince1970: time)
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
@@ -258,23 +273,23 @@ class NewCheckoutViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 

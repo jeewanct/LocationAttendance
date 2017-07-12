@@ -230,7 +230,7 @@ extension Array {
 }
 
 
-extension String {
+public extension String {
     var asDate:Date! {
         let styler = DateFormatter()
         styler.timeZone = NSTimeZone(name: "UTC") as TimeZone!
@@ -253,7 +253,7 @@ extension String {
     
 }
 
-extension Date {
+public extension Date {
     var formatted:String {
         let formatter = DateFormatter()
         formatter.timeZone = NSTimeZone.system
@@ -274,7 +274,7 @@ extension Date {
     }
 }
 
-extension String {
+public extension String {
     var toProper:String {
         if self.characters.count == 0 {
             return self

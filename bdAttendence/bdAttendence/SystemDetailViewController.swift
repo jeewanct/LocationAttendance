@@ -62,7 +62,12 @@ class SystemDetailViewController: UIViewController {
         
         systemDetail  = []
         let userDataForToday = UserDayData.getFrequencyBarData(date: Date())
-        let lastCheckinTime = "Last beacon check in \(Date(timeIntervalSince1970: userDataForToday.getLastCheckinTime()!).formatted)"
+        var  lastCheckinTime = String()
+        if let data = userDataForToday.getLastCheckinTime() {
+        lastCheckinTime = "Last beacon check-in \(Date(timeIntervalSince1970: data).formatted)"
+        }else{
+           lastCheckinTime = "No last Checkin Found"
+        }
         
         let lastCheckinLocation = "Last beacon location " + userDataForToday.getLastCheckInAddress()!
         systemDetail.append(lastCheckinTime)
@@ -73,7 +78,7 @@ class SystemDetailViewController: UIViewController {
             
         }
         
-        let pendingCheckins = "Pending check ins \(CheckinModel.getBeaconCheckinCount())"
+        let pendingCheckins = "Pending check-ins \(CheckinModel.getBeaconCheckinCount())"
         systemDetail.append(pendingCheckins)
         if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastSyncTime.rawValue ) as? Date {
             let detail = "Last synced at " + data.formatted

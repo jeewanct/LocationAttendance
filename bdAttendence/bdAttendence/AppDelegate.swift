@@ -162,9 +162,10 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                 break
             case .NewAssignment,.FirstCheckin:
                 //self.showLocalNotification(userInfo)
-                
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
-            case .UpdatedAssignment,.NoCheckin:
+                break
+                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
+            case .UpdatedAssignment,.NoCheckin,.testNotification:
+        
                 break;
                 
             

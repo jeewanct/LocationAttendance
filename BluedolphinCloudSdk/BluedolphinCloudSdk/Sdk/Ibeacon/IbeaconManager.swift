@@ -207,7 +207,7 @@ public enum iBeaconNotifications:String{
         
         for beaconRegion in regions{
             locationManager.startMonitoring(for: beaconRegion)
-            locationManager.startRangingBeacons(in: beaconRegion)
+            //locationManager.startRangingBeacons(in: beaconRegion)
             //FIXME: check if needed [self.locationManager performSelector:@selector(requestStateForRegion:) withObject:beaconRegion afterDelay:1];
             //FIXME: added more validation for the ibeacons permission matrix
         
@@ -219,7 +219,7 @@ public enum iBeaconNotifications:String{
     open func stopMonitoring(){
         for beaconRegion in regions{
             locationManager.stopMonitoring(for: beaconRegion)
-            locationManager.stopRangingBeacons(in: beaconRegion)
+            //locationManager.stopRangingBeacons(in: beaconRegion)
         }
         //locationManager.stopUpdatingLocation()
     }

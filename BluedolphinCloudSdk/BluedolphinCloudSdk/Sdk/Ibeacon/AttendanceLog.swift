@@ -87,22 +87,25 @@ open class AttendanceLogModel {
                 }else{
                     let newbeaconList = List<BeaconData>()
                     let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
-                    newbeaconList.append(newBeaconData)
-                    dayOfWeekData.beaconList = newbeaconList
-                    dayOfWeekData.timeStamp = beconLastSeen
+                    
+                    
                     try! realm.write {
-                    realm.add(dayOfWeekData, update: true)
+                        dayOfWeekData.beaconList.removeAll()
+                        newbeaconList.append(newBeaconData)
+                        dayOfWeekData.beaconList = newbeaconList
+                        dayOfWeekData.timeStamp = beconLastSeen
                     }
                 }
             }else {
                 let dayOfWeekData = AttendanceLog()
                 let newbeaconList = List<BeaconData>()
                 let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
-                newbeaconList.append(newBeaconData)
-                dayOfWeekData.beaconList = newbeaconList
-                dayOfWeekData.timeStamp = beconLastSeen
-                dayOfWeekData.dayofWeek = "\(weekDay)"
+                
                 try! realm.write {
+                    newbeaconList.append(newBeaconData)
+                    dayOfWeekData.beaconList = newbeaconList
+                    dayOfWeekData.timeStamp = beconLastSeen
+                    dayOfWeekData.dayofWeek = "\(weekDay)"
                     realm.add(dayOfWeekData)
                 }
                 

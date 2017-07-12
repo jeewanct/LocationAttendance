@@ -30,7 +30,12 @@ public func getUUIDString()->String{
         return headers
     }
     
-    
+  public class func getBeaconCheckinCount() -> Int {
+        let realm = try! Realm()
+        let checkins = realm.objects(RMCCheckin.self).filter("checkinType = %@", CheckinType.Beacon.rawValue)
+        return checkins.count
+        
+    }
     
     
    public class func postCheckin(checkinId:String = ""){
@@ -128,13 +133,16 @@ public func getUUIDString()->String{
         switch statusCode{
         case 200,400,409:
             if let checkinId = data["checkinId"] as? String{
+                UserDefaults.standard.set(Date(), forKey:UserDefaultsKeys.LastSyncTime.rawValue)
                 let realm = try! Realm()
                 guard let checkin = realm.objects(RMCCheckin.self).filter("checkinId = %@",checkinId).first  else {
                     return
                 }
+                
                 try! realm.write {
                     realm.delete(checkin)
                 }
+                
             }
         default:
             break;
@@ -205,27 +213,27 @@ public func getUUIDString()->String{
         try! realm.write {
             realm.add(checkin, update: true)
         }
-        UserDefaults.standard.set(Date(), forKey: "LastCheckinTime")
+        UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastCheckinTime.rawValue)
 
     }
    
-    class func calcluateTotalTime(timeLag:Int = 1800){
+    class func calcluateTotalTime(timeLag:Int = CheckinGap){
         var lastBeaconTime = Date()
-        if let value = UserDefaults.standard.value(forKey: "LastBeaconCheckinTime") as? Date {
+        if let value = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastBeaconCheckinTime.rawValue) as? Date {
             lastBeaconTime = value
             if !Calendar.current.isDateInToday(lastBeaconTime){
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FirstBeaconCheckin"), object: self, userInfo: nil)
-                UserDefaults.standard.set(0, forKey: "TotalTime")
+                UserDefaults.standard.set(0, forKey: UserDefaultsKeys.TotalTime.rawValue)
             }else{
                 let checkinDiff =   Date().secondsFrom(lastBeaconTime)
                 if checkinDiff <= timeLag {
                     var localTime = Int()
-                    if let totalTime = UserDefaults.standard.value(forKey: "TotalTime") as? Int{
+                    if let totalTime = UserDefaults.standard.value(forKey: UserDefaultsKeys.TotalTime.rawValue) as? Int{
                         localTime = totalTime + checkinDiff
-                        UserDefaults.standard.set(localTime, forKey: "TotalTime")
+                        UserDefaults.standard.set(localTime, forKey: UserDefaultsKeys.TotalTime.rawValue)
                     }else{
                         localTime = checkinDiff
-                        UserDefaults.standard.set(localTime, forKey: "TotalTime")
+                        UserDefaults.standard.set(localTime, forKey: UserDefaultsKeys.TotalTime.rawValue)
                     }
                     
                     
@@ -237,7 +245,7 @@ public func getUUIDString()->String{
         }
     
     
-    UserDefaults.standard.set(Date(), forKey: "LastBeaconCheckinTime")
+    UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastBeaconCheckinTime.rawValue)
     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "TimeUpdate"), object: self, userInfo: nil)
         
     }

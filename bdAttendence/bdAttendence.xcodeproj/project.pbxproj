@@ -19,9 +19,15 @@
 		991A0ECB1ECC259D00513373 /* ProjectConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A0ECA1ECC259D00513373 /* ProjectConstant.swift */; };
 		99576C071F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99576C061F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf */; };
 		99576C091F0CD5E300A53A4C /* SystemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99576C081F0CD5E300A53A4C /* SystemDetailViewController.swift */; };
+		9969531A1F136D66000A6C26 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 996953181F136D49000A6C26 /* BluedolphinCloudSdk.framework */; };
+		9969531B1F136D66000A6C26 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 996953181F136D49000A6C26 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9969531D1F13BA46000A6C26 /* TransmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9969531C1F13BA46000A6C26 /* TransmitViewController.swift */; };
+		996953211F13BC25000A6C26 /* Broadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996953201F13BC25000A6C26 /* Broadcaster.swift */; };
+		996953231F149A7A000A6C26 /* CheckinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996953221F149A7A000A6C26 /* CheckinView.swift */; };
+		996953251F149A92000A6C26 /* CheckinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 996953241F149A92000A6C26 /* CheckinView.xib */; };
+		996953271F14A0A4000A6C26 /* CheckoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 996953261F14A0A4000A6C26 /* CheckoutView.xib */; };
+		996953291F14A125000A6C26 /* DayCheckinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 996953281F14A125000A6C26 /* DayCheckinView.xib */; };
 		997490291F0CD8A000AC92B9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997490281F0CD8A000AC92B9 /* UserDataModel.swift */; };
-		997490381F0CE19200AC92B9 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 997490361F0CE18800AC92B9 /* BluedolphinCloudSdk.framework */; };
-		997490391F0CE19200AC92B9 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 997490361F0CE18800AC92B9 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9974903B1F0CFC0600AC92B9 /* CorouselEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9974903A1F0CFC0600AC92B9 /* CorouselEffect.swift */; };
 		9982462F1ED5BEAD006CA0E4 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9982462E1ED5BD64006CA0E4 /* SourceSansPro-Regular.ttf */; };
 		998246301ED5BEAD006CA0E4 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9982462D1ED5BD35006CA0E4 /* SourceSansPro-Black.ttf */; };
@@ -35,14 +41,13 @@
 		99BD39B71EA49B7100B6942B /* bdAttendenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39B61EA49B7100B6942B /* bdAttendenceTests.swift */; };
 		99BD39C21EA49B7100B6942B /* bdAttendenceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39C11EA49B7100B6942B /* bdAttendenceUITests.swift */; };
 		99BD39D01EA4A23800B6942B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39CF1EA4A23800B6942B /* CustomButton.swift */; };
-		99BD39D21EA4A50700B6942B /* ErrorCheckinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39D11EA4A50700B6942B /* ErrorCheckinView.swift */; };
-		99BD39DE1EA5EB7A00B6942B /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */; };
 		99BD39E01EA5F83800B6942B /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39DF1EA5F83800B6942B /* CommonFunction.swift */; };
-		99BD39ED1EA7414D00B6942B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39EC1EA7414D00B6942B /* Extensions.swift */; };
 		99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39EE1EA7453A00B6942B /* Loader.swift */; };
 		99CA96F71F0A367A00E2813B /* DayCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */; };
 		99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */; };
 		99D6172E1EBA075800E7E05F /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6172D1EBA075800E7E05F /* OTPView.swift */; };
+		99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E641F1607B100FA8A9E /* ProgressBar.swift */; };
+		99FB1E671F1607B100FA8A9E /* ProjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */; };
 		99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */; };
 		99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C91EFBCB840022AF61 /* SuperViewController.swift */; };
 		99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */; };
@@ -73,7 +78,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				997490391F0CE19200AC92B9 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				9969531B1F136D66000A6C26 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,8 +101,14 @@
 		99576C051F0BBA0100A53A4C /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		99576C061F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-ExtraLight.ttf"; sourceTree = "<group>"; };
 		99576C081F0CD5E300A53A4C /* SystemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemDetailViewController.swift; sourceTree = "<group>"; };
+		996953181F136D49000A6C26 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		9969531C1F13BA46000A6C26 /* TransmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmitViewController.swift; sourceTree = "<group>"; };
+		996953201F13BC25000A6C26 /* Broadcaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broadcaster.swift; sourceTree = "<group>"; };
+		996953221F149A7A000A6C26 /* CheckinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinView.swift; sourceTree = "<group>"; };
+		996953241F149A92000A6C26 /* CheckinView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckinView.xib; sourceTree = "<group>"; };
+		996953261F14A0A4000A6C26 /* CheckoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutView.xib; sourceTree = "<group>"; };
+		996953281F14A125000A6C26 /* DayCheckinView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCheckinView.xib; sourceTree = "<group>"; };
 		997490281F0CD8A000AC92B9 /* UserDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
-		997490361F0CE18800AC92B9 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		9974903A1F0CFC0600AC92B9 /* CorouselEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorouselEffect.swift; sourceTree = "<group>"; };
 		9982461D1ED55BBE006CA0E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9982462C1ED5BD04006CA0E4 /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
@@ -118,15 +129,14 @@
 		99BD39C11EA49B7100B6942B /* bdAttendenceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bdAttendenceUITests.swift; sourceTree = "<group>"; };
 		99BD39C31EA49B7100B6942B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99BD39CF1EA4A23800B6942B /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		99BD39D11EA4A50700B6942B /* ErrorCheckinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCheckinView.swift; sourceTree = "<group>"; };
-		99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressBar.swift; path = ../ProgressBar.swift; sourceTree = "<group>"; };
 		99BD39DF1EA5F83800B6942B /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
-		99BD39EC1EA7414D00B6942B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		99BD39EE1EA7453A00B6942B /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCheckoutViewController.swift; sourceTree = "<group>"; };
 		99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPermissionViewController.swift; sourceTree = "<group>"; };
 		99D6172D1EBA075800E7E05F /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bdAttendence.entitlements; sourceTree = "<group>"; };
+		99FB1E641F1607B100FA8A9E /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectExtensions.swift; sourceTree = "<group>"; };
 		99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		99FCB0C91EFBCB840022AF61 /* SuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperViewController.swift; sourceTree = "<group>"; };
 		99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCheckinViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				997490381F0CE19200AC92B9 /* BluedolphinCloudSdk.framework in Frameworks */,
+				9969531A1F136D66000A6C26 /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,6 +179,7 @@
 		990CBCF41EFAA20200F56E38 /* NewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				9969531C1F13BA46000A6C26 /* TransmitViewController.swift */,
 				99576C081F0CD5E300A53A4C /* SystemDetailViewController.swift */,
 				99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */,
 				99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */,
@@ -188,7 +199,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				997490361F0CE18800AC92B9 /* BluedolphinCloudSdk.framework */,
+				996953181F136D49000A6C26 /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -217,6 +228,7 @@
 				990CBCF41EFAA20200F56E38 /* NewDesign */,
 				99CA967D1F021E5B00E2813B /* Assets */,
 				99BD39A31EA49B7100B6942B /* ViewController.swift */,
+				99FB1E631F15FDBD00FA8A9E /* Views */,
 			);
 			path = bdAttendence;
 			sourceTree = "<group>";
@@ -269,13 +281,13 @@
 				99D6172D1EBA075800E7E05F /* OTPView.swift */,
 				990CBCEC1EFA422000F56E38 /* GradientView.swift */,
 				99BD39EE1EA7453A00B6942B /* Loader.swift */,
-				99BD39DD1EA5EB7A00B6942B /* ProgressBar.swift */,
+				99FB1E641F1607B100FA8A9E /* ProgressBar.swift */,
+				99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */,
 				99B936901EC98706008E12C4 /* CardView.swift */,
 				991A0ECA1ECC259D00513373 /* ProjectConstant.swift */,
-				99BD39D11EA4A50700B6942B /* ErrorCheckinView.swift */,
 				99BD39CF1EA4A23800B6942B /* CustomButton.swift */,
-				99BD39EC1EA7414D00B6942B /* Extensions.swift */,
 				997490281F0CD8A000AC92B9 /* UserDataModel.swift */,
+				996953201F13BC25000A6C26 /* Broadcaster.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -288,6 +300,17 @@
 				99BD39AD1EA49B7100B6942B /* Info.plist */,
 			);
 			name = Assets;
+			sourceTree = "<group>";
+		};
+		99FB1E631F15FDBD00FA8A9E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				996953221F149A7A000A6C26 /* CheckinView.swift */,
+				996953241F149A92000A6C26 /* CheckinView.xib */,
+				996953281F14A125000A6C26 /* DayCheckinView.xib */,
+				996953261F14A0A4000A6C26 /* CheckoutView.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		C651DF381E775D951C454493 /* Pods */ = {
@@ -443,11 +466,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				996953251F149A92000A6C26 /* CheckinView.xib in Resources */,
+				996953271F14A0A4000A6C26 /* CheckoutView.xib in Resources */,
 				99576C071F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf in Resources */,
 				990CBCEB1EFA3F3A00F56E38 /* NewDesign.storyboard in Resources */,
 				9982462F1ED5BEAD006CA0E4 /* SourceSansPro-Regular.ttf in Resources */,
 				998246301ED5BEAD006CA0E4 /* SourceSansPro-Black.ttf in Resources */,
 				998246311ED5BEAD006CA0E4 /* SourceSansPro-Semibold.ttf in Resources */,
+				996953291F14A125000A6C26 /* DayCheckinView.xib in Resources */,
 				99BD39AC1EA49B7100B6942B /* LaunchScreen.storyboard in Resources */,
 				99BD39A91EA49B7100B6942B /* Assets.xcassets in Resources */,
 			);
@@ -628,6 +654,7 @@
 				99D6172E1EBA075800E7E05F /* OTPView.swift in Sources */,
 				99BD39E01EA5F83800B6942B /* CommonFunction.swift in Sources */,
 				990CBCF31EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift in Sources */,
+				996953231F149A7A000A6C26 /* CheckinView.swift in Sources */,
 				99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */,
 				99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */,
 				9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */,
@@ -637,16 +664,17 @@
 				990CBCF71EFAA40300F56E38 /* NewOtpViewController.swift in Sources */,
 				99B936911EC98706008E12C4 /* CardView.swift in Sources */,
 				99CA96F71F0A367A00E2813B /* DayCheckoutViewController.swift in Sources */,
-				99BD39DE1EA5EB7A00B6942B /* ProgressBar.swift in Sources */,
-				99BD39ED1EA7414D00B6942B /* Extensions.swift in Sources */,
+				99FB1E671F1607B100FA8A9E /* ProjectExtensions.swift in Sources */,
+				99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */,
+				996953211F13BC25000A6C26 /* Broadcaster.swift in Sources */,
 				99BD39D01EA4A23800B6942B /* CustomButton.swift in Sources */,
 				99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */,
 				99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */,
 				99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */,
-				99BD39D21EA4A50700B6942B /* ErrorCheckinView.swift in Sources */,
 				99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */,
 				99576C091F0CD5E300A53A4C /* SystemDetailViewController.swift in Sources */,
 				990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */,
+				9969531D1F13BA46000A6C26 /* TransmitViewController.swift in Sources */,
 				9974903B1F0CFC0600AC92B9 /* CorouselEffect.swift in Sources */,
 				997490291F0CD8A000AC92B9 /* UserDataModel.swift in Sources */,
 				99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */,
@@ -810,6 +838,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4456F8DD4A5DDBB36E629859 /* Pods-bdAttendence.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
@@ -835,7 +864,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0e86e5a6-840a-406d-a1d8-dfe50082cffd";
+				PROVISIONING_PROFILE = "c37eb303-03c4-429a-9b76-7cf7685e9f4c";
 				PROVISIONING_PROFILE_SPECIFIER = attendancedev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -846,6 +875,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8AE9D8E83427C8914FFBC505 /* Pods-bdAttendence.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
@@ -871,7 +901,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0e86e5a6-840a-406d-a1d8-dfe50082cffd";
+				PROVISIONING_PROFILE = "c37eb303-03c4-429a-9b76-7cf7685e9f4c";
 				PROVISIONING_PROFILE_SPECIFIER = attendancedev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

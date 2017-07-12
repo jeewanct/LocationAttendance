@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let APPVERSION = "1.2.1"
+let APPVERSION = "1.2.2"
 
 struct APPFONT {
 //   static var regular = UIFont(name: "SourceSansPro-Regular", size: 15.0)
@@ -20,7 +20,7 @@ struct APPFONT {
     static var OTPCONFIRMATION = UIFont(name: "SourceSansPro-Regular", size: 18.0)
     static var HELPTEXT = UIFont(name: "SourceSansPro-Regular", size: 15.0)
     static var HELPTEXTBUTTON = UIFont(name: "SourceSansPro-ExtraLight", size: 24.0)
-     static var BODYTEXT =  UIFont(name: "SourceSansPro-Regular", size: 15.0)
+     static var BODYTEXT =  UIFont(name: "SourceSansPro-Regular", size: 24.0)
     static var PERMISSIONHEADER =  UIFont(name: "SourceSansPro-Regular", size: 24.0)
     static var PERMISSIONBODY =  UIFont(name: "SourceSansPro-Regular", size: 18.0)
     static var PERMISSIONENABLED =  UIFont(name: "SourceSansPro-Regular", size: 24.0)
