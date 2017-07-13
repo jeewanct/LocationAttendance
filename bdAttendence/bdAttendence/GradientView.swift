@@ -32,8 +32,8 @@ extension UIView {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = colorArray.map({ $0.cgColor })
         if isTopBottom {
-            gradientLayer.locations = [0.0, 1.0]
-            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+            //gradientLayer.locations = [0.0, 1.0]
+            gradientLayer.startPoint = CGPoint.zero
             gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
 
         } else {
@@ -42,7 +42,7 @@ extension UIView {
             gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
         }
         
-        backgroundColor = .clear
+        //backgroundColor = .clear
         gradientLayer.frame = bounds
         layer.insertSublayer(gradientLayer, at: 0)
     }

@@ -19,12 +19,24 @@ class NewLoginViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
-        self.sendOtpButton.layer.cornerRadius = 10.0
+        self.sendOtpButton.layer.cornerRadius = 15.0
         self.sendOtpButton.clipsToBounds = true
+        self.sendOtpButton.titleLabel?.font = APPFONT.OTPACTION
         self.sendOtpButton.addTarget(self, action: #selector(sendOtpAction), for: UIControlEvents.touchUpInside)
         self.mobileTextfield.font = APPFONT.BODYTEXT
         mobileTextfield.delegate = self
+         //createGradientLayer()
         // Do any additional setup after loading the view.
+    }
+    
+    func createGradientLayer() {
+      let  gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.bounds
+        gradientLayer.colors = [APPColor.BlueGradient.cgColor, APPColor.GreenGradient.cgColor]
+        //gradientLayer.colors = [UIColor.blue.cgColor, UIColor.green.cgColor]
+        
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     func sendOtpAction(){

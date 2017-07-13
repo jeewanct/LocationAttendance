@@ -166,13 +166,15 @@ extension SuperViewController{
             notification.userInfo = ["notificationType": "FirstCheckin"]
             UIApplication.shared.scheduleLocalNotification(notification)
         }else if state == .active{
-            let notification = UILocalNotification()
-            notification.fireDate = NSDate(timeIntervalSinceNow: 30) as Date
-            notification.alertBody = NotificationMessage.AttendanceMarked.rawValue + "\(Date().formatted)"
-            notification.soundName = UILocalNotificationDefaultSoundName
-            notification.userInfo = ["notificationType": "FirstCheckin"]
-            UIApplication.shared.scheduleLocalNotification(notification)
-            
+//            let notification = UILocalNotification()
+//            notification.fireDate = NSDate(timeIntervalSinceNow: 30) as Date
+//            notification.alertBody = NotificationMessage.AttendanceMarked.rawValue + "\(Date().formatted)"
+//            notification.soundName = UILocalNotificationDefaultSoundName
+//            notification.userInfo = ["notificationType": "FirstCheckin"]
+//            UIApplication.shared.scheduleLocalNotification(notification)
+            let message = NotificationMessage.AttendanceMarked.rawValue + "\(Date().formatted)"
+            self.showAlert(message )
+//            
         }
         
         
