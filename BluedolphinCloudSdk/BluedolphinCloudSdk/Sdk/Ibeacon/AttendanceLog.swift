@@ -80,33 +80,38 @@ open class AttendanceLogModel {
             let weekOfYear = Calendar.current.component(.weekOfYear, from: beconLastSeen)
             if let dayOfWeekData = realm.objects(AttendanceLog.self).filter("dayofWeek = %@","\(weekDay)").first {
                 if weekOfYear == Calendar.current.component(.weekOfYear, from: dayOfWeekData.timeStamp!){
-                    let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
+                    
                     try! realm.write {
+                        let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
                         dayOfWeekData.beaconList.append(newBeaconData)
+                        realm.add(dayOfWeekData,update:true)
                     }
                 }else{
                     let newbeaconList = List<BeaconData>()
-                    let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
+                    
                     
                     
                     try! realm.write {
+                        let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
                         dayOfWeekData.beaconList.removeAll()
                         newbeaconList.append(newBeaconData)
                         dayOfWeekData.beaconList = newbeaconList
                         dayOfWeekData.timeStamp = beconLastSeen
+                        realm.add(dayOfWeekData,update:true)
                     }
                 }
             }else {
                 let dayOfWeekData = AttendanceLog()
-                let newbeaconList = List<BeaconData>()
-                let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
+                
                 
                 try! realm.write {
+                    let newbeaconList = List<BeaconData>()
+                    let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
                     newbeaconList.append(newBeaconData)
                     dayOfWeekData.beaconList = newbeaconList
                     dayOfWeekData.timeStamp = beconLastSeen
                     dayOfWeekData.dayofWeek = "\(weekDay)"
-                    realm.add(dayOfWeekData)
+                    realm.add(dayOfWeekData,update:true)
                 }
                 
             }
