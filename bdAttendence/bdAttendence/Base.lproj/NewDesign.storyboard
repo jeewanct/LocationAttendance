@@ -134,7 +134,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="128.5" y="218" width="119" height="19"/>
+                                <rect key="frame" x="128" y="218" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -154,7 +154,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="225" y="345.5" width="77" height="30"/>
+                                <rect key="frame" x="225" y="346" width="77" height="30"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.97669434420000001" green="1" blue="0.43377791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -310,7 +310,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XHz-wX-LQ2">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
-                                    <segue destination="zIJ-e7-QIo" kind="embed" id="6DH-lS-H1e"/>
+                                    <segue destination="qvO-xa-hq5" kind="embed" id="fLS-LX-Vtc"/>
                                 </connections>
                             </containerView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jz1-XT-SiE">
@@ -372,12 +372,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2K-kw-7PQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="353" y="560"/>
+            <point key="canvasLocation" x="158" y="301"/>
+        </scene>
+        <!--My Dashboard View Controller-->
+        <scene sceneID="895-gc-8l5">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="0UV-d0-7SZ" customClass="MyDashboardViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PPN-v4-jTN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Shh-tf-Ka9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Krs-LW-HgW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3a-yu-YvB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="zIJ-e7-QIo" kind="embed" id="SM3-MP-jzf"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Shh-tf-Ka9" firstAttribute="top" secondItem="j3a-yu-YvB" secondAttribute="bottom" id="CWC-gr-9fP"/>
+                            <constraint firstAttribute="trailing" secondItem="j3a-yu-YvB" secondAttribute="trailing" id="Mi9-uc-qge"/>
+                            <constraint firstItem="j3a-yu-YvB" firstAttribute="leading" secondItem="Krs-LW-HgW" secondAttribute="leading" id="T0L-dg-8TZ"/>
+                            <constraint firstItem="j3a-yu-YvB" firstAttribute="top" secondItem="PPN-v4-jTN" secondAttribute="bottom" id="feq-mg-Onb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="cSq-u1-7Sb"/>
+                    <connections>
+                        <outlet property="containerView" destination="j3a-yu-YvB" id="h4U-AD-IrJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="imA-X7-Bsd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2444" y="68.815592203898049"/>
         </scene>
         <!--New Checkin View Controller-->
         <scene sceneID="l01-jF-lQe">
             <objects>
-                <viewController id="ngQ-HD-aXg" customClass="NewCheckinViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="checkin" automaticallyAdjustsScrollViewInsets="NO" id="ngQ-HD-aXg" customClass="NewCheckinViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7kh-QQ-ksR"/>
                         <viewControllerLayoutGuide type="bottom" id="7GM-Zp-LmH"/>
@@ -449,7 +485,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yVp-TQ-gHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2534" y="707"/>
+            <point key="canvasLocation" x="2988" y="857"/>
         </scene>
         <!--System Detail View Controller-->
         <scene sceneID="aqJ-Yq-qb4">
@@ -816,7 +852,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfg-I1-iyk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1381.5999999999999" y="708.39580209895053"/>
+            <point key="canvasLocation" x="2054" y="857"/>
         </scene>
         <!--New Permission View Controller-->
         <scene sceneID="YNl-Ah-CXQ">
@@ -995,7 +1031,7 @@ mark your presence at your workplace</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H03-KF-tFC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3743.1999999999998" y="-75.112443778110944"/>
+            <point key="canvasLocation" x="4682.3999999999996" y="-75.112443778110944"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pXd-r2-U6G">
@@ -1013,7 +1049,7 @@ mark your presence at your workplace</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kuu-Lr-VZE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2804" y="-75.112443778110944"/>
+            <point key="canvasLocation" x="3743.1999999999998" y="-75.112443778110944"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6il-ae-k75">
@@ -1070,6 +1106,24 @@ mark your presence at your workplace</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="grN-ZZ-0Cf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="100" y="2277"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WLj-Uu-1w7">
+            <objects>
+                <navigationController storyboardIdentifier="dashboard" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="qvO-xa-hq5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZZi-nf-7Mh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0UV-d0-7SZ" kind="relationship" relationship="rootViewController" id="Clu-hn-Je1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dV-zh-z4b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1504.8" y="68.815592203898049"/>
         </scene>
     </scenes>
     <resources>

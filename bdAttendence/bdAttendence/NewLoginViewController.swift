@@ -25,7 +25,7 @@ class NewLoginViewController: UIViewController {
         self.sendOtpButton.addTarget(self, action: #selector(sendOtpAction), for: UIControlEvents.touchUpInside)
         self.mobileTextfield.font = APPFONT.BODYTEXT
         mobileTextfield.delegate = self
-         //createGradientLayer()
+         createGradientLayer()
         // Do any additional setup after loading the view.
     }
     
@@ -63,6 +63,7 @@ class NewLoginViewController: UIViewController {
             case APIResult.Success.rawValue:
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? NewOtpViewController
                 controller?.mobileNumber = self.mobileTextfield.text!
+                //self.presentedViewController
                 self.navigationController?.show(controller!, sender: nil)
             case APIResult.InvalidCredentials.rawValue:
                 self.showAlert(ErrorMessage.UserNotFound.rawValue)

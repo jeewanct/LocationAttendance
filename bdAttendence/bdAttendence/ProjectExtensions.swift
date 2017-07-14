@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-    //Swift.print(items[0], separator:separator, terminator: terminator)
+    Swift.print(items[0], separator:separator, terminator: terminator)
 }
 
 
@@ -93,6 +93,9 @@ enum LocalNotifcation:String{
     case FirstBeaconCheckin
     case Dashboard
     case SystemDetail
+    case CheckoutScreen
+    case CheckinScreen
+    case DayCheckinScreen
 }
 enum ErrorMessage:String{
     case UserNotFound = "User not found with that phone number in system,Please contact your administrator"

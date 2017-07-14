@@ -23,14 +23,16 @@ class TransmitViewController: UIViewController,CheckinViewDelegate {
     
     
     func transmitAsBeacon(){
-//        IBeaconBroadcaster.sharedInstance.setBeacon(uuid: SDKSingleton.sharedInstance.userId, major: NSNumber(integerLiteral: major), minor: 65535, power:  NSNumber(floatLiteral: powerValue))
-//        print(IBeaconBroadcaster.sharedInstance.startBeacon())
-//        
-//        let delay = 30.0 * Double(NSEC_PER_SEC)
-//        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
-//        DispatchQueue.main.asyncAfter(deadline: time, execute: {
-//            print(IBeaconBroadcaster.sharedInstance.stopBeacon())
-//        })
+        IBeaconBroadcaster.sharedInstance.setBeacon(uuid: SDKSingleton.sharedInstance.userId, major: NSNumber(integerLiteral: major), minor: 65535, power:  NSNumber(floatLiteral: powerValue))
+        print(IBeaconBroadcaster.sharedInstance.startBeacon())
+        AlertView.sharedInstance.setLabelText("Transmitting")
+        AlertView.sharedInstance.showActivityIndicator(self.view)
+        let delay = 30.0 * Double(NSEC_PER_SEC)
+        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {
+            print(IBeaconBroadcaster.sharedInstance.stopBeacon())
+            AlertView.sharedInstance.hideActivityIndicator(self.view)
+        })
     }
 
     override func viewDidLoad() {

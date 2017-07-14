@@ -33,6 +33,7 @@
 		9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */; };
 		999D30081F176DDA0073AEEA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999D30061F176DCF0073AEEA /* BluedolphinCloudSdk.framework */; };
 		999D30091F176DDA0073AEEA /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 999D30061F176DCF0073AEEA /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		999D300B1F17A57F0073AEEA /* MyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */; };
 		99B936911EC98706008E12C4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B936901EC98706008E12C4 /* CardView.swift */; };
 		99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39A11EA49B7100B6942B /* AppDelegate.swift */; };
 		99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39A31EA49B7100B6942B /* ViewController.swift */; };
@@ -115,6 +116,7 @@
 		9982462E1ED5BD64006CA0E4 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSingleton.swift; sourceTree = "<group>"; };
 		999D30061F176DCF0073AEEA /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardViewController.swift; sourceTree = "<group>"; };
 		99B936901EC98706008E12C4 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		99BD399E1EA49B7100B6942B /* bdAttendence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bdAttendence.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BD39A11EA49B7100B6942B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */,
 				99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */,
 				99FCB0C91EFBCB840022AF61 /* SuperViewController.swift */,
+				999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */,
 				99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */,
 				99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */,
 				990CBCEE1EFA47F700F56E38 /* NewLoginViewController.swift */,
@@ -655,6 +658,7 @@
 				99BD39E01EA5F83800B6942B /* CommonFunction.swift in Sources */,
 				990CBCF31EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift in Sources */,
 				996953231F149A7A000A6C26 /* CheckinView.swift in Sources */,
+				999D300B1F17A57F0073AEEA /* MyDashboardViewController.swift in Sources */,
 				99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */,
 				99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */,
 				9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */,

@@ -33,7 +33,7 @@ class DayCheckoutViewController: UIViewController {
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
         BlueDolphinManager.manager.startScanning()
         //self.dismiss(animated: true, completion: nil)
-      self.navigationController?.popViewController(animated: true)
+      NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)
       
     }
     

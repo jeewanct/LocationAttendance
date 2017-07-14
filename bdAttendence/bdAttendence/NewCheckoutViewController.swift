@@ -93,7 +93,7 @@ class NewCheckoutViewController: UIViewController {
         guard  let firstdateofWeek = Date().startOfWeek() else {
             return
         }
-        let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("timeStamp >= %@",firstdateofWeek).sorted(byProperty: "timeStamp", ascending: false)
+        let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("timeStamp >= %@",firstdateofWeek).sorted(byProperty: "timeStamp", ascending: true)
         
         let totalCount = attendanceLogForToday.count
         if totalCount != 0{
@@ -103,6 +103,7 @@ class NewCheckoutViewController: UIViewController {
         for attendance in attendanceLogForToday{
             dataArray.append(attendance.timeStamp!)
         }
+        pageControl.currentPage = totalCount
         //print(attendanceLogForToday.count)
         
         
@@ -125,8 +126,7 @@ class NewCheckoutViewController: UIViewController {
             case UISwipeGestureRecognizerDirection.down:
                 UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
                 //BlueDolphinManager.manager.stopScanning()
-                let controller = self.storyboard?.instantiateViewController(withIdentifier: "day") as? DayCheckoutViewController
-                self.show(controller!, sender: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
             case UISwipeGestureRecognizerDirection.left:
                 if pageControl.currentPage < dataArray.count {
                     pageControl.currentPage = pageControl.currentPage + 1

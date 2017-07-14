@@ -37,10 +37,16 @@ class NewCheckinViewController: UIViewController {
     func handleGesture(sender:UIGestureRecognizer){
         BlueDolphinManager.manager.startScanning()
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
-//        let controller = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as? UINavigationController
-//        self.present(controller!, animated: true, completion: nil)
+         NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)
+        
+        
+//       let controller = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as? UINavigationController
+//       self.present(controller!, animated: true) {
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+//        }
         //self.show(controller!, sender: nil)
+        
+        
     }
     
     func menuAction(sender:UIBarButtonItem){
