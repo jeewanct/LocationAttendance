@@ -23,16 +23,20 @@ class TransmitViewController: UIViewController,CheckinViewDelegate {
     
     
     func transmitAsBeacon(){
-        IBeaconBroadcaster.sharedInstance.setBeacon(uuid: SDKSingleton.sharedInstance.userId, major: NSNumber(integerLiteral: major), minor: 65535, power:  NSNumber(floatLiteral: powerValue))
-        print(IBeaconBroadcaster.sharedInstance.startBeacon())
-        AlertView.sharedInstance.setLabelText("Transmitting")
-        AlertView.sharedInstance.showActivityIndicator(self.view)
-        let delay = 30.0 * Double(NSEC_PER_SEC)
-        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: time, execute: {
-            print(IBeaconBroadcaster.sharedInstance.stopBeacon())
-            AlertView.sharedInstance.hideActivityIndicator(self.view)
-        })
+//        IBeaconBroadcaster.sharedInstance.setBeacon(uuid: SDKSingleton.sharedInstance.userId, major: NSNumber(integerLiteral: major), minor: 65535, power:  NSNumber(floatLiteral: powerValue))
+//        print(IBeaconBroadcaster.sharedInstance.startBeacon())
+//        AlertView.sharedInstance.setLabelText("Transmitting")
+//        AlertView.sharedInstance.showActivityIndicator(self.view)
+//        let delay = 30.0 * Double(NSEC_PER_SEC)
+//        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+//        DispatchQueue.main.asyncAfter(deadline: time, execute: {
+//            print(IBeaconBroadcaster.sharedInstance.stopBeacon())
+//            AlertView.sharedInstance.hideActivityIndicator(self.view)
+//        })
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "testView") as? ViewController
+       
+        self.navigationController?.show(controller!, sender: nil)
     }
 
     override func viewDidLoad() {

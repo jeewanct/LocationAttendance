@@ -134,7 +134,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="128" y="218" width="119" height="19"/>
+                                <rect key="frame" x="128.5" y="218" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -154,7 +154,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="225" y="346" width="77" height="30"/>
+                                <rect key="frame" x="225" y="345.5" width="77" height="30"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.97669434420000001" green="1" blue="0.43377791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1088,6 +1088,24 @@ mark your presence at your workplace</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v7n-FJ-W9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="956" y="2276"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="aIU-7x-vKA">
+            <objects>
+                <viewController storyboardIdentifier="testView" id="ccZ-11-Hxz" customClass="ViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lkR-Dl-GEj"/>
+                        <viewControllerLayoutGuide type="bottom" id="zha-Bk-7id"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oaj-dg-wtI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vZU-dk-MOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1806" y="2275"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9Fu-8J-99C">

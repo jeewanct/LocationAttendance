@@ -75,15 +75,20 @@ class NewCheckoutViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         processCurrentWeek()
-        let value = dataArray[pageControl.currentPage]
-        updateView(date: value)
+        if dataArray.count > 0{
+            let value = dataArray[pageControl.currentPage]
+            updateView(date: value)
+        }
+        
     }
     
     
     func updateTime(sender:NSNotification){
         processCurrentWeek()
+         if dataArray.count > 0{
         let value = dataArray[pageControl.currentPage]
         updateView(date: value)
+        }
         
         
     }
@@ -109,8 +114,10 @@ class NewCheckoutViewController: UIViewController {
         
     }
     @IBAction func pageControlAction(_ sender: UIPageControl) {
+         if dataArray.count > 0{
         let date = dataArray[pageControl.currentPage]
         updateView(date: date)
+        }
         
     }
     
