@@ -34,9 +34,9 @@ class TransmitViewController: UIViewController,CheckinViewDelegate {
 //            AlertView.sharedInstance.hideActivityIndicator(self.view)
 //        })
         
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "testView") as? ViewController
-       
-        self.navigationController?.show(controller!, sender: nil)
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "testView") as? TimerViewController
+       self.present(controller!, animated: true, completion: nil)
+        //self.navigationController?.show(controller!, sender: nil)
     }
 
     override func viewDidLoad() {

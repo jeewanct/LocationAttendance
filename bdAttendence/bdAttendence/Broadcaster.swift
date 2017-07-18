@@ -136,7 +136,7 @@ open class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
         } else {
             
             // Set up a beacon region with the UUID, Major and Minor values
-            let region = CLBeaconRegion(proximityUUID:beaconUUID! as UUID, major:withMajor.uint16Value, minor:withMinor.uint16Value, identifier:"com.raremediacompany.bluedolphinPro")
+            let region = CLBeaconRegion(proximityUUID:beaconUUID! as UUID, major:withMajor.uint16Value, minor:withMinor.uint16Value, identifier:appIdentifier)
             
             // Attempt to set up a peripheral with the measured power
             let peripheralData : NSMutableDictionary? = region.peripheralData(withMeasuredPower: (withPower.intValue == 127) ? nil : withPower)
@@ -206,13 +206,7 @@ open class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
         return _peripheralManager!.isAdvertising
     }
     
-    /**
-     *
-     *  @brief   Peripheral Manager Delegate
-     *
-     *  @return  Void
-     *
-     */
+   
     
     public func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         
@@ -225,27 +219,18 @@ open class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
                 let notificationPayload = ["broadcastStatus" : shouldBroadcast]
                 
                 if (shouldBroadcast == true) {
-                    _ =   startBeacon()
+                       startBeacon()
                     
                     //NotificationCenter.defaultCenter.postNotificationName("iBeaconBroadcastStatus", object: nil, userInfo: notificationPayload)
                 } else {
-                    stopBeacon()
+                        stopBeacon()
                     //NotificationCenter.defaultCenter.postNotificationName("iBeaconBroadcastStatus", object: nil, userInfo: notificationPayload)
                 }
             }
         }
     }
     
-    /**
-     *
-     *  @brief   Utility function to get the current view controller
-     *           Required to present alerts to the current  view controller
-     *
-     *  @return  UIViewController ID of the current View Controller
-     *
-     */
     
-    //
     func getTopWindow()->UIViewController? {
         
         var topViewController : UIViewController? = UIApplication.shared.keyWindow?.rootViewController

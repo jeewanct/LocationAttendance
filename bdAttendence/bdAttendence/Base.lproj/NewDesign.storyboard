@@ -25,7 +25,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZLB-mr-keV" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PpO-oJ-7dP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PpO-oJ-7dP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -824,7 +824,7 @@
         <scene sceneID="I4C-5l-vUt">
             <objects>
                 <navigationController storyboardIdentifier="Main" id="Fx4-6H-Q9G" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="NkD-E7-dcq" customClass="CustomNavigationBar" customModule="bdAttendence" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NkD-E7-dcq" customClass="CustomNavigationBar" customModule="bdAttendence" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -841,7 +841,7 @@
             <objects>
                 <navigationController storyboardIdentifier="newCheckin" automaticallyAdjustsScrollViewInsets="NO" id="zIJ-e7-QIo" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CgV-dC-oic">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CgV-dC-oic">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -925,7 +925,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="newCheckout" automaticallyAdjustsScrollViewInsets="NO" id="6bY-kG-nMU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1Bc-I9-SNd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Bc-I9-SNd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -943,7 +943,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="orgList" automaticallyAdjustsScrollViewInsets="NO" id="mG7-SV-y42" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qvb-WV-LU4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qvb-WV-LU4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1038,7 +1038,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="dayCheckin" automaticallyAdjustsScrollViewInsets="NO" id="TV0-G9-M50" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="sRP-aP-KUP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sRP-aP-KUP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1056,7 +1056,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="systemDetail" automaticallyAdjustsScrollViewInsets="NO" id="w3I-iW-gws" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="S5S-3o-dKy">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S5S-3o-dKy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1089,10 +1089,10 @@ mark your presence at your workplace</string>
             </objects>
             <point key="canvasLocation" x="956" y="2276"/>
         </scene>
-        <!--View Controller-->
+        <!--Timer View Controller-->
         <scene sceneID="aIU-7x-vKA">
             <objects>
-                <viewController storyboardIdentifier="testView" id="ccZ-11-Hxz" customClass="ViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="testView" id="ccZ-11-Hxz" customClass="TimerViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lkR-Dl-GEj"/>
                         <viewControllerLayoutGuide type="bottom" id="zha-Bk-7id"/>
@@ -1100,19 +1100,149 @@ mark your presence at your workplace</string>
                     <view key="view" contentMode="scaleToFill" id="oaj-dg-wtI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hS-e9-aVf" customClass="UICircularProgressRingView" customModule="bdAttendence" customModuleProvider="target">
+                                <rect key="frame" x="62" y="208.5" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="cEa-HK-crp"/>
+                                    <constraint firstAttribute="height" constant="250" id="tFA-xh-FBY"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="guideColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showGuide" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="guideLineWidth">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="angle">
+                                        <real key="value" value="120"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="startAngle">
+                                        <real key="value" value="-90"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="IBColor1">
+                                        <color key="value" red="0.97669434420000001" green="1" blue="0.43377791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="lerpColorMode" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldShowValueText" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="valueIndicator" value=" sec"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="viewStyle">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="innerRingColor">
+                                        <color key="value" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="outerRingWidth">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="innerRingWidth">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showFloatingPoint" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="outerRingColor">
+                                        <color key="value" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0YI-Uo-wY2">
+                                <rect key="frame" x="15" y="125" width="345" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0YI-Uo-wY2" firstAttribute="leading" secondItem="oaj-dg-wtI" secondAttribute="leading" constant="15" id="4II-sW-bNT"/>
+                            <constraint firstItem="4hS-e9-aVf" firstAttribute="top" secondItem="0YI-Uo-wY2" secondAttribute="bottom" constant="62.5" id="Def-gh-PT1"/>
+                            <constraint firstAttribute="trailing" secondItem="0YI-Uo-wY2" secondAttribute="trailing" constant="15" id="cBb-j3-seK"/>
+                            <constraint firstItem="4hS-e9-aVf" firstAttribute="centerY" secondItem="oaj-dg-wtI" secondAttribute="centerY" id="iAN-1B-aTg"/>
+                            <constraint firstItem="4hS-e9-aVf" firstAttribute="centerX" secondItem="oaj-dg-wtI" secondAttribute="centerX" id="nU8-c3-GKl"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="detailLabel" destination="0YI-Uo-wY2" id="LxX-eh-VRH"/>
+                        <outlet property="timerView" destination="4hS-e9-aVf" id="hAF-bZ-OHe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZU-dk-MOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1806" y="2275"/>
+            <point key="canvasLocation" x="1805.5999999999999" y="2274.5127436281859"/>
+        </scene>
+        <!--Error View Controller-->
+        <scene sceneID="DJB-qb-noZ">
+            <objects>
+                <viewController storyboardIdentifier="errorView" id="gyQ-xP-72p" customClass="ErrorViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TkH-M4-oMm"/>
+                        <viewControllerLayoutGuide type="bottom" id="fpX-6K-D5B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CBy-ew-1pu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error" translatesAutoresizingMaskIntoConstraints="NO" id="IGl-ff-f1K">
+                                <rect key="frame" x="98" y="194" width="179" height="179"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRb-M8-piQ">
+                                <rect key="frame" x="40" y="490" width="295" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UW2-IO-ZHh"/>
+                                </constraints>
+                                <state key="normal" title="Transmit again"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHn-uP-Hl5">
+                                <rect key="frame" x="23" y="425.5" width="329" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mRb-M8-piQ" firstAttribute="top" secondItem="jHn-uP-Hl5" secondAttribute="bottom" constant="43.5" id="4nq-qM-PRA"/>
+                            <constraint firstItem="IGl-ff-f1K" firstAttribute="centerY" secondItem="CBy-ew-1pu" secondAttribute="centerY" constant="-50" id="5K8-hM-OxU"/>
+                            <constraint firstItem="IGl-ff-f1K" firstAttribute="centerX" secondItem="CBy-ew-1pu" secondAttribute="centerX" id="5oe-UC-lXD"/>
+                            <constraint firstAttribute="trailing" secondItem="jHn-uP-Hl5" secondAttribute="trailing" constant="23" id="BqP-Zf-MA3"/>
+                            <constraint firstAttribute="trailing" secondItem="mRb-M8-piQ" secondAttribute="trailing" constant="40" id="QaB-73-4Io"/>
+                            <constraint firstItem="jHn-uP-Hl5" firstAttribute="leading" secondItem="CBy-ew-1pu" secondAttribute="leading" constant="23" id="eEx-Dm-mPP"/>
+                            <constraint firstItem="mRb-M8-piQ" firstAttribute="leading" secondItem="CBy-ew-1pu" secondAttribute="leading" constant="40" id="mda-Iy-wMm"/>
+                            <constraint firstItem="jHn-uP-Hl5" firstAttribute="top" secondItem="IGl-ff-f1K" secondAttribute="bottom" constant="52.5" id="yT1-xK-Ip9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="errorLabel" destination="jHn-uP-Hl5" id="Ojt-RO-8Dq"/>
+                        <outlet property="transmitButton" destination="mRb-M8-piQ" id="PEQ-CP-177"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ttS-lP-Vcl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2825" y="2276"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9Fu-8J-99C">
             <objects>
                 <navigationController storyboardIdentifier="VirtualBeacon" automaticallyAdjustsScrollViewInsets="NO" id="rIn-Qu-bpd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lJ0-cZ-Jy0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lJ0-cZ-Jy0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1130,7 +1260,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="dashboard" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="qvO-xa-hq5" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZZi-nf-7Mh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZZi-nf-7Mh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1145,6 +1275,7 @@ mark your presence at your workplace</string>
         </scene>
     </scenes>
     <resources>
+        <image name="error" width="179" height="179"/>
         <image name="logo" width="35" height="36"/>
         <image name="profile" width="75" height="75"/>
         <image name="quote" width="21" height="19"/>

@@ -31,7 +31,7 @@ class SideMenuViewController: UIViewController  {
                 userNameLabel.font = APPFONT.MENUTEXT
                 versionLabel.textColor = UIColor.white
                 versionLabel.font = APPFONT.VERSIONTEXT
-                versionLabel.text = "AppVersion: V" + APPVERSION
+                versionLabel.text = "V" + APPVERSION
                 versionLabel.textAlignment = .center
             }
     

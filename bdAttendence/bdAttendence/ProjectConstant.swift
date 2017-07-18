@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 let APPVERSION = "1.2.2"
+let appIdentifier = "com.raremedia.bdAttendence"
 
 struct APPFONT {
 //   static var regular = UIFont(name: "SourceSansPro-Regular", size: 15.0)

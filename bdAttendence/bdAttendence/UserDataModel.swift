@@ -75,6 +75,8 @@ class FrequencyBarGraphData :NSObject  {
         self.lastCheckInAddress = lastCheckInAddress;
     }
 }
+
+
 class UserDayData {
     class func getFrequencyBarData(date:Date) ->FrequencyBarGraphData{
         

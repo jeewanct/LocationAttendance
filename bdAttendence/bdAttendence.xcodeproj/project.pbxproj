@@ -47,6 +47,8 @@
 		99CA96F71F0A367A00E2813B /* DayCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */; };
 		99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */; };
 		99D6172E1EBA075800E7E05F /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6172D1EBA075800E7E05F /* OTPView.swift */; };
+		99E369CB1F1CB519000A642C /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CA1F1CB519000A642C /* TimerViewController.swift */; };
+		99E369CD1F1CC4A5000A642C /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */; };
 		99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E641F1607B100FA8A9E /* ProgressBar.swift */; };
 		99FB1E671F1607B100FA8A9E /* ProjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */; };
 		99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */; };
@@ -136,6 +138,8 @@
 		99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCheckoutViewController.swift; sourceTree = "<group>"; };
 		99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPermissionViewController.swift; sourceTree = "<group>"; };
 		99D6172D1EBA075800E7E05F /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
+		99E369CA1F1CB519000A642C /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bdAttendence.entitlements; sourceTree = "<group>"; };
 		99FB1E641F1607B100FA8A9E /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectExtensions.swift; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 		990CBCF41EFAA20200F56E38 /* NewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */,
+				99E369CA1F1CB519000A642C /* TimerViewController.swift */,
 				9969531C1F13BA46000A6C26 /* TransmitViewController.swift */,
 				99576C081F0CD5E300A53A4C /* SystemDetailViewController.swift */,
 				99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */,
@@ -664,6 +670,8 @@
 				9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */,
 				99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */,
 				990CBCF11EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift in Sources */,
+				99E369CD1F1CC4A5000A642C /* ErrorViewController.swift in Sources */,
+				99E369CB1F1CB519000A642C /* TimerViewController.swift in Sources */,
 				990CBCEF1EFA47F700F56E38 /* NewLoginViewController.swift in Sources */,
 				990CBCF71EFAA40300F56E38 /* NewOtpViewController.swift in Sources */,
 				99B936911EC98706008E12C4 /* CardView.swift in Sources */,
@@ -845,8 +853,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -868,8 +876,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c37eb303-03c4-429a-9b76-7cf7685e9f4c";
-				PROVISIONING_PROFILE_SPECIFIER = attendancedev;
+				PROVISIONING_PROFILE = "4fc7beaa-c463-4b8d-8dd9-40a169a5454c";
+				PROVISIONING_PROFILE_SPECIFIER = AttendanceAppstore;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -882,8 +890,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -905,8 +913,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c37eb303-03c4-429a-9b76-7cf7685e9f4c";
-				PROVISIONING_PROFILE_SPECIFIER = attendancedev;
+				PROVISIONING_PROFILE = "4fc7beaa-c463-4b8d-8dd9-40a169a5454c";
+				PROVISIONING_PROFILE_SPECIFIER = AttendanceAppstore;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

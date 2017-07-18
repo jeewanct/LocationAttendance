@@ -66,7 +66,7 @@ class NewCheckoutViewController: UIViewController {
         swipedown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipedown?.direction = .down
         pageControl.hidesForSinglePage = true
-    
+        
         
         
         
@@ -75,7 +75,7 @@ class NewCheckoutViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         processCurrentWeek()
-        if dataArray.count > 0{
+        if  pageControl.currentPage < dataArray.count {
             let value = dataArray[pageControl.currentPage]
             updateView(date: value)
         }
@@ -85,9 +85,9 @@ class NewCheckoutViewController: UIViewController {
     
     func updateTime(sender:NSNotification){
         processCurrentWeek()
-         if dataArray.count > 0{
-        let value = dataArray[pageControl.currentPage]
-        updateView(date: value)
+        if  pageControl.currentPage < dataArray.count {
+            let value = dataArray[pageControl.currentPage]
+            updateView(date: value)
         }
         
         
@@ -114,9 +114,9 @@ class NewCheckoutViewController: UIViewController {
         
     }
     @IBAction func pageControlAction(_ sender: UIPageControl) {
-         if dataArray.count > 0{
-        let date = dataArray[pageControl.currentPage]
-        updateView(date: date)
+        if dataArray.count > pageControl.currentPage{
+            let date = dataArray[pageControl.currentPage]
+            updateView(date: date)
         }
         
     }
@@ -158,7 +158,7 @@ class NewCheckoutViewController: UIViewController {
         }
         
     }
-
+    
     
     func updateView(date:Date = Date()){
         
@@ -184,12 +184,12 @@ class NewCheckoutViewController: UIViewController {
     
     func createFrequencybarView(date:Date){
         let queue = DispatchQueue.global(qos: .userInteractive)
-            
-            
-            
+        
+        
+        
         // submit a task to the queue for background execution
         queue.async() {
-        let object = UserDayData.getFrequencyBarData(date:date)
+            let object = UserDayData.getFrequencyBarData(date:date)
             DispatchQueue.main.async() {
                 let totalTime = object.getElapsedTime()!
                 self.progressView.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
@@ -216,9 +216,9 @@ class NewCheckoutViewController: UIViewController {
                 self.updateFrequencyBar(mData: object)
             }
         }
-       
-            
-            
+        
+        
+        
         
     }
     
@@ -254,7 +254,7 @@ class NewCheckoutViewController: UIViewController {
         frequencyBarView.addSubview(view)
         
     }
-
+    
     
     
     func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
