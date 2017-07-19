@@ -178,7 +178,7 @@ public func getUUIDString()->String{
             checkin.relativeUrl = checkinData.relativeUrl
             
         }else if checkin.checkinType == CheckinType.Beacon.rawValue {
-            calcluateTotalTime()
+           
             let beconList = List<RMCBeacon>()
             for data in checkinData.beaconProximities!{
                 
@@ -203,6 +203,7 @@ public func getUUIDString()->String{
             }
             
             AttendanceLogModel.updateAttendanceLog(beaconList: beconList)
+            calcluateTotalTime()
             checkin.beaconProximity = beconList
            
             
