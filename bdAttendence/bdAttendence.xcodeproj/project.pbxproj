@@ -31,8 +31,6 @@
 		998246301ED5BEAD006CA0E4 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9982462D1ED5BD35006CA0E4 /* SourceSansPro-Black.ttf */; };
 		998246311ED5BEAD006CA0E4 /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9982462C1ED5BD04006CA0E4 /* SourceSansPro-Semibold.ttf */; };
 		9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */; };
-		999D30081F176DDA0073AEEA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999D30061F176DCF0073AEEA /* BluedolphinCloudSdk.framework */; };
-		999D30091F176DDA0073AEEA /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 999D30061F176DCF0073AEEA /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		999D300B1F17A57F0073AEEA /* MyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */; };
 		99B936911EC98706008E12C4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B936901EC98706008E12C4 /* CardView.swift */; };
 		99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39A11EA49B7100B6942B /* AppDelegate.swift */; };
@@ -49,6 +47,9 @@
 		99D6172E1EBA075800E7E05F /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6172D1EBA075800E7E05F /* OTPView.swift */; };
 		99E369CB1F1CB519000A642C /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CA1F1CB519000A642C /* TimerViewController.swift */; };
 		99E369CD1F1CC4A5000A642C /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */; };
+		99E369CF1F1DFE99000A642C /* WorkHourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CE1F1DFE99000A642C /* WorkHourViewController.swift */; };
+		99E369D21F1F31CF000A642C /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E369D01F1F31C4000A642C /* BluedolphinCloudSdk.framework */; };
+		99E369D31F1F31CF000A642C /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99E369D01F1F31C4000A642C /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E641F1607B100FA8A9E /* ProgressBar.swift */; };
 		99FB1E671F1607B100FA8A9E /* ProjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */; };
 		99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */; };
@@ -81,7 +82,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				999D30091F176DDA0073AEEA /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				99E369D31F1F31CF000A642C /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,7 +118,6 @@
 		9982462D1ED5BD35006CA0E4 /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.ttf"; sourceTree = "<group>"; };
 		9982462E1ED5BD64006CA0E4 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSingleton.swift; sourceTree = "<group>"; };
-		999D30061F176DCF0073AEEA /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardViewController.swift; sourceTree = "<group>"; };
 		99B936901EC98706008E12C4 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		99BD399E1EA49B7100B6942B /* bdAttendence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bdAttendence.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +140,8 @@
 		99D6172D1EBA075800E7E05F /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		99E369CA1F1CB519000A642C /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		99E369CE1F1DFE99000A642C /* WorkHourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkHourViewController.swift; sourceTree = "<group>"; };
+		99E369D01F1F31C4000A642C /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bdAttendence.entitlements; sourceTree = "<group>"; };
 		99FB1E641F1607B100FA8A9E /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectExtensions.swift; sourceTree = "<group>"; };
@@ -158,7 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				999D30081F176DDA0073AEEA /* BluedolphinCloudSdk.framework in Frameworks */,
+				99E369D21F1F31CF000A642C /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +203,7 @@
 				9974903A1F0CFC0600AC92B9 /* CorouselEffect.swift */,
 				990CBCF61EFAA40300F56E38 /* NewOtpViewController.swift */,
 				99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */,
+				99E369CE1F1DFE99000A642C /* WorkHourViewController.swift */,
 			);
 			name = NewDesign;
 			sourceTree = "<group>";
@@ -208,7 +211,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				999D30061F176DCF0073AEEA /* BluedolphinCloudSdk.framework */,
+				99E369D01F1F31C4000A642C /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -683,6 +686,7 @@
 				99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */,
 				99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */,
 				99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */,
+				99E369CF1F1DFE99000A642C /* WorkHourViewController.swift in Sources */,
 				99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */,
 				99576C091F0CD5E300A53A4C /* SystemDetailViewController.swift in Sources */,
 				990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */,
@@ -862,14 +866,6 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/bdAttendence",
 					"$(PROJECT_DIR)/ObjectMapper",
-					"$(PROJECT_DIR)/Release-iphonesimulator/Alamofire",
-					"$(PROJECT_DIR)/Release-iphonesimulator/AlamofireObjectMapper",
-					"$(PROJECT_DIR)/Release-iphonesimulator/AWSCore",
-					"$(PROJECT_DIR)/Release-iphonesimulator/AWSS3",
-					"$(PROJECT_DIR)/Release-iphonesimulator",
-					"$(PROJECT_DIR)/Release-iphonesimulator/ObjectMapper",
-					"$(PROJECT_DIR)/Release-iphonesimulator/Realm",
-					"$(PROJECT_DIR)/Release-iphonesimulator/RealmSwift",
 				);
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -899,14 +895,6 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/bdAttendence",
 					"$(PROJECT_DIR)/ObjectMapper",
-					"$(PROJECT_DIR)/Release-iphonesimulator/Alamofire",
-					"$(PROJECT_DIR)/Release-iphonesimulator/AlamofireObjectMapper",
-					"$(PROJECT_DIR)/Release-iphonesimulator/AWSCore",
-					"$(PROJECT_DIR)/Release-iphonesimulator/AWSS3",
-					"$(PROJECT_DIR)/Release-iphonesimulator",
-					"$(PROJECT_DIR)/Release-iphonesimulator/ObjectMapper",
-					"$(PROJECT_DIR)/Release-iphonesimulator/Realm",
-					"$(PROJECT_DIR)/Release-iphonesimulator/RealmSwift",
 				);
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

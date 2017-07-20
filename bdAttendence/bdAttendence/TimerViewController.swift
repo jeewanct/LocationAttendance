@@ -11,6 +11,8 @@ import BluedolphinCloudSdk
 
 class TimerViewController: UIViewController {
 
+    @IBOutlet weak var cancelButton: UIButton!
+    let timeDuration = 10
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var timerView: UICircularProgressRingView!
     
@@ -19,27 +21,35 @@ class TimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailLabel.text = "Your device can now be discovered by receivers"
+        detailLabel.text = "Connecting..."
         detailLabel.font = APPFONT.BODYTEXT
         detailLabel.numberOfLines = 0
         detailLabel.textAlignment = .center
+        self.cancelButton.layer.cornerRadius = 15.0
+        self.cancelButton.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        self.cancelButton.clipsToBounds = true
+        self.cancelButton.titleLabel?.font = APPFONT.FOOTERBODY
+        self.cancelButton.tintColor = UIColor.white
+        self.cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: UIControlEvents.touchUpInside)
+            
+           // UIBarButtonItem(image: UIImage(named:"menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         // Do any additional setup after loading the view.
     }
 
+    
+     func cancelButtonAction() {
+         self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         transmitBeacon()
         
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-       
-        
-        
-    }
     
     func transmitBeacon(){
         
-        timerView.maxValue = 30.0
+        timerView.maxValue = CGFloat(timeDuration)
         timerView.innerRingColor = APPColor.newGreen
         timerView.shouldShowValueText = true
         timerView.showFloatingPoint = false
@@ -47,7 +57,7 @@ class TimerViewController: UIViewController {
         timerView.valueIndicator = " secs"
         timerView.animationStyle = kCAMediaTimingFunctionLinear
 
-        timerView.setProgress(value: CGFloat(30), animationDuration: 30.0) {
+        timerView.setProgress(value: CGFloat(timeDuration), animationDuration: TimeInterval(timeDuration)) {
             self.timerView.value = 0.0
             
             self.moveToError()
@@ -59,7 +69,7 @@ class TimerViewController: UIViewController {
         print(IBeaconBroadcaster.sharedInstance.startBeacon())
         
        
-        let delay = 30.0 * Double(NSEC_PER_SEC)
+        let delay = Double(timeDuration) * Double(NSEC_PER_SEC)
         let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: time, execute: {
             print(IBeaconBroadcaster.sharedInstance.stopBeacon())

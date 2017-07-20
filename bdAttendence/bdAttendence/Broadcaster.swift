@@ -136,7 +136,10 @@ open class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
         } else {
             
             // Set up a beacon region with the UUID, Major and Minor values
-            let region = CLBeaconRegion(proximityUUID:beaconUUID! as UUID, major:withMajor.uint16Value, minor:withMinor.uint16Value, identifier:appIdentifier)
+            let region = CLBeaconRegion(proximityUUID: beaconUUID! as UUID, major: CLBeaconMajorValue(withMajor), minor: CLBeaconMinorValue(withMinor), identifier: appIdentifier)
+                
+                
+               // CLBeaconRegion(proximityUUID:beaconUUID! as UUID, major:withMajor.uint16Value, minor:withMinor.uint16Value, identifier:appIdentifier)
             
             // Attempt to set up a peripheral with the measured power
             let peripheralData : NSMutableDictionary? = region.peripheralData(withMeasuredPower: (withPower.intValue == 127) ? nil : withPower)
@@ -146,11 +149,11 @@ open class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
             if (peripheralData != nil) {
                 
                 // let's first convert NSMutableDicitionary to swift Dictionary
-                var swiftDict : Dictionary<String,AnyObject?> = Dictionary<String,AnyObject!>()
+                var swiftDict : Dictionary<String,Any> = Dictionary<String,Any>()
                 for key : Any in peripheralData!.allKeys {
                     let stringKey = key as! String
                     if let keyValue = peripheralData!.value(forKey: stringKey){
-                        swiftDict[stringKey] = keyValue as AnyObject??
+                        swiftDict[stringKey] = keyValue
                     }
                 }
                 
@@ -216,10 +219,10 @@ open class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
             
             if (peripheral.isAdvertising != shouldBroadcast) {
                 
-                let notificationPayload = ["broadcastStatus" : shouldBroadcast]
+                //let notificationPayload = ["broadcastStatus" : shouldBroadcast]
                 
                 if (shouldBroadcast == true) {
-                       startBeacon()
+                     _  =  startBeacon()
                     
                     //NotificationCenter.defaultCenter.postNotificationName("iBeaconBroadcastStatus", object: nil, userInfo: notificationPayload)
                 } else {

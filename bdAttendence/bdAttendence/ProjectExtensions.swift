@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-   // Swift.print(items[0], separator:separator, terminator: terminator)
+    //Swift.print(items[0], separator:separator, terminator: terminator)
 }
 
 
@@ -68,48 +68,6 @@ public extension DispatchQueue {
     }
 }
 
-enum NotificationType:String{
-    case NewAssignment = "New-Assignment"
-    case Welcome = "Welcome-Message"
-    case UpdatedAssignment = "Updated-Assignment"
-    case FirstCheckin
-    case NoCheckin
-    case testNotification
-    
-}
-
-enum LocalNotifcation:String{
-    case Profile = "MyProfile"
-    case Assignment = "MyAssignments"
-    case VirtualBeacon = "VirtualBeacon"
-    case Pushreceived = "Pushreceived"
-    case NewAssignment = "NewAssignment"
-    case Draft = "Draft"
-    case BaseAnalytics
-    case Attendance
-    case Background
-    case TimeUpdate
-    case LocationUpdate
-    case FirstBeaconCheckin
-    case Dashboard
-    case SystemDetail
-    case CheckoutScreen
-    case CheckinScreen
-    case DayCheckinScreen
-}
-enum ErrorMessage:String{
-    case UserNotFound = "User not found with that phone number in system,Please contact your administrator"
-    case InternalServer = "We are facing some internal issue please try again after sometime"
-    case NotValidData = "Input you send is not valid"
-    case emailError = "Please enter the valid email"
-    case FECodeError = "Please enter the mobile number"
-    case NetError = "Could not connect to internet please try again."
-    case InvalidFECode = "Please enter valid mobile  number"
-    case InvalidOtp = "Please enter valid otpcode"
-}
-enum NotificationMessage:String{
-    case AttendanceMarked  = "We've marked you present for today. Have a wonderful day! "
-}
 
 
 extension String {

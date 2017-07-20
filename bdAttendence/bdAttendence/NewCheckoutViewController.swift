@@ -10,12 +10,6 @@ import UIKit
 import RealmSwift
 import BluedolphinCloudSdk
 
-let CHECK_IN_DURATION_TOLERANCE:Double = 30 * 60
-let VALID_CHECKIN_DURATION :Double = 5*60
-let officeStartHour = 9
-let officeStartMin = 0
-let officeEndHour = 21
-let officeEndMin = 0
 
 //extension Date {
 //

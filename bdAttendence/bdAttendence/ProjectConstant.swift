@@ -9,8 +9,64 @@
 import Foundation
 import UIKit
 
-let APPVERSION = "1.2.2"
+let APPVERSION = "1.2.4"
 let appIdentifier = "com.raremedia.bdAttendence"
+
+let CHECK_IN_DURATION_TOLERANCE:Double = 30 * 60
+let VALID_CHECKIN_DURATION :Double = 5*60
+let officeStartHour = 9
+let officeStartMin = 0
+let officeEndHour = 21
+let officeEndMin = 0
+
+
+
+enum NotificationType:String{
+    case NewAssignment = "New-Assignment"
+    case Welcome = "Welcome-Message"
+    case UpdatedAssignment = "Updated-Assignment"
+    case FirstCheckin
+    case NoCheckin
+    case testNotification
+    case AttendanceMarked
+    
+}
+enum ProjectUserDefaultsKeys:String{
+    case startDayTime
+}
+enum LocalNotifcation:String{
+    case Profile = "MyProfile"
+    case Assignment = "MyAssignments"
+    case VirtualBeacon = "VirtualBeacon"
+    case Pushreceived = "Pushreceived"
+    case NewAssignment = "NewAssignment"
+    case Draft = "Draft"
+    case BaseAnalytics
+    case Attendance
+    case Background
+    case TimeUpdate
+    case LocationUpdate
+    case FirstBeaconCheckin
+    case Dashboard
+    case SystemDetail
+    case CheckoutScreen
+    case CheckinScreen
+    case DayCheckinScreen
+}
+enum ErrorMessage:String{
+    case UserNotFound = "User not found with that phone number in system,Please contact your administrator"
+    case InternalServer = "We are facing some internal issue please try again after sometime"
+    case NotValidData = "Input you send is not valid"
+    case emailError = "Please enter the valid email"
+    case FECodeError = "Please enter the mobile number"
+    case NetError = "Could not connect to internet please try again."
+    case InvalidFECode = "Please enter valid mobile  number"
+    case InvalidOtp = "Please enter valid otpcode"
+}
+enum NotificationMessage:String{
+    case AttendanceMarked  = "We've marked you present for today. Have a wonderful day! "
+}
+
 
 struct APPFONT {
 //   static var regular = UIFont(name: "SourceSansPro-Regular", size: 15.0)

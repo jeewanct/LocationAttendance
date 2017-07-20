@@ -16,11 +16,11 @@ class ErrorViewController: UIViewController {
         super.viewDidLoad()
         errorLabel.textAlignment = .center
         errorLabel.text = "Your session has timed out!"
-        errorLabel.font = APPFONT.PERMISSIONBODY
+        errorLabel.font = APPFONT.BODYTEXT
         self.transmitButton.layer.cornerRadius = 15.0
         self.transmitButton.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         self.transmitButton.clipsToBounds = true
-        self.transmitButton.titleLabel?.font = APPFONT.OTPACTION
+        self.transmitButton.titleLabel?.font = APPFONT.FOOTERBODY
         self.transmitButton.tintColor = UIColor.white
         self.transmitButton.addTarget(self, action: #selector(transmitButtonAction), for: UIControlEvents.touchUpInside)
         // Do any additional setup after loading the view.

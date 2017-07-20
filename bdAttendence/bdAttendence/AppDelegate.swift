@@ -156,17 +156,22 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             
         } else {
             let result: NSDictionary = userInfo as NSDictionary
-            let type:NotificationType = NotificationType(rawValue: result ["notificationType"] as! String)!
+            let type =  result ["notificationType"] as! String
             switch type {
-            case .Welcome:
+            case NotificationType.Welcome.rawValue:
                 break
-            case .NewAssignment,.FirstCheckin:
+            case NotificationType.NewAssignment.rawValue , NotificationType.FirstCheckin.rawValue:
                 //self.showLocalNotification(userInfo)
                 break
                 //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
-            case .UpdatedAssignment,.NoCheckin,.testNotification:
+            case NotificationType.UpdatedAssignment.rawValue,NotificationType.NoCheckin.rawValue,NotificationType.testNotification.rawValue:
         
                 break;
+            case NotificationType.AttendanceMarked.rawValue:
+                break
+                
+            default:
+                break
                 
             
                 
