@@ -134,7 +134,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="128.5" y="218" width="119" height="19"/>
+                                <rect key="frame" x="128" y="218" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -154,7 +154,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="225" y="345.5" width="77" height="30"/>
+                                <rect key="frame" x="225" y="346" width="77" height="30"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.97669434420000001" green="1" blue="0.43377791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -820,6 +820,78 @@
             </objects>
             <point key="canvasLocation" x="252" y="1281.4092953523239"/>
         </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="k6M-mW-hna">
+            <objects>
+                <viewController id="Xi6-oo-Utl" customClass="SplashViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cfB-Ic-0jV"/>
+                        <viewControllerLayoutGuide type="bottom" id="aY3-oc-cqh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ioO-TB-YBh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ih6-ij-8zE">
+                                <rect key="frame" x="40" y="567" width="295" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ElM-ig-rHD"/>
+                                </constraints>
+                                <state key="normal" title="Login"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ii5-ek-hW1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="517"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash visual" translatesAutoresizingMaskIntoConstraints="NO" id="YsX-ux-XPY">
+                                        <rect key="frame" x="43.5" y="120" width="288" height="277"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38d-Ui-Pc0">
+                                        <rect key="frame" x="166" y="420" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhY-tn-Aap">
+                                        <rect key="frame" x="23" y="451" width="329" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="hhY-tn-Aap" secondAttribute="trailing" constant="23" id="0qv-hL-7ud"/>
+                                    <constraint firstItem="YsX-ux-XPY" firstAttribute="centerX" secondItem="Ii5-ek-hW1" secondAttribute="centerX" id="71h-gi-ifD"/>
+                                    <constraint firstItem="38d-Ui-Pc0" firstAttribute="top" secondItem="YsX-ux-XPY" secondAttribute="bottom" constant="23" id="NRn-Y6-ANJ"/>
+                                    <constraint firstItem="hhY-tn-Aap" firstAttribute="leading" secondItem="Ii5-ek-hW1" secondAttribute="leading" constant="23" id="W68-UV-GBk"/>
+                                    <constraint firstItem="hhY-tn-Aap" firstAttribute="top" secondItem="38d-Ui-Pc0" secondAttribute="bottom" constant="10" id="ZWl-Ga-lnE"/>
+                                    <constraint firstItem="YsX-ux-XPY" firstAttribute="centerY" secondItem="Ii5-ek-hW1" secondAttribute="centerY" id="vjF-0V-fGk"/>
+                                    <constraint firstItem="38d-Ui-Pc0" firstAttribute="centerX" secondItem="YsX-ux-XPY" secondAttribute="centerX" id="wcl-tb-Nn1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ii5-ek-hW1" firstAttribute="leading" secondItem="ioO-TB-YBh" secondAttribute="leading" id="5Oz-xk-9Jm"/>
+                            <constraint firstItem="aY3-oc-cqh" firstAttribute="top" secondItem="Ih6-ij-8zE" secondAttribute="bottom" constant="50" id="8Jd-Sd-eeE"/>
+                            <constraint firstItem="Ih6-ij-8zE" firstAttribute="top" secondItem="Ii5-ek-hW1" secondAttribute="bottom" constant="50" id="CV2-XN-x6f"/>
+                            <constraint firstAttribute="trailing" secondItem="Ii5-ek-hW1" secondAttribute="trailing" id="CzK-A1-e5g"/>
+                            <constraint firstItem="Ih6-ij-8zE" firstAttribute="leading" secondItem="ioO-TB-YBh" secondAttribute="leading" constant="40" id="VHx-13-w5l"/>
+                            <constraint firstAttribute="trailing" secondItem="Ih6-ij-8zE" secondAttribute="trailing" constant="40" id="fJ5-Ga-DdZ"/>
+                            <constraint firstItem="Ii5-ek-hW1" firstAttribute="top" secondItem="ioO-TB-YBh" secondAttribute="top" id="uGs-0e-e7R"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="aboutLabel" destination="hhY-tn-Aap" id="qED-Pd-BKr"/>
+                        <outlet property="backgroundView" destination="Ii5-ek-hW1" id="L5l-SF-2Sa"/>
+                        <outlet property="loginButton" destination="Ih6-ij-8zE" id="Pjp-sh-q6a"/>
+                        <outlet property="welcomeLabel" destination="38d-Ui-Pc0" id="SUg-cN-u1N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRQ-He-vUQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1632.8" y="-4.0479760119940034"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="I4C-5l-vUt">
             <objects>
@@ -1449,6 +1521,7 @@ mark your presence at your workplace</string>
         <image name="logo" width="35" height="36"/>
         <image name="profile" width="75" height="75"/>
         <image name="quote" width="21" height="19"/>
+        <image name="splash visual" width="288" height="277"/>
         <image name="success" width="74" height="74"/>
         <image name="swipe_up" width="48" height="42"/>
         <image name="unquote" width="21" height="19"/>

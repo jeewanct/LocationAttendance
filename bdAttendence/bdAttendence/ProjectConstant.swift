@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 
-let APPVERSION = "1.2.4"
+let APPVERSION = "1.2.5"
 let appIdentifier = "com.raremedia.bdAttendence"
+
 
 let CHECK_IN_DURATION_TOLERANCE:Double = 30 * 60
 let VALID_CHECKIN_DURATION :Double = 5*60

@@ -140,10 +140,13 @@ extension SuperViewController{
         if isInternetAvailable() {
            //self.showLoader()
             BlueDolphinManager.manager.updateToken()
-            BlueDolphinManager.manager.getNearByBeacons()
+            BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
+                BlueDolphinManager.manager.startScanning()
+            })
+            
         }
         
-        BlueDolphinManager.manager.startScanning()
+        //BlueDolphinManager.manager.startScanning()
        
         //NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         
@@ -237,22 +240,7 @@ extension SuperViewController{
         
         
     }
-    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
-        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
-    func timeText(_ s: Int) -> String {
-        return s < 10 ? "0\(s)" : "\(s)"
-    }
-    func showLoader(text:String = "Updating your details" ){
-        AlertView.sharedInstance.setLabelText(text)
-        AlertView.sharedInstance.showActivityIndicator(self.view)
-        let delay = 3.0 * Double(NSEC_PER_SEC)
-        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: time, execute: {
-            AlertView.sharedInstance.hideActivityIndicator(self.view)
-            BlueDolphinManager.manager.startScanning()
-        })
-    }
+    
     
     
     func showAlert(_ message : String) {

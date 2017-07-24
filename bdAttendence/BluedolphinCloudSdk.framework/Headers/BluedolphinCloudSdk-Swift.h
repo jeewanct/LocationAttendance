@@ -202,7 +202,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BlueDolphinM
 - (void)setConfigWithSecretKey:(NSString * _Nonnull)secretKey organizationId:(NSString * _Nonnull)organizationId;
 - (void)authorizeUserWithEmail:(NSString * _Nonnull)email firstName:(NSString * _Nonnull)firstName lastName:(NSString * _Nonnull)lastName metaInfo:(NSDictionary * _Nonnull)metaInfo;
 - (void)postTransientCheckinWithMetaInfo:(NSDictionary<NSString *, id> * _Nonnull)metaInfo;
-- (void)getNearByBeacons;
 - (void)startScanning;
 - (void)updateToken;
 - (void)stopScanning;

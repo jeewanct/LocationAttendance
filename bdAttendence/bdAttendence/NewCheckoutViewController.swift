@@ -126,7 +126,7 @@ class NewCheckoutViewController: UIViewController {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:
                 UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                //BlueDolphinManager.manager.stopScanning()
+                BlueDolphinManager.manager.stopScanning()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
             case UISwipeGestureRecognizerDirection.left:
                 if pageControl.currentPage < dataArray.count {
@@ -184,6 +184,7 @@ class NewCheckoutViewController: UIViewController {
         // submit a task to the queue for background execution
         queue.async() {
             let object = UserDayData.getFrequencyBarData(date:date)
+            print(object)
             DispatchQueue.main.async() {
                 let totalTime = object.getElapsedTime()!
                 self.progressView.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
@@ -202,7 +203,7 @@ class NewCheckoutViewController: UIViewController {
                 self.startTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
                 self.endTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
                 if let lastCheckinTime = object.getLastCheckinTime() {
-                    self.lastCheckinLabel.text = "Last system check-in sent at \(self.currentTime(time: lastCheckinTime)) "
+                    self.lastCheckinLabel.text = "You were last seen at \(self.currentTime(time: lastCheckinTime)) "
                 }else{
                     self.lastCheckinLabel.text = ""
                 }
