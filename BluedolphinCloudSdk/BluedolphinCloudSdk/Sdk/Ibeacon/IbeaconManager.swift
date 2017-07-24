@@ -27,8 +27,7 @@ public enum iBeaconNotifications:String{
  class IBeaconManager: NSObject, CLLocationManagerDelegate {
     
     let locationManager:CLLocationManager = CLLocationManager()
-    //    private var beacons = [iBeacon]() // Currently unused
-    /**Storing reference to registered regions*/
+    
     fileprivate var regions = [CLBeaconRegion]()
     
     open var stateCallback:((_ beacon:iBeacon)->Void)?
@@ -198,16 +197,17 @@ public enum iBeaconNotifications:String{
     
     /**Starts monitoring beacons*/
     func startMonitoring(){
+        locationManager.startUpdatingLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.distanceFilter  = 100 // Must move at least 3km
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.startUpdatingLocation()
+       
         
         
         for beaconRegion in regions{
             locationManager.startMonitoring(for: beaconRegion)
-            //locationManager.startRangingBeacons(in: beaconRegion)
+            locationManager.startRangingBeacons(in: beaconRegion)
             //FIXME: check if needed [self.locationManager performSelector:@selector(requestStateForRegion:) withObject:beaconRegion afterDelay:1];
             //FIXME: added more validation for the ibeacons permission matrix
         
@@ -219,9 +219,9 @@ public enum iBeaconNotifications:String{
     open func stopMonitoring(){
         for beaconRegion in regions{
             locationManager.stopMonitoring(for: beaconRegion)
-            //locationManager.stopRangingBeacons(in: beaconRegion)
+            locationManager.stopRangingBeacons(in: beaconRegion)
         }
-        //locationManager.stopUpdatingLocation()
+         //locationManager.stopUpdatingLocation()
     }
     
     

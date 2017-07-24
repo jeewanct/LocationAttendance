@@ -22,7 +22,7 @@ public enum BeaconScanning:String{
     }
     
     
-  public  func getHeader()->[String:String]{
+  public class func getHeader()->[String:String]{
         let headers = [
             "Content-Type":"application/json",
             "Accept-Encoding":"application/gzip",
@@ -34,7 +34,7 @@ public enum BeaconScanning:String{
         return headers
     }
     
-   public func getNearByBeacons(completion: @escaping (_ result: BeaconScanning) -> Void){
+   public class func getNearByBeacons(completion: @escaping (_ result: BeaconScanning) -> Void){
         let url = VicinityManager.url() + "/beacon"
     //?vicinity=\(CurrentLocation.coordinate.latitude),\(CurrentLocation.coordinate.longitude)&maxDistance=2000"
         print(url)
@@ -70,7 +70,7 @@ public enum BeaconScanning:String{
         }
     }
     
-   public func saveBeacons(data:NSDictionary){
+   public class func saveBeacons(data:NSDictionary){
         let vicintyBeacon = VicinityBeacon()
         if let beaconData = data["beaconData"] as? NSDictionary {
             if let beaconlocation = beaconData["location"] as? NSDictionary{
@@ -133,14 +133,14 @@ public enum BeaconScanning:String{
     }
     
     
-    func deleteBeacons(){
+    class func  deleteBeacons(){
         let realm = try! Realm()
         let beacons = realm.objects(VicinityBeacon.self)
         try! realm.write {
             realm.delete(beacons)
         }
     }
-      func fetchBeaconsFromDb(uuid:String="") ->Results<VicinityBeacon>{
+     public class func  fetchBeaconsFromDb(uuid:String="") ->Results<VicinityBeacon>{
         let realm = try! Realm()
         var beacons = realm.objects(VicinityBeacon.self)
         if !uuid.isBlank{

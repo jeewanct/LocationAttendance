@@ -93,18 +93,18 @@ open class BlueDolphinManager:NSObject {
         }
     }
     
-    public func getNearByBeacons(){
-        let vicinityManager = VicinityManager()
+    public func getNearByBeacons(completion: @escaping (_ result: BeaconScanning) -> Void){
         if isInternetAvailable() {
-            vicinityManager.getNearByBeacons { (value) in
-                switch value {
-                case .StartScanning:
-                    
-                    self.startScanning()
-                case .Failure,.NoScanning:
-                    break;
-                    
-                }
+            VicinityManager.getNearByBeacons { (value) in
+//                switch value {
+//                case .StartScanning:
+//                    
+//                    self.startScanning()
+//                case .Failure,.NoScanning:
+//                    break;
+//                    
+//                }
+                completion(value)
             }
         }
         
@@ -114,9 +114,8 @@ open class BlueDolphinManager:NSObject {
     public func startScanning(){
         
         var beaconArray = [iBeacon]()
-        let vicinityManager = VicinityManager()
         
-        let beaconsData = vicinityManager.fetchBeaconsFromDb()
+        let beaconsData = VicinityManager.fetchBeaconsFromDb()
         for beaconObject in beaconsData{
             let ibeacon =
                 iBeacon(minor: beaconObject.minor, major: beaconObject.major, proximityId: beaconObject.uuid!, id: beaconObject.beaconId!)
