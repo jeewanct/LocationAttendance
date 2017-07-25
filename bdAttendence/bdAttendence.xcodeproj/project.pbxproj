@@ -33,6 +33,8 @@
 		9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */; };
 		999D300B1F17A57F0073AEEA /* MyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */; };
 		99B936911EC98706008E12C4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B936901EC98706008E12C4 /* CardView.swift */; };
+		99BC35021F27285E00A59A4A /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC35001F27285600A59A4A /* BluedolphinCloudSdk.framework */; };
+		99BC35031F27285E00A59A4A /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC35001F27285600A59A4A /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39A11EA49B7100B6942B /* AppDelegate.swift */; };
 		99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39A31EA49B7100B6942B /* ViewController.swift */; };
 		99BD39A91EA49B7100B6942B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99BD39A81EA49B7100B6942B /* Assets.xcassets */; };
@@ -49,8 +51,6 @@
 		99E369CD1F1CC4A5000A642C /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */; };
 		99E369CF1F1DFE99000A642C /* WorkHourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CE1F1DFE99000A642C /* WorkHourViewController.swift */; };
 		99F2177A1F20A833002A0E5C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F217791F20A833002A0E5C /* SplashViewController.swift */; };
-		99F2179C1F220D8F002A0E5C /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F2179A1F220D86002A0E5C /* BluedolphinCloudSdk.framework */; };
-		99F2179D1F220D8F002A0E5C /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99F2179A1F220D86002A0E5C /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E641F1607B100FA8A9E /* ProgressBar.swift */; };
 		99FB1E671F1607B100FA8A9E /* ProjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */; };
 		99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */; };
@@ -83,7 +83,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99F2179D1F220D8F002A0E5C /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				99BC35031F27285E00A59A4A /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,6 +121,7 @@
 		9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSingleton.swift; sourceTree = "<group>"; };
 		999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardViewController.swift; sourceTree = "<group>"; };
 		99B936901EC98706008E12C4 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		99BC35001F27285600A59A4A /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		99BD399E1EA49B7100B6942B /* bdAttendence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bdAttendence.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BD39A11EA49B7100B6942B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99BD39A31EA49B7100B6942B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -144,7 +145,6 @@
 		99E369CE1F1DFE99000A642C /* WorkHourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkHourViewController.swift; sourceTree = "<group>"; };
 		99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bdAttendence.entitlements; sourceTree = "<group>"; };
 		99F217791F20A833002A0E5C /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		99F2179A1F220D86002A0E5C /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		99FB1E641F1607B100FA8A9E /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectExtensions.swift; sourceTree = "<group>"; };
 		99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99F2179C1F220D8F002A0E5C /* BluedolphinCloudSdk.framework in Frameworks */,
+				99BC35021F27285E00A59A4A /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,7 +214,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				99F2179A1F220D86002A0E5C /* BluedolphinCloudSdk.framework */,
+				99BC35001F27285600A59A4A /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,

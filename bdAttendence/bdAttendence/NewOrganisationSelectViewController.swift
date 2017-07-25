@@ -21,6 +21,9 @@ class NewOrganisationSelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
         collectionView.delegate = self
         collectionView.dataSource = self
         // Do any additional setup after loading the view.
