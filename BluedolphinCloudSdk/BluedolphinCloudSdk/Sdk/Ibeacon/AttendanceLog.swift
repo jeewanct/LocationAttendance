@@ -87,10 +87,11 @@ open class AttendanceLogModel {
                         realm.add(dayOfWeekData,update:true)
                     }
                 }else{
+                    
                     try! realm.write {
+                        realm.deleteObjectAndChilds(dayOfWeekData.beaconList)
                         let newbeaconList = List<BeaconData>()
                         let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
-                        dayOfWeekData.beaconList.removeAll()
                         newbeaconList.append(newBeaconData)
                         dayOfWeekData.beaconList = newbeaconList
                         dayOfWeekData.timeStamp = beconLastSeen

@@ -140,7 +140,8 @@ public func getUUIDString()->String{
                 }
                 
                 try! realm.write {
-                    realm.delete(checkin)
+                    realm.deleteObjectAndChilds(checkin)
+                    //realm.delete(checkin)
                 }
                 
             }

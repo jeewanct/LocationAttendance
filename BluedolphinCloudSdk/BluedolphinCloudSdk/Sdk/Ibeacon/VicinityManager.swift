@@ -16,6 +16,34 @@ public enum BeaconScanning:String{
   case Failure
 }
 
+extension Realm{
+    func deleteObjectAndChilds(_ entity: Any) {
+        let realm = try! Realm()
+        let mirror = Mirror(reflecting: entity)
+        
+        for property in mirror.children {
+            if let entity = property.value as? Object {
+                deleteObjectAndChilds(entity)
+            }
+            else if let list = property.value as? RealmSwift.ListBase {
+                while list.count > 0 {
+                    let item = list._rlmArray.firstObject()
+                    deleteObjectAndChilds(item as Any)
+                }
+            }
+        }
+        
+        // delete object
+        
+        if let realmEntity = entity as? Object {
+            if realmEntity.isInvalidated == false {
+                realm.delete(realmEntity)
+            }
+        }
+    }
+}
+
+
  class VicinityManager {
     internal static func url() -> String {
         return  APIURL + ModuleUrl.Organisation.rawValue + SDKSingleton.sharedInstance.organizationId 
@@ -136,8 +164,15 @@ public enum BeaconScanning:String{
     class func  deleteBeacons(){
         let realm = try! Realm()
         let beacons = realm.objects(VicinityBeacon.self)
+        
         try! realm.write {
-            realm.delete(beacons)
+            for beaconObject in beacons{
+              // realm.deleteObjectAndChilds(beaconObject)
+                realm.delete(beaconObject.location!)
+                realm.delete(beaconObject)
+            }
+            
+            //realm.delete(beacons)
         }
     }
      public class func  fetchBeaconsFromDb(uuid:String="") ->Results<VicinityBeacon>{
