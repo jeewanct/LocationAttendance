@@ -70,6 +70,7 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.SystemDetail.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: nil)
         
         
@@ -333,27 +334,27 @@ extension SuperViewController {
             destVc.view.frame = self.mainContainer.frame
             self.mainContainer.addSubview(destVc.view)
             destVc.didMove(toParentViewController: self)
-//        case LocalNotifcation.CheckoutScreen.rawValue:
-//            var lastController: AnyObject?
-//            
-//            if let controller =  self.childViewControllers.first as? UINavigationController {
-//                lastController = controller
-//            } else {
-//                lastController = self.childViewControllers.last as! UINavigationController
-//            }
-//            for views in self.mainContainer.subviews {
-//                views.removeFromSuperview()
-//            }
-//            lastController?.willMove(toParentViewController: nil)
-//            
-//            lastController?.removeFromParentViewController()
-//            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
-//            
-//            
-//            self.addChildViewController(destVc)
-//            destVc.view.frame = self.mainContainer.frame
-//            self.mainContainer.addSubview(destVc.view)
-//            destVc.didMove(toParentViewController: self)
+        case LocalNotifcation.ThisWeek.rawValue:
+            var lastController: AnyObject?
+            
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainer.subviews {
+                views.removeFromSuperview()
+            }
+            lastController?.willMove(toParentViewController: nil)
+            
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "history") as! UINavigationController
+            
+            
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainer.frame
+            self.mainContainer.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
             
           
     

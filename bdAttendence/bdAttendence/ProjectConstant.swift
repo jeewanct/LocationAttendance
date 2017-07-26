@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let APPVERSION = "1.2.5"
+let APPVERSION = "1.3.1"
 let appIdentifier = "com.raremedia.bdAttendence"
 
 
@@ -53,6 +53,7 @@ enum LocalNotifcation:String{
     case CheckoutScreen
     case CheckinScreen
     case DayCheckinScreen
+    case ThisWeek
 }
 enum ErrorMessage:String{
     case UserNotFound = "User not found with that phone number in system,Please contact your administrator"

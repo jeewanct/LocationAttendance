@@ -15,7 +15,7 @@ class SideMenuViewController: UIViewController  {
         @IBOutlet weak var sideMenuTable: UITableView!
         @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var userImageView: UIImageView!
-        var sideMenuOptionsArray =  ["My Dashboard","System Detail","Transmit"]
+        var sideMenuOptionsArray =  ["My Dashboard","System Detail","This Week","Transmit"]
 
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -113,6 +113,8 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
         case 1:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.SystemDetail.rawValue), object: self, userInfo: nil)
         case 2:
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: self, userInfo: nil)
+        case 3:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: self, userInfo: nil)
             break
         default:

@@ -35,6 +35,8 @@
 		99B936911EC98706008E12C4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B936901EC98706008E12C4 /* CardView.swift */; };
 		99BC35021F27285E00A59A4A /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC35001F27285600A59A4A /* BluedolphinCloudSdk.framework */; };
 		99BC35031F27285E00A59A4A /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC35001F27285600A59A4A /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		99BC35051F27448A00A59A4A /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BC35041F27448A00A59A4A /* HistoryViewController.swift */; };
+		99BC35071F275A8800A59A4A /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BC35061F275A8800A59A4A /* DayCollectionViewCell.swift */; };
 		99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39A11EA49B7100B6942B /* AppDelegate.swift */; };
 		99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD39A31EA49B7100B6942B /* ViewController.swift */; };
 		99BD39A91EA49B7100B6942B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99BD39A81EA49B7100B6942B /* Assets.xcassets */; };
@@ -51,6 +53,7 @@
 		99E369CD1F1CC4A5000A642C /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */; };
 		99E369CF1F1DFE99000A642C /* WorkHourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CE1F1DFE99000A642C /* WorkHourViewController.swift */; };
 		99F2177A1F20A833002A0E5C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F217791F20A833002A0E5C /* SplashViewController.swift */; };
+		99F84C161F2877D200D6AE44 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F84C151F2877D200D6AE44 /* CircleView.swift */; };
 		99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E641F1607B100FA8A9E /* ProgressBar.swift */; };
 		99FB1E671F1607B100FA8A9E /* ProjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */; };
 		99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */; };
@@ -122,6 +125,8 @@
 		999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardViewController.swift; sourceTree = "<group>"; };
 		99B936901EC98706008E12C4 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		99BC35001F27285600A59A4A /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		99BC35041F27448A00A59A4A /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		99BC35061F275A8800A59A4A /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
 		99BD399E1EA49B7100B6942B /* bdAttendence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bdAttendence.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BD39A11EA49B7100B6942B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99BD39A31EA49B7100B6942B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +150,7 @@
 		99E369CE1F1DFE99000A642C /* WorkHourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkHourViewController.swift; sourceTree = "<group>"; };
 		99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bdAttendence.entitlements; sourceTree = "<group>"; };
 		99F217791F20A833002A0E5C /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		99F84C151F2877D200D6AE44 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		99FB1E641F1607B100FA8A9E /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		99FB1E651F1607B100FA8A9E /* ProjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectExtensions.swift; sourceTree = "<group>"; };
 		99FCB0C71EFBC8980022AF61 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 		990CBCF41EFAA20200F56E38 /* NewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				99BC35041F27448A00A59A4A /* HistoryViewController.swift */,
 				99F217791F20A833002A0E5C /* SplashViewController.swift */,
 				99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */,
 				99E369CA1F1CB519000A642C /* TimerViewController.swift */,
@@ -303,6 +310,7 @@
 				99BD39CF1EA4A23800B6942B /* CustomButton.swift */,
 				997490281F0CD8A000AC92B9 /* UserDataModel.swift */,
 				996953201F13BC25000A6C26 /* Broadcaster.swift */,
+				99F84C151F2877D200D6AE44 /* CircleView.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -320,6 +328,7 @@
 		99FB1E631F15FDBD00FA8A9E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				99BC35061F275A8800A59A4A /* DayCollectionViewCell.swift */,
 				996953221F149A7A000A6C26 /* CheckinView.swift */,
 				996953241F149A92000A6C26 /* CheckinView.xib */,
 				996953281F14A125000A6C26 /* DayCheckinView.xib */,
@@ -666,6 +675,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99F84C161F2877D200D6AE44 /* CircleView.swift in Sources */,
 				99D6172E1EBA075800E7E05F /* OTPView.swift in Sources */,
 				99BD39E01EA5F83800B6942B /* CommonFunction.swift in Sources */,
 				990CBCF31EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift in Sources */,
@@ -681,8 +691,10 @@
 				990CBCEF1EFA47F700F56E38 /* NewLoginViewController.swift in Sources */,
 				990CBCF71EFAA40300F56E38 /* NewOtpViewController.swift in Sources */,
 				99B936911EC98706008E12C4 /* CardView.swift in Sources */,
+				99BC35051F27448A00A59A4A /* HistoryViewController.swift in Sources */,
 				99CA96F71F0A367A00E2813B /* DayCheckoutViewController.swift in Sources */,
 				99FB1E671F1607B100FA8A9E /* ProjectExtensions.swift in Sources */,
+				99BC35071F275A8800A59A4A /* DayCollectionViewCell.swift in Sources */,
 				99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */,
 				996953211F13BC25000A6C26 /* Broadcaster.swift in Sources */,
 				99BD39D01EA4A23800B6942B /* CustomButton.swift in Sources */,
