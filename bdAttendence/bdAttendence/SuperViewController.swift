@@ -30,7 +30,7 @@ class SuperViewController: UIViewController {
         menuLeadingSpace.constant = -sideMenuContainer.bounds.size.width
         
         self.navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.isStatusBarHidden = false
+        UIApplication.shared.isStatusBarHidden = true
         
         let leftSwipeOnTransparentView =  UISwipeGestureRecognizer(target: self, action: #selector(SuperViewController.handleSwipes(sender:)))
         let leftSwipeOnContainerView = UISwipeGestureRecognizer(target: self, action: #selector(SuperViewController.handleSwipes(sender:)))
@@ -39,7 +39,7 @@ class SuperViewController: UIViewController {
         
         sideMenuContainer.addGestureRecognizer(leftSwipeOnContainerView)
         blurView.addGestureRecognizer(leftSwipeOnTransparentView)
-        blurView.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        //blurView.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         
         if self.window != nil {
             self.window!.rootViewController = self
@@ -121,7 +121,7 @@ class SuperViewController: UIViewController {
         UIView.animate(withDuration: 0.5, animations: { () -> Void in
             
             self.view.layoutIfNeeded()
-            self.blurView.alpha = 1
+            self.blurView.alpha = 0.9
         }, completion: { (Bool) -> Void in
             
         })

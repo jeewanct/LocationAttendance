@@ -21,12 +21,13 @@ class SystemDetailViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sync"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(sync(sender:)))
-        self.navigationItem.title = "System Detail"
+        self.navigationItem.title = "System Details"
         systemTableview.delegate = self
         systemTableview.dataSource = self
         systemTableview.tableFooterView = UIView()
+        systemTableview.allowsSelection = false
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.lightGray
         refreshControl.addTarget(self, action: #selector(refresh(refreshControl:)), for: .valueChanged)

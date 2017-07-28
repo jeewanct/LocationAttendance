@@ -168,7 +168,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                 
                 break;
             case NotificationType.AttendanceMarked.rawValue:
-                break
+                pushAlertView(userInfo: result)
                 
             default:
                 break
@@ -224,6 +224,28 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
         }
         //}
+    }
+    
+    func pushAlertView(userInfo:NSDictionary) {
+        var alertMessage = ""
+        let result = userInfo ["aps"] as AnyObject
+        alertMessage = result["alert"]! as! String
+        
+        let alert2 = UIAlertController(title: "Message", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        //    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
+        //      //pushReceived = false
+        //
+        //    })
+        //    alert2.addAction(cancelAction)
+        alert2.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+            
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo as? [AnyHashable : Any])
+        }))
+        
+        
+        self.window?.rootViewController?.present(alert2, animated: true, completion: nil)
+        
     }
     
     

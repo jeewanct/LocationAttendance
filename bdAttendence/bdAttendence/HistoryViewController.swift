@@ -18,12 +18,13 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var progressBar: UICircularProgressRingView!
     var thisWeekDays = [Date]()
+    var currentDisplayDate = Date()
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationItem.title = Date().formattedWith(format: "MMMM yyyy")
         calenderView.delegate = self
         calenderView.dataSource = self
@@ -31,7 +32,7 @@ class HistoryViewController: UIViewController {
         self.endLabel.font = APPFONT.VERSIONTEXT
         getCalenderData()
         
-        
+       currentDisplayDate = Date().dayStart()!
 
         // Do any additional setup after loading the view.
     }
@@ -53,6 +54,13 @@ class HistoryViewController: UIViewController {
     
     
     
+    @IBAction func showTimeLineView(_ sender: Any) {
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "timeLine") as? UINavigationController
+        let topcontroller = controller?.topViewController as! TimeLineViewController
+        topcontroller.currentDate = self.currentDisplayDate
+        self.present(controller!, animated: true, completion: nil)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -65,7 +73,8 @@ class HistoryViewController: UIViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        if let index = thisWeekDays.index(of: Date().dayStart()!) {
+        if let index = thisWeekDays.index(of: currentDisplayDate) {
+            
             let indexPath = IndexPath(row: index, section: 0)
             self.collectionView(calenderView, didSelectItemAt: indexPath)
             
@@ -101,6 +110,12 @@ class HistoryViewController: UIViewController {
         
         // submit a task to the queue for background execution
         queue.async() {
+            let values = CheckinListModel.getDataFromDb(date: date)
+            print(values)
+            for value in values{
+                print(self.getDateInAMPM(date: Date(timeIntervalSince1970: value.getStartTime()!)))
+                print(self.getDateInAMPM(date: Date(timeIntervalSince1970: value.getEndTime()!)))
+            }
             let object = UserDayData.getFrequencyBarData(date:date)
             print(object)
             DispatchQueue.main.async() {
@@ -132,10 +147,13 @@ class HistoryViewController: UIViewController {
     }
     
     func getDateInAMPM(date:Date)->String{
+        print(date)
         let timeFormatter = DateFormatter()
-        timeFormatter.dateStyle = .none
-        timeFormatter.timeStyle = .short
+        //timeFormatter.dateStyle = .none
+        
+        timeFormatter.dateFormat = "hh:mm a"
         return timeFormatter.string(from:date)
+        
     }
     
     
@@ -217,6 +235,7 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         let currentData = thisWeekDays[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekCell", for: indexPath as IndexPath)  as! DayCollectionViewCell
         cell.cellLabel.text = currentData.formattedWith(format: "EEEEE")
+        cell.cellLabel.font = APPFONT.DAYCHAR
             
         cell.dateLabel.text = currentData.formattedWith(format: "d")
 //        cell.dateView.layer.cornerRadius = cell.dateLabel.frame.width / 2
@@ -244,6 +263,7 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         
         
         let currentData = thisWeekDays[indexPath.row]
+        currentDisplayDate = currentData
         updateView(date: currentData)
          self.applyForCell(indexPath) { cell in cell.highlight() }
 

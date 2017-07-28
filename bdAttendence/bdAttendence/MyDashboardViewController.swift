@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BluedolphinCloudSdk
 
 //protocol myDashboardDelegate :class{
 //    
@@ -105,6 +106,7 @@ class MyDashboardViewController: UIViewController {
     func updateView(sender:NSNotification){
           switch (sender.name.rawValue) {
           case LocalNotifcation.CheckoutScreen.rawValue:
+            BlueDolphinManager.manager.startScanning()
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
@@ -115,6 +117,7 @@ class MyDashboardViewController: UIViewController {
             
             
           case LocalNotifcation.DayCheckinScreen.rawValue:
+           BlueDolphinManager.manager.stopScanning()
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "dayCheckin") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: -containerView.frame.size.height)

@@ -39,7 +39,7 @@ class NewCheckoutViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         
         let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeleft.direction = .left
@@ -126,7 +126,7 @@ class NewCheckoutViewController: UIViewController {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:
                 UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                BlueDolphinManager.manager.stopScanning()
+                
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
             case UISwipeGestureRecognizerDirection.left:
                 if pageControl.currentPage < dataArray.count {
@@ -219,8 +219,9 @@ class NewCheckoutViewController: UIViewController {
     
     func getDateInAMPM(date:Date)->String{
         let timeFormatter = DateFormatter()
-        timeFormatter.dateStyle = .none
-        timeFormatter.timeStyle = .short
+        //timeFormatter.dateStyle = .none
+        timeFormatter.timeZone = TimeZone.current
+        timeFormatter.dateFormat = "hh:mm "
         return timeFormatter.string(from:date)
     }
     
