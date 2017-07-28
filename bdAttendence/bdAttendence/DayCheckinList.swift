@@ -152,7 +152,8 @@ class CheckinListModel{
         } else {
             // no data recorded for current day
         }
-        return  data.reversed()
+        return  data
+            //.reversed()
         
     }
     

@@ -218,11 +218,13 @@ class NewCheckoutViewController: UIViewController {
     }
     
     func getDateInAMPM(date:Date)->String{
+        print(date)
         let timeFormatter = DateFormatter()
         //timeFormatter.dateStyle = .none
-        timeFormatter.timeZone = TimeZone.current
-        timeFormatter.dateFormat = "hh:mm "
+        
+        timeFormatter.dateFormat = "hh:mm a"
         return timeFormatter.string(from:date)
+        
     }
     
     
