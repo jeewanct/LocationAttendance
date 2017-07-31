@@ -13,6 +13,7 @@ var AppVersion = "1.0"
 let deviceType = "ios"
 var CheckinInterVal = 300
 var CheckinGap = 1800
+var Debugging = true
 
 
 enum ModuleUrl :String{

@@ -33,7 +33,7 @@ public struct CurrentLocation {
             locationManager = CLLocationManager()
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-            locationManager.distanceFilter  = 100 // Must move at least 3km
+            locationManager.distanceFilter  = 100// Must move at least 3km
             locationManager.startMonitoringSignificantLocationChanges()
             locationManager.allowsBackgroundLocationUpdates = true
             locationManager.pausesLocationUpdatesAutomatically = true

@@ -221,7 +221,7 @@ public enum iBeaconNotifications:String{
             locationManager.stopMonitoring(for: beaconRegion)
             locationManager.stopRangingBeacons(in: beaconRegion)
         }
-         //locationManager.stopUpdatingLocation()
+         locationManager.stopUpdatingLocation()
     }
     
     

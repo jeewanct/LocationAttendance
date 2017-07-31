@@ -24,8 +24,8 @@ open class BlueDolphinManager:NSObject {
     
     public var seanbeacons = NSMutableDictionary()
     var beaconSentflag = true
-    let beaconManager = IBeaconManager()
-    let semaphore = DispatchSemaphore(value: 1)
+    
+    var beaconManager = IBeaconManager()
     
     public func initialize(secretKey:String?,organizationId:String?,email:String?,firstName:String?,lastName:String?,metaInfo:NSDictionary?) {
         
@@ -112,7 +112,7 @@ open class BlueDolphinManager:NSObject {
     
     
     public func startScanning(){
-        
+        //beaconManager = IBeaconManager()
         var beaconArray = [iBeacon]()
         
         let beaconsData = VicinityManager.fetchBeaconsFromDb()
