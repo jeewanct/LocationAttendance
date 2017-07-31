@@ -27,7 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         let appVersion = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         print(appVersion)
+        
         setAppVersion(appVersion: APPVERSION)
+        stopDebugging(flag: true)
+        setCheckinInteral(val: 600)
         //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
         Fabric.with([Crashlytics.self])
@@ -37,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerForRemoteNotification()
         updateRealmConfiguration()
         startUpTask()
+        
         
         
         // Override point for customization after application launch.

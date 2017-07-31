@@ -10,6 +10,7 @@ import UIKit
 
 class HistoryViewController: UIViewController {
 
+    @IBOutlet weak var swipeUpButton: UIButton!
     @IBOutlet weak var calenderView: UICollectionView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var endLabel: UILabel!
@@ -110,16 +111,14 @@ class HistoryViewController: UIViewController {
         
         // submit a task to the queue for background execution
         queue.async() {
-            let values = CheckinListModel.getDataFromDb(date: date)
-            print(values)
-            for value in values{
-                print(self.getDateInAMPM(date: Date(timeIntervalSince1970: value.getStartTime()!)))
-                print(self.getDateInAMPM(date: Date(timeIntervalSince1970: value.getEndTime()!)))
-            }
-            let object = UserDayData.getFrequencyBarData(date:date)
-            print(object)
+          let object = UserDayData.getFrequencyBarData(date:date)
             DispatchQueue.main.async() {
                 let totalTime = object.getElapsedTime()!
+                if totalTime == 0{
+                    self.swipeUpButton.isHidden = true
+                }else{
+                    self.swipeUpButton.isHidden = false
+                }
                 self.progressBar.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
                     
                 }
@@ -139,6 +138,7 @@ class HistoryViewController: UIViewController {
                 self.addressLabel.text = object.getLastCheckInAddress()
                 self.updateFrequencyBar(mData: object)
             }
+            
         }
         
         

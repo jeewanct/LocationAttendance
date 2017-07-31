@@ -70,8 +70,8 @@ extension TimeLineViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "timeLineCell", for: indexPath as IndexPath) as! TimeLineTableViewCell
         let currentData = timeLineData[indexPath.row]
-        cell.timeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970:  currentData.getStartTime()!))  + "-" +  self.getDateInAMPM(date: Date(timeIntervalSince1970:  currentData.getEndTime()!))
-        cell.timeLabel.font = APPFONT.HELPTEXTBUTTON
+        cell.timeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970:  currentData.getStartTime()!))  +  " - " +  self.getDateInAMPM(date: Date(timeIntervalSince1970:  currentData.getEndTime()!))
+        cell.timeLabel.font = APPFONT.HELPTEXT
         cell.beaconLabel.text = "Beacon Location"
         cell.beaconLabel.font = APPFONT.OTPACTION
         let distictBeacon = currentData.getDistinctBeacons()

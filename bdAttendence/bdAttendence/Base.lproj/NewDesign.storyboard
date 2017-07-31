@@ -134,7 +134,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="128" y="218" width="119" height="19"/>
+                                <rect key="frame" x="128.5" y="218" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -154,7 +154,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="225" y="346" width="77" height="30"/>
+                                <rect key="frame" x="225" y="345.5" width="77" height="30"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.97669434420000001" green="1" blue="0.43377791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1311,15 +1311,15 @@ mark your presence at your workplace</string>
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFi-i9-sFo">
-                                        <rect key="frame" x="15" y="25" width="320" height="0.0"/>
+                                        <rect key="frame" x="15" y="25" width="297" height="0.0"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvp-Mx-7h8">
-                                        <rect key="frame" x="340" y="0.0" width="35" height="50"/>
+                                        <rect key="frame" x="312" y="0.0" width="63" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="GQu-cb-aSY"/>
+                                            <constraint firstAttribute="width" constant="63" id="GQu-cb-aSY"/>
                                         </constraints>
                                         <state key="normal" image="swipe_up_two"/>
                                         <connections>
@@ -1331,7 +1331,7 @@ mark your presence at your workplace</string>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Uvp-Mx-7h8" secondAttribute="trailing" id="HGe-jX-CZG"/>
                                     <constraint firstItem="sFi-i9-sFo" firstAttribute="leading" secondItem="h81-3A-3Ot" secondAttribute="leading" constant="15" id="K1V-de-Ym5"/>
-                                    <constraint firstItem="Uvp-Mx-7h8" firstAttribute="leading" secondItem="sFi-i9-sFo" secondAttribute="trailing" constant="5" id="SiY-7X-sdb"/>
+                                    <constraint firstItem="Uvp-Mx-7h8" firstAttribute="leading" secondItem="sFi-i9-sFo" secondAttribute="trailing" id="SiY-7X-sdb"/>
                                     <constraint firstItem="Uvp-Mx-7h8" firstAttribute="top" secondItem="h81-3A-3Ot" secondAttribute="top" id="aJy-F7-8Nv"/>
                                     <constraint firstAttribute="bottom" secondItem="Uvp-Mx-7h8" secondAttribute="bottom" id="aWF-lJ-VKd"/>
                                     <constraint firstAttribute="height" constant="50" id="iDt-FX-9XS"/>
@@ -1382,6 +1382,7 @@ mark your presence at your workplace</string>
                         <outlet property="endLabel" destination="9JT-gB-fjH" id="XMH-ef-Izl"/>
                         <outlet property="progressBar" destination="9tj-tx-qSk" id="Unu-dc-9a0"/>
                         <outlet property="startLabel" destination="n2g-Jo-5yq" id="iFd-oD-skV"/>
+                        <outlet property="swipeUpButton" destination="Uvp-Mx-7h8" id="2Da-Do-CgA"/>
                         <outlet property="timeLabel" destination="j3B-1J-Rjf" id="Mb4-wD-1rf"/>
                     </connections>
                 </viewController>

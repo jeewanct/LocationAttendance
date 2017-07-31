@@ -60,7 +60,6 @@ class CheckinListData :NSObject{
 class CheckinListModel{
     class func getDataFromDb( date:Date)->[CheckinListData] {
         var data = [CheckinListData]();
-        var calendar = Calendar.current;
         let realm = try! Realm()
         let weekDay = Calendar.current.component(.weekday, from: date)
         let weekOfYear = Calendar.current.component(.weekOfYear, from: date)
@@ -152,8 +151,7 @@ class CheckinListModel{
         } else {
             // no data recorded for current day
         }
-        return  data
-            //.reversed()
+        return  data.reversed()
         
     }
     

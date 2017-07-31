@@ -142,7 +142,12 @@ extension SuperViewController{
            //self.showLoader()
             BlueDolphinManager.manager.updateToken()
             BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
-                BlueDolphinManager.manager.startScanning()
+            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+                if screenFlag == "1"{
+                    BlueDolphinManager.manager.startScanning()
+                }
+                
+                }
             })
             
         }

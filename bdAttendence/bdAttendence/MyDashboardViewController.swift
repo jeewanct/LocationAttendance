@@ -117,7 +117,7 @@ class MyDashboardViewController: UIViewController {
             
             
           case LocalNotifcation.DayCheckinScreen.rawValue:
-           BlueDolphinManager.manager.stopScanning()
+           //BlueDolphinManager.manager.stopScanning()
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "dayCheckin") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: -containerView.frame.size.height)

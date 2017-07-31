@@ -41,13 +41,13 @@ class NewCheckoutViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         
-        let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
-        swipeleft.direction = .left
-        let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
-        swiperight.direction = .right
-        
-        self.view.addGestureRecognizer(swipeleft)
-        self.view.addGestureRecognizer(swiperight)
+//        let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+//        swipeleft.direction = .left
+//        let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+//        swiperight.direction = .right
+//        
+//        self.view.addGestureRecognizer(swipeleft)
+//        self.view.addGestureRecognizer(swiperight)
         
         let image: UIImage = UIImage(named: "swipe_up")!
         let imageRotated: UIImage =
@@ -68,80 +68,85 @@ class NewCheckoutViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        processCurrentWeek()
-        if  pageControl.currentPage < dataArray.count {
-            let value = dataArray[pageControl.currentPage]
-            updateView(date: value)
-        }
+        updateView()
+//        processCurrentWeek()
+//        if  pageControl.currentPage < dataArray.count {
+//            let value = dataArray[pageControl.currentPage]
+//            updateView(date: value)
+//        }
         
     }
     
     
     func updateTime(sender:NSNotification){
-        processCurrentWeek()
-        if  pageControl.currentPage < dataArray.count {
-            let value = dataArray[pageControl.currentPage]
-            updateView(date: value)
-        }
+        updateView()
+        
+        
+        //processCurrentWeek()
+        
+//        if  pageControl.currentPage < dataArray.count {
+//            let value = dataArray[pageControl.currentPage]
+//            updateView(date: value)
+//        }
         
         
     }
-    func processCurrentWeek(){
-        dataArray = []
-        let realm = try! Realm()
-        guard  let firstdateofWeek = Date().startOfWeek() else {
-            return
-        }
-        let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("timeStamp >= %@",firstdateofWeek).sorted(byProperty: "timeStamp", ascending: true)
-        
-        let totalCount = attendanceLogForToday.count
-        if totalCount != 0{
-            pageControl.numberOfPages = totalCount
-        }
-        
-        for attendance in attendanceLogForToday{
-            dataArray.append(attendance.timeStamp!)
-        }
-        pageControl.currentPage = totalCount
-        //print(attendanceLogForToday.count)
-        
-        
-    }
-    @IBAction func pageControlAction(_ sender: UIPageControl) {
-        if dataArray.count > pageControl.currentPage{
-            let date = dataArray[pageControl.currentPage]
-            updateView(date: date)
-        }
-        
-    }
+//    func processCurrentWeek(){
+//        dataArray = []
+//        let realm = try! Realm()
+//        guard  let firstdateofWeek = Date().startOfWeek() else {
+//            return
+//        }
+//        let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("timeStamp >= %@",firstdateofWeek).sorted(byProperty: "timeStamp", ascending: true)
+//        
+//        let totalCount = attendanceLogForToday.count
+//        if totalCount != 0{
+//            pageControl.numberOfPages = totalCount
+//        }
+//        
+//        for attendance in attendanceLogForToday{
+//            dataArray.append(attendance.timeStamp!)
+//        }
+//        pageControl.currentPage = totalCount
+//        //print(attendanceLogForToday.count)
+//        
+//        
+//    }
+//    @IBAction func pageControlAction(_ sender: UIPageControl) {
+//        if dataArray.count > pageControl.currentPage{
+//            let date = dataArray[pageControl.currentPage]
+//            updateView(date: date)
+//        }
+//        
+//    }
     
     //    func pageChanged(sender:UIPageControl){
     //        let date = dataArray[pageControl.currentPage]
     //        updateView(date: date)
     //
-    //    }
+//        }
     func handleGesture(sender:UIGestureRecognizer){
-        print(dataArray)
+        //print(dataArray)
         if let swipeGesture = sender as? UISwipeGestureRecognizer {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:
                 UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
-            case UISwipeGestureRecognizerDirection.left:
-                if pageControl.currentPage < dataArray.count {
-                    pageControl.currentPage = pageControl.currentPage + 1
-                    let value = dataArray[pageControl.currentPage]
-                    updateView(date: value)
-                }
-                
-                
-            case UISwipeGestureRecognizerDirection.right:
-                if pageControl.currentPage >= 0 {
-                    pageControl.currentPage = pageControl.currentPage - 1
-                    let value = dataArray[pageControl.currentPage]
-                    updateView(date: value)
-                }
+//            case UISwipeGestureRecognizerDirection.left:
+//                if pageControl.currentPage < dataArray.count {
+//                    pageControl.currentPage = pageControl.currentPage + 1
+//                    let value = dataArray[pageControl.currentPage]
+//                    updateView(date: value)
+//                }
+//                
+//                
+//            case UISwipeGestureRecognizerDirection.right:
+//                if pageControl.currentPage >= 0 {
+//                    pageControl.currentPage = pageControl.currentPage - 1
+//                    let value = dataArray[pageControl.currentPage]
+//                    updateView(date: value)
+//                }
                 
                 
             default:
@@ -152,7 +157,7 @@ class NewCheckoutViewController: UIViewController {
         }
         
     }
-    
+//
     
     func updateView(date:Date = Date()){
         
