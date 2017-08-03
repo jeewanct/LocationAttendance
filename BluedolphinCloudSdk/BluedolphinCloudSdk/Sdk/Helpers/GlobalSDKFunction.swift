@@ -84,6 +84,20 @@ public func getUserData(){
         SDKSingleton.sharedInstance.userName = tokenData.userName!
         SDKSingleton.sharedInstance.accessToken = tokenData.token
         print("accessToken id = \(SDKSingleton.sharedInstance.accessToken)")
+        if let orgCustomFeatures = tokenData.orgFeatures{
+            if let orgFeature = toDictionary(text: orgCustomFeatures) as? NSDictionary{
+                if let value = orgFeature["transmitter"] as? Bool{
+                    SDKSingleton.sharedInstance.transmitter = value
+                }
+                if let value = orgFeature["locationTracking"] as? Bool{
+                    SDKSingleton.sharedInstance.locationTracking = value
+                }
+                if let value = orgFeature["employeeShiftSwitchFlexibility"] as? Bool{
+                    SDKSingleton.sharedInstance.employeeShiftSwitchFlexibility = value
+                }
+            }
+        }
+       
     }
     
 }

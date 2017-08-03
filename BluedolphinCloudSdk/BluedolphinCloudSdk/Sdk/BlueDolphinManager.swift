@@ -240,6 +240,9 @@ open class BlueDolphinManager:NSObject {
                         if Date().secondsFrom(LastBeaconCheckinTime) > CheckinInterVal {
                             self.sendCheckins()
                         }
+                        if Date().secondsFrom(LastBeaconCheckinTime) < 0{
+                           self.sendCheckins()
+                        }
                     }else{
                         self.sendCheckins()
                     }

@@ -42,6 +42,7 @@
 		994509DB1E9256F9002921D9 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C31E922E94002921D9 /* Realm.framework */; };
 		994509DC1E9256F9002921D9 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C41E922E94002921D9 /* RealmSwift.framework */; };
 		997C638D1E9283120019740A /* BlueDolphinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997C638C1E9283120019740A /* BlueDolphinManager.swift */; };
+		99B811671F2F1DB700174FD0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B811661F2F1DB700174FD0 /* Logger.swift */; };
 		99CA96811F037CF100E2813B /* AttendanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96801F037CF100E2813B /* AttendanceLog.swift */; };
 		A1ADEA9532F07BD836A6FF8E /* Pods_BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D771F3BC31D3C77084C535 /* Pods_BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
@@ -87,6 +88,7 @@
 		994509C31E922E94002921D9 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/Realm/Realm.framework"; sourceTree = "<group>"; };
 		994509C41E922E94002921D9 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		997C638C1E9283120019740A /* BlueDolphinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueDolphinManager.swift; sourceTree = "<group>"; };
+		99B811661F2F1DB700174FD0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		99CA96801F037CF100E2813B /* AttendanceLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +177,7 @@
 				991EE27C1E40BF5B00E4A00D /* Reachability.swift */,
 				991EE27D1E40BF5B00E4A00D /* SdkConstant.swift */,
 				991EE27E1E40BF5B00E4A00D /* SDKSingelton.swift */,
+				99B811661F2F1DB700174FD0 /* Logger.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				991EE28E1E40BF5B00E4A00D /* CheckinModel.swift in Sources */,
 				991EE2A11E40BF5C00E4A00D /* UserModel.swift in Sources */,
 				991EE28F1E40BF5B00E4A00D /* CheckinObject.swift in Sources */,
+				99B811671F2F1DB700174FD0 /* Logger.swift in Sources */,
 				991EE2911E40BF5B00E4A00D /* CoreLocationManager.swift in Sources */,
 				991EE2891E40BF5B00E4A00D /* AssignmentModel.swift in Sources */,
 				991EE28B1E40BF5B00E4A00D /* OauthModel.swift in Sources */,

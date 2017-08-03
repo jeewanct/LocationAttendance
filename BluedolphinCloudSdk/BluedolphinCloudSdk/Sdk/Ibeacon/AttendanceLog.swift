@@ -89,12 +89,34 @@ open class AttendanceLogModel {
                 }else{
                     
                     try! realm.write {
-                        realm.deleteObjectAndChilds(dayOfWeekData.beaconList)
+                        
+                        realm.delete(dayOfWeekData.beaconList)
+                        realm.delete(dayOfWeekData)
+//                        let newbeaconList = List<BeaconData>()
+//                        let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
+//                        newbeaconList.append(newBeaconData)
+//                        print(newbeaconList)
+//                        
+//                        print("================================== before update")
+//                        print(dayOfWeekData.beaconList)
+//                        
+//                        dayOfWeekData.beaconList = newbeaconList
+//                        
+//                        dayOfWeekData.timeStamp = beconLastSeen
+//                        
+//                        print("================================== after update")
+//                        print(dayOfWeekData.beaconList)
+//                        realm.add(dayOfWeekData,update:true)
+                        
+                        
+                        
+                        let dayOfWeekData = AttendanceLog()
                         let newbeaconList = List<BeaconData>()
                         let newBeaconData = createBeaconData(beacon: beaconData,beaconNumber :count)
                         newbeaconList.append(newBeaconData)
                         dayOfWeekData.beaconList = newbeaconList
                         dayOfWeekData.timeStamp = beconLastSeen
+                        dayOfWeekData.dayofWeek = "\(weekDay)"
                         realm.add(dayOfWeekData,update:true)
                     }
                 }

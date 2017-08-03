@@ -39,30 +39,37 @@ open class OauthModel :NSObject, Meta{
                             
                             
                             if let data = dataValue["data"] as? NSDictionary {
-                            
-//                                let oauth = realm.objects(Oauth.self){
-//                                    realm.delete(self)
-//                                }
+                             try! realm.write {
                                 if let accessToken = data["accessToken"] as? NSArray{
                                     for val in accessToken{
-                                        try! realm.write {
-                                      realm.create(AccessTokenObject.self, value: val, update: true)
+                                        
+                                        
+                                        let value = val as! NSDictionary
+                                        
+                                        let object =  realm.create(AccessTokenObject.self, value: val, update: true)
+                                        
+                                        
+                                        if let orgFeatures = value["orgCustomFeatures"] as? NSDictionary{
+                                            object.orgFeatures = toJsonString(orgFeatures)
+                                            
                                         }
-                                       
+                                        
+                                        
                                     }
                                     
                                     
                                 }
+                                
                                 if let refreshToken = data["refreshToken"] as? NSArray{
                                     for val in refreshToken{
-                                        try! realm.write {
+                                        
                                        realm.create(RefreshTokenObject.self, value: val, update: true)
-                                        }
+                                    
                                     }
                                     
                                 }
                                 
-                                
+                                }
                             }
                             
                             completion(APIResult.Success.rawValue)
@@ -134,7 +141,17 @@ open class OauthModel :NSObject, Meta{
                         
                         if let accessToken = data["accessToken"] as? NSArray{
                             for val in accessToken{
-                                realm.create(AccessTokenObject.self, value: val, update: true)
+                                let value = val as! NSDictionary
+                                
+                               var object =  realm.create(AccessTokenObject.self, value: val, update: true)
+                                
+                               
+                                if let orgFeatures = value["orgCustomFeatures"] as? NSDictionary{
+                                  object.orgFeatures = toJsonString(orgFeatures)
+                                
+                                }
+                                
+                                
                             }
                             
                         }
