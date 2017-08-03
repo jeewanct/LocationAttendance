@@ -145,6 +145,7 @@ extension MainViewController {
     func ShowController (sender : NSNotification) {
         switch (sender.name.rawValue) {
         case LocalNotifcation.Profile.rawValue:
+            self.startScanning()
             
             //      for views in mainContainer.subviews {
             //        views.removeFromSuperview()

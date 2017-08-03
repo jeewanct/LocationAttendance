@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
     var statusOption = ["Online","Offline"]
     var organisationOption = ["New","BdLite","BdPro"]
     let pickerView = UIPickerView()
-    var menuView: CustomNavigationDropdownMenu!
+       
     
     
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ class HomeViewController: UIViewController {
         if let deviceToken = UserDefaults.standard.value(forKey: UserDefaultsKeys.deviceToken.rawValue) as? String{
             print(deviceToken)
         }
-            createNavView()
+            createNavView(controller: self, title: "Profile")
             createLayout()
         
       
@@ -114,102 +114,10 @@ class HomeViewController: UIViewController {
         
     }
     
-    func createNavView(){
-        let items = ["My DashBoard", "Assignments", "Profile","VirtualBeacon","Drafts",]
-        
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        //UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
-        
-        menuView = CustomNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Profile", items: items as [AnyObject])
-        menuView.cellHeight = 50
-        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
-        
-        menuView.cellSelectionColor = UIColor.white
-        //UIColor(red: 0.0/255.0, green:160.0/255.0, blue:195.0/255.0, alpha: 1.0)
-        menuView.shouldKeepSelectedCellColor = true
-        menuView.cellTextLabelColor = UIColor.black
-        menuView.cellTextLabelFont = UIFont(name: "SourceSansPro-Regular", size: 17)
-        menuView.cellTextLabelAlignment = .left // .Center // .Right // .Left
-        menuView.arrowPadding = 15
-        menuView.animationDuration = 0.3
-        menuView.maskBackgroundColor = UIColor.black
-        menuView.maskBackgroundOpacity = 0.3
-        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
-            print("Did select item at index: \(indexPath)")
-            self.menuChanger(segment: indexPath)
-            
-        }
-        
-        self.navigationItem.titleView = menuView
-    }
-    
-    func menuChanger(segment:Int){
-        switch segment {
-        case 0:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.BaseAnalytics.rawValue) , object: nil)
-        case 1:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue) , object: nil)
-            
-        case 2:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
-        case 3:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue) , object: nil)
-        case 4:
-            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Draft.rawValue) , object: nil)
-        
-        default:
-            break
-        }
-    }
+   
     
 
-//    func createNavView(){
-//        let items = ["My Dashboard", "Assignments", "Calendar", "Call History", "Profile"]
-//        
-//        self.navigationController?.navigationBar.isTranslucent = false
-//        self.navigationController?.navigationBar.barTintColor = UIColor.white
-//        //UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
-//        
-//        menuView = CustomNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Profile", items: items as [AnyObject])
-//        menuView.cellHeight = 50
-//        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
-//        
-//        menuView.cellSelectionColor = UIColor.white
-//        //UIColor(red: 0.0/255.0, green:160.0/255.0, blue:195.0/255.0, alpha: 1.0)
-//        menuView.shouldKeepSelectedCellColor = true
-//        menuView.cellTextLabelColor = UIColor.black
-//        menuView.cellTextLabelFont = UIFont(name: "SourceSansPro-Regular", size: 17)
-//        menuView.cellTextLabelAlignment = .left // .Center // .Right // .Left
-//        menuView.arrowPadding = 15
-//        menuView.animationDuration = 0.3
-//        menuView.maskBackgroundColor = UIColor.black
-//        menuView.maskBackgroundOpacity = 0.3
-//        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
-//            print("Did select item at index: \(indexPath)")
-//            
-//         self.menuChanger(segment: indexPath)
-//            
-//            
-//        }
-//        
-//        self.navigationItem.titleView = menuView
-//    }
-//    
-//    func menuChanger(segment:Int){
-//        switch segment {
-//        case 1:
-//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Assignment.rawValue) , object: nil)
-//            
-//        case 4:
-//            NotificationCenter.default.post(name:NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue) , object: nil)
-//            
-//        default:
-//            break
-//        }
-//    }
+
 
     func postCheckin(){
         let checkin = CheckinHolder()

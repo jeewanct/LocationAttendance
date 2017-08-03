@@ -72,6 +72,7 @@
 		99A721BD1DF83D890059DFBB /* AssignmentTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */; };
 		99A721DF1DFA6EF00059DFBB /* AwsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721DE1DFA6EF00059DFBB /* AwsManager.swift */; };
 		99A721E11DFAC4F70059DFBB /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A721E01DFAC4F70059DFBB /* BottomBar.swift */; };
+		99B811711F2F558900174FD0 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B811701F2F558900174FD0 /* SideMenu.swift */; };
 		99BD3E1D1DD326CA0066C07B /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */; };
 		99BD3E1F1DDAE95C0066C07B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD3E1E1DDAE95C0066C07B /* Reachability.swift */; };
 		99CACFD81DB8A1590099AA00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CACFD71DB8A1590099AA00 /* AppDelegate.swift */; };
@@ -108,7 +109,7 @@
 		991536C41DEBFF810046254C /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		9918E87D1DDC2C30000376CF /* CheckinHolderClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinHolderClass.swift; sourceTree = "<group>"; };
 		9918E87F1DDC7C59000376CF /* BluedolphinPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BluedolphinPro.entitlements; sourceTree = "<group>"; };
-		9918E8801DDD7B42000376CF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9918E8801DDD7B42000376CF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HomeViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9918E8821DDD7C4E000376CF /* KeyChainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainWrapper.swift; sourceTree = "<group>"; };
 		9918E8841DDD9CF1000376CF /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		9919E1481E2CA0B800AB4944 /* BeaconObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconObject.swift; sourceTree = "<group>"; };
@@ -121,19 +122,19 @@
 		991B468B1DF00AF10012D8DC /* LocalExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalExtensions.swift; sourceTree = "<group>"; };
 		991B468D1DF027FA0012D8DC /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		991DCD0B1E7FF51D00A45E2E /* BaseAnaltyics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAnaltyics.swift; sourceTree = "<group>"; };
-		991DCD0D1E7FF6A800A45E2E /* BaseAnalticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAnalticsViewController.swift; sourceTree = "<group>"; };
+		991DCD0D1E7FF6A800A45E2E /* BaseAnalticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BaseAnalticsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		991DCD111E8115E300A45E2E /* BarGraphTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarGraphTableViewCell.swift; sourceTree = "<group>"; };
 		991DCD121E8115E300A45E2E /* BarGraphTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarGraphTableViewCell.xib; sourceTree = "<group>"; };
 		991EE2631E3F0D1300E4A00D /* VicinityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicinityManager.swift; sourceTree = "<group>"; };
 		991F09321E0B069200539473 /* CreateAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAssignmentViewController.swift; sourceTree = "<group>"; };
 		992086A61DCCC0850055C6BF /* GlobalSDKFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSDKFunction.swift; sourceTree = "<group>"; };
 		9931B53E1E5C6BCF002B79E6 /* iBeaconAdvertisement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iBeaconAdvertisement.swift; path = ../iBeaconAdvertisement.swift; sourceTree = "<group>"; };
-		9931B5421E5DA604002B79E6 /* VirtualViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualViewController.swift; sourceTree = "<group>"; };
+		9931B5421E5DA604002B79E6 /* VirtualViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VirtualViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		99339CFE1DE2C86000F3C770 /* CheckinObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinObject.swift; sourceTree = "<group>"; };
 		99339D001DE2C8BA00F3C770 /* OauthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthObject.swift; sourceTree = "<group>"; };
 		99339D021DE2D5B700F3C770 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		99339F661DE5B38B00F3C770 /* AssignmentObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentObject.swift; sourceTree = "<group>"; };
-		99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
+		99339F6A1DE6D8AC00F3C770 /* AssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AssignmentViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		99339F701DE6EE4C00F3C770 /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		99369CF61DF036C200B405E4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		994FF91B1DC8BA2E00276B97 /* CheckinModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinModel.swift; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 		99A721BB1DF83D890059DFBB /* AssignmentTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentTableCell.xib; sourceTree = "<group>"; };
 		99A721DE1DFA6EF00059DFBB /* AwsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwsManager.swift; sourceTree = "<group>"; };
 		99A721E01DFAC4F70059DFBB /* BottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
+		99B811701F2F558900174FD0 /* SideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		99BD3E1C1DD326C90066C07B /* CoreLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
 		99BD3E1E1DDAE95C0066C07B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		99CACFD41DB8A1590099AA00 /* BluedolphinPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluedolphinPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,6 +307,7 @@
 				99A509C71E0166BD00688FAF /* CustomPhotoAlbum.swift */,
 				991B468B1DF00AF10012D8DC /* LocalExtensions.swift */,
 				99EB0EAF1E373354000CF3B1 /* ProjectSingelton.swift */,
+				99B811701F2F558900174FD0 /* SideMenu.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				994FF91E1DC9B5D000276B97 /* AssignmentModel.swift in Sources */,
 				9918E8851DDD9CF1000376CF /* ErrorMessage.swift in Sources */,
 				99339F711DE6EE4C00F3C770 /* TabView.swift in Sources */,
+				99B811711F2F558900174FD0 /* SideMenu.swift in Sources */,
 				994FF9201DCA173800276B97 /* Extensions.swift in Sources */,
 				99CACFDA1DB8A1590099AA00 /* ViewController.swift in Sources */,
 				99339D031DE2D5B700F3C770 /* Enums.swift in Sources */,
