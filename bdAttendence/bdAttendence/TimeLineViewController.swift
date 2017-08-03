@@ -88,7 +88,7 @@ extension TimeLineViewController:UITableViewDelegate,UITableViewDataSource{
         cell.numberOfBeaconLabel.numberOfLines = 0
         cell.numberOfBeaconLabel.lineBreakMode = .byWordWrapping
         cell.numberOfBeaconLabel.sizeToFit()
-        cell.numberOfBeaconLabel.text = beaconAddressArray.joined(separator: "\n")
+        cell.numberOfBeaconLabel.text = beaconAddressArray.joined(separator: "\n").capitalized
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {

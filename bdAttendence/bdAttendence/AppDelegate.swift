@@ -25,11 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
-        let appVersion = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
-        print(appVersion)
+        APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
+        print(APPVERSION)
         
         setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: true)
+        stopDebugging(flag: false)
         setCheckinInteral(val: 600)
         //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
@@ -125,16 +125,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 1,
+            schemaVersion: 2,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 
-                if oldSchemaVersion < 1 {
+                if oldSchemaVersion < 2 {
                     migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
                         
-                    }    }
+                    }
+                    migration.enumerateObjects(ofType: AccessTokenObject.className()) { oldObject, newObject in
+                        
+                    }
+
+                
+                }
         }
             
         )

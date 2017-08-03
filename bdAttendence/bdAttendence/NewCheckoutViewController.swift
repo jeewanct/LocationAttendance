@@ -212,7 +212,7 @@ class NewCheckoutViewController: UIViewController {
                 }else{
                     self.lastCheckinLabel.text = ""
                 }
-                self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()
+                self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()?.capitalized
                 self.updateFrequencyBar(mData: object)
             }
         }

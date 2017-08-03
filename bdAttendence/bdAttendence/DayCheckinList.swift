@@ -68,7 +68,7 @@ class CheckinListModel{
         if let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("dayofWeek = %@","\(weekDay)").first {
             
             if weekOfYear == Calendar.current.component(.weekOfYear, from: attendanceLogForToday.timeStamp!){
-                let beaconData = attendanceLogForToday.beaconList.sorted(byProperty: "lastSeen", ascending: true)
+                let beaconData = attendanceLogForToday.beaconList.sorted(byProperty: "lastSeen", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
                     //.filter("beaconNumber = %@","0")
                 print("============")
                 //print(beaconData)

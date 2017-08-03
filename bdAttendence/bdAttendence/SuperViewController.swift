@@ -71,6 +71,7 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.SystemDetail.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.ContactUs.rawValue), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: nil)
         
         
@@ -79,6 +80,7 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.firstCheckin(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.FirstBeaconCheckin.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bluetoothEnabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconEnabled.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         
         
     }
@@ -154,7 +156,7 @@ extension SuperViewController{
         
         //BlueDolphinManager.manager.startScanning()
        
-        //NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
+        
         
         //        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.updateLocation(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
         
@@ -223,25 +225,28 @@ extension SuperViewController{
     
     
     func locationCheckin(sender:NSNotification){
-        if let lastLocationCheckin = UserDefaults.standard.value(forKeyPath: "lastLocationCheckin") as? Date {
-            print( "Difference last \(lastLocationCheckin.minuteFrom(Date()))")
-            if Date().minuteFrom(lastLocationCheckin) > 2{
-                let checkin = CheckinHolder()
-                
-                checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
-                checkin.checkinCategory = CheckinCategory.Transient.rawValue
-                checkin.checkinType = CheckinType.Location.rawValue
-                //
-                
-                CheckinModel.createCheckin(checkinData: checkin)
-                UserDefaults.standard.set(Date(), forKey: "lastLocationCheckin")
-                if isInternetAvailable(){
-                    CheckinModel.postCheckin()
+        if SDKSingleton.sharedInstance.locationTracking {
+            if let lastLocationCheckin = UserDefaults.standard.value(forKeyPath: "lastLocationCheckin") as? Date {
+                print( "Difference last \(lastLocationCheckin.minuteFrom(Date()))")
+                if Date().minuteFrom(lastLocationCheckin) > 10{
+                    let checkin = CheckinHolder()
+                    
+                    checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
+                    checkin.checkinCategory = CheckinCategory.Transient.rawValue
+                    checkin.checkinType = CheckinType.Location.rawValue
+                    //
+                    
+                    CheckinModel.createCheckin(checkinData: checkin)
+                    UserDefaults.standard.set(Date(), forKey: "lastLocationCheckin")
+                    if isInternetAvailable(){
+                        CheckinModel.postCheckin()
+                    }
                 }
+            } else{
+                UserDefaults.standard.set(Date(), forKey: "lastLocationCheckin")
             }
-        } else{
-            UserDefaults.standard.set(Date(), forKey: "lastLocationCheckin")
         }
+        
         
         
         
@@ -360,7 +365,27 @@ extension SuperViewController {
             destVc.view.frame = self.mainContainer.frame
             self.mainContainer.addSubview(destVc.view)
             destVc.didMove(toParentViewController: self)
+        case LocalNotifcation.ContactUs.rawValue:
+            var lastController: AnyObject?
             
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainer.subviews {
+                views.removeFromSuperview()
+            }
+            lastController?.willMove(toParentViewController: nil)
+            
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "contactUs") as! UINavigationController
+            
+            
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainer.frame
+            self.mainContainer.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
           
     
         default:

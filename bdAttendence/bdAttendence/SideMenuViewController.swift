@@ -8,17 +8,25 @@
 
 import UIKit
 import BluedolphinCloudSdk
-
+enum SideMenuOptions:String{
+    case MyDashboard = "My Dashboard"
+    case SystemDetail = "System Detail"
+    case ThisWeek = "This Week"
+    case Transmit
+}
 class SideMenuViewController: UIViewController  {
         
     @IBOutlet weak var versionLabel: UILabel!
         @IBOutlet weak var sideMenuTable: UITableView!
         @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var userImageView: UIImageView!
-        var sideMenuOptionsArray =  ["My Dashboard","System Detail","This Week","Transmit"]
+        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ThisWeek.rawValue,/*"Contact Us",*/SideMenuOptions.Transmit.rawValue]
 
         override func viewDidLoad() {
             super.viewDidLoad()
+            if !SDKSingleton.sharedInstance.transmitter{
+                sideMenuOptionsArray.remove(at: sideMenuOptionsArray.index(of: SideMenuOptions.Transmit.rawValue)!)
+            }
             self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
             let tapGestureForImage = UITapGestureRecognizer(target: self, action: #selector(SideMenuViewController.handleTap(sender:)))
             let tapGestureForLabel = UITapGestureRecognizer(target: self, action: #selector(SideMenuViewController.handleTap(sender:)))
@@ -105,16 +113,18 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        switch (indexPath.row)
+        let option = sideMenuOptionsArray[indexPath.row]
+        switch (option)
         {
-        case 0:
+        case SideMenuOptions.MyDashboard.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
-        case 1:
+        case SideMenuOptions.SystemDetail.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.SystemDetail.rawValue), object: self, userInfo: nil)
-        case 2:
+        case SideMenuOptions.ThisWeek.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: self, userInfo: nil)
-        case 3:
+//        case 3:
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ContactUs.rawValue), object: self, userInfo: nil)
+        case SideMenuOptions.Transmit.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: self, userInfo: nil)
             break
         default:

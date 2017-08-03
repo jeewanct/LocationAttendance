@@ -135,7 +135,7 @@ class HistoryViewController: UIViewController {
                 self.startLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
                 self.endLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
                
-                self.addressLabel.text = object.getLastCheckInAddress()
+                self.addressLabel.text = object.getLastCheckInAddress()?.capitalized
                 self.updateFrequencyBar(mData: object)
             }
             

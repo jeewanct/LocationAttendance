@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let APPVERSION = "1.3.1"
+var APPVERSION = "1.3.1"
 let appIdentifier = "com.raremedia.bdAttendence"
 
 
@@ -54,16 +54,17 @@ enum LocalNotifcation:String{
     case CheckinScreen
     case DayCheckinScreen
     case ThisWeek
+    case ContactUs
 }
 enum ErrorMessage:String{
-    case UserNotFound = "User not found with that phone number in system,Please contact your administrator"
+    case UserNotFound = "Number not found. Contact admin"
     case InternalServer = "We are facing some internal issue please try again after sometime"
     case NotValidData = "Input you send is not valid"
     case emailError = "Please enter the valid email"
     case FECodeError = "Please enter the mobile number"
     case NetError = "Could not connect to internet please try again."
     case InvalidFECode = "Please enter valid mobile  number"
-    case InvalidOtp = "Please enter valid otpcode"
+    case InvalidOtp = "Please enter valid 6 digit OTP code"
 }
 enum NotificationMessage:String{
     case AttendanceMarked  = "We've marked you present for today. Have a wonderful day! "
