@@ -20,7 +20,14 @@ let officeStartMin = 0
 let officeEndHour = 21
 let officeEndMin = 0
 
-
+enum CheckinDetailKeys:String{
+    case userInteraction
+    case swipeUp
+    case swipeDown
+    case bluetoothStatus
+    case gpsStatus
+    
+}
 
 enum NotificationType:String{
     case NewAssignment = "New-Assignment"

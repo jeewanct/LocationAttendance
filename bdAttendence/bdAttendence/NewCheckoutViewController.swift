@@ -59,7 +59,7 @@ class NewCheckoutViewController: UIViewController {
         
         swipedown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipedown?.direction = .down
-        pageControl.hidesForSinglePage = true
+       
         
         
         
@@ -131,8 +131,8 @@ class NewCheckoutViewController: UIViewController {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:
                 UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
+                
 //            case UISwipeGestureRecognizerDirection.left:
 //                if pageControl.currentPage < dataArray.count {
 //                    pageControl.currentPage = pageControl.currentPage + 1
@@ -158,6 +158,8 @@ class NewCheckoutViewController: UIViewController {
         
     }
 //
+    
+    
     
     func updateView(date:Date = Date()){
         

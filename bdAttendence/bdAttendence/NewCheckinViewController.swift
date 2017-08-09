@@ -37,6 +37,7 @@ class NewCheckinViewController: UIViewController {
     func handleGesture(sender:UIGestureRecognizer){
         //BlueDolphinManager.manager.startScanning()
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+       
          NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)
         
         
@@ -53,6 +54,7 @@ class NewCheckinViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
     
     }
+    
     
   
     override func didReceiveMemoryWarning() {

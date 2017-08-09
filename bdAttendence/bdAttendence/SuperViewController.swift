@@ -154,11 +154,7 @@ extension SuperViewController{
             
         }
         
-        //BlueDolphinManager.manager.startScanning()
        
-        
-        
-        //        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.updateLocation(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
         
         
         
@@ -194,21 +190,58 @@ extension SuperViewController{
     
     func bluetoothEnabled(){
         ProjectSingleton.sharedInstance.bluetoothAvaliable = true
+        postBluetoothStateDataCheckin()
+        
     }
     func bluetoothDisabled(){
         ProjectSingleton.sharedInstance.bluetoothAvaliable = false
+        postBluetoothStateDataCheckin()
     }
+    
+    func postBluetoothStateDataCheckin(){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,CheckinDetailKeys.bluetoothStatus.rawValue:ProjectSingleton.sharedInstance.bluetoothAvaliable as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Data.rawValue
+        checkin.checkinType = CheckinType.Data.rawValue
+        //
+        
+        CheckinModel.createCheckin(checkinData: checkin)
+        
+        if isInternetAvailable(){
+            CheckinModel.postCheckin()
+        }
+    }
+    
+    func postGpsStateDataCheckin(){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,CheckinDetailKeys.gpsStatus.rawValue:ProjectSingleton.sharedInstance.locationAvailable as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Data.rawValue
+        checkin.checkinType = CheckinType.Data.rawValue
+        //
+        
+        CheckinModel.createCheckin(checkinData: checkin)
+        
+        if isInternetAvailable(){
+            CheckinModel.postCheckin()
+        }
+    }
+    
     func checkPermissionStatus(sender:NSNotification){
         updateTask()
         if CLLocationManager.locationServicesEnabled() {
             switch(CLLocationManager.authorizationStatus()) {
             case .notDetermined, .restricted, .denied:
                 ProjectSingleton.sharedInstance.locationAvailable = false
+                
             case .authorizedAlways, .authorizedWhenInUse:
                 ProjectSingleton.sharedInstance.locationAvailable = true
             }
+            postGpsStateDataCheckin()
         } else {
             ProjectSingleton.sharedInstance.locationAvailable = false
+            postGpsStateDataCheckin()
         }
         
         print("Location enabled \(ProjectSingleton.sharedInstance.locationAvailable)")
@@ -228,7 +261,7 @@ extension SuperViewController{
         if SDKSingleton.sharedInstance.locationTracking {
             if let lastLocationCheckin = UserDefaults.standard.value(forKeyPath: "lastLocationCheckin") as? Date {
                 print( "Difference last \(lastLocationCheckin.minuteFrom(Date()))")
-                if Date().minuteFrom(lastLocationCheckin) > 10{
+                if Date().secondsFrom(lastLocationCheckin) > 300{
                     let checkin = CheckinHolder()
                     
                     checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]

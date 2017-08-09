@@ -107,6 +107,7 @@ class MyDashboardViewController: UIViewController {
           switch (sender.name.rawValue) {
           case LocalNotifcation.CheckoutScreen.rawValue:
             BlueDolphinManager.manager.startScanning()
+            postDataCheckin(userInteraction: .swipeUp)
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
@@ -118,6 +119,8 @@ class MyDashboardViewController: UIViewController {
             
           case LocalNotifcation.DayCheckinScreen.rawValue:
            //BlueDolphinManager.manager.stopScanning()
+            postDataCheckin(userInteraction: .swipeDown)
+
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "dayCheckin") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: -containerView.frame.size.height)
@@ -128,6 +131,21 @@ class MyDashboardViewController: UIViewController {
             
           default:
             break
+        }
+    }
+    
+    func postDataCheckin(userInteraction:CheckinDetailKeys){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,CheckinDetailKeys.userInteraction.rawValue:userInteraction.rawValue as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Data.rawValue
+        checkin.checkinType = CheckinType.Data.rawValue
+        //
+        
+        CheckinModel.createCheckin(checkinData: checkin)
+        
+        if isInternetAvailable(){
+            CheckinModel.postCheckin()
         }
     }
     

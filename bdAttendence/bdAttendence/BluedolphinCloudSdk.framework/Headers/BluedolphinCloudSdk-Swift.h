@@ -135,6 +135,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import RealmSwift;
 @import Foundation;
 @import ObjectiveC;
+@import UIKit;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -206,7 +207,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BlueDolphinM
 - (void)startScanning;
 - (void)updateToken;
 - (void)stopScanning;
-- (void)sendCheckins;
+- (void)sendCheckinsWithArray:(NSArray * _Nonnull)array;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -299,6 +300,11 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk11RMCLocation")
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface UIDevice (SWIFT_EXTENSION(BluedolphinCloudSdk))
+@property (nonatomic, readonly, copy) NSString * _Nonnull modelName;
 @end
 
 

@@ -25,7 +25,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZLB-mr-keV" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PpO-oJ-7dP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PpO-oJ-7dP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -134,7 +134,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="128.5" y="218" width="119" height="19"/>
+                                <rect key="frame" x="129" y="218" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -154,7 +154,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="225" y="345.5" width="77" height="30"/>
+                                <rect key="frame" x="225" y="346" width="77" height="30"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.97669434420000001" green="1" blue="0.43377791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -885,7 +885,7 @@
         <scene sceneID="I4C-5l-vUt">
             <objects>
                 <navigationController storyboardIdentifier="Main" id="Fx4-6H-Q9G" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NkD-E7-dcq" customClass="CustomNavigationBar" customModule="bdAttendence" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="NkD-E7-dcq" customClass="CustomNavigationBar" customModule="bdAttendence" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -902,7 +902,7 @@
             <objects>
                 <navigationController storyboardIdentifier="newCheckin" automaticallyAdjustsScrollViewInsets="NO" id="zIJ-e7-QIo" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CgV-dC-oic">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CgV-dC-oic">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -986,7 +986,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="newCheckout" automaticallyAdjustsScrollViewInsets="NO" id="6bY-kG-nMU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Bc-I9-SNd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1Bc-I9-SNd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1004,7 +1004,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="orgList" automaticallyAdjustsScrollViewInsets="NO" id="mG7-SV-y42" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qvb-WV-LU4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qvb-WV-LU4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1099,7 +1099,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="dayCheckin" automaticallyAdjustsScrollViewInsets="NO" id="TV0-G9-M50" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sRP-aP-KUP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="sRP-aP-KUP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1117,7 +1117,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="systemDetail" automaticallyAdjustsScrollViewInsets="NO" id="w3I-iW-gws" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S5S-3o-dKy">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="S5S-3o-dKy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1794,7 +1794,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="VirtualBeacon" automaticallyAdjustsScrollViewInsets="NO" id="rIn-Qu-bpd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lJ0-cZ-Jy0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lJ0-cZ-Jy0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1812,7 +1812,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="dashboard" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="qvO-xa-hq5" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZZi-nf-7Mh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZZi-nf-7Mh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1830,7 +1830,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="workHour" automaticallyAdjustsScrollViewInsets="NO" id="WZn-6M-bBT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Qc-hx-k9c">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7Qc-hx-k9c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1848,7 +1848,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yfq-El-d6L" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vk5-bQ-7rb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Vk5-bQ-7rb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1866,7 +1866,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="history" automaticallyAdjustsScrollViewInsets="NO" id="KVF-kH-0Wb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FhW-Wb-Jlp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FhW-Wb-Jlp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1985,7 +1985,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="timeLine" automaticallyAdjustsScrollViewInsets="NO" id="YDi-IL-4Nu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LVS-vm-jP9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LVS-vm-jP9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2003,7 +2003,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="contactUs" automaticallyAdjustsScrollViewInsets="NO" id="ffZ-Rd-c08" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ghG-kp-CxQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ghG-kp-CxQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

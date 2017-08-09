@@ -41,7 +41,7 @@ class DayCheckoutViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }
-    
+   
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

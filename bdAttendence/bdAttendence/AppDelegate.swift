@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(APPVERSION)
         
         setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: false)
-        setCheckinInteral(val: 600)
+        stopDebugging(flag: true)
+        setCheckinInteral(val: 300)
         //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
         Fabric.with([Crashlytics.self])
@@ -125,18 +125,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 2,
+            schemaVersion: 3,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 
-                if oldSchemaVersion < 2 {
+                if oldSchemaVersion < 3 {
                     migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
                         
                     }
                     migration.enumerateObjects(ofType: AccessTokenObject.className()) { oldObject, newObject in
-                        
                     }
 
                 
