@@ -161,6 +161,8 @@ public func getUUIDString()->String{
         checkinDetails[AssignmentWork.AppVersion.rawValue] = AppVersion as AnyObject?
         checkinDetails[AssignmentWork.UserAgent.rawValue] = deviceType as AnyObject?
         checkinDetails[AssignmentWork.batteryLevel.rawValue] = "\(SDKSingleton.sharedInstance.batteryLevel()*100)" as AnyObject?
+        checkinDetails[AssignmentWork.deviceModel.rawValue] = UIDevice.current.modelName as AnyObject
+        checkinDetails[AssignmentWork.deviceOS.rawValue] = "iOS \(UIDevice.current.systemVersion)" as AnyObject
         
         checkin.checkinDetails = toJsonString(checkinDetails as AnyObject)
         checkin.accuracy = CurrentLocation.accuracy
@@ -202,9 +204,11 @@ public func getUUIDString()->String{
                 }
                 
             }
+            if beconList.count > 0 {
+                AttendanceLogModel.updateAttendanceLog(beaconList: beconList)
+                calcluateTotalTime()
+            }
             
-            AttendanceLogModel.updateAttendanceLog(beaconList: beconList)
-            calcluateTotalTime()
             checkin.beaconProximity = beconList
            
             

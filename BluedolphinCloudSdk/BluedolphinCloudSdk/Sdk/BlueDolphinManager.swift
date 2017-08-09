@@ -147,60 +147,10 @@ open class BlueDolphinManager:NSObject {
     }
     
     func beaconsEntry(notification:NSNotification){
-        //        if let beacon = notification.object as? iBeacon{
-        //            let dict = [
-        //                "uuid" : beacon.UUID ,
-        //                "major": String(describing: beacon.major!),
-        //                "minor" : String(describing: beacon.minor!),
-        //                //"proximity" :  String(describing: beacon.proximity),
-        //                "rssi" : beacon.rssi != "" ? beacon.rssi: "-88",
-        //                "distance" :beacon.accuracy != "" ? beacon.accuracy: "3.089",
-        //                "lastseen" : getCurrentDate().formattedISO8601
-        //
-        //            ]
-        //            let checkin = CheckinHolder()
-        //            var beaconArray = Array<Any>()
-        //
-        //            beaconArray.append(dict)
-        //
-        //            checkin.beaconProximities = beaconArray
-        //            checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject,"BeaconState":"BeaconEntry" as AnyObject]
-        //            checkin.checkinCategory = CheckinCategory.Transient.rawValue
-        //            checkin.checkinType = CheckinType.Beacon.rawValue
-        //            let checkinModelObject = CheckinModel()
-        //            checkinModelObject.createCheckin(checkinData: checkin)
-        //            if isInternetAvailable(){
-        //                checkinModelObject.postCheckin()
-        //            }
-        //        }
+     
     }
     func beaconsExit(notification:NSNotification){
-        //        if let beacon = notification.object as? iBeacon{
-        //            let dict = [
-        //                "uuid" : beacon.UUID ,
-        //                "major": String(describing: beacon.major!),
-        //                "minor" : String(describing: beacon.minor!),
-        //                //"proximity" :  String(describing: beacon.proximity),
-        //                "rssi" : beacon.rssi != "" ? beacon.rssi: "-88",
-        //                "distance" :beacon.accuracy != "" ? beacon.accuracy: "3.089",
-        //                "lastseen" : getCurrentDate().formattedISO8601
-        //
-        //            ]
-        //            let checkin = CheckinHolder()
-        //            var beaconArray = Array<Any>()
-        //
-        //            beaconArray.append(dict)
-        //
-        //            checkin.beaconProximities = beaconArray
-        //            checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject,"BeaconState":"BeaconExit" as AnyObject]
-        //            checkin.checkinCategory = CheckinCategory.Transient.rawValue
-        //            checkin.checkinType = CheckinType.Beacon.rawValue
-        //            let checkinModelObject = CheckinModel()
-        //            checkinModelObject.createCheckin(checkinData: checkin)
-        //            if isInternetAvailable(){
-        //                checkinModelObject.postCheckin()
-        //            }
-        //        }
+        
         
     }
     
@@ -233,18 +183,24 @@ open class BlueDolphinManager:NSObject {
                 //                let delay = 60.0 * Double(NSEC_PER_SEC)
                 //                let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
                 //                DispatchQueue.main.asyncAfter(deadline: time, execute: {
+                var beaconArray = Array<Any>()
+                for (_,value) in self.seanbeacons {
+                    beaconArray.append(value)
+                }
                 
-                if self.seanbeacons.count != 0 {
+                if beaconArray.count != 0 {
                     if let LastBeaconCheckinTime = UserDefaults.standard.value(forKeyPath: UserDefaultsKeys.LastBeaconCheckinTime.rawValue) as? Date {
+                 
                         print( "Difference LastBeaconCheckinTime \(LastBeaconCheckinTime.minuteFrom(Date()))")
                         if Date().secondsFrom(LastBeaconCheckinTime) > CheckinInterVal {
-                            self.sendCheckins()
+                            print("beacon data \(beaconArray)")
+                            self.sendCheckins(array: beaconArray)
                         }
                         if Date().secondsFrom(LastBeaconCheckinTime) < 0{
-                           self.sendCheckins()
+                           self.sendCheckins(array: beaconArray)
                         }
                     }else{
-                        self.sendCheckins()
+                        self.sendCheckins(array: beaconArray)
                     }
                 }
                 self.beaconSentflag = true
@@ -256,14 +212,11 @@ open class BlueDolphinManager:NSObject {
         }
     }
     
-    public  func sendCheckins(){
+    public  func sendCheckins(array:Array<Any>){
         
         let checkin = CheckinHolder()
-        var beaconArray = Array<Any>()
-        for (_,value) in self.seanbeacons {
-            beaconArray.append(value)
-        }
-        checkin.beaconProximities = beaconArray
+        
+        checkin.beaconProximities = array
         checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
         checkin.checkinCategory = CheckinCategory.Transient.rawValue
         checkin.checkinType = CheckinType.Beacon.rawValue
