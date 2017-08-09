@@ -131,9 +131,8 @@ class HomeViewController: UIViewController {
         checkin.organizationId = SDKSingleton.sharedInstance.organizationId
         checkin.checkinId = UUID().uuidString
         checkin.time = getCurrentDate().formattedISO8601
-        let user = CheckinModel()
-        user.createCheckin(checkinData: checkin)
-        user.postCheckin()
+        CheckinModel.createCheckin(checkinData: checkin)
+        CheckinModel.postCheckin()
         
     }
 

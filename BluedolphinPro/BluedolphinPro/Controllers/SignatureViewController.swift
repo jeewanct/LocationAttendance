@@ -164,8 +164,8 @@ class SignatureViewController: UIViewController {
         checkin.assignmentId = assignment?.assignmentId
         checkin.imageName = albumName + ".Signature"
         checkin.relativeUrl = imageId
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
+  
+        CheckinModel.createCheckin(checkinData: checkin)
         //checkinModelObject.postCheckin()
         let assignmentModel = AssignmentModel()
         assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.Signature, value: imageId, status: CheckinType.Inprogress)

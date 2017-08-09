@@ -102,9 +102,9 @@ class AddNotesViewController: UIViewController {
         checkin.checkinCategory = CheckinCategory.NonTransient.rawValue
         checkin.checkinType = CheckinType.Inprogress.rawValue
         checkin.assignmentId = assignment?.assignmentId
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
-        checkinModelObject.postCheckin()
+  
+        CheckinModel.createCheckin(checkinData: checkin)
+        CheckinModel.postCheckin()
         let assignmentModel = AssignmentModel()
         assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.notes, value: notesTextView.text!, status: CheckinType.Inprogress)
         

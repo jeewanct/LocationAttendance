@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class OTPViewController: UIViewController {
     
@@ -45,20 +46,45 @@ class OTPViewController: UIViewController {
     }
     
     
-    func updateUser(){
-        let objectdata = ["loginType":"mobile",
-                          "mobile":mobileNumber,
-                          "otpToken":otpToken,
-                          "deviceType":"ios",
-                          "deviceToken":UserDefaults.standard.value(forKey: "DeviceToken") as! String,
-                          "imeiId":SDKSingleton.sharedInstance.DeviceUDID
+    func updateUser(updateflag:Bool = false){
+        var objectdata :[String:AnyObject] = ["loginType":"mobile" as AnyObject,
+                                              "mobile":mobileNumber as AnyObject,
+                                              "otpToken":otpToken as AnyObject,
+                                              "deviceType":"ios" as AnyObject,
+                                              "deviceToken":UserDefaults.standard.value(forKey: "DeviceToken") as! String as AnyObject,
+                                              "imeiId":SDKSingleton.sharedInstance.DeviceUDID as AnyObject
             
             
         ]
-        
-        let userData = UserDataModel()
-        userData.createUserData(userObject: objectdata)
-        userData.userSignUp(mobile: mobileNumber)
+        if updateflag{
+            objectdata["updateFlag"] = updateflag as AnyObject
+        }
+        print(objectdata)
+        //UserDataModel.createUserData(userObject: objectdata as! [String : AnyObject])
+        UserDataModel.userSignUp(param:objectdata) { (value) in
+            switch (value){
+            case APIResult.Success.rawValue:
+                
+                let realm = try! Realm()
+                let tokensList = realm.objects(AccessTokenObject.self)
+                for token in tokensList{
+                    UserDefaults.standard.set(token.organizationId, forKey: UserDefaultsKeys.organizationId.rawValue)
+                }
+                
+                
+                UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
+                getUserData()
+                let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+                UIApplication.shared.keyWindow?.rootViewController = destVC
+            case APIResult.UserInteractionRequired.rawValue:
+                self.showInteractionAlert("Already User login on other device")
+                
+                
+            default:
+                break
+                
+            }
+        }
     }
     
     
@@ -72,17 +98,14 @@ class OTPViewController: UIViewController {
             ] as [String : Any]
         if isInternetAvailable() {
             showLoader(text: "Checking Info")
-            let oauth = OauthModel()
-            oauth.getToken(userObject: param) { (result) in
+            
+            OauthModel.getToken(userObject: param) { (result) in
                 
                 switch (result){
                 case APIResult.Success.rawValue:
-                    self.updateUser()
-                    getUserData()
                     
-                    UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
-                    let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                    UIApplication.shared.keyWindow?.rootViewController = destVC
+                    self.updateUser()
+                    
                 case APIResult.InvalidCredentials.rawValue:
                     self.showAlert(ErrorMessage.InvalidOtp.rawValue)
                     
@@ -107,9 +130,9 @@ class OTPViewController: UIViewController {
     
     
     func sendOTP(){
-        let otpmodel = OTPModel()
+        
         showLoader()
-        otpmodel.getOtp(mobile: mobileNumber) { (result) in
+        OTPModel.getOtp(mobile: mobileNumber) { (result) in
             switch (result){
             case APIResult.Success.rawValue:
                 self.showAlert("Otp Sent")
@@ -127,7 +150,7 @@ class OTPViewController: UIViewController {
         }
         
     }
-
+    
     
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
@@ -138,6 +161,21 @@ class OTPViewController: UIViewController {
         }
     }
     
+    func showInteractionAlert(_ message : String) {
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: userUpdatePressed))
+        alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: userCancelPressed))
+        self.present(alertController, animated: true) {
+        }
+    }
+    
+    func userUpdatePressed(action: UIAlertAction){
+        self.updateUser(updateflag: true)
+    }
+    func userCancelPressed(action: UIAlertAction){
+        self.navigationController?.popViewController(animated: true)
+        
+    }
     func showLoader(text:String = "Requesting OTP" ){
         AlertView.sharedInstance.setLabelText(text)
         AlertView.sharedInstance.showActivityIndicator(self.view)

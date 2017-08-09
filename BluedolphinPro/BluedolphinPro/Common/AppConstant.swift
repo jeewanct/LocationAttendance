@@ -10,9 +10,6 @@ import Foundation
 import  UIKit
 
 
-let AppVersion = "1.2"
-let deviceType = "ios"
-
 let TARGET_DEVICE_SIZE = CGSize(width: 414,height: 736)
 struct ScreenConstant {
     static var width     = UIScreen.main.bounds.size.width

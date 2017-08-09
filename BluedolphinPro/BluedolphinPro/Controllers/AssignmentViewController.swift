@@ -263,8 +263,8 @@ class AssignmentViewController: UIViewController ,GMSMapViewDelegate {
         print("Current TimeStamp \(getCurrentDate())")
          if isInternetAvailable() {
             fetchnewAssignment()
-            let model = CheckinModel()
-            model.updatePhotoCheckin()
+
+            CheckinModel.updatePhotoCheckin()
             
         }
     }

@@ -49,7 +49,7 @@ var menuView :CustomNavigationDropdownMenu!
     func showButton(){
         print("=====================")
         print(beaconId)
-        let beacon = VicinityManager().fetchBeaconsFromDb(uuid: beaconId)
+        let beacon = VicinityManager.fetchBeaconsFromDb(uuid: beaconId)
         for data in beacon{
             addressString = data.address!
         }
@@ -152,10 +152,9 @@ var menuView :CustomNavigationDropdownMenu!
             checkin.checkinType = CheckinType.Beacon.rawValue
             self.seanbeacons = NSMutableDictionary()                //        checkin.imageName = imageName + Date().formattedISO8601
             //        checkin.relativeUrl = imageId
-            let checkinModelObject = CheckinModel()
-            checkinModelObject.createCheckin(checkinData: checkin)
+            CheckinModel.createCheckin(checkinData: checkin)
             if isInternetAvailable(){
-                checkinModelObject.postCheckin()
+                CheckinModel.postCheckin()
             }
             
             if checkinString == "I am in"{
@@ -189,9 +188,9 @@ extension MarkAttendanceViewController {
     func startScanning(){
         beaconManager = IBeaconManager()
         var beaconArray = [iBeacon]()
-        let vicinityManager = VicinityManager()
         
-        let beaconsData = vicinityManager.fetchBeaconsFromDb()
+        
+        let beaconsData = VicinityManager.fetchBeaconsFromDb()
         for beaconObject in beaconsData{
             print(beaconObject)
             let ibeacon =

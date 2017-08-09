@@ -23,9 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var coreLocationController:CoreLocationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        stopDebugging(flag: false)
+        let APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
+        print(Bundle.main.bundleIdentifier ?? "raghv")
+        setAppVersion(appVersion: APPVERSION)
+        setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         // Override point for customization after application launch.
+      
        registerForRemoteNotification()
        startUpTask()
+        
         return true
     }
 
@@ -46,8 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         if !SDKSingleton.sharedInstance.userId.isBlank{
-            postTransientCheckin()
+        postTransientCheckin()
         }
+       
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
@@ -195,13 +203,13 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 4,
+            schemaVersion: 1,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 
-                if oldSchemaVersion < 4 {
+                if oldSchemaVersion < 1 {
                     migration.enumerateObjects(ofType: AssignmentObject.className()) { oldObject, newObject in
 
                     }    }
@@ -220,10 +228,10 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         checkin.checkinCategory = CheckinCategory.Transient.rawValue
         checkin.checkinType = CheckinType.Location.rawValue
         
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
+    
+        CheckinModel.createCheckin(checkinData: checkin)
         if isInternetAvailable() {
-          checkinModelObject.postCheckin()
+          CheckinModel.postCheckin()
         }
         
         

@@ -17,14 +17,17 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let oauth = OauthModel()
-        oauth.updateToken()
+      
+        OauthModel.updateToken()
         Singleton.sharedInstance.sortBy = SortEnum.ClearSort.rawValue
         setObservers()
-        BlueDolphinManager.manager.getNearByBeacons()
-        postdbAssignment()
+        BlueDolphinManager.manager.getNearByBeacons { (value) in
         
-        //        postTransientCheckin()
+        }
+        postdbAssignment()
+        DynamicObjectManager.getDObjecct { (value) in
+        
+        }
         // Do any additional setup after loading the view.
     }
     func setObservers(){
@@ -38,21 +41,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Attendance.rawValue), object: nil)
     }
     
-    func getNearByBeacons(){
-        let vicinityManager = VicinityManager()
-        if isInternetAvailable() {
-            vicinityManager.getNearByBeacons { (value) in
-                switch value {
-                case .StartScanning: break
-                    //self.startScanning()
-                case .Failure,.NoScanning:
-                    break;
-                    
-                }
-            }
-        }
-        
-    }
+  
     func postdbAssignment(){
         let assignmentModel = AssignmentModel()
         if isInternetAvailable() {
@@ -145,7 +134,7 @@ extension MainViewController {
     func ShowController (sender : NSNotification) {
         switch (sender.name.rawValue) {
         case LocalNotifcation.Profile.rawValue:
-            self.startScanning()
+            BlueDolphinManager.manager.stopScanning()
             
             //      for views in mainContainer.subviews {
             //        views.removeFromSuperview()
@@ -176,7 +165,7 @@ extension MainViewController {
             
         case LocalNotifcation.Assignment.rawValue:
             
-            
+             BlueDolphinManager.manager.startScanning()
             var lastController: AnyObject?
             
             if let controller =  self.childViewControllers.first as? UINavigationController {
@@ -326,119 +315,58 @@ extension MainViewController {
 extension MainViewController {
     
     
-    func startScanning(){
-        let beaconManager = IBeaconManager()
-        var beaconArray = [iBeacon]()
-        //        let estimoteBeacon1 = iBeacon(minor: 10010, major: 24361, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
-        //        let estimoteBeacon2 = iBeacon(minor: 10858, major: 27403, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
-        //        let estimoteBeacon3 = iBeacon(minor: 21481, major: 21826, proximityId: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
-        let vicinityManager = VicinityManager()
-        
-        let beaconsData = vicinityManager.fetchBeaconsFromDb()
-        for beaconObject in beaconsData{
-            let ibeacon =
-                iBeacon(minor: beaconObject.minor, major: beaconObject.major, proximityId: beaconObject.uuid!, id: beaconObject.beaconId!)
-            beaconArray.append(ibeacon)
-        }
-        
-        print("Beacons count \(beaconArray.count)")
-        beaconManager.registerBeacons(beaconArray)
-        //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
-        
-        beaconManager.startMonitoring({
-            
-        }) { (messages) in
-            print("Error Messages \(messages)")
-        }
-    }
+   
     
     
     
     
-    func sendNotification(id:String) {
-        var address = String()
-        let beacon = VicinityManager().fetchBeaconsFromDb(uuid: id)
-        for data in beacon{
-            address = data.address!
-        }
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
-                                                        repeats: false)
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Bluedolphin Alert"
-        content.subtitle = ""
-        content.body = "Your entered a location \(address)"
-        content.badge = 0
-        
-        content.sound = UNNotificationSound.default()
-        
-        let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
-        
-        //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        UNUserNotificationCenter.current().add(request) {(error) in
-            if let error = error {
-                print("Uh oh! We had an error: \(error)")
-            }
-        }
-    }
+//    func sendNotification(id:String) {
+//        var address = String()
+//        let beacon = VicinityManager.fetchBeaconsFromDb(uuid: id)
+//        for data in beacon{
+//            address = data.address!
+//        }
+//        
+//        if #available(iOS 10.0, *) {
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
+//                                                            repeats: false)
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//        
+//        if #available(iOS 10.0, *) {
+//            let content = UNMutableNotificationContent()
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//        content.title = "Bluedolphin Alert"
+//        content.subtitle = ""
+//        content.body = "Your entered a location \(address)"
+//        content.badge = 0
+//        
+//        if #available(iOS 10.0, *) {
+//            content.sound = UNNotificationSound.default()
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//        
+//        if #available(iOS 10.0, *) {
+//            let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//        
+//        //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//        if #available(iOS 10.0, *) {
+//            UNUserNotificationCenter.current().add(request) {(error) in
+//                if let error = error {
+//                    print("Uh oh! We had an error: \(error)")
+//                }
+//            }
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//    }
     /**Called when the beacons are ranged*/
-    func beaconsRanged(notification:NSNotification){
-        var beconId = String()
-        if let visibleIbeacons = notification.object as? [iBeacon]{
-            
-            
-            for beacon in visibleIbeacons{
-                /// Do something with the iBeacon
-                
-                let dict = [
-                    "uuid" : beacon.UUID ,
-                    "major": String(describing: beacon.major!),
-                    "minor" : String(describing: beacon.minor!),
-                    //"proximity" :  String(describing: beacon.proximity),
-                    "rssi" : beacon.rssi,
-                    "distance" :beacon.accuracy,
-                    "lastseen" : getCurrentDate().formattedISO8601
-                    
-                ]
-                beconId = beacon.UUID
-                seanbeacons.addEntries(from: [beacon.major! :dict])
-                print(dict)
-            }
-            if beaconSentflag {
-                beaconSentflag = false
-                //sendNotification(id: beconId)
-                let delay = 60.0 * Double(NSEC_PER_SEC)
-                let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
-                DispatchQueue.main.asyncAfter(deadline: time, execute: {
-                    self.beaconSentflag = true
-                    
-                    if self.seanbeacons.count != 0 {
-                        
-                        let checkin = CheckinHolder()
-                        var beaconArray = Array<Any>()
-                        for (_,value) in self.seanbeacons {
-                            beaconArray.append(value)
-                        }
-                        checkin.beaconProximities = beaconArray
-                        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:AppVersion as AnyObject,AssignmentWork.UserAgent.rawValue:deviceType as AnyObject]
-                        checkin.checkinCategory = CheckinCategory.Transient.rawValue
-                        checkin.checkinType = CheckinType.Beacon.rawValue
-                        self.seanbeacons = NSMutableDictionary()                //        checkin.imageName = imageName + Date().formattedISO8601
-                        //        checkin.relativeUrl = imageId
-                        let checkinModelObject = CheckinModel()
-                        checkinModelObject.createCheckin(checkinData: checkin)
-                        if isInternetAvailable(){
-                            checkinModelObject.postCheckin()
-                        }
-                        
-                    }
-                })
-            }
-            
-            
-            
-        }
-    }
+   
 }

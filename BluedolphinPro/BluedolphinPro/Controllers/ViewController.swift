@@ -71,9 +71,11 @@ class ViewController: UIViewController {
             
         ]
         
-                let userData = UserDataModel()
-                userData.createUserData(userObject: objectdata)
-                userData.userSignUp(mobile: email)
+        
+//                UserDataModel.createUserData(userObject: objectdata)
+//                UserDataModel.userSignUp(param: email) { (value) in
+//                    print(value)
+//        }
     }
     
     
@@ -86,8 +88,8 @@ class ViewController: UIViewController {
                             "otpToken":pass
                         ]
         
-        let oauth = OauthModel()
-        oauth.getToken(userObject: param) { (result) in
+    
+        OauthModel.getToken(userObject: param) { (result) in
             if result == APIResult.Success.rawValue {
                 getUserData()
                 let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController

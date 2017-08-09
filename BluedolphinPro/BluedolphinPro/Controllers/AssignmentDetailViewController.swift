@@ -303,11 +303,15 @@ class AssignmentDetailViewController: UIViewController {
             let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallURL)) {
                 //application.openURL(phoneCallURL);
-                application.open(phoneCallURL, options: [:], completionHandler: { (success) in
-                    if success {
-                        print("call")
-                    }
-                })
+                if #available(iOS 10.0, *) {
+                    application.open(phoneCallURL, options: [:], completionHandler: { (success) in
+                        if success {
+                            print("call")
+                        }
+                    })
+                } else {
+                    // Fallback on earlier versions
+                }
             }
             else {
                 self.showAlert("Your device is not compatible to call.")
@@ -477,8 +481,8 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
         checkin.assignmentId = assignment?.assignmentId
         checkin.imageName = imageName + getCurrentDate().formattedISO8601
         checkin.relativeUrl = imageId
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
+    
+        CheckinModel.createCheckin(checkinData: checkin)
         //checkinModelObject.postCheckin()
         let assignmentModel = AssignmentModel()
         assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.Photo, value: imageId, status: CheckinType.Inprogress)
@@ -497,8 +501,8 @@ extension AssignmentDetailViewController :UINavigationControllerDelegate,UIImage
         checkin.assignmentId = assignment?.assignmentId
 //        checkin.imageName = imageName + Date().formattedISO8601
 //        checkin.relativeUrl = imageId
-        let checkinModelObject = CheckinModel()
-        checkinModelObject.createCheckin(checkinData: checkin)
+
+        CheckinModel.createCheckin(checkinData: checkin)
         //checkinModelObject.postCheckin()
         let assignmentModel = AssignmentModel()
         assignmentModel.updateAssignment(id:(assignment?.assignmentId)! , type: AssignmentWork.Submission, value:"Submitted", status: CheckinType.Submitted)
@@ -526,11 +530,19 @@ extension AssignmentDetailViewController{
         {
             if let url = URL(string: googleApp + query.stringByAddingPercentEncodingForRFC3986()!) {
                 
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    // Fallback on earlier versions
+                }
             }
             
         } else {
-            UIApplication.shared.open(URL(string: googlePath + query.stringByAddingPercentEncodingForRFC3986()!)!, options: [:], completionHandler: nil)
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(URL(string: googlePath + query.stringByAddingPercentEncodingForRFC3986()!)!, options: [:], completionHandler: nil)
+            } else {
+                // Fallback on earlier versions
+            }
         }
         
         

@@ -31,7 +31,7 @@ class AssignmentTableCell: UITableViewCell {
         
         if let assignmentdetail = task.assignmentDetails?.parseJSONString as? NSDictionary{
                         if let jobNumber = assignmentdetail["jobNumber"] as? String{
-                jobNameLabel.text = jobNumber
+                         jobNameLabel.text = jobNumber
             }
 
             
