@@ -207,6 +207,8 @@ public func getUUIDString()->String{
             if beconList.count > 0 {
                 AttendanceLogModel.updateAttendanceLog(beaconList: beconList)
                 calcluateTotalTime()
+            }else{
+                return
             }
             
             checkin.beaconProximity = beconList

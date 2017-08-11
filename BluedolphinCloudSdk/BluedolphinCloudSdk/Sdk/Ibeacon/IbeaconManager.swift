@@ -67,20 +67,23 @@ public enum iBeaconNotifications:String{
     /**Checks the status of the application*/
     func checkStatus(){
         //starts from Bluetooth
-  
         if let _ = self.bluetoothManager{
-              if (UserDefaults.standard.value(forKeyPath: "LastBeaconCheckinTime") as? Date) != nil {
-              }else{
+            if (UserDefaults.standard.value(forKeyPath: "LastBeaconCheckinTime") as? Date) != nil {
                 bluetoothManager = BluetoothManager()
+                bluetoothManager?.callback = bluetoothUpdate
+                
+            }else{
+                //bluetoothManager = BluetoothManager()
                 bluetoothManager?.callback = bluetoothUpdate
             }
             
         }
         else{
-    
+            
             bluetoothManager = BluetoothManager()
             bluetoothManager?.callback = bluetoothUpdate
         }
+
         
     }
     
@@ -212,6 +215,7 @@ public enum iBeaconNotifications:String{
             //FIXME: added more validation for the ibeacons permission matrix
         
         }
+        print("Beacon Scanning Started")
         
     }
     
@@ -222,6 +226,7 @@ public enum iBeaconNotifications:String{
             locationManager.stopRangingBeacons(in: beaconRegion)
         }
          locationManager.stopUpdatingLocation()
+        print("Beacon Scanning Stopped")
     }
     
     
@@ -267,13 +272,13 @@ public enum iBeaconNotifications:String{
             }
         }
         //if we are outside stop ranging
-        if state == .outside{
-         manager.stopRangingBeacons(in: region as! CLBeaconRegion)
-        }
-        if state == .inside{
-            manager.startRangingBeacons(in: region as! CLBeaconRegion)
-        }
-        
+//        if state == .outside{
+//         manager.stopRangingBeacons(in: region as! CLBeaconRegion)
+//        }
+//        if state == .inside{
+//            manager.startRangingBeacons(in: region as! CLBeaconRegion)
+//        }
+//        
         
     }
     /*
@@ -409,7 +414,7 @@ public enum iBeaconNotifications:String{
             if logging {
                 print("Region Entered! \(region) ")
                
-                manager.startRangingBeacons(in: region as! CLBeaconRegion)
+                //manager.startRangingBeacons(in: region as! CLBeaconRegion)
             }
         }
     }
@@ -431,7 +436,7 @@ public enum iBeaconNotifications:String{
             if logging {
                 
                 print("Exit Region! \(region) ")
-                manager.stopRangingBeacons(in: region as! CLBeaconRegion)
+                //manager.stopRangingBeacons(in: region as! CLBeaconRegion)
             }
             
         }
