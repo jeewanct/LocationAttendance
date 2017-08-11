@@ -13,6 +13,7 @@ enum SideMenuOptions:String{
     case SystemDetail = "System Detail"
     case ThisWeek = "This Week"
     case Transmit
+    case ContactUs = "Contact Us"
 }
 class SideMenuViewController: UIViewController  {
         
@@ -20,7 +21,7 @@ class SideMenuViewController: UIViewController  {
         @IBOutlet weak var sideMenuTable: UITableView!
         @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var userImageView: UIImageView!
-        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ThisWeek.rawValue,/*"Contact Us",*/SideMenuOptions.Transmit.rawValue]
+        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ThisWeek.rawValue,SideMenuOptions.ContactUs.rawValue,SideMenuOptions.Transmit.rawValue]
 
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -122,8 +123,8 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.SystemDetail.rawValue), object: self, userInfo: nil)
         case SideMenuOptions.ThisWeek.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: self, userInfo: nil)
-//        case 3:
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ContactUs.rawValue), object: self, userInfo: nil)
+      case SideMenuOptions.ContactUs.rawValue :
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ContactUs.rawValue), object: self, userInfo: nil)
         case SideMenuOptions.Transmit.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: self, userInfo: nil)
             break

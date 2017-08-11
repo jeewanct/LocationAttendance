@@ -106,6 +106,7 @@ class MyDashboardViewController: UIViewController {
     func updateView(sender:NSNotification){
           switch (sender.name.rawValue) {
           case LocalNotifcation.CheckoutScreen.rawValue:
+            BlueDolphinManager.manager.stopScanning()
             BlueDolphinManager.manager.startScanning()
             postDataCheckin(userInteraction: .swipeUp)
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
@@ -118,7 +119,7 @@ class MyDashboardViewController: UIViewController {
             
             
           case LocalNotifcation.DayCheckinScreen.rawValue:
-           //BlueDolphinManager.manager.stopScanning()
+           BlueDolphinManager.manager.stopScanning()
             postDataCheckin(userInteraction: .swipeDown)
 
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "dayCheckin") as! UINavigationController

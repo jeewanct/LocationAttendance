@@ -24,6 +24,7 @@ class SystemDetailViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sync"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(sync(sender:)))
         self.navigationItem.title = "System Details"
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         systemTableview.delegate = self
         systemTableview.dataSource = self
         systemTableview.tableFooterView = UIView()
@@ -70,7 +71,7 @@ class SystemDetailViewController: UIViewController {
            lastCheckinTime = "No last Checkin Found"
         }
         
-        let lastCheckinLocation = "Last beacon location : " + userDataForToday.getLastCheckInAddress()!
+        let lastCheckinLocation = "Last beacon location : " + userDataForToday.getLastCheckInAddress()!.capitalized
         systemDetail.append(lastCheckinTime)
         systemDetail.append(lastCheckinLocation)
         if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastBeaconScanned.rawValue ) as? Date {

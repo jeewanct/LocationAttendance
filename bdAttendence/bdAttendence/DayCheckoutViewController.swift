@@ -31,7 +31,7 @@ class DayCheckoutViewController: UIViewController {
     }
     func handleGesture(sender:UIGestureRecognizer){
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-        BlueDolphinManager.manager.startScanning()
+       
         //self.dismiss(animated: true, completion: nil)
       NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)
       

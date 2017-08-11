@@ -100,6 +100,7 @@ struct APPFONT {
     static var MENUTEXT =  UIFont(name: "SourceSansPro-Light", size: 15.0)
     static var VERSIONTEXT = UIFont(name: "SourceSansPro-Regular", size: 12.0)
     static var DAYCHAR = UIFont(name: "SourceSansPro-Semibold", size: 11.0)
+    static var MESSAGEHELPTEXT = UIFont(name: "SourceSansPro-Regular", size: 16.0)
 }
 
 

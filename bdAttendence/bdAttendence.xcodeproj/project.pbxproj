@@ -33,8 +33,10 @@
 		9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */; };
 		998461201F2AF45900D91AB7 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984611F1F2AF45900D91AB7 /* TimeLineViewController.swift */; };
 		999D300B1F17A57F0073AEEA /* MyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */; };
-		99B5A9001F3B174900FE950C /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99B5A8FE1F3B174000FE950C /* BluedolphinCloudSdk.framework */; };
-		99B5A9011F3B174900FE950C /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99B5A8FE1F3B174000FE950C /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		99B5A90C1F3D86AA00FE950C /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99B5A90A1F3D869C00FE950C /* BluedolphinCloudSdk.framework */; };
+		99B5A90D1F3D86AA00FE950C /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99B5A90A1F3D869C00FE950C /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		99B5A90F1F3DB81600FE950C /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5A90E1F3DB81600FE950C /* ContactTableViewCell.swift */; };
+		99B5A9111F3DC21A00FE950C /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5A9101F3DC21A00FE950C /* MailComposer.swift */; };
 		99B811651F2F11E200174FD0 /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B811641F2F11E200174FD0 /* ContactUsViewController.swift */; };
 		99B936911EC98706008E12C4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B936901EC98706008E12C4 /* CardView.swift */; };
 		99BC35051F27448A00A59A4A /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BC35041F27448A00A59A4A /* HistoryViewController.swift */; };
@@ -90,7 +92,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99B5A9011F3B174900FE950C /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				99B5A90D1F3D86AA00FE950C /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,7 +130,9 @@
 		9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSingleton.swift; sourceTree = "<group>"; };
 		9984611F1F2AF45900D91AB7 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardViewController.swift; sourceTree = "<group>"; };
-		99B5A8FE1F3B174000FE950C /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		99B5A90A1F3D869C00FE950C /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		99B5A90E1F3DB81600FE950C /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		99B5A9101F3DC21A00FE950C /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		99B811641F2F11E200174FD0 /* ContactUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
 		99B936901EC98706008E12C4 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		99BC35041F27448A00A59A4A /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99B5A9001F3B174900FE950C /* BluedolphinCloudSdk.framework in Frameworks */,
+				99B5A90C1F3D86AA00FE950C /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,6 +236,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
+				99B5A90A1F3D869C00FE950C /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -254,7 +259,6 @@
 		99BD39A01EA49B7100B6942B /* bdAttendence */ = {
 			isa = PBXGroup;
 			children = (
-				99B5A8FE1F3B174000FE950C /* BluedolphinCloudSdk.framework */,
 				99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */,
 				99CA967B1F021E2A00E2813B /* Storyboard */,
 				99CA967C1F021E4300E2813B /* Helpers */,
@@ -322,6 +326,7 @@
 				997490281F0CD8A000AC92B9 /* UserDataModel.swift */,
 				996953201F13BC25000A6C26 /* Broadcaster.swift */,
 				99F84C151F2877D200D6AE44 /* CircleView.swift */,
+				99B5A9101F3DC21A00FE950C /* MailComposer.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				996953241F149A92000A6C26 /* CheckinView.xib */,
 				996953281F14A125000A6C26 /* DayCheckinView.xib */,
 				996953261F14A0A4000A6C26 /* CheckoutView.xib */,
+				99B5A90E1F3DB81600FE950C /* ContactTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -723,9 +729,11 @@
 				99576C091F0CD5E300A53A4C /* SystemDetailViewController.swift in Sources */,
 				990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */,
 				9969531D1F13BA46000A6C26 /* TransmitViewController.swift in Sources */,
+				99B5A90F1F3DB81600FE950C /* ContactTableViewCell.swift in Sources */,
 				9974903B1F0CFC0600AC92B9 /* CorouselEffect.swift in Sources */,
 				997490291F0CD8A000AC92B9 /* UserDataModel.swift in Sources */,
 				99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */,
+				99B5A9111F3DC21A00FE950C /* MailComposer.swift in Sources */,
 				991A0ECB1ECC259D00513373 /* ProjectConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -904,7 +912,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0e86e5a6-840a-406d-a1d8-dfe50082cffd";
+				PROVISIONING_PROFILE = "1c00b222-b453-4dc3-a610-e81ae70210a1";
 				PROVISIONING_PROFILE_SPECIFIER = attendancedev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

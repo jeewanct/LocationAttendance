@@ -22,7 +22,7 @@ class TimeLineViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(cancelAction))
         self.navigationItem.title = currentDate?.formattedWith(format: "MMM d, yyyy")
-        //self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYCHAR!]
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationController?.navigationBar.tintColor = APPColor.BlueGradient
         timeLineData = CheckinListModel.getDataFromDb(date: currentDate!)
         timeLineTableview.delegate = self
