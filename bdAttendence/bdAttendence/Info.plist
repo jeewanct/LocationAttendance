@@ -40,6 +40,10 @@
 	<string>Want to access near by beacons</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Want to access near by location to track your indoor location</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Want to access your camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Want to access your gallery</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SourceSansPro-Black.ttf</string>

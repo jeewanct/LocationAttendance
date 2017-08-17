@@ -15,20 +15,28 @@ enum SideMenuOptions:String{
     case Transmit
     case ContactUs = "Contact Us"
 }
+protocol SideMenuDelegate {
+    func updateMenu()
+}
 class SideMenuViewController: UIViewController  {
         
     @IBOutlet weak var versionLabel: UILabel!
         @IBOutlet weak var sideMenuTable: UITableView!
         @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var userImageView: UIImageView!
-        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ThisWeek.rawValue,SideMenuOptions.ContactUs.rawValue,SideMenuOptions.Transmit.rawValue]
+        var menuindex = 0
+        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.ThisWeek.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ContactUs.rawValue,SideMenuOptions.Transmit.rawValue]
 
         override func viewDidLoad() {
             super.viewDidLoad()
             if !SDKSingleton.sharedInstance.transmitter{
                 sideMenuOptionsArray.remove(at: sideMenuOptionsArray.index(of: SideMenuOptions.Transmit.rawValue)!)
             }
+
+            userImageView.layer.cornerRadius = 50.0
             self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+            
+            
             let tapGestureForImage = UITapGestureRecognizer(target: self, action: #selector(SideMenuViewController.handleTap(sender:)))
             let tapGestureForLabel = UITapGestureRecognizer(target: self, action: #selector(SideMenuViewController.handleTap(sender:)))
                 userImageView.isUserInteractionEnabled = true
@@ -42,11 +50,23 @@ class SideMenuViewController: UIViewController  {
                 versionLabel.font = APPFONT.VERSIONTEXT
                 versionLabel.text = "V" + APPVERSION
                 versionLabel.textAlignment = .center
+            
+            UserDefaults.standard.addObserver(self, forKeyPath: "profileImage", options: .new, context: nil)
             }
     
-            //println(userData)
-            
-            
+    
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "profileImage" {
+            if let imageData = UserDefaults.standard.value(forKey: "profileImage") as? Data {
+                userImageView.image = UIImage(data: imageData)!
+            }
+        }
+    }
+    
+    deinit {
+        UserDefaults.standard.removeObserver(self, forKeyPath: "profileImage")
+    }
             // Do any additional setup after loading the view.
     
         
@@ -54,8 +74,17 @@ class SideMenuViewController: UIViewController  {
         func handleTap(sender : UITapGestureRecognizer) {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MyProfile"), object: nil)
         }
-        
-        
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let imageData = UserDefaults.standard.value(forKey: "profileImage") as? Data {
+            userImageView.image = UIImage(data: imageData)!
+        }
+        let indexPath = IndexPath(row: menuindex, section: 0)
+        self.tableView(sideMenuTable, didSelectRowAt: indexPath)
+        sideMenuTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
+       
+    }
+    
 
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
@@ -70,10 +99,14 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath)
         
         cell.textLabel!.text = sideMenuOptionsArray[indexPath.row]
-        //cell.imageView?.image = UIImage()
+        cell.imageView?.image = UIImage()
+        cell.selectionStyle = .gray
         cell.textLabel?.textColor = UIColor.white
         cell.textLabel?.font = APPFONT.MENUTEXT
-        cell.textLabel?.textAlignment = NSTextAlignment.center
+        cell.textLabel?.textAlignment = NSTextAlignment.left
+        let selectedview = UIView()
+        selectedview.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        cell.selectedBackgroundView = selectedview
         return cell
     }
 
@@ -100,21 +133,23 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
         return true
     }
     
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath as IndexPath)
-        cell!.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath as IndexPath)
-        cell!.textLabel?.textColor = UIColor.white
-        cell?.contentView.backgroundColor = UIColor.clear
-        cell?.backgroundColor = UIColor.clear
-    }
+//    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+//        let cell = tableView.cellForRow(at: indexPath as IndexPath)
+//        cell!.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+//        
+//    }
+//    
+//    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+//        let cell = tableView.cellForRow(at: indexPath as IndexPath)
+//        cell!.textLabel?.textColor = UIColor.white
+//        
+//        cell?.contentView.backgroundColor = UIColor.clear
+//        cell?.backgroundColor = UIColor.clear
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        menuindex = indexPath.row
         let option = sideMenuOptionsArray[indexPath.row]
+        
         switch (option)
         {
         case SideMenuOptions.MyDashboard.rawValue:
@@ -143,3 +178,10 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+//extension SideMenuViewController:SideMenuDelegate{
+//    func updateMenu() {
+//        if let imageData = UserDefaults.standard.value(forKey: "profileImage") as? Data {
+//            userImageView.image = UIImage(data: imageData)!
+//        }
+//    }
+//}

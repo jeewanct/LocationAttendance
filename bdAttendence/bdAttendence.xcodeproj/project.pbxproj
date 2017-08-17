@@ -10,6 +10,11 @@
 		419EFA8AA35C4A224D53A6E7 /* Pods_bdAttendenceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84808C944901ADB85F779C1 /* Pods_bdAttendenceUITests.framework */; };
 		787D118106469ECFDE39FB93 /* Pods_bdAttendenceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 705EFBD76E06AFBFB1CF3729 /* Pods_bdAttendenceTests.framework */; };
 		7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31BC022915AA05FF0E1E696 /* Pods_bdAttendence.framework */; };
+		990089161F44177400CED97E /* TwoSideLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990089141F44177400CED97E /* TwoSideLabelTableViewCell.swift */; };
+		990089171F44177400CED97E /* TwoSideLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 990089151F44177400CED97E /* TwoSideLabelTableViewCell.xib */; };
+		9900891B1F4419D200CED97E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9900891A1F4419D200CED97E /* ProfileViewController.swift */; };
+		9900891E1F4465FA00CED97E /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9900891C1F4465FA00CED97E /* SwitchTableViewCell.swift */; };
+		9900891F1F4465FA00CED97E /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9900891D1F4465FA00CED97E /* SwitchTableViewCell.xib */; };
 		990CBCEB1EFA3F3A00F56E38 /* NewDesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 990CBCE91EFA3F3900F56E38 /* NewDesign.storyboard */; };
 		990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCEC1EFA422000F56E38 /* GradientView.swift */; };
 		990CBCEF1EFA47F700F56E38 /* NewLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCEE1EFA47F700F56E38 /* NewLoginViewController.swift */; };
@@ -105,6 +110,11 @@
 		70323FBB1E8B6C109AC2505C /* Pods-bdAttendenceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendenceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendenceUITests/Pods-bdAttendenceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		705EFBD76E06AFBFB1CF3729 /* Pods_bdAttendenceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdAttendenceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AE9D8E83427C8914FFBC505 /* Pods-bdAttendence.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdAttendence.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdAttendence/Pods-bdAttendence.release.xcconfig"; sourceTree = "<group>"; };
+		990089141F44177400CED97E /* TwoSideLabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoSideLabelTableViewCell.swift; sourceTree = "<group>"; };
+		990089151F44177400CED97E /* TwoSideLabelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSideLabelTableViewCell.xib; sourceTree = "<group>"; };
+		9900891A1F4419D200CED97E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9900891C1F4465FA00CED97E /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		9900891D1F4465FA00CED97E /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
 		990CBCEA1EFA3F3900F56E38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NewDesign.storyboard; sourceTree = "<group>"; };
 		990CBCEC1EFA422000F56E38 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		990CBCEE1EFA47F700F56E38 /* NewLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewLoginViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +217,7 @@
 		990CBCF41EFAA20200F56E38 /* NewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				9900891A1F4419D200CED97E /* ProfileViewController.swift */,
 				99B811641F2F11E200174FD0 /* ContactUsViewController.swift */,
 				9984611F1F2AF45900D91AB7 /* TimeLineViewController.swift */,
 				99BC35041F27448A00A59A4A /* HistoryViewController.swift */,
@@ -344,6 +355,8 @@
 		99FB1E631F15FDBD00FA8A9E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				990089141F44177400CED97E /* TwoSideLabelTableViewCell.swift */,
+				990089151F44177400CED97E /* TwoSideLabelTableViewCell.xib */,
 				99CCF2431F2A1E56008947FA /* TimeLineTableViewCell.swift */,
 				99BC35061F275A8800A59A4A /* DayCollectionViewCell.swift */,
 				996953221F149A7A000A6C26 /* CheckinView.swift */,
@@ -351,6 +364,8 @@
 				996953281F14A125000A6C26 /* DayCheckinView.xib */,
 				996953261F14A0A4000A6C26 /* CheckoutView.xib */,
 				99B5A90E1F3DB81600FE950C /* ContactTableViewCell.swift */,
+				9900891C1F4465FA00CED97E /* SwitchTableViewCell.swift */,
+				9900891D1F4465FA00CED97E /* SwitchTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -517,7 +532,9 @@
 				998246311ED5BEAD006CA0E4 /* SourceSansPro-Semibold.ttf in Resources */,
 				996953291F14A125000A6C26 /* DayCheckinView.xib in Resources */,
 				99BD39AC1EA49B7100B6942B /* LaunchScreen.storyboard in Resources */,
+				9900891F1F4465FA00CED97E /* SwitchTableViewCell.xib in Resources */,
 				99BD39A91EA49B7100B6942B /* Assets.xcassets in Resources */,
+				990089171F44177400CED97E /* TwoSideLabelTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +716,7 @@
 				990CBCF31EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift in Sources */,
 				996953231F149A7A000A6C26 /* CheckinView.swift in Sources */,
 				999D300B1F17A57F0073AEEA /* MyDashboardViewController.swift in Sources */,
+				9900891B1F4419D200CED97E /* ProfileViewController.swift in Sources */,
 				99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */,
 				99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */,
 				9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */,
@@ -724,12 +742,14 @@
 				99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */,
 				99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */,
 				998461201F2AF45900D91AB7 /* TimeLineViewController.swift in Sources */,
+				9900891E1F4465FA00CED97E /* SwitchTableViewCell.swift in Sources */,
 				99E369CF1F1DFE99000A642C /* WorkHourViewController.swift in Sources */,
 				99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */,
 				99576C091F0CD5E300A53A4C /* SystemDetailViewController.swift in Sources */,
 				990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */,
 				9969531D1F13BA46000A6C26 /* TransmitViewController.swift in Sources */,
 				99B5A90F1F3DB81600FE950C /* ContactTableViewCell.swift in Sources */,
+				990089161F44177400CED97E /* TwoSideLabelTableViewCell.swift in Sources */,
 				9974903B1F0CFC0600AC92B9 /* CorouselEffect.swift in Sources */,
 				997490291F0CD8A000AC92B9 /* UserDataModel.swift in Sources */,
 				99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */,

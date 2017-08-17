@@ -65,7 +65,7 @@ class ContactUsViewController: UIViewController {
     
     func sendMail(){
         if messageTextView.text.isBlank {
-            //self.showAlert("Please enter  message before")
+            self.showAlert("Please enter your message")
         }else{
             if( MFMailComposeViewController.canSendMail() ) {
                 
@@ -145,7 +145,7 @@ class ContactUsViewController: UIViewController {
     
     func callAlertView() {
         
-        let alertString =  "Carrier charges may apply Are  you sure you want to call"
+        let alertString =  "Carrier charges may apply. Are  you sure you want to call ?"
         showAlertView(alertString, yesAction: callAction)
         
     }

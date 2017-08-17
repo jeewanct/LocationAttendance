@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(APPVERSION)
         
         setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: true)
+        stopDebugging(flag: false)
         setCheckinInteral(val: 300)
         //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
@@ -88,7 +88,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func startUpTask(){
         getDeviceID()
         checkLogin()
-        
+        if let deviceToken = UserDefaults.standard.value(forKey: UserDefaultsKeys.deviceToken.rawValue) as? String{
+            print(deviceToken)
+        }
     }
     
     func getDeviceID(){

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-    //Swift.print(items[0], separator:separator, terminator: terminator)
+    Swift.print(items[0], separator:separator, terminator: terminator)
 }
 
 
@@ -42,6 +42,22 @@ extension UIColor {
             green: CGFloat(g) / 0xff,
             blue: CGFloat(b) / 0xff, alpha: 1
         )
+    }
+}
+
+
+extension UITableViewCell {
+    
+    func setDisclosure(toColour: UIColor) -> () {
+        for view in self.subviews {
+            if let disclosure = view as? UIButton {
+                if let image = disclosure.backgroundImage(for: .normal) {
+                    let colouredImage = image.withRenderingMode(.alwaysTemplate);
+                    disclosure.setImage(colouredImage, for: .normal)
+                    disclosure.tintColor = toColour
+                }
+            }
+        }
     }
 }
 

@@ -28,7 +28,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZLB-mr-keV" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PpO-oJ-7dP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PpO-oJ-7dP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -736,7 +736,9 @@
                                     <constraint firstAttribute="height" constant="100" id="zDI-UG-lws"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="32"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="32"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raghvendra" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eg8-XT-sab">
@@ -746,7 +748,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hAE-up-dgZ">
-                                <rect key="frame" x="0.0" y="206" width="220" height="421"/>
+                                <rect key="frame" x="0.0" y="205" width="220" height="422"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
@@ -774,10 +776,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCj-KP-j6g">
-                                <rect key="frame" x="0.0" y="205" width="220" height="1"/>
+                                <rect key="frame" x="0.0" y="205" width="220" height="0.0"/>
                                 <color key="backgroundColor" red="0.54602867219452711" green="0.90372243284442433" blue="0.9312309423073899" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="nc1-WO-PNq"/>
+                                    <constraint firstAttribute="height" id="nc1-WO-PNq"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -888,7 +890,7 @@
         <scene sceneID="I4C-5l-vUt">
             <objects>
                 <navigationController storyboardIdentifier="Main" id="Fx4-6H-Q9G" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NkD-E7-dcq" customClass="CustomNavigationBar" customModule="bdAttendence" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="NkD-E7-dcq" customClass="CustomNavigationBar" customModule="bdAttendence" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -905,7 +907,7 @@
             <objects>
                 <navigationController storyboardIdentifier="newCheckin" automaticallyAdjustsScrollViewInsets="NO" id="zIJ-e7-QIo" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CgV-dC-oic">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CgV-dC-oic">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -989,7 +991,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="newCheckout" automaticallyAdjustsScrollViewInsets="NO" id="6bY-kG-nMU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Bc-I9-SNd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1Bc-I9-SNd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1007,7 +1009,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="orgList" automaticallyAdjustsScrollViewInsets="NO" id="mG7-SV-y42" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qvb-WV-LU4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qvb-WV-LU4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1102,7 +1104,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="dayCheckin" automaticallyAdjustsScrollViewInsets="NO" id="TV0-G9-M50" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sRP-aP-KUP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="sRP-aP-KUP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1120,7 +1122,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="systemDetail" automaticallyAdjustsScrollViewInsets="NO" id="w3I-iW-gws" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S5S-3o-dKy">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="S5S-3o-dKy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1797,7 +1799,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="VirtualBeacon" automaticallyAdjustsScrollViewInsets="NO" id="rIn-Qu-bpd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lJ0-cZ-Jy0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lJ0-cZ-Jy0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1815,7 +1817,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="dashboard" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="qvO-xa-hq5" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZZi-nf-7Mh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZZi-nf-7Mh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1833,7 +1835,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="workHour" automaticallyAdjustsScrollViewInsets="NO" id="WZn-6M-bBT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Qc-hx-k9c">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7Qc-hx-k9c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1851,7 +1853,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yfq-El-d6L" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vk5-bQ-7rb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Vk5-bQ-7rb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1869,7 +1871,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="history" automaticallyAdjustsScrollViewInsets="NO" id="KVF-kH-0Wb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FhW-Wb-Jlp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FhW-Wb-Jlp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2010,12 +2012,86 @@ mark your presence at your workplace</string>
             </objects>
             <point key="canvasLocation" x="1983.2" y="4567.4662668665669"/>
         </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="9uy-bC-4la">
+            <objects>
+                <viewController id="1Rd-Sa-Vnh" customClass="ProfileViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9hx-w4-6nt"/>
+                        <viewControllerLayoutGuide type="bottom" id="Om4-aR-nA4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uEj-yj-xfL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-uc-ZLt">
+                                <rect key="frame" x="112" y="83" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="Cig-Ps-fb4"/>
+                                    <constraint firstAttribute="height" constant="150" id="yb0-5L-dyz"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="32"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="an5-NT-Sbz">
+                                <rect key="frame" x="187" y="248" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dRE-Ky-pc8">
+                                <rect key="frame" x="0.0" y="288" width="375" height="379"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="oEf-hr-XGZ">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oEf-hr-XGZ" id="mdP-WI-zvC">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="g7v-aY-O08">
+                                <rect key="frame" x="225" y="93" width="27" height="27"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="U4T-uc-ZLt" firstAttribute="top" secondItem="9hx-w4-6nt" secondAttribute="bottom" constant="19" id="6ow-Je-ZSn"/>
+                            <constraint firstItem="dRE-Ky-pc8" firstAttribute="leading" secondItem="uEj-yj-xfL" secondAttribute="leading" id="7ug-aY-oho"/>
+                            <constraint firstItem="g7v-aY-O08" firstAttribute="top" secondItem="U4T-uc-ZLt" secondAttribute="top" constant="10" id="9Sk-Bu-q39"/>
+                            <constraint firstItem="an5-NT-Sbz" firstAttribute="centerX" secondItem="U4T-uc-ZLt" secondAttribute="centerX" id="Jbh-sr-pBn"/>
+                            <constraint firstAttribute="trailing" secondItem="dRE-Ky-pc8" secondAttribute="trailing" id="UNJ-pl-6Xh"/>
+                            <constraint firstItem="Om4-aR-nA4" firstAttribute="top" secondItem="dRE-Ky-pc8" secondAttribute="bottom" id="bDV-ti-ZYn"/>
+                            <constraint firstItem="dRE-Ky-pc8" firstAttribute="top" secondItem="an5-NT-Sbz" secondAttribute="bottom" constant="40" id="jX0-wu-wez"/>
+                            <constraint firstItem="U4T-uc-ZLt" firstAttribute="centerX" secondItem="uEj-yj-xfL" secondAttribute="centerX" id="pN5-s5-LRb"/>
+                            <constraint firstItem="an5-NT-Sbz" firstAttribute="top" secondItem="U4T-uc-ZLt" secondAttribute="bottom" constant="15" id="up6-J4-QVa"/>
+                            <constraint firstItem="g7v-aY-O08" firstAttribute="trailing" secondItem="U4T-uc-ZLt" secondAttribute="trailing" constant="-10" id="wSh-Gb-4lg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="LGy-US-NCP"/>
+                    <connections>
+                        <outlet property="profileImageView" destination="U4T-uc-ZLt" id="a1G-15-Ihf"/>
+                        <outlet property="profileTableView" destination="dRE-Ky-pc8" id="aLh-sc-bi1"/>
+                        <outlet property="userNameLabel" destination="an5-NT-Sbz" id="5fn-AV-6na"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Anu-U7-K3u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2909.5999999999999" y="5345.577211394303"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="erW-W3-bmO">
             <objects>
                 <navigationController storyboardIdentifier="timeLine" automaticallyAdjustsScrollViewInsets="NO" id="YDi-IL-4Nu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LVS-vm-jP9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LVS-vm-jP9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2033,7 +2109,7 @@ mark your presence at your workplace</string>
             <objects>
                 <navigationController storyboardIdentifier="contactUs" automaticallyAdjustsScrollViewInsets="NO" id="ffZ-Rd-c08" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ghG-kp-CxQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ghG-kp-CxQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2046,8 +2122,27 @@ mark your presence at your workplace</string>
             </objects>
             <point key="canvasLocation" x="1044" y="4567.4662668665669"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mh2-b1-4jQ">
+            <objects>
+                <navigationController storyboardIdentifier="myprofile" automaticallyAdjustsScrollViewInsets="NO" id="EOi-Rb-pmA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Uyh-Qf-4yB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1Rd-Sa-Vnh" kind="relationship" relationship="rootViewController" id="8nc-QX-AjI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ocz-KZ-Dhg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1968.8" y="5345.577211394303"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="edit" width="27" height="27"/>
         <image name="error" width="179" height="179"/>
         <image name="logo" width="35" height="36"/>
         <image name="phone" width="14" height="14"/>

@@ -20,6 +20,7 @@ class SuperViewController: UIViewController {
     
     @IBOutlet weak var mainContainer: UIView!
     
+    
     var visualEffectView = UIVisualEffectView()
     var bool = Bool()
     override func viewDidLoad() {
@@ -50,6 +51,7 @@ class SuperViewController: UIViewController {
     
     }
     func handleLeftGesture() {
+      
         self.showMenuView()
     }
     
@@ -72,6 +74,7 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.ContactUs.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: nil)
         
         
@@ -129,6 +132,7 @@ class SuperViewController: UIViewController {
         })
     }
     func ShowSideMenu(sender : NSNotification) {
+       
         self.showMenuView()
         
     }
@@ -329,16 +333,7 @@ extension SuperViewController {
             
             lastController?.removeFromParentViewController()
             let destVc = self.storyboard?.instantiateViewController(withIdentifier: "dashboard") as! UINavigationController
-//            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
-//                switch screenFlag {
-//                case "1":
-//                    destVc = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
-//                case "2":
-//                    destVc = self.storyboard?.instantiateViewController(withIdentifier: "newCheckin") as! UINavigationController
-//                default:
-//                    break
-//                }
-//            }
+
             
             self.addChildViewController(destVc)
             destVc.view.frame = self.mainContainer.frame
@@ -422,6 +417,27 @@ extension SuperViewController {
             
             lastController?.removeFromParentViewController()
             let destVc = self.storyboard?.instantiateViewController(withIdentifier: "contactUs") as! UINavigationController
+            
+            
+            self.addChildViewController(destVc)
+            destVc.view.frame = self.mainContainer.frame
+            self.mainContainer.addSubview(destVc.view)
+            destVc.didMove(toParentViewController: self)
+        case LocalNotifcation.Profile.rawValue:
+            var lastController: AnyObject?
+            
+            if let controller =  self.childViewControllers.first as? UINavigationController {
+                lastController = controller
+            } else {
+                lastController = self.childViewControllers.last as! UINavigationController
+            }
+            for views in self.mainContainer.subviews {
+                views.removeFromSuperview()
+            }
+            lastController?.willMove(toParentViewController: nil)
+            
+            lastController?.removeFromParentViewController()
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "myprofile") as! UINavigationController
             
             
             self.addChildViewController(destVc)
