@@ -61,7 +61,15 @@ class SuperViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = true
         setObservers()
-        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+        BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
+            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+                if screenFlag == "1"{
+                    BlueDolphinManager.manager.stopScanning()
+                    BlueDolphinManager.manager.startScanning()
+                }
+                
+            }
+        })
         updateTask()
     }
     
@@ -147,32 +155,14 @@ extension SuperViewController{
         if isInternetAvailable() {
            //self.showLoader()
             BlueDolphinManager.manager.updateToken()
-            BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
-            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
-                if screenFlag == "1"{
-                    BlueDolphinManager.manager.stopScanning()
-                    BlueDolphinManager.manager.startScanning()
-                }
-                
-                }
-            })
+        }
+        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+            if screenFlag == "1"{
+                BlueDolphinManager.manager.stopScanning()
+                BlueDolphinManager.manager.startScanning()
+            }
             
         }
-        else{
-            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
-                if screenFlag == "1"{
-                    BlueDolphinManager.manager.stopScanning()
-                    BlueDolphinManager.manager.startScanning()
-                }
-                
-            }
-        }
-       
-        
-        
-        
-        
-        
         
     }
     

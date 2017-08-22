@@ -16,6 +16,7 @@ class SystemDetailViewController: UIViewController {
     var systemDetail = [String]()
     
     var imageIcons :[UIImage] = [#imageLiteral(resourceName: "bluetooth_gray"),#imageLiteral(resourceName: "bluetooth_gray"),#imageLiteral(resourceName: "bluetooth_gray"),#imageLiteral(resourceName: "pending_checkin"),#imageLiteral(resourceName: "sync")]
+        var longPressGesture :UILongPressGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -33,7 +34,7 @@ class SystemDetailViewController: UIViewController {
         refreshControl.tintColor = UIColor.lightGray
         refreshControl.addTarget(self, action: #selector(refresh(refreshControl:)), for: .valueChanged)
         systemTableview.addSubview(refreshControl)
-        
+        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         updateData()
 
         // Do any additional setup after loading the view.
@@ -42,10 +43,23 @@ class SystemDetailViewController: UIViewController {
     func sync(sender:UIBarButtonItem){
         if isInternetAvailable(){
             CheckinModel.postCheckin()
+            BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
+                
+            })
         }else{
             showAlert(ErrorMessage.NetError.rawValue)
         }
         
+    }
+    
+    func handleLongPress(){
+        let message = getBeaconList().joined(separator: "\n")
+        let alertController = UIAlertController(title: "Beacons", message: message, preferredStyle: .alert)
+        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+            return        }
+        alertController.addAction(OkAction)
+        self.present(alertController, animated: true) {
+        }
     }
     
     func showAlert(_ message : String) {
@@ -61,7 +75,7 @@ class SystemDetailViewController: UIViewController {
         refreshControl.endRefreshing()
     }
     func updateData(){
-        
+        getBeaconList()
         systemDetail  = []
         let userDataForToday = UserDayData.getFrequencyBarData(date: Date())
         var  lastCheckinTime = String()
@@ -110,6 +124,18 @@ class SystemDetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    func getBeaconList() -> [String]{
+       var beaconAddressList = [String]()
+        let realm = try! Realm()
+        let beaconList = realm.objects(VicinityBeacon.self)
+        var count = 1
+        for object in beaconList{
+            beaconAddressList.append("\(count): " + object.address!.capitalized)
+            count = count + 1
+        }
+        return beaconAddressList
+        
+    }
 
 }
 
@@ -126,6 +152,10 @@ extension SystemDetailViewController:UITableViewDelegate,UITableViewDataSource {
         cell.textLabel?.text = systemDetail[indexPath.row]
         cell.textLabel?.numberOfLines = 0
         cell.imageView?.image = imageIcons[indexPath.row]
+        if indexPath.row == 1{
+            cell.addGestureRecognizer(longPressGesture!)
+            
+        }
     
         return cell
     }

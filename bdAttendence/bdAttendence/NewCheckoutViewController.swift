@@ -213,7 +213,7 @@ class NewCheckoutViewController: UIViewController {
                 if let lastCheckinTime = object.getLastCheckinTime() {
                     self.lastCheckinLabel.text = "You were last seen at \(self.currentTime(time: lastCheckinTime)) "
                 }else{
-                    self.lastCheckinLabel.text = ""
+                    self.lastCheckinLabel.text = "No checkins for today"
                 }
                 self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()?.capitalized
                 self.updateFrequencyBar(mData: object)

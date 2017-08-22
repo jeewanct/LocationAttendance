@@ -37,9 +37,11 @@
 		998246311ED5BEAD006CA0E4 /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9982462C1ED5BD04006CA0E4 /* SourceSansPro-Semibold.ttf */; };
 		9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */; };
 		998461201F2AF45900D91AB7 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984611F1F2AF45900D91AB7 /* TimeLineViewController.swift */; };
+		99937B541F4704FE00C80B90 /* WeekCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99937B521F4704FE00C80B90 /* WeekCollectionViewCell.swift */; };
+		99937B551F4704FE00C80B90 /* WeekCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99937B531F4704FE00C80B90 /* WeekCollectionViewCell.xib */; };
+		99937B7E1F4B1A5F00C80B90 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99937B7C1F4B1A5800C80B90 /* BluedolphinCloudSdk.framework */; };
+		99937B7F1F4B1A5F00C80B90 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99937B7C1F4B1A5800C80B90 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		999D300B1F17A57F0073AEEA /* MyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */; };
-		99B5A90C1F3D86AA00FE950C /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99B5A90A1F3D869C00FE950C /* BluedolphinCloudSdk.framework */; };
-		99B5A90D1F3D86AA00FE950C /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99B5A90A1F3D869C00FE950C /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		99B5A90F1F3DB81600FE950C /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5A90E1F3DB81600FE950C /* ContactTableViewCell.swift */; };
 		99B5A9111F3DC21A00FE950C /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5A9101F3DC21A00FE950C /* MailComposer.swift */; };
 		99B811651F2F11E200174FD0 /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B811641F2F11E200174FD0 /* ContactUsViewController.swift */; };
@@ -97,7 +99,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99B5A90D1F3D86AA00FE950C /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				99937B7F1F4B1A5F00C80B90 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,8 +141,10 @@
 		9982462E1ED5BD64006CA0E4 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSingleton.swift; sourceTree = "<group>"; };
 		9984611F1F2AF45900D91AB7 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
+		99937B521F4704FE00C80B90 /* WeekCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekCollectionViewCell.swift; sourceTree = "<group>"; };
+		99937B531F4704FE00C80B90 /* WeekCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeekCollectionViewCell.xib; sourceTree = "<group>"; };
+		99937B7C1F4B1A5800C80B90 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		999D300A1F17A57F0073AEEA /* MyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardViewController.swift; sourceTree = "<group>"; };
-		99B5A90A1F3D869C00FE950C /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		99B5A90E1F3DB81600FE950C /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		99B5A9101F3DC21A00FE950C /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		99B811641F2F11E200174FD0 /* ContactUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
@@ -190,7 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99B5A90C1F3D86AA00FE950C /* BluedolphinCloudSdk.framework in Frameworks */,
+				99937B7E1F4B1A5F00C80B90 /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,7 +251,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				99B5A90A1F3D869C00FE950C /* BluedolphinCloudSdk.framework */,
+				99937B7C1F4B1A5800C80B90 /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -355,6 +359,8 @@
 		99FB1E631F15FDBD00FA8A9E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				99937B521F4704FE00C80B90 /* WeekCollectionViewCell.swift */,
+				99937B531F4704FE00C80B90 /* WeekCollectionViewCell.xib */,
 				990089141F44177400CED97E /* TwoSideLabelTableViewCell.swift */,
 				990089151F44177400CED97E /* TwoSideLabelTableViewCell.xib */,
 				99CCF2431F2A1E56008947FA /* TimeLineTableViewCell.swift */,
@@ -534,6 +540,7 @@
 				99BD39AC1EA49B7100B6942B /* LaunchScreen.storyboard in Resources */,
 				9900891F1F4465FA00CED97E /* SwitchTableViewCell.xib in Resources */,
 				99BD39A91EA49B7100B6942B /* Assets.xcassets in Resources */,
+				99937B551F4704FE00C80B90 /* WeekCollectionViewCell.xib in Resources */,
 				990089171F44177400CED97E /* TwoSideLabelTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -744,6 +751,7 @@
 				998461201F2AF45900D91AB7 /* TimeLineViewController.swift in Sources */,
 				9900891E1F4465FA00CED97E /* SwitchTableViewCell.swift in Sources */,
 				99E369CF1F1DFE99000A642C /* WorkHourViewController.swift in Sources */,
+				99937B541F4704FE00C80B90 /* WeekCollectionViewCell.swift in Sources */,
 				99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */,
 				99576C091F0CD5E300A53A4C /* SystemDetailViewController.swift in Sources */,
 				990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */,
@@ -932,7 +940,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1c00b222-b453-4dc3-a610-e81ae70210a1";
+				PROVISIONING_PROFILE = "0e86e5a6-840a-406d-a1d8-dfe50082cffd";
 				PROVISIONING_PROFILE_SPECIFIER = attendancedev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -961,7 +969,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1c00b222-b453-4dc3-a610-e81ae70210a1";
+				PROVISIONING_PROFILE = "0e86e5a6-840a-406d-a1d8-dfe50082cffd";
 				PROVISIONING_PROFILE_SPECIFIER = attendancedev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

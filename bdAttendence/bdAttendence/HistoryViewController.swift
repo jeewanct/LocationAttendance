@@ -33,6 +33,10 @@ class HistoryViewController: UIViewController {
         self.startLabel.font = APPFONT.VERSIONTEXT
         self.endLabel.font = APPFONT.VERSIONTEXT
         getCalenderData()
+        calenderView.register(UINib(nibName: "WeekCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "weekCell")
+    
+        
+        
         
        currentDisplayDate = Date().dayStart()!
 
@@ -40,12 +44,15 @@ class HistoryViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        var insets = self.calenderView.contentInset
-        //let value = (self.calenderView.frame.size.height - (self.calenderView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize.height)
-        insets.top = 0.0
-        insets.bottom = 0.0
-        self.calenderView.contentInset = insets
-        //calenderView.contentSize = CGSize(width: 40.0, height: 40.0)
+//        var insets = self.calenderView.contentInset
+//        //let value = (self.calenderView.frame.size.height - (self.calenderView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize.height)
+//        insets.top = 0.0
+//        insets.bottom = 0.0
+//        insets.left = 0.0
+//        insets.right = 0.0
+//        self.calenderView.contentInset = insets
+        
+        //alenderView.contentSize = CGSize(width: 40.0, height: 40.0)
     }
 
     
@@ -223,18 +230,21 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.invalidateLayout()
+       
         
-        return CGSize(width: self.view.frame.width/7, height:self.view.frame.height) // Set your item size here
+        return CGSize(width: collectionView.frame.width/7, height:collectionView.frame.height) // Set your item size here
     }
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(collectionView.frame)
         return thisWeekDays.count
     }
 
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let currentData = thisWeekDays[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekCell", for: indexPath as IndexPath)  as! DayCollectionViewCell
+        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekCell", for: indexPath as IndexPath)  as! DayCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekCell", for: indexPath) as! WeekCollectionViewCell
         cell.cellLabel.text = currentData.formattedWith(format: "EEEEE")
         cell.cellLabel.font = APPFONT.DAYCHAR
             
@@ -275,9 +285,9 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         self.applyForCell(indexPath) { cell in cell.unhighlight() }
     }
     
-    fileprivate func applyForCell(_ indexPath: IndexPath, action: (DayCollectionViewCell) -> ()) {
+    fileprivate func applyForCell(_ indexPath: IndexPath, action: (WeekCollectionViewCell) -> ()) {
         print(indexPath)
-        let highlightedCell = calenderView.cellForItem(at: indexPath) as! DayCollectionViewCell
+        let highlightedCell = calenderView.cellForItem(at: indexPath) as! WeekCollectionViewCell
         action(highlightedCell)
     }
     

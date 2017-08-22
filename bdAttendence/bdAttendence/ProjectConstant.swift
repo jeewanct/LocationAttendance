@@ -26,6 +26,7 @@ enum CheckinDetailKeys:String{
     case swipeDown
     case bluetoothStatus
     case gpsStatus
+    case AppTerminated
     
 }
 

@@ -31,6 +31,8 @@ class ProfileViewController: UIViewController {
         tapGestureForImage = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         profileImageView.addGestureRecognizer(tapGestureForImage)
         profileImageView.layer.cornerRadius = 75.0
+        profileImageView.layer.borderWidth = 0.5
+        profileImageView.layer.borderColor = UIColor.gray.cgColor
         if let imageData = UserDefaults.standard.value(forKey: "profileImage") as? Data {
             profileImageView.image = UIImage(data: imageData)!
         }

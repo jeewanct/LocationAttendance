@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         
-        BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
+       // BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         print(APPVERSION)
         
@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
+        postDataCheckin(userInteraction: CheckinDetailKeys.AppTerminated)
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -260,6 +261,21 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
     }
     
     
+    
+    func postDataCheckin(userInteraction:CheckinDetailKeys){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,CheckinDetailKeys.userInteraction.rawValue:userInteraction.rawValue as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Data.rawValue
+        checkin.checkinType = CheckinType.Data.rawValue
+        //
+        
+        CheckinModel.createCheckin(checkinData: checkin)
+        
+        if isInternetAvailable(){
+            CheckinModel.postCheckin()
+        }
+    }
     
     
     
