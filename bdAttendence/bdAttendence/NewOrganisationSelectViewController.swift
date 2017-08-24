@@ -14,20 +14,32 @@ import RealmSwift
 
 
 class NewOrganisationSelectViewController: UIViewController {
-
+    var selectedIndexPath: IndexPath?
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
      var accessTokensList:Results<AccessTokenObject>!
-    
+    var orgId = String()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
+        let realm = try! Realm()
+        accessTokensList = realm.objects(AccessTokenObject.self)
         collectionView.delegate = self
         collectionView.dataSource = self
+        nextButton.addTarget(self, action: #selector(nextAction), for: UIControlEvents.touchUpInside)
+        
+        
+        
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         var insets = self.collectionView.contentInset
@@ -37,12 +49,26 @@ class NewOrganisationSelectViewController: UIViewController {
         self.collectionView.contentInset = insets
         self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     }
+    
+    func nextAction(){
+        if orgId.isBlank {
+            
+        }else{
+            UserDefaults.standard.set(orgId, forKey: UserDefaultsKeys.organizationId.rawValue)
+            getUserData()
+            let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+            UIApplication.shared.keyWindow?.rootViewController = destVC
+        }
+       
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 
+   
     /*
     // MARK: - Navigation
 
@@ -80,13 +106,17 @@ extension NewOrganisationSelectViewController:UICollectionViewDelegate,UICollect
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
+        
          let cell = collectionView.cellForItem(at: indexPath) as! OrganizationCollectionViewCell
         cell.checkImage.image = #imageLiteral(resourceName: "org_selection")
+        selectedIndexPath = indexPath
         let task = accessTokensList[indexPath.row]
-        let orgId  = task.organizationId
-        UserDefaults.standard.set(orgId, forKey: UserDefaultsKeys.organizationId.rawValue)
-        getUserData()
-        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-        UIApplication.shared.keyWindow?.rootViewController = destVC
+        orgId  = task.organizationId
+       
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: selectedIndexPath!) as! OrganizationCollectionViewCell
+        cell.checkImage.image = nil
+
     }
 }

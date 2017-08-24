@@ -11,15 +11,6 @@ import RealmSwift
 import BluedolphinCloudSdk
 
 
-func deleteAllData(){
-    let realm = try! Realm()
-    try! realm.write {
-        realm.deleteAll()
-    }
-    if let bundle = Bundle.main.bundleIdentifier {
-        UserDefaults.standard.removePersistentDomain(forName: bundle)
-    }
-}
 
 class GraphData:NSObject {
     fileprivate var startTime:TimeInterval?

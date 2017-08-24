@@ -41,6 +41,7 @@ enum NotificationType:String{
     case shiftStartReminder
     case shiftActiveUserInactive
     case userInactiveAfterShiftEnd
+    case MultipleLogout = "Multiple-Logout"
     
 }
 enum ProjectUserDefaultsKeys:String{

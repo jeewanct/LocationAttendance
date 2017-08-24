@@ -29,7 +29,7 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
     @IBInspectable open var sideItemScale: CGFloat = 0.6
     @IBInspectable open var sideItemAlpha: CGFloat = 0.6
     @IBInspectable open var sideItemShift: CGFloat = 0.0
-    open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: 40)
+    open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: 35)
     
     fileprivate var state = LayoutState(size: CGSize.zero, direction: .horizontal)
     

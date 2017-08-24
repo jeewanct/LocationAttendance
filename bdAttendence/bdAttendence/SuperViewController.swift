@@ -83,7 +83,7 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.ContactUs.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Profile.rawValue), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.pushNotificationReceived(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: nil)
         
         
         
@@ -151,6 +151,34 @@ class SuperViewController: UIViewController {
 }
 
 extension SuperViewController{
+    
+    func pushNotificationReceived(sender:NSNotification){
+        let result: NSDictionary = sender.userInfo! as NSDictionary
+        let type =  result ["notificationType"] as! String
+        switch type {
+        case NotificationType.Welcome.rawValue:
+            break
+        case NotificationType.NewAssignment.rawValue , NotificationType.FirstCheckin.rawValue:
+            //self.showLocalNotification(userInfo)
+            break
+        case NotificationType.UpdatedAssignment.rawValue,NotificationType.NoCheckin.rawValue,NotificationType.testNotification.rawValue:
+            
+            break;
+        case NotificationType.AttendanceMarked.rawValue:
+           break
+        case NotificationType.MultipleLogout.rawValue:
+            deleteAllData()
+            moveToFirstScreen()
+            
+            
+        default:
+            break
+            
+            
+            
+        }
+        
+    }
     func updateTask(){
         if isInternetAvailable() {
            //self.showLoader()

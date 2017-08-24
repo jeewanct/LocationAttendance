@@ -237,6 +237,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk13CheckinHolder")
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk12CheckinModel")
 @interface CheckinModel : NSObject
 + (NSInteger)getBeaconCheckinCount SWIFT_WARN_UNUSED_RESULT;
++ (NSInteger)getCheckinCount SWIFT_WARN_UNUSED_RESULT;
 + (void)postCheckinWithCheckinId:(NSString * _Nonnull)checkinId;
 + (void)createCheckinWithCheckinData:(CheckinHolder * _Nonnull)checkinData;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -310,7 +311,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk11RMCLocation")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk13UserDataModel")
 @interface UserDataModel : NSObject
-+ (void)userSignUpWithMobile:(NSString * _Nonnull)mobile completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)userSignUpWithParam:(NSDictionary<NSString *, id> * _Nonnull)param completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 + (void)createUserDataWithUserObject:(NSDictionary<NSString *, NSString *> * _Nonnull)userObject;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end

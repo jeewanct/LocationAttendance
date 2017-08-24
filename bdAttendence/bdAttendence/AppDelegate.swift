@@ -14,7 +14,6 @@ import RealmSwift
 import Fabric
 import Crashlytics
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -31,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setAppVersion(appVersion: APPVERSION)
         stopDebugging(flag: false)
         setCheckinInteral(val: 300)
-        //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+        setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
         Fabric.with([Crashlytics.self])
         
@@ -99,12 +98,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(DeviceUDID ?? "")
         let kcs = KeychainService()
         if let recoveredId = kcs.load(name:"UniqueId") {
+            
+            SDKSingleton.sharedInstance.DeviceUDID = recoveredId
+            _ = kcs.save(name: "RMCIMEI", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
+        }
+        if let recoveredId = kcs.load(name:"RMCIMEI") {
+            
             SDKSingleton.sharedInstance.DeviceUDID = recoveredId
         }
         else {
             
             SDKSingleton.sharedInstance.DeviceUDID = DeviceUDID!
-            _ = kcs.save(name: "UniqueId", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
+            _ = kcs.save(name: "RMCIMEI", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
+           
         }
     }
     func checkLogin(){
@@ -114,6 +120,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
             let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+            if self.window != nil {
+                self.window?.rootViewController = destVC
+            }
+            
+        }else if (UserDefaults.standard.value(forKey: UserDefaultsKeys.FeCode.rawValue) as? String) != nil {
+            let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
+            let destVC = storyboard.instantiateViewController(withIdentifier: "orgList") as! UINavigationController
             if self.window != nil {
                 self.window?.rootViewController = destVC
             }
@@ -175,12 +188,15 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             case NotificationType.NewAssignment.rawValue , NotificationType.FirstCheckin.rawValue:
                 //self.showLocalNotification(userInfo)
                 break
-            //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
             case NotificationType.UpdatedAssignment.rawValue,NotificationType.NoCheckin.rawValue,NotificationType.testNotification.rawValue:
                 
                 break;
             case NotificationType.AttendanceMarked.rawValue:
                 pushAlertView(userInfo: result)
+            case NotificationType.MultipleLogout.rawValue:
+                deleteAllData()
+                moveToFirstScreen()
+            
                 
             default:
                 break

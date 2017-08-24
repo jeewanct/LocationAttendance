@@ -25,7 +25,7 @@ class NewCheckinViewController: UIViewController {
         swipeUp.direction = .up
         self.view.addGestureRecognizer(swipeUp)
         nameLabel.font = APPFONT.DAYHOUR
-        nameLabel.text = "Hi " + SDKSingleton.sharedInstance.userName + ","
+        nameLabel.text = "Hi " + SDKSingleton.sharedInstance.userName.capitalized + ","
         quoteLabel.font = APPFONT.PERMISSIONBODY
         swipeLabel.font = APPFONT.FOOTERBODY
         

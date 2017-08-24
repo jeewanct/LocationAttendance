@@ -47,21 +47,51 @@ class NewOtpViewController: UIViewController {
     
 
     
-    func updateUser() {
-        let objectdata = ["loginType":"mobile",
-                          "mobile":mobileNumber,
-                          "otpToken":otpToken,
-                          "deviceType":"ios",
-                          "deviceToken":UserDefaults.standard.value(forKey: "DeviceToken") as! String,
-                          "imeiId":SDKSingleton.sharedInstance.DeviceUDID
+    func updateUser(updateflag:Bool = false){
+        var objectdata :[String:AnyObject] = ["loginType":"mobile" as AnyObject,
+                                              "mobile":mobileNumber as AnyObject,
+                                              "otpToken":otpToken as AnyObject,
+                                              "deviceType":"ios" as AnyObject,
+                                              "deviceToken":UserDefaults.standard.value(forKey: "DeviceToken") as! String as AnyObject,
+                                              "imeiId":SDKSingleton.sharedInstance.DeviceUDID as AnyObject
             
             
         ]
-        
-        
-        UserDataModel.createUserData(userObject: objectdata)
-        UserDataModel.userSignUp(mobile: mobileNumber) { (result) in
-            
+        if updateflag{
+            objectdata["updateFlag"] = updateflag as AnyObject
+        }
+        print(objectdata)
+        //UserDataModel.createUserData(userObject: objectdata as! [String : AnyObject])
+        UserDataModel.userSignUp(param:objectdata) { (value) in
+            switch (value){
+            case APIResult.Success.rawValue:
+                
+                UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
+                let realm = try! Realm()
+                let tokensList = realm.objects(AccessTokenObject.self)
+                if tokensList.count > 1{
+                    let destVC = self.storyboard?.instantiateViewController(withIdentifier: "orgList") as! UINavigationController
+//                    let topController = destVC.topViewController as! NewOrganisationSelectViewController
+//                    topController.accessTokensList = tokensList
+                    UIApplication.shared.keyWindow?.rootViewController = destVC
+                    
+                }else{
+                    for token in tokensList{
+                        UserDefaults.standard.set(token.organizationId, forKey: UserDefaultsKeys.organizationId.rawValue)
+                    }
+                    
+                    getUserData()
+                    let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+                    UIApplication.shared.keyWindow?.rootViewController = destVC
+                }
+            case APIResult.UserInteractionRequired.rawValue:
+                self.showInteractionAlert("Already User login on other device")
+                
+                
+            default:
+                break
+                
+            }
         }
     }
     
@@ -81,24 +111,7 @@ class NewOtpViewController: UIViewController {
                 switch (result){
                 case APIResult.Success.rawValue:
                     self.updateUser()
-                    UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
-                    let realm = try! Realm()
-                    let tokensList = realm.objects(AccessTokenObject.self)
-                    if tokensList.count > 1{
-                        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "orgList") as! UINavigationController
-                        let topController = destVC.topViewController as! NewOrganisationSelectViewController
-                        topController.accessTokensList = tokensList
-                        UIApplication.shared.keyWindow?.rootViewController = destVC
-                        
-                    }else{
-                        for token in tokensList{
-                            UserDefaults.standard.set(token.organizationId, forKey: UserDefaultsKeys.organizationId.rawValue)
-                        }
-                        
-                        getUserData()
-                        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                        UIApplication.shared.keyWindow?.rootViewController = destVC
-                    }
+                    
                     
                 case APIResult.InvalidCredentials.rawValue:
                     self.showAlert(ErrorMessage.InvalidOtp.rawValue)
@@ -144,7 +157,21 @@ class NewOtpViewController: UIViewController {
         }
         
     }
+    func showInteractionAlert(_ message : String) {
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: userUpdatePressed))
+        alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: userCancelPressed))
+        self.present(alertController, animated: true) {
+        }
+    }
     
+    func userUpdatePressed(action: UIAlertAction){
+        self.updateUser(updateflag: true)
+    }
+    func userCancelPressed(action: UIAlertAction){
+        self.navigationController?.popViewController(animated: true)
+        
+    }
     
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
