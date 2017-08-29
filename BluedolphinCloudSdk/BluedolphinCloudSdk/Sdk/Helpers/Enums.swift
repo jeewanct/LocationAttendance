@@ -29,6 +29,7 @@ public enum APIResult:String{
     case InternalServer = "InternalServerError"
     case InvalidData = "InvalidData"
     case Fail = "Fail"
+     case UserInteractionRequired
 }
 public enum CheckinCategory:String{
     case Transient = "Transient"

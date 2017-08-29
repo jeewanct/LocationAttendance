@@ -37,6 +37,13 @@ public func getUUIDString()->String{
         
     }
     
+    public class func getCheckinCount() -> Int {
+        let realm = try! Realm()
+        let checkins = realm.objects(RMCCheckin.self)
+        return checkins.count
+        
+    }
+    
     
    public class func postCheckin(checkinId:String = ""){
         let realm = try! Realm()

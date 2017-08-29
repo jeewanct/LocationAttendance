@@ -68,37 +68,40 @@ open class UserDataModel :NSObject, Meta{
         return headers
     }
     
-    
-   public class func userSignUp(mobile:String,completion: @escaping (_ result: String) -> Void){
-        let realm = try! Realm()
-        let user = realm.objects(RMCUser.self).filter("mobile=%@",mobile).first
-        let param = user?.toDictionary()
-        print(param!)
+    public class func userSignUp(param:[String:AnyObject],completion: @escaping (_ result: String) -> Void){
+        //        let realm = try! Realm()
+        //        let user = realm.objects(RMCUser.self).filter("mobile=%@",mobile).first
+        //        let param = user?.toDictionary()
+        //        print(param!)
         
-                NetworkModel.submitData(UserDataModel.url(), method: .put, params: param as? [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
-                    
-                    guard let status = responseData["statusCode"] as? Int else {
-                        return
-                    }
-                    switch status {
-                    case 200:
-                        completion(APIResult.Success.rawValue)
-                    case 401:
-                    
-                        completion(APIResult.InvalidCredentials.rawValue)
-                    case 409:
-                        completion(APIResult.InvalidData.rawValue)
-                    case 500...502:
-                        completion(APIResult.InternalServer.rawValue)
-                        
-                    default:break
-                    }
-                    
-                    
-                    
-                    
-                }) { (error) in
-                    print(error)
+        print(UserDataModel.url)
+        NetworkModel.submitData(UserDataModel.url(), method: .put, params: param, headers: self.getHeader(), success: { (responseData) in
+            
+            guard let status = responseData["statusCode"] as? Int else {
+                return
+            }
+            switch status {
+            case 200:
+                completion(APIResult.Success.rawValue)
+            case 401:
+                
+                completion(APIResult.InvalidCredentials.rawValue)
+            case 403:
+                completion(APIResult.UserInteractionRequired.rawValue)
+                
+            case 409:
+                completion(APIResult.InvalidData.rawValue)
+            case 500...502:
+                completion(APIResult.InternalServer.rawValue)
+                
+            default:break
+            }
+            
+            
+            
+            
+        }) { (error) in
+            print(error)
         }
         
     }

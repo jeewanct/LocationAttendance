@@ -143,13 +143,14 @@ open class OauthModel :NSObject, Meta{
                             for val in accessToken{
                                 let value = val as! NSDictionary
                                 
-                               var object =  realm.create(AccessTokenObject.self, value: val, update: true)
+                                let object =  realm.create(AccessTokenObject.self, value: val, update: true)
                                 
-                               
+                                
                                 if let orgFeatures = value["orgCustomFeatures"] as? NSDictionary{
-                                  object.orgFeatures = toJsonString(orgFeatures)
-                                
+                                    object.orgFeatures = toJsonString(orgFeatures)
+                                    
                                 }
+                                
                                 
                                 
                             }
