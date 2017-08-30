@@ -34,6 +34,7 @@ import Security
         SecItemDelete(keychainQuery as CFDictionary)
         
         statusAdd = SecItemAdd(keychainQuery! as CFDictionary, nil)
+        print(statusAdd)
         
         return statusAdd;
     }

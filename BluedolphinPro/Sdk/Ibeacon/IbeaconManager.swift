@@ -52,16 +52,15 @@ public enum iBeaconNotifications:String{
     override public init(){
         
         super.init()
-        
+        locationManager.delegate = self
+        registerNotifications()
+        locationManager.startUpdatingLocation()
         //test if enabled
     }
     
     
     /**Starts Monitoring for beacons*/
     open func startMonitoring(_ successCallback:@escaping (()->Void), errorCallback:@escaping (_ messages:[String])->Void){
-        locationManager.delegate = self
-        registerNotifications()
-        locationManager.startUpdatingLocation()
         self.successCallback = successCallback
         self.errorCallback = errorCallback
         checkStatus()
@@ -73,9 +72,11 @@ public enum iBeaconNotifications:String{
         
         if let _ = self.bluetoothManager{
             if (UserDefaults.standard.value(forKeyPath: "LastBeaconCheckinTime") as? Date) != nil {
+                bluetoothManager = BluetoothManager()
+                bluetoothManager?.callback = bluetoothUpdate
                 
             }else{
-                bluetoothManager = BluetoothManager()
+                //bluetoothManager = BluetoothManager()
                 bluetoothManager?.callback = bluetoothUpdate
             }
             
@@ -201,6 +202,8 @@ public enum iBeaconNotifications:String{
     
     /**Starts monitoring beacons*/
     func startMonitoring(){
+        
+       
         locationManager.startUpdatingLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.distanceFilter  = 100 // Must move at least 3km
@@ -216,6 +219,7 @@ public enum iBeaconNotifications:String{
             //FIXME: added more validation for the ibeacons permission matrix
         
         }
+         print("beacon Scanning started")
         
     }
     
@@ -226,6 +230,7 @@ public enum iBeaconNotifications:String{
             locationManager.stopRangingBeacons(in: beaconRegion)
         }
          locationManager.stopUpdatingLocation()
+         print("beacon Scanning ended")
     }
     
     

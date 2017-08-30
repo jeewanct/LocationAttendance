@@ -76,7 +76,7 @@ open class UserDataModel :NSObject, Meta{
 //        print(param!)
     
     print(UserDataModel.url)
-                NetworkModel.submitData(UserDataModel.url(), method: .put, params: param as? [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
+                NetworkModel.submitData(UserDataModel.url(), method: .put, params: param as! [String : AnyObject], headers: self.getHeader(), success: { (responseData) in
                     
                     guard let status = responseData["statusCode"] as? Int else {
                         return

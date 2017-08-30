@@ -32,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
        registerForRemoteNotification()
        startUpTask()
+        if let deviceToken = UserDefaults.standard.value(forKey: UserDefaultsKeys.deviceToken.rawValue) as? String{
+            print(deviceToken)
+        }
+    
         
         return true
     }
@@ -105,17 +109,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-        func getDeviceID(){
+    func getDeviceID(){
         let DeviceUDID = UIDevice.current.identifierForVendor?.uuidString
         print(DeviceUDID ?? "")
         let kcs = KeychainService()
-        if let recoveredId = kcs.load(name:"UniqueId") {
+        if let recoveredId = kcs.load(name:"RMCIMEI") {
             SDKSingleton.sharedInstance.DeviceUDID = recoveredId
         }
         else {
             
             SDKSingleton.sharedInstance.DeviceUDID = DeviceUDID!
-           _ = kcs.save(name: "UniqueId", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
+            _ = kcs.save(name: "RMCIMEI", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
         }
     }
     
@@ -134,16 +138,18 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             
         } else {
             let result: NSDictionary = userInfo as NSDictionary
-            let type:NotificationType = NotificationType(rawValue: result ["notificationType"] as! String)!
+            let type =  result ["notificationType"] as! String
             switch type {
-            case .Welcome:
+            case NotificationType.Welcome.rawValue:
                 break
-            case .NewAssignment:
+            case NotificationType.NewAssignment.rawValue:
                 //self.showLocalNotification(userInfo)
 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
-            case .UpdatedAssignment:
+            case NotificationType.UpdatedAssignment.rawValue:
                 break;
+            default:
+                break
                 
             }
             //
@@ -184,13 +190,13 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
 //            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
 //            UIApplication.shared.registerForRemoteNotifications()
 //        }
-//            // iOS 8 support
-//        else if #available(iOS 8, *) {
-//            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
-//            UIApplication.shared.registerForRemoteNotifications()
-//        }
-            // iOS 7 support
-        else {  
+            // iOS 8 support
+        else if #available(iOS 8, *) {
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+             iOS 7 support
+        else {
            UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
         }
         //}
