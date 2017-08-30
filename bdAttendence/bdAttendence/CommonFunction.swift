@@ -28,9 +28,16 @@ func deleteAllData(){
     try! realm.write {
         realm.deleteAll()
     }
+   
+    guard let deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") as? String else {
+     return
+    }
     if let bundle = Bundle.main.bundleIdentifier {
         UserDefaults.standard.removePersistentDomain(forName: bundle)
     }
+    UserDefaults.standard.setValue(deviceToken, forKey: UserDefaultsKeys.deviceToken.rawValue)
+    UserDefaults.standard.synchronize()
+    
 }
 
 func moveToFirstScreen(){

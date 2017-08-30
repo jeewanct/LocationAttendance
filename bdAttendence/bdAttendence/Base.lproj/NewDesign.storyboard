@@ -26,7 +26,7 @@
         <!--Navigation Controller-->
         <scene sceneID="sZB-nN-lLw">
             <objects>
-                <navigationController storyboardIdentifier="root" automaticallyAdjustsScrollViewInsets="NO" id="ZLB-mr-keV" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Root" automaticallyAdjustsScrollViewInsets="NO" id="ZLB-mr-keV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PpO-oJ-7dP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -389,7 +389,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2K-kw-7PQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="158" y="301"/>
+            <point key="canvasLocation" x="399" y="57"/>
         </scene>
         <!--My Dashboard View Controller-->
         <scene sceneID="895-gc-8l5">

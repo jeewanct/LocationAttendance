@@ -21,16 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+      
         
         
-       // BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
+        //BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         print(APPVERSION)
         
         setAppVersion(appVersion: APPVERSION)
         stopDebugging(flag: false)
         setCheckinInteral(val: 300)
-        setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+        
+        
+        
+        //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
         Fabric.with([Crashlytics.self])
         
@@ -38,6 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIDevice.current.isBatteryMonitoringEnabled = true
         registerForRemoteNotification()
         updateRealmConfiguration()
+        
+        let organisationId = "cf6739d6-9320-4ecf-a73d-c8b1528d070b"
+        let secretKey = "FDvIzhOifAqNbSTzOOkWcPNDnmZm4pn8NXafhLeD"
+        setAPIURL(url: "https://0uvkmcic37.execute-api.ap-south-1.amazonaws.com/bd/live/")
+        
+        BlueDolphinManager.manager.initialize(secretKey: secretKey, organizationId: organisationId, email: "iraghav2@gmail.com", firstName: "Raghv", lastName: "Srivastava", metaInfo: [:])
         startUpTask()
         
         
@@ -194,6 +204,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             case NotificationType.AttendanceMarked.rawValue:
                 pushAlertView(userInfo: result)
             case NotificationType.MultipleLogout.rawValue:
+            
                 deleteAllData()
                 moveToFirstScreen()
             
