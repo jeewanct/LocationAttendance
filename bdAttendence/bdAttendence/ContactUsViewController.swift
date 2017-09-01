@@ -223,8 +223,7 @@ extension ContactUsViewController:MFMailComposeViewControllerDelegate {
             //self.showAlert("Transfer")
             break
             
-        default:
-            break
+        
         }
         dismiss(animated: true, completion: nil)
     }

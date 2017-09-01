@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G24b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TimerView" customModule="bdAttendence" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MfI-P3-pui" customClass="UICircularProgressRingView" customModule="bdAttendence" customModuleProvider="target">
+                    <rect key="frame" x="62" y="204" width="250" height="250"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="YRN-kg-ejR"/>
+                        <constraint firstAttribute="height" constant="250" id="oYd-F1-Kfn"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="guideColor">
+                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="showGuide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="guideLineWidth">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="angle">
+                            <real key="value" value="120"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="startAngle">
+                            <real key="value" value="-90"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="trackColor">
+                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="IBColor1">
+                            <color key="value" red="0.97669434420000001" green="1" blue="0.43377791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="lerpColorMode" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="value">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="shouldShowValueText" value="NO"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="valueIndicator" value=" sec"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="viewStyle">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="innerRingColor">
+                            <color key="value" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="outerRingWidth">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="innerRingWidth">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="showFloatingPoint" value="YES"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="outerRingColor">
+                            <color key="value" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1sy-ke-m9F">
+                    <rect key="frame" x="166" y="121" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgc-rP-QR5">
+                    <rect key="frame" x="62" y="496" width="250" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="sj4-tE-5hF"/>
+                    </constraints>
+                    <state key="normal" title="Cancel"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Lgc-rP-QR5" firstAttribute="trailing" secondItem="MfI-P3-pui" secondAttribute="trailing" id="7OZ-qY-DKK"/>
+                <constraint firstItem="MfI-P3-pui" firstAttribute="top" secondItem="1sy-ke-m9F" secondAttribute="bottom" constant="62" id="Lt8-Iz-e8O"/>
+                <constraint firstItem="1sy-ke-m9F" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="121" id="PjL-ba-75h"/>
+                <constraint firstItem="1sy-ke-m9F" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Wsb-Co-VGc"/>
+                <constraint firstItem="Lgc-rP-QR5" firstAttribute="top" secondItem="MfI-P3-pui" secondAttribute="bottom" constant="41.5" id="bpi-eE-8Lh"/>
+                <constraint firstItem="MfI-P3-pui" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="nMd-Ab-J39"/>
+                <constraint firstItem="Lgc-rP-QR5" firstAttribute="leading" secondItem="MfI-P3-pui" secondAttribute="leading" id="zLx-VI-VLH"/>
+            </constraints>
+            <connections>
+                <outlet property="cancelButton" destination="Lgc-rP-QR5" id="q8o-Uv-IRl"/>
+                <outlet property="scanningLabel" destination="1sy-ke-m9F" id="6X3-8i-dvx"/>
+                <outlet property="timerView" destination="MfI-P3-pui" id="Nha-oS-ABx"/>
+            </connections>
+        </view>
+    </objects>
+</document>

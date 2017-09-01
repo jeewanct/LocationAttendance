@@ -75,7 +75,7 @@ class SystemDetailViewController: UIViewController {
         refreshControl.endRefreshing()
     }
     func updateData(){
-        getBeaconList()
+       
         systemDetail  = []
         let userDataForToday = UserDayData.getFrequencyBarData(date: Date())
         var  lastCheckinTime = String()

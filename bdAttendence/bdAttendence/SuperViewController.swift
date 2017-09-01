@@ -46,7 +46,7 @@ class SuperViewController: UIViewController {
             self.window!.rootViewController = self
         }
         
-        
+         checkDeviceStatus()
     
     
     }
@@ -61,6 +61,7 @@ class SuperViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = true
         setObservers()
+       
         BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
             if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
                 if screenFlag == "1"{
@@ -316,7 +317,34 @@ extension SuperViewController{
         
     }
     
-    
+    func checkDeviceStatus(){
+        UserDeviceModel.getDeviceStatus { (status, id) in
+            switch (status){
+            case APIResult.Success.rawValue:
+                print(SDKSingleton.sharedInstance.DeviceUDID)
+                print(id)
+                if id != SDKSingleton.sharedInstance.DeviceUDID{
+                    deleteAllData()
+                    moveToFirstScreen()
+                }
+            case APIResult.InvalidCredentials.rawValue:
+                break
+                //self.showAlert(ErrorMessage.UserNotFound.rawValue)
+                
+            case APIResult.InternalServer.rawValue:
+                break
+                //self.showAlert(ErrorMessage.InternalServer.rawValue)
+                
+                
+            case APIResult.InvalidData.rawValue:
+                break
+                //self.showAlert(ErrorMessage.NotValidData.rawValue)
+            default:
+                break
+                
+            }
+        }
+    }
     
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
@@ -327,6 +355,7 @@ extension SuperViewController{
         }
     }
 }
+
 
 
 

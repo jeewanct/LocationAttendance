@@ -26,10 +26,11 @@ class AlertView: UIView {
      @param uiView - add activity indicator to this view
      */
     func setLabelText(_ text:String){
-        label.frame = CGRect(x: 50, y: 10, width: 200, height: 60)
-        let pleaseWaitText = "Please wait"
-        let attributedString = NSMutableAttributedString(string:"\(text)\n\(pleaseWaitText)")
-        attributedString.addAttribute(NSFontAttributeName, value:  UIFont.systemFont(ofSize: 20), range:NSRange(location: 0, length:text.characters.count))
+        label.frame = CGRect(x: 50, y: 10, width: 200, height: 40)
+       // let pleaseWaitText = "Please wait"
+        let attributedString = NSMutableAttributedString(string:"\(text)")
+            //\n\(pleaseWaitText)")
+        attributedString.addAttribute(NSFontAttributeName, value:  UIFont.systemFont(ofSize: 24), range:NSRange(location: 0, length:text.characters.count))
         
         label.attributedText = attributedString
         label.numberOfLines = 3
@@ -41,19 +42,19 @@ class AlertView: UIView {
         
         container.frame = uiView.frame
         container.center = uiView.center
-        container.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
+        container.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
         //UIColorFromHex(0xd3d3d3, alpha: 0.1)
         
-        loadingView.frame = CGRect(x: 0, y: 0, width: container.frame.size.width-100, height: 80)
+        loadingView.frame = CGRect(x: 0, y: 0, width: container.frame.size.width-100, height: 60)
         loadingView.center = uiView.center
-        loadingView.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
+        loadingView.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
         
         
         
-        activityIndicator.frame = CGRect(x: 0.0, y: 20.0, width: 40.0, height: 40.0);
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        activityIndicator.frame = CGRect(x: 0.0, y: 10.0, width: 40.0, height: 40.0);
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
         //activityIndicator.center = CGPointMake(loadingView.frame.size.width / 2, (loadingView.frame.size.height / 2) - 40);
         
         loadingView.addSubview(label)

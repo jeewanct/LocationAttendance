@@ -317,6 +317,13 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk13UserDataModel")
 @end
 
 
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk15UserDeviceModel")
+@interface UserDeviceModel : NSObject
++ (void)getDeviceStatusWithCompletion:(void (^ _Nonnull)(NSString * _Nonnull, NSString * _Nonnull))completion;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk14VicinityBeacon")
 @interface VicinityBeacon : RealmSwiftObject
 @property (nonatomic, copy) NSString * _Nullable addedOn;

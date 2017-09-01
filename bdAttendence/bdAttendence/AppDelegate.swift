@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+        setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
         Fabric.with([Crashlytics.self])
         
@@ -43,11 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerForRemoteNotification()
         updateRealmConfiguration()
         
-        let organisationId = "cf6739d6-9320-4ecf-a73d-c8b1528d070b"
-        let secretKey = "FDvIzhOifAqNbSTzOOkWcPNDnmZm4pn8NXafhLeD"
-        setAPIURL(url: "https://0uvkmcic37.execute-api.ap-south-1.amazonaws.com/bd/live/")
         
-        BlueDolphinManager.manager.initialize(secretKey: secretKey, organizationId: organisationId, email: "iraghav2@gmail.com", firstName: "Raghv", lastName: "Srivastava", metaInfo: [:])
         startUpTask()
         
         
@@ -172,9 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = config
     }
     
-    
-    
-    
+ 
     
 }
 

@@ -19,6 +19,8 @@ class MyDashboardViewController: UIViewController {
     
     
     @IBOutlet weak var containerView: UIView!
+    var errorView :ErrorScanView!
+    var timerView:TimerView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,6 +111,7 @@ class MyDashboardViewController: UIViewController {
             BlueDolphinManager.manager.stopScanning()
             BlueDolphinManager.manager.startScanning()
             postDataCheckin(userInteraction: .swipeUp)
+            checkSwipeUp()
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
@@ -159,6 +162,51 @@ class MyDashboardViewController: UIViewController {
         let constraint4 = NSLayoutConstraint(item: view1, attribute: .leading, relatedBy: .equal, toItem: view2, attribute: .leading, multiplier: 1.0, constant: 0.0)
         view1.addConstraints([constraint1, constraint2, constraint3, constraint4])
     }
+    
+    func checkSwipeUp(){
+        delayWithSeconds(10) {
+            if BlueDolphinManager.manager.seanbeacons.count == 0 {
+                self.showErrorCustomView()
+            }else{
+                
+            }
+        }
+        
+    }
+    func showErrorCustomView(){
+       
+         errorView = ErrorScanView(frame: self.view.frame)
+            //ErrorScanView(frame: CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height))
+       UIView.transition(with: errorView, duration: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+    
+       }) { (value) in
+        self.view.addSubview(self.errorView)
+        self.errorView.delegate = self
+        self.errorView.createView()
+        }
+    }
+    func removeErrorCustomView(){
+        
+        UIView.transition(with: errorView, duration: 0.5, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            
+        }) { (value) in
+            self.errorView.removeFromSuperview()
+            self.errorView.delegate = nil
+        }
+    }
+    
+    
+    func showLoader(text:String = "Scanning ..." ){
+        AlertView.sharedInstance.setLabelText(text)
+        AlertView.sharedInstance.showActivityIndicator(self.view)
+        let delay = 10.0 * Double(NSEC_PER_SEC)
+        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {
+            AlertView.sharedInstance.hideActivityIndicator(self.view)
+            //self.dismiss(animated: true, completion: nil)
+        })
+    }
+
     /*
      // MARK: - Navigation
      
@@ -168,5 +216,28 @@ class MyDashboardViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
+}
+
+extension MyDashboardViewController:CheckinViewDelegate {
+    func updateView(moveToView: Screen) {
+        switch moveToView {
+        case .Timer:
+            self.showLoader()
+            delayWithSeconds(10
+                , completion: {
+                if BlueDolphinManager.manager.seanbeacons.count != 0 {
+                    self.removeErrorCustomView()
+                }
+            })
+        case .Checkin:
+            removeErrorCustomView()
+            
+        case .Checkout,.Daycheckin,.PayPal:
+            break
+            
+        }
+    }
+    
     
 }
