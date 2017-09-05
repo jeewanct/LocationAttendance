@@ -20,7 +20,7 @@ import CoreBluetooth
     override init() {
         super.init()
         
-        self.centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main, options: [CBCentralManagerOptionShowPowerAlertKey:true])
+        self.centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main, options: [CBCentralManagerOptionShowPowerAlertKey:false])
     }
     
     convenience init(callback:@escaping (Bool)->Void)

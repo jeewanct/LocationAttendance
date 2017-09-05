@@ -46,6 +46,7 @@
 		99B811671F2F1DB700174FD0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B811661F2F1DB700174FD0 /* Logger.swift */; };
 		99CA96811F037CF100E2813B /* AttendanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96801F037CF100E2813B /* AttendanceLog.swift */; };
 		99F07F5E1F584944000B4967 /* UserDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F07F5D1F584944000B4967 /* UserDeviceModel.swift */; };
+		99F07F7C1F597B42000B4967 /* ShiftHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F07F7B1F597B42000B4967 /* ShiftHandling.swift */; };
 		A1ADEA9532F07BD836A6FF8E /* Pods_BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D771F3BC31D3C77084C535 /* Pods_BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,7 @@
 		99B811661F2F1DB700174FD0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		99CA96801F037CF100E2813B /* AttendanceLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceLog.swift; sourceTree = "<group>"; };
 		99F07F5D1F584944000B4967 /* UserDeviceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDeviceModel.swift; sourceTree = "<group>"; };
+		99F07F7B1F597B42000B4967 /* ShiftHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftHandling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		991EE2671E40BF5B00E4A00D /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
+				99F07F7B1F597B42000B4967 /* ShiftHandling.swift */,
 				991EE2681E40BF5B00E4A00D /* Assignments */,
 				991EE26C1E40BF5B00E4A00D /* Auth */,
 				991EE26F1E40BF5B00E4A00D /* Checkins */,
@@ -385,6 +388,7 @@
 				991EE2901E40BF5B00E4A00D /* AwsManager.swift in Sources */,
 				991EE29E1E40BF5C00E4A00D /* IbeaconManager.swift in Sources */,
 				991EE2971E40BF5C00E4A00D /* NetworkClass.swift in Sources */,
+				99F07F7C1F597B42000B4967 /* ShiftHandling.swift in Sources */,
 				997C638D1E9283120019740A /* BlueDolphinManager.swift in Sources */,
 				991EE2951E40BF5C00E4A00D /* GlobalSDKFunction.swift in Sources */,
 				991EE2921E40BF5C00E4A00D /* Enums.swift in Sources */,
