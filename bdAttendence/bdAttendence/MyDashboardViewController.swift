@@ -26,6 +26,7 @@ class MyDashboardViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(MyDashboardViewController.updateView(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MyDashboardViewController.updateView(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MyDashboardViewController.updateView(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: nil)
 //        let controller2 = self.storyboard?.instantiateViewController(withIdentifier: "checkout") as! NewCheckoutViewController
 //        controller2.delegate = self
         
@@ -122,10 +123,23 @@ class MyDashboardViewController: UIViewController {
             
             
           case LocalNotifcation.DayCheckinScreen.rawValue:
+            UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
            BlueDolphinManager.manager.stopScanning()
             postDataCheckin(userInteraction: .swipeDown)
 
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "dayCheckin") as! UINavigationController
+            self.updateChildController(destVc: destVc)
+            destVc.view.transform = CGAffineTransform(translationX:0 , y: -containerView.frame.size.height)
+            UIView.animate(withDuration: 0.3) {
+                destVc.view.transform = CGAffineTransform(translationX: 0, y: 0)
+            }
+            constraintViewEqual(view1: containerView, view2: destVc.view)
+          case LocalNotifcation.CheckinScreen.rawValue:
+            UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+            BlueDolphinManager.manager.stopScanning()
+            postDataCheckin(userInteraction: .swipeDown)
+            
+            let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckin") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: -containerView.frame.size.height)
             UIView.animate(withDuration: 0.3) {
@@ -232,6 +246,8 @@ extension MyDashboardViewController:CheckinViewDelegate {
             })
         case .Checkin:
             removeErrorCustomView()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: nil)
+            
             
         case .Checkout,.Daycheckin,.PayPal:
             break

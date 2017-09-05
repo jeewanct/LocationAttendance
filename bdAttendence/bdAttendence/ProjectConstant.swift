@@ -68,6 +68,14 @@ enum LocalNotifcation:String{
     case ThisWeek
     case ContactUs
 }
+enum StoryboardIdentifier:String{
+    case myprofile
+    case contactUs
+    case history
+    case VirtualBeacon
+    case systemDetail
+    case dashboard
+}
 enum ErrorMessage:String{
     case UserNotFound = "Number not found. Contact admin"
     case InternalServer = "We are facing some internal issue please try again after sometime"
@@ -77,6 +85,7 @@ enum ErrorMessage:String{
     case NetError = "Could not connect to internet please try again."
     case InvalidFECode = "Please enter valid mobile  number"
     case InvalidOtp = "Please enter valid 6 digit OTP code"
+    case MultipleUser = "You are already logged into some other device. Do you wish to log out from other device and continue with this device?"
 }
 enum NotificationMessage:String{
     case AttendanceMarked  = "We've marked you present for today. Have a wonderful day! "

@@ -131,7 +131,6 @@ class NewCheckoutViewController: UIViewController {
         if let swipeGesture = sender as? UISwipeGestureRecognizer {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:
-                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
                 
 //            case UISwipeGestureRecognizerDirection.left:

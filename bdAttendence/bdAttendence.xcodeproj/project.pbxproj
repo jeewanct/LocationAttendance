@@ -30,6 +30,8 @@
 		996953251F149A92000A6C26 /* CheckinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 996953241F149A92000A6C26 /* CheckinView.xib */; };
 		996953271F14A0A4000A6C26 /* CheckoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 996953261F14A0A4000A6C26 /* CheckoutView.xib */; };
 		996953291F14A125000A6C26 /* DayCheckinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 996953281F14A125000A6C26 /* DayCheckinView.xib */; };
+		99713F0D1F5D6E6200A1993F /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99713F0B1F5D6E5700A1993F /* BluedolphinCloudSdk.framework */; };
+		99713F0E1F5D6E6200A1993F /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99713F0B1F5D6E5700A1993F /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		997490291F0CD8A000AC92B9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997490281F0CD8A000AC92B9 /* UserDataModel.swift */; };
 		9974903B1F0CFC0600AC92B9 /* CorouselEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9974903A1F0CFC0600AC92B9 /* CorouselEffect.swift */; };
 		9982462F1ED5BEAD006CA0E4 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9982462E1ED5BD64006CA0E4 /* SourceSansPro-Regular.ttf */; };
@@ -65,8 +67,6 @@
 		99F07F581F57D981000B4967 /* ErrorScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99F07F571F57D981000B4967 /* ErrorScanView.xib */; };
 		99F07F5A1F57EE6F000B4967 /* TimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99F07F591F57EE6F000B4967 /* TimerView.xib */; };
 		99F07F5C1F57EF75000B4967 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F07F5B1F57EF75000B4967 /* TimerView.swift */; };
-		99F07F791F594587000B4967 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F07F771F594580000B4967 /* BluedolphinCloudSdk.framework */; };
-		99F07F7A1F594587000B4967 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99F07F771F594580000B4967 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		99F2177A1F20A833002A0E5C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F217791F20A833002A0E5C /* SplashViewController.swift */; };
 		99F84C161F2877D200D6AE44 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F84C151F2877D200D6AE44 /* CircleView.swift */; };
 		99F84C181F28C7DB00D6AE44 /* DayCheckinList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F84C171F28C7DB00D6AE44 /* DayCheckinList.swift */; };
@@ -96,13 +96,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		99B811841F30ABD700174FD0 /* Embed Frameworks */ = {
+		99713F0A1F5D68E500A1993F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99F07F7A1F594587000B4967 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				99713F0E1F5D6E6200A1993F /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +136,7 @@
 		996953241F149A92000A6C26 /* CheckinView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckinView.xib; sourceTree = "<group>"; };
 		996953261F14A0A4000A6C26 /* CheckoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutView.xib; sourceTree = "<group>"; };
 		996953281F14A125000A6C26 /* DayCheckinView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCheckinView.xib; sourceTree = "<group>"; };
+		99713F0B1F5D6E5700A1993F /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		997490281F0CD8A000AC92B9 /* UserDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		9974903A1F0CFC0600AC92B9 /* CorouselEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorouselEffect.swift; sourceTree = "<group>"; };
 		9982461D1ED55BBE006CA0E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -178,7 +179,6 @@
 		99F07F571F57D981000B4967 /* ErrorScanView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorScanView.xib; sourceTree = "<group>"; };
 		99F07F591F57EE6F000B4967 /* TimerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerView.xib; sourceTree = "<group>"; };
 		99F07F5B1F57EF75000B4967 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		99F07F771F594580000B4967 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bdAttendence.entitlements; sourceTree = "<group>"; };
 		99F217791F20A833002A0E5C /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		99F84C151F2877D200D6AE44 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99F07F791F594587000B4967 /* BluedolphinCloudSdk.framework in Frameworks */,
+				99713F0D1F5D6E6200A1993F /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,7 +256,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				99F07F771F594580000B4967 /* BluedolphinCloudSdk.framework */,
+				99713F0B1F5D6E5700A1993F /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -423,7 +423,7 @@
 				BE12DAB159A486021F77D987 /* [CP] Embed Pods Frameworks */,
 				89B6EA88FBA43767DC8F52BF /* [CP] Copy Pods Resources */,
 				99F41E931EEFD70F00E01960 /* ShellScript */,
-				99B811841F30ABD700174FD0 /* Embed Frameworks */,
+				99713F0A1F5D68E500A1993F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -937,8 +937,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -952,8 +952,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0e86e5a6-840a-406d-a1d8-dfe50082cffd";
-				PROVISIONING_PROFILE_SPECIFIER = attendancedev;
+				PROVISIONING_PROFILE = "e42a8866-f431-46eb-8e10-d3d646a496ca";
+				PROVISIONING_PROFILE_SPECIFIER = AttendanceAppstore;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -966,8 +966,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rare Media Company Private Limited (9S8FZ5YMQ4)";
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -981,8 +981,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdAttendence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0e86e5a6-840a-406d-a1d8-dfe50082cffd";
-				PROVISIONING_PROFILE_SPECIFIER = attendancedev;
+				PROVISIONING_PROFILE = "e42a8866-f431-46eb-8e10-d3d646a496ca";
+				PROVISIONING_PROFILE_SPECIFIER = AttendanceAppstore;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

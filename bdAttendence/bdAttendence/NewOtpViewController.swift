@@ -62,7 +62,10 @@ class NewOtpViewController: UIViewController {
         }
         print(objectdata)
         //UserDataModel.createUserData(userObject: objectdata as! [String : AnyObject])
+        AlertView.sharedInstance.setLabelText("Verifying")
+        AlertView.sharedInstance.showActivityIndicator(self.view)
         UserDataModel.userSignUp(param:objectdata) { (value) in
+        AlertView.sharedInstance.hideActivityIndicator(self.view)
             switch (value){
             case APIResult.Success.rawValue:
                 
@@ -85,7 +88,7 @@ class NewOtpViewController: UIViewController {
                     UIApplication.shared.keyWindow?.rootViewController = destVC
                 }
             case APIResult.UserInteractionRequired.rawValue:
-                self.showInteractionAlert("Already User login on other device")
+                self.showInteractionAlert(ErrorMessage.MultipleUser.rawValue )
                 
                 
             default:
@@ -105,8 +108,11 @@ class NewOtpViewController: UIViewController {
             "otpToken":otpToken
             ] as [String : Any]
         if isInternetAvailable() {
-            showLoader(text: "Verifying")
+            //showLoader(text: "Verifying")
+            AlertView.sharedInstance.setLabelText("Verifying")
+            AlertView.sharedInstance.showActivityIndicator(self.view)
             OauthModel.getToken(userObject: param) { (result) in
+                AlertView.sharedInstance.hideActivityIndicator(self.view)
                 
                 switch (result){
                 case APIResult.Success.rawValue:
