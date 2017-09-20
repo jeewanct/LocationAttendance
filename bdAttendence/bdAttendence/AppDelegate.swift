@@ -29,12 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(APPVERSION)
         
         setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: true)
+        stopDebugging(flag: false)
         setCheckinInteral(val: 300)
         
         
         
-        //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+        setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
         Fabric.with([Crashlytics.self])
         
@@ -69,7 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        postDataCheckin(userInteraction: CheckinDetailKeys.AppTerminated)
+        if !SDKSingleton.sharedInstance.userId.isBlank{
+            postDataCheckin(userInteraction: CheckinDetailKeys.AppTerminated)
+        }
+       
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

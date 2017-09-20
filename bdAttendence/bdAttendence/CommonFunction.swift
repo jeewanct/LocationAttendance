@@ -55,6 +55,8 @@ func sendToServer(){
     }
 }
 
+
+
 func isShiftStart(time:String)->Bool{
     
     return false
