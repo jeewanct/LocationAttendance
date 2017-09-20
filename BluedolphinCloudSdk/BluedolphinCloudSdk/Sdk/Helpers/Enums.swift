@@ -21,6 +21,12 @@ public enum UserDefaultsKeys:String{
     case LastBeaconCheckinTime
     case LastBeaconScanned
     case TotalTime
+    case BDShiftStartHour
+    case BDShiftStartMin
+    case BDShiftEndHour
+    case BDShiftEndMin
+    case BDWorkingDays
+    case BDShiftDuration
  
 }
 public enum APIResult:String{

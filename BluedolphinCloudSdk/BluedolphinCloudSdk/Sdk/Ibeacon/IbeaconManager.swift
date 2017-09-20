@@ -67,22 +67,24 @@ public enum iBeaconNotifications:String{
     /**Checks the status of the application*/
     func checkStatus(){
         //starts from Bluetooth
-        if let _ = self.bluetoothManager{
-            if (UserDefaults.standard.value(forKeyPath: "LastBeaconCheckinTime") as? Date) != nil {
-                bluetoothManager = BluetoothManager()
-                bluetoothManager?.callback = bluetoothUpdate
-                
-            }else{
-                //bluetoothManager = BluetoothManager()
-                bluetoothManager?.callback = bluetoothUpdate
-            }
-            
-        }
-        else{
-            
-            bluetoothManager = BluetoothManager()
-            bluetoothManager?.callback = bluetoothUpdate
-        }
+//        if let _ = self.bluetoothManager{
+//            if (UserDefaults.standard.value(forKeyPath: "LastBeaconCheckinTime") as? Date) != nil {
+//                bluetoothManager = BluetoothManager()
+//                bluetoothManager?.callback = bluetoothUpdate
+//                
+//            }else{
+//                bluetoothManager = BluetoothManager()
+//                bluetoothManager?.callback = bluetoothUpdate
+//            }
+//            
+//        }
+//        else{
+//            
+//            bluetoothManager = BluetoothManager()
+//            bluetoothManager?.callback = bluetoothUpdate
+//        }
+        bluetoothManager = BluetoothManager()
+        bluetoothManager?.callback = bluetoothUpdate
 
         
     }
@@ -209,7 +211,7 @@ public enum iBeaconNotifications:String{
         
         
         for beaconRegion in regions{
-           // locationManager.startMonitoring(for: beaconRegion)
+            locationManager.startMonitoring(for: beaconRegion)
             locationManager.startRangingBeacons(in: beaconRegion)
             //FIXME: check if needed [self.locationManager performSelector:@selector(requestStateForRegion:) withObject:beaconRegion afterDelay:1];
             //FIXME: added more validation for the ibeacons permission matrix
@@ -222,7 +224,7 @@ public enum iBeaconNotifications:String{
     /**Stops monitoring beacons*/
     open func stopMonitoring(){
         for beaconRegion in regions{
-            //locationManager.stopMonitoring(for: beaconRegion)
+            locationManager.stopMonitoring(for: beaconRegion)
             locationManager.stopRangingBeacons(in: beaconRegion)
         }
          locationManager.stopUpdatingLocation()
@@ -350,8 +352,9 @@ public enum iBeaconNotifications:String{
             }
             
             myBeacons.sort(by: {$0.proximity.sortIndex < $1.proximity.sortIndex})
-            
+          
             NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: myBeacons)
+            
         }
         
         
@@ -410,11 +413,11 @@ public enum iBeaconNotifications:String{
             let beacon = region as! CLBeaconRegion
             let ibeacon =  iBeacon(minor: beacon.minor?.uint16Value, major: beacon.major?.uint16Value, proximityId: beacon.proximityUUID.uuidString)
             ibeacon.proximity = CLProximity(rawValue: 1)!
-            NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.BeaconEntry.rawValue), object: ibeacon)
+            //NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.BeaconEntry.rawValue), object: ibeacon)
             if logging {
                 print("Region Entered! \(region) ")
                
-                //manager.startRangingBeacons(in: region as! CLBeaconRegion)
+                manager.startRangingBeacons(in: region as! CLBeaconRegion)
             }
         }
     }
@@ -432,11 +435,11 @@ public enum iBeaconNotifications:String{
             let beacon = region as! CLBeaconRegion
             let ibeacon =  iBeacon(minor: beacon.minor?.uint16Value, major: beacon.major?.uint16Value, proximityId: beacon.proximityUUID.uuidString)
             ibeacon.proximity = CLProximity(rawValue: 1)!
-            NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.BeaconExit.rawValue), object: ibeacon)
+            //NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.BeaconExit.rawValue), object: ibeacon)
             if logging {
                 
                 print("Exit Region! \(region) ")
-                //manager.stopRangingBeacons(in: region as! CLBeaconRegion)
+                manager.stopRangingBeacons(in: region as! CLBeaconRegion)
             }
             
         }
