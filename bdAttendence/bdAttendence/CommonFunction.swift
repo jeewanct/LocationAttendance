@@ -37,6 +37,7 @@ func deleteAllData(){
     }
     UserDefaults.standard.setValue(deviceToken, forKey: UserDefaultsKeys.deviceToken.rawValue)
     UserDefaults.standard.synchronize()
+    BlueDolphinManager.manager.stopScanning()
     
 }
 

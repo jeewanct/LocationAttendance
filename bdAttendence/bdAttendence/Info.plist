@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key></key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -19,7 +21,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.4</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -40,7 +42,11 @@
 	<string>Want to access near by beacons</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Want to access your camera</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Want to access near by location to track your indoor location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Want to access near by location to track your indoor location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Want to access near by location to track your indoor location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Want to access your gallery</string>

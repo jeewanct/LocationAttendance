@@ -9,7 +9,7 @@ target 'bdAttendence' do
 pod 'Alamofire'
 pod 'AlamofireObjectMapper'
 pod 'AWSS3'
-pod 'RealmSwift','~> 2.0.2'
+pod 'RealmSwift'
 pod 'IQKeyboardManagerSwift'
 pod 'Fabric'
 pod 'Crashlytics'

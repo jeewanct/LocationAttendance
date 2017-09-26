@@ -60,7 +60,12 @@ class NewCheckoutViewController: UIViewController {
         
         swipedown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipedown?.direction = .down
-       
+        let shiftDetails = ShiftHandling.getShiftDetail()
+        officeEndHour = shiftDetails.2
+        officeStartHour = shiftDetails.0
+        officeStartMin = shiftDetails.1
+        officeEndMin = shiftDetails.3
+        
         
         
         

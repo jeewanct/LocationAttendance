@@ -37,7 +37,7 @@ class NewOrganisationSelectViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
+        //self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,6 +55,7 @@ class NewOrganisationSelectViewController: UIViewController {
             
         }else{
             UserDefaults.standard.set(orgId, forKey: UserDefaultsKeys.organizationId.rawValue)
+            UserDefaults.standard.synchronize()
             getUserData()
             let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
             UIApplication.shared.keyWindow?.rootViewController = destVC
@@ -96,7 +97,7 @@ extension NewOrganisationSelectViewController:UICollectionViewDelegate,UICollect
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
         cell.organizationNameLabel.numberOfLines = 0
         cell.organizationNameLabel.font = APPFONT.BODYTEXT
-        cell.organizationNameLabel.text = task.organizationName.capitalized
+        cell.organizationNameLabel.text = task.organizationName?.capitalized
         cell.backgroundColor = UIColor.white // make cell more visible in our example project
         
         return cell
@@ -111,7 +112,7 @@ extension NewOrganisationSelectViewController:UICollectionViewDelegate,UICollect
         cell.checkImage.image = #imageLiteral(resourceName: "org_selection")
         selectedIndexPath = indexPath
         let task = accessTokensList[indexPath.row]
-        orgId  = task.organizationId
+        orgId  = task.organizationId!
        
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

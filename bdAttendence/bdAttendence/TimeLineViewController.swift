@@ -30,7 +30,8 @@ class TimeLineViewController: UIViewController {
         timeLineTableview.allowsSelection = false
         timeLineTableview.tableFooterView = UIView()
         timeLineTableview.separatorStyle = .none
-        
+        self.timeLineTableview.estimatedRowHeight =  200
+        self.timeLineTableview.rowHeight = UITableViewAutomaticDimension;
     
     
         // Do any additional setup after loading the view.
@@ -89,7 +90,7 @@ extension TimeLineViewController:UITableViewDelegate,UITableViewDataSource{
         cell.numberOfBeaconLabel.font = APPFONT.HELPTEXT
         cell.numberOfBeaconLabel.numberOfLines = 0
         cell.numberOfBeaconLabel.lineBreakMode = .byWordWrapping
-        cell.numberOfBeaconLabel.sizeToFit()
+        cell.numberOfBeaconLabel.adjustsFontSizeToFitWidth = true
         cell.numberOfBeaconLabel.text = beaconAddressArray.joined(separator: "\n").capitalized
         return cell
     }

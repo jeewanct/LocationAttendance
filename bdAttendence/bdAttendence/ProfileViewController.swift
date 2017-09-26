@@ -51,7 +51,7 @@ class ProfileViewController: UIViewController {
     func getOrganisationName(){
         let realm = try! Realm()
         if let tokenData = realm.objects(AccessTokenObject.self).filter("organizationId = %@",SDKSingleton.sharedInstance.organizationId).first {
-            organisationName = tokenData.organizationName
+            organisationName = tokenData.organizationName!
             
         }
     }
@@ -184,6 +184,7 @@ extension ProfileViewController :UIImagePickerControllerDelegate,UINavigationCon
         let pickedImage  = info[UIImagePickerControllerEditedImage] as! UIImage
         profileImageView.image = pickedImage
         UserDefaults.standard.set(UIImageJPEGRepresentation(pickedImage, 100), forKey: "profileImage")
+        UserDefaults.standard.synchronize()
         picker.dismiss(animated: true, completion: nil)
     }
     

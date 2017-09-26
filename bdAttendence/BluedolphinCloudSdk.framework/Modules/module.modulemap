@@ -7,4 +7,5 @@ framework module BluedolphinCloudSdk {
 
 module BluedolphinCloudSdk.Swift {
     header "BluedolphinCloudSdk-Swift.h"
+    requires objc
 }

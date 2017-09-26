@@ -15,10 +15,10 @@ let appIdentifier = "com.raremedia.bdAttendence"
 
 let CHECK_IN_DURATION_TOLERANCE:Double = 30 * 60
 let VALID_CHECKIN_DURATION :Double = 5*60
-let officeStartHour = 9
-let officeStartMin = 0
-let officeEndHour = 21
-let officeEndMin = 0
+var officeStartHour = 9
+var officeStartMin = 0
+var officeEndHour = 21
+var officeEndMin = 0
 
 enum CheckinDetailKeys:String{
     case userInteraction
@@ -67,6 +67,7 @@ enum LocalNotifcation:String{
     case DayCheckinScreen
     case ThisWeek
     case ContactUs
+    case ShiftEnded
 }
 enum StoryboardIdentifier:String{
     case myprofile

@@ -102,7 +102,7 @@ class UserDayData {
         if let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("dayofWeek = %@","\(weekDay)").first {
             
             if weekOfYear == Calendar.current.component(.weekOfYear, from: attendanceLogForToday.timeStamp!){
-                let beaconData = attendanceLogForToday.beaconList.sorted(byProperty: "lastSeen", ascending: true).filter("beaconNumber = %@","0").filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                let beaconData = attendanceLogForToday.beaconList.sorted(byKeyPath: "lastSeen", ascending: true).filter("beaconNumber = %@","0").filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
                 
                 
                 

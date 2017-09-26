@@ -47,6 +47,7 @@ class SuperViewController: UIViewController {
         }
         
          checkDeviceStatus()
+         checkShiftStatus()
     
     
     }
@@ -93,7 +94,16 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.firstCheckin(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.FirstBeaconCheckin.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bluetoothEnabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconEnabled.rawValue), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(shiftHandling), name: NSNotification.Name(rawValue: LocalNotifcation.ShiftEnded.rawValue), object: nil)
+        
+        
+    }
+    
+    func shiftHandling(){
+        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+        UserDefaults.standard.synchronize()
+        BlueDolphinManager.manager.stopScanning()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: nil)
         
         
     }
@@ -171,6 +181,7 @@ extension SuperViewController{
         case NotificationType.MultipleLogout.rawValue:
             deleteAllData()
             moveToFirstScreen()
+            BlueDolphinManager.manager.stopScanning()
             
             
         default:
@@ -309,12 +320,14 @@ extension SuperViewController{
                             
                             CheckinModel.createCheckin(checkinData: checkin)
                             UserDefaults.standard.set(Date(), forKey: "lastLocationCheckin")
+                            UserDefaults.standard.synchronize()
                             if isInternetAvailable(){
                                 CheckinModel.postCheckin()
                             }
                         }
                     } else{
                         UserDefaults.standard.set(Date(), forKey: "lastLocationCheckin")
+                        UserDefaults.standard.synchronize()
                     }
                 }
             }
@@ -334,6 +347,7 @@ extension SuperViewController{
                 if id != SDKSingleton.sharedInstance.DeviceUDID{
                     deleteAllData()
                     moveToFirstScreen()
+                    BlueDolphinManager.manager.stopScanning()
                 }
             case APIResult.InvalidCredentials.rawValue:
                 break
@@ -353,6 +367,41 @@ extension SuperViewController{
             }
         }
     }
+    func checkShiftStatus(){
+      
+            UserDeviceModel.getDObjectsShift { (status) in
+                switch (status){
+                case APIResult.Success.rawValue:
+                    let shiftDetails = ShiftHandling.getShiftDetail()
+                    officeEndHour = shiftDetails.2
+                    officeStartHour = shiftDetails.0
+                    officeStartMin = shiftDetails.1
+                    officeEndMin = shiftDetails.3
+                    
+                    if let value = UserDefaults.standard.value(forKey: UserDefaultsKeys.BDShiftId.rawValue) as? String{
+                        SDKSingleton.sharedInstance.shiftId = value
+                    }
+                    break
+                   
+                case APIResult.InvalidCredentials.rawValue:
+                    break
+                    //self.showAlert(ErrorMessage.UserNotFound.rawValue)
+                    
+                case APIResult.InternalServer.rawValue:
+                    break
+                    //self.showAlert(ErrorMessage.InternalServer.rawValue)
+                    
+                    
+                case APIResult.InvalidData.rawValue:
+                    break
+                //self.showAlert(ErrorMessage.NotValidData.rawValue)
+                default:
+                    break
+                    
+                }
+            }
+        }
+    
     
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)

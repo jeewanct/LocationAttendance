@@ -21,6 +21,8 @@
 		990CBCF11EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCF01EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift */; };
 		990CBCF31EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCF21EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift */; };
 		990CBCF71EFAA40300F56E38 /* NewOtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBCF61EFAA40300F56E38 /* NewOtpViewController.swift */; };
+		9915B7231F79322D00EE4FBF /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9915B7221F79322600EE4FBF /* BluedolphinCloudSdk.framework */; };
+		9915B7241F79322D00EE4FBF /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9915B7221F79322600EE4FBF /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		991A0ECB1ECC259D00513373 /* ProjectConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A0ECA1ECC259D00513373 /* ProjectConstant.swift */; };
 		99576C071F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99576C061F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf */; };
 		99576C091F0CD5E300A53A4C /* SystemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99576C081F0CD5E300A53A4C /* SystemDetailViewController.swift */; };
@@ -57,8 +59,6 @@
 		99CA96F71F0A367A00E2813B /* DayCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */; };
 		99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */; };
 		99CCF2441F2A1E56008947FA /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CCF2431F2A1E56008947FA /* TimeLineTableViewCell.swift */; };
-		99CF2CC61F6BB1F1002E49EA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CF2CC41F6BB1E8002E49EA /* BluedolphinCloudSdk.framework */; };
-		99CF2CC71F6BB1F1002E49EA /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99CF2CC41F6BB1E8002E49EA /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		99D6172E1EBA075800E7E05F /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6172D1EBA075800E7E05F /* OTPView.swift */; };
 		99E369CB1F1CB519000A642C /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CA1F1CB519000A642C /* TimerViewController.swift */; };
 		99E369CD1F1CC4A5000A642C /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */; };
@@ -103,7 +103,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99CF2CC71F6BB1F1002E49EA /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				9915B7241F79322D00EE4FBF /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,7 +127,9 @@
 		990CBCF01EFA4C7400F56E38 /* NewOrganisationSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOrganisationSelectViewController.swift; sourceTree = "<group>"; };
 		990CBCF21EFA4ED600F56E38 /* OrganizationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationCollectionViewCell.swift; sourceTree = "<group>"; };
 		990CBCF61EFAA40300F56E38 /* NewOtpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOtpViewController.swift; sourceTree = "<group>"; };
+		9915B7221F79322600EE4FBF /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		991A0ECA1ECC259D00513373 /* ProjectConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectConstant.swift; sourceTree = "<group>"; };
+		991FBCC41F728C47000E6E3E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		99576C051F0BBA0100A53A4C /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		99576C061F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-ExtraLight.ttf"; sourceTree = "<group>"; };
 		99576C081F0CD5E300A53A4C /* SystemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemDetailViewController.swift; sourceTree = "<group>"; };
@@ -171,7 +173,6 @@
 		99CA96F61F0A367A00E2813B /* DayCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCheckoutViewController.swift; sourceTree = "<group>"; };
 		99CA96F81F0A3F5600E2813B /* NewPermissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPermissionViewController.swift; sourceTree = "<group>"; };
 		99CCF2431F2A1E56008947FA /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
-		99CF2CC41F6BB1E8002E49EA /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		99D6172D1EBA075800E7E05F /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		99E369CA1F1CB519000A642C /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		99E369CC1F1CC4A5000A642C /* ErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
@@ -202,7 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99CF2CC61F6BB1F1002E49EA /* BluedolphinCloudSdk.framework in Frameworks */,
+				9915B7231F79322D00EE4FBF /* BluedolphinCloudSdk.framework in Frameworks */,
 				7AFEBE0BA4990811CC646CD5 /* Pods_bdAttendence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,7 +259,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				99CF2CC41F6BB1E8002E49EA /* BluedolphinCloudSdk.framework */,
+				9915B7221F79322600EE4FBF /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD39B51EA49B7100B6942B /* bdAttendenceTests */,
 				99BD39C01EA49B7100B6942B /* bdAttendenceUITests */,
@@ -404,6 +405,7 @@
 		DF78D011E002203932CCD6B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				991FBCC41F728C47000E6E3E /* MobileCoreServices.framework */,
 				9982461D1ED55BBE006CA0E4 /* MapKit.framework */,
 				D31BC022915AA05FF0E1E696 /* Pods_bdAttendence.framework */,
 				705EFBD76E06AFBFB1CF3729 /* Pods_bdAttendenceTests.framework */,

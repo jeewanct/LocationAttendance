@@ -70,6 +70,7 @@ class NewOtpViewController: UIViewController {
             case APIResult.Success.rawValue:
                 
                 UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
+                UserDefaults.standard.synchronize()
                 let realm = try! Realm()
                 let tokensList = realm.objects(AccessTokenObject.self)
                 if tokensList.count > 1{
@@ -81,6 +82,7 @@ class NewOtpViewController: UIViewController {
                 }else{
                     for token in tokensList{
                         UserDefaults.standard.set(token.organizationId, forKey: UserDefaultsKeys.organizationId.rawValue)
+                        UserDefaults.standard.synchronize()
                     }
                     
                     getUserData()

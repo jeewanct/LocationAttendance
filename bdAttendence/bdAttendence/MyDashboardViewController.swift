@@ -8,6 +8,7 @@
 
 import UIKit
 import BluedolphinCloudSdk
+import AudioToolbox
 
 //protocol myDashboardDelegate :class{
 //    
@@ -23,6 +24,7 @@ class MyDashboardViewController: UIViewController {
     var timerView:TimerView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         
         NotificationCenter.default.addObserver(self, selector: #selector(MyDashboardViewController.updateView(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MyDashboardViewController.updateView(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: nil)
@@ -42,6 +44,11 @@ class MyDashboardViewController: UIViewController {
             }
             
             updateChildController(destVc: destVc)
+//            destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
+//            UIView.animate(withDuration: 0.3) {
+//                destVc.view.transform = CGAffineTransform(translationX: 0, y: 0)
+//            }
+            constraintViewEqual(view1: containerView, view2: destVc.view)
             
             
         }
@@ -124,6 +131,7 @@ class MyDashboardViewController: UIViewController {
             
           case LocalNotifcation.DayCheckinScreen.rawValue:
             UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+            UserDefaults.standard.synchronize()
            BlueDolphinManager.manager.stopScanning()
             postDataCheckin(userInteraction: .swipeDown)
 
@@ -136,6 +144,7 @@ class MyDashboardViewController: UIViewController {
             constraintViewEqual(view1: containerView, view2: destVc.view)
           case LocalNotifcation.CheckinScreen.rawValue:
             UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+            UserDefaults.standard.synchronize()
             BlueDolphinManager.manager.stopScanning()
             postDataCheckin(userInteraction: .swipeDown)
             
