@@ -15,13 +15,13 @@ import ObjectMapper
 
 
 open class AccessTokenObject :Object,Mappable {
-   public  dynamic var organizationId:String = ""
-     public dynamic var token:String = ""
-    public  dynamic var userId:String = ""
-   public dynamic var organizationName:String = ""
+   public  dynamic var organizationId:String? = nil
+     public dynamic var token:String? = nil
+    public  dynamic var userId:String? = nil
+   public dynamic var organizationName:String? = nil
    public dynamic var expires  = 0
-   public dynamic var userName:String?
-   public dynamic var orgFeatures:String?
+   public dynamic var userName:String? = nil
+   public dynamic var orgFeatures:String? = nil
      
     //dynamic var primeKey :String?
     //Impl. of Mappable protocol
@@ -56,8 +56,8 @@ open class AccessTokenObject :Object,Mappable {
 }
  class RefreshTokenObject :Object,Mappable {
     
-    dynamic var token:String = ""
-    dynamic var userId:String = ""
+    dynamic var token:String? = nil
+    dynamic var userId:String? = nil
     dynamic var expires  = 0
     //Impl. of Mappable protocol
     required convenience public init?(map: Map) {

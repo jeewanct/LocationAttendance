@@ -139,6 +139,7 @@ open class OauthModel :NSObject, Meta{
                     
                     if let data = dataValue["data"] as? NSDictionary {
                         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.startDate.rawValue)
+                        UserDefaults.standard.synchronize()
                         try! realm.write {
                             
                             if let accessToken = data["accessToken"] as? NSArray{

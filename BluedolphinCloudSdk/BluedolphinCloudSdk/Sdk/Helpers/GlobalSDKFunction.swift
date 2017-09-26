@@ -77,14 +77,19 @@ public func getUserData(){
         SDKSingleton.sharedInstance.mobileNumber = mobile
         print("mobile id = \(mobile)")
     }
+    if let value = storage.value(forKey: UserDefaultsKeys.BDShiftId.rawValue) as? String{
+        SDKSingleton.sharedInstance.shiftId = value
+    }
     if let tokenData = realm.objects(AccessTokenObject.self).filter("organizationId = %@",SDKSingleton.sharedInstance.organizationId).first {
         print(tokenData)
-        SDKSingleton.sharedInstance.userId = tokenData.userId
+        SDKSingleton.sharedInstance.userId = tokenData.userId!
         print("user id = \(SDKSingleton.sharedInstance.userId)")
         SDKSingleton.sharedInstance.userName = tokenData.userName!
-        SDKSingleton.sharedInstance.accessToken = tokenData.token
+        SDKSingleton.sharedInstance.accessToken = tokenData.token!
         print("accessToken id = \(SDKSingleton.sharedInstance.accessToken)")
-        if let orgCustomFeatures = tokenData.orgFeatures{
+        
+        if let orgCustomFeatures = tokenData.orgFeatures {
+        
             if let orgFeature = toDictionary(text: orgCustomFeatures) as? NSDictionary{
                 if let value = orgFeature["transmitter"] as? Bool{
                     SDKSingleton.sharedInstance.transmitter = value
@@ -96,8 +101,8 @@ public func getUserData(){
                     SDKSingleton.sharedInstance.employeeShiftSwitchFlexibility = value
                 }
             }
+        
         }
-       
     }
     
 }

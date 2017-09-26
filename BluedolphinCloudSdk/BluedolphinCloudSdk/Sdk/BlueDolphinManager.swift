@@ -140,6 +140,9 @@ open class BlueDolphinManager:NSObject {
         getUserData()
         OauthModel.updateToken()
     }
+    public func stopLocationMonitoring(){
+        coreLocationController?.locationManager.stopUpdatingLocation()
+    }
     
     public func stopScanning(){
         beaconManager.stopMonitoring()
@@ -162,31 +165,32 @@ open class BlueDolphinManager:NSObject {
             
             for beacon in visibleIbeacons{
                 /// Do something with the iBeacon
+                if !beacon.generateId().isBlank {
+                    let dict = [
+                        "uuid" : beacon.UUID ,
+                        "major": String(describing: beacon.major!),
+                        "minor" : String(describing: beacon.minor!),
+                        //"proximity" :  String(describing: beacon.proximity),
+                        "rssi" : beacon.rssi,
+                        "distance" :beacon.accuracy,
+                        "lastSeen" : getCurrentDate().formattedISO8601
+                        
+                    ]
+                    seanbeacons.addEntries(from: [beacon.generateId() :dict])
+                    print(dict)
+                }
                 
-                let dict = [
-                    "uuid" : beacon.UUID ,
-                    "major": String(describing: beacon.major!),
-                    "minor" : String(describing: beacon.minor!),
-                    //"proximity" :  String(describing: beacon.proximity),
-                    "rssi" : beacon.rssi,
-                    "distance" :beacon.accuracy,
-                    "lastSeen" : getCurrentDate().formattedISO8601
-                    
-                ]
-                seanbeacons.addEntries(from: [beacon.major! :dict])
-                print(dict)
             }
             UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastBeaconScanned.rawValue)
+            UserDefaults.standard.synchronize()
 
             if beaconSentflag {
                 beaconSentflag = false
-                //                let delay = 60.0 * Double(NSEC_PER_SEC)
-                //                let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
-                //                DispatchQueue.main.asyncAfter(deadline: time, execute: {
                 var beaconArray = Array<Any>()
                 for (_,value) in self.seanbeacons {
                     beaconArray.append(value)
                 }
+                
                 
                 if beaconArray.count != 0 {
                     if let LastBeaconCheckinTime = UserDefaults.standard.value(forKeyPath: UserDefaultsKeys.LastBeaconCheckinTime.rawValue) as? Date {
@@ -202,13 +206,17 @@ open class BlueDolphinManager:NSObject {
                     }else{
                         self.sendCheckins(array: beaconArray)
                     }
+                }else{
+                    DispatchQueue.main.async {
+                    let shiftStatus = ShiftHandling.checkUserShiftStatus(currentTime: Date())
+                    print("Shift Staus \(shiftStatus)")
+                    }
+                    
                 }
                 self.beaconSentflag = true
                 //})
             }
-            
-            
-            
+
         }
     }
     

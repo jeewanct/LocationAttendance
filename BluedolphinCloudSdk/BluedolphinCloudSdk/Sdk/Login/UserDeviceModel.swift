@@ -75,7 +75,7 @@ open class UserDeviceModel:NSObject, Meta{
             }
         }
     
-    public class  func getDObjectsShift(completion: @escaping (_ result: String,_ imeid:String) -> Void){
+    public class  func getDObjectsShift(completion: @escaping (_ result: String) -> Void){
         let url = UserDeviceModel.url() + SDKSingleton.sharedInstance.userId + "?dObject=\(true)"
         NetworkModel.fetchData(url, header: getHeader() as NSDictionary, success: { (response) in
             guard let status = response["statusCode"] as? Int else {
@@ -90,18 +90,25 @@ open class UserDeviceModel:NSObject, Meta{
                             
                             for document in documents{
                                 let documentDict = document as! NSDictionary
-                                if let dObjectData = documentDict["dObjectData"] as? NSDictionary{
-                                    if let objectName = dObjectData["objectName"] as? String{
-                                        switch objectName {
-                                        case DObject.shift.rawValue:
-                                            processShiftData(dobject: documentDict)
-                                            break
-                                        default:
-                                            break
+                                 if let associationData = documentDict["associationData"] as? NSArray{
+                                    for associationDataObject in associationData{
+                                        let associationDataDict = associationDataObject as! NSDictionary
+                                        if let dObjectData = associationDataDict["dObjectData"] as? NSDictionary{
+                                            if let objectName = dObjectData["objectName"] as? String{
+                                                switch objectName {
+                                                case DObject.shift.rawValue:
+                                                    processShiftData(dobject: associationDataDict)
+                                                    break
+                                                default:
+                                                    break
+                                                }
+                                                
+                                            }
                                         }
-                                        
                                     }
                                 }
+                                    
+                                
                             }
                             
                         }
@@ -109,14 +116,14 @@ open class UserDeviceModel:NSObject, Meta{
                 }
             case 401:
                 
-                completion(APIResult.InvalidCredentials.rawValue,"")
+                completion(APIResult.InvalidCredentials.rawValue)
             case 403:
-                completion(APIResult.UserInteractionRequired.rawValue,"")
+                completion(APIResult.UserInteractionRequired.rawValue)
                 
             case 409:
-                completion(APIResult.InvalidData.rawValue,"")
+                completion(APIResult.InvalidData.rawValue)
             case 500...502:
-                completion(APIResult.InternalServer.rawValue,"")
+                completion(APIResult.InternalServer.rawValue)
                 
             default:break
             }
@@ -140,6 +147,8 @@ open class UserDeviceModel:NSObject, Meta{
             UserDefaults.standard.set(shiftObject.endMin, forKey: UserDefaultsKeys.BDShiftEndMin.rawValue)
             UserDefaults.standard.set(shiftObject.endHr, forKey: UserDefaultsKeys.BDShiftEndHour.rawValue)
             UserDefaults.standard.set(shiftObject.duration, forKey: UserDefaultsKeys.BDShiftDuration.rawValue)
+            UserDefaults.standard.set(shiftObject.shiftId, forKey: UserDefaultsKeys.BDShiftId.rawValue)
+            
             
             
         }
@@ -154,7 +163,7 @@ open class UserDeviceModel:NSObject, Meta{
         }
     }
     
-
+    UserDefaults.standard.synchronize()
 }
     
     

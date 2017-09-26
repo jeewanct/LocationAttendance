@@ -11,16 +11,16 @@ import RealmSwift
 import ObjectMapper
 
 open class BeaconData :Object,Mappable{
-   public dynamic var lastSeen:Date?
-   public dynamic var distance:String?
-   public dynamic var rssi:String?
-   public dynamic var major:String?
-   public dynamic var minor:String?
-   public dynamic var uuid:String?
-   public dynamic var beaconId:String?
-   public dynamic var latitude:String?
-   public dynamic var longitude:String?
-    public dynamic var beaconNumber:String?
+   public dynamic var lastSeen:Date? = nil
+   public dynamic var distance:String? = nil
+   public dynamic var rssi:String? = nil
+   public dynamic var major:String? = nil
+   public dynamic var minor:String? = nil
+   public dynamic var uuid:String? = nil
+   public dynamic var beaconId:String? = nil
+   public dynamic var latitude:String? = nil
+   public dynamic var longitude:String? = nil
+    public dynamic var beaconNumber:String? = nil
     required convenience public init?(map : Map){
         self.init()
     }
@@ -41,8 +41,8 @@ open class BeaconData :Object,Mappable{
 }
 
 open class AttendanceLog:Object,Mappable{
-   public dynamic var dayofWeek:String?
-   public dynamic var timeStamp:Date?
+   public dynamic var dayofWeek:String? = nil
+   public dynamic var timeStamp:Date? = nil
    public var beaconList = List<BeaconData>()
     override open static func primaryKey() -> String? {
         return "dayofWeek"

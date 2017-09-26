@@ -263,7 +263,7 @@ import RealmSwift
             }else {
                 assignment.selfAssignment = "false"
             }
-        assignment.newAssignment = "true"
+        assignment.firstTypeAssignment = "true"
         
         
         var currentUpdate = Dictionary<String,Any>()
@@ -336,7 +336,7 @@ import RealmSwift
             }else {
                 assignment.selfAssignment = "false"
             }
-            assignment.newAssignment = "true"
+            assignment.firstTypeAssignment = "true"
             
             
             var currentUpdate = Dictionary<String,Any>()

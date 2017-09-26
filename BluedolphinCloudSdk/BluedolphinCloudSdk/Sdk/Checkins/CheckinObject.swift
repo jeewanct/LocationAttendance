@@ -14,25 +14,25 @@ import ObjectMapper
 
  class RMCCheckin:Object,Mappable{
     
-    dynamic var latitude:String?
-    dynamic var longitude:String?
-    dynamic var accuracy:String?
-    dynamic var altitude:String?
-    dynamic var organizationId:String?
-    dynamic var checkinId:String?
-    dynamic var time:String?
-    dynamic var checkinCategory:String?
-    dynamic var checkinType:String?
-    dynamic var checkinDetails:String?
-    dynamic var imageUrl:String?
-    dynamic var assignmentId:String?
-    dynamic var imageName:String?
-    dynamic var relativeUrl:String?
-    dynamic var jobNumber:String?
+    dynamic var latitude:String? = nil
+    dynamic var longitude:String? = nil
+    dynamic var accuracy:String? = nil
+    dynamic var altitude:String? = nil
+    dynamic var organizationId:String? = nil
+    dynamic var checkinId:String? = nil
+    dynamic var time:String? = nil
+    dynamic var checkinCategory:String? = nil
+    dynamic var checkinType:String? = nil
+    dynamic var checkinDetails:String? = nil
+    dynamic var imageUrl:String? = nil
+    dynamic var assignmentId:String? = nil
+    dynamic var imageName:String? = nil
+    dynamic var relativeUrl:String? = nil
+    dynamic var jobNumber:String? = nil
     var beaconProximity  = List<RMCBeacon>()
     
     
-    override open static func primaryKey() -> String? {
+    override open static func primaryKey() -> String {
         return "checkinId"
         
     }

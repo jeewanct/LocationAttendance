@@ -18,14 +18,14 @@ protocol Meta {
  class RMCUser :Object ,Mappable{
     
 
-    dynamic var mobile:String?
-    dynamic var otpToken:String?
-    dynamic var firstName:String?
-    dynamic var lastName:String?
-    dynamic var imeiId:String?
-    dynamic var deviceType:String?
-    dynamic var deviceToken :String?
-    dynamic var loginType:String?
+    dynamic var mobile:String? = nil
+    dynamic var otpToken:String?  = nil
+    dynamic var firstName:String?  = nil
+    dynamic var lastName:String?  = nil
+    dynamic var imeiId:String?  = nil
+    dynamic var deviceType:String?  = nil
+    dynamic var deviceToken :String?  = nil
+    dynamic var loginType:String?  = nil
     //dynamic var appId:String?
     
     

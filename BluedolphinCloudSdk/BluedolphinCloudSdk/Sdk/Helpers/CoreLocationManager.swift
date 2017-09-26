@@ -38,7 +38,9 @@ public struct CurrentLocation {
             locationManager.allowsBackgroundLocationUpdates = true
             locationManager.pausesLocationUpdatesAutomatically = true
             //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-            locationManager.requestAlwaysAuthorization()
+            
+                locationManager.requestAlwaysAuthorization()
+            
             locationManager.startUpdatingLocation()
             
         }

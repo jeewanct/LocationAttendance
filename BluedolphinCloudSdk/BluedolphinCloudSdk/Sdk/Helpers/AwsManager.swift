@@ -19,7 +19,7 @@ import AWSS3
    
     
     var s3Url = String()
-    init(poolId:String = "ap-northeast-1:a0c55baf-0ee2-4ffa-90e8-901d3b14c45b",region:AWSRegionType = AWSRegionType.apNortheast1,bucket:String = "bd-bucket-tokyo",url:String = "http://di4woccwc7kdj.cloudfront.net/") {
+    init(poolId:String = "ap-northeast-1:a0c55baf-0ee2-4ffa-90e8-901d3b14c45b",region:AWSRegionType = AWSRegionType.APNortheast1,bucket:String = "bd-bucket-tokyo",url:String = "http://di4woccwc7kdj.cloudfront.net/") {
         CognitoPoolID = poolId
         Region = region
         cdnUrl = url
@@ -67,14 +67,14 @@ import AWSS3
         
         // upload
         let transferManager = AWSS3TransferManager.default()
-        transferManager?.upload(uploadRequest).continue({ (task) -> Any? in
+        transferManager.upload(uploadRequest!).continueWith(block: { (task) -> Any? in
             if let error = task.error {
                 print("Upload failed ❌ (\(error))")
             }
             
-            if let exception = task.exception {
-                print("Upload failed ❌ (\(exception))")
-            }
+//            if let exception = task.description {
+//                print("Upload failed ❌ (\(exception))")
+//            }
             
             if task.result != nil {
                 let s3URL =  self.cdnUrl! + fileName

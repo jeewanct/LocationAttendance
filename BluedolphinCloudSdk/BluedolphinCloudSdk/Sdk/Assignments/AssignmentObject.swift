@@ -47,20 +47,20 @@ import ObjectMapper
  class AssignmentObject:Object,Mappable{
     
     
-   dynamic var assignmentId:String?
-   dynamic var assigneeId:String?
-   dynamic var status:String?
-   dynamic var latitude:String?
-   dynamic var longitude:String?
-   dynamic var altitude:String?
-   dynamic  var accuracy:String?
-   dynamic  var organizationId:String?
-   dynamic  var assignmentDeadline:String?
-    dynamic var assignmentStartTime:String?
-    dynamic var assignmentAddress:String?
-    dynamic var time :String?
+   dynamic var assignmentId:String? = nil
+   dynamic var assigneeId:String? = nil
+   dynamic var status:String? = nil
+   dynamic var latitude:String? = nil
+   dynamic var longitude:String? = nil
+   dynamic var altitude:String? = nil
+   dynamic  var accuracy:String? = nil
+   dynamic  var organizationId:String? = nil
+   dynamic  var assignmentDeadline:String? = nil
+    dynamic var assignmentStartTime:String? = nil
+    dynamic var assignmentAddress:String? = nil
+    dynamic var time :String? = nil
     
-    dynamic var assignmentDetails:String?
+    dynamic var assignmentDetails:String? = nil
     override open static func primaryKey() -> String? {
         return "assignmentId"
         
@@ -95,27 +95,27 @@ import ObjectMapper
 
 
  class RMCAssignmentObject :Object,Mappable {
-    dynamic var assignmentId:String?
-    dynamic var addedOn:String?
-    dynamic var time:String?
-    dynamic var updatedOn:String?
-    dynamic var assignmentDetails:String?
-    dynamic var assignmentStatusLog:String?
-    dynamic var assignmentDeadline:Date?
-    dynamic var assignmentStartTime:Date?
-    dynamic var assignmentAddress:String?
+    dynamic var assignmentId:String? = nil
+    dynamic var addedOn:String? = nil
+    dynamic var time:String? = nil
+    dynamic var updatedOn:String? = nil
+    dynamic var assignmentDetails:String? = nil
+    dynamic var assignmentStatusLog:String? = nil
+    dynamic var assignmentDeadline:Date?  = nil
+    dynamic var assignmentStartTime:Date?  = nil
+    dynamic var assignmentAddress:String? = nil
     var assigneeData = List<RMCAssignee>()
     dynamic var assignerData:RMCAssignee?
     dynamic var location:RMCLocation?
-    dynamic var status:String?
-    dynamic var jobNumber:String?
-    dynamic var bookmarked:String?
-    dynamic var lastUpdated:Date?
-    dynamic var selfAssignment:String?
-    dynamic var downloadedOn:Date?
-    dynamic var submittedOn:Date?
-    dynamic var newAssignment :String?
-    override open static func primaryKey() -> String? {
+    dynamic var status:String? = nil
+    dynamic var jobNumber:String? = nil
+    dynamic var bookmarked:String? = nil
+    dynamic var lastUpdated:Date?  = nil
+    dynamic var selfAssignment:String? = nil
+    dynamic var downloadedOn:Date?  = nil
+    dynamic var submittedOn:Date?  = nil
+    dynamic var firstTypeAssignment :String? = nil
+    override open static func primaryKey() -> String?  {
         return "assignmentId"
         
     }
@@ -142,15 +142,15 @@ import ObjectMapper
         downloadedOn <- map["downloadedOn"]
         submittedOn <- map["submittedOn"]
         jobNumber <- map["jobNumber"]
-        newAssignment <- map["newAssignment"]
+        firstTypeAssignment <- map["firstTypeAssignment"]
     }
     
 }
 
 
  class RMCAssignee :Object,Mappable{
-    dynamic var userId:String?;
-    dynamic var organizationId:String?;
+    dynamic var userId:String? = nil;
+    dynamic var organizationId:String? = nil;
     
     required convenience public init?(map: Map) {
         self.init()
@@ -164,17 +164,17 @@ import ObjectMapper
         organizationId <- map["organizationId"]
     }
 }
- class assignmentLog:Object{
-    dynamic var status :String?
-    dynamic var time:String?
-    dynamic var checkinId:String?
-}
+// class assignmentLog:Object{
+//    dynamic var status :String?
+//    dynamic var time:String?
+//    dynamic var checkinId:String?
+//}
 
 open class RMCLocation:Object,Mappable{
-  public  dynamic var latitude:String?
-   public dynamic var longitude:String?
-   public dynamic var altitude:String?
-   public dynamic var accuracy:String?
+  public  dynamic var latitude:String? = nil
+   public dynamic var longitude:String? = nil
+   public dynamic var altitude:String? = nil
+   public dynamic var accuracy:String? = nil
     required convenience public init?(map: Map) {
         self.init()
     }
@@ -206,5 +206,6 @@ open class RMCLocation:Object,Mappable{
     
     
 }
+
 
 

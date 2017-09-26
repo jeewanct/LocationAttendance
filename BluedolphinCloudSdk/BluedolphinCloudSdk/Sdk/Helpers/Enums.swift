@@ -21,12 +21,14 @@ public enum UserDefaultsKeys:String{
     case LastBeaconCheckinTime
     case LastBeaconScanned
     case TotalTime
+    case AlreadyCheckin
     case BDShiftStartHour
     case BDShiftStartMin
     case BDShiftEndHour
     case BDShiftEndMin
     case BDWorkingDays
     case BDShiftDuration
+    case BDShiftId
  
 }
 public enum APIResult:String{
@@ -72,4 +74,5 @@ public enum AssignmentWork:String{
     case batteryLevel
     case deviceModel
     case deviceOS
+    case shiftId = "shiftid"
 }

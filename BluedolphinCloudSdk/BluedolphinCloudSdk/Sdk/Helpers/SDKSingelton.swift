@@ -18,9 +18,10 @@ import UIKit
    public var accessToken = String()
    public var userName = String()
    public var mobileNumber = String()
-    public var employeeShiftSwitchFlexibility = Bool()
-    public var locationTracking = Bool()
-    public var transmitter = Bool()
+   public var employeeShiftSwitchFlexibility = Bool()
+   public var locationTracking = Bool()
+   public var transmitter = Bool()
+   public var shiftId = String()
 
     func batteryLevel() -> Float {
         return UIDevice.current.batteryLevel

@@ -141,6 +141,7 @@ public func getUUIDString()->String{
         case 200,400,409:
             if let checkinId = data["checkinId"] as? String{
                 UserDefaults.standard.set(Date(), forKey:UserDefaultsKeys.LastSyncTime.rawValue)
+                UserDefaults.standard.synchronize()
                 let realm = try! Realm()
                 guard let checkin = realm.objects(RMCCheckin.self).filter("checkinId = %@",checkinId).first  else {
                     return
@@ -170,6 +171,7 @@ public func getUUIDString()->String{
         checkinDetails[AssignmentWork.batteryLevel.rawValue] = "\(SDKSingleton.sharedInstance.batteryLevel()*100)" as AnyObject?
         checkinDetails[AssignmentWork.deviceModel.rawValue] = UIDevice.current.modelName as AnyObject
         checkinDetails[AssignmentWork.deviceOS.rawValue] = "iOS \(UIDevice.current.systemVersion)" as AnyObject
+         checkinDetails[AssignmentWork.shiftId.rawValue] = SDKSingleton.sharedInstance.shiftId as AnyObject
         
         checkin.checkinDetails = toJsonString(checkinDetails as AnyObject)
         checkin.accuracy = CurrentLocation.accuracy
@@ -229,6 +231,7 @@ public func getUUIDString()->String{
             realm.add(checkin, update: true)
         }
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastCheckinTime.rawValue)
+        UserDefaults.standard.synchronize()
 
     }
    
@@ -239,6 +242,7 @@ public func getUUIDString()->String{
             if !Calendar.current.isDateInToday(lastBeaconTime){
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FirstBeaconCheckin"), object: self, userInfo: nil)
                 UserDefaults.standard.set(0, forKey: UserDefaultsKeys.TotalTime.rawValue)
+                
             }else{
                 let checkinDiff =   Date().secondsFrom(lastBeaconTime)
                 if checkinDiff <= timeLag {
@@ -246,9 +250,11 @@ public func getUUIDString()->String{
                     if let totalTime = UserDefaults.standard.value(forKey: UserDefaultsKeys.TotalTime.rawValue) as? Int{
                         localTime = totalTime + checkinDiff
                         UserDefaults.standard.set(localTime, forKey: UserDefaultsKeys.TotalTime.rawValue)
+                        
                     }else{
                         localTime = checkinDiff
                         UserDefaults.standard.set(localTime, forKey: UserDefaultsKeys.TotalTime.rawValue)
+                       
                     }
                     
                     
@@ -261,6 +267,7 @@ public func getUUIDString()->String{
     
     
     UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastBeaconCheckinTime.rawValue)
+    UserDefaults.standard.synchronize()
     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "TimeUpdate"), object: self, userInfo: nil)
         
     }

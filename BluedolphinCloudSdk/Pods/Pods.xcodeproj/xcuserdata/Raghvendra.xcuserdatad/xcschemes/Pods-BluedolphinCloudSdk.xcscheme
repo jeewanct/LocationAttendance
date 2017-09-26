@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9CBE0B20888A061B259861F55378F1B4"
+               BlueprintIdentifier = "7C694333651806A72D7373D04CD6BD2F"
                BuildableName = "Pods_BluedolphinCloudSdk.framework"
                BlueprintName = "Pods-BluedolphinCloudSdk"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -36,6 +37,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9CBE0B20888A061B259861F55378F1B4"
+            BlueprintIdentifier = "7C694333651806A72D7373D04CD6BD2F"
             BuildableName = "Pods_BluedolphinCloudSdk.framework"
             BlueprintName = "Pods-BluedolphinCloudSdk"
             ReferencedContainer = "container:Pods.xcodeproj">
