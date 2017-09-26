@@ -46,9 +46,10 @@ class SuperViewController: UIViewController {
             self.window!.rootViewController = self
         }
         
-         checkDeviceStatus()
-         checkShiftStatus()
-    
+        if isInternetAvailable(){
+            checkShiftStatus()
+            
+        }
     
     }
     func handleLeftGesture() {
@@ -275,6 +276,10 @@ extension SuperViewController{
     func checkPermissionStatus(sender:NSNotification){
         updateTask()
         checkBlockerScreen()
+        if isInternetAvailable(){
+           checkDeviceStatus()
+        }
+        
         
     }
     
@@ -344,11 +349,14 @@ extension SuperViewController{
             case APIResult.Success.rawValue:
                 print(SDKSingleton.sharedInstance.DeviceUDID)
                 print(id)
-                if id != SDKSingleton.sharedInstance.DeviceUDID{
-                    deleteAllData()
-                    moveToFirstScreen()
-                    BlueDolphinManager.manager.stopScanning()
+                if !SDKSingleton.sharedInstance.DeviceUDID.isBlank && !id.isBlank{
+                    if id.capitalized != SDKSingleton.sharedInstance.DeviceUDID.capitalized{
+                        deleteAllData()
+                        moveToFirstScreen()
+                        BlueDolphinManager.manager.stopScanning()
+                    }
                 }
+               
             case APIResult.InvalidCredentials.rawValue:
                 break
                 //self.showAlert(ErrorMessage.UserNotFound.rawValue)

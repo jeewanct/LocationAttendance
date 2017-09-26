@@ -24,7 +24,7 @@ class MyDashboardViewController: UIViewController {
     var timerView:TimerView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        //AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(MyDashboardViewController.updateView(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MyDashboardViewController.updateView(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: nil)
@@ -189,6 +189,8 @@ class MyDashboardViewController: UIViewController {
     func checkSwipeUp(){
         delayWithSeconds(10) {
             if BlueDolphinManager.manager.seanbeacons.count == 0 {
+                BlueDolphinManager.manager.stopScanning()
+                AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                 self.showErrorCustomView()
             }else{
                 
@@ -246,12 +248,17 @@ extension MyDashboardViewController:CheckinViewDelegate {
     func updateView(moveToView: Screen) {
         switch moveToView {
         case .Timer:
+            BlueDolphinManager.manager.stopScanning()
+            BlueDolphinManager.manager.startScanning()
             self.showLoader()
             delayWithSeconds(10
                 , completion: {
-                if BlueDolphinManager.manager.seanbeacons.count != 0 {
-                    self.removeErrorCustomView()
-                }
+                    if BlueDolphinManager.manager.seanbeacons.count != 0 {
+                        self.removeErrorCustomView()
+                    }else{
+                        BlueDolphinManager.manager.stopScanning()
+                        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+                    }
             })
         case .Checkin:
             removeErrorCustomView()

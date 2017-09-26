@@ -65,6 +65,9 @@ class NewCheckoutViewController: UIViewController {
         officeStartHour = shiftDetails.0
         officeStartMin = shiftDetails.1
         officeEndMin = shiftDetails.3
+        if let value = UserDefaults.standard.value(forKey: UserDefaultsKeys.BDShiftId.rawValue) as? String{
+            SDKSingleton.sharedInstance.shiftId = value
+        }
         
         
         

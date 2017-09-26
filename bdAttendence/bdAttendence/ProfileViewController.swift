@@ -46,6 +46,7 @@ class ProfileViewController: UIViewController {
         profileTableView.rowHeight = 50.0
         profileTableView.register(UINib(nibName: "TwoSideLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "twoLabel")
         profileTableView.register(UINib(nibName: "SwitchTableViewCell", bundle: nil), forCellReuseIdentifier: "switch")
+       
         // Do any additional setup after loading the view.
     }
     func getOrganisationName(){
@@ -106,7 +107,15 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    func getDateInAMPM(date:Date)->String{
+        print(date)
+        let timeFormatter = DateFormatter()
+        //timeFormatter.dateStyle = .none
+        
+        timeFormatter.dateFormat = "hh:mm a"
+        return timeFormatter.string(from:date)
+        
+    }
     /*
      // MARK: - Navigation
      
@@ -152,7 +161,9 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource{
             cell.headingLabel.font = APPFONT.HELPTEXT
             cell.valueLabel.font = APPFONT.HELPTEXT
             cell.headingLabel.text = "Shift-Timing"
-            cell.valueLabel.text = "9am - 9pm"
+            let startDate = Date().dateAt(hours: officeStartHour, minutes: officeStartMin)
+            let endDate = Date().dateAt(hours: officeEndHour, minutes: officeEndMin)
+            cell.valueLabel.text = "\(getDateInAMPM(date: startDate!)) -  \(getDateInAMPM(date: endDate!))"
             cell.setDisclosure(toColour: APPColor.blueGradient)
             return cell
         case 3:
