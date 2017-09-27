@@ -43,9 +43,11 @@ class ProfileViewController: UIViewController {
         profileTableView.dataSource = self
         
         profileTableView.tableFooterView = UIView()
-        profileTableView.rowHeight = 50.0
+        
         profileTableView.register(UINib(nibName: "TwoSideLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "twoLabel")
         profileTableView.register(UINib(nibName: "SwitchTableViewCell", bundle: nil), forCellReuseIdentifier: "switch")
+        self.profileTableView.estimatedRowHeight =  50
+        self.profileTableView.rowHeight = UITableViewAutomaticDimension;
        
         // Do any additional setup after loading the view.
     }

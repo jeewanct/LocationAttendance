@@ -69,6 +69,8 @@ class NewCheckoutViewController: UIViewController {
             SDKSingleton.sharedInstance.shiftId = value
         }
         
+        BlueDolphinManager.manager.stopScanning()
+        BlueDolphinManager.manager.startScanning()
         
         
         

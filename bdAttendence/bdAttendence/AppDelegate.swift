@@ -41,8 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIDevice.current.isBatteryMonitoringEnabled = true
         registerForRemoteNotification()
         updateRealmConfiguration()
-       
-
         startUpTask()
         
         
@@ -103,12 +101,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getDeviceID(){
         let DeviceUDID = UIDevice.current.identifierForVendor?.uuidString
-        print(DeviceUDID ?? "")
+        
         let kcs = KeychainService()
         if let recoveredId = kcs.load(name:"UniqueId") {
             
-            SDKSingleton.sharedInstance.DeviceUDID = recoveredId
-            _ = kcs.save(name: "RMCIMEI", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
+           // SDKSingleton.sharedInstance.DeviceUDID = recoveredId
+            _ = kcs.save(name: "RMCIMEI", value:recoveredId as NSString)
         }
         if let recoveredId = kcs.load(name:"RMCIMEI") {
             
@@ -120,7 +118,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             _ = kcs.save(name: "RMCIMEI", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
            
         }
+        print(SDKSingleton.sharedInstance.DeviceUDID)
     }
+    
+    
     func checkLogin(){
         getUserData()
         
@@ -149,19 +150,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 3,
+            schemaVersion: 4,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 
-                if oldSchemaVersion < 3 {
+                if oldSchemaVersion < 4 {
                     migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
                         
                     }
                     migration.enumerateObjects(ofType: AccessTokenObject.className()) { oldObject, newObject in
                     }
+                    migration.enumerateObjects(ofType: RMCAssignmentObject.className()) { oldObject, newObject in
 
+                    }
                 
                 }
         }
@@ -169,9 +172,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         Realm.Configuration.defaultConfiguration = config
     }
-    
- 
-    
 }
 
 extension AppDelegate:UNUserNotificationCenterDelegate{

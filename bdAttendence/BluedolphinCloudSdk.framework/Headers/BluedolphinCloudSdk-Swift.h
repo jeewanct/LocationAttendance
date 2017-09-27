@@ -319,6 +319,16 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10OauthModel")
 
 
 
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk19RMCAssignmentObject")
+@interface RMCAssignmentObject : RealmSwiftObject
++ (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk9RMCBeacon")
 @interface RMCBeacon : RealmSwiftObject
 @property (nonatomic, copy) NSString * _Nullable lastSeen;
