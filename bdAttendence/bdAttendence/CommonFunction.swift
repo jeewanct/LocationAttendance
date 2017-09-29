@@ -32,10 +32,14 @@ func deleteAllData(){
     guard let deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") as? String else {
      return
     }
+    if let deviceIMEID = UserDefaults.standard.value(forKey: "RMCIMEI") as? String{
+        SDKSingleton.sharedInstance.DeviceUDID = deviceIMEID
+    }
     if let bundle = Bundle.main.bundleIdentifier {
         UserDefaults.standard.removePersistentDomain(forName: bundle)
     }
     UserDefaults.standard.setValue(deviceToken, forKey: UserDefaultsKeys.deviceToken.rawValue)
+    UserDefaults.standard.setValue(SDKSingleton.sharedInstance.DeviceUDID, forKey: "RMCIMEI")
     UserDefaults.standard.synchronize()
     BlueDolphinManager.manager.stopScanning()
     

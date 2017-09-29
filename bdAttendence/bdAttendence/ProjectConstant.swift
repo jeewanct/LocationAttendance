@@ -11,6 +11,7 @@ import UIKit
 
 var APPVERSION = "1.3.1"
 let appIdentifier = "com.raremedia.bdAttendence"
+let AppstoreURL = "https://itunes.apple.com/in/app/bdattendance/id1233146566?mt=8"
 
 
 let CHECK_IN_DURATION_TOLERANCE:Double = 30 * 60

@@ -96,7 +96,7 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bluetoothEnabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconEnabled.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(shiftHandling), name: NSNotification.Name(rawValue: LocalNotifcation.ShiftEnded.rawValue), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin(sender:)), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         
     }
     
@@ -283,6 +283,12 @@ extension SuperViewController{
         
     }
     
+    func checkForceUpdate(){
+        if APPVERSION != SDKSingleton.sharedInstance.DeviceUDID{
+        
+        }
+    }
+    
     func checkBlockerScreen(){
         if CLLocationManager.locationServicesEnabled() {
             switch(CLLocationManager.authorizationStatus()) {
@@ -418,6 +424,23 @@ extension SuperViewController{
         alertController.addAction(OkAction)
         self.present(alertController, animated: true) {
         }
+    }
+    
+    func forceupdatePopup(){
+        let actionSheetController: UIAlertController = UIAlertController(title: "BDAttendance", message: "Update required", preferredStyle: .alert)
+        let nextAction: UIAlertAction = UIAlertAction(title: "Update", style: .default) { action -> Void in
+            
+            let application:UIApplication = UIApplication.shared
+            let storeUrl = NSURL(string: AppstoreURL)
+            if (application.canOpenURL(storeUrl)) {
+                application.openURL(storeUrl);
+            }
+            else {
+                self.showAlert( "Unable to open AppStore.")
+            }
+        }
+        actionSheetController.addAction(nextAction)
+        self.present(actionSheetController, animated: true, completion: nil)
     }
 }
 

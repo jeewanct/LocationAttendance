@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(APPVERSION)
         
         setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: true)
+        stopDebugging(flag: false)
         setCheckinInteral(val: 300)
         
         
@@ -100,23 +100,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func getDeviceID(){
-        let DeviceUDID = UIDevice.current.identifierForVendor?.uuidString
+       
         
-        let kcs = KeychainService()
-        if let recoveredId = kcs.load(name:"UniqueId") {
-            
-           // SDKSingleton.sharedInstance.DeviceUDID = recoveredId
-            _ = kcs.save(name: "RMCIMEI", value:recoveredId as NSString)
-        }
-        if let recoveredId = kcs.load(name:"RMCIMEI") {
-            
-            SDKSingleton.sharedInstance.DeviceUDID = recoveredId
-        }
-        else {
-            
+//        let kcs = KeychainService()
+//        if let recoveredId = kcs.load(name:"UniqueId") {
+//
+//           // SDKSingleton.sharedInstance.DeviceUDID = recoveredId
+//            _ = kcs.save(name: "RMCIMEI", value:recoveredId as NSString)
+//        }
+//        if let recoveredId = kcs.load(name:"RMCIMEI") {
+//
+//            SDKSingleton.sharedInstance.DeviceUDID = recoveredId
+//        }
+//        else {
+//
+//            SDKSingleton.sharedInstance.DeviceUDID = DeviceUDID!
+//            _ = kcs.save(name: "RMCIMEI", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
+//
+//        }
+        if let deviceIMEID = UserDefaults.standard.value(forKey: "RMCIMEI") as? String{
+            SDKSingleton.sharedInstance.DeviceUDID = deviceIMEID
+        }else{
+             let DeviceUDID = UIDevice.current.identifierForVendor?.uuidString
             SDKSingleton.sharedInstance.DeviceUDID = DeviceUDID!
-            _ = kcs.save(name: "RMCIMEI", value: SDKSingleton.sharedInstance.DeviceUDID as NSString)
-           
+            UserDefaults.standard.set(DeviceUDID, forKey: "RMCIMEI")
         }
         print(SDKSingleton.sharedInstance.DeviceUDID)
     }

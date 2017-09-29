@@ -13,6 +13,7 @@ import BluedolphinCloudSdk
 class NewOtpViewController: UIViewController {
     @IBOutlet weak var otpView: UIView!
 
+    @IBOutlet weak var sendOtpButton: UIButton!
     @IBOutlet weak var otpLabel: UILabel!
     fileprivate var otpToken = String()
     var mobileNumber = "9015620820"
@@ -23,6 +24,7 @@ class NewOtpViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.tintColor = UIColor.white
+        sendOtpButton.addTarget(self, action: #selector(sendOTP), for: UIControlEvents.touchUpInside)
         let codeInputView = CodeInputView(frame: CGRect(x: 0, y: 0, width: otpView.frame.width, height: otpView.frame.height))
         codeInputView.delegate = self
         codeInputView.tag = 17
@@ -143,6 +145,7 @@ class NewOtpViewController: UIViewController {
         
     }
     
+
     
     func sendOTP(){
         
