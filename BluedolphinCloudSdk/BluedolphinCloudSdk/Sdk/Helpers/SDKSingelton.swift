@@ -22,6 +22,7 @@ import UIKit
    public var locationTracking = Bool()
    public var transmitter = Bool()
    public var shiftId = String()
+   public var iosAPPVersion = String()
 
     func batteryLevel() -> Float {
         return UIDevice.current.batteryLevel

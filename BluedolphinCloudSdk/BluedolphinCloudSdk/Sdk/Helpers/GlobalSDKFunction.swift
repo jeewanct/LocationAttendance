@@ -100,6 +100,11 @@ public func getUserData(){
                 if let value = orgFeature["employeeShiftSwitchFlexibility"] as? Bool{
                     SDKSingleton.sharedInstance.employeeShiftSwitchFlexibility = value
                 }
+                if let value = orgFeature["iosAppVersion"] as? String{
+                    SDKSingleton.sharedInstance.iosAPPVersion = value
+                }
+                
+                
             }
         
         }

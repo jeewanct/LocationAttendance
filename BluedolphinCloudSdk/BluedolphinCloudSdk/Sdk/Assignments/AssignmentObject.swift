@@ -94,7 +94,7 @@ import ObjectMapper
 }
 
 
- class RMCAssignmentObject :Object,Mappable {
+open class RMCAssignmentObject :Object,Mappable {
     dynamic var assignmentId:String? = nil
     dynamic var addedOn:String? = nil
     dynamic var time:String? = nil
