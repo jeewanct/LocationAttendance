@@ -114,8 +114,8 @@ class UserDayData {
                         if (beaconObject.lastSeen?.timeIntervalSince1970)! < slotStartTime{
                             let dateComponents =  calendar.dateComponents([.hour,.minute], from: beaconObject.lastSeen!)
                             let newStartTime = beaconObject.lastSeen?.dateAt(hours: dateComponents.hour!, minutes: 0)
-                            let newValue =  Calendar.current.date(byAdding: .hour, value: -1, to: newStartTime!)
-                            frequencyGraphData.setStartTime(startTime: newValue!.timeIntervalSince1970)
+//                            let newValue =  Calendar.current.date(byAdding: .hour, value: -1, to: newStartTime!)
+                            frequencyGraphData.setStartTime(startTime: newStartTime!.timeIntervalSince1970)
                         }
                     }
                     if i == beaconData.count - 1 {

@@ -194,6 +194,7 @@ extension SuperViewController{
         
     }
     func updateTask(){
+        checkForceUpdate()
         if isInternetAvailable() {
            //self.showLoader()
             BlueDolphinManager.manager.updateToken()
@@ -285,7 +286,7 @@ extension SuperViewController{
     
     func checkForceUpdate(){
         if APPVERSION != SDKSingleton.sharedInstance.DeviceUDID{
-        
+        forceupdatePopup()
         }
     }
     
@@ -427,13 +428,13 @@ extension SuperViewController{
     }
     
     func forceupdatePopup(){
-        let actionSheetController: UIAlertController = UIAlertController(title: "BDAttendance", message: "Update required", preferredStyle: .alert)
+        let actionSheetController: UIAlertController = UIAlertController(title: "BDAttendance", message: "New version is available! Please update your app from the App Store", preferredStyle: .alert)
         let nextAction: UIAlertAction = UIAlertAction(title: "Update", style: .default) { action -> Void in
             
             let application:UIApplication = UIApplication.shared
-            let storeUrl = NSURL(string: AppstoreURL)
-            if (application.canOpenURL(storeUrl)) {
-                application.openURL(storeUrl);
+            let storeUrl = URL(string: AppstoreURL)
+            if (application.canOpenURL(storeUrl!)) {
+                application.openURL(storeUrl!);
             }
             else {
                 self.showAlert( "Unable to open AppStore.")

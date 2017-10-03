@@ -163,8 +163,9 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource{
             cell.headingLabel.font = APPFONT.HELPTEXT
             cell.valueLabel.font = APPFONT.HELPTEXT
             cell.headingLabel.text = "Shift-Timing"
-            let startDate = Date().dateAt(hours: officeStartHour, minutes: officeStartMin)
-            let endDate = Date().dateAt(hours: officeEndHour, minutes: officeEndMin)
+            let shiftDetails = ShiftHandling.getShiftDetail()
+            let startDate = Date().dateAt(hours: shiftDetails.0, minutes: shiftDetails.1)
+            let endDate = Date().dateAt(hours: shiftDetails.2, minutes: shiftDetails.3)
             cell.valueLabel.text = "\(getDateInAMPM(date: startDate!)) -  \(getDateInAMPM(date: endDate!))"
             cell.setDisclosure(toColour: APPColor.blueGradient)
             return cell
