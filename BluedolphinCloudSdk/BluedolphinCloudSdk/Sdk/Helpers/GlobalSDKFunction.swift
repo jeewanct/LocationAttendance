@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import CoreLocation
 //import TrueTime
 
 
@@ -24,13 +25,24 @@ public func stopDebugging(flag:Bool){
     
 
 }
-
+public func getDistanceFromLastLocation(location:CLLocation = CLLocation(latitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude))->CLLocationDistance{
+    let distance = location.distance(from: CurrentLocation.lastLocation)
+    return distance
+    
+}
 public func getCurrentDate()->Date{
    // return TrueTimeClient.sharedInstance.referenceTime?.time ?? Date()
   return Date()
 }
+public func getUUIDString()->String{
+    return UUID().uuidString
+}
+
 public func setCheckinInteral(val:Int){
     CheckinInterVal = val
+}
+public func setCheckinGap(val:Int){
+    CheckinGap = val
 }
 public func setAppVersion(appVersion:String){
     AppVersion = appVersion
@@ -40,6 +52,7 @@ public func setAppVersion(appVersion:String){
 public func setAPIURL(url:String){
     APIURL = url
 }
+
 public func toDictionary(text: String) -> AnyObject? {
     if let data = text.data(using: String.Encoding.utf8) {
         do {
@@ -50,6 +63,10 @@ public func toDictionary(text: String) -> AnyObject? {
     }
     return nil
 }
+public func setBundleId(id:String){
+    AppBundle = id
+}
+
 
 public func toJsonString(_ dict:AnyObject)->String{
     

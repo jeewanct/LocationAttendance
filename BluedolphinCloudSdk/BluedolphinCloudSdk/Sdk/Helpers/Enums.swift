@@ -20,6 +20,7 @@ public enum UserDefaultsKeys:String{
     case LastCheckinTime
     case LastBeaconCheckinTime
     case LastBeaconScanned
+    case LastLocationCheckinTime
     case TotalTime
     case AlreadyCheckin
     case BDShiftStartHour
@@ -75,4 +76,6 @@ public enum AssignmentWork:String{
     case deviceModel
     case deviceOS
     case shiftId = "shiftid"
+    case appId
+    case distance
 }

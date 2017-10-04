@@ -17,6 +17,7 @@ public struct CurrentLocation {
    public static var altitude = "102.23"
    public static var address = String()
    public static var time = Date()
+   public static var lastLocation = CLLocation(latitude: 28.63, longitude: 77.23)
 }
 
 
@@ -39,9 +40,8 @@ public struct CurrentLocation {
             locationManager.pausesLocationUpdatesAutomatically = true
             //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             
-                locationManager.requestAlwaysAuthorization()
+            locationManager.requestAlwaysAuthorization()
             
-            locationManager.startUpdatingLocation()
             
         }
         else {
@@ -60,7 +60,7 @@ public struct CurrentLocation {
             
         case .authorizedAlways:
             print(".Authorized")
-            self.locationManager.startUpdatingLocation()
+            //self.locationManager.startUpdatingLocation()
             break
             
         case .denied:
@@ -77,23 +77,39 @@ public struct CurrentLocation {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         
-        let location = locations.last! as CLLocation
        
+        
+        if let location = locations.last{
+            print("Update Location to \(location)")
+            print(location.horizontalAccuracy)
             geoCode(location)
             
             CurrentLocation.coordinate = location.coordinate
             CurrentLocation.accuracy = String(location.horizontalAccuracy)
             CurrentLocation.altitude = String(location.altitude)
             CurrentLocation.time = location.timestamp
-            print(CurrentLocation.time)
-        
+           
+            
+            NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.Location.rawValue),  object: location)
+            
+            
+        }
+
         
         
     }
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error while updating location " + error.localizedDescription)
     }
-    
+    public func stopLocationUpdates(){
+        print("Location update Stoppped")
+        self.locationManager.stopUpdatingLocation()
+    }
+    public func startLocationUpdate(){
+        print("Location update Started")
+        self.locationManager.startUpdatingLocation()
+        
+    }
     func geoCode(_ location : CLLocation!){
         /* Only one reverse geocoding can be in progress at a time hence we need to cancel existing
          one if we are getting location updates */

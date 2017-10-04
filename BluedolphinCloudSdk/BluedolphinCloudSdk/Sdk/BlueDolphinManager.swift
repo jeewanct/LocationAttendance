@@ -25,7 +25,7 @@ open class BlueDolphinManager:NSObject {
     public var seanbeacons = NSMutableDictionary()
     var beaconSentflag = true
     
-    var beaconManager = IBeaconManager()
+    var beaconManager: IBeaconManager?
     
     public func initialize(secretKey:String?,organizationId:String?,email:String?,firstName:String?,lastName:String?,metaInfo:NSDictionary?) {
         
@@ -112,7 +112,7 @@ open class BlueDolphinManager:NSObject {
     
     
     public func startScanning(){
-        //beaconManager = IBeaconManager()
+        beaconManager = IBeaconManager()
         var beaconArray = [iBeacon]()
         
         let beaconsData = VicinityManager.fetchBeaconsFromDb()
@@ -123,13 +123,13 @@ open class BlueDolphinManager:NSObject {
         }
         
         print("Beacons count \(beaconArray.count)")
-        beaconManager.registerBeacons(beaconArray)
+        beaconManager?.registerBeacons(beaconArray)
         //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsRanged(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconProximity.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsEntry(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconEntry.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(beaconsExit(notification:)), name: NSNotification.Name(rawValue: iBeaconNotifications.BeaconExit.rawValue), object: nil)
-        beaconManager.startMonitoring({
+        beaconManager?.startMonitoring({
             print("Sucesss")
         }) { (error) in
             print(error)
@@ -141,11 +141,14 @@ open class BlueDolphinManager:NSObject {
         OauthModel.updateToken()
     }
     public func stopLocationMonitoring(){
-        coreLocationController?.locationManager.stopUpdatingLocation()
+       coreLocationController?.stopLocationUpdates()
+    }
+    public func startLocationMonitoring(){
+        coreLocationController?.startLocationUpdate()
     }
     
     public func stopScanning(){
-        beaconManager.stopMonitoring()
+        beaconManager?.stopMonitoring()
        // NotificationCenter.default.removeObserver(self)
     }
     

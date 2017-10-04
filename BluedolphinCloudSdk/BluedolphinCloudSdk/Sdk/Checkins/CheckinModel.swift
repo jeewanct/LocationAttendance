@@ -8,10 +8,9 @@
 
 import Foundation
 import RealmSwift
+import CoreLocation
 
-public func getUUIDString()->String{
-    return UUID().uuidString
-}
+
 
  open class CheckinModel:NSObject, Meta{
     internal static func url() -> String {
@@ -166,13 +165,15 @@ public func getUUIDString()->String{
         let realm = try! Realm()
         let checkin = RMCCheckin()
         var checkinDetails = checkinData.checkinDetails!
+        
         checkinDetails[AssignmentWork.AppVersion.rawValue] = AppVersion as AnyObject?
         checkinDetails[AssignmentWork.UserAgent.rawValue] = deviceType as AnyObject?
         checkinDetails[AssignmentWork.batteryLevel.rawValue] = "\(SDKSingleton.sharedInstance.batteryLevel()*100)" as AnyObject?
         checkinDetails[AssignmentWork.deviceModel.rawValue] = UIDevice.current.modelName as AnyObject
         checkinDetails[AssignmentWork.deviceOS.rawValue] = "iOS \(UIDevice.current.systemVersion)" as AnyObject
-         checkinDetails[AssignmentWork.shiftId.rawValue] = SDKSingleton.sharedInstance.shiftId as AnyObject
-        
+        checkinDetails[AssignmentWork.shiftId.rawValue] = SDKSingleton.sharedInstance.shiftId as AnyObject
+        checkinDetails[AssignmentWork.appId.rawValue] = AppBundle as AnyObject
+        checkinDetails[AssignmentWork.distance.rawValue] = getDistanceFromLastLocation() as AnyObject
         checkin.checkinDetails = toJsonString(checkinDetails as AnyObject)
         checkin.accuracy = CurrentLocation.accuracy
         checkin.altitude = CurrentLocation.altitude
@@ -185,45 +186,50 @@ public func getUUIDString()->String{
         checkin.checkinType = checkinData.checkinType
         checkin.jobNumber = checkinData.jobNumber
     
-        if checkin.checkinType == CheckinType.PhotoCheckin.rawValue {
-            checkin.imageName = checkinData.imageName
-            checkin.relativeUrl = checkinData.relativeUrl
+    
+    switch checkin.checkinType! {
+    case CheckinType.PhotoCheckin.rawValue:
+        checkin.imageName = checkinData.imageName
+        checkin.relativeUrl = checkinData.relativeUrl
+    case CheckinType.Beacon.rawValue :
+        let beconList = List<RMCBeacon>()
+        for data in checkinData.beaconProximities!{
             
-        }else if checkin.checkinType == CheckinType.Beacon.rawValue {
-           
-            let beconList = List<RMCBeacon>()
-            for data in checkinData.beaconProximities!{
-                
-                if let dataDict = data as? [String:Any] {
-                    let major = dataDict["major"] as! String
-                    let minor = dataDict["minor"] as! String
-                    let uuid = (dataDict["uuid"] as! String).uppercased()
-                    if let vicinitybeacon =  realm.objects(VicinityBeacon.self).filter("major = %@ AND minor = %@ AND uuid = %@",major,minor,uuid).first  {
-                        print(vicinitybeacon)
-                        let beconObject = RMCBeacon()
-                        beconObject.beaconId = vicinitybeacon.beaconId
-                        beconObject.major = vicinitybeacon.major
-                        beconObject.minor = vicinitybeacon.minor
-                        beconObject.uuid = vicinitybeacon.uuid
-                        beconObject.rssi = dataDict["rssi"] as? String
-                        beconObject.distance = dataDict["distance"] as? String
-                        beconObject.lastSeen = dataDict["lastSeen"] as? String
-                        beconList.append(beconObject)
-                    }
+            if let dataDict = data as? [String:Any] {
+                let major = dataDict["major"] as! String
+                let minor = dataDict["minor"] as! String
+                let uuid = (dataDict["uuid"] as! String).uppercased()
+                if let vicinitybeacon =  realm.objects(VicinityBeacon.self).filter("major = %@ AND minor = %@ AND uuid = %@",major,minor,uuid).first  {
+                    print(vicinitybeacon)
+                    let beconObject = RMCBeacon()
+                    beconObject.beaconId = vicinitybeacon.beaconId
+                    beconObject.major = vicinitybeacon.major
+                    beconObject.minor = vicinitybeacon.minor
+                    beconObject.uuid = vicinitybeacon.uuid
+                    beconObject.rssi = dataDict["rssi"] as? String
+                    beconObject.distance = dataDict["distance"] as? String
+                    beconObject.lastSeen = dataDict["lastSeen"] as? String
+                    beconList.append(beconObject)
                 }
-                
             }
-            if beconList.count > 0 {
-                AttendanceLogModel.updateAttendanceLog(beaconList: beconList)
-                calcluateTotalTime()
-            }else{
-                return
-            }
-            
-            checkin.beaconProximity = beconList
-           
             
         }
+        if beconList.count > 0 {
+            AttendanceLogModel.updateAttendanceLog(beaconList: beconList)
+            calcluateTotalBeaconTime()
+        }else{
+            return
+        }
+        
+        checkin.beaconProximity = beconList
+    case CheckinType.Location.rawValue:
+        CurrentLocation.lastLocation = CLLocation(latitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude)
+        LocationAttendanceLogModel.updateAttendanceLog(checkinData: checkin)
+        calcluateTotalLocationTime()
+    default:
+        break
+    }
+    
     
         checkin.time = getCurrentDate().formattedISO8601
     
@@ -234,10 +240,47 @@ public func getUUIDString()->String{
         UserDefaults.standard.synchronize()
 
     }
-   
-    class func calcluateTotalTime(timeLag:Int = CheckinGap){
+    
+    class func calcluateTotalBeaconTime(timeLag:Int = CheckinGap){
         var lastBeaconTime = Date()
         if let value = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastBeaconCheckinTime.rawValue) as? Date {
+            lastBeaconTime = value
+            if !Calendar.current.isDateInToday(lastBeaconTime){
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FirstBeaconCheckin"), object: self, userInfo: nil)
+                UserDefaults.standard.set(0, forKey: UserDefaultsKeys.TotalTime.rawValue)
+                
+            }else{
+                let checkinDiff =   Date().secondsFrom(lastBeaconTime)
+                if checkinDiff <= timeLag {
+                    var localTime = Int()
+                    if let totalTime = UserDefaults.standard.value(forKey: UserDefaultsKeys.TotalTime.rawValue) as? Int{
+                        localTime = totalTime + checkinDiff
+                        UserDefaults.standard.set(localTime, forKey: UserDefaultsKeys.TotalTime.rawValue)
+                        
+                    }else{
+                        localTime = checkinDiff
+                        UserDefaults.standard.set(localTime, forKey: UserDefaultsKeys.TotalTime.rawValue)
+                        
+                    }
+                    
+                    
+                }
+            }
+            
+        }else{
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FirstBeaconCheckin"), object: self, userInfo: nil)
+        }
+        
+        
+        UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastBeaconCheckinTime.rawValue)
+        UserDefaults.standard.synchronize()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "TimeUpdate"), object: self, userInfo: nil)
+        
+    }
+   
+    class func calcluateTotalLocationTime(timeLag:Int = CheckinGap){
+        var lastBeaconTime = Date()
+        if let value = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastLocationCheckinTime.rawValue) as? Date {
             lastBeaconTime = value
             if !Calendar.current.isDateInToday(lastBeaconTime){
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FirstBeaconCheckin"), object: self, userInfo: nil)
@@ -266,7 +309,7 @@ public func getUUIDString()->String{
         }
     
     
-    UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastBeaconCheckinTime.rawValue)
+    UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastLocationCheckinTime.rawValue)
     UserDefaults.standard.synchronize()
     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "TimeUpdate"), object: self, userInfo: nil)
         

@@ -379,7 +379,7 @@ public enum iBeaconNotifications:String{
             print("Update Location to \(location)")
             print(location.horizontalAccuracy)
             if location.horizontalAccuracy <= locationManager.desiredAccuracy {
-               NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.Location.rawValue),  object: location)
+               //NotificationCenter.default.post(name: Notification.Name(rawValue: iBeaconNotifications.Location.rawValue),  object: location)
             }
             
         }

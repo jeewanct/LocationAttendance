@@ -42,6 +42,7 @@
 		994509DB1E9256F9002921D9 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C31E922E94002921D9 /* Realm.framework */; };
 		994509DC1E9256F9002921D9 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994509C41E922E94002921D9 /* RealmSwift.framework */; };
 		997C638D1E9283120019740A /* BlueDolphinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997C638C1E9283120019740A /* BlueDolphinManager.swift */; };
+		999802DC1F8398410079E926 /* LocationAttendanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999802DB1F8398410079E926 /* LocationAttendanceLog.swift */; };
 		99B5A8E91F3AFB7B00FE950C /* DeviceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5A8E81F3AFB7B00FE950C /* DeviceDetail.swift */; };
 		99B811671F2F1DB700174FD0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B811661F2F1DB700174FD0 /* Logger.swift */; };
 		99CA96811F037CF100E2813B /* AttendanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CA96801F037CF100E2813B /* AttendanceLog.swift */; };
@@ -91,6 +92,7 @@
 		994509C31E922E94002921D9 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/Realm/Realm.framework"; sourceTree = "<group>"; };
 		994509C41E922E94002921D9 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BluedolphinCloudSdk-bimyxuopbgohfecjtetiouxiplfn/Build/Products/Debug-iphonesimulator/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		997C638C1E9283120019740A /* BlueDolphinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueDolphinManager.swift; sourceTree = "<group>"; };
+		999802DB1F8398410079E926 /* LocationAttendanceLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAttendanceLog.swift; sourceTree = "<group>"; };
 		99B5A8E81F3AFB7B00FE950C /* DeviceDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDetail.swift; sourceTree = "<group>"; };
 		99B811661F2F1DB700174FD0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		99CA96801F037CF100E2813B /* AttendanceLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceLog.swift; sourceTree = "<group>"; };
@@ -129,7 +131,7 @@
 		991EE2671E40BF5B00E4A00D /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
-				99F07F7B1F597B42000B4967 /* ShiftHandling.swift */,
+				999802DA1F8398140079E926 /* Shift */,
 				991EE2681E40BF5B00E4A00D /* Assignments */,
 				991EE26C1E40BF5B00E4A00D /* Auth */,
 				991EE26F1E40BF5B00E4A00D /* Checkins */,
@@ -137,6 +139,7 @@
 				991EE27F1E40BF5B00E4A00D /* Ibeacon */,
 				991EE2851E40BF5B00E4A00D /* Login */,
 				997C638C1E9283120019740A /* BlueDolphinManager.swift */,
+				999802EF1F84B73F0079E926 /* LocationLog */,
 			);
 			path = Sdk;
 			sourceTree = "<group>";
@@ -239,6 +242,22 @@
 				99339D121DE32AD200F3C770 /* Info.plist */,
 			);
 			path = BluedolphinCloudSdk;
+			sourceTree = "<group>";
+		};
+		999802DA1F8398140079E926 /* Shift */ = {
+			isa = PBXGroup;
+			children = (
+				99F07F7B1F597B42000B4967 /* ShiftHandling.swift */,
+			);
+			path = Shift;
+			sourceTree = "<group>";
+		};
+		999802EF1F84B73F0079E926 /* LocationLog */ = {
+			isa = PBXGroup;
+			children = (
+				999802DB1F8398410079E926 /* LocationAttendanceLog.swift */,
+			);
+			path = LocationLog;
 			sourceTree = "<group>";
 		};
 		D7A3B6048825B4A1769EFA0C /* Frameworks */ = {
@@ -402,6 +421,7 @@
 				99B5A8E91F3AFB7B00FE950C /* DeviceDetail.swift in Sources */,
 				991EE2981E40BF5C00E4A00D /* Reachability.swift in Sources */,
 				991EE29C1E40BF5C00E4A00D /* BluetoothManager.swift in Sources */,
+				999802DC1F8398410079E926 /* LocationAttendanceLog.swift in Sources */,
 				991EE2941E40BF5C00E4A00D /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
