@@ -138,7 +138,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="94.5" y="218" width="131.5" height="17.5"/>
+                                <rect key="frame" x="95" y="218" width="131.5" height="17.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -158,7 +158,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="206" y="343.5" width="77" height="30"/>
+                                <rect key="frame" x="206" y="344" width="77" height="30"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.97669434420000001" green="1" blue="0.43377791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -973,26 +973,36 @@ mark your presence at your workplace</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4a-lO-L8j">
-                                <rect key="frame" x="40" y="369.5" width="240" height="48"/>
+                                <rect key="frame" x="40" y="394" width="240" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="eXi-5s-YEs"/>
                                 </constraints>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXb-0T-8ll">
+                                <rect key="frame" x="15" y="350" width="290" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xXb-0T-8ll" firstAttribute="top" secondItem="rdY-sj-Lc5" secondAttribute="bottom" constant="23" id="0ep-Jl-4zf"/>
                             <constraint firstItem="l4a-lO-L8j" firstAttribute="leading" secondItem="5Eh-Vs-qea" secondAttribute="leading" constant="40" id="5T8-ei-ujs"/>
+                            <constraint firstItem="xXb-0T-8ll" firstAttribute="leading" secondItem="rdY-sj-Lc5" secondAttribute="leading" id="HzT-37-nB2"/>
                             <constraint firstItem="fdb-3Z-s9K" firstAttribute="leading" secondItem="5Eh-Vs-qea" secondAttribute="leading" constant="15" id="ML9-8Z-shs"/>
                             <constraint firstAttribute="trailing" secondItem="fdb-3Z-s9K" secondAttribute="trailing" constant="15" id="THN-wF-qWl"/>
                             <constraint firstItem="rdY-sj-Lc5" firstAttribute="top" secondItem="fdb-3Z-s9K" secondAttribute="bottom" constant="50" id="Tsr-Rv-kPr"/>
                             <constraint firstAttribute="trailing" secondItem="l4a-lO-L8j" secondAttribute="trailing" constant="40" id="V7q-kg-5V0"/>
                             <constraint firstItem="rdY-sj-Lc5" firstAttribute="leading" secondItem="5Eh-Vs-qea" secondAttribute="leading" constant="15" id="WJL-M2-iln"/>
+                            <constraint firstItem="l4a-lO-L8j" firstAttribute="top" secondItem="xXb-0T-8ll" secondAttribute="bottom" constant="23" id="Z7d-Jp-VRa"/>
                             <constraint firstAttribute="trailing" secondItem="rdY-sj-Lc5" secondAttribute="trailing" constant="15" id="ZLB-c3-WCK"/>
-                            <constraint firstItem="l4a-lO-L8j" firstAttribute="top" secondItem="rdY-sj-Lc5" secondAttribute="bottom" constant="42.5" id="n9y-3r-48U"/>
+                            <constraint firstItem="xXb-0T-8ll" firstAttribute="trailing" secondItem="rdY-sj-Lc5" secondAttribute="trailing" id="mL4-Qe-GFg"/>
                             <constraint firstItem="fdb-3Z-s9K" firstAttribute="top" secondItem="5Y0-jX-PbE" secondAttribute="bottom" constant="100" id="sl5-gc-7J0"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="currentSettingLabel" destination="xXb-0T-8ll" id="R3l-0X-Sc0"/>
                         <outlet property="detailMessageLabel" destination="rdY-sj-Lc5" id="0JI-31-GVZ"/>
                         <outlet property="locationButton" destination="l4a-lO-L8j" id="5nd-x0-PCd"/>
                     </connections>

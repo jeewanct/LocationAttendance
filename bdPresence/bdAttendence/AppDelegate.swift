@@ -30,12 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setBundleId(id: appIdentifier)
         setCheckinGap(val: 3600)
         setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: false)
+        stopDebugging(flag: true)
         setCheckinInteral(val: 300)
         
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
-        setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+        //setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         
         Fabric.with([Crashlytics.self])
         

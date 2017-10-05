@@ -37,7 +37,10 @@ class NewOrganisationSelectViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
+        if accessTokensList.count > 0 {
+           self.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
+        }
+        
     }
     
     override func viewDidLayoutSubviews() {

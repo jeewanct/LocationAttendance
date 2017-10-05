@@ -15,7 +15,7 @@ class SystemDetailViewController: UIViewController {
     @IBOutlet weak var systemTableview: UITableView!
     var systemDetail = [String]()
     
-    var imageIcons :[UIImage] = [#imageLiteral(resourceName: "bluetooth_gray"),#imageLiteral(resourceName: "bluetooth_gray"),#imageLiteral(resourceName: "bluetooth_gray"),#imageLiteral(resourceName: "pending_checkin"),#imageLiteral(resourceName: "sync")]
+    var imageIcons :[UIImage] = [#imageLiteral(resourceName: "pending_checkin"),#imageLiteral(resourceName: "pending_checkin"),#imageLiteral(resourceName: "sync")]
         var longPressGesture :UILongPressGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +43,9 @@ class SystemDetailViewController: UIViewController {
     func sync(sender:UIBarButtonItem){
         if isInternetAvailable(){
             CheckinModel.postCheckin()
-            BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
-                
-            })
+//            BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
+//
+//            })
         }else{
             showAlert(ErrorMessage.NetError.rawValue)
         }
@@ -77,24 +77,24 @@ class SystemDetailViewController: UIViewController {
     func updateData(){
        
         systemDetail  = []
-        let userDataForToday = UserDayData.getFrequencyBarData(date: Date())
+        let userDataForToday = UserDayData.getFrequencyLocationBarData(date: Date())
         var  lastCheckinTime = String()
         if let data = userDataForToday.getLastCheckinTime() {
-        lastCheckinTime = "Last beacon check-in : \(Date(timeIntervalSince1970: data).formatted)"
+        lastCheckinTime = "Last location check-in : \(Date(timeIntervalSince1970: data).formatted)"
         }else{
            lastCheckinTime = "No last Checkin Found"
         }
         
-        let lastCheckinLocation = "Last beacon location : " + userDataForToday.getLastCheckInAddress()!.capitalized
+        //let lastCheckinLocation = "Last beacon location : " + userDataForToday.getLastCheckInAddress()!.capitalized
         systemDetail.append(lastCheckinTime)
-        systemDetail.append(lastCheckinLocation)
-        if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastBeaconScanned.rawValue ) as? Date {
-            let detail = "Last beacon scanned on : " + data.formatted
-            systemDetail.append(detail)
-            
-        }
+       // systemDetail.append(lastCheckinLocation)
+//        if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastBeaconScanned.rawValue ) as? Date {
+//            let detail = "Last beacon scanned on : " + data.formatted
+//            systemDetail.append(detail)
+//
+//        }
         
-        let pendingCheckins = "Pending check-ins : \(CheckinModel.getBeaconCheckinCount())"
+        let pendingCheckins = "Pending check-ins : \(CheckinModel.getCheckinsTypeCount(type: .Location))"
         systemDetail.append(pendingCheckins)
         if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastSyncTime.rawValue ) as? Date {
             let detail = "Last synced at : " + data.formatted
@@ -152,10 +152,10 @@ extension SystemDetailViewController:UITableViewDelegate,UITableViewDataSource {
         cell.textLabel?.text = systemDetail[indexPath.row]
         cell.textLabel?.numberOfLines = 0
         cell.imageView?.image = imageIcons[indexPath.row]
-        if indexPath.row == 1{
-            cell.addGestureRecognizer(longPressGesture!)
-            
-        }
+//        if indexPath.row == 1{
+//            cell.addGestureRecognizer(longPressGesture!)
+//
+//        }
     
         return cell
     }

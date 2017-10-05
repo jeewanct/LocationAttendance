@@ -10,37 +10,49 @@ import UIKit
 import CoreLocation
 
 class NewPermissionViewController: UIViewController {
-
-
-  
+    
+    
+    @IBOutlet weak var currentSettingLabel: UILabel!
     @IBOutlet weak var detailMessageLabel: UILabel!
-    
-    
-    
     @IBOutlet weak var locationButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailMessageLabel.text = "Always enabling the location services will ensure that we are able to accurately mark your presence at your workplace"
+        
+        let attributedString1 = NSAttributedString(string: "Always enabling the location services ", attributes:  [NSFontAttributeName : APPFONT.PERMISSIONBODY!
+            , NSForegroundColorAttributeName : APPColor.blue])
+        let attributedString2 = NSAttributedString(string: "will ensure that we are able to accurately mark your presence at your workplace", attributes:  [NSFontAttributeName : APPFONT.PERMISSIONBODY!])
+        let combinedString = NSMutableAttributedString()
+        combinedString.append(attributedString1)
+        combinedString.append(NSAttributedString(string: "\n"))
+        combinedString.append(attributedString2)
+        self.detailMessageLabel.attributedText = combinedString
+        self.currentSettingLabel.numberOfLines = 0
+        self.currentSettingLabel.lineBreakMode = .byWordWrapping
+        self.currentSettingLabel.adjustsFontSizeToFitWidth = true
+        self.currentSettingLabel.font = APPFONT.PERMISSIONBODY
         NotificationCenter.default.addObserver(self, selector: #selector(NewPermissionViewController.checkPermissionStatus(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: nil)
-    
+        
         
         locationButton.addTarget(self, action: #selector(openAppSetting), for: UIControlEvents.touchUpInside)
         
-//        if CLLocationManager.locationServicesEnabled() {
-//            switch(CLLocationManager.authorizationStatus()) {
-//            case .notDetermined, .restricted, .denied:
-//          currentSettingLabel.text = "CURRENT LOCATION SETTING Never access location "
-//
-//            case  .authorizedWhenInUse:
-//               currentSettingLabel.text = "CURRENT LOCATION SETTING Allow access location while using the app "
-//
-//            case .authorizedAlways:
-//                ProjectSingleton.sharedInstance.locationAvailable = true
-//            }
-//        }
+        checkLocationStatus()
         
         // Do any additional setup after loading the view.
+    }
+    func checkLocationStatus(){
+        if CLLocationManager.locationServicesEnabled() {
+            switch(CLLocationManager.authorizationStatus()) {
+            case .notDetermined, .restricted, .denied:
+                currentSettingLabel.text = "CURRENT LOCATION SETTING \n Never access location "
+                
+            case  .authorizedWhenInUse:
+                currentSettingLabel.text = "CURRENT LOCATION SETTING  \n Allow access location while using the app "
+                
+            case .authorizedAlways:
+                ProjectSingleton.sharedInstance.locationAvailable = true
+            }
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         updateLayout()
@@ -50,24 +62,25 @@ class NewPermissionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     func checkPermissionStatus(sender:NSNotification){
+        checkLocationStatus()
         updateLayout()
     }
     
     func updateLayout(){
         if ProjectSingleton.sharedInstance.locationAvailable{
-            locationButton.setImage(UIImage(named: "permission_location_enabled"), for: UIControlState.normal)
+            locationButton.setImage(UIImage(named: "Permission_enabled"), for: UIControlState.normal)
             locationButton.isUserInteractionEnabled = false
         }else{
             locationButton.isUserInteractionEnabled = true
-            locationButton.setImage(UIImage(named: "permission_location_disabled"), for: UIControlState.normal)
+            locationButton.setImage(UIImage(named: "Permission_disabled"), for: UIControlState.normal)
         }
-//        if ProjectSingleton.sharedInstance.bluetoothAvaliable{
-//            bluetoothButton.isUserInteractionEnabled = false
-//            bluetoothButton.setImage(UIImage(named: "permission_bluetooth_enabled"), for: UIControlState.normal)
-//        }else{
-//            bluetoothButton.isUserInteractionEnabled = true
-//            bluetoothButton.setImage(UIImage(named: "permission_bluetooth_disabled"), for: UIControlState.normal)
-//        }
+        //        if ProjectSingleton.sharedInstance.bluetoothAvaliable{
+        //            bluetoothButton.isUserInteractionEnabled = false
+        //            bluetoothButton.setImage(UIImage(named: "permission_bluetooth_enabled"), for: UIControlState.normal)
+        //        }else{
+        //            bluetoothButton.isUserInteractionEnabled = true
+        //            bluetoothButton.setImage(UIImage(named: "permission_bluetooth_disabled"), for: UIControlState.normal)
+        //        }
         if  ProjectSingleton.sharedInstance.locationAvailable{
             self.dismiss(animated: true, completion: nil)
             
@@ -86,17 +99,18 @@ class NewPermissionViewController: UIViewController {
             UIApplication.shared.openURL(url as URL)
         }
     }
-
     
-
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
+
