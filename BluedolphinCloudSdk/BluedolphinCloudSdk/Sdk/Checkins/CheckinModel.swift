@@ -29,9 +29,9 @@ import CoreLocation
         return headers
     }
     
-  public class func getBeaconCheckinCount() -> Int {
+    public class func getCheckinsTypeCount(type:CheckinType) -> Int {
         let realm = try! Realm()
-        let checkins = realm.objects(RMCCheckin.self).filter("checkinType = %@", CheckinType.Beacon.rawValue)
+        let checkins = realm.objects(RMCCheckin.self).filter("checkinType = %@", type.rawValue)
         return checkins.count
         
     }
