@@ -50,6 +50,8 @@ class SuperViewController: UIViewController {
             checkShiftStatus()
             
         }
+        //setObservers()
+        updateTask()
     
     }
     func handleLeftGesture() {
@@ -60,22 +62,10 @@ class SuperViewController: UIViewController {
    
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(animated)
+         setObservers()
         self.navigationController?.isNavigationBarHidden = true
-        setObservers()
-       
-//        BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
-//            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
-//                if screenFlag == "1"{
-////                    BlueDolphinManager.manager.stopScanning()
-////                    BlueDolphinManager.manager.startScanning()
-//                    BlueDolphinManager.manager.stopLocationMonitoring()
-//                    BlueDolphinManager.manager.startLocationMonitoring()
-//                }
-//                
-//            }
-//        })
-        updateTask()
+        
     }
     
     
@@ -95,8 +85,7 @@ class SuperViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.checkPermissionStatus(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.firstCheckin(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.FirstBeaconCheckin.rawValue), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(bluetoothDisabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconDisabled.rawValue), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(bluetoothEnabled), name: NSNotification.Name(rawValue: iBeaconNotifications.iBeaconEnabled.rawValue), object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(shiftHandling), name: NSNotification.Name(rawValue: LocalNotifcation.ShiftEnded.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin(sender:)), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         
@@ -238,30 +227,7 @@ extension SuperViewController{
         
     }
     
-    func bluetoothEnabled(){
-        ProjectSingleton.sharedInstance.bluetoothAvaliable = true
-        postBluetoothStateDataCheckin()
-        
-    }
-    func bluetoothDisabled(){
-        ProjectSingleton.sharedInstance.bluetoothAvaliable = false
-        postBluetoothStateDataCheckin()
-    }
     
-    func postBluetoothStateDataCheckin(){
-        let checkin = CheckinHolder()
-        
-        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,CheckinDetailKeys.bluetoothStatus.rawValue:ProjectSingleton.sharedInstance.bluetoothAvaliable as AnyObject]
-        checkin.checkinCategory = CheckinCategory.Data.rawValue
-        checkin.checkinType = CheckinType.Data.rawValue
-        //
-        
-        CheckinModel.createCheckin(checkinData: checkin)
-        
-        if isInternetAvailable(){
-            CheckinModel.postCheckin()
-        }
-    }
     
     func postGpsStateDataCheckin(){
         let checkin = CheckinHolder()
@@ -279,7 +245,7 @@ extension SuperViewController{
     }
     
     func checkPermissionStatus(sender:NSNotification){
-        //updateTask()
+        updateTask()
         checkBlockerScreen()
         if isInternetAvailable(){
            checkDeviceStatus()
@@ -289,8 +255,9 @@ extension SuperViewController{
     }
     
     func checkForceUpdate(){
-        if APPVERSION != SDKSingleton.sharedInstance.DeviceUDID{
-        forceupdatePopup()
+        let storeVersion = SDKSingleton.sharedInstance.iosAPPVersion
+        if storeVersion.compare(APPVERSION, options: .numeric) == .orderedDescending {
+            forceupdatePopup()
         }
     }
     
@@ -306,15 +273,16 @@ extension SuperViewController{
             case .authorizedAlways:
                 ProjectSingleton.sharedInstance.locationAvailable = true
             }
-            postGpsStateDataCheckin()
+            
         } else {
             ProjectSingleton.sharedInstance.locationAvailable = false
-            postGpsStateDataCheckin()
+           
         }
         
         print("Location enabled \(ProjectSingleton.sharedInstance.locationAvailable)")
         //print("Bluetooth enabled \(ProjectSingleton.sharedInstance.bluetoothAvaliable)")
         if ProjectSingleton.sharedInstance.locationAvailable == false{
+            postGpsStateDataCheckin()
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "permission") as! NewPermissionViewController
             self.present(controller, animated: true, completion: nil)
         }
@@ -401,40 +369,7 @@ extension SuperViewController{
             }
         }
     }
-    func checkShiftStatus(){
-      
-            UserDeviceModel.getDObjectsShift { (status) in
-                switch (status){
-                case APIResult.Success.rawValue:
-                    let shiftDetails = ShiftHandling.getShiftDetail()
-                    officeEndHour = shiftDetails.2
-                    officeStartHour = shiftDetails.0
-                    officeStartMin = shiftDetails.1
-                    officeEndMin = shiftDetails.3
-                    
-                    if let value = UserDefaults.standard.value(forKey: UserDefaultsKeys.BDShiftId.rawValue) as? String{
-                        SDKSingleton.sharedInstance.shiftId = value
-                    }
-                    break
-                   
-                case APIResult.InvalidCredentials.rawValue:
-                    break
-                    //self.showAlert(ErrorMessage.UserNotFound.rawValue)
-                    
-                case APIResult.InternalServer.rawValue:
-                    break
-                    //self.showAlert(ErrorMessage.InternalServer.rawValue)
-                    
-                    
-                case APIResult.InvalidData.rawValue:
-                    break
-                //self.showAlert(ErrorMessage.NotValidData.rawValue)
-                default:
-                    break
-                    
-                }
-            }
-        }
+    
     
     
     func showAlert(_ message : String) {

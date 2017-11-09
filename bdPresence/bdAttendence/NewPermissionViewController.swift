@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import BluedolphinCloudSdk
 
 class NewPermissionViewController: UIViewController {
     
@@ -82,9 +83,25 @@ class NewPermissionViewController: UIViewController {
         //            bluetoothButton.setImage(UIImage(named: "permission_bluetooth_disabled"), for: UIControlState.normal)
         //        }
         if  ProjectSingleton.sharedInstance.locationAvailable{
+            postGpsStateDataCheckin()
             self.dismiss(animated: true, completion: nil)
             
             
+        }
+    }
+    
+    func postGpsStateDataCheckin(){
+        let checkin = CheckinHolder()
+        
+        checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject,CheckinDetailKeys.gpsStatus.rawValue:ProjectSingleton.sharedInstance.locationAvailable as AnyObject]
+        checkin.checkinCategory = CheckinCategory.Data.rawValue
+        checkin.checkinType = CheckinType.Data.rawValue
+        //
+        
+        CheckinModel.createCheckin(checkinData: checkin)
+        
+        if isInternetAvailable(){
+            CheckinModel.postCheckin()
         }
     }
     

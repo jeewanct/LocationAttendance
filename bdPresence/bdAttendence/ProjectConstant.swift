@@ -11,7 +11,7 @@ import UIKit
 
 var APPVERSION = "1.3.1"
 var appIdentifier = "com.raremedia.bdAttendence"
-let AppstoreURL = "https://itunes.apple.com/in/app/bdattendance/id1233146566?mt=8"
+let AppstoreURL = "https://itunes.apple.com/in/app/bd-presence/id1292604414?mt=8"
 let supportEmail = "support@raremediacompany.in"
 let supportAddress = "G-84 Outer Circle, Connaught Place, Delhi"
 let supportContactNumber = "+911141561260"

@@ -43,6 +43,7 @@ class SystemDetailViewController: UIViewController {
     func sync(sender:UIBarButtonItem){
         if isInternetAvailable(){
             CheckinModel.postCheckin()
+            checkShiftStatus()
 //            BlueDolphinManager.manager.getNearByBeacons(completion: { (value) in
 //
 //            })
