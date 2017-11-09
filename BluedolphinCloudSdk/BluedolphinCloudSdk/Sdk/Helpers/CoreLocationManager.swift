@@ -35,7 +35,7 @@ public struct CurrentLocation {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.distanceFilter  = 100// Must move at least 3km
-            locationManager.startMonitoringSignificantLocationChanges()
+            //locationManager.startMonitoringSignificantLocationChanges()
             locationManager.allowsBackgroundLocationUpdates = true
             locationManager.pausesLocationUpdatesAutomatically = true
             //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer

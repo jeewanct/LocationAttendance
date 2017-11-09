@@ -137,7 +137,7 @@ import CoreLocation
             return
         }
         switch statusCode{
-        case 200,400,409:
+        case 200,409:
             if let checkinId = data["checkinId"] as? String{
                 UserDefaults.standard.set(Date(), forKey:UserDefaultsKeys.LastSyncTime.rawValue)
                 UserDefaults.standard.synchronize()
@@ -152,6 +152,8 @@ import CoreLocation
                 }
                 
             }
+        case 409:
+            break
         default:
             break;
         }
