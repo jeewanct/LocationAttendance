@@ -22,6 +22,7 @@ var officeStartHour = 9
 var officeStartMin = 0
 var officeEndHour = 21
 var officeEndMin = 0
+let PREVIOUSGPSSTATUS = "previousGpsStatus"
 
 enum CheckinDetailKeys:String{
     case userInteraction

@@ -50,7 +50,10 @@ class SuperViewController: UIViewController {
             checkShiftStatus()
             
         }
+        
         //setObservers()
+        //Adding Check blocker to solve a bug when permission is denied at first time
+        checkBlockerScreen()
         updateTask()
     
     }
@@ -71,6 +74,7 @@ class SuperViewController: UIViewController {
     
     func setObservers(){
          NotificationCenter.default.removeObserver(self)
+      
          NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "HideSideMen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: nil)
@@ -90,6 +94,7 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin(sender:)), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         
     }
+    
     
     func shiftHandling(){
         UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
@@ -241,6 +246,7 @@ extension SuperViewController{
         
         if isInternetAvailable(){
             CheckinModel.postCheckin()
+            
         }
     }
     
@@ -279,16 +285,63 @@ extension SuperViewController{
            
         }
         
+        var previousGpsStatus : Bool!
+        if let tempGpsStatus = UserDefaults.standard.value(forKey: PREVIOUSGPSSTATUS) as? Bool  {
+           previousGpsStatus = tempGpsStatus
+        }
+        
         print("Location enabled \(ProjectSingleton.sharedInstance.locationAvailable)")
         //print("Bluetooth enabled \(ProjectSingleton.sharedInstance.bluetoothAvaliable)")
-        if ProjectSingleton.sharedInstance.locationAvailable == false{
+        if previousGpsStatus != nil {
+            
+        } else {
+            UserDefaults.standard.set(ProjectSingleton.sharedInstance.locationAvailable, forKey: PREVIOUSGPSSTATUS)
+            previousGpsStatus = ProjectSingleton.sharedInstance.locationAvailable
+            postGpsStateDataCheckin()
+            if !ProjectSingleton.sharedInstance.locationAvailable {
+                let controller = self.storyboard?.instantiateViewController(withIdentifier: "permission") as! NewPermissionViewController
+                self.present(controller, animated: true, completion: nil)
+            }
+        }
+
+        if ProjectSingleton.sharedInstance.locationAvailable && !previousGpsStatus {
+            UserDefaults.standard.set(ProjectSingleton.sharedInstance.locationAvailable, forKey: PREVIOUSGPSSTATUS)
+            
+            postGpsStateDataCheckin()
+        } else if (ProjectSingleton.sharedInstance.locationAvailable && previousGpsStatus) {
+            //don't send checkin and dont update data
+        } else if (!ProjectSingleton.sharedInstance.locationAvailable && previousGpsStatus) {
+            UserDefaults.standard.set(ProjectSingleton.sharedInstance.locationAvailable, forKey: PREVIOUSGPSSTATUS)
             postGpsStateDataCheckin()
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "permission") as! NewPermissionViewController
             self.present(controller, animated: true, completion: nil)
+
+        } else if (!ProjectSingleton.sharedInstance.locationAvailable && !previousGpsStatus) {
+            //do nothing
         }
+        
+        UserDefaults.standard.synchronize()
+        
+        
+//        if ProjectSingleton.sharedInstance.locationAvailable == false && previousGpsStatus{
+//            //Here we should have a callback which will ensure the correct app flow
+//            postGpsStateDataCheckin()
+//            UserDefaults.standard.set(<#T##value: Bool##Bool#>, forKey: <#T##String#>)
+//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "permission") as! NewPermissionViewController
+//            self.present(controller, animated: true, completion: nil)
+//        } else if ProjectSingleton.sharedInstance.locationAvailable == false && previousGpsStatus {
+//            postGpsStateDataCheckin()
+//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "permission") as! NewPermissionViewController
+//            self.present(controller, animated: true, completion: nil)
+//
+//        }else if ProjectSingleton.sharedInstance.locationAvailable == true && !previousGpsStatus {
+//            postGpsStateDataCheckin()
+//        }
+
     }
     
-    
+    //Assigning the GPSSENDCHECKINSTATUS value when sucessfull checkin is send to server
+    //UserDefaults.standard.set("true", forKey: GPSSENDCHECKINSTATUS)
     
     
     func locationCheckin(sender:NSNotification){

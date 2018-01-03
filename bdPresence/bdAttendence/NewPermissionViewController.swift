@@ -83,7 +83,10 @@ class NewPermissionViewController: UIViewController {
         //            bluetoothButton.setImage(UIImage(named: "permission_bluetooth_disabled"), for: UIControlState.normal)
         //        }
         if  ProjectSingleton.sharedInstance.locationAvailable{
-            postGpsStateDataCheckin()
+            /*
+             @Sourabh - Since we have done this allready on SuperViewController so removing it from here
+            */
+            //postGpsStateDataCheckin()
             self.dismiss(animated: true, completion: nil)
             
             
