@@ -18,11 +18,11 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
+        /*
+         Don't config until the location is on
+        */
         BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         print(APPVERSION)
@@ -35,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
-        setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+        #if DEBUG
+            setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+        #endif
         
         Fabric.with([Crashlytics.self])
         
@@ -49,10 +51,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         startUpTask()
         
-        
-        
-        
-        // Override point for customization after application launch.
+//        let alertView : UIAlertController?
+//        //We have to make sure that the Background App Refresh is enable for the Location updates to work in the background.
+//        if UIApplication.shared.backgroundRefreshStatus == .denied {
+//            alertView = UIAlertController.init(title: "BDPresence", message: "The app doesn't work without the Background App Refresh enabled. To turn it on, go to Settings > General > Background App Refresh", preferredStyle: .alert)
+//            alertView?.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+//            self.window?.rootViewController?.present(alertView!, animated: true, completion: nil)
+//        } else if UIApplication.shared.backgroundRefreshStatus == .restricted {
+//            alertView = UIAlertController.init(title: "BDPresence", message: "The functions of this app are limited because the Background App Refresh is disable.", preferredStyle: .alert)
+//            alertView?.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+//            self.window?.rootViewController?.present(alertView!, animated: true, completion: nil)
+//        } else {
+//            // When there is a significant changes of the location,
+//            // The key UIApplicationLaunchOptionsLocationKey will be returned from didFinishLaunchingWithOptions
+//            // When the app is receiving the key, it must reinitiate the locationManager and get
+//            // the latest location updates
+//
+//            // This UIApplicationLaunchOptionsLocationKey key enables the location update even when
+//            // the app has been killed/terminated (Not in th background) by iOS or the user.
+//
+//            //print("UIApplicationLaunchOptionsLocationKey = \(launchOptions?[UIApplicationLaunchOptionsKey.location])")
+//
+//            if (launchOptions?[UIApplicationLaunchOptionsKey.location] != nil) {
+//                BlueDolphinManager.manager.startLocationMonitoring()
+//            } else if (launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] != nil) {
+//                print("opened from notification tapped")
+//                appIsStarting = true
+//            }
+//        }
+
         return true
     }
     
@@ -84,8 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 
         //NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
-    
-
         
         
         
@@ -99,14 +124,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        
     }
     
     
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        //NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -120,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let defaultDeviceToken: String = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         
-        // println("defaultDeviceToken: \(defaultDeviceToken)")
+        print("defaultDeviceToken: \(defaultDeviceToken)")
         if defaultDeviceToken != "" {
             UserDefaults.standard.setValue(defaultDeviceToken, forKey: UserDefaultsKeys.deviceToken.rawValue)
             UserDefaults.standard.synchronize()
@@ -225,8 +251,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate:UNUserNotificationCenterDelegate{
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print(userInfo)
+        print("userInfo sourabh = \(userInfo)")
         let state: UIApplicationState = application.applicationState
+        /*
+         @sourabh - Added new code to check whether push invoke this function in background or not.
+         Ideally this function is invoked in background
+        */
+        //BlueDolphinManager.manager.startLocationMonitoring()
+        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+            if screenFlag == "1"{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
+            }
+            
+        }
+        
+
+//        let notification = UILocalNotification()
+//        notification.fireDate = NSDate(timeIntervalSinceNow: 1) as Date
+//        notification.alertBody = NotificationMessage.AttendanceMarked.rawValue + "\(Date().formatted)"
+//        notification.soundName = UILocalNotificationDefaultSoundName
+//        notification.userInfo = ["notificationType": "FirstCheckin"]
+//        UIApplication.shared.scheduleLocalNotification(notification)
+//        DispatchQueue.main.async {
+//            UserDefaults.standard.set(true, forKey: "AppOpenedFromAPNS")
+//            UserDefaults.standard.synchronize()
+//            UIApplication.shared.applicationIconBadgeNumber += 1
+//        }
+
+//        if (state == UIApplicationState.background) || (state == UIApplicationState.inactive && !appIsStarting!) {
+//            // Function is called
+//            UserDefaults.standard.set(true, forKey: "AppOpenedFromAPNS")
+//            //call completion handler
+//            //completionHandler(UIBackgroundFetchResult.newData)
+//        } else if state == UIApplicationState.inactive && appIsStarting! {
+//            print("User tapped notification")
+//            completionHandler(UIBackgroundFetchResult.newData)
+//        } else {
+//            //app is active
+//            print("app is active")
+//            completionHandler(UIBackgroundFetchResult.noData)
+//        }
+        
+        // Till here the new code is written .
         if state != UIApplicationState.active {
             
             //        println("json of push \(userInfo)")
