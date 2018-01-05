@@ -20,7 +20,7 @@ open class BlueDolphinManager:NSObject {
     var secretKey:String = String()
     var organizationId:String  = String()
     public var emailId:String  = String()
-    var coreLocationController:CoreLocationController?
+    var coreLocationManager : CoreLocationManager?
     
     public var seanbeacons = NSMutableDictionary()
     var beaconSentflag = true
@@ -37,7 +37,10 @@ open class BlueDolphinManager:NSObject {
     public func setConfig(secretKey:String,organizationId:String){
         self.secretKey = secretKey
         self.organizationId = organizationId
-        self.coreLocationController  = CoreLocationController()
+        self.coreLocationManager  = CoreLocationManager.sharedInstance
+        
+
+//        self.coreLocationManager?.startMonitoringLocation()
         
     }
     
@@ -141,11 +144,17 @@ open class BlueDolphinManager:NSObject {
         OauthModel.updateToken()
     }
     public func stopLocationMonitoring(){
-       coreLocationController?.stopLocationUpdates()
+       // coreLocationManager?.stopMonitoringLocation()
+       coreLocationManager?.stopLocationUpdates()
     }
     public func startLocationMonitoring(){
-        coreLocationController?.startLocationUpdate()
+        //coreLocationManager?.startMonitoringLocation()
+        coreLocationManager?.startLocationUpdate()
     }
+    
+//    public func restartLocationMonitoring () {
+//        coreLocationManager?.restartMonitoringLocation()
+//    }
     
     public func stopScanning(){
         beaconManager?.stopMonitoring()

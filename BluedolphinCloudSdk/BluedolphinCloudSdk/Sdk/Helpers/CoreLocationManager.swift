@@ -22,33 +22,57 @@ public struct CurrentLocation {
 
 
 
- class CoreLocationController : NSObject, CLLocationManagerDelegate {
+ class CoreLocationManager : NSObject, CLLocationManagerDelegate {
     
-    var locationManager:CLLocationManager = CLLocationManager()
+    public static var sharedInstance = CoreLocationManager()
+    let locationManager: CLLocationManager
+    
+    
+    //var tempLocationManager : CLLocationManager?
+    
+    //static let sharedManager : CoreLocationManager = CoreLocationManager()
+
     
     override init() {
-        super.init()
-        if (CLLocationManager.locationServicesEnabled())
-        {
-            
             locationManager = CLLocationManager()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.distanceFilter  = 100// Must move at least 3km
-            //locationManager.startMonitoringSignificantLocationChanges()
-            locationManager.allowsBackgroundLocationUpdates = true
-            locationManager.pausesLocationUpdatesAutomatically = true
-            //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+            
+            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+            locationManager.distanceFilter = 5
             
             locationManager.requestAlwaysAuthorization()
-            
-            
-        }
-        else {
-           // showAlert("This app does not have access to Location service,You can enable access in Settings->Privacy->Location->Location Services ")
-        }
-        
+            locationManager.allowsBackgroundLocationUpdates = true
+            locationManager.pausesLocationUpdatesAutomatically = false
+            super.init()
+            locationManager.delegate = self
     }
+    
+    
+//    public func startMonitoringLocation () {
+//        if tempLocationManager != nil {
+//            tempLocationManager?.stopMonitoringSignificantLocationChanges()
+//        }
+//
+//        tempLocationManager  = CLLocationManager()
+//        tempLocationManager?.delegate = self
+//        tempLocationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+//        tempLocationManager?.activityType = CLActivityType.otherNavigation
+//        //tempLocationManager.distanceFilter  = 100// Must move at least 3km
+//        tempLocationManager?.allowsBackgroundLocationUpdates = true
+//        //            locationManager.pausesLocationUpdatesAutomatically = fa
+//
+//        tempLocationManager?.requestAlwaysAuthorization()
+//        tempLocationManager?.startMonitoringSignificantLocationChanges()
+//    }
+    
+//    public func stopMonitoringLocation () {
+//        tempLocationManager?.stopMonitoringSignificantLocationChanges()
+//    }
+    
+//    public func restartMonitoringLocation () {
+//        tempLocationManager?.stopMonitoringSignificantLocationChanges()
+//        //tempLocationManager?.requestAlwaysAuthorization()
+//        tempLocationManager?.startMonitoringSignificantLocationChanges()
+//    }
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("didChangeAuthorizationStatus")
@@ -76,9 +100,6 @@ public struct CurrentLocation {
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        
-       
-        
         if let location = locations.last{
             print("Update Location to \(location)")
             print(location.horizontalAccuracy)
@@ -99,6 +120,15 @@ public struct CurrentLocation {
         
     }
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        /*
+         @Sourabh - Setting local notification to user when we didn't get location
+        */
+        let notification = UILocalNotification()
+        notification.fireDate = NSDate(timeIntervalSinceNow: 2) as Date
+        notification.alertBody = "Look's like you have turned off your Location Services"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["notificationType": "NOLocation"]
+        UIApplication.shared.scheduleLocalNotification(notification)
         print("Error while updating location " + error.localizedDescription)
     }
     public func stopLocationUpdates(){
