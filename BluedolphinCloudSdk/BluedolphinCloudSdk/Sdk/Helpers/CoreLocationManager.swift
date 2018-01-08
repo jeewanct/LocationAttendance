@@ -123,12 +123,12 @@ public struct CurrentLocation {
         /*
          @Sourabh - Setting local notification to user when we didn't get location
         */
-        let notification = UILocalNotification()
-        notification.fireDate = NSDate(timeIntervalSinceNow: 2) as Date
-        notification.alertBody = "Look's like you have turned off your Location Services"
-        notification.soundName = UILocalNotificationDefaultSoundName
-        notification.userInfo = ["notificationType": "NOLocation"]
-        UIApplication.shared.scheduleLocalNotification(notification)
+//        let notification = UILocalNotification()
+//        notification.fireDate = NSDate(timeIntervalSinceNow: 2) as Date
+//        notification.alertBody = "Look's like you have turned off your Location Services"
+//        notification.soundName = UILocalNotificationDefaultSoundName
+//        notification.userInfo = ["notificationType": "NOLocation"]
+//        UIApplication.shared.scheduleLocalNotification(notification)
         print("Error while updating location " + error.localizedDescription)
     }
     public func stopLocationUpdates(){
