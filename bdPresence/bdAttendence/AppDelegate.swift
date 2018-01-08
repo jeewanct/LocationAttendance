@@ -3,6 +3,7 @@
 //  bdAttendence
 //
 //  Created by Raghvendra on 17/04/17.
+
 //  Copyright © 2017 Raghvendra. All rights reserved.
 //
 
@@ -249,6 +250,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
 }
 
+
 extension AppDelegate:UNUserNotificationCenterDelegate{
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("userInfo sourabh = \(userInfo)")
@@ -258,12 +260,12 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
          Ideally this function is invoked in background
         */
         //BlueDolphinManager.manager.startLocationMonitoring()
-        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
-            if screenFlag == "1"{
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
-            }
-            
-        }
+//        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+//            if screenFlag == "1"{
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
+//            }
+//
+//        }
         
 
 //        let notification = UILocalNotification()
