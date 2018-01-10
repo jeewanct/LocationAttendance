@@ -95,19 +95,24 @@ open class OauthModel :NSObject, Meta{
     }
     
     
-    public class func updateToken(){
-        let realm = try! Realm()
+    public class func updateToken(forceUpdate:Bool = false){
         var today : Bool?
-        if let todayDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.startDate.rawValue) as? Date {
-            today = Calendar.current.isDateInToday(todayDate)
-        }
-        else {
+        if forceUpdate {
             today = false
+        }else{
+            if let todayDate = UserDefaults.standard.value(forKey: UserDefaultsKeys.startDate.rawValue) as? Date {
+                today = Calendar.current.isDateInToday(todayDate)
+            }
+            else {
+                today = false
+            }
         }
+        
+        
         if today == false {
             var refreshToken = String()
+            let realm = try! Realm()
             let refreshTokenData = realm.objects(RefreshTokenObject.self).first
-            print(refreshTokenData ?? "")
             if let token = refreshTokenData?["token"] as? String {
                 refreshToken = token
             }
@@ -154,9 +159,6 @@ open class OauthModel :NSObject, Meta{
                                             
                                         }
                                     }
-                                    
-                                   
-                                    
                                     
                                     
                                 }

@@ -116,7 +116,7 @@ import CoreLocation
                     }
                 }
             case 403:
-                OauthModel.updateToken()
+                OauthModel.updateToken(forceUpdate: true)
                 
             default:
                 break;

@@ -342,7 +342,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk8OTPModel")
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk10OauthModel")
 @interface OauthModel : NSObject
 + (void)getTokenWithUserObject:(NSDictionary<NSString *, id> * _Nonnull)userObject completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
-+ (void)updateToken;
++ (void)updateTokenWithForceUpdate:(BOOL)forceUpdate;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
