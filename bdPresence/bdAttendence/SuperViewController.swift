@@ -192,7 +192,8 @@ extension SuperViewController{
         
     }
     func updateTask(){
-        //checkForceUpdate()
+        //Changing as per new change for same organisation
+        checkForceUpdate()
         if isInternetAvailable() {
            //self.showLoader()
             BlueDolphinManager.manager.updateToken()

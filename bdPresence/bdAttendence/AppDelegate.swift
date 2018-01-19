@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setBundleId(id: appIdentifier)
         setCheckinGap(val: 3600)
         setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: false)
+        stopDebugging(flag: true)
         setCheckinInteral(val: 300)
         
         
@@ -170,7 +170,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getDeviceID(){
        
-        
 //        let kcs = KeychainService()
 //        if let recoveredId = kcs.load(name:"UniqueId") {
 //
@@ -255,6 +254,8 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("userInfo sourabh = \(userInfo)")
         let state: UIApplicationState = application.applicationState
+        
+        
         /*
          @sourabh - Added new code to check whether push invoke this function in background or not.
          Ideally this function is invoked in background
