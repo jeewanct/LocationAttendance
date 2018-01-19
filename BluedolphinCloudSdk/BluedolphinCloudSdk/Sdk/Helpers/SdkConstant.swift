@@ -14,7 +14,7 @@ let deviceType = "ios"
 var CheckinInterVal = 300
 var CheckinGap = 1800
 var Debugging = true
-var AppBundle = "com.raremedia.bdAttendance"
+var AppBundle = "com.raremedia.bdPresence"
 
 
 

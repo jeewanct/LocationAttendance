@@ -25,6 +25,8 @@ public func stopDebugging(flag:Bool){
     
 
 }
+
+
 public func getDistanceFromLastLocation(location:CLLocation = CLLocation(latitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude))->CLLocationDistance{
     let distance = location.distance(from: CurrentLocation.lastLocation)
     return distance
@@ -117,8 +119,19 @@ public func getUserData(){
                 if let value = orgFeature["employeeShiftSwitchFlexibility"] as? Bool{
                     SDKSingleton.sharedInstance.employeeShiftSwitchFlexibility = value
                 }
-                if let value = orgFeature["iosAppVersion"] as? String{
-                    SDKSingleton.sharedInstance.iosAPPVersion = value
+                
+                if let appDetail = orgFeature["appDetails"] as? NSArray {
+                    for tempAppDetail in appDetail {
+                        if let tempObj = tempAppDetail as? NSDictionary {
+                            let tempAppId = tempObj["appId"] as? String
+                            if tempAppId == AppBundle {
+                                if let value = tempObj["appVersion"] as? String{
+                                    print("Printingvalue = \(value)")
+                                    SDKSingleton.sharedInstance.iosAPPVersion = value
+                                }
+                            }
+                        }
+                    }
                 }
                 
                 

@@ -262,9 +262,12 @@ extension SuperViewController{
     }
     
     func checkForceUpdate(){
-        let storeVersion = SDKSingleton.sharedInstance.iosAPPVersion
-        if storeVersion.compare(APPVERSION, options: .numeric) == .orderedDescending {
-            forceupdatePopup()
+        if !SDKSingleton.sharedInstance.iosAPPVersion.isBlank {
+            let storeVersion = SDKSingleton.sharedInstance.iosAPPVersion
+            if storeVersion.compare(APPVERSION, options: .numeric) == .orderedDescending {
+                forceupdatePopup()
+            }
+
         }
     }
     
