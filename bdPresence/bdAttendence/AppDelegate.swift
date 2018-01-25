@@ -170,6 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getDeviceID(){
        
+        print("ID = \(UIDevice.current.identifierForVendor?.uuidString)")
 //        let kcs = KeychainService()
 //        if let recoveredId = kcs.load(name:"UniqueId") {
 //
