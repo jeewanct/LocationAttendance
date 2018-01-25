@@ -15,6 +15,7 @@ class NewOtpViewController: UIViewController {
 
     @IBOutlet weak var sendOtpButton: UIButton!
     @IBOutlet weak var otpLabel: UILabel!
+    var codeInputView : CodeInputView!
     fileprivate var otpToken = String()
     var mobileNumber = "9015620820"
     override func viewDidLoad() {
@@ -25,13 +26,13 @@ class NewOtpViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.tintColor = UIColor.white
         sendOtpButton.addTarget(self, action: #selector(sendOTP), for: UIControlEvents.touchUpInside)
-        let codeInputView = CodeInputView(frame: CGRect(x: 0, y: 0, width: otpView.frame.width, height: otpView.frame.height))
+        codeInputView = CodeInputView(frame: CGRect(x: 0, y: 0, width: otpView.frame.width, height: otpView.frame.height))
         codeInputView.delegate = self
         codeInputView.tag = 17
         
         otpView.addSubview(codeInputView)
         
-        codeInputView.becomeFirstResponder()
+        //codeInputView.becomeFirstResponder()
         otpLabel.text = "6-digit OTP send to \(mobileNumber)"
         otpLabel.font = APPFONT.OTPCONFIRMATION
         //self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(backbuttonAction(sender:)))
@@ -47,7 +48,9 @@ class NewOtpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+         codeInputView.becomeFirstResponder()
+    }
     
     func updateUser(updateflag:Bool = false){
         var deviceToken = "3273a5f0598cd8e9518ccf07c67fbdd1ebb079d2a95aa890e259a4b70ecad57e"
@@ -59,7 +62,8 @@ class NewOtpViewController: UIViewController {
                                               "otpToken":otpToken as AnyObject,
                                               "deviceType":"ios" as AnyObject,
                                               "deviceToken":deviceToken as AnyObject,
-                                              "imeiId":SDKSingleton.sharedInstance.DeviceUDID as AnyObject
+                                              "imeiId":SDKSingleton.sharedInstance.DeviceUDID as AnyObject,
+                                              "appId":appIdentifier as AnyObject
             
             
         ]
@@ -115,6 +119,7 @@ class NewOtpViewController: UIViewController {
             "mobile":mobileNumber,
             "otpToken":otpToken
             ] as [String : Any]
+        print(param)
         if isInternetAvailable() {
             //showLoader(text: "Verifying")
             AlertView.sharedInstance.setLabelText("Verifying")

@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setBundleId(id: appIdentifier)
         setCheckinGap(val: 3600)
         setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: true)
+        stopDebugging(flag: false)
         setCheckinInteral(val: 300)
         
         
@@ -52,34 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         startUpTask()
         
-//        let alertView : UIAlertController?
-//        //We have to make sure that the Background App Refresh is enable for the Location updates to work in the background.
-//        if UIApplication.shared.backgroundRefreshStatus == .denied {
-//            alertView = UIAlertController.init(title: "BDPresence", message: "The app doesn't work without the Background App Refresh enabled. To turn it on, go to Settings > General > Background App Refresh", preferredStyle: .alert)
-//            alertView?.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-//            self.window?.rootViewController?.present(alertView!, animated: true, completion: nil)
-//        } else if UIApplication.shared.backgroundRefreshStatus == .restricted {
-//            alertView = UIAlertController.init(title: "BDPresence", message: "The functions of this app are limited because the Background App Refresh is disable.", preferredStyle: .alert)
-//            alertView?.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-//            self.window?.rootViewController?.present(alertView!, animated: true, completion: nil)
-//        } else {
-//            // When there is a significant changes of the location,
-//            // The key UIApplicationLaunchOptionsLocationKey will be returned from didFinishLaunchingWithOptions
-//            // When the app is receiving the key, it must reinitiate the locationManager and get
-//            // the latest location updates
-//
-//            // This UIApplicationLaunchOptionsLocationKey key enables the location update even when
-//            // the app has been killed/terminated (Not in th background) by iOS or the user.
-//
-//            //print("UIApplicationLaunchOptionsLocationKey = \(launchOptions?[UIApplicationLaunchOptionsKey.location])")
-//
-//            if (launchOptions?[UIApplicationLaunchOptionsKey.location] != nil) {
-//                BlueDolphinManager.manager.startLocationMonitoring()
-//            } else if (launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] != nil) {
-//                print("opened from notification tapped")
-//                appIsStarting = true
-//            }
-//        }
+
 
         return true
     }
@@ -193,7 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SDKSingleton.sharedInstance.DeviceUDID = DeviceUDID!
             UserDefaults.standard.set(DeviceUDID, forKey: "RMCIMEI")
         }
-        print(SDKSingleton.sharedInstance.DeviceUDID)
+        print("IMEIID" + SDKSingleton.sharedInstance.DeviceUDID)
     }
     
     
