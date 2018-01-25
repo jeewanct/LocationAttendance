@@ -32,7 +32,7 @@ class UserShift:NSObject{
             endMin = Int(value) ?? 0
             
         }
-        if let value = object["objectId"] as? String{
+        if let value = object["dObjectId"] as? String{
             shiftId = value
             
         }

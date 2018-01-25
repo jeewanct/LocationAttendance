@@ -75,7 +75,7 @@ public enum AssignmentWork:String{
     case batteryLevel
     case deviceModel
     case deviceOS
-    case shiftId = "shiftid"
+    case shiftId
     case appId
     case distance
 }
