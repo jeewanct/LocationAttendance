@@ -955,11 +955,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdPresence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-<<<<<<< HEAD
 				PROVISIONING_PROFILE = "1b1f92c3-ddd6-4b55-a55c-7d7c1c3db768";
-=======
-				PROVISIONING_PROFILE = "f62c82ad-4eb5-4e9f-8503-052ba3fd02af";
->>>>>>> e50d69e810f3d59370a14870245fd2ed18075cef
 				PROVISIONING_PROFILE_SPECIFIER = bdPresenceDev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -989,11 +985,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdPresence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-<<<<<<< HEAD
 				PROVISIONING_PROFILE = "1b1f92c3-ddd6-4b55-a55c-7d7c1c3db768";
-=======
-				PROVISIONING_PROFILE = "f62c82ad-4eb5-4e9f-8503-052ba3fd02af";
->>>>>>> e50d69e810f3d59370a14870245fd2ed18075cef
 				PROVISIONING_PROFILE_SPECIFIER = bdPresenceDev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
