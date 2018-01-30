@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setBundleId(id: appIdentifier)
         setCheckinGap(val: 3600)
         setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: false)
+        stopDebugging(flag: true)
         setCheckinInteral(val: 300)
         
         
