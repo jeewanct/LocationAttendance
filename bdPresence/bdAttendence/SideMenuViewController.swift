@@ -19,8 +19,8 @@ class SideMenuViewController: UIViewController  {
         @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var userImageView: UIImageView!
         var menuindex = 0
-        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.ThisWeek.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ContactUs.rawValue,SideMenuOptions.Transmit.rawValue]
-
+        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.ThisWeek.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ContactUs.rawValue]
+//,SideMenuOptions.Transmit.rawValue
         override func viewDidLoad() {
             super.viewDidLoad()
             if !SDKSingleton.sharedInstance.transmitter{

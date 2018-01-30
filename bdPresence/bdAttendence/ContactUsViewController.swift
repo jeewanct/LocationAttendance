@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 import BluedolphinCloudSdk
-
+import RealmSwift
 
 class ContactUsViewController: UIViewController {
 
@@ -19,8 +19,12 @@ class ContactUsViewController: UIViewController {
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
+    
+    fileprivate var organizationName : String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        getOrganisationName()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -49,6 +53,12 @@ class ContactUsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func getOrganisationName(){
+        let realm = try! Realm()
+        if let tokenData = realm.objects(AccessTokenObject.self).filter("organizationId = %@",SDKSingleton.sharedInstance.organizationId).first {
+            organizationName = tokenData.organizationName!
+        }
+    }
     
     
     func menuAction(sender:UIBarButtonItem){
@@ -76,13 +86,15 @@ class ContactUsViewController: UIViewController {
                 }
                 
                 //Set the subject and message of the email
-                mailComposer.setSubject("BD Attendance (iOS) v" + APPVERSION + ":Contact Us")
+                mailComposer.setSubject("BD Field Force (iOS) v" + APPVERSION + ":Contact Us")
+                _ = SDKSingleton.sharedInstance.organizationId
                 let message1 = "Username: " + SDKSingleton.sharedInstance.userName
+                let orgName = "\n" + "Organization Name: " + organizationName
                 let message2 = "\n" + "Contact Number: " + SDKSingleton.sharedInstance.mobileNumber
                 let message3 = "\n" + "Device Details:  " + UIDevice.current.modelName +  " iOS \(UIDevice.current.systemVersion)"
                 let message4 = "\n" + "Message: \n" + messageTextView.text
                 
-                mailComposer.setMessageBody(message1 + message2 + message3 + message4, isHTML: false)
+                mailComposer.setMessageBody(message1 + orgName + message2 + message3 + message4, isHTML: false)
                 
                 
                 self.present(mailComposer, animated: true, completion: nil)

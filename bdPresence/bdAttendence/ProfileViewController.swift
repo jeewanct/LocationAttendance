@@ -55,7 +55,6 @@ class ProfileViewController: UIViewController {
         let realm = try! Realm()
         if let tokenData = realm.objects(AccessTokenObject.self).filter("organizationId = %@",SDKSingleton.sharedInstance.organizationId).first {
             organisationName = tokenData.organizationName!
-            
         }
     }
     func menuAction(sender:UIBarButtonItem){
