@@ -51,9 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // And it should be set here on first launch of app
         
         startUpTask()
-        
-
-
         return true
     }
     
