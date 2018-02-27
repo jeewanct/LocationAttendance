@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Asset 10-8" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-wC-ycp">
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Asset 32" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-wC-ycp">
                                 <rect key="frame" x="16" y="20" width="343" height="647"/>
                             </imageView>
                         </subviews>
@@ -41,6 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Asset 10-8" width="750" height="1334"/>
+        <image name="Asset 32" width="750" height="1334"/>
     </resources>
 </document>
