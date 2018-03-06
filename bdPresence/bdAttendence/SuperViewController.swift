@@ -329,7 +329,8 @@ extension SuperViewController{
     }
     
     
-    
+    // SOurabh- Removing this function because it's allready done in SDK
+    /*
     func postGpsStateDataCheckin(){
         let checkin = CheckinHolder()
         
@@ -345,6 +346,7 @@ extension SuperViewController{
             
         }
     }
+ */
     
     func checkPermissionStatus(sender:NSNotification){
         updateTask()
