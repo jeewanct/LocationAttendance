@@ -55,6 +55,9 @@ class SuperViewController: UIViewController {
         //Adding Check blocker to solve a bug when permission is denied at first time
         checkBlockerScreen()
         updateTask()
+        
+        wakeUpCall(notify: NotifyingFrom.Normal)
+
     
     }
     func handleLeftGesture() {
@@ -74,7 +77,8 @@ class SuperViewController: UIViewController {
     
     func setObservers(){
          NotificationCenter.default.removeObserver(self)
-      
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.wakeUp(sender:)), name: NSNotification.Name(LocalNotifcation.WakeUpCall.rawValue), object: nil)
+
          NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "HideSideMen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: nil)
@@ -94,6 +98,97 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin(sender:)), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         
     }
+    
+    func wakeUp (sender : NSNotification) {
+        self.wakeUpCall(notify: NotifyingFrom.SilentPush)
+    }
+    
+    func wakeUpCall (notify: NotifyingFrom) {
+        let rmcNotifier = RMCNotifier.shared
+        print(notify)
+        
+        rmcNotifier.notifyUserForStartScanning(notifying: notify, completion:{ (notifier) in
+            print("notify response = \(notifier)")
+            print(UserDefaults.standard.value(forKey: "AlreadyCheckin") as? String)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            let tempNotifier = notifier as [String : AnyObject]
+            if tempNotifier["status"] as! Bool {
+                UI {
+                    if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                        print("screenflag = \(screenFlag)")
+                        
+                        if screenFlag == "1" {
+                            // Already swipedup
+                            //start scanning
+                            bdCloudStartMonitoring()
+                            //bdScanningStart()
+                        } else if screenFlag == "2" {
+                            // automatic checkin function
+                            appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
+                            //then set defaults value to 1
+                            // sending userinfo which will tell dashboard to work accordingly
+                            // with the userinfo will tell which type of chekin to be sent and do not check for blocker screen
+                            UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+                            appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                            //                            bdScanningStart()
+                        }
+                    } else {
+                        appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
+                        UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+                        appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                        
+                    }
+                }
+                
+            } else {
+                // Swipe down code
+                if tempNotifier["message"] as! String == notifyUserResponse.swipeDownAndStopScanning.rawValue {
+                    
+                    if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                        if screenFlag == "1" {
+                            appDelegate.postDataCheckin(userInteraction: .swipeDownAuto)
+                            
+                            UI {
+                                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                                
+                                bdCloudStopMonitoring()
+                                appDelegate.toShowLocalNotification(message: "Looks like you're out of office. Time to relax!")
+                                
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                                
+                                //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
+                            }
+                        }
+                    }
+                } else if tempNotifier["message"] as! String == notifyUserResponse.shiftEnded.rawValue {
+                    print("shift ended")
+                    
+                } else if tempNotifier["message"] as! String == notifyUserResponse.noShiftToday.rawValue {
+                    print("noshifttoday")
+                    //                    //no data checkin
+                    //                    UI {
+                    //                        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                    //
+                    //                        bdScanningStop()
+                    //
+                    //                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: nil)
+                    //
+                    //                        appDelegate.toShowLocalNotification(message: "Looks like you're out of office. Time to relax!")
+                    //
+                    //                    }
+                }
+                
+            }
+            
+        })
+    }
+
+    
     
     
     func shiftHandling(){
@@ -271,7 +366,8 @@ extension SuperViewController{
         }
     }
     
-    func checkBlockerScreen(){
+    func checkBlockerScreen() {
+        
         if CLLocationManager.locationServicesEnabled() {
             switch(CLLocationManager.authorizationStatus()) {
             case .notDetermined, .restricted, .denied:
@@ -289,13 +385,22 @@ extension SuperViewController{
            
         }
         
+        if (ProjectSingleton.sharedInstance.locationAvailable == false ){
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "permission") as! NewPermissionViewController
+            self.present(controller, animated: true, completion: nil)
+        }
+        
+        // changed new GPSStatus checkin
+        BlueDolphinManager.manager.toSendGPSStateCheckins(currentStatus: ProjectSingleton.sharedInstance.locationAvailable)
+        
+        /*
         var previousGpsStatus : Bool!
         if let tempGpsStatus = UserDefaults.standard.value(forKey: PREVIOUSGPSSTATUS) as? Bool  {
            previousGpsStatus = tempGpsStatus
         }
         
         print("Location enabled \(ProjectSingleton.sharedInstance.locationAvailable)")
-        //print("Bluetooth enabled \(ProjectSingleton.sharedInstance.bluetoothAvaliable)")
+
         if previousGpsStatus != nil {
             
         } else {
@@ -326,7 +431,7 @@ extension SuperViewController{
         
         UserDefaults.standard.synchronize()
         
-        
+        */
 //        if ProjectSingleton.sharedInstance.locationAvailable == false && previousGpsStatus{
 //            //Here we should have a callback which will ensure the correct app flow
 //            postGpsStateDataCheckin()

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 var APPVERSION = "1.3.1"
+let APPNAME = "BD Field Force"
 var appIdentifier = "com.raremedia.bdAttendence"
 let AppstoreURL = "https://itunes.apple.com/us/app/bd-field-force/id1292604414?ls=1&mt=8"
 let supportEmail = "support@raremediacompany.in"
@@ -24,15 +25,7 @@ var officeEndHour = 21
 var officeEndMin = 0
 let PREVIOUSGPSSTATUS = "previousGpsStatus"
 
-enum CheckinDetailKeys:String{
-    case userInteraction
-    case swipeUp
-    case swipeDown
-    case bluetoothStatus
-    case gpsStatus
-    case AppTerminated
-    
-}
+
 
 enum SideMenuOptions:String{
     case MyDashboard = "My Dashboard"
@@ -59,28 +52,7 @@ enum NotificationType:String{
 enum ProjectUserDefaultsKeys:String{
     case startDayTime
 }
-enum LocalNotifcation:String{
-    case Profile = "MyProfile"
-    case Assignment = "MyAssignments"
-    case VirtualBeacon
-    case Pushreceived
-    case NewAssignment
-    case Draft
-    case BaseAnalytics
-    case Attendance
-    case Background
-    case TimeUpdate
-    case LocationUpdate
-    case FirstBeaconCheckin
-    case Dashboard
-    case SystemDetail
-    case CheckoutScreen
-    case CheckinScreen
-    case DayCheckinScreen
-    case ThisWeek
-    case ContactUs
-    case ShiftEnded
-}
+
 enum StoryboardIdentifier:String{
     case myprofile
     case contactUs

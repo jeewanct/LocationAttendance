@@ -173,8 +173,10 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if __has_feature(modules)
 @import RealmSwift;
-@import Foundation;
 @import ObjectiveC;
+@import Foundation;
+@import CoreLocation;
+@import Photos;
 @import UIKit;
 #endif
 
@@ -200,11 +202,36 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk17AccessTokenObject")
 @property (nonatomic) NSInteger expires;
 @property (nonatomic, copy) NSString * _Nullable userName;
 @property (nonatomic, copy) NSString * _Nullable orgFeatures;
+@property (nonatomic, copy) NSString * _Nullable privelege;
 + (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk16AssignmentHolder")
+@interface AssignmentHolder : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk15AssignmentModel")
+@interface AssignmentModel : NSObject
++ (void)getAssignmentsWithAssignmentId:(NSString * _Nonnull)assignmentId completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)getAssignmentsWithStatus:(NSString * _Nonnull)status completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)updateAssignments;
++ (void)postdbAssignments;
++ (void)postAssignmentsWithAssignment:(NSObject * _Nonnull)assignment;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSDictionary;
+
+@interface AssignmentModel (SWIFT_EXTENSION(BluedolphinCloudSdk))
++ (void)createAssignmentWithAssignmentData:(AssignmentHolder * _Nonnull)assignmentData;
++ (void)saveAssignmentWithAssignmentData:(NSDictionary * _Nonnull)assignmentData;
 @end
 
 
@@ -239,7 +266,6 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10BeaconData")
 @end
 
 @class NSMutableDictionary;
-@class NSDictionary;
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk18BlueDolphinManager")
 @interface BlueDolphinManager : NSObject
@@ -249,14 +275,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BlueDolphinM
 @property (nonatomic, strong) NSMutableDictionary * _Nonnull seanbeacons;
 - (void)initializeWithSecretKey:(NSString * _Nullable)secretKey organizationId:(NSString * _Nullable)organizationId email:(NSString * _Nullable)email firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName metaInfo:(NSDictionary * _Nullable)metaInfo;
 - (void)setConfigWithSecretKey:(NSString * _Nonnull)secretKey organizationId:(NSString * _Nonnull)organizationId;
-- (void)authorizeUserWithEmail:(NSString * _Nonnull)email firstName:(NSString * _Nonnull)firstName lastName:(NSString * _Nonnull)lastName metaInfo:(NSDictionary * _Nonnull)metaInfo;
+- (void)authorizeUserWithEmail:(NSString * _Nonnull)email firstName:(NSString * _Nonnull)firstName lastName:(NSString * _Nonnull)lastName metaInfo:(NSDictionary * _Nonnull)metaInfo completion:(void (^ _Nonnull)(BOOL))completion;
 - (void)postTransientCheckinWithMetaInfo:(NSDictionary<NSString *, id> * _Nonnull)metaInfo;
-- (void)startScanning;
+- (void)getNearByBeaconsWithCompletion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
+- (void)startScanningWithCompletion:(void (^ _Nonnull)(BOOL))completion;
 - (void)updateToken;
 - (void)stopLocationMonitoring;
 - (void)startLocationMonitoring;
 - (void)stopScanning;
 - (void)sendCheckinsWithArray:(NSArray * _Nonnull)array;
+- (void)gpsAuthorizationStatusWithGpsStatus:(void (^ _Nonnull)(CLAuthorizationStatus))gpsStatus;
+- (void)bluetoothEnabledWithCompletion:(void (^ _Nonnull)(BOOL))completion;
+- (void)toSendGPSStateCheckinsWithCurrentStatus:(BOOL)currentStatus;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -342,15 +372,53 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk8OTPModel")
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk10OauthModel")
 @interface OauthModel : NSObject
 + (void)getTokenWithUserObject:(NSDictionary<NSString *, id> * _Nonnull)userObject completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
-+ (void)updateTokenWithForceUpdate:(BOOL)forceUpdate;
++ (void)updateToken;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 
 
+@interface PHAssetCollection (SWIFT_EXTENSION(BluedolphinCloudSdk))
+@property (nonatomic, readonly) NSInteger photosCount;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk11RMCAssignee")
+@interface RMCAssignee : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable userId;
+@property (nonatomic, copy) NSString * _Nullable organizationId;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class RMCLocation;
+
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk19RMCAssignmentObject")
 @interface RMCAssignmentObject : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable assignmentId;
+@property (nonatomic, copy) NSDate * _Nullable addedOn;
+@property (nonatomic, copy) NSDate * _Nullable time;
+@property (nonatomic, copy) NSDate * _Nullable updatedOn;
+@property (nonatomic, copy) NSString * _Nullable assignmentDetails;
+@property (nonatomic, copy) NSString * _Nullable assignmentStatusLog;
+@property (nonatomic, copy) NSDate * _Nullable assignmentDeadline;
+@property (nonatomic, copy) NSDate * _Nullable assignmentStartTime;
+@property (nonatomic, copy) NSString * _Nullable assignmentAddress;
+@property (nonatomic, strong) RMCAssignee * _Nullable assignerData;
+@property (nonatomic, strong) RMCLocation * _Nullable location;
+@property (nonatomic, copy) NSString * _Nullable status;
+@property (nonatomic, copy) NSString * _Nullable jobNumber;
+@property (nonatomic, copy) NSString * _Nullable bookmarked;
+@property (nonatomic, copy) NSDate * _Nullable lastUpdated;
+@property (nonatomic, copy) NSString * _Nullable assignmentType;
+@property (nonatomic, copy) NSDate * _Nullable downloadedOn;
+@property (nonatomic, copy) NSDate * _Nullable submittedOn;
+@property (nonatomic, copy) NSString * _Nullable firstTypeAssignment;
+@property (nonatomic, copy) NSString * _Nullable placeId;
+@property (nonatomic, copy) NSString * _Nullable localStatus;
 + (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
@@ -375,12 +443,42 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk9RMCBeacon")
 @end
 
 
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk10RMCDObject")
+@interface RMCDObject : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable dObjectId;
+@property (nonatomic, copy) NSString * _Nullable dObjectDetails;
+@property (nonatomic) BOOL isUploaded;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk17RMCDObjectManager")
+@interface RMCDObjectManager : NSObject
++ (void)getDObjectsDetailsWithCompletion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)updateDOBject;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk11RMCLocation")
 @interface RMCLocation : RealmSwiftObject
 @property (nonatomic, copy) NSString * _Nullable latitude;
 @property (nonatomic, copy) NSString * _Nullable longitude;
 @property (nonatomic, copy) NSString * _Nullable altitude;
 @property (nonatomic, copy) NSString * _Nullable accuracy;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk9RMCPhotos")
+@interface RMCPhotos : RealmSwiftObject
++ (NSString * _Nonnull)primaryKey SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
@@ -396,6 +494,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk11RMCLocation")
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk13UserDataModel")
 @interface UserDataModel : NSObject
 + (void)userSignUpWithParam:(NSDictionary<NSString *, id> * _Nonnull)param completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)updateUserWithParam:(NSDictionary<NSString *, id> * _Nonnull)param completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 + (void)createUserDataWithUserObject:(NSDictionary<NSString *, NSString *> * _Nonnull)userObject;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end

@@ -28,17 +28,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         print(APPVERSION)
         appIdentifier = Bundle.main.bundleIdentifier!
-        setBundleId(id: appIdentifier)
-        setCheckinGap(val: 3600)
-        setAppVersion(appVersion: APPVERSION)
-        stopDebugging(flag: true)
-        setCheckinInteral(val: 300)
-        
+//        setBundleId(id: appIdentifier)
+//        setCheckinGap(val: 3600)
+//        setAppVersion(appVersion: APPVERSION)
+//        stopDebugging(flag: true)
+//        setCheckinInteral(val: 300)
+        ConfigurationModel.setBundleId(id: appIdentifier)
+        ConfigurationModel.setAppVersion(appVersion: APPVERSION)
+        ConfigurationModel.stopDebugging(flag: false)
+        ConfigurationModel.setCheckinInteral(val: 300)
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
+        //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
         #if DEBUG
-            setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            ConfigurationModel.setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
+        #else
+            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging")
         #endif
+        
+//        #if DEBUG
+//            setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+//        #endif
         
         Fabric.with([Crashlytics.self])
         
@@ -102,9 +112,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
+//        BlueDolphinManager.manager.gpsAuthorizationStatus { (newStatus) in
+//            print("newStatus = \(newStatus.rawValue)")
+//        }
         
     }
+    
     
     func applicationWillTerminate(_ application: UIApplication) {
         if !SDKSingleton.sharedInstance.userId.isBlank{
@@ -190,6 +203,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    func toShowLocalNotification (message : String ) {
+        if #available(iOS 10.0, *) {
+            let content = UNMutableNotificationContent()
+            content.title = APPNAME
+            content.body = message
+            //content.badge = 1
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
+                                                            repeats: false)
+            
+            let requestIdentifier = "demoNotification"
+            let request = UNNotificationRequest(identifier: requestIdentifier,
+                                                content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request,
+                                                   withCompletionHandler: { (error) in
+                                                    // Handle error
+                                                    print("error in notification = \(String(describing: error?.localizedDescription))")
+            })
+        } else {
+            
+        }
+        
+        
+        
+        //        DispatchQueue.main.async {
+        //            let notification = UILocalNotification()
+        //            notification.fireDate = NSDate(timeIntervalSinceNow: 1) as Date
+        //            notification.alertBody = message
+        //            notification.soundName = UILocalNotificationDefaultSoundName
+        //            notification.userInfo = ["notificationType": "DoNothing"]
+        //            UIApplication.shared.scheduleLocalNotification(notification)
+        //        }
+        
+    }
+    
+    
     
     
 //    func updateRealmConfiguration(){
@@ -226,7 +276,13 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         print("userInfo sourabh = \(userInfo)")
         let state: UIApplicationState = application.applicationState
         
+        if !SDKSingleton.sharedInstance.userId.isBlank {
+            // changed new GPSStatus checkin
+            BlueDolphinManager.manager.toSendGPSStateCheckins(currentStatus: ProjectSingleton.sharedInstance.locationAvailable)
+        }
         
+
+
         /*
          @sourabh - Added new code to check whether push invoke this function in background or not.
          Ideally this function is invoked in background
@@ -271,7 +327,15 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             
             //        println("json of push \(userInfo)")
             //       println(userInfo["aps"])
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Pushreceived.rawValue), object: self, userInfo: userInfo)
+            UI {
+                if !SDKSingleton.sharedInstance.userId.isBlank{
+                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: userInfo)
+                    completionHandler(.newData)
+
+                }
+            }
+            
+           
             
             
         } else {
@@ -305,11 +369,15 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             //
             
         }
-        completionHandler(UIBackgroundFetchResult.noData)
+        completionHandler(UIBackgroundFetchResult.newData)
         
         
     }
-    // MARK: UNUserNotificationCenter Delegate // >= iOS 10
+
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        // perform fetch handler
+        
+    }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
