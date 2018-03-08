@@ -14,6 +14,7 @@ import UserNotifications
 import RealmSwift
 import Fabric
 import Crashlytics
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,16 +43,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
         #if DEBUG
             ConfigurationModel.setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
+            print("https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
         #else
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging")
+            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+            print("https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
         #endif
         
 //        #if DEBUG
 //            setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
 //        #endif
-        
-        Fabric.with([Crashlytics.self])
-        
+        #if DEBUG
+            
+            #else
+            Fabric.with([Crashlytics.self])
+        #endif
         IQKeyboardManager.sharedManager().enable = true
         UIDevice.current.isBatteryMonitoringEnabled = true
         registerForRemoteNotification()
@@ -122,6 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         if !SDKSingleton.sharedInstance.userId.isBlank{
             postDataCheckin(userInteraction: CheckinDetailKeys.AppTerminated)
+            
         }
        
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -275,14 +281,27 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("userInfo sourabh = \(userInfo)")
         let state: UIApplicationState = application.applicationState
-        
-        if !SDKSingleton.sharedInstance.userId.isBlank {
-            // changed new GPSStatus checkin
-            BlueDolphinManager.manager.toSendGPSStateCheckins(currentStatus: ProjectSingleton.sharedInstance.locationAvailable)
+       
+        UI {
+            if CLLocationManager.locationServicesEnabled() {
+                switch(CLLocationManager.authorizationStatus()) {
+                case .notDetermined, .restricted, .denied:
+                    ProjectSingleton.sharedInstance.locationAvailable = false
+                    
+                case  .authorizedWhenInUse:
+                    ProjectSingleton.sharedInstance.locationAvailable = false
+                    
+                case .authorizedAlways:
+                    ProjectSingleton.sharedInstance.locationAvailable = true
+                }
+                
+            } else {
+                ProjectSingleton.sharedInstance.locationAvailable = false
+                
+            }
         }
         
-
-
+        
         /*
          @sourabh - Added new code to check whether push invoke this function in background or not.
          Ideally this function is invoked in background
@@ -329,6 +348,11 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             //       println(userInfo["aps"])
             UI {
                 if !SDKSingleton.sharedInstance.userId.isBlank{
+                    //if !SDKSingleton.sharedInstance.userId.isBlank {
+                        // changed new GPSStatus checkin
+                        BlueDolphinManager.manager.toSendGPSStateCheckins(currentStatus: ProjectSingleton.sharedInstance.locationAvailable)
+                    //}
+
                      NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: userInfo)
                     completionHandler(.newData)
 
@@ -367,9 +391,10 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                 
             }
             //
+            completionHandler(UIBackgroundFetchResult.newData)
+
             
         }
-        completionHandler(UIBackgroundFetchResult.newData)
         
         
     }

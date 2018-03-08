@@ -495,7 +495,6 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk13UserDataModel")
 @interface UserDataModel : NSObject
 + (void)userSignUpWithParam:(NSDictionary<NSString *, id> * _Nonnull)param completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 + (void)updateUserWithParam:(NSDictionary<NSString *, id> * _Nonnull)param completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
-+ (void)createUserDataWithUserObject:(NSDictionary<NSString *, NSString *> * _Nonnull)userObject;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

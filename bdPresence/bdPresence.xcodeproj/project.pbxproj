@@ -71,8 +71,8 @@
 		99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C91EFBCB840022AF61 /* SuperViewController.swift */; };
 		99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */; };
 		99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */; };
-		C845437D204EDB1C00CC05E9 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C845437B204EDB0800CC05E9 /* BluedolphinCloudSdk.framework */; };
-		C845437E204EDB1C00CC05E9 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C845437B204EDB0800CC05E9 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C83C008320516E52003F300E /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83C008120516E4B003F300E /* BluedolphinCloudSdk.framework */; };
+		C83C008420516E52003F300E /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C83C008120516E4B003F300E /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D8C205C7086D060A42B8A17C /* Pods_bdPresenceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EE7A650801BE90DFD757D6 /* Pods_bdPresenceTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,13 +94,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C8C35556204EA009004A69A3 /* Embed Frameworks */ = {
+		C83C005820514431003F300E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C845437E204EDB1C00CC05E9 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				C83C008420516E52003F300E /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,7 +186,7 @@
 		99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCheckoutViewController.swift; sourceTree = "<group>"; };
 		9E064E113D673F4D27DE4C78 /* Pods-bdPresence.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.debug.xcconfig"; sourceTree = "<group>"; };
 		A084A320988D78FF201876B4 /* Pods-bdPresenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		C845437B204EDB0800CC05E9 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		C83C008120516E4B003F300E /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		F6E9FC10420409BA083F7821 /* Pods-bdPresence.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -195,7 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C845437D204EDB1C00CC05E9 /* BluedolphinCloudSdk.framework in Frameworks */,
+				C83C008320516E52003F300E /* BluedolphinCloudSdk.framework in Frameworks */,
 				42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,7 +251,7 @@
 		99BD39951EA49B7100B6942B = {
 			isa = PBXGroup;
 			children = (
-				C845437B204EDB0800CC05E9 /* BluedolphinCloudSdk.framework */,
+				C83C008120516E4B003F300E /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD399F1EA49B7100B6942B /* Products */,
 				C651DF381E775D951C454493 /* Pods */,
@@ -399,7 +399,7 @@
 				BE12DAB159A486021F77D987 /* [CP] Embed Pods Frameworks */,
 				89B6EA88FBA43767DC8F52BF /* [CP] Copy Pods Resources */,
 				99F41E931EEFD70F00E01960 /* ShellScript */,
-				C8C35556204EA009004A69A3 /* Embed Frameworks */,
+				C83C005820514431003F300E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -960,6 +960,12 @@
 					"$(PROJECT_DIR)/bdAttendence",
 					"$(PROJECT_DIR)/ObjectMapper",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+				);
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -989,6 +995,12 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/bdAttendence",
 					"$(PROJECT_DIR)/ObjectMapper",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 				);
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
