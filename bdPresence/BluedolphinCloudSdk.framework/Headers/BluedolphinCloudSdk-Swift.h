@@ -279,10 +279,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BlueDolphinM
 - (void)postTransientCheckinWithMetaInfo:(NSDictionary<NSString *, id> * _Nonnull)metaInfo;
 - (void)getNearByBeaconsWithCompletion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 - (void)startScanningWithCompletion:(void (^ _Nonnull)(BOOL))completion;
+- (void)stopScanning;
 - (void)updateToken;
 - (void)stopLocationMonitoring;
 - (void)startLocationMonitoring;
-- (void)stopScanning;
 - (void)sendCheckinsWithArray:(NSArray * _Nonnull)array;
 - (void)gpsAuthorizationStatusWithGpsStatus:(void (^ _Nonnull)(CLAuthorizationStatus))gpsStatus;
 - (void)bluetoothEnabledWithCompletion:(void (^ _Nonnull)(BOOL))completion;

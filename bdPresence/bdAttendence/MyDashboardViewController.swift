@@ -117,8 +117,12 @@ class MyDashboardViewController: UIViewController {
           switch (sender.name.rawValue) {
           case LocalNotifcation.CheckoutScreen.rawValue:
             bdCloudStartMonitoring()
-            postDataCheckin(userInteraction: .swipeUp)
-            //checkSwipeUp()
+            if sender.userInfo != nil {
+                
+            } else {
+                self.postDataCheckin(userInteraction: .swipeUp)
+//                self.checkSwipeUp()
+            }
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
@@ -146,8 +150,11 @@ class MyDashboardViewController: UIViewController {
             UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
             UserDefaults.standard.synchronize()
             bdCloudStopMonitoring()
-            postDataCheckin(userInteraction: .swipeDown)
-            
+            if sender.userInfo != nil {
+                
+            } else {
+                self.postDataCheckin(userInteraction: .swipeDown)
+            }
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckin") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: -containerView.frame.size.height)

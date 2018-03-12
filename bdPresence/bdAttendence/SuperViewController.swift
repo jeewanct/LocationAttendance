@@ -122,7 +122,6 @@ class SuperViewController: UIViewController {
                             // Already swipedup
                             //start scanning
                             bdCloudStartMonitoring()
-                            //bdScanningStart()
                         } else if screenFlag == "2" {
                             // automatic checkin function
                             appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
@@ -133,7 +132,6 @@ class SuperViewController: UIViewController {
                             appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
                             
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
-                            //                            bdScanningStart()
                         }
                     } else {
                         appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
