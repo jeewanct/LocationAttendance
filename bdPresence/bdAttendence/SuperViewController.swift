@@ -394,7 +394,7 @@ extension SuperViewController{
         BlueDolphinManager.manager.toSendGPSStateCheckins(currentStatus: ProjectSingleton.sharedInstance.locationAvailable)
         
         /*
-        var previousGpsStatus : Bool!
+        var previousGpsStatus : Bool! 
         if let tempGpsStatus = UserDefaults.standard.value(forKey: PREVIOUSGPSSTATUS) as? Bool  {
            previousGpsStatus = tempGpsStatus
         }

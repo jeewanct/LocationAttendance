@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        setCheckinInteral(val: 300)
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
-        ConfigurationModel.stopDebugging(flag: false)
+        ConfigurationModel.stopDebugging(flag: true)
         ConfigurationModel.setCheckinInteral(val: 300)
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         UIDevice.current.isBatteryMonitoringEnabled = true
         registerForRemoteNotification()
-        //updateRealmConfiguration()
+        updateRealmConfiguration()
         
         //Adding a Defaults value which will show gpsCheckinSendStatus
         // And it should be set here on first launch of app
@@ -248,32 +248,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-//    func updateRealmConfiguration(){
-//        let config =     Realm.Configuration(
-//            // Set the new schema version. This must be greater than the previously used
-//            // version (if you've never set a schema version before, the version is 0).
-//            schemaVersion: 4,
-//
-//            // Set the block which will be called automatically when opening a Realm with
-//            // a schema version lower than the one set above
-//            migrationBlock: { migration, oldSchemaVersion in
-//
-//                if oldSchemaVersion < 4 {
-//                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
-//
-//                    }
-//                    migration.enumerateObjects(ofType: AccessTokenObject.className()) { oldObject, newObject in
-//                    }
-//                    migration.enumerateObjects(ofType: RMCAssignmentObject.className()) { oldObject, newObject in
-//
-//                    }
-//
-//                }
-//        }
-//
-//        )
-//        Realm.Configuration.defaultConfiguration = config
-//    }
+    func updateRealmConfiguration(){
+        let config =     Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            schemaVersion: 4,
+
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+
+                if oldSchemaVersion < 4 {
+                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
+
+                    }
+                    migration.enumerateObjects(ofType: AccessTokenObject.className()) { oldObject, newObject in
+                    }
+                    migration.enumerateObjects(ofType: RMCAssignmentObject.className()) { oldObject, newObject in
+
+                    }
+
+                }
+        }
+
+        )
+        Realm.Configuration.defaultConfiguration = config
+    }
 }
 
 
@@ -353,8 +353,12 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                         BlueDolphinManager.manager.toSendGPSStateCheckins(currentStatus: ProjectSingleton.sharedInstance.locationAvailable)
                     //}
 
-                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: userInfo)
+                    let superControllerObj = SuperViewController()
+                    superControllerObj.wakeUpCall(notify: NotifyingFrom.SilentPush)
+                    //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: nil)
                     completionHandler(.newData)
+//                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: userInfo)
+//                    completionHandler(.newData)
 
                 }
             }

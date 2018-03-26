@@ -486,6 +486,16 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk9RMCPhotos")
 @end
 
 
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk7RMCUser")
+@interface RMCUser : RealmSwiftObject
++ (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 @interface UIDevice (SWIFT_EXTENSION(BluedolphinCloudSdk))
 @property (nonatomic, readonly, copy) NSString * _Nonnull modelName;
 @end
