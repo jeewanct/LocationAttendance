@@ -36,14 +36,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        setCheckinInteral(val: 300)
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
-        ConfigurationModel.stopDebugging(flag: true)
+        ConfigurationModel.stopDebugging(flag: false)
         ConfigurationModel.setCheckinInteral(val: 300)
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
         //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
         #if DEBUG
-            ConfigurationModel.setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
-            print("https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
+            ConfigurationModel.setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            print("https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         #else
             ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
             print("https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")

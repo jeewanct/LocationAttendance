@@ -61,6 +61,7 @@ class NewOtpViewController: UIViewController {
                                               "mobile":mobileNumber as AnyObject,
                                               "otpToken":otpToken as AnyObject,
                                               "deviceType":"ios" as AnyObject,
+                                              "appName":"BDPresence" as AnyObject,
                                               "deviceToken":deviceToken as AnyObject,
                                               "imeiId":SDKSingleton.sharedInstance.DeviceUDID as AnyObject,
                                               "appId":appIdentifier as AnyObject
