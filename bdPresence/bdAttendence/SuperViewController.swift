@@ -476,6 +476,7 @@ extension SuperViewController{
                             }
                         }
                     } else{
+                        //this will executed once
                         let checkin = CheckinHolder()
                         
                         checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]

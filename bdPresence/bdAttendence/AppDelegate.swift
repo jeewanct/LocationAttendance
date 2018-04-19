@@ -36,27 +36,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        setCheckinInteral(val: 300)
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
-        ConfigurationModel.stopDebugging(flag: false)
+        ConfigurationModel.stopDebugging(flag: true)
         ConfigurationModel.setCheckinInteral(val: 300)
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
         //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
         #if DEBUG
-            ConfigurationModel.setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
             print("https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         #else
             ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
             print("https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+            Fabric.with([Crashlytics.self])
+
         #endif
         
 //        #if DEBUG
 //            setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
 //        #endif
-        #if DEBUG
-            
-            #else
-            Fabric.with([Crashlytics.self])
-        #endif
+      
         IQKeyboardManager.sharedManager().enable = true
         UIDevice.current.isBatteryMonitoringEnabled = true
         registerForRemoteNotification()
@@ -355,7 +353,11 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
 
                     let superControllerObj = SuperViewController()
                     superControllerObj.wakeUpCall(notify: NotifyingFrom.SilentPush)
-                    //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: nil)
+                    //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: nil)
+                    // Adding post checkin on arrival of wakeupcall too
+                    if isInternetAvailable(){
+                        CheckinModel.postCheckin()
+                    }
                     completionHandler(.newData)
 //                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: userInfo)
 //                    completionHandler(.newData)
