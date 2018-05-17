@@ -42,8 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
         //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
         #if DEBUG
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
-            print("https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            //ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+
         #else
             ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
             print("https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
