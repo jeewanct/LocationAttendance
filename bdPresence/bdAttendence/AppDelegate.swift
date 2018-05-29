@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*
          Don't config until the location is on
         */
+        ConfigurationModel.stopDebugging(flag: true)
+
         BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         print(APPVERSION)
@@ -36,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        setCheckinInteral(val: 300)
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
-        ConfigurationModel.stopDebugging(flag: false)
         ConfigurationModel.setCheckinInteral(val: 300)
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
