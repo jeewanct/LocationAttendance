@@ -284,6 +284,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BlueDolphinM
 - (void)gpsAuthorizationStatusWithGpsStatus:(void (^ _Nonnull)(CLAuthorizationStatus))gpsStatus;
 - (void)bluetoothEnabledWithCompletion:(void (^ _Nonnull)(BOOL))completion;
 - (void)toSendGPSStateCheckinsWithCurrentStatus:(BOOL)currentStatus;
+- (void)toSendBluetoothStateCheckinsWithCurrentStatus:(BOOL)currentStatus;
+- (NSInteger)getBeaconDataCount SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -455,7 +457,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10RMCDObject")
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk17RMCDObjectManager")
 @interface RMCDObjectManager : NSObject
 + (void)getDObjectsDetailsWithCompletion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
-+ (void)updateDOBject;
++ (void)updateDOBjectWithObjectId:(NSString * _Nonnull)objectId;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

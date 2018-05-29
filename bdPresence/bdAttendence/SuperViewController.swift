@@ -168,17 +168,9 @@ class SuperViewController: UIViewController {
                     
                 } else if tempNotifier["message"] as! String == notifyUserResponse.noShiftToday.rawValue {
                     print("noshifttoday")
-                    //                    //no data checkin
-                    //                    UI {
-                    //                        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                    //
-                    //                        bdScanningStop()
-                    //
-                    //                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: nil)
-                    //
-                    //                        appDelegate.toShowLocalNotification(message: "Looks like you're out of office. Time to relax!")
-                    //
-                    //                    }
+                    // In any case if this calls then i have to show no shift today and stop monitorig
+                    bdCloudStopMonitoring()
+                    
                 }
                 
             }
