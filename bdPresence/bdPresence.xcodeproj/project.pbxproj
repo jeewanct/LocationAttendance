@@ -73,6 +73,7 @@
 		99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */; };
 		C80B4E7A205659C40069A1CC /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C80B4E78205659B70069A1CC /* BluedolphinCloudSdk.framework */; };
 		C80B4E7B205659C40069A1CC /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C80B4E78205659B70069A1CC /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C89A35D320C16AC7000D5FFD /* BackgroundDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */; };
 		D8C205C7086D060A42B8A17C /* Pods_bdPresenceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EE7A650801BE90DFD757D6 /* Pods_bdPresenceTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -187,6 +188,7 @@
 		9E064E113D673F4D27DE4C78 /* Pods-bdPresence.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.debug.xcconfig"; sourceTree = "<group>"; };
 		A084A320988D78FF201876B4 /* Pods-bdPresenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C80B4E78205659B70069A1CC /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDebug.swift; sourceTree = "<group>"; };
 		F6E9FC10420409BA083F7821 /* Pods-bdPresence.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -322,6 +324,7 @@
 				996953201F13BC25000A6C26 /* Broadcaster.swift */,
 				9974903A1F0CFC0600AC92B9 /* CorouselEffect.swift */,
 				99F84C151F2877D200D6AE44 /* CircleView.swift */,
+				C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 				996953231F149A7A000A6C26 /* CheckinView.swift in Sources */,
 				999D300B1F17A57F0073AEEA /* MyDashboardViewController.swift in Sources */,
 				99F07F561F57D95F000B4967 /* ErrorScanView.swift in Sources */,
+				C89A35D320C16AC7000D5FFD /* BackgroundDebug.swift in Sources */,
 				9900891B1F4419D200CED97E /* ProfileViewController.swift in Sources */,
 				99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */,
 				99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */,

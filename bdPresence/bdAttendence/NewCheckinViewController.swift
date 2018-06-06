@@ -35,7 +35,8 @@ class NewCheckinViewController: UIViewController {
     }
 
     func handleGesture(sender:UIGestureRecognizer){
-       
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
+        UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
         UserDefaults.standard.synchronize()
        

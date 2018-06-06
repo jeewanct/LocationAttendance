@@ -25,20 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*
          Don't config until the location is on
         */
+        #if DEBUG
+        ConfigurationModel.stopDebugging(flag: false)
+        #else
         ConfigurationModel.stopDebugging(flag: true)
-
-        BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
-        APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
-        print(APPVERSION)
+        #endif
         appIdentifier = Bundle.main.bundleIdentifier!
-//        setBundleId(id: appIdentifier)
-//        setCheckinGap(val: 3600)
-//        setAppVersion(appVersion: APPVERSION)
-//        stopDebugging(flag: true)
-//        setCheckinInteral(val: 300)
+        APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
-        ConfigurationModel.setCheckinInteral(val: 300)
+        ConfigurationModel.setCheckinInteral(val: 600)
+        print(APPVERSION)
+        BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
+        
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
         //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
@@ -64,7 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Adding a Defaults value which will show gpsCheckinSendStatus
         // And it should be set here on first launch of app
-        
+        if !SDKSingleton.sharedInstance.userId.isBlank {
+            if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
+                BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
+                BlueDolphinManager.manager.startLocationMonitoring()
+            }
+        }
+
         startUpTask()
         return true
     }
@@ -280,6 +285,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate:UNUserNotificationCenterDelegate{
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("userInfo sourabh = \(userInfo)")
+        BackgroundDebug().write(string: "didReceiveRemoteNotification- SilentPush")
+
         let state: UIApplicationState = application.applicationState
        
         UI {
@@ -353,13 +360,33 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                         BlueDolphinManager.manager.toSendGPSStateCheckins(currentStatus: ProjectSingleton.sharedInstance.locationAvailable)
                     //}
 
-                    let superControllerObj = SuperViewController()
-                    superControllerObj.wakeUpCall(notify: NotifyingFrom.SilentPush)
-                    //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: nil)
-                    // Adding post checkin on arrival of wakeupcall too
-                    if isInternetAvailable(){
-                        CheckinModel.postCheckin()
+                    if let lastScannedTime = UserDefaults.standard.value(forKey: "LastLocationUpdate") as? Date {
+                        if Date().secondsFrom(lastScannedTime) > 420 {
+                            let superControllerObj = SuperViewController()
+                            superControllerObj.wakeUpCall(notify: NotifyingFrom.SilentPush)
+                            //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: nil)
+                            // Adding post checkin on arrival of wakeupcall too
+                            if isInternetAvailable(){
+                                CheckinModel.postCheckin()
+                            }
+                        } else {
+                            // Dont Scan
+                            print("Dont scan before 7 minutes")
+                        }
+                        
+                    } else {
+                        UserDefaults.standard.set(Date(), forKey: "LastLocationUpdate")
+                        print("Location update Started")
+                        let superControllerObj = SuperViewController()
+                        superControllerObj.wakeUpCall(notify: NotifyingFrom.SilentPush)
+                        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: nil)
+                        // Adding post checkin on arrival of wakeupcall too
+                        if isInternetAvailable(){
+                            CheckinModel.postCheckin()
+                        }
+                        
                     }
+                    
                     completionHandler(.newData)
 //                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: userInfo)
 //                    completionHandler(.newData)

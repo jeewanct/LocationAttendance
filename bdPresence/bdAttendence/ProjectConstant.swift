@@ -11,7 +11,7 @@ import UIKit
 
 var APPVERSION = "1.3.1"
 let APPNAME = "BD Field Force"
-var appIdentifier = "com.raremedia.bdAttendence"
+var appIdentifier = "com.raremedia.bdPresence"
 let AppstoreURL = "https://itunes.apple.com/us/app/bd-field-force/id1292604414?ls=1&mt=8"
 let supportEmail = "support@raremediacompany.in"
 let supportAddress = "G-84 Outer Circle, Connaught Place, Delhi"

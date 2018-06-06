@@ -171,6 +171,8 @@ class SuperViewController: UIViewController {
                     // In any case if this calls then i have to show no shift today and stop monitorig
                     bdCloudStopMonitoring()
                     
+                } else if tempNotifier["message"] as! String == notifyUserResponse.manualSwipeStateChangedToday.rawValue {
+                    print("Do nothing")
                 }
                 
             }
@@ -285,7 +287,7 @@ extension SuperViewController{
         }
         if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
             if screenFlag == "1"{
-
+                
                 bdCloudStartMonitoring()
             }
             
@@ -453,7 +455,7 @@ extension SuperViewController{
                
                     if let lastLocationCheckin = UserDefaults.standard.value(forKeyPath: UserDefaultsKeys.LastLocationCheckinTime.rawValue) as? Date {
                         print( "Difference last \(lastLocationCheckin.minuteFrom(Date()))")
-                        if Date().secondsFrom(lastLocationCheckin) > 300{
+                        if Date().secondsFrom(lastLocationCheckin) > CONFIG.CHECKININTERVAL{
                             let checkin = CheckinHolder()
                             
                             checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]

@@ -31,6 +31,7 @@ class NewCheckoutViewController: UIViewController {
     var swipedown :UISwipeGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -53,6 +54,7 @@ class NewCheckoutViewController: UIViewController {
         lastCheckinLabel.font = APPFONT.DAYHOURTEXT
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
         swipedown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipedown?.direction = .down
         let shiftDetails = ShiftHandling.getShiftDetail()
@@ -79,11 +81,15 @@ class NewCheckoutViewController: UIViewController {
 //        }
         
     }
-    
+    func updateAddress(sender: NSNotification) {
+        DispatchQueue.main.async {
+            self.lastCheckinAddressLabel.text = CurrentLocation.address
+        }
+    }
     
     func updateTime(sender:NSNotification){
         updateView()
-        
+       
         
         //processCurrentWeek()
         
@@ -130,6 +136,7 @@ class NewCheckoutViewController: UIViewController {
 //        }
     func handleGesture(sender:UIGestureRecognizer){
         //print(dataArray)
+
         if let swipeGesture = sender as? UISwipeGestureRecognizer {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:

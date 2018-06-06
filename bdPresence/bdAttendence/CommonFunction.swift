@@ -62,8 +62,11 @@ func sendToServer(){
 }
 
 func bdCloudStartMonitoring(){
+    // putting a delay to start location monitoring
+    // Sourabh - changed on 31/05/2018
     BlueDolphinManager.manager.stopLocationMonitoring()
     BlueDolphinManager.manager.startLocationMonitoring()
+
 }
 
 func bdCloudStopMonitoring(){
