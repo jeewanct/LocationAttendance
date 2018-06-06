@@ -251,7 +251,7 @@ class MyDashboardViewController: UIViewController {
     
 }
 
-extension MyDashboardViewController:CheckinViewDelegate {
+extension MyDashboardViewController: CheckinViewDelegate {
     func updateView(moveToView: Screen) {
         switch moveToView {
         case .Timer:

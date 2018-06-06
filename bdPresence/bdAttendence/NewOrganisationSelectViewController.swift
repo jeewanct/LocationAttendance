@@ -60,8 +60,19 @@ class NewOrganisationSelectViewController: UIViewController {
             UserDefaults.standard.set(orgId, forKey: UserDefaultsKeys.organizationId.rawValue)
             UserDefaults.standard.synchronize()
             getUserData()
-            let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-            UIApplication.shared.keyWindow?.rootViewController = destVC
+            
+            AlertView.sharedInstance.showActivityIndicator(self.view)
+            if isInternetAvailable(){
+                checkShiftStatus { (apiResultStatus) in
+                    AlertView.sharedInstance.hideActivityIndicator(self.view)
+                    if apiResultStatus == APIResult.Success {
+                        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+                        UIApplication.shared.keyWindow?.rootViewController = destVC
+                    }
+                }
+                
+            }
+            
         }
        
         

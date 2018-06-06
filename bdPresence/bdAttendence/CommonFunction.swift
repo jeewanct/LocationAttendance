@@ -82,7 +82,7 @@ func isShiftEnd(time:String)->Bool{
     return false
     
 }
-func checkShiftStatus(){
+func checkShiftStatus(completion : @escaping (APIResult) -> ()){
     
     UserDeviceModel.getDObjectsShift { (status) in
         switch (status){
@@ -96,21 +96,28 @@ func checkShiftStatus(){
             if let value = UserDefaults.standard.value(forKey: UserDefaultsKeys.BDShiftId.rawValue) as? String{
                 SDKSingleton.sharedInstance.shiftId = value
             }
+            completion(.Success)
             break
             
         case APIResult.InvalidCredentials.rawValue:
+            completion(.InvalidCredentials)
             break
             //self.showAlert(ErrorMessage.UserNotFound.rawValue)
             
         case APIResult.InternalServer.rawValue:
+            completion(.InternalServer)
             break
             //self.showAlert(ErrorMessage.InternalServer.rawValue)
             
             
         case APIResult.InvalidData.rawValue:
+            completion(.InvalidData)
+
             break
         //self.showAlert(ErrorMessage.NotValidData.rawValue)
         default:
+            completion(.NoInternetConnection)
+
             break
             
         }

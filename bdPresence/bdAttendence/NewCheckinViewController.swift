@@ -29,8 +29,6 @@ class NewCheckinViewController: UIViewController {
         quoteLabel.font = APPFONT.PERMISSIONBODY
         swipeLabel.font = APPFONT.FOOTERBODY
         
-        
-       
         // Do any additional setup after loading the view.
     }
 
@@ -39,8 +37,26 @@ class NewCheckinViewController: UIViewController {
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
         UserDefaults.standard.synchronize()
-       
-         NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)
+//        if isAppAlreadyLaunchedOnce() {
+//            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
+//            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
+//            UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+//            UserDefaults.standard.synchronize()
+//
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)
+//        } else {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+//                UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
+//                UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
+//                UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+//                UserDefaults.standard.synchronize()
+//
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)
+//            }
+//        }
+        
         
         
 //       let controller = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as? UINavigationController

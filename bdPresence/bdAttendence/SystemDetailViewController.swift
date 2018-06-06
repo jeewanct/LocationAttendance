@@ -44,7 +44,18 @@ class SystemDetailViewController: UIViewController {
         if isInternetAvailable(){
             
             CheckinModel.postCheckin()
-            checkShiftStatus()
+            AlertView.sharedInstance.showActivityIndicator(self.view)
+            if isInternetAvailable(){
+                checkShiftStatus { (apiResultStatus) in
+                    AlertView.sharedInstance.hideActivityIndicator(self.view)
+                    if apiResultStatus == APIResult.Success {
+                        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+                        UIApplication.shared.keyWindow?.rootViewController = destVC
+                    }
+                }
+                
+            }
+//            checkShiftStatus()
             
             //Sourabh - Forcefully updating access token
             

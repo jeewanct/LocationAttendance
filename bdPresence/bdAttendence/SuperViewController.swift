@@ -46,10 +46,11 @@ class SuperViewController: UIViewController {
             self.window!.rootViewController = self
         }
         
-        if isInternetAvailable(){
-            checkShiftStatus()
-            
-        }
+        //06/06/2018 - Sourabh
+//        if isInternetAvailable(){
+//            checkShiftStatus()
+//            
+//        }
         
         //setObservers()
         //Adding Check blocker to solve a bug when permission is denied at first time
