@@ -92,7 +92,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
         
-        
+        if !SDKSingleton.sharedInstance.userId.isBlank{
+            if isInternetAvailable() {
+                CheckinModel.postCheckin()
+            }
+            
+        }
         
     }
     
@@ -104,6 +109,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        if !SDKSingleton.sharedInstance.userId.isBlank{
+            if isInternetAvailable() {
+                CheckinModel.postCheckin()
+            }
+            
+        }
     }
     
     
@@ -246,16 +257,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 4,
+            schemaVersion: 5,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
 
-                if oldSchemaVersion < 4 {
-                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
-
-                    }
+                if oldSchemaVersion < 5 {
+//                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
+//
+//                    }
                     migration.enumerateObjects(ofType: AccessTokenObject.className()) { oldObject, newObject in
                     }
                     migration.enumerateObjects(ofType: RMCAssignmentObject.className()) { oldObject, newObject in

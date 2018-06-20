@@ -447,6 +447,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10RMCDObject")
 @property (nonatomic, copy) NSString * _Nullable dObjectId;
 @property (nonatomic, copy) NSString * _Nullable dObjectDetails;
 @property (nonatomic) BOOL isUploaded;
++ (NSString * _Nonnull)primaryKey SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
@@ -456,7 +457,9 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10RMCDObject")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk17RMCDObjectManager")
 @interface RMCDObjectManager : NSObject
-+ (void)getDObjectsDetailsWithCompletion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)getDObjectsDetailsWithOrderId:(NSString * _Nonnull)orderId philipsObjectID:(NSString * _Nonnull)philipsObjectID completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (RMCDObject * _Nullable)getDObjectFromDBWithDobjectId:(NSString * _Nonnull)dobjectId SWIFT_WARN_UNUSED_RESULT;
++ (void)saveDobjectInDBWithDObjectDetails:(NSDictionary * _Nonnull)dObjectDetails dobjectId:(NSString * _Nonnull)dobjectId;
 + (void)updateDOBjectWithObjectId:(NSString * _Nonnull)objectId;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end

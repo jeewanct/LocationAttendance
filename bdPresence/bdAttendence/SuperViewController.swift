@@ -126,6 +126,10 @@ class SuperViewController: UIViewController {
                         } else if screenFlag == "2" {
                             // automatic checkin function
                             appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
+                            // New change - 20/06/2018
+                            //Here we have to send one location checkin also
+                            bdCloudStartMonitoring()
+                            
                             //then set defaults value to 1
                             // sending userinfo which will tell dashboard to work accordingly
                             // with the userinfo will tell which type of chekin to be sent and do not check for blocker screen
@@ -154,7 +158,10 @@ class SuperViewController: UIViewController {
                             
                             UI {
                                 UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                                
+                                // New change on 20/06/2018 to create one checkin
+                                if isInternetAvailable(){
+                                    CheckinModel.postCheckin()
+                                }
                                 bdCloudStopMonitoring()
                                 appDelegate.toShowLocalNotification(message: "Looks like you're out of office. Time to relax!")
                                 
@@ -301,7 +308,7 @@ extension SuperViewController{
         let state = UIApplication.shared.applicationState
         if state == .background {
             let notification = UILocalNotification()
-            notification.fireDate = NSDate(timeIntervalSinceNow: 10) as Date
+            notification.fireDate = NSDate(timeIntervalSinceNow: 5) as Date
             notification.alertBody = NotificationMessage.AttendanceMarked.rawValue + "\(Date().formatted)"
             notification.soundName = UILocalNotificationDefaultSoundName
             notification.userInfo = ["notificationType": "FirstCheckin"]
