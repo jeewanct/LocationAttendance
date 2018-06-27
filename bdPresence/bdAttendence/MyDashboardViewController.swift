@@ -205,6 +205,7 @@ class MyDashboardViewController: UIViewController {
         }
         
     }
+    
     func showErrorCustomView(){
        
          errorView = ErrorScanView(frame: self.view.frame)

@@ -15,6 +15,8 @@ class NewCheckinViewController: UIViewController {
     @IBOutlet weak var swipeLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -37,7 +39,7 @@ class NewCheckinViewController: UIViewController {
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
         UserDefaults.standard.synchronize()
-        
+        print("In handleGesture NewCheckinViewController")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)
 //        if isAppAlreadyLaunchedOnce() {
 //            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)

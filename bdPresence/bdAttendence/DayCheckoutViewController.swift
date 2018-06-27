@@ -30,6 +30,8 @@ class DayCheckoutViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     func handleGesture(sender:UIGestureRecognizer){
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
+        UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
         UserDefaults.standard.synchronize()
        

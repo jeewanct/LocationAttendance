@@ -43,18 +43,55 @@ class SystemDetailViewController: UIViewController {
     func sync(sender:UIBarButtonItem){
         if isInternetAvailable(){
             
-            CheckinModel.postCheckin()
-            AlertView.sharedInstance.showActivityIndicator(self.view)
-            if isInternetAvailable(){
+            if let lastManualSync = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastManualSync.rawValue) as? Date {
+                let interval = Date().timeIntervalSince(lastManualSync)
+                print(interval)
+                if interval > 120 {
+                    AlertView.sharedInstance.setLabelText("Syncing started...")
+                    AlertView.sharedInstance.showActivityIndicator(self.view)
+                    CheckinModel.postCheckin()
+                    checkShiftStatus { (apiResultStatus) in
+                        AlertView.sharedInstance.hideActivityIndicator(self.view)
+                        if apiResultStatus == APIResult.Success {
+                            self.updateData()
+                        }
+                    }
+                    
+                } else {
+                }
+            }else {
+                AlertView.sharedInstance.setLabelText("Syncing started...")
+                AlertView.sharedInstance.showActivityIndicator(self.view)
+                UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastManualSync.rawValue)
+                // No last beacon checkin as Date
+                CheckinModel.postCheckin()
+                
                 checkShiftStatus { (apiResultStatus) in
                     AlertView.sharedInstance.hideActivityIndicator(self.view)
                     if apiResultStatus == APIResult.Success {
-                        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                        UIApplication.shared.keyWindow?.rootViewController = destVC
+                        self.updateData()
                     }
                 }
                 
             }
+            
+            
+            
+            
+//            CheckinModel.postCheckin()
+//            AlertView.sharedInstance.setLabelText("Syncing ...")
+//            AlertView.sharedInstance.showActivityIndicator(self.view)
+//            if isInternetAvailable(){
+//                checkShiftStatus { (apiResultStatus) in
+//                    AlertView.sharedInstance.hideActivityIndicator(self.view)
+//                    if apiResultStatus == APIResult.Success {
+//
+//                        //let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+//                        //UIApplication.shared.keyWindow?.rootViewController = destVC
+//                    }
+//                }
+//
+//            }
 //            checkShiftStatus()
             
             //Sourabh - Forcefully updating access token
@@ -119,7 +156,9 @@ class SystemDetailViewController: UIViewController {
             systemDetail.append(detail)
             
         }
-        systemTableview.reloadData()
+        DispatchQueue.main.async {
+            self.systemTableview.reloadData()
+        }
     }
     
     func menuAction(sender:UIBarButtonItem){
