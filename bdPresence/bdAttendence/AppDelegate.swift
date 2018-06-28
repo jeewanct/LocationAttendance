@@ -25,32 +25,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*
          Don't config until the location is on
         */
-        #if DEBUG
-        ConfigurationModel.stopDebugging(flag: false)
-        #else
-        ConfigurationModel.stopDebugging(flag: true)
-        #endif
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
         ConfigurationModel.setCheckinInteral(val: 600)
-        print(APPVERSION)
+        print("appversion = \(APPVERSION)")
+        switch(ReleaseType.currentConfiguration()) {
+        case .Debug:
+            ConfigurationModel.stopDebugging(flag: false)
+            print("In Debug")
+            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+        case .Alpha:
+            ConfigurationModel.stopDebugging(flag: false)
+            print("In Alpha")
+            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            Fabric.with([Crashlytics.self])
+        case .Release:
+            print("In Release")
+            ConfigurationModel.stopDebugging(flag: true)
+            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+            Fabric.with([Crashlytics.self])
+        case .Unknown:
+            print("In unknown")
+            break
+        }
+        
         BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
         //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
-        #if DEBUG
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
-            //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-
-        #else
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
-            print("https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
-            Fabric.with([Crashlytics.self])
-
-        #endif
+//        #if DEBUG
+//            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+//            //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+//
+//        #else
+//            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+//            print("https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+//            Fabric.with([Crashlytics.self])
+//
+//        #endif
         
 //        #if DEBUG
 //            setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")

@@ -262,6 +262,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10BeaconData")
 - (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class BluedolphinLocationManager;
 @class NSMutableDictionary;
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk18BlueDolphinManager")
@@ -269,6 +270,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk18BlueDolphinManager")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BlueDolphinManager * _Nonnull manager;)
 + (BlueDolphinManager * _Nonnull)manager SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, copy) NSString * _Nonnull emailId;
+@property (nonatomic, strong) BluedolphinLocationManager * _Null_unspecified bluedolphinLocationManager;
 @property (nonatomic, strong) NSMutableDictionary * _Nonnull seanbeacons;
 - (void)initializeWithSecretKey:(NSString * _Nullable)secretKey organizationId:(NSString * _Nullable)organizationId email:(NSString * _Nullable)email firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName metaInfo:(NSDictionary * _Nullable)metaInfo;
 - (void)setConfigWithSecretKey:(NSString * _Nonnull)secretKey organizationId:(NSString * _Nonnull)organizationId;
@@ -287,6 +289,28 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BlueDolphinM
 - (void)toSendBluetoothStateCheckinsWithCurrentStatus:(BOOL)currentStatus;
 - (NSInteger)getBeaconDataCount SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class CLLocationManager;
+@class CLLocation;
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk26BluedolphinLocationManager")
+@interface BluedolphinLocationManager : NSObject <CLLocationManagerDelegate>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) BluedolphinLocationManager * _Nonnull sharedInstance;)
++ (BluedolphinLocationManager * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
++ (void)setSharedInstance:(BluedolphinLocationManager * _Nonnull)value;
+@property (nonatomic, readonly) CLLocationAccuracy acceptableLocationAccuracy;
+@property (nonatomic, readonly) NSTimeInterval checkLocationInterval;
+@property (nonatomic, readonly) BOOL isRunning;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)requestAlwaysAuthorization;
+- (void)startUpdatingLocationWithInterval:(NSTimeInterval)interval acceptableLocationAccuracy:(CLLocationAccuracy)acceptableLocationAccuracy;
+- (void)stopUpdatingLocation;
+- (void)startLocationManager;
+- (void)stopLocationManager;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didFailWithError:(NSError * _Nonnull)error;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
 @end
 
 

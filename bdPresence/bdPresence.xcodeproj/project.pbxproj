@@ -74,6 +74,7 @@
 		C80B4E7A205659C40069A1CC /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C80B4E78205659B70069A1CC /* BluedolphinCloudSdk.framework */; };
 		C80B4E7B205659C40069A1CC /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C80B4E78205659B70069A1CC /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C89A35D320C16AC7000D5FFD /* BackgroundDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */; };
+		C8CBF8D420E3CB4A00D84C89 /* ReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CBF8D320E3CB4A00D84C89 /* ReleaseType.swift */; };
 		D8C205C7086D060A42B8A17C /* Pods_bdPresenceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EE7A650801BE90DFD757D6 /* Pods_bdPresenceTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -187,8 +188,12 @@
 		99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCheckoutViewController.swift; sourceTree = "<group>"; };
 		9E064E113D673F4D27DE4C78 /* Pods-bdPresence.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.debug.xcconfig"; sourceTree = "<group>"; };
 		A084A320988D78FF201876B4 /* Pods-bdPresenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BF9692C2CF1E754CA931DA3B /* Pods-bdPresenceTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.alpha.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.alpha.xcconfig"; sourceTree = "<group>"; };
+		C1DDC1645746106604EC0F12 /* Pods-bdPresence.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.alpha.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.alpha.xcconfig"; sourceTree = "<group>"; };
 		C80B4E78205659B70069A1CC /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDebug.swift; sourceTree = "<group>"; };
+		C8CBF8D320E3CB4A00D84C89 /* ReleaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseType.swift; sourceTree = "<group>"; };
+		DA2BA024D3A44C342A4D3FF6 /* Pods-bdPresenceUITests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.alpha.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.alpha.xcconfig"; sourceTree = "<group>"; };
 		F6E9FC10420409BA083F7821 /* Pods-bdPresence.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -325,6 +330,7 @@
 				9974903A1F0CFC0600AC92B9 /* CorouselEffect.swift */,
 				99F84C151F2877D200D6AE44 /* CircleView.swift */,
 				C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */,
+				C8CBF8D320E3CB4A00D84C89 /* ReleaseType.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -372,6 +378,9 @@
 				4109A7E8C6D948A14C0F47EE /* Pods-bdPresenceTests.release.xcconfig */,
 				A084A320988D78FF201876B4 /* Pods-bdPresenceUITests.debug.xcconfig */,
 				048969DA26B3EABDC293FB6D /* Pods-bdPresenceUITests.release.xcconfig */,
+				C1DDC1645746106604EC0F12 /* Pods-bdPresence.alpha.xcconfig */,
+				BF9692C2CF1E754CA931DA3B /* Pods-bdPresenceTests.alpha.xcconfig */,
+				DA2BA024D3A44C342A4D3FF6 /* Pods-bdPresenceUITests.alpha.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -400,7 +409,6 @@
 				99BD399B1EA49B7100B6942B /* Frameworks */,
 				99BD399C1EA49B7100B6942B /* Resources */,
 				BE12DAB159A486021F77D987 /* [CP] Embed Pods Frameworks */,
-				89B6EA88FBA43767DC8F52BF /* [CP] Copy Pods Resources */,
 				99F41E931EEFD70F00E01960 /* ShellScript */,
 				C83C005820514431003F300E /* Embed Frameworks */,
 			);
@@ -421,8 +429,6 @@
 				99BD39AE1EA49B7100B6942B /* Sources */,
 				99BD39AF1EA49B7100B6942B /* Frameworks */,
 				99BD39B01EA49B7100B6942B /* Resources */,
-				2098759FD002DE379B90FA62 /* [CP] Embed Pods Frameworks */,
-				06952792FBB71B0DF4C868DF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -442,8 +448,6 @@
 				99BD39B91EA49B7100B6942B /* Sources */,
 				99BD39BA1EA49B7100B6942B /* Frameworks */,
 				99BD39BB1EA49B7100B6942B /* Resources */,
-				DA83B8B837BDE9E6DFD1F5EC /* [CP] Embed Pods Frameworks */,
-				1C9BE1A7EE2BEF8A39E52B9F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -550,51 +554,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		06952792FBB71B0DF4C868DF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1C9BE1A7EE2BEF8A39E52B9F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2098759FD002DE379B90FA62 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		34D075C9EE995051E8CC0488 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -629,21 +588,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		89B6EA88FBA43767DC8F52BF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		99F41E931EEFD70F00E01960 /* ShellScript */ = {
@@ -711,21 +655,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DA83B8B837BDE9E6DFD1F5EC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -743,6 +672,7 @@
 				C89A35D320C16AC7000D5FFD /* BackgroundDebug.swift in Sources */,
 				9900891B1F4419D200CED97E /* ProfileViewController.swift in Sources */,
 				99BD39A41EA49B7100B6942B /* ViewController.swift in Sources */,
+				C8CBF8D420E3CB4A00D84C89 /* ReleaseType.swift in Sources */,
 				99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */,
 				9982469F1EDC4C57006CA0E4 /* ProjectSingleton.swift in Sources */,
 				99BD39A21EA49B7100B6942B /* AppDelegate.swift in Sources */,
@@ -957,8 +887,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				ENABLE_BITCODE = NO;
@@ -977,10 +907,11 @@
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DDEBUG $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdPresence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3b7e42ea-d582-4128-b182-d5f7b211896b";
-				PROVISIONING_PROFILE_SPECIFIER = BDPresenceAppstore;
+				PROVISIONING_PROFILE = "d0e9f13d-1c01-4194-9074-d224d6a6d460";
+				PROVISIONING_PROFILE_SPECIFIER = bdPresenceDev;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -994,8 +925,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				ENABLE_BITCODE = NO;
@@ -1014,10 +945,11 @@
 				INFOPLIST_FILE = bdAttendence/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DRELEASE $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdPresence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3b7e42ea-d582-4128-b182-d5f7b211896b";
-				PROVISIONING_PROFILE_SPECIFIER = BDPresenceAppstore;
+				PROVISIONING_PROFILE = "d0e9f13d-1c01-4194-9074-d224d6a6d460";
+				PROVISIONING_PROFILE_SPECIFIER = bdPresenceDev;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1099,6 +1031,137 @@
 			};
 			name = Release;
 		};
+		C83C150620E3A48F00E856AE /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mayank Saini (33HB2NJ63C)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
+				PROVISIONING_PROFILE = "1b1f92c3-ddd6-4b55-a55c-7d7c1c3db768";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Alpha;
+		};
+		C83C150720E3A48F00E856AE /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1DDC1645746106604EC0F12 /* Pods-bdPresence.alpha.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/bdAttendence",
+					"$(PROJECT_DIR)/ObjectMapper",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+				);
+				INFOPLIST_FILE = bdAttendence/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DALPHA $(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdPresence;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d0e9f13d-1c01-4194-9074-d224d6a6d460";
+				PROVISIONING_PROFILE_SPECIFIER = bdPresenceDev;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Alpha;
+		};
+		C83C150820E3A48F00E856AE /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF9692C2CF1E754CA931DA3B /* Pods-bdPresenceTests.alpha.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = bdAttendenceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rmc.bdAttendenceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bdPresence.app/bdPresence";
+			};
+			name = Alpha;
+		};
+		C83C150920E3A48F00E856AE /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA2BA024D3A44C342A4D3FF6 /* Pods-bdPresenceUITests.alpha.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = bdAttendenceUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rmc.bdAttendenceUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = bdAttendence;
+			};
+			name = Alpha;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1107,6 +1170,7 @@
 			buildConfigurations = (
 				99BD39C41EA49B7100B6942B /* Debug */,
 				99BD39C51EA49B7100B6942B /* Release */,
+				C83C150620E3A48F00E856AE /* Alpha */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1116,6 +1180,7 @@
 			buildConfigurations = (
 				99BD39C71EA49B7100B6942B /* Debug */,
 				99BD39C81EA49B7100B6942B /* Release */,
+				C83C150720E3A48F00E856AE /* Alpha */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1125,6 +1190,7 @@
 			buildConfigurations = (
 				99BD39CA1EA49B7100B6942B /* Debug */,
 				99BD39CB1EA49B7100B6942B /* Release */,
+				C83C150820E3A48F00E856AE /* Alpha */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1134,6 +1200,7 @@
 			buildConfigurations = (
 				99BD39CD1EA49B7100B6942B /* Debug */,
 				99BD39CE1EA49B7100B6942B /* Release */,
+				C83C150920E3A48F00E856AE /* Alpha */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

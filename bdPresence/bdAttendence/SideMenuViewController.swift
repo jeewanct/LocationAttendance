@@ -41,7 +41,20 @@ class SideMenuViewController: UIViewController  {
                 userNameLabel.font = APPFONT.MENUTEXT
                 versionLabel.textColor = UIColor.white
                 versionLabel.font = APPFONT.VERSIONTEXT
-                versionLabel.text = "V" + APPVERSION
+
+                switch(ReleaseType.currentConfiguration()) {
+                case .Alpha:
+                    versionLabel.text = "V" + APPVERSION + "ALPHA"
+                
+                case .Unknown:
+                    versionLabel.text = "V" + APPVERSION
+                case .Debug:
+                    versionLabel.text = "V" + APPVERSION
+
+                case .Release:
+                    versionLabel.text = "V" + APPVERSION
+
+            }
                 versionLabel.textAlignment = .center
             
             UserDefaults.standard.addObserver(self, forKeyPath: "profileImage", options: .new, context: nil)
