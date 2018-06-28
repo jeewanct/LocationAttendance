@@ -300,7 +300,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate:UNUserNotificationCenterDelegate{
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("userInfo sourabh = \(userInfo)")
-        BackgroundDebug().write(string: "didReceiveRemoteNotification- SilentPush")
+        //BackgroundDebug().write(string: "didReceiveRemoteNotification- SilentPush")
 
         let state: UIApplicationState = application.applicationState
        
