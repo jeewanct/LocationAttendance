@@ -136,7 +136,10 @@ class NewCheckoutViewController: UIViewController {
 //        }
     func handleGesture(sender:UIGestureRecognizer){
         //print(dataArray)
-
+        //Sourabh - When swiped down then we will not allow SDK to work as accordingly in RMCNotifier
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
+        UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
         if let swipeGesture = sender as? UISwipeGestureRecognizer {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:

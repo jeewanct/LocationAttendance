@@ -38,6 +38,8 @@ class NewCheckinViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+
         UserDefaults.standard.synchronize()
         print("In handleGesture NewCheckinViewController")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: nil)

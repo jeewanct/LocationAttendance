@@ -125,6 +125,8 @@ class SuperViewController: UIViewController {
                             bdCloudStartMonitoring()
                         } else if screenFlag == "2" {
                             // automatic checkin function
+                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+
                             appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
                             // New change - 20/06/2018
                             //Here we have to send one location checkin also
@@ -155,7 +157,8 @@ class SuperViewController: UIViewController {
                     if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
                         if screenFlag == "1" {
                             appDelegate.postDataCheckin(userInteraction: .swipeDownAuto)
-                            
+                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+
                             UI {
                                 UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
                                 // New change on 20/06/2018 to create one checkin
