@@ -9,6 +9,13 @@ PODS:
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - Fabric (1.7.5)
+  - GoogleMaps (2.7.0):
+    - GoogleMaps/Maps (= 2.7.0)
+  - GoogleMaps/Base (2.7.0)
+  - GoogleMaps/Maps (2.7.0):
+    - GoogleMaps/Base
+  - GooglePlaces (2.7.0):
+    - GoogleMaps/Base (= 2.7.0)
   - IQKeyboardManagerSwift (5.0.7)
   - ObjectMapper (3.1.0)
   - ReachabilitySwift (3)
@@ -24,6 +31,8 @@ DEPENDENCIES:
   - AWSS3
   - Crashlytics
   - Fabric
+  - GoogleMaps
+  - GooglePlaces
   - IQKeyboardManagerSwift
   - ReachabilitySwift (~> 3)
   - RealmSwift
@@ -36,6 +45,8 @@ SPEC REPOS:
     - AWSS3
     - Crashlytics
     - Fabric
+    - GoogleMaps
+    - GooglePlaces
     - IQKeyboardManagerSwift
     - ObjectMapper
     - ReachabilitySwift
@@ -49,12 +60,14 @@ SPEC CHECKSUMS:
   AWSS3: c35608e0cdd5172f9e1d943221fd5fde01c5f749
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   Fabric: ae7146a5f505ea370a1e44820b4b1dc8890e2890
+  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
+  GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
 
-PODFILE CHECKSUM: 3737b1968a1862cea8216f8e49502e8209c5a33a
+PODFILE CHECKSUM: a62e1744c6e217e9ebb453107384dd74a4620997
 
 COCOAPODS: 1.5.2

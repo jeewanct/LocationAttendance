@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZLB-mr-keV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZLB-mr-keV">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </array>
         <array key="SourceSansPro-Light.ttf">
             <string>SourceSansPro-Light</string>
         </array>
@@ -45,7 +42,7 @@
         <!--New Login View Controller-->
         <scene sceneID="UbS-eK-mff">
             <objects>
-                <viewController id="vMO-ql-6Ap" customClass="NewLoginViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vMO-ql-6Ap" customClass="NewLoginViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BVX-wb-ufz"/>
                         <viewControllerLayoutGuide type="bottom" id="MbB-t2-OcC"/>
@@ -128,7 +125,7 @@
         <!--New Otp View Controller-->
         <scene sceneID="rAq-aK-I7A">
             <objects>
-                <viewController storyboardIdentifier="otpScreen" id="HFB-BG-t3c" customClass="NewOtpViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="otpScreen" id="HFB-BG-t3c" customClass="NewOtpViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cBz-sW-O7f"/>
                         <viewControllerLayoutGuide type="bottom" id="bx2-Fu-StG"/>
@@ -138,13 +135,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="95" y="218" width="131.5" height="17.5"/>
+                                <rect key="frame" x="101.5" y="218" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F71-eu-Hs0">
-                                <rect key="frame" x="10" y="275.5" width="300" height="50"/>
+                                <rect key="frame" x="10" y="277" width="300" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="oTQ-Bp-ozM"/>
@@ -152,13 +149,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not received the OTP ? " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWV-bK-EbK">
-                                <rect key="frame" x="34" y="348.5" width="172" height="19"/>
+                                <rect key="frame" x="43" y="350" width="154" height="20.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="206" y="344" width="77" height="30"/>
+                                <rect key="frame" x="197" y="345.5" width="77" height="30"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.97669434420000001" green="1" blue="0.43377791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -194,7 +191,7 @@
         <!--New Organisation Select View Controller-->
         <scene sceneID="xFV-wG-wU9">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BNe-A4-cSr" customClass="NewOrganisationSelectViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BNe-A4-cSr" customClass="NewOrganisationSelectViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BeA-Xw-0R3"/>
                         <viewControllerLayoutGuide type="bottom" id="PVt-uR-W8N"/>
@@ -209,7 +206,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="JbQ-36-rcq"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="R5A-8d-JrS" customClass="UPCarouselFlowLayout" customModule="bdAttendence" customModuleProvider="target">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="R5A-8d-JrS" customClass="UPCarouselFlowLayout" customModule="bdPresence" customModuleProvider="target">
                                     <size key="itemSize" width="231" height="168"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -227,7 +224,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="organisationCell" id="O58-Oo-D0v" customClass="OrganizationCollectionViewCell" customModule="bdAttendence" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="organisationCell" id="O58-Oo-D0v" customClass="OrganizationCollectionViewCell" customModule="bdPresence" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="16" width="231" height="168"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -235,13 +232,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2Y-P2-JLF">
-                                                    <rect key="frame" x="10" y="96" width="211" height="17"/>
+                                                    <rect key="frame" x="10" y="84" width="211" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="DGI-WW-4Ld">
-                                                    <rect key="frame" x="90" y="32" width="50" height="50"/>
+                                                    <rect key="frame" x="90" y="20" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="E2h-ly-3Ug"/>
                                                         <constraint firstAttribute="height" constant="50" id="lcw-wY-2Uv"/>
@@ -275,7 +272,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your organization" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ef-sW-FE5">
-                                <rect key="frame" x="23" y="87" width="274" height="28"/>
+                                <rect key="frame" x="23" y="87" width="274" height="30.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -317,7 +314,7 @@
         <!--Super View Controller-->
         <scene sceneID="Ggs-gR-u9k">
             <objects>
-                <viewController storyboardIdentifier="SuperViewController" id="I2f-Ag-FHW" customClass="SuperViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SuperViewController" id="I2f-Ag-FHW" customClass="SuperViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CWK-yx-aQ8"/>
                         <viewControllerLayoutGuide type="bottom" id="dSG-qf-yXN"/>
@@ -391,12 +388,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2K-kw-7PQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="399" y="57"/>
+            <point key="canvasLocation" x="319" y="77"/>
         </scene>
         <!--My Dashboard View Controller-->
         <scene sceneID="895-gc-8l5">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="0UV-d0-7SZ" customClass="MyDashboardViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="0UV-d0-7SZ" customClass="MyDashboardViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PPN-v4-jTN"/>
                         <viewControllerLayoutGuide type="bottom" id="Shh-tf-Ka9"/>
@@ -432,7 +429,7 @@
         <!--New Checkin View Controller-->
         <scene sceneID="l01-jF-lQe">
             <objects>
-                <viewController storyboardIdentifier="checkin" automaticallyAdjustsScrollViewInsets="NO" id="ngQ-HD-aXg" customClass="NewCheckinViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="checkin" automaticallyAdjustsScrollViewInsets="NO" id="ngQ-HD-aXg" customClass="NewCheckinViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7kh-QQ-ksR"/>
                         <viewControllerLayoutGuide type="bottom" id="7GM-Zp-LmH"/>
@@ -470,7 +467,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe up to start your day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7tA-Ht-FRg">
-                                <rect key="frame" x="40" y="430.5" width="240" height="20"/>
+                                <rect key="frame" x="40" y="430.5" width="240" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -509,7 +506,7 @@
         <!--System Detail View Controller-->
         <scene sceneID="aqJ-Yq-qb4">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Dr7-h5-k5B" customClass="SystemDetailViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Dr7-h5-k5B" customClass="SystemDetailViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jaa-xw-nui"/>
                         <viewControllerLayoutGuide type="bottom" id="yyl-av-uFc"/>
@@ -553,7 +550,7 @@
         <!--New Checkout View Controller-->
         <scene sceneID="vnb-vL-ePd">
             <objects>
-                <viewController storyboardIdentifier="checkout" id="sia-RL-Dab" customClass="NewCheckoutViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="checkout" id="sia-RL-Dab" customClass="NewCheckoutViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="K06-7g-v0G"/>
                         <viewControllerLayoutGuide type="bottom" id="Vzz-7a-EcF"/>
@@ -578,7 +575,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2H-U3-6sf" customClass="UICircularProgressRingView" customModule="bdAttendence" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2H-U3-6sf" customClass="UICircularProgressRingView" customModule="bdPresence" customModuleProvider="target">
                                 <rect key="frame" x="50" y="174" width="220" height="220"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="cea-RI-eAo"/>
@@ -665,7 +662,7 @@
                                     <constraint firstAttribute="height" constant="40" id="RLe-Qm-dPj"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NL-pT-kMV" customClass="CardView" customModule="bdAttendence" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NL-pT-kMV" customClass="CardView" customModule="bdPresence" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="528" width="320" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugh-5c-h6b">
@@ -742,7 +739,7 @@
         <!--Side Menu View Controller-->
         <scene sceneID="WTs-G5-kK6">
             <objects>
-                <viewController storyboardIdentifier="SideMenuScreen" automaticallyAdjustsScrollViewInsets="NO" id="cr7-xS-nY9" customClass="SideMenuViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SideMenuScreen" automaticallyAdjustsScrollViewInsets="NO" id="cr7-xS-nY9" customClass="SideMenuViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Zx-bz-baB"/>
                         <viewControllerLayoutGuide type="bottom" id="Kma-wF-Lnh"/>
@@ -773,7 +770,7 @@
                                 <rect key="frame" x="0.0" y="205" width="220" height="323"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
+                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
                                         <rect key="frame" x="0.0" y="22" width="220" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXN-ad-IkB" id="syQ-Lf-NEi">
@@ -839,7 +836,7 @@
         <!--Splash View Controller-->
         <scene sceneID="k6M-mW-hna">
             <objects>
-                <viewController id="Xi6-oo-Utl" customClass="SplashViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Xi6-oo-Utl" customClass="SplashViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cfB-Ic-0jV"/>
                         <viewControllerLayoutGuide type="bottom" id="aY3-oc-cqh"/>
@@ -912,7 +909,7 @@
         <scene sceneID="I4C-5l-vUt">
             <objects>
                 <navigationController storyboardIdentifier="Main" id="Fx4-6H-Q9G" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NkD-E7-dcq" customClass="CustomNavigationBar" customModule="bdAttendence" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NkD-E7-dcq" customClass="CustomNavigationBar" customModule="bdPresence" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -945,7 +942,7 @@
         <!--New Permission View Controller-->
         <scene sceneID="YNl-Ah-CXQ">
             <objects>
-                <viewController storyboardIdentifier="permission" id="X4M-5E-uqw" customClass="NewPermissionViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="permission" id="X4M-5E-uqw" customClass="NewPermissionViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Y0-jX-PbE"/>
                         <viewControllerLayoutGuide type="bottom" id="gH4-cQ-pAZ"/>
@@ -1050,7 +1047,7 @@ mark your presence at your workplace</string>
         <!--Day Checkout View Controller-->
         <scene sceneID="VPL-N0-ioW">
             <objects>
-                <viewController storyboardIdentifier="day" id="J1v-09-kvw" customClass="DayCheckoutViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="day" id="J1v-09-kvw" customClass="DayCheckoutViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wMS-gb-mZb"/>
                         <viewControllerLayoutGuide type="bottom" id="T53-gd-gBw"/>
@@ -1088,7 +1085,7 @@ mark your presence at your workplace</string>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe up to continue your day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtF-li-mWG">
-                                <rect key="frame" x="40" y="440.5" width="240" height="20"/>
+                                <rect key="frame" x="40" y="440.5" width="240" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1163,7 +1160,7 @@ mark your presence at your workplace</string>
         <!--Transmit View Controller-->
         <scene sceneID="sow-6k-0cU">
             <objects>
-                <viewController id="JxF-1A-oeg" customClass="TransmitViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JxF-1A-oeg" customClass="TransmitViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Cf-5E-t0y"/>
                         <viewControllerLayoutGuide type="bottom" id="Vd5-aU-37O"/>
@@ -1183,7 +1180,7 @@ mark your presence at your workplace</string>
         <!--History View Controller-->
         <scene sceneID="mR4-EE-dFu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="dsK-X2-zy3" customClass="HistoryViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="dsK-X2-zy3" customClass="HistoryViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GTL-ws-lUE"/>
                         <viewControllerLayoutGuide type="bottom" id="ie3-CP-fhQ"/>
@@ -1215,7 +1212,7 @@ mark your presence at your workplace</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tj-tx-qSk" customClass="UICircularProgressRingView" customModule="bdAttendence" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tj-tx-qSk" customClass="UICircularProgressRingView" customModule="bdPresence" customModuleProvider="target">
                                 <rect key="frame" x="50" y="174" width="220" height="220"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="Ju0-Zb-wuH"/>
@@ -1292,7 +1289,7 @@ mark your presence at your workplace</string>
                                     <constraint firstAttribute="height" constant="40" id="BaO-hF-bPg"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h81-3A-3Ot" customClass="CardView" customModule="bdAttendence" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h81-3A-3Ot" customClass="CardView" customModule="bdPresence" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFi-i9-sFo">
@@ -1378,7 +1375,7 @@ mark your presence at your workplace</string>
         <!--Time Line View Controller-->
         <scene sceneID="SZz-Ix-PEA">
             <objects>
-                <viewController storyboardIdentifier="timeLineController" automaticallyAdjustsScrollViewInsets="NO" id="fPv-Bs-TGt" customClass="TimeLineViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="timeLineController" automaticallyAdjustsScrollViewInsets="NO" id="fPv-Bs-TGt" customClass="TimeLineViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6xI-WW-5WH"/>
                         <viewControllerLayoutGuide type="bottom" id="H8G-z3-6HP"/>
@@ -1391,14 +1388,14 @@ mark your presence at your workplace</string>
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="timeLineCell" rowHeight="200" id="p1Q-kC-Wgg" customClass="TimeLineTableViewCell" customModule="bdAttendence" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="timeLineCell" rowHeight="200" id="p1Q-kC-Wgg" customClass="TimeLineTableViewCell" customModule="bdPresence" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p1Q-kC-Wgg" id="HvZ-KC-IPV">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="utW-Lk-2V0" customClass="CardView" customModule="bdAttendence" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="utW-Lk-2V0" customClass="CardView" customModule="bdPresence" customModuleProvider="target">
                                                     <rect key="frame" x="50" y="30" width="220" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tf-1K-sTL">
@@ -1510,7 +1507,7 @@ mark your presence at your workplace</string>
         <!--Timer View Controller-->
         <scene sceneID="aIU-7x-vKA">
             <objects>
-                <viewController storyboardIdentifier="testView" id="ccZ-11-Hxz" customClass="TimerViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="testView" id="ccZ-11-Hxz" customClass="TimerViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lkR-Dl-GEj"/>
                         <viewControllerLayoutGuide type="bottom" id="zha-Bk-7id"/>
@@ -1519,7 +1516,7 @@ mark your presence at your workplace</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hS-e9-aVf" customClass="UICircularProgressRingView" customModule="bdAttendence" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hS-e9-aVf" customClass="UICircularProgressRingView" customModule="bdPresence" customModuleProvider="target">
                                 <rect key="frame" x="35" y="159" width="250" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="cEa-HK-crp"/>
@@ -1620,7 +1617,7 @@ mark your presence at your workplace</string>
         <!--Error View Controller-->
         <scene sceneID="DJB-qb-noZ">
             <objects>
-                <viewController storyboardIdentifier="errorView" id="gyQ-xP-72p" customClass="ErrorViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="errorView" id="gyQ-xP-72p" customClass="ErrorViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TkH-M4-oMm"/>
                         <viewControllerLayoutGuide type="bottom" id="fpX-6K-D5B"/>
@@ -1670,7 +1667,7 @@ mark your presence at your workplace</string>
         <!--Work Hour View Controller-->
         <scene sceneID="u9G-2a-gKW">
             <objects>
-                <viewController id="ceX-sG-UfA" customClass="WorkHourViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ceX-sG-UfA" customClass="WorkHourViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mSb-ff-JTU"/>
                         <viewControllerLayoutGuide type="bottom" id="pHm-1l-ugA"/>
@@ -1692,7 +1689,7 @@ mark your presence at your workplace</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0V8-SV-e68" customClass="UICircularProgressRingView" customModule="bdAttendence" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0V8-SV-e68" customClass="UICircularProgressRingView" customModule="bdPresence" customModuleProvider="target">
                                 <rect key="frame" x="35" y="159" width="250" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="K5w-uy-OVT"/>
@@ -1882,7 +1879,7 @@ mark your presence at your workplace</string>
         <!--Contact Us View Controller-->
         <scene sceneID="tzN-22-Yyx">
             <objects>
-                <viewController id="GG1-BZ-j8U" customClass="ContactUsViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="GG1-BZ-j8U" customClass="ContactUsViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uyc-LV-UcO"/>
                         <viewControllerLayoutGuide type="bottom" id="IgK-hV-hms"/>
@@ -1892,25 +1889,25 @@ mark your presence at your workplace</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello There !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bfq-Uv-2Ha">
-                                <rect key="frame" x="15" y="69" width="290" height="20"/>
+                                <rect key="frame" x="15" y="69" width="290" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Light" family="Source Sans Pro" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg9-c2-al9">
-                                <rect key="frame" x="15" y="94" width="290" height="0.0"/>
+                                <rect key="frame" x="15" y="95.5" width="290" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPm-Om-fny">
-                                <rect key="frame" x="15" y="104" width="290" height="21"/>
+                                <rect key="frame" x="15" y="105.5" width="290" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="abU-N6-oc5">
-                                <rect key="frame" x="15" y="130" width="290" height="100"/>
+                                <rect key="frame" x="15" y="131.5" width="290" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="100" id="4Bg-eA-wbO"/>
@@ -1919,14 +1916,14 @@ mark your presence at your workplace</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1V-c3-kWm">
-                                <rect key="frame" x="255" y="245" width="50" height="36"/>
+                                <rect key="frame" x="255" y="246.5" width="50" height="36"/>
                                 <state key="normal" image="send_message"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="112" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lvi-QW-lgT">
-                                <rect key="frame" x="0.0" y="281" width="320" height="287"/>
+                                <rect key="frame" x="0.0" y="282.5" width="320" height="285.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="contactCell" rowHeight="100" id="rBM-mC-xnx" customClass="ContactTableViewCell" customModule="bdAttendence" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="contactCell" rowHeight="100" id="rBM-mC-xnx" customClass="ContactTableViewCell" customModule="bdPresence" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rBM-mC-xnx" id="mwA-59-CtM">
@@ -1946,7 +1943,7 @@ mark your presence at your workplace</string>
                                                     </state>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="z5L-tD-tft">
-                                                    <rect key="frame" x="15" y="62.5" width="14" height="18.5"/>
+                                                    <rect key="frame" x="15" y="62.5" width="14" height="16"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -2010,7 +2007,7 @@ mark your presence at your workplace</string>
         <!--Profile View Controller-->
         <scene sceneID="9uy-bC-4la">
             <objects>
-                <viewController id="1Rd-Sa-Vnh" customClass="ProfileViewController" customModule="bdAttendence" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1Rd-Sa-Vnh" customClass="ProfileViewController" customModule="bdPresence" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9hx-w4-6nt"/>
                         <viewControllerLayoutGuide type="bottom" id="Om4-aR-nA4"/>
@@ -2139,7 +2136,7 @@ mark your presence at your workplace</string>
     <resources>
         <image name="edit" width="27" height="27"/>
         <image name="error" width="179" height="179"/>
-        <image name="logo" width="35" height="36"/>
+        <image name="logo" width="50" height="50"/>
         <image name="phone" width="14" height="14"/>
         <image name="profile" width="75" height="75"/>
         <image name="quote" width="21" height="19"/>

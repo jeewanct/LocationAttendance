@@ -16,6 +16,10 @@ import Fabric
 import Crashlytics
 import CoreLocation
 
+/* Added on 10 July */
+import GoogleMaps
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -85,6 +89,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        
+        /* Added on 10 July */
+        GMSServices.provideAPIKey(GoogleMapsApi.GOOGLEAPI)
+        GMSPlacesClient.provideAPIKey(GoogleMapsApi.GOOGLEAPI)
+        
+        
         startUpTask()
         return true
     }

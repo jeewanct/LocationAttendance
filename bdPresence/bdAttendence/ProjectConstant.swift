@@ -121,3 +121,12 @@ struct APPColor {
     static var blueGradient = UIColor(red: 112.0/255.0, green: 179.0/255.0, blue: 215.0/255.0, alpha: 1.0)
 
 }
+
+
+    /* Changes made on 10 July '18 New Design */
+
+struct GoogleMapsApi{
+    
+    static let GOOGLEAPI = "AIzaSyAGSip9P63JGP5o9aTzwE3MmK6xOL5E1xI"
+    
+}
