@@ -140,6 +140,8 @@ class NewCheckoutViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+        UserDefaults.standard.synchronize()
+
         if let swipeGesture = sender as? UISwipeGestureRecognizer {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:

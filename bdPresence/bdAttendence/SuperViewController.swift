@@ -46,11 +46,24 @@ class SuperViewController: UIViewController {
             self.window!.rootViewController = self
         }
         
-        //06/06/2018 - Sourabh
-//        if isInternetAvailable(){
-//            checkShiftStatus()
-//            
-//        }
+        if let lastShiftFetchedTime = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastShiftFetchedTime.rawValue) as? Date {
+            let interval = Date().timeIntervalSince(lastShiftFetchedTime)
+            print(interval)
+            if interval > 3600 {
+                //06/06/2018 - Sourabh
+                if isInternetAvailable(){
+                    checkShiftStatus { (apiResultStatus) in
+                        if apiResultStatus == APIResult.Success {
+                        }
+                    }
+                }
+            }
+        } else {
+            // First time
+            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastShiftFetchedTime.rawValue)
+        }
+
+        
         
         //setObservers()
         //Adding Check blocker to solve a bug when permission is denied at first time
