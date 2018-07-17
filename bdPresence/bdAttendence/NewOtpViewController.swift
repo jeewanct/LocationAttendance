@@ -20,7 +20,7 @@ class NewOtpViewController: UIViewController {
     var mobileNumber = "9015620820"
     override func viewDidLoad() {
         super.viewDidLoad()
-    self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+    //self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -37,6 +37,22 @@ class NewOtpViewController: UIViewController {
         otpLabel.font = APPFONT.OTPCONFIRMATION
         //self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(backbuttonAction(sender:)))
         // Do any additional setup after loading the view.
+        
+        /* Changes made from 10 th July '18 */
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleHideKeyBoard)))
+        let downGesturee = UISwipeGestureRecognizer(target: self, action: #selector(handleHideKeyBoard))
+        downGesturee.direction = .down
+        view.addGestureRecognizer(downGesturee)
+        otpView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+    }
+    
+    @objc func handleHideKeyBoard(){
+            codeInputView.resignFirstResponder()
+    }
+    
+    
+    @objc func handleTap(){
+        codeInputView.becomeFirstResponder()
     }
     
     func backbuttonAction(sender:Any){
@@ -53,6 +69,7 @@ class NewOtpViewController: UIViewController {
     }
     
     func updateUser(updateflag:Bool = false){
+        
         var deviceToken = "3273a5f0598cd8e9518ccf07c67fbdd1ebb079d2a95aa890e259a4b70ecad57e"
         if let token = UserDefaults.standard.value(forKey: "DeviceToken") as? String {
             deviceToken = token

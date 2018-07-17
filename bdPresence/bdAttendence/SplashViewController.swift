@@ -30,10 +30,10 @@ class SplashViewController: UIViewController{
         self.aboutLabel.text = "Bluedolphin is the convenient platform for attendance at work.It is very simple.Let's begin now"
         
         self.loginButton.layer.cornerRadius = 15.0
-        self.loginButton.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        //self.loginButton.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         self.loginButton.clipsToBounds = true
         self.loginButton.titleLabel?.font = APPFONT.FOOTERBODY
-        self.loginButton.tintColor = UIColor.white
+        //self.loginButton.tintColor = UIColor.white
         self.loginButton.addTarget(self, action: #selector(loginButtonAction), for: UIControlEvents.touchUpInside)
         // Do any additional setup after loading the view.
     }

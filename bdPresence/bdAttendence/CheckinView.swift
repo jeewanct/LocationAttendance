@@ -86,6 +86,9 @@ class CheckinView: UIView {
         quoteLabel.font = APPFONT.PERMISSIONBODY
         swipeLabel.font = APPFONT.FOOTERBODY
         
+        
+        
+        
     }
     
     

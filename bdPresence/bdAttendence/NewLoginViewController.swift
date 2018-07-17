@@ -27,6 +27,10 @@ class NewLoginViewController: UIViewController {
         mobileTextfield.delegate = self
          createGradientLayer()
         // Do any additional setup after loading the view.
+        
+        /* Changes made on 10 July '18 */
+        
+       // navigationController?.present(TutorialController(), animated: true, completion: nil)
     }
     
     func createGradientLayer() {
@@ -40,6 +44,12 @@ class NewLoginViewController: UIViewController {
     }
     
     func sendOtpAction(){
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? NewOtpViewController
+        controller?.mobileNumber = self.mobileTextfield.text!
+        //self.presentedViewController
+        self.navigationController?.show(controller!, sender: nil)
+        
         if mobileTextfield.text!.isBlank{
             self.showAlert(ErrorMessage.FECodeError.rawValue)
         }

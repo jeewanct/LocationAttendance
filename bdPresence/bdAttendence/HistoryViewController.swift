@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import GoogleMaps
 class HistoryViewController: UIViewController {
 
     @IBOutlet weak var swipeUpButton: UIButton!
@@ -20,6 +20,17 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var progressBar: UICircularProgressRingView!
     var thisWeekDays = [Date]()
     var currentDisplayDate = Date()
+    
+    @IBOutlet weak var mapView: GMSMapView!
+    
+    
+    /* Changes made from 10th July '18 */
+    
+    var userContainerView: NewCheckOutUserScreen?
+    
+    @IBOutlet weak var userLocationContainerView: UIView!
+    
+    @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -40,7 +51,13 @@ class HistoryViewController: UIViewController {
         self.swipeUpButton.frame.size.width = 0
         
        currentDisplayDate = Date().dayStart()!
-
+        
+        
+        /* Changes made from 10th July '18 */
+        
+        
+        setupMap()
+        addGestureInContainerView()
         // Do any additional setup after loading the view.
     }
     override func viewDidLayoutSubviews() {
@@ -107,55 +124,55 @@ class HistoryViewController: UIViewController {
     
     func updateView(date:Date = Date()){
         
-        progressBar.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
-        progressBar.innerRingColor = APPColor.newGreen
-        
-        createbarchartView(date: date)
+//        progressBar.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
+//        progressBar.innerRingColor = APPColor.newGreen
+//
+//        createbarchartView(date: date)
     }
     
-    func createbarchartView(date:Date){
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        
-        
-        
-        // submit a task to the queue for background execution
-        queue.async() {
-          let object = UserDayData.getFrequencyLocationBarData(date:date)
-            DispatchQueue.main.async() {
-                let totalTime = object.getElapsedTime()!
-//                if totalTime == 0{
-//                    self.swipeUpButton.isHidden = true
-//                }else{
-//                    self.swipeUpButton.isHidden = false
+//    func createbarchartView(date:Date){
+//        let queue = DispatchQueue.global(qos: .userInteractive)
+//
+//
+//
+//        // submit a task to the queue for background execution
+//        queue.async() {
+//          let object = UserDayData.getFrequencyLocationBarData(date:date)
+//            DispatchQueue.main.async() {
+//                let totalTime = object.getElapsedTime()!
+////                if totalTime == 0{
+////                    self.swipeUpButton.isHidden = true
+////                }else{
+////                    self.swipeUpButton.isHidden = false
+////                }
+//                self.progressBar.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
+//
 //                }
-                self.progressBar.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
-                    
-                }
-                let (hour,min,_) = self.secondsToHoursMinutesSeconds(seconds: Int(totalTime))
-                
-                let myMutableString =  NSMutableAttributedString(
-                    string: "\(self.timeText(hour)):\(self.timeText(min))",
-                    attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
-                let seconndMutableString =  NSMutableAttributedString(
-                    string: " Total hours",
-                    attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
-                myMutableString.append(seconndMutableString)
-                self.timeLabel.attributedText = myMutableString
-                self.startLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
-                self.endLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
-               self.addressLabel.numberOfLines = 0
-               self.addressLabel.lineBreakMode = .byWordWrapping
-               self.addressLabel.adjustsFontSizeToFitWidth = true
-                self.addressLabel.text = object.getLastCheckInAddress()?.capitalized
-                self.updateFrequencyBar(mData: object)
-            }
-            
-        }
-        
-        
-        
-        
-    }
+//                let (hour,min,_) = self.secondsToHoursMinutesSeconds(seconds: Int(totalTime))
+//
+//                let myMutableString =  NSMutableAttributedString(
+//                    string: "\(self.timeText(hour)):\(self.timeText(min))",
+//                    attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
+//                let seconndMutableString =  NSMutableAttributedString(
+//                    string: " Total hours",
+//                    attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
+//                myMutableString.append(seconndMutableString)
+//                self.timeLabel.attributedText = myMutableString
+//                self.startLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
+//                self.endLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
+//               self.addressLabel.numberOfLines = 0
+//               self.addressLabel.lineBreakMode = .byWordWrapping
+//               self.addressLabel.adjustsFontSizeToFitWidth = true
+//                self.addressLabel.text = object.getLastCheckInAddress()?.capitalized
+//                self.updateFrequencyBar(mData: object)
+//            }
+//
+//        }
+//
+//
+//
+//
+//    }
     
     func getDateInAMPM(date:Date)->String{
         print(date)
@@ -168,31 +185,31 @@ class HistoryViewController: UIViewController {
     }
     
     
-    func updateFrequencyBar(mData:FrequencyBarGraphData) {
-        var mRectList = [CGRect]()
-        
-        let viewWidth = barchartView.frame.size.width;
-        let viewHeight =
-            barchartView.frame.size.height;
-        let maxDuration = mData.getEndTime()! - mData.getStartTime()!;
-        let widthPerDuration =  viewWidth / CGFloat(maxDuration);
-        for  duration in mData.graphData {
-            
-            let left = Int(widthPerDuration * CGFloat(duration.getStartTime() - mData.getStartTime()!));
-            var right = Int(CGFloat(left) + (widthPerDuration * CGFloat(duration.getEndTime() - duration.getStartTime())));
-            let top = 0;
-            let bottom = viewHeight;
-            right = right - left < 1 ?  1 :  right - left;
-            
-            let rect = CGRect(x: left, y: top, width: right, height: Int(bottom))
-            //print(rect)
-            mRectList.append(rect)
-        }
-        let view = FrequencyGraphView(frame: CGRect(x: 0, y: 0, width: barchartView.frame.width, height: barchartView.frame.height), data: mRectList)
-        barchartView.addSubview(view)
-        
-    }
-    
+//    func updateFrequencyBar(mData:FrequencyBarGraphData) {
+//        var mRectList = [CGRect]()
+//
+//        let viewWidth = barchartView.frame.size.width;
+//        let viewHeight =
+//            barchartView.frame.size.height;
+//        let maxDuration = mData.getEndTime()! - mData.getStartTime()!;
+//        let widthPerDuration =  viewWidth / CGFloat(maxDuration);
+//        for  duration in mData.graphData {
+//
+//            let left = Int(widthPerDuration * CGFloat(duration.getStartTime() - mData.getStartTime()!));
+//            var right = Int(CGFloat(left) + (widthPerDuration * CGFloat(duration.getEndTime() - duration.getStartTime())));
+//            let top = 0;
+//            let bottom = viewHeight;
+//            right = right - left < 1 ?  1 :  right - left;
+//
+//            let rect = CGRect(x: left, y: top, width: right, height: Int(bottom))
+//            //print(rect)
+//            mRectList.append(rect)
+//        }
+//        let view = FrequencyGraphView(frame: CGRect(x: 0, y: 0, width: barchartView.frame.width, height: barchartView.frame.height), data: mRectList)
+//        barchartView.addSubview(view)
+//
+//    }
+//
     
     
     func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
@@ -293,6 +310,96 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         let highlightedCell = calenderView.cellForItem(at: indexPath) as! WeekCollectionViewCell
         action(highlightedCell)
     }
+    
+}
+
+
+extension HistoryViewController{
+    func setupMap(){
+        
+        // mapView.changeStyle()
+        
+        let marker = GMSMarker()
+        
+        
+        
+        
+        var locationManage = CLLocationManager()
+        locationManage.location?.coordinate.latitude
+        
+        
+        
+        if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
+            
+            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            marker.title = "Sydney"
+            marker.snippet = "Australia"
+            marker.map = mapView
+            marker.icon = #imageLiteral(resourceName: "locationBlack")
+            
+            
+            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
+            mapView.camera = camera
+        }
+        
+        
+    }
+    
+    func addGestureInContainerView(){
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        userLocationContainerView.addGestureRecognizer(tapGesture)
+        
+        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
+        downGesture.direction = .up
+        
+        userLocationContainerView.addGestureRecognizer(downGesture)
+        
+    }
+    
+    @objc func handleTap(){
+        
+        print("View Tapped")
+        
+        if userLocationCardHeightAnchor.constant == 0 {
+            animateContainerView(heightToAnimate: 400)
+        }else{
+            // 400
+            userContainerView?.tableView.isScrollEnabled = true
+            animateContainerView(heightToAnimate: 0)
+        }
+        
+        
+    }
+    
+    func animateContainerView(heightToAnimate height: CGFloat){
+        
+        UIView.animate(withDuration: 0.5) {
+            self.userLocationCardHeightAnchor.constant = height
+            self.view.layoutIfNeeded()
+            
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userContainerViewSegue"{
+            userContainerView = segue.destination as! NewCheckOutUserScreen
+            userContainerView?.delegate = self
+        }
+    }
+    
+    
+}
+
+
+extension HistoryViewController: HandleUserViewDelegate{
+    
+    func handleOnSwipe() {
+        // userLocationCardHeightAnchor.constant += 50
+        self.view.layoutIfNeeded()
+        handleTap()
+    }
+    
     
 }
 

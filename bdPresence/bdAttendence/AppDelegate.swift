@@ -16,9 +16,9 @@ import Fabric
 import Crashlytics
 import CoreLocation
 
-/* Added on 10 July */
+/* Change on 10 July '18 New Design */
 import GoogleMaps
-
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -87,13 +87,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
                 BlueDolphinManager.manager.startLocationMonitoring()
             }
+
         }
 
         
-        /* Added on 10 July */
-        GMSServices.provideAPIKey(GoogleMapsApi.GOOGLEAPI)
-        GMSPlacesClient.provideAPIKey(GoogleMapsApi.GOOGLEAPI)
-        
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        GMSServices.provideAPIKey(GoogleMaps.GOOGLEMAPSAPI)
+        GMSPlacesClient.provideAPIKey(GoogleMaps.GOOGLEMAPSAPI)
         
         startUpTask()
         return true

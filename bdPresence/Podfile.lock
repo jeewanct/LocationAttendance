@@ -24,6 +24,7 @@ PODS:
   - Realm/Headers (3.1.1)
   - RealmSwift (3.1.1):
     - Realm (= 3.1.1)
+  - SwiftGifOrigin (1.6.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - ReachabilitySwift (~> 3)
   - RealmSwift
+  - SwiftGifOrigin (~> 1.6.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -52,6 +54,7 @@ SPEC REPOS:
     - ReachabilitySwift
     - Realm
     - RealmSwift
+    - SwiftGifOrigin
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
@@ -67,7 +70,8 @@ SPEC CHECKSUMS:
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: a62e1744c6e217e9ebb453107384dd74a4620997
+PODFILE CHECKSUM: 4d0b603c99b8b65d46c24c7474face2f457353d6
 
 COCOAPODS: 1.5.2

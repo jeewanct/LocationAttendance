@@ -8,16 +8,31 @@
 
 import UIKit
 import BluedolphinCloudSdk
+import SwiftGifOrigin
+
 class DayCheckoutViewController: UIViewController {
     @IBOutlet weak var swipeLabel: UILabel!
-
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    
+    /* Changes made from 10th July '18 */
+    
+    @IBOutlet weak var checkInImageView: UIImageView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+        setupView()
+        navigationController?.removeTransparency()
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
+
+    }
+    
+    func setupView(){
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeUp.direction = .up
@@ -26,9 +41,12 @@ class DayCheckoutViewController: UIViewController {
         nameLabel.text = "Hi " + SDKSingleton.sharedInstance.userName + ","
         quoteLabel.font = APPFONT.PERMISSIONBODY
         swipeLabel.font = APPFONT.FOOTERBODY
-
-        // Do any additional setup after loading the view.
+        
+        
+        checkInImageView.loadGif(name: "swipeUp")
     }
+    
+    
     func handleGesture(sender:UIGestureRecognizer){
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)

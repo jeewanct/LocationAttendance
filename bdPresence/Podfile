@@ -16,6 +16,7 @@ pod 'Crashlytics'
 pod 'ReachabilitySwift', '~> 3'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'SwiftGifOrigin', '~> 1.6.1'
 
 
   target 'bdPresenceTests' do

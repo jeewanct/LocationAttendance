@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
         profileImageView.isUserInteractionEnabled = true
         tapGestureForImage = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         profileImageView.addGestureRecognizer(tapGestureForImage)
-        profileImageView.layer.cornerRadius = 75.0
+        profileImageView.layer.cornerRadius = 50
         profileImageView.layer.borderWidth = 0.5
         profileImageView.layer.borderColor = UIColor.gray.cgColor
         if let imageData = UserDefaults.standard.value(forKey: "profileImage") as? Data {
@@ -46,6 +46,10 @@ class ProfileViewController: UIViewController {
         
         profileTableView.register(UINib(nibName: "TwoSideLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "twoLabel")
         profileTableView.register(UINib(nibName: "SwitchTableViewCell", bundle: nil), forCellReuseIdentifier: "switch")
+        
+        profileTableView.register(UINib(nibName: "LabelWithImage", bundle: nil), forCellReuseIdentifier: "twoLabelWithImage")
+        
+        
         self.profileTableView.estimatedRowHeight =  50
         self.profileTableView.rowHeight = UITableViewAutomaticDimension;
        
@@ -176,6 +180,13 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource{
             cell.headerLabel.text = "Notification"
             
             return cell
+            
+        case 4:
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "twoLabelWithImage", for: indexPath as IndexPath) as! LabelWithImage
+            cell.headerLabel.textColor = UIColor(hex: "333333")
+            cell.headerLabel.font = APPFONT.HELPTEXT
+            cell.headerLabel.text = "Logout"
+            return cell
         default:
             break
         }
@@ -186,7 +197,7 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
     
 }

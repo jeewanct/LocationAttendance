@@ -9,13 +9,14 @@
 import Foundation
 import RealmSwift
 import BluedolphinCloudSdk
-
+import GoogleMaps
 
 func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
     DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
         completion()
     }
 }
+
 func ChangeRootVC(destinationView: UIViewController) {
     
     (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController = destinationView
@@ -122,5 +123,7 @@ func checkShiftStatus(completion : @escaping (APIResult) -> ()){
             
         }
     }
+    
+    
 }
 

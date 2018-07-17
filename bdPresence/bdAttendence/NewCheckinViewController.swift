@@ -8,20 +8,24 @@
 
 import UIKit
 import BluedolphinCloudSdk
-
+import SwiftGifOrigin
 
 class NewCheckinViewController: UIViewController {
 
     @IBOutlet weak var swipeLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var checkInImageView: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.removeTransparency()
+        
+        
        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeUp.direction = .up
@@ -32,6 +36,7 @@ class NewCheckinViewController: UIViewController {
         swipeLabel.font = APPFONT.FOOTERBODY
         
         // Do any additional setup after loading the view.
+        checkInImageView.loadGif(name: "swipeUp")
     }
 
     func handleGesture(sender:UIGestureRecognizer){
@@ -81,7 +86,9 @@ class NewCheckinViewController: UIViewController {
   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Dispose of any resources that can be recreated.'
+        
+        
     }
     
 

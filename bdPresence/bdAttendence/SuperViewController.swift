@@ -98,6 +98,14 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(shiftHandling), name: NSNotification.Name(rawValue: LocalNotifcation.ShiftEnded.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin(sender:)), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         
+        
+        /* Changes made from 10 July '18 */
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Location.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyTeam.rawValue), object: nil)
+        
+        
+        
     }
     
     func wakeUp (sender : NSNotification) {
@@ -587,6 +595,12 @@ extension SuperViewController {
             changeChildController(identifier: .contactUs)
         case LocalNotifcation.Profile.rawValue:
             changeChildController(identifier: .myprofile)
+            
+            /* Changes made from 10 July '18 */
+        case LocalNotifcation.Location.rawValue:
+            changeChildController(identifier: .myLocation)
+        case LocalNotifcation.MyTeam.rawValue:
+            changeChildController(identifier: .myTeam)
     
         default:
             print("")
@@ -607,6 +621,7 @@ extension SuperViewController {
         lastController?.willMove(toParentViewController: nil)
         
         lastController?.removeFromParentViewController()
+        
         let destVc = self.storyboard?.instantiateViewController(withIdentifier: identifier.rawValue) as! UINavigationController
         
         

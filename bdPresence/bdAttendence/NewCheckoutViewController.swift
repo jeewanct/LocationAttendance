@@ -9,32 +9,49 @@
 import UIKit
 import RealmSwift
 import BluedolphinCloudSdk
-
+import GoogleMaps
 
 
 
 class NewCheckoutViewController: UIViewController {
     @IBOutlet weak var checkoutButton: UIImageView!
-    @IBOutlet weak var timeLabel: UILabel!
+   // @IBOutlet weak var timeLabel: UILabel!
     
-    @IBOutlet weak var lastCheckinLabel: UILabel!
-    @IBOutlet weak var frequencyBarView: UIView!
+   // @IBOutlet weak var lastCheckinLabel: UILabel!
+   // @IBOutlet weak var frequencyBarView: UIView!
     
+   
+    @IBOutlet weak var mapView: GMSMapView!
     
-    @IBOutlet weak var startTimeLabel: UILabel!
+   // @IBOutlet weak var mapView: GMSMapView!
+    
+   // @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var endYourDayLabel: UILabel!
-    @IBOutlet weak var pageControl: UIPageControl!
+   // @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var lastCheckinAddressLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
-    @IBOutlet weak var progressView: UICircularProgressRingView!
+  //  @IBOutlet weak var progressView: UICircularProgressRingView!
     var  dataArray = [Date]()
     var swipedown :UISwipeGestureRecognizer?
+   
+    /* Changes done from 10 July '18 New Design */
+    
+    @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
+    
+    @IBOutlet weak var userLocationContainerView: UIView!
+    
+    var userContainerView: NewCheckOutUserScreen?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationController?.removeTransparency()
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+        
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         
@@ -46,12 +63,12 @@ class NewCheckoutViewController: UIViewController {
 //        self.view.addGestureRecognizer(swipeleft)
 //        self.view.addGestureRecognizer(swiperight)
         
-        let image: UIImage = UIImage(named: "swipe_up")!
-        let imageRotated: UIImage =
-            UIImage(cgImage: image.cgImage!, scale: 1, orientation: UIImageOrientation.down)
-        checkoutButton.image = imageRotated
+//        let image: UIImage = UIImage(named: "s")!
+//        let imageRotated: UIImage =
+//            UIImage(cgImage: image.cgImage!, scale: 1, orientation: UIImageOrientation.down)
+//        checkoutButton.image = imageRotated
         endYourDayLabel.font = APPFONT.DAYHEADER
-        lastCheckinLabel.font = APPFONT.DAYHOURTEXT
+      //  lastCheckinLabel.font = APPFONT.DAYHOURTEXT
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
@@ -67,6 +84,10 @@ class NewCheckoutViewController: UIViewController {
         }
         bdCloudStartMonitoring()
         
+        
+        /* Changes made on 10 July '18 New Design */
+        setupMap()
+        addGestureInContainerView()
         
         
         // Do any additional setup after loading the view.
@@ -175,12 +196,12 @@ class NewCheckoutViewController: UIViewController {
     
     func updateView(date:Date = Date()){
         
-        progressView.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
-        progressView.innerRingColor = APPColor.newGreen
+        //progressView.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
+        //progressView.innerRingColor = APPColor.newGreen
         let isToday = Calendar.current.isDateInToday(date)
         if isToday{
             self.navigationItem.title = "Today"
-            
+
             self.view.addGestureRecognizer(swipedown!)
             checkoutButton.isHidden = false
             endYourDayLabel.isHidden = false
@@ -190,54 +211,54 @@ class NewCheckoutViewController: UIViewController {
             endYourDayLabel.isHidden = true
             self.view.removeGestureRecognizer(swipedown!)
         }
-        
-        
-        createFrequencybarView(date: date)
+
+
+        //createFrequencybarView(date: date)
     }
     
-    func createFrequencybarView(date:Date){
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        
-        
-        
-        // submit a task to the queue for background execution
-        queue.async() {
-            let object = UserDayData.getFrequencyLocationBarData(date:date)
-            print(object)
-            DispatchQueue.main.async() {
-                let totalTime = object.getElapsedTime()!
-                self.progressView.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
-                    
-                }
-                let (hour,min,_) = self.secondsToHoursMinutesSeconds(seconds: Int(totalTime))
-                
-                let myMutableString =  NSMutableAttributedString(
-                    string: "\(self.timeText(hour)):\(self.timeText(min))",
-                    attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
-                let seconndMutableString =  NSMutableAttributedString(
-                    string: " Total hours",
-                    attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
-                myMutableString.append(seconndMutableString)
-                self.timeLabel.attributedText = myMutableString
-                self.startTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
-                self.endTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
-                if let lastCheckinTime = object.getLastCheckinTime() {
-                    self.lastCheckinLabel.text = "You were last seen at \(self.currentTime(time: lastCheckinTime)) "
-                }else{
-                    self.lastCheckinLabel.text = "No checkins for today"
-                }
-                self.lastCheckinAddressLabel.numberOfLines = 0
-                self.lastCheckinAddressLabel.lineBreakMode = .byWordWrapping
-                self.lastCheckinAddressLabel.adjustsFontSizeToFitWidth = true
-                self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()?.capitalized
-                self.updateFrequencyBar(mData: object)
-            }
-        }
-        
-        
-        
-        
-    }
+//    func createFrequencybarView(date:Date){
+//        let queue = DispatchQueue.global(qos: .userInteractive)
+//
+//
+//
+//        // submit a task to the queue for background execution
+//        queue.async() {
+//            let object = UserDayData.getFrequencyLocationBarData(date:date)
+//            print(object)
+//            DispatchQueue.main.async() {
+//                let totalTime = object.getElapsedTime()!
+//                self.progressView.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
+//
+//                }
+//                let (hour,min,_) = self.secondsToHoursMinutesSeconds(seconds: Int(totalTime))
+//
+//                let myMutableString =  NSMutableAttributedString(
+//                    string: "\(self.timeText(hour)):\(self.timeText(min))",
+//                    attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
+//                let seconndMutableString =  NSMutableAttributedString(
+//                    string: " Total hours",
+//                    attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
+//                myMutableString.append(seconndMutableString)
+//                self.timeLabel.attributedText = myMutableString
+//                self.startTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
+//                self.endTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
+//                if let lastCheckinTime = object.getLastCheckinTime() {
+//                    self.lastCheckinLabel.text = "You were last seen at \(self.currentTime(time: lastCheckinTime)) "
+//                }else{
+//                    self.lastCheckinLabel.text = "No checkins for today"
+//                }
+//                self.lastCheckinAddressLabel.numberOfLines = 0
+//                self.lastCheckinAddressLabel.lineBreakMode = .byWordWrapping
+//                self.lastCheckinAddressLabel.adjustsFontSizeToFitWidth = true
+//                self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()?.capitalized
+//                self.updateFrequencyBar(mData: object)
+//            }
+//        }
+//
+//
+//
+//
+//    }
     
     func getDateInAMPM(date:Date)->String{
         print(date)
@@ -250,30 +271,30 @@ class NewCheckoutViewController: UIViewController {
     }
     
     
-    func updateFrequencyBar(mData:FrequencyBarGraphData) {
-        var mRectList = [CGRect]()
-        
-        let viewWidth = frequencyBarView.frame.size.width;
-        let viewHeight =
-            frequencyBarView.frame.size.height;
-        let maxDuration = mData.getEndTime()! - mData.getStartTime()!;
-        let widthPerDuration =  viewWidth / CGFloat(maxDuration);
-        for  duration in mData.graphData {
-            
-            let left = Int(widthPerDuration * CGFloat(duration.getStartTime() - mData.getStartTime()!));
-            var right = Int(CGFloat(left) + (widthPerDuration * CGFloat(duration.getEndTime() - duration.getStartTime())));
-            let top = 0;
-            let bottom = viewHeight;
-            right = right - left < 1 ?  1 :  right - left;
-            
-            let rect = CGRect(x: left, y: top, width: right, height: Int(bottom))
-            //print(rect)
-            mRectList.append(rect)
-        }
-        let view = FrequencyGraphView(frame: CGRect(x: 0, y: 0, width: frequencyBarView.frame.width, height: frequencyBarView.frame.height), data: mRectList)
-        frequencyBarView.addSubview(view)
-        
-    }
+//    func updateFrequencyBar(mData:FrequencyBarGraphData) {
+//        var mRectList = [CGRect]()
+//        
+//        let viewWidth = frequencyBarView.frame.size.width;
+//        let viewHeight =
+//            frequencyBarView.frame.size.height;
+//        let maxDuration = mData.getEndTime()! - mData.getStartTime()!;
+//        let widthPerDuration =  viewWidth / CGFloat(maxDuration);
+//        for  duration in mData.graphData {
+//            
+//            let left = Int(widthPerDuration * CGFloat(duration.getStartTime() - mData.getStartTime()!));
+//            var right = Int(CGFloat(left) + (widthPerDuration * CGFloat(duration.getEndTime() - duration.getStartTime())));
+//            let top = 0;
+//            let bottom = viewHeight;
+//            right = right - left < 1 ?  1 :  right - left;
+//            
+//            let rect = CGRect(x: left, y: top, width: right, height: Int(bottom))
+//            //print(rect)
+//            mRectList.append(rect)
+//        }
+//        let view = FrequencyGraphView(frame: CGRect(x: 0, y: 0, width: frequencyBarView.frame.width, height: frequencyBarView.frame.height), data: mRectList)
+//        frequencyBarView.addSubview(view)
+//        
+//    }
     
     
     
@@ -317,7 +338,115 @@ class NewCheckoutViewController: UIViewController {
      }
      */
     
+//    let mapView1: GMSMapView = {
+//        let camera = GMSCameraPosition.camera(withLatitude: 51.527669000000003, longitude: -0.089038999999999993, zoom: 17)
+//        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+//        return mapView
+//    }()
+    
 }
+
+
+
+/* Changes made on 10 July '18 New Design */
+
+
+extension NewCheckoutViewController{
+    
+    func setupMap(){
+      
+       // mapView.changeStyle()
+        
+        let marker = GMSMarker()
+       
+        
+        
+        
+        var locationManage = CLLocationManager()
+         locationManage.location?.coordinate.latitude
+        
+        
+        
+        
+        
+        if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
+           
+            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            marker.title = "Sydney"
+            marker.snippet = "Australia"
+            marker.icon = #imageLiteral(resourceName: "locationBlack")
+            marker.map = mapView
+            
+            
+            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
+            mapView.camera = camera
+        }
+        
+        
+        
+        
+    }
+    
+    func addGestureInContainerView(){
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        userLocationContainerView.addGestureRecognizer(tapGesture)
+        
+        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
+        downGesture.direction = .up
+        
+        userLocationContainerView.addGestureRecognizer(downGesture)
+        
+    }
+    
+    @objc func handleTap(){
+        
+        print("View Tapped")
+        
+        if userLocationCardHeightAnchor.constant == 49 {
+            animateContainerView(heightToAnimate: 450)
+        }else{
+            // 400
+            userContainerView?.tableView.isScrollEnabled = true
+            animateContainerView(heightToAnimate: 49)
+        }
+        
+        
+    }
+    
+    func animateContainerView(heightToAnimate height: CGFloat){
+        
+        UIView.animate(withDuration: 0.5) {
+            self.userLocationCardHeightAnchor.constant = height
+            self.view.layoutIfNeeded()
+            
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "containerViewSegue"{
+            userContainerView = segue.destination as! NewCheckOutUserScreen
+            userContainerView?.delegate = self
+        }
+    }
+    
+    
+}
+
+
+extension NewCheckoutViewController: HandleUserViewDelegate{
+   
+    func handleOnSwipe() {
+       // userLocationCardHeightAnchor.constant += 50
+        self.view.layoutIfNeeded()
+        handleTap()
+    }
+    
+    
+}
+
+
+
 
 
 

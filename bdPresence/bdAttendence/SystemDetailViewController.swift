@@ -15,31 +15,46 @@ class SystemDetailViewController: UIViewController {
     @IBOutlet weak var systemTableview: UITableView!
     var systemDetail = [String]()
     
-    var imageIcons :[UIImage] = [#imageLiteral(resourceName: "pending_checkin"),#imageLiteral(resourceName: "pending_checkin"),#imageLiteral(resourceName: "sync")]
+    var imageIcons :[UIImage] = [#imageLiteral(resourceName: "syncImage"),#imageLiteral(resourceName: "syncImage"),#imageLiteral(resourceName: "pendingImage"),#imageLiteral(resourceName: "notouchImage")]
+    
         var longPressGesture :UILongPressGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+        
+        navigationController?.removeTransparency()
+        setupController()
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
+        
+        
+
+        // Do any additional setup after loading the view.
+    }
+
+    
+    func setupController(){
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sync"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(sync(sender:)))
+       // self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sync"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(sync(sender:)))
         self.navigationItem.title = "System Details"
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         systemTableview.delegate = self
         systemTableview.dataSource = self
         systemTableview.tableFooterView = UIView()
         systemTableview.allowsSelection = false
+        
+        systemTableview.register(UINib(nibName: "SystemSettingsCell", bundle: nil), forCellReuseIdentifier: "SystemSettingsCell")
+        
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.lightGray
         refreshControl.addTarget(self, action: #selector(refresh(refreshControl:)), for: .valueChanged)
         systemTableview.addSubview(refreshControl)
         longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         updateData()
-
-        // Do any additional setup after loading the view.
     }
-
+    
+    
+    
     func sync(sender:UIBarButtonItem){
         if isInternetAvailable(){
             
@@ -198,17 +213,28 @@ class SystemDetailViewController: UIViewController {
 
 extension SystemDetailViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return systemDetail.count
+        return imageIcons.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / 7
+        return 49
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "systemdetailCell", for: indexPath as IndexPath)
-        cell.textLabel?.font = APPFONT.DAYHOURTEXT
-        cell.textLabel?.text = systemDetail[indexPath.row]
-        cell.textLabel?.numberOfLines = 0
-        cell.imageView?.image = imageIcons[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SystemSettingsCell", for: indexPath as IndexPath) as! SystemSettingsCell
+        cell.headerLabel.font = APPFONT.HELPTEXT
+        cell.headerLabel.textColor = UIColor(hex: "333333")
+        cell.valueLabel.textColor =  UIColor(hex: "a9a9a9")
+        cell.valueLabel.font = APPFONT.HELPTEXT
+//        cell.headingLabel.text = "Status"
+//        cell.valueLabel.text = "Available"
+        
+        cell.imageView?.image = imageIcons[indexPath.item]
+        cell.headerLabel.text = ["Auto sync status", "Last synced", "Pending check ins", "No touch mode"][indexPath.item]
+        
+        
+//        cell.textLabel?.font = APPFONT.DAYHOURTEXT
+//        cell.textLabel?.text = systemDetail[indexPath.row]
+//        cell.textLabel?.numberOfLines = 0
+//        cell.imageView?.image = imageIcons[indexPath.row]
 //        if indexPath.row == 1{
 //            cell.addGestureRecognizer(longPressGesture!)
 //

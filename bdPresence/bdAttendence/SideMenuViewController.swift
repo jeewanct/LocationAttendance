@@ -19,14 +19,15 @@ class SideMenuViewController: UIViewController  {
         @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var userImageView: UIImageView!
         var menuindex = 0
-        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.ThisWeek.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ContactUs.rawValue,SideMenuOptions.Transmit.rawValue]
+        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.HistoricData.rawValue, SideMenuOptions.MyTeam.rawValue,SideMenuOptions.Locations.rawValue,SideMenuOptions.MyProfile.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ContactUs.rawValue]
+    
         override func viewDidLoad() {
             super.viewDidLoad()
             if !SDKSingleton.sharedInstance.transmitter{
-                sideMenuOptionsArray.remove(at: sideMenuOptionsArray.index(of: SideMenuOptions.Transmit.rawValue)!)
+               //sideMenuOptionsArray.remove(at: sideMenuOptionsArray.index(of: SideMenuOptions.Transmit.rawValue)!)
             }
 
-            userImageView.layer.cornerRadius = 50.0
+            userImageView.layer.cornerRadius = 30
             self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
             
             
@@ -131,7 +132,7 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / 7
+        return 49
     }
     
     
@@ -160,14 +161,23 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
         {
         case SideMenuOptions.MyDashboard.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+        case SideMenuOptions.HistoricData.rawValue:
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: self, userInfo: nil)
         case SideMenuOptions.SystemDetail.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.SystemDetail.rawValue), object: self, userInfo: nil)
-        case SideMenuOptions.ThisWeek.rawValue:
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: self, userInfo: nil)
+        case SideMenuOptions.MyProfile.rawValue:
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MyProfile"), object: nil)
+            
+        case SideMenuOptions.Locations.rawValue:
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Location.rawValue), object: self, userInfo: nil)
+        case SideMenuOptions.MyTeam.rawValue:
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.MyTeam.rawValue), object: self, userInfo: nil)
+//        case SideMenuOptions.ThisWeek.rawValue:
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ThisWeek.rawValue), object: self, userInfo: nil)
       case SideMenuOptions.ContactUs.rawValue :
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.ContactUs.rawValue), object: self, userInfo: nil)
-        case SideMenuOptions.Transmit.rawValue:
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: self, userInfo: nil)
+//        case SideMenuOptions.Transmit.rawValue:
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.VirtualBeacon.rawValue), object: self, userInfo: nil)
             break
         default:
             break
