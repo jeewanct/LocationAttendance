@@ -26,6 +26,7 @@ class NewLoginViewController: UIViewController {
         self.mobileTextfield.font = APPFONT.BODYTEXT
         mobileTextfield.delegate = self
          createGradientLayer()
+        
         // Do any additional setup after loading the view.
         
         /* Changes made on 10 July '18 */

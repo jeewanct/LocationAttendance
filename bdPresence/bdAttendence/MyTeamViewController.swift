@@ -26,6 +26,7 @@ class MyTeamViewController: UIViewController{
         setupNavigation()
         getTeamLocation()
         print("the base url is ", CONFIG.APIURL)
+        SDKSingleton.sharedInstance.organizationId
     }
     
 }
