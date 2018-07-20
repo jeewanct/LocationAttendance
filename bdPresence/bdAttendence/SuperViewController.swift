@@ -139,11 +139,11 @@ class SuperViewController: UIViewController {
                         } else if screenFlag == "2" {
                             // automatic checkin function
                             //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
-
+                            bdCloudStartMonitoring()
+                            
                             appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
                             // New change - 20/06/2018
                             //Here we have to send one location checkin also
-                            bdCloudStartMonitoring()
                             
                             //then set defaults value to 1
                             // sending userinfo which will tell dashboard to work accordingly
