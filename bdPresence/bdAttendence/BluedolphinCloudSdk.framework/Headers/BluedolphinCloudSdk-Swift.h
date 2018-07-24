@@ -383,6 +383,12 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk12LocationData")
 @end
 
 
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk11MyTeamModel")
+@interface MyTeamModel : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk8OTPModel")
