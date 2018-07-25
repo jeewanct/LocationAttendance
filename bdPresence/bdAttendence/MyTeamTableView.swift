@@ -7,10 +7,15 @@
 //
 
 import UIKit
-
+import BluedolphinCloudSdk
 class MyTeamTableView: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
+    var teamData: [MyTeamDocument]?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
     var delegate: HandleUserViewDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +38,7 @@ extension MyTeamTableView: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return teamData?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -47,7 +52,28 @@ extension MyTeamTableView: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyTeamTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyTeamTableViewCell", for: indexPath) as! MyLocationTableViewCell
+        setTeamDetails(cell: cell, indexPath: indexPath)
         return cell
     }
+    
+    func setTeamDetails(cell: MyLocationTableViewCell, indexPath: IndexPath){
+        
+        if let teamMember = teamData?[indexPath.item].userDetails?.name{
+            
+            var userName = ""
+            if let firstname = teamMember["first"]{
+                userName = firstname + " "
+            }
+            
+            if let lastname = teamMember["last"]{
+                userName = userName + lastname
+            }
+            
+            cell.nameLabel.text = userName
+        }
+        
+    }
+    
+    
 }

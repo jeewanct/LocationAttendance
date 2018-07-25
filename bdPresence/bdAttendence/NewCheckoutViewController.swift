@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import BluedolphinCloudSdk
 import GoogleMaps
-
+import Alamofire
 
 
 class NewCheckoutViewController: UIViewController {
@@ -50,6 +50,7 @@ class NewCheckoutViewController: UIViewController {
 //        navigationController?.navigationBar.shadowImage = UIImage()
 //        navigationController?.navigationBar.isTranslucent = true
         
+     
         
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
@@ -69,6 +70,8 @@ class NewCheckoutViewController: UIViewController {
 //        checkoutButton.image = imageRotated
         endYourDayLabel.font = APPFONT.DAYHEADER
       //  lastCheckinLabel.font = APPFONT.DAYHOURTEXT
+       
+        
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
@@ -213,19 +216,183 @@ class NewCheckoutViewController: UIViewController {
         }
 
 
+        plotMarkers(date: date)
         //createFrequencybarView(date: date)
     }
     
-//    func createFrequencybarView(date:Date){
-//        let queue = DispatchQueue.global(qos: .userInteractive)
+    func plotMarkers(date: Date){
+        
+        let queue = DispatchQueue.global(qos: .userInteractive)
+        
+        queue.async {
+            let locations = UserDayData.getLocationData(date: date)
+            
+            DispatchQueue.main.async() {
+                
+                if let getLocations = locations{
+                    self.removeUnneccessaryLocationsWithAccuracy(locations: getLocations)
+                }
+                
+                
+                
+            }
+        }
+    }
+    
+    func removeUnneccessaryLocationsWithAccuracy(locations: [LocationDataModel]){
+     
+        var updatedLocations = [LocationDataModel]()
+        for location in locations{
+            
+            if let getAccuracy = location.accuracy, let accuracy = Float(getAccuracy){
+                
+                if accuracy > 700{
+                    
+                }else{
+                    updatedLocations.append(location)
+                }
+            }
+        }
+        
+        
+        let finalLocations = removeUnnecessaryLocationWithTime(locations: updatedLocations)
+        print("After removing locations", finalLocations)
+        
+        
+        
+    }
+    
+    func removeUnnecessaryLocationWithTime(locations: [LocationDataModel]) -> [LocationDataModel]{
+        
+        var updatedLocations = [LocationDataModel]()
+        
+      
+            
+            for index1 in 0..<locations.count - 1{
+                
+                if let firstLocation = locations[index1].lastSeen, let secondLocation = locations[index1 + 1].lastSeen{
+                    
+                    let timeDifference = getTime(date: secondLocation) - getTime(date: firstLocation)
+                    
+                    if timeDifference == 0 || timeDifference > 8000{
+                        
+                        // hit Google Api
+                        
+                        
+                        if let firstLat = locations[index1].latitude, let firstLong =  locations[index1].longitude, let secondLat = locations[index1 + 1].latitude, let secondLong = locations[index1 + 1].longitude{
+                            
+                            let url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=\(firstLat),\(firstLong)&destinations=\(secondLat),\(secondLong)&key=AIzaSyAEHGCnCX0R__be18wIL8sZ9UVhPO6bbAo&departure_time=1727491194&traffic_model=optimistic"
+                            
+                             findApproxTimeToTravel(timeDifference: timeDifference, url: url)
+                            
+                        }
+                        
+                    }else{
+                        
+                        updatedLocations.append(locations[index1])
+                        
+                    }
+                    
+                    
+                }
+            }
+            
+        
+        
+        return updatedLocations
+        
+    }
+    
+    func findApproxTimeToTravel(timeDifference: Int, url: String) -> Bool{
+        
+        var isUsed  = false
+        
+        Networking.fetchGenericData(url, header: [:], success: { (timeRequired: GoogleDistanceCoveredTimeModel) in
+            
+            print(dump(timeRequired))
+            
+            
+            isUsed = self.discardLocationUsingGoogle(timeRequired: timeRequired.rows, timeDifference : timeDifference)
+            
+            
+        }) { (error) in
+            
+        }
+        
+        return isUsed
+        
+    }
+    
+    func discardLocationUsingGoogle(timeRequired: [GoogleRowModel]?, timeDifference : Int) -> Bool{
+        
+        
+        guard let googleTimeArray = timeRequired else{
+            return false
+        }
+        
+        var timeTaken = 0
+        
+        for timeArray in googleTimeArray{
+            
+            if let elements = timeArray.elements{
+                
+                for element in elements{
+                    
+                    if let getTime = element.duration?.value{
+                        timeTaken = timeTaken + getTime
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        if 0.45 * Double(timeTaken) > Double(timeDifference){
+            return false
+        }
+        
+        return true
+        
+    }
+    
+    func getTime(date: Date) -> Int{
+        
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        
+        return hour * 60 * 60 + minutes * 60 + seconds
+        
+        
+    }
+    
+    
+    func createFrequencybarView(date:Date){
+        let queue = DispatchQueue.global(qos: .userInteractive)
+
+
+
+        // submit a task to the queue for background execution
+        queue.async() {
+            let object = UserDayData.getFrequencyLocationBarData(date:date)
+            print(object)
+            
+            
+            DispatchQueue.main.async() {
+                
+            
+//                let latitudeData = attendanceLogForToday.locationList.sorted(byKeyPath: "latitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
 //
-//
-//
-//        // submit a task to the queue for background execution
-//        queue.async() {
-//            let object = UserDayData.getFrequencyLocationBarData(date:date)
-//            print(object)
-//            DispatchQueue.main.async() {
+//                let longitueData = attendanceLogForToday.locationList.sorted(byKeyPath: "longitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                
+                
+                
+                
+                
+                
 //                let totalTime = object.getElapsedTime()!
 //                self.progressView.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
 //
@@ -252,13 +419,13 @@ class NewCheckoutViewController: UIViewController {
 //                self.lastCheckinAddressLabel.adjustsFontSizeToFitWidth = true
 //                self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()?.capitalized
 //                self.updateFrequencyBar(mData: object)
-//            }
-//        }
-//
-//
-//
-//
-//    }
+            }
+        }
+
+
+
+
+    }
     
     func getDateInAMPM(date:Date)->String{
         print(date)
@@ -447,6 +614,60 @@ extension NewCheckoutViewController: HandleUserViewDelegate{
 
 
 
+class Networking{
+
+class func fetchGenericData<T: Decodable>(_ strURL: String,header:[String: String], success:@escaping (T) -> Void, failure:@escaping (Error) -> Void) {
+    print(strURL)
+    print(header)
+    Alamofire.request(strURL,headers: header as? HTTPHeaders).responseJSON { (responseObject) -> Void in
+        
+        print(responseObject)
+        
+        
+        if responseObject.result.isSuccess {
+            if let responseData = responseObject.data{
+                
+                do{
+                    let jsonData = try JSONDecoder().decode(T.self, from: responseData)
+                    success(jsonData)
+                }catch let jsonError{
+                    failure(jsonError)
+                }
+            }
+        }
+        if responseObject.result.isFailure {
+            let error : Error = responseObject.result.error!
+            failure(error)
+        }
+        
+        
+    }
+}
+
+}
+
+
+class GoogleDistanceCoveredTimeModel: Decodable{
+    
+    var rows : [GoogleRowModel]?
+}
+
+class GoogleRowModel: Decodable{
+    
+    var elements: [GoogleElementsModel]?
+}
+
+class GoogleElementsModel: Decodable{
+    
+    var duration: GoogleDurationModel?
+}
+
+
+class GoogleDurationModel: Decodable{
+    
+    var  text : String?
+    var value : Int?
+}
 
 
 

@@ -30,9 +30,6 @@
 		992F2D4820F60877009E1213 /* MyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992F2D4720F60877009E1213 /* MyLocationViewController.swift */; };
 		99482F4D20F87F1900324AE5 /* SystemSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99482F4C20F87F1900324AE5 /* SystemSettingsCell.swift */; };
 		99482F4F20F87F3C00324AE5 /* SystemSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99482F4E20F87F3C00324AE5 /* SystemSettingsCell.xib */; };
-		99482F5320F8913B00324AE5 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99482F5220F8913A00324AE5 /* BluedolphinCloudSdk.framework */; };
-		99482F5420F8948300324AE5 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99482F5220F8913A00324AE5 /* BluedolphinCloudSdk.framework */; };
-		99482F5520F8948300324AE5 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 99482F5220F8913A00324AE5 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		99482F5720F8AB7D00324AE5 /* MyTeamLocationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99482F5620F8AB7D00324AE5 /* MyTeamLocationDetails.swift */; };
 		99482F5920F8BB0B00324AE5 /* MyLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99482F5820F8BB0B00324AE5 /* MyLocationTableViewCell.swift */; };
 		99576C071F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99576C061F0BBC6F00A53A4C /* SourceSansPro-ExtraLight.ttf */; };
@@ -94,6 +91,10 @@
 		99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0C91EFBCB840022AF61 /* SuperViewController.swift */; };
 		99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */; };
 		99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */; };
+		A52B90672101E2EE005056AB /* MyTeamViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52B90662101E2EE005056AB /* MyTeamViewCell.swift */; };
+		A5952A232105F2CB005E6108 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */; };
+		A5952A242105F2D7005E6108 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */; };
+		A5952A252105F2D7005E6108 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C89A35D320C16AC7000D5FFD /* BackgroundDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */; };
 		C8CBF8D420E3CB4A00D84C89 /* ReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CBF8D320E3CB4A00D84C89 /* ReleaseType.swift */; };
 		D8C205C7086D060A42B8A17C /* Pods_bdPresenceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EE7A650801BE90DFD757D6 /* Pods_bdPresenceTests.framework */; };
@@ -123,7 +124,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				99482F5520F8948300324AE5 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				A5952A252105F2D7005E6108 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,7 +159,6 @@
 		992F2D4720F60877009E1213 /* MyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationViewController.swift; sourceTree = "<group>"; };
 		99482F4C20F87F1900324AE5 /* SystemSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettingsCell.swift; sourceTree = "<group>"; };
 		99482F4E20F87F3C00324AE5 /* SystemSettingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SystemSettingsCell.xib; sourceTree = "<group>"; };
-		99482F5220F8913A00324AE5 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		99482F5620F8AB7D00324AE5 /* MyTeamLocationDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamLocationDetails.swift; sourceTree = "<group>"; };
 		99482F5820F8BB0B00324AE5 /* MyLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationTableViewCell.swift; sourceTree = "<group>"; };
 		99576C051F0BBA0100A53A4C /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
@@ -231,6 +231,8 @@
 		99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCheckoutViewController.swift; sourceTree = "<group>"; };
 		9E064E113D673F4D27DE4C78 /* Pods-bdPresence.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.debug.xcconfig"; sourceTree = "<group>"; };
 		A084A320988D78FF201876B4 /* Pods-bdPresenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A52B90662101E2EE005056AB /* MyTeamViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamViewCell.swift; sourceTree = "<group>"; };
+		A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		BF9692C2CF1E754CA931DA3B /* Pods-bdPresenceTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.alpha.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.alpha.xcconfig"; sourceTree = "<group>"; };
 		C1DDC1645746106604EC0F12 /* Pods-bdPresence.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.alpha.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.alpha.xcconfig"; sourceTree = "<group>"; };
 		C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDebug.swift; sourceTree = "<group>"; };
@@ -244,8 +246,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99482F5320F8913B00324AE5 /* BluedolphinCloudSdk.framework in Frameworks */,
-				99482F5420F8948300324AE5 /* BluedolphinCloudSdk.framework in Frameworks */,
+				A5952A232105F2CB005E6108 /* BluedolphinCloudSdk.framework in Frameworks */,
+				A5952A242105F2D7005E6108 /* BluedolphinCloudSdk.framework in Frameworks */,
 				42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +303,7 @@
 				99068B1B20F7363A0018D3B8 /* MyTeamViewController.swift */,
 				99068B1D20F742CB0018D3B8 /* MyTeamTableView.swift */,
 				99482F5620F8AB7D00324AE5 /* MyTeamLocationDetails.swift */,
+				A52B90662101E2EE005056AB /* MyTeamViewCell.swift */,
 			);
 			name = NewDesign;
 			sourceTree = "<group>";
@@ -317,7 +320,6 @@
 			isa = PBXGroup;
 			children = (
 				999FB43320F61368000ABA7D /* BDFF-README.md */,
-				99482F5220F8913A00324AE5 /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD399F1EA49B7100B6942B /* Products */,
 				C651DF381E775D951C454493 /* Pods */,
@@ -338,6 +340,7 @@
 		99BD39A01EA49B7100B6942B /* bdAttendence */ = {
 			isa = PBXGroup;
 			children = (
+				A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */,
 				9924EEA920F8722000B0A661 /* GifImages */,
 				99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */,
 				99CA967B1F021E2A00E2813B /* Storyboard */,
@@ -544,7 +547,7 @@
 				TargetAttributes = {
 					99BD399D1EA49B7100B6942B = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 9S8FZ5YMQ4;
+						DevelopmentTeam = 59GX6F36RM;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -797,6 +800,7 @@
 				99BC35071F275A8800A59A4A /* DayCollectionViewCell.swift in Sources */,
 				999FB43220F60C0A000ABA7D /* MyLocationTableView.swift in Sources */,
 				99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */,
+				A52B90672101E2EE005056AB /* MyTeamViewCell.swift in Sources */,
 				99CCF2441F2A1E56008947FA /* TimeLineTableViewCell.swift in Sources */,
 				996953211F13BC25000A6C26 /* Broadcaster.swift in Sources */,
 				99BD39D01EA4A23800B6942B /* CustomButton.swift in Sources */,
@@ -1005,7 +1009,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				DEVELOPMENT_TEAM = 59GX6F36RM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1023,7 +1027,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDEBUG $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.poc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdFieldForce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1043,7 +1047,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				DEVELOPMENT_TEAM = 59GX6F36RM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1061,7 +1065,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DRELEASE $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.poc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdFieldForce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1212,7 +1216,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				DEVELOPMENT_TEAM = 59GX6F36RM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1230,7 +1234,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DALPHA $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.poc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdFieldForce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

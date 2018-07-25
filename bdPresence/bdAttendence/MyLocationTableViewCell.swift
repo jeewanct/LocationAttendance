@@ -10,6 +10,8 @@ import UIKit
 
 class MyLocationTableViewCell: UITableViewCell{
     
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
     }

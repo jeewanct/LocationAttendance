@@ -6,4 +6,13 @@
 //  Copyright © 2018 Raghvendra. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+
+class MyTeamViewCell: UITableViewCell{
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+}

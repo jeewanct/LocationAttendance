@@ -2870,6 +2870,9 @@ mark your presence at your workplace</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="Z2m-fb-0P2" id="Q6G-Rs-jgE"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -2960,6 +2963,6 @@ mark your presence at your workplace</string>
         <image name="unquote" width="21" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="228-Kj-YEd"/>
+        <segue reference="9gI-Lp-NYu"/>
     </inferredMetricsTieBreakers>
 </document>
