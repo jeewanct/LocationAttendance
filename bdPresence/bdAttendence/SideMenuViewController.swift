@@ -169,7 +169,7 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MyProfile"), object: nil)
             
         case SideMenuOptions.Locations.rawValue:
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Location.rawValue), object: self, userInfo: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.MyLocation.rawValue), object: self, userInfo: nil)
         case SideMenuOptions.MyTeam.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.MyTeam.rawValue), object: self, userInfo: nil)
 //        case SideMenuOptions.ThisWeek.rawValue:

@@ -62,6 +62,7 @@ class HistoryViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
 //        var insets = self.calenderView.contentInset
 //        //let value = (self.calenderView.frame.size.height - (self.calenderView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize.height)
 //        insets.top = 0.0
@@ -106,7 +107,7 @@ class HistoryViewController: UIViewController {
             self.collectionView(calenderView, didSelectItemAt: indexPath)
             
             calenderView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.bottom)
-            //updateView()
+            updateView()
         }
     }
     
@@ -124,20 +125,26 @@ class HistoryViewController: UIViewController {
     
     func updateView(date:Date = Date()){
         
-//        progressBar.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
-//        progressBar.innerRingColor = APPColor.newGreen
-//
-//        createbarchartView(date: date)
+        //progressBar.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
+        //progressBar.innerRingColor = APPColor.newGreen
+
+        createbarchartView(date: date)
     }
     
-//    func createbarchartView(date:Date){
+    func createbarchartView(date:Date){
+        
+        
+        let object = UserDayData.getFrequencyLocationBarData(date:date)
+        
+        print("The data object is ", dump(object))
+        
 //        let queue = DispatchQueue.global(qos: .userInteractive)
 //
 //
 //
 //        // submit a task to the queue for background execution
 //        queue.async() {
-//          let object = UserDayData.getFrequencyLocationBarData(date:date)
+//           let object = UserDayData.getFrequencyLocationBarData(date:date)
 //            DispatchQueue.main.async() {
 //                let totalTime = object.getElapsedTime()!
 ////                if totalTime == 0{
@@ -166,13 +173,13 @@ class HistoryViewController: UIViewController {
 //                self.addressLabel.text = object.getLastCheckInAddress()?.capitalized
 //                self.updateFrequencyBar(mData: object)
 //            }
-//
-//        }
-//
-//
-//
-//
-//    }
+
+      //  }
+
+
+
+
+    }
     
     func getDateInAMPM(date:Date)->String{
         print(date)
@@ -322,12 +329,8 @@ extension HistoryViewController{
         let marker = GMSMarker()
         
         
-        
-        
         var locationManage = CLLocationManager()
         locationManage.location?.coordinate.latitude
-        
-        
         
         if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
             

@@ -101,7 +101,7 @@ class SuperViewController: UIViewController {
         
         /* Changes made from 10 July '18 */
         
-        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Location.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyLocation.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyTeam.rawValue), object: nil)
         
         
@@ -118,7 +118,10 @@ class SuperViewController: UIViewController {
         
         rmcNotifier.notifyUserForStartScanning(notifying: notify, completion:{ (notifier) in
             print("notify response = \(notifier)")
+            
             print(UserDefaults.standard.value(forKey: "AlreadyCheckin") as? String)
+            
+            
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             let tempNotifier = notifier as [String : AnyObject]
@@ -333,7 +336,9 @@ extension SuperViewController{
 //            UIApplication.shared.scheduleLocalNotification(notification)
             let message = NotificationMessage.AttendanceMarked.rawValue + "\(Date().formatted)"
             self.showAlert(message )
-//            
+//
+            
+            
         }
         
         
@@ -597,7 +602,7 @@ extension SuperViewController {
             changeChildController(identifier: .myprofile)
             
             /* Changes made from 10 July '18 */
-        case LocalNotifcation.Location.rawValue:
+        case LocalNotifcation.MyLocation.rawValue:
             changeChildController(identifier: .myLocation)
         case LocalNotifcation.MyTeam.rawValue:
             changeChildController(identifier: .myTeam)

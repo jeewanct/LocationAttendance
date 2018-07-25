@@ -12,6 +12,22 @@ import BluedolphinCloudSdk
 
 
 
+
+class LocationDataModel{
+
+    var lastSeen: Date?
+    var accuracy: String?
+    var altitude: String?
+    var userId: String?
+    var organizationId: String?
+    var checkinId: String?
+    var latitude: String?
+    var longitude: String?
+    var details: String?
+}
+
+
+
 class GraphData:NSObject {
     fileprivate var startTime:TimeInterval?
     fileprivate var endTime:TimeInterval?
@@ -34,6 +50,8 @@ class FrequencyBarGraphData :NSObject  {
     fileprivate var elapsedTime:TimeInterval?
     fileprivate var lastCheckinTime:TimeInterval?
     fileprivate var lastCheckInAddress:String?
+    
+    
     var graphData = [GraphData]()
     
     public func getStartTime()->TimeInterval? {
@@ -107,6 +125,7 @@ class UserDayData {
                 
                 
                 print("============")
+                
                 //print(beaconData)
                 for i in 0..<beaconData.count{
                     let beaconObject = beaconData[i]
@@ -163,9 +182,51 @@ class UserDayData {
                 
             }
         }
+        
+        
         return frequencyGraphData
         
     }
+    
+    
+    
+    class func getLocationData(date: Date) -> [LocationDataModel]?{
+        
+        let realm = try! Realm()
+        let weekDay = Calendar.current.component(.weekday, from: date)
+        let weekOfYear = Calendar.current.component(.weekOfYear, from: date)
+        
+        if let attendanceLogForToday = realm.objects(LocationAttendanceLog.self).filter("dayofWeek = %@","\(weekDay)").first {
+            if weekOfYear == Calendar.current.component(.weekOfYear, from: attendanceLogForToday.timeStamp!){
+                let locationData = attendanceLogForToday.locationList.sorted(byKeyPath: "latitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                var locationDataArray = [LocationDataModel]()
+                
+                for index in 0..<locationData.count{
+                 
+                    let locationValue = LocationDataModel()
+                    locationValue.accuracy = locationData[index].accuracy
+                    locationValue.altitude = locationData[index].altitude
+                    locationValue.checkinId = locationData[index].checkinId
+                    locationValue.details = locationData[index].details
+                    locationValue.lastSeen = locationData[index].lastSeen
+                    locationValue.latitude = locationData[index].latitude
+                    locationValue.longitude = locationData[index].longitude
+                    locationValue.userId = locationData[index].userId
+                    locationValue.organizationId = locationData[index].organizationId
+                    
+                    locationDataArray.append(locationValue)
+                }
+                return locationDataArray
+                
+            }
+            
+        }
+        
+        return nil
+        
+    }
+    
+    
     class func getFrequencyLocationBarData(date:Date) ->FrequencyBarGraphData{
         
         
@@ -192,64 +253,87 @@ class UserDayData {
                 let beaconData = attendanceLogForToday.locationList.sorted(byKeyPath: "lastSeen", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
                 
                 
+                let latitudeData = attendanceLogForToday.locationList.sorted(byKeyPath: "latitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                
+                let longitueData = attendanceLogForToday.locationList.sorted(byKeyPath: "longitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                
                 
                 print("============")
-                //print(beaconData)
-                for i in 0..<beaconData.count{
-                    let beaconObject = beaconData[i]
-                    if i == 0{
-                        if (beaconObject.lastSeen?.timeIntervalSince1970)! < slotStartTime{
-                            let dateComponents =  calendar.dateComponents([.hour,.minute], from: beaconObject.lastSeen!)
-                            let newStartTime = beaconObject.lastSeen?.dateAt(hours: dateComponents.hour!, minutes: 0)
-                            //                            let newValue =  Calendar.current.date(byAdding: .hour, value: -1, to: newStartTime!)
-                            frequencyGraphData.setStartTime(startTime: newStartTime!.timeIntervalSince1970)
-                        }
-                    }
-                    if i == beaconData.count - 1 {
-                        if (beaconObject.lastSeen?.timeIntervalSince1970)! > slotEndTime{
-                            let dateComponents =  calendar.dateComponents([.hour,.minute], from: beaconObject.lastSeen!)
-                            let newEndTime = beaconObject.lastSeen?.dateAt(hours: dateComponents.hour!, minutes: 0)
-                            let newValue =  Calendar.current.date(byAdding: .hour, value: 1, to: newEndTime!)
-                            frequencyGraphData.setEndTime(endTime: newValue!.timeIntervalSince1970)
-                        }
-                    }
-                    let  frequencyStartTime = beaconObject.lastSeen?.timeIntervalSince1970
-                    var  frequencyEndTime = frequencyStartTime
-                    
-                    if  i+1 < beaconData.count{
-                        
-                        let nextBeacon = beaconData[i+1]
-                        let timeDifference = getBeaconTimeDifference(timePrev: frequencyStartTime!, timeNext: nextBeacon.lastSeen!.timeIntervalSince1970)
-                        
-                        frequencyEndTime = frequencyStartTime! + timeDifference
-                        
-                    }
-                    frequencyGraphData.graphData.append(GraphData(sTime: frequencyStartTime!, eTime: frequencyEndTime!))
-                    if (lastCheckInRecorded != 0) {
-                        // check how much time elapsed
-                        let elapsedTimeNow = getElapsedTime(previousCheckInTime: lastCheckInRecorded, currentCheckInTime: frequencyStartTime!);
-                        elapsedTime =  elapsedTime + elapsedTimeNow;
-                    }
-                    // if (isToday) {
-                    frequencyGraphData.setLastCheckinTime(lastCheckinTime: frequencyStartTime!);
-                    // }
-                    
-                    lastCheckInRecorded = frequencyStartTime!
-                    
-                    if (i == beaconData.count - 1) {
-                        
-                            
-                            frequencyGraphData.setLastCheckInAddress(lastCheckInAddress: CurrentLocation.address)
-                            
-                        
-                    }
-                }
-                frequencyGraphData.setElapsedTime(elapsedTime: elapsedTime);
+             
+                print(latitudeData)
+                print(longitueData)
                 
-            }else{
+                for lat in 0..<latitudeData.count{
+                    
+                    
+                }
+                
+                for long in 0..<longitueData.count{
+                    
+                    
+                }
                 
             }
+            
         }
+                
+//                //print(beaconData)
+//                for i in 0..<beaconData.count{
+//                    let beaconObject = beaconData[i]
+//                    if i == 0{
+//                        if (beaconObject.lastSeen?.timeIntervalSince1970)! < slotStartTime{
+//                            let dateComponents =  calendar.dateComponents([.hour,.minute], from: beaconObject.lastSeen!)
+//                            let newStartTime = beaconObject.lastSeen?.dateAt(hours: dateComponents.hour!, minutes: 0)
+//                            //                            let newValue =  Calendar.current.date(byAdding: .hour, value: -1, to: newStartTime!)
+//                            frequencyGraphData.setStartTime(startTime: newStartTime!.timeIntervalSince1970)
+//
+//                        }
+//                    }
+//                    if i == beaconData.count - 1 {
+//                        if (beaconObject.lastSeen?.timeIntervalSince1970)! > slotEndTime{
+//                            let dateComponents =  calendar.dateComponents([.hour,.minute], from: beaconObject.lastSeen!)
+//                            let newEndTime = beaconObject.lastSeen?.dateAt(hours: dateComponents.hour!, minutes: 0)
+//                            let newValue =  Calendar.current.date(byAdding: .hour, value: 1, to: newEndTime!)
+//                            frequencyGraphData.setEndTime(endTime: newValue!.timeIntervalSince1970)
+//                        }
+//                    }
+//                    let  frequencyStartTime = beaconObject.lastSeen?.timeIntervalSince1970
+//                    var  frequencyEndTime = frequencyStartTime
+//
+//                    if  i+1 < beaconData.count{
+//
+//                        let nextBeacon = beaconData[i+1]
+//                        let timeDifference = getBeaconTimeDifference(timePrev: frequencyStartTime!, timeNext: nextBeacon.lastSeen!.timeIntervalSince1970)
+//
+//                        frequencyEndTime = frequencyStartTime! + timeDifference
+//
+//                    }
+//                    frequencyGraphData.graphData.append(GraphData(sTime: frequencyStartTime!, eTime: frequencyEndTime!))
+//                    if (lastCheckInRecorded != 0) {
+//                        // check how much time elapsed
+//                        let elapsedTimeNow = getElapsedTime(previousCheckInTime: lastCheckInRecorded, currentCheckInTime: frequencyStartTime!);
+//                        elapsedTime =  elapsedTime + elapsedTimeNow;
+//                    }
+//                    // if (isToday) {
+//                    frequencyGraphData.setLastCheckinTime(lastCheckinTime: frequencyStartTime!);
+//                    // }
+//
+//                    lastCheckInRecorded = frequencyStartTime!
+//
+//                    if (i == beaconData.count - 1) {
+//
+//
+//                            frequencyGraphData.setLastCheckInAddress(lastCheckInAddress: CurrentLocation.address)
+//
+//
+//                    }
+//                }
+//                frequencyGraphData.setElapsedTime(elapsedTime: elapsedTime);
+//
+//            }else{
+//
+//            }
+     // }
         return frequencyGraphData
         
     }

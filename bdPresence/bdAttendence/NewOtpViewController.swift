@@ -68,6 +68,10 @@ class NewOtpViewController: UIViewController {
          codeInputView.becomeFirstResponder()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        codeInputView.resignFirstResponder()
+    }
     func updateUser(updateflag:Bool = false){
         
         var deviceToken = "3273a5f0598cd8e9518ccf07c67fbdd1ebb079d2a95aa890e259a4b70ecad57e"

@@ -10,6 +10,9 @@ import UIKit
 import GoogleMaps
 import BluedolphinCloudSdk
 
+
+
+
 class MyTeamViewController: UIViewController{
     
     @IBOutlet weak var userLocationContainerView: UIView!
@@ -17,7 +20,8 @@ class MyTeamViewController: UIViewController{
     
     @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
     var userContainerView: MyTeamTableView?
-    
+    var teamData: [MyTeamDocument]?
+    //var errorView :ErrorScanView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +29,72 @@ class MyTeamViewController: UIViewController{
         addGestureInContainerView()
         setupNavigation()
         getTeamLocation()
-        print("the base url is ", CONFIG.APIURL)
-        SDKSingleton.sharedInstance.organizationId
+        
+       
+        
+    }
+    
+}
+
+extension MyTeamViewController{
+    
+    func addMarkersInMap(teamDetails: [MyTeamDocument]?){
+        
+        guard let getTeamDetails = teamDetails else {
+            return
+        }
+        
+        for teams in getTeamDetails{
+            
+            if let coordinates = teams.userStatus?.location?.coordinates{
+                
+                if coordinates.count == 2 {
+                    let long = coordinates[0]
+                    let lat = coordinates[1]
+                   
+                    
+                    let marker = GMSMarker()
+                    marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))
+                    
+                   // marker.title = "Sydney"
+                    marker.icon = #imageLiteral(resourceName: "employeeImage")
+                    marker.snippet = "Australia"
+                    marker.map = mapView
+                    
+                    if let name = teams.userDetails?.name{
+                        
+                        var userName = ""
+                        if let firstname = name["first"]{
+                            userName = firstname + " "
+                        }
+                        
+                        if let lastname = name["last"]{
+                            userName = userName + lastname
+                        }
+                        
+                        marker.title = userName
+                        
+                    }
+                    
+                    
+                    
+//                    let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long), zoom: 17.0)
+//                    mapView.camera = camera
+                }
+            }
+        }
+        
     }
     
 }
 
 
+
+
 extension MyTeamViewController{
+    
+    
+    
     
     func setupNavigation(){
         navigationController?.removeTransparency()
@@ -44,6 +106,19 @@ extension MyTeamViewController{
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }
+    
+    func showLoader(text:String = "Loading ..." ){
+        AlertView.sharedInstance.setLabelText(text)
+        AlertView.sharedInstance.showActivityIndicator(self.view)
+        let delay = 10.0 * Double(NSEC_PER_SEC)
+        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {
+            AlertView.sharedInstance.hideActivityIndicator(self.view)
+            //self.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    
     
     
 }
@@ -60,16 +135,12 @@ extension MyTeamViewController{
         
         // mapView.changeStyle()
         
-        let marker = GMSMarker()
+       
         let locationManage = CLLocationManager()
         
         if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
             
-            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            marker.title = "Sydney"
-            marker.icon = #imageLiteral(resourceName: "employeeImage")
-            marker.snippet = "Australia"
-            marker.map = mapView
+
             
             
             let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
@@ -144,6 +215,19 @@ extension MyTeamViewController: HandleUserViewDelegate{
 extension MyTeamViewController{
     func getTeamLocation(){
         
+        self.showLoader()
+        
+        
+        MyTeamModel.getTeamMember(completion: { (myTeamData) in
+            print("Team Member data is ",dump(myTeamData))
+            
+            self.teamData = myTeamData
+            self.addMarkersInMap(teamDetails: self.teamData)
+            self.userContainerView?.teamData = self.teamData
+        }) { (error) in
+            
+            print("the error in fetching team", error)
+        }
         
     }
 }
