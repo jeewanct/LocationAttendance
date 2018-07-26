@@ -167,6 +167,9 @@
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="handleClose:" destination="hxL-Uq-wHb" eventType="touchUpInside" id="lRn-wn-gse"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wpu-am-SK2">
                                 <rect key="frame" x="24" y="376.5" width="272" height="30"/>
@@ -207,6 +210,9 @@
                                 <rect key="frame" x="22" y="444" width="276" height="31"/>
                                 <color key="minimumTrackTintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="thumbTintColor" red="0.42352941176470588" green="0.72941176470588232" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="handleGeoFenceSlider:" destination="hxL-Uq-wHb" eventType="valueChanged" id="Cl4-cY-ja6"/>
+                                </connections>
                             </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -243,7 +249,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="1kl-Gx-t4b" id="S7K-za-4Au"/>
+                        <outlet property="currenLocationTextField" destination="Mug-7v-reD" id="vq5-bv-Nhs"/>
+                        <outlet property="doneButton" destination="LbA-to-qkn" id="cmk-XB-SSD"/>
+                        <outlet property="geoFenceRadiusDistance" destination="w5t-8P-CYD" id="AZu-Gj-UAz"/>
+                        <outlet property="geoFenceRadiusSlider" destination="MQN-6y-J9K" id="XVk-Fg-8TK"/>
                         <outlet property="mapView" destination="qjk-jU-ccr" id="Ias-6h-RNf"/>
+                        <outlet property="saveLocationTextField" destination="Wpu-am-SK2" id="imJ-W9-rUA"/>
+                        <outlet property="visualEffect" destination="lY7-b5-FgH" id="aX6-Td-QQH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SGW-Mu-YEZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -364,7 +377,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="101" y="256" width="119" height="19"/>
+                                <rect key="frame" x="100.5" y="256" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -384,7 +397,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="187.5" y="373" width="72" height="29"/>
+                                <rect key="frame" x="187.5" y="372.5" width="72" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -400,7 +413,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zem-fm-UdE">
-                                <rect key="frame" x="221.5" y="405" width="76" height="29"/>
+                                <rect key="frame" x="221.5" y="404.5" width="76" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Change No.">
                                     <color key="titleColor" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1028,7 +1041,7 @@
                                 <rect key="frame" x="0.0" y="126" width="220" height="402"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
+                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
                                         <rect key="frame" x="0.0" y="22" width="220" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXN-ad-IkB" id="syQ-Lf-NEi">
@@ -2471,7 +2484,7 @@ mark your presence at your workplace</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewCheckOutUserScreenCell" rowHeight="109" id="pbb-tV-Fdc">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewCheckOutUserScreenCell" rowHeight="109" id="pbb-tV-Fdc" customClass="NewCheckoutCell" customModule="bdPresence" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="304" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pbb-tV-Fdc" id="ZzP-Qc-Swm">
@@ -2511,6 +2524,11 @@ mark your presence at your workplace</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="addressLabel" destination="vxC-H3-Nla" id="PSy-Nu-moh"/>
+                                            <outlet property="locationDetailLabel" destination="tBX-du-gC9" id="EGI-2X-JJB"/>
+                                            <outlet property="timeLabel" destination="gDk-7C-K14" id="8s0-MD-thA"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewCheckOutUserScreenCellLocations" rowHeight="113" id="PYV-X4-7GM">
                                         <rect key="frame" x="0.0" y="137" width="304" height="113"/>
@@ -2543,6 +2561,7 @@ mark your presence at your workplace</string>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="u1G-9Z-a61" id="wgh-bN-1x7"/>
+                        <outlet property="visualEffectView" destination="VOO-Rh-7Pj" id="1yG-Qa-3O6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNe-UZ-rea" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2565,7 +2584,7 @@ mark your presence at your workplace</string>
                                 <rect key="frame" x="0.0" y="24.5" width="320" height="543.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyLocationIdentifier" rowHeight="103" id="5BP-CZ-8X7">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyLocationIdentifier" rowHeight="103" id="5BP-CZ-8X7" customClass="LocationTableViewCell" customModule="bdPresence" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5BP-CZ-8X7" id="9Xg-Rq-KU7">
@@ -2634,6 +2653,9 @@ mark your presence at your workplace</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="visualEffect" destination="npS-OT-xT2" id="op4-LN-WR5"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -2824,6 +2846,7 @@ mark your presence at your workplace</string>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="15"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </visualEffectView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jeevan Tiwari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2m-fb-0P2">
@@ -2871,7 +2894,9 @@ mark your presence at your workplace</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="locationLabel" destination="nkg-fa-pcB" id="k1u-V4-ZsI"/>
                                             <outlet property="nameLabel" destination="Z2m-fb-0P2" id="Q6G-Rs-jgE"/>
+                                            <outlet property="visualEffect" destination="f4J-dF-eTC" id="hrT-nC-wiw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2963,6 +2988,6 @@ mark your presence at your workplace</string>
         <image name="unquote" width="21" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9gI-Lp-NYu"/>
+        <segue reference="228-Kj-YEd"/>
     </inferredMetricsTieBreakers>
 </document>

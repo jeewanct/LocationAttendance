@@ -24,9 +24,18 @@ class MyLocationViewController: UIViewController{
         super.viewDidLoad()
         addGestureInContainerView()
         setupNavigation()
+        setupMap()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "My Location"
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        title = ""
+    }
     
     
 }
@@ -52,13 +61,16 @@ extension MyLocationViewController{
     func setupMap(){
         
         mapView.changeStyle()
-        
+        mapView.delegate = self
         let marker = GMSMarker()
         
         
+        
         marker.position = CurrentLocation.coordinate
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
+        
+        marker.title = "\(CurrentLocation.time)"
+        marker.snippet = CurrentLocation.address
+        marker.isDraggable = true
         marker.map = mapView
         
         let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude, zoom: 12.0)
@@ -119,6 +131,18 @@ extension MyLocationViewController: HandleUserViewDelegate{
         self.view.layoutIfNeeded()
         handleTap()
     }
+    
+    
+    
+}
+
+
+extension MyLocationViewController: GMSMapViewDelegate{
+    
+    func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
+        
+    }
+    
     
     
 }

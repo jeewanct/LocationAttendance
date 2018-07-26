@@ -8,6 +8,7 @@
 
 import UIKit
 import BluedolphinCloudSdk
+import CoreLocation
 class MyTeamTableView: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
@@ -24,7 +25,19 @@ class MyTeamTableView: UIViewController{
 }
 
 
-extension MyTeamTableView: UITableViewDelegate, UITableViewDataSource{
+extension MyTeamTableView: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let viewController = storyboard?.instantiateViewController(withIdentifier: "MyTeamLocationDetails") as! MyTeamLocationDetails
+        viewController.teamMemberUserId = teamData?[indexPath.item]._id
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    
+}
+
+extension MyTeamTableView: UITableViewDataSource{
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -45,12 +58,7 @@ extension MyTeamTableView: UITableViewDelegate, UITableViewDataSource{
         return 108
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let viewController = storyboard?.instantiateViewController(withIdentifier: "MyTeamLocationDetails") as! MyTeamLocationDetails
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
+   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyTeamTableViewCell", for: indexPath) as! MyLocationTableViewCell
         setTeamDetails(cell: cell, indexPath: indexPath)
@@ -72,6 +80,32 @@ extension MyTeamTableView: UITableViewDelegate, UITableViewDataSource{
             
             cell.nameLabel.text = userName
         }
+        
+        if let location = teamData?[indexPath.item].userStatus?.location?.teamAddress{
+            
+            cell.locationLabel.text = location
+            
+        }else{
+           
+            if let teamLocation = teamData?[indexPath.item].userStatus?.location?.coordinates{
+                
+                if teamLocation.count == 2{
+                    let location = CLLocation(latitude: CLLocationDegrees(teamLocation[1]), longitude: CLLocationDegrees(teamLocation[0]))
+                    
+                    LogicHelper.shared.reverseGeoCode(location: location) { (address) in
+                        self.teamData?[indexPath.item].userStatus?.location?.teamAddress = address
+                        cell.locationLabel.text = address
+                    }
+                }
+                
+                
+            }
+            
+        }
+        
+        
+        
+        
         
     }
     

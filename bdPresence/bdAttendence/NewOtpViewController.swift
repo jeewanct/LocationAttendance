@@ -251,6 +251,7 @@ class NewOtpViewController: UIViewController {
 extension NewOtpViewController:CodeInputViewDelegate{
     func codeInputView(codeInputView: CodeInputView, didFinishWithCode code: String) {
         otpToken  = code
+        view.endEditing(true)
         getOauth()
     }
 }

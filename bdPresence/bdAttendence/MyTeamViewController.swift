@@ -10,9 +10,6 @@ import UIKit
 import GoogleMaps
 import BluedolphinCloudSdk
 
-
-
-
 class MyTeamViewController: UIViewController{
     
     @IBOutlet weak var userLocationContainerView: UIView!

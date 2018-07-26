@@ -28,7 +28,7 @@ class SideMenuViewController: UIViewController  {
             }
 
             userImageView.layer.cornerRadius = 30
-            self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+            self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.GreenGradient, APPColor.BlueGradient])
             
             
             let tapGestureForImage = UITapGestureRecognizer(target: self, action: #selector(SideMenuViewController.handleTap(sender:)))

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		091517A22108694A00FABD3D /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A12108694A00FABD3D /* LocationTableViewCell.swift */; };
+		091517A421087A8800FABD3D /* LogicHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A321087A8800FABD3D /* LogicHelper.swift */; };
+		091517AA2108A8AC00FABD3D /* NewCheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */; };
+		096FEA032109C47B00A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */; };
+		096FEA042109C48000A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */; };
+		096FEA052109C48000A1D2EA /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0982365D2109A948002BEECC /* RoughWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982365C2109A948002BEECC /* RoughWork.swift */; };
 		42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0780D204E38BF525A133B40D /* Pods_bdPresence.framework */; };
 		901CC43E17B9E13245BD210A /* Pods_bdPresenceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6E3D50C77FAC49A06A0A14 /* Pods_bdPresenceUITests.framework */; };
 		990089161F44177400CED97E /* TwoSideLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990089141F44177400CED97E /* TwoSideLabelTableViewCell.swift */; };
@@ -92,9 +99,6 @@
 		99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */; };
 		99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */; };
 		A52B90672101E2EE005056AB /* MyTeamViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52B90662101E2EE005056AB /* MyTeamViewCell.swift */; };
-		A5952A232105F2CB005E6108 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */; };
-		A5952A242105F2D7005E6108 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */; };
-		A5952A252105F2D7005E6108 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C89A35D320C16AC7000D5FFD /* BackgroundDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */; };
 		C8CBF8D420E3CB4A00D84C89 /* ReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CBF8D320E3CB4A00D84C89 /* ReleaseType.swift */; };
 		D8C205C7086D060A42B8A17C /* Pods_bdPresenceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EE7A650801BE90DFD757D6 /* Pods_bdPresenceTests.framework */; };
@@ -124,7 +128,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A5952A252105F2D7005E6108 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				096FEA052109C48000A1D2EA /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +138,11 @@
 /* Begin PBXFileReference section */
 		048969DA26B3EABDC293FB6D /* Pods-bdPresenceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0780D204E38BF525A133B40D /* Pods_bdPresence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdPresence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		091517A12108694A00FABD3D /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		091517A321087A8800FABD3D /* LogicHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicHelper.swift; sourceTree = "<group>"; };
+		091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCheckoutCell.swift; sourceTree = "<group>"; };
+		096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		0982365C2109A948002BEECC /* RoughWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughWork.swift; sourceTree = "<group>"; };
 		0B0496CF0D3F1160AE556FB2 /* Pods-bdPresenceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4109A7E8C6D948A14C0F47EE /* Pods-bdPresenceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.release.xcconfig"; sourceTree = "<group>"; };
 		63EE7A650801BE90DFD757D6 /* Pods_bdPresenceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdPresenceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,7 +241,6 @@
 		9E064E113D673F4D27DE4C78 /* Pods-bdPresence.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.debug.xcconfig"; sourceTree = "<group>"; };
 		A084A320988D78FF201876B4 /* Pods-bdPresenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A52B90662101E2EE005056AB /* MyTeamViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamViewCell.swift; sourceTree = "<group>"; };
-		A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		BF9692C2CF1E754CA931DA3B /* Pods-bdPresenceTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.alpha.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.alpha.xcconfig"; sourceTree = "<group>"; };
 		C1DDC1645746106604EC0F12 /* Pods-bdPresence.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresence.alpha.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresence/Pods-bdPresence.alpha.xcconfig"; sourceTree = "<group>"; };
 		C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDebug.swift; sourceTree = "<group>"; };
@@ -246,8 +254,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5952A232105F2CB005E6108 /* BluedolphinCloudSdk.framework in Frameworks */,
-				A5952A242105F2D7005E6108 /* BluedolphinCloudSdk.framework in Frameworks */,
+				096FEA032109C47B00A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */,
+				096FEA042109C48000A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */,
 				42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,7 +348,7 @@
 		99BD39A01EA49B7100B6942B /* bdAttendence */ = {
 			isa = PBXGroup;
 			children = (
-				A5952A222105F2CB005E6108 /* BluedolphinCloudSdk.framework */,
+				096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */,
 				9924EEA920F8722000B0A661 /* GifImages */,
 				99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */,
 				99CA967B1F021E2A00E2813B /* Storyboard */,
@@ -349,6 +357,7 @@
 				99CA967D1F021E5B00E2813B /* Assets */,
 				99BD39A31EA49B7100B6942B /* ViewController.swift */,
 				99FB1E631F15FDBD00FA8A9E /* Views */,
+				0982365C2109A948002BEECC /* RoughWork.swift */,
 			);
 			path = bdAttendence;
 			sourceTree = "<group>";
@@ -398,6 +407,7 @@
 				99E046E520F4D23F008DA7A8 /* GoogleMapsCustomization.swift */,
 				992F2D4520F5E551009E1213 /* ProtocolsForController.swift */,
 				9924EEA720F8709500B0A661 /* NavigationSetup.swift */,
+				091517A321087A8800FABD3D /* LogicHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -440,6 +450,8 @@
 				99482F4C20F87F1900324AE5 /* SystemSettingsCell.swift */,
 				99482F4E20F87F3C00324AE5 /* SystemSettingsCell.xib */,
 				99482F5820F8BB0B00324AE5 /* MyLocationTableViewCell.swift */,
+				091517A12108694A00FABD3D /* LocationTableViewCell.swift */,
+				091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -789,12 +801,14 @@
 				99E369CB1F1CB519000A642C /* TimerViewController.swift in Sources */,
 				990CBCEF1EFA47F700F56E38 /* NewLoginViewController.swift in Sources */,
 				99F84C181F28C7DB00D6AE44 /* DayCheckinList.swift in Sources */,
+				091517AA2108A8AC00FABD3D /* NewCheckoutCell.swift in Sources */,
 				990CBCF71EFAA40300F56E38 /* NewOtpViewController.swift in Sources */,
 				9924EEA820F8709500B0A661 /* NavigationSetup.swift in Sources */,
 				99B936911EC98706008E12C4 /* CardView.swift in Sources */,
 				99BC35051F27448A00A59A4A /* HistoryViewController.swift in Sources */,
 				99CA96F71F0A367A00E2813B /* DayCheckoutViewController.swift in Sources */,
 				99E046E620F4D23F008DA7A8 /* GoogleMapsCustomization.swift in Sources */,
+				091517A22108694A00FABD3D /* LocationTableViewCell.swift in Sources */,
 				99FB1E671F1607B100FA8A9E /* ProjectExtensions.swift in Sources */,
 				99482F5720F8AB7D00324AE5 /* MyTeamLocationDetails.swift in Sources */,
 				99BC35071F275A8800A59A4A /* DayCollectionViewCell.swift in Sources */,
@@ -807,6 +821,7 @@
 				99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */,
 				99F2177A1F20A833002A0E5C /* SplashViewController.swift in Sources */,
 				99B67D5920F78C6E00308137 /* LabelWithImage.swift in Sources */,
+				0982365D2109A948002BEECC /* RoughWork.swift in Sources */,
 				99B811651F2F11E200174FD0 /* ContactUsViewController.swift in Sources */,
 				99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */,
 				99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */,
@@ -814,6 +829,7 @@
 				9900891E1F4465FA00CED97E /* SwitchTableViewCell.swift in Sources */,
 				99E369CF1F1DFE99000A642C /* WorkHourViewController.swift in Sources */,
 				99937B541F4704FE00C80B90 /* WeekCollectionViewCell.swift in Sources */,
+				091517A421087A8800FABD3D /* LogicHelper.swift in Sources */,
 				99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */,
 				99576C091F0CD5E300A53A4C /* SystemDetailViewController.swift in Sources */,
 				999FB43520F61C38000ABA7D /* GeoTagController.swift in Sources */,

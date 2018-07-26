@@ -8,7 +8,7 @@
 
 import UIKit
 import GoogleMaps
-
+import BluedolphinCloudSdk
 
 class MyTeamLocationDetails: UIViewController{
     
@@ -17,6 +17,12 @@ class MyTeamLocationDetails: UIViewController{
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var userLocationContainerView: UIView!
+    
+    var teamMemberUserId: String?{
+        didSet{
+            getTeamMemberDetails()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMap()
@@ -24,6 +30,70 @@ class MyTeamLocationDetails: UIViewController{
     }
     
     
+}
+
+
+extension MyTeamLocationDetails{
+    
+    func getTeamMemberDetails(){
+        
+        guard let getUserId = teamMemberUserId else{
+            return
+        }
+        
+        MyTeamDetailsModel.getTeamMember(userId: getUserId, completion: { (data) in
+            dump(data)
+            self.makeTeamLocationData(teamLocationData: data)
+        }, inError: { (error) in
+            
+        })
+    }
+    
+    
+    func makeTeamLocationData(teamLocationData: [MyTeamDetailsDocument]?){
+        
+        var teamData = [LocationDataModel]()
+        
+        
+        if let getTeamLocation = teamLocationData{
+            
+            for location in getTeamLocation{
+                
+                let locationData = LocationDataModel()
+                
+                if let accuracy = location.checkinData?.location?.accuracy{
+                   locationData.accuracy = String(accuracy)
+                }
+                
+                if let altitude = location.checkinData?.location?.altitude{
+                    locationData.altitude = String(altitude)
+                }
+                
+                
+                if let coordinates = location.checkinData?.location?.coordinates{
+                    
+                    if coordinates.count  == 2{
+                        
+                        locationData.longitude = String(coordinates[0])
+                        locationData.latitude = String(coordinates[1])
+                    }
+                    
+                }
+            
+                teamData.append(locationData)
+            }
+            
+            userContainerView?.locationData = teamData
+            userContainerView?.tableView.reloadData()
+            
+            
+            
+        }
+        
+        
+        
+        
+    }
 }
 
 
@@ -108,6 +178,7 @@ extension MyTeamLocationDetails{
     
     
 }
+
 
 
 extension MyTeamLocationDetails: HandleUserViewDelegate{

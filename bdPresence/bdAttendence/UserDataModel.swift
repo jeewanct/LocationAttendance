@@ -24,6 +24,7 @@ class LocationDataModel{
     var latitude: String?
     var longitude: String?
     var details: String?
+    var address: String?
 }
 
 

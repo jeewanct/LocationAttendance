@@ -42,6 +42,12 @@ class NewCheckoutViewController: UIViewController {
     
     var userContainerView: NewCheckOutUserScreen?
     
+    var userLocations: [LocationDataModel]?{
+        didSet{
+            plotUserLocation()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -256,6 +262,16 @@ class NewCheckoutViewController: UIViewController {
         
         
         let finalLocations = removeUnnecessaryLocationWithTime(locations: updatedLocations)
+        userLocations = finalLocations
+        
+        if let locationData = userLocations{
+            
+            userContainerView?.locationData = locationData.reversed()
+        }
+        
+        
+        
+        
         print("After removing locations", finalLocations)
         
         
@@ -270,31 +286,25 @@ class NewCheckoutViewController: UIViewController {
             
             for index1 in 0..<locations.count - 1{
                 
-                if let firstLocation = locations[index1].lastSeen, let secondLocation = locations[index1 + 1].lastSeen{
+                
+                if let firstLat = locations[index1].latitude, let firstLong =  locations[index1].longitude, let secondLat = locations[index1 + 1].latitude, let secondLong = locations[index1 + 1].longitude{
                     
-                    let timeDifference = getTime(date: secondLocation) - getTime(date: firstLocation)
+                    let distanceBetweenTwoCoordinates = distanceBetween(firstLat: firstLat, firstLong: firstLong, secondLat: secondLat, secondLong: secondLong)
                     
-                    if timeDifference == 0 || timeDifference > 8000{
+                    if distanceBetweenTwoCoordinates == 0 || distanceBetweenTwoCoordinates > 8000{
+                       
+                        let url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=\(firstLat),\(firstLong)&destinations=\(secondLat),\(secondLong)&key=AIzaSyAEHGCnCX0R__be18wIL8sZ9UVhPO6bbAo&departure_time=1727491194&traffic_model=optimistic"
                         
-                        // hit Google Api
-                        
-                        
-                        if let firstLat = locations[index1].latitude, let firstLong =  locations[index1].longitude, let secondLat = locations[index1 + 1].latitude, let secondLong = locations[index1 + 1].longitude{
-                            
-                            let url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=\(firstLat),\(firstLong)&destinations=\(secondLat),\(secondLong)&key=AIzaSyAEHGCnCX0R__be18wIL8sZ9UVhPO6bbAo&departure_time=1727491194&traffic_model=optimistic"
-                            
-                             findApproxTimeToTravel(timeDifference: timeDifference, url: url)
-                            
-                        }
+                        //findApproxTimeToTravel(timeDifference: timeDifference, url: url)
                         
                     }else{
                         
                         updatedLocations.append(locations[index1])
-                        
                     }
                     
                     
                 }
+                
             }
             
         
@@ -357,6 +367,28 @@ class NewCheckoutViewController: UIViewController {
         
     }
     
+    
+    func distanceBetween(firstCoordinate first: CLLocation, secondCoordinate second: CLLocation) -> Double{
+        
+        return first.distance(from: second)
+        
+    }
+    
+    func distanceBetween(firstLat: String, firstLong: String, secondLat: String, secondLong: String) -> Double{
+     
+        if let firstLocationLat = CLLocationDegrees(firstLat), let firstLocationLong = CLLocationDegrees(firstLong), let secondLocationLat = CLLocationDegrees(secondLat), let secondLocationLong = CLLocationDegrees(secondLong){
+           
+            let firstLocation = CLLocation(latitude: CLLocationDegrees(firstLocationLat), longitude: CLLocationDegrees(firstLocationLong))
+            let secondLocation = CLLocation(latitude: CLLocationDegrees(secondLocationLat), longitude: CLLocationDegrees(secondLocationLong))
+            
+            return firstLocation.distance(from: secondLocation)
+            
+        }
+        
+        return 0
+    }
+    
+    
     func getTime(date: Date) -> Int{
         
         let calendar = Calendar.current
@@ -364,9 +396,9 @@ class NewCheckoutViewController: UIViewController {
         let minutes = calendar.component(.minute, from: date)
         let seconds = calendar.component(.second, from: date)
         
+        
         return hour * 60 * 60 + minutes * 60 + seconds
-        
-        
+    
     }
     
     
@@ -524,30 +556,30 @@ extension NewCheckoutViewController{
       
        // mapView.changeStyle()
         
-        let marker = GMSMarker()
-       
-        
-        
-        
-        var locationManage = CLLocationManager()
-         locationManage.location?.coordinate.latitude
-        
-        
-        
-        
-        
-        if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
-           
-            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            marker.title = "Sydney"
-            marker.snippet = "Australia"
-            marker.icon = #imageLiteral(resourceName: "locationBlack")
-            marker.map = mapView
-            
-            
-            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
-            mapView.camera = camera
-        }
+//        let marker = GMSMarker()
+//       
+//        
+//        
+//        
+//        var locationManage = CLLocationManager()
+//         locationManage.location?.coordinate.latitude
+//        
+//        
+//        
+//        
+//        
+//        if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
+//           
+//            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//            marker.title = "Sydney"
+//            marker.snippet = "Australia"
+//            marker.icon = #imageLiteral(resourceName: "locationBlack")
+//            marker.map = mapView
+//            
+//            
+//            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
+//            mapView.camera = camera
+//        }
         
         
         
@@ -614,6 +646,56 @@ extension NewCheckoutViewController: HandleUserViewDelegate{
 
 
 
+extension NewCheckoutViewController{
+    
+    func plotUserLocation(){
+        
+        guard let markerLocations = userLocations else {
+            return 
+        }
+        
+        
+        let path = GMSMutablePath()
+        for location in markerLocations{
+            
+            let marker = GMSMarker()
+            
+            
+            if let lat = location.latitude, let long = location.longitude{
+                
+                if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
+                    
+                    marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
+                    marker.title = "Sydney"
+                    marker.snippet = "Australia"
+                    marker.icon = #imageLiteral(resourceName: "locationBlack")
+                    marker.map = mapView
+                    
+                    
+                    let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 17.0)
+                    mapView.camera = camera
+                    
+                    
+                    
+                    path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
+                    
+                }
+                
+                
+                
+            }
+         
+            
+        }
+        
+        let polyline = GMSPolyline(path: path)
+        polyline.map = mapView
+        
+    }
+}
+
+
+
 class Networking{
 
 class func fetchGenericData<T: Decodable>(_ strURL: String,header:[String: String], success:@escaping (T) -> Void, failure:@escaping (Error) -> Void) {
@@ -668,6 +750,10 @@ class GoogleDurationModel: Decodable{
     var  text : String?
     var value : Int?
 }
+
+
+
+
 
 
 

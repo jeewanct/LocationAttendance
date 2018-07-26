@@ -1,19 +1,17 @@
 //
-//  MyLocationTableViewCell.swift
+//  LocationTableViewCell.swift
 //  bdPresence
 //
-//  Created by Raghvendra on 13/07/18.
+//  Created by Jeevan Tiwari on 25/07/18.
 //  Copyright © 2018 Raghvendra. All rights reserved.
 //
 
 import UIKit
 
-class MyLocationTableViewCell: UITableViewCell{
+
+class LocationTableViewCell: UITableViewCell{
+   
     @IBOutlet weak var visualEffect: UIVisualEffectView!
-    
-    @IBOutlet weak var locationLabel: UILabel!
-    
-    @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         

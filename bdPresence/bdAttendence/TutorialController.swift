@@ -73,6 +73,7 @@ class TutorialControllerCell: UICollectionViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         //cell.backgroundView?.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        
         self.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
     }
     

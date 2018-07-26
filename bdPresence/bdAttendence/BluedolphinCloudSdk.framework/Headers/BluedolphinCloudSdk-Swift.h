@@ -344,6 +344,8 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk12CheckinModel")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
 @class NSString;
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk15KeychainService")
@@ -380,6 +382,12 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk12LocationData")
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk18MyTeamDetailsModel")
+@interface MyTeamDetailsModel : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
