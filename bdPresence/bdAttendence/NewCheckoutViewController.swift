@@ -57,7 +57,7 @@ class NewCheckoutViewController: UIViewController {
 //        navigationController?.navigationBar.isTranslucent = true
         
      
-        
+        getPlaceList()
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
@@ -727,6 +727,24 @@ class func fetchGenericData<T: Decodable>(_ strURL: String,header:[String: Strin
 }
 
 }
+
+
+
+extension  NewCheckoutViewController{
+    
+    func getPlaceList(){
+        
+        RMCPlacesManager.getPlaces(completion: { (data) in
+            dump(data)
+        }) { (error) in
+            print(error)
+            
+        }
+    }
+}
+
+
+
 
 
 class GoogleDistanceCoveredTimeModel: Decodable{

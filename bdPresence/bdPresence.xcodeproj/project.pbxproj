@@ -10,9 +10,9 @@
 		091517A22108694A00FABD3D /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A12108694A00FABD3D /* LocationTableViewCell.swift */; };
 		091517A421087A8800FABD3D /* LogicHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A321087A8800FABD3D /* LogicHelper.swift */; };
 		091517AA2108A8AC00FABD3D /* NewCheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */; };
-		096FEA032109C47B00A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */; };
-		096FEA042109C48000A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */; };
-		096FEA052109C48000A1D2EA /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		096FEA25210A01F000A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */; };
+		096FEA26210A01F800A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */; };
+		096FEA27210A01F800A1D2EA /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0982365D2109A948002BEECC /* RoughWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982365C2109A948002BEECC /* RoughWork.swift */; };
 		42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0780D204E38BF525A133B40D /* Pods_bdPresence.framework */; };
 		901CC43E17B9E13245BD210A /* Pods_bdPresenceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6E3D50C77FAC49A06A0A14 /* Pods_bdPresenceUITests.framework */; };
@@ -128,7 +128,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				096FEA052109C48000A1D2EA /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				096FEA27210A01F800A1D2EA /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,7 +141,7 @@
 		091517A12108694A00FABD3D /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		091517A321087A8800FABD3D /* LogicHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicHelper.swift; sourceTree = "<group>"; };
 		091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCheckoutCell.swift; sourceTree = "<group>"; };
-		096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
+		096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		0982365C2109A948002BEECC /* RoughWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughWork.swift; sourceTree = "<group>"; };
 		0B0496CF0D3F1160AE556FB2 /* Pods-bdPresenceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4109A7E8C6D948A14C0F47EE /* Pods-bdPresenceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -254,8 +254,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				096FEA032109C47B00A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */,
-				096FEA042109C48000A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */,
+				096FEA25210A01F000A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */,
+				096FEA26210A01F800A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */,
 				42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,7 +348,7 @@
 		99BD39A01EA49B7100B6942B /* bdAttendence */ = {
 			isa = PBXGroup;
 			children = (
-				096FEA022109C47B00A1D2EA /* BluedolphinCloudSdk.framework */,
+				096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */,
 				9924EEA920F8722000B0A661 /* GifImages */,
 				99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */,
 				99CA967B1F021E2A00E2813B /* Storyboard */,
