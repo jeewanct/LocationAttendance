@@ -74,7 +74,16 @@ class TutorialControllerCell: UICollectionViewCell{
         super.awakeFromNib()
         //cell.backgroundView?.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         
-        self.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        
+       
+       
+        //self.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+       //  self.setNeedsUpdateConstraints()
     }
     
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.contentView.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+    }
 }

@@ -357,12 +357,11 @@
                     <connections>
                         <outlet property="mobileTextfield" destination="NDV-1c-QhV" id="yTq-kZ-heY"/>
                         <outlet property="sendOtpButton" destination="nlh-8I-scc" id="Gzu-t0-Psi"/>
-                        <segue destination="HFB-BG-t3c" kind="show" identifier="showOtpScreen" id="lRF-Kt-DIO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmb-3I-AwO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-992" y="-925"/>
+            <point key="canvasLocation" x="-969" y="-925"/>
         </scene>
         <!--New Otp View Controller-->
         <scene sceneID="rAq-aK-I7A">
@@ -377,13 +376,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="101.5" y="256" width="119" height="19"/>
+                                <rect key="frame" x="101" y="212" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F71-eu-Hs0">
-                                <rect key="frame" x="10" y="305" width="300" height="50"/>
+                                <rect key="frame" x="10" y="261" width="300" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="oTQ-Bp-ozM"/>
@@ -391,29 +390,29 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not received the OTP ? " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWV-bK-EbK">
-                                <rect key="frame" x="53" y="378" width="134.5" height="18"/>
+                                <rect key="frame" x="53" y="334" width="134.5" height="18"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="187.5" y="373.5" width="72" height="29"/>
+                                <rect key="frame" x="187.5" y="329" width="72" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success" translatesAutoresizingMaskIntoConstraints="NO" id="OYL-5C-BVi">
-                                <rect key="frame" x="88" y="88" width="144" height="144"/>
+                                <rect key="frame" x="88" y="44" width="144" height="144"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entered incorrect phone number ? " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXn-EN-8dL">
-                                <rect key="frame" x="19" y="410" width="202.5" height="18"/>
+                                <rect key="frame" x="19" y="366" width="202.5" height="18"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zem-fm-UdE">
-                                <rect key="frame" x="221.5" y="405.5" width="76" height="29"/>
+                                <rect key="frame" x="221.5" y="361" width="76" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Change No.">
                                     <color key="titleColor" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -449,7 +448,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q7L-2c-zK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-248" y="-938"/>
+            <point key="canvasLocation" x="-246" y="-925"/>
         </scene>
         <!--New Organisation Select View Controller-->
         <scene sceneID="xFV-wG-wU9">
@@ -932,7 +931,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iDA-Oj-aZO">
-                                <rect key="frame" x="0.0" y="450" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="397" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="56O-hC-4Zk" kind="embed" identifier="containerViewSegue" id="9gI-Lp-NYu"/>
@@ -950,13 +949,13 @@
                             <constraint firstItem="USZ-DE-GZE" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="LFW-z6-Qoi"/>
                             <constraint firstAttribute="bottom" secondItem="1NL-pT-kMV" secondAttribute="bottom" id="TDt-lm-h4o"/>
                             <constraint firstAttribute="trailing" secondItem="iDA-Oj-aZO" secondAttribute="trailing" id="VMc-3p-1M5"/>
-                            <constraint firstItem="iDA-Oj-aZO" firstAttribute="top" secondItem="U0L-Z1-1Ta" secondAttribute="top" constant="450" id="XlM-qL-nuU"/>
                             <constraint firstItem="iDA-Oj-aZO" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="aiR-uS-qi5"/>
-                            <constraint firstItem="iDA-Oj-aZO" firstAttribute="height" secondItem="U0L-Z1-1Ta" secondAttribute="height" id="gJp-YX-91E"/>
                             <constraint firstAttribute="trailing" secondItem="YYf-kK-yZe" secondAttribute="trailing" constant="40" id="kMw-aV-F05"/>
                             <constraint firstItem="USZ-DE-GZE" firstAttribute="top" secondItem="YYf-kK-yZe" secondAttribute="bottom" constant="8" id="oXw-aH-T5S"/>
                             <constraint firstAttribute="trailing" secondItem="USZ-DE-GZE" secondAttribute="trailing" id="q5a-gs-Ia7"/>
+                            <constraint firstItem="iDA-Oj-aZO" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" constant="333" id="upZ-z6-N1g"/>
                             <constraint firstItem="j5E-91-oHK" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" constant="15" id="xg7-CA-jLW"/>
+                            <constraint firstItem="iDA-Oj-aZO" firstAttribute="height" secondItem="U0L-Z1-1Ta" secondAttribute="height" id="xlc-Yx-oaB"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -971,7 +970,7 @@
                         <outlet property="endYourDayLabel" destination="YYf-kK-yZe" id="Kd7-Vo-tVQ"/>
                         <outlet property="lastCheckinAddressLabel" destination="ugh-5c-h6b" id="BcY-LI-vJ3"/>
                         <outlet property="mapView" destination="USZ-DE-GZE" id="Lrg-mO-NOA"/>
-                        <outlet property="userLocationCardHeightAnchor" destination="XlM-qL-nuU" id="ZJH-qH-msl"/>
+                        <outlet property="userLocationCardHeightAnchor" destination="upZ-z6-N1g" id="YJc-RP-Wmn"/>
                         <outlet property="userLocationContainerView" destination="iDA-Oj-aZO" id="TeM-jD-ziC"/>
                     </connections>
                 </viewController>
@@ -1161,6 +1160,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="Cp1-aM-EKr" id="42S-e5-AAR"/>
                                     <outlet property="delegate" destination="Cp1-aM-EKr" id="P48-uB-wEI"/>
+                                    <outlet property="prefetchDataSource" destination="Cp1-aM-EKr" id="ZUA-4V-XGF"/>
                                 </connections>
                             </collectionView>
                             <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2Z-aX-DK2">
@@ -1194,7 +1194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Li-vX-660" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2415" y="-925"/>
+            <point key="canvasLocation" x="-2419" y="-982"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="k6M-mW-hna">
@@ -2499,6 +2499,9 @@ mark your presence at your workplace</string>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBX-du-gC9">
                                                     <rect key="frame" x="16" y="16" width="272" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="19" id="gJE-cy-ZKh"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -2566,7 +2569,7 @@ mark your presence at your workplace</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNe-UZ-rea" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4779" y="1576"/>
+            <point key="canvasLocation" x="4777.5" y="1575"/>
         </scene>
         <!--My Location Table View-->
         <scene sceneID="C1t-6F-BF2">
@@ -2988,6 +2991,6 @@ mark your presence at your workplace</string>
         <image name="unquote" width="21" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="228-Kj-YEd"/>
+        <segue reference="9gI-Lp-NYu"/>
     </inferredMetricsTieBreakers>
 </document>

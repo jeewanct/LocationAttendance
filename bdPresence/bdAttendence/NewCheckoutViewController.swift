@@ -52,12 +52,14 @@ class NewCheckoutViewController: UIViewController {
         super.viewDidLoad()
 
         navigationController?.removeTransparency()
+       // userLocationContainerView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+       
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
 //        navigationController?.navigationBar.shadowImage = UIImage()
 //        navigationController?.navigationBar.isTranslucent = true
         
      
-        getPlaceList()
+        
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
@@ -219,187 +221,110 @@ class NewCheckoutViewController: UIViewController {
             checkoutButton.isHidden = true
             endYourDayLabel.isHidden = true
             self.view.removeGestureRecognizer(swipedown!)
+        
+         }
+        
+        
+        LogicHelper.shared.plotMarkers(date: date) { (data) in
+        
+            
+            self.userLocations = data
+           // UserPlace.getPlacesData(location: dat)
+            self.getGeoTagData(location: self.userLocations)
+            
+        
         }
 
-
-        plotMarkers(date: date)
+//        plotMarkers(date: date)
         //createFrequencybarView(date: date)
     }
     
-    func plotMarkers(date: Date){
+    func getGeoTagData(location: [LocationDataModel]? ){
         
-        let queue = DispatchQueue.global(qos: .userInteractive)
         
-        queue.async {
-            let locations = UserDayData.getLocationData(date: date)
+        //var geoTaggedLocations = [GeoTagLocationModel]()
+        if let locationData = location{
             
-            DispatchQueue.main.async() {
-                
-                if let getLocations = locations{
-                    self.removeUnneccessaryLocationsWithAccuracy(locations: getLocations)
+            for locationIndex in 0..<locationData.count{
+                if let geoTagged = UserPlace.getPlacesData(location: locationData[locationIndex]){
+                    locationData[locationIndex].geoTaggedLocations = geoTagged
                 }
                 
-                
-                
             }
+            
+            
+            locationAccordingToGeoTag(locations: locationData)
         }
+   
+    
     }
     
-    func removeUnneccessaryLocationsWithAccuracy(locations: [LocationDataModel]){
-     
-        var updatedLocations = [LocationDataModel]()
-        for location in locations{
+    
+    func locationAccordingToGeoTag(locations: [LocationDataModel]){
+        
+        
+        var geoTaggedLocations = [GeoTagLocationModel]()
+        var ordinaryLocations  = [LocationDataModel]()
+        
+        for index in 0..<locations.count {
             
-            if let getAccuracy = location.accuracy, let accuracy = Float(getAccuracy){
+            var geolocations = [LocationDataModel]()
+            
+            for index1 in index + 1..<locations.count{
                 
-                if accuracy > 700{
+                
+                if locations[index1].isRepeated == false{
+                
+                if locations[index].geoTaggedLocations?.placeDetails?.placeId == locations[index1].geoTaggedLocations?.placeDetails?.placeId{
+                    geolocations.append(locations[index])
+                        locations[index1].isRepeated = true
+                }
+                
+                }
+
+            }
+            
+            if geolocations.isEmpty{
+                ordinaryLocations.append(locations[index])
+                
+            }else{
+                
+                if let geoTaggedLocation = setClusterTaggedLocation(currentGeoLocation: locations[index], location: geolocations){
+                     geoTaggedLocations.append(geoTaggedLocation)
                     
-                }else{
-                    updatedLocations.append(location)
                 }
+                //geoTaggedLocations.append(setClusterTaggedLocation(currentGeoLocation: locations[index], location: geolocations))
+                
             }
-        }
-        
-        
-        let finalLocations = removeUnnecessaryLocationWithTime(locations: updatedLocations)
-        userLocations = finalLocations
-        
-        if let locationData = userLocations{
             
-            userContainerView?.locationData = locationData.reversed()
+            
+            
         }
         
-        
-        
-        
-        print("After removing locations", finalLocations)
-        
-        
+        print("Jeevan the geoTagged Dta", dump(geoTaggedLocations))
+        print("Jeevan the location Dta", dump(ordinaryLocations))
         
     }
     
-    func removeUnnecessaryLocationWithTime(locations: [LocationDataModel]) -> [LocationDataModel]{
-        
-        var updatedLocations = [LocationDataModel]()
+    func setClusterTaggedLocation(currentGeoLocation: LocationDataModel,location: [LocationDataModel]) -> GeoTagLocationModel?{
         
       
-            
-            for index1 in 0..<locations.count - 1{
-                
-                
-                if let firstLat = locations[index1].latitude, let firstLong =  locations[index1].longitude, let secondLat = locations[index1 + 1].latitude, let secondLong = locations[index1 + 1].longitude{
-                    
-                    let distanceBetweenTwoCoordinates = distanceBetween(firstLat: firstLat, firstLong: firstLong, secondLat: secondLat, secondLong: secondLong)
-                    
-                    if distanceBetweenTwoCoordinates == 0 || distanceBetweenTwoCoordinates > 8000{
-                       
-                        let url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=\(firstLat),\(firstLong)&destinations=\(secondLat),\(secondLong)&key=AIzaSyAEHGCnCX0R__be18wIL8sZ9UVhPO6bbAo&departure_time=1727491194&traffic_model=optimistic"
-                        
-                        //findApproxTimeToTravel(timeDifference: timeDifference, url: url)
-                        
-                    }else{
-                        
-                        updatedLocations.append(locations[index1])
-                    }
-                    
-                    
-                }
-                
-            }
-            
         
-        
-        return updatedLocations
-        
-    }
-    
-    func findApproxTimeToTravel(timeDifference: Int, url: String) -> Bool{
-        
-        var isUsed  = false
-        
-        Networking.fetchGenericData(url, header: [:], success: { (timeRequired: GoogleDistanceCoveredTimeModel) in
+        if let taggedLocation = currentGeoLocation.geoTaggedLocations{
+              var geoTaggedModel = GeoTagLocationModel()
+            geoTaggedModel = taggedLocation
+            geoTaggedModel.locations = location
             
-            print(dump(timeRequired))
-            
-            
-            isUsed = self.discardLocationUsingGoogle(timeRequired: timeRequired.rows, timeDifference : timeDifference)
-            
-            
-        }) { (error) in
+            return geoTaggedModel
             
         }
         
-        return isUsed
+        
+        return nil
+        
         
     }
     
-    func discardLocationUsingGoogle(timeRequired: [GoogleRowModel]?, timeDifference : Int) -> Bool{
-        
-        
-        guard let googleTimeArray = timeRequired else{
-            return false
-        }
-        
-        var timeTaken = 0
-        
-        for timeArray in googleTimeArray{
-            
-            if let elements = timeArray.elements{
-                
-                for element in elements{
-                    
-                    if let getTime = element.duration?.value{
-                        timeTaken = timeTaken + getTime
-                        
-                    }
-                    
-                }
-                
-            }
-            
-        }
-        
-        if 0.45 * Double(timeTaken) > Double(timeDifference){
-            return false
-        }
-        
-        return true
-        
-    }
-    
-    
-    func distanceBetween(firstCoordinate first: CLLocation, secondCoordinate second: CLLocation) -> Double{
-        
-        return first.distance(from: second)
-        
-    }
-    
-    func distanceBetween(firstLat: String, firstLong: String, secondLat: String, secondLong: String) -> Double{
-     
-        if let firstLocationLat = CLLocationDegrees(firstLat), let firstLocationLong = CLLocationDegrees(firstLong), let secondLocationLat = CLLocationDegrees(secondLat), let secondLocationLong = CLLocationDegrees(secondLong){
-           
-            let firstLocation = CLLocation(latitude: CLLocationDegrees(firstLocationLat), longitude: CLLocationDegrees(firstLocationLong))
-            let secondLocation = CLLocation(latitude: CLLocationDegrees(secondLocationLat), longitude: CLLocationDegrees(secondLocationLong))
-            
-            return firstLocation.distance(from: secondLocation)
-            
-        }
-        
-        return 0
-    }
-    
-    
-    func getTime(date: Date) -> Int{
-        
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        let seconds = calendar.component(.second, from: date)
-        
-        
-        return hour * 60 * 60 + minutes * 60 + seconds
-    
-    }
     
     
     func createFrequencybarView(date:Date){
@@ -451,6 +376,8 @@ class NewCheckoutViewController: UIViewController {
 //                self.lastCheckinAddressLabel.adjustsFontSizeToFitWidth = true
 //                self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()?.capitalized
 //                self.updateFrequencyBar(mData: object)
+                
+                
             }
         }
 
@@ -554,32 +481,34 @@ extension NewCheckoutViewController{
     
     func setupMap(){
       
-       // mapView.changeStyle()
+        mapView.changeStyle()
         
-//        let marker = GMSMarker()
-//       
-//        
-//        
-//        
-//        var locationManage = CLLocationManager()
-//         locationManage.location?.coordinate.latitude
-//        
-//        
-//        
-//        
-//        
-//        if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
-//           
-//            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-//            marker.title = "Sydney"
-//            marker.snippet = "Australia"
-//            marker.icon = #imageLiteral(resourceName: "locationBlack")
-//            marker.map = mapView
-//            
-//            
-//            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
-//            mapView.camera = camera
-//        }
+        let marker = GMSMarker()
+       
+        
+        
+        
+        var locationManage = CLLocationManager()
+         locationManage.location?.coordinate.latitude
+        
+        
+        
+        if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
+           
+            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            marker.title = "Sydney"
+            marker.snippet = "Australia"
+            
+            let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysTemplate))
+            iconImageView.tintColor = #colorLiteral(red: 0.5097929835, green: 0.7668902278, blue: 0.8576113582, alpha: 1)
+            
+            marker.iconView = iconImageView
+            marker.map = mapView
+            
+            
+            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
+            mapView.camera = camera
+        }
         
         
         
@@ -602,12 +531,13 @@ extension NewCheckoutViewController{
         
         print("View Tapped")
         
-        if userLocationCardHeightAnchor.constant == 49 {
-            animateContainerView(heightToAnimate: 450)
+        if userLocationCardHeightAnchor.constant == 0 {
+            animateContainerView(heightToAnimate: 333)
         }else{
             // 400
             userContainerView?.tableView.isScrollEnabled = true
-            animateContainerView(heightToAnimate: 49)
+            
+            animateContainerView(heightToAnimate: 0)
         }
         
         
@@ -620,6 +550,7 @@ extension NewCheckoutViewController{
             self.view.layoutIfNeeded()
             
         }
+       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -651,9 +582,16 @@ extension NewCheckoutViewController{
     func plotUserLocation(){
         
         guard let markerLocations = userLocations else {
+            userLocationContainerView.isHidden = true
             return 
         }
+        userContainerView?.locationData = userLocations
         
+        if markerLocations.count == 0{
+            userLocationContainerView.isHidden = true
+            }else{
+            userLocationContainerView.isHidden = false
+        }
         
         let path = GMSMutablePath()
         for location in markerLocations{
@@ -696,78 +634,30 @@ extension NewCheckoutViewController{
 
 
 
-class Networking{
 
-class func fetchGenericData<T: Decodable>(_ strURL: String,header:[String: String], success:@escaping (T) -> Void, failure:@escaping (Error) -> Void) {
-    print(strURL)
-    print(header)
-    Alamofire.request(strURL,headers: header as? HTTPHeaders).responseJSON { (responseObject) -> Void in
-        
-        print(responseObject)
-        
-        
-        if responseObject.result.isSuccess {
-            if let responseData = responseObject.data{
-                
-                do{
-                    let jsonData = try JSONDecoder().decode(T.self, from: responseData)
-                    success(jsonData)
-                }catch let jsonError{
-                    failure(jsonError)
-                }
-            }
-        }
-        if responseObject.result.isFailure {
-            let error : Error = responseObject.result.error!
-            failure(error)
-        }
-        
-        
-    }
-}
-
-}
 
 
 
 extension  NewCheckoutViewController{
     
-    func getPlaceList(){
-        
-        RMCPlacesManager.getPlaces(completion: { (data) in
-            dump(data)
-        }) { (error) in
-            print(error)
-            
-        }
-    }
-}
-
-
-
-
-
-class GoogleDistanceCoveredTimeModel: Decodable{
+//    func getPlaceList(){
+//      
+//        RMCPlacesManager.getPlaces(completion: { (data) in
+//
+//            dump(data)
+//        }) { (error) in
+//            dump(error)
+//        }
+//        
+//        
+//    }
     
-    var rows : [GoogleRowModel]?
-}
-
-class GoogleRowModel: Decodable{
     
-    var elements: [GoogleElementsModel]?
-}
-
-class GoogleElementsModel: Decodable{
-    
-    var duration: GoogleDurationModel?
 }
 
 
-class GoogleDurationModel: Decodable{
-    
-    var  text : String?
-    var value : Int?
-}
+
+
 
 
 

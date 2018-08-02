@@ -11,8 +11,6 @@ import RealmSwift
 import BluedolphinCloudSdk
 
 
-
-
 class LocationDataModel{
 
     var lastSeen: Date?
@@ -25,6 +23,9 @@ class LocationDataModel{
     var longitude: String?
     var details: String?
     var address: String?
+    var geoTaggedLocations: GeoTagLocationModel?
+    var isRepeated: Bool?
+    
 }
 
 
@@ -100,7 +101,7 @@ class FrequencyBarGraphData :NSObject  {
 class UserDayData {
     class func getFrequencyBarData(date:Date) ->FrequencyBarGraphData{
         
-        
+
         let calendar = Calendar.current
         let frequencyGraphData = FrequencyBarGraphData()
         let slotStartTime =  calendar.date(bySettingHour: officeStartHour, minute: officeStartMin, second: 0, of: date)!.timeIntervalSince1970
@@ -108,6 +109,7 @@ class UserDayData {
         
         frequencyGraphData.setStartTime(startTime: slotStartTime)
         frequencyGraphData.setEndTime(endTime: slotEndTime)
+        
         
         //let isToday =  Calendar
         let realm = try! Realm()
@@ -199,7 +201,13 @@ class UserDayData {
         
         if let attendanceLogForToday = realm.objects(LocationAttendanceLog.self).filter("dayofWeek = %@","\(weekDay)").first {
             if weekOfYear == Calendar.current.component(.weekOfYear, from: attendanceLogForToday.timeStamp!){
-                let locationData = attendanceLogForToday.locationList.sorted(byKeyPath: "latitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                
+                //let locationData = attendanceLogForToday.locationList.sorted(byKeyPath: "latitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                
+                let locationData = attendanceLogForToday.locationList.filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                
+                
+                
                 var locationDataArray = [LocationDataModel]()
                 
                 for index in 0..<locationData.count{

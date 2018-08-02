@@ -25,9 +25,15 @@ class NewCheckOutUserScreen: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        visualEffectView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        
             tableView.estimatedRowHeight = 50
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        visualEffectView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        //visualEffectView.layer.masksToBounds = true
     }
     
 }

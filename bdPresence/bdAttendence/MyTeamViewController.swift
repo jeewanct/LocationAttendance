@@ -115,7 +115,11 @@ extension MyTeamViewController{
         })
     }
     
-    
+    func hideLoader() {
+        DispatchQueue.main.async {
+            AlertView.sharedInstance.hideActivityIndicator(self.view)
+        }
+    }
     
     
 }
@@ -215,14 +219,15 @@ extension MyTeamViewController{
         self.showLoader()
         
         
-        MyTeamModel.getTeamMember(completion: { (myTeamData) in
+        MyTeamModel.getTeamMember(completion: {[weak self] (myTeamData) in
             print("Team Member data is ",dump(myTeamData))
+            self?.hideLoader()
+            self?.teamData = myTeamData
+            self?.addMarkersInMap(teamDetails: self?.teamData)
+            self?.userContainerView?.teamData = self?.teamData
             
-            self.teamData = myTeamData
-            self.addMarkersInMap(teamDetails: self.teamData)
-            self.userContainerView?.teamData = self.teamData
         }) { (error) in
-            
+            self.hideLoader()
             print("the error in fetching team", error)
         }
         

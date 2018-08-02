@@ -421,6 +421,21 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10OauthModel")
 @end
 
 
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk12PlaceDetails")
+@interface PlaceDetails : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable placeId;
+@property (nonatomic, copy) NSString * _Nullable editedBy;
+@property (nonatomic, copy) NSString * _Nullable addedBy;
+@property (nonatomic, copy) NSString * _Nullable placeType;
+@property (nonatomic, copy) NSString * _Nullable address;
++ (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk11RMCAssignee")
 @interface RMCAssignee : RealmSwiftObject
 @property (nonatomic, copy) NSString * _Nullable userId;
@@ -537,9 +552,36 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk9RMCPhotos")
 - (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class RMCPlaceLocation;
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk8RMCPlace")
 @interface RMCPlace : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable placeId;
+@property (nonatomic, copy) NSDate * _Nullable addedOn;
+@property (nonatomic, copy) NSDate * _Nullable updatedOn;
+@property (nonatomic, copy) NSString * _Nullable placeAddress;
+@property (nonatomic, strong) RMCPlaceLocation * _Nullable location;
+@property (nonatomic, copy) NSString * _Nullable associationIds;
+@property (nonatomic, copy) NSString * _Nullable localStatus;
+@property (nonatomic, copy) NSString * _Nullable status;
+@property (nonatomic, strong) PlaceDetails * _Nullable placeDetails;
++ (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk16RMCPlaceLocation")
+@interface RMCPlaceLocation : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable placeId;
+@property (nonatomic, copy) NSString * _Nullable latitude;
+@property (nonatomic, copy) NSString * _Nullable longitude;
+@property (nonatomic, copy) NSString * _Nullable altitude;
+@property (nonatomic, copy) NSString * _Nullable accuracy;
+@property (nonatomic, copy) NSString * _Nullable associationId;
+@property (nonatomic, copy) NSString * _Nullable type;
 + (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
@@ -550,6 +592,8 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk8RMCPlace")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk16RMCPlacesManager")
 @interface RMCPlacesManager : NSObject
++ (void)getPlaces;
++ (RMCDObject * _Nullable)getDObjectFromDBWithDobjectId:(NSString * _Nonnull)dobjectId SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -589,6 +633,11 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk15UserDeviceModel")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk5Users")
 @interface Users : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable dObjId;
+@property (nonatomic, copy) NSString * _Nullable userId;
+@property (nonatomic, copy) NSString * _Nullable firstName;
+@property (nonatomic, copy) NSString * _Nullable lastName;
+@property (nonatomic, copy) NSString * _Nullable organisationId;
 + (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;

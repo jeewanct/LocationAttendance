@@ -22,7 +22,7 @@ class NewLoginViewController: UIViewController {
         self.sendOtpButton.layer.cornerRadius = 15.0
         self.sendOtpButton.clipsToBounds = true
         self.sendOtpButton.titleLabel?.font = APPFONT.OTPACTION
-        self.sendOtpButton.addTarget(self, action: #selector(sendOtpAction), for: UIControlEvents.touchUpInside)
+        self.sendOtpButton.addTarget(self, action: #selector(sendOtpAction), for: .touchUpInside)
         self.mobileTextfield.font = APPFONT.BODYTEXT
         mobileTextfield.delegate = self
          createGradientLayer()
@@ -46,10 +46,10 @@ class NewLoginViewController: UIViewController {
     
     func sendOtpAction(){
         
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? NewOtpViewController
-        controller?.mobileNumber = self.mobileTextfield.text!
-        //self.presentedViewController
-        self.navigationController?.show(controller!, sender: nil)
+//        let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? NewOtpViewController
+//        controller?.mobileNumber = self.mobileTextfield.text!
+//        //self.presentedViewController
+//        self.navigationController?.show(controller!, sender: nil)
         
         if mobileTextfield.text!.isBlank{
             self.showAlert(ErrorMessage.FECodeError.rawValue)
