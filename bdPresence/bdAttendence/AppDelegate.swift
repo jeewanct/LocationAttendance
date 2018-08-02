@@ -223,12 +223,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func checkLogin(){
         getUserData()
-        
-        // Changes made for RMCPlaces
-        RMCPlacesManager.getPlaces()
-        
+
         
         if !SDKSingleton.sharedInstance.userId.isBlank{
+            
+            // Changes made for RMCPlaces
+            RMCPlacesManager.getPlaces()
+            
             
             let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
             let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
