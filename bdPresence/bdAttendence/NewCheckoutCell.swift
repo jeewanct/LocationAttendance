@@ -18,6 +18,7 @@ class NewCheckoutCell: UITableViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        
     }
     
   

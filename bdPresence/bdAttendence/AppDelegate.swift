@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          Don't config until the location is on
         */
         
+        
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
@@ -138,6 +139,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if !SDKSingleton.sharedInstance.userId.isBlank{
             if isInternetAvailable() {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: self, userInfo: nil)
                 CheckinModel.postCheckin()
             }
             
@@ -221,6 +223,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func checkLogin(){
         getUserData()
+        
+        // Changes made for RMCPlaces
+        RMCPlacesManager.getPlaces()
+        
         
         if !SDKSingleton.sharedInstance.userId.isBlank{
             

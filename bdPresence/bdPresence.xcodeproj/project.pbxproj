@@ -10,10 +10,14 @@
 		091517A22108694A00FABD3D /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A12108694A00FABD3D /* LocationTableViewCell.swift */; };
 		091517A421087A8800FABD3D /* LogicHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A321087A8800FABD3D /* LogicHelper.swift */; };
 		091517AA2108A8AC00FABD3D /* NewCheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */; };
-		096FEA25210A01F000A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */; };
-		096FEA26210A01F800A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */; };
-		096FEA27210A01F800A1D2EA /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0982365D2109A948002BEECC /* RoughWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982365C2109A948002BEECC /* RoughWork.swift */; };
+		09B5BC65211077450071155C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC64211077450071155C /* Networking.swift */; };
+		09B5BC67211077B50071155C /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC66211077B50071155C /* AppConstants.swift */; };
+		09B5BC692110786C0071155C /* GoogleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC682110786C0071155C /* GoogleUtils.swift */; };
+		09CE05672110840400C4AA24 /* UserPlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE05662110840400C4AA24 /* UserPlaceModel.swift */; };
+		09FAA4072111CD3100679D86 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */; };
+		09FAA4082111CD8900679D86 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */; };
+		09FAA4092111CD8900679D86 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0780D204E38BF525A133B40D /* Pods_bdPresence.framework */; };
 		901CC43E17B9E13245BD210A /* Pods_bdPresenceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6E3D50C77FAC49A06A0A14 /* Pods_bdPresenceUITests.framework */; };
 		990089161F44177400CED97E /* TwoSideLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990089141F44177400CED97E /* TwoSideLabelTableViewCell.swift */; };
@@ -124,11 +128,11 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		C83C005820514431003F300E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				096FEA27210A01F800A1D2EA /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				09FAA4092111CD8900679D86 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,8 +145,12 @@
 		091517A12108694A00FABD3D /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		091517A321087A8800FABD3D /* LogicHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicHelper.swift; sourceTree = "<group>"; };
 		091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCheckoutCell.swift; sourceTree = "<group>"; };
-		096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		0982365C2109A948002BEECC /* RoughWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughWork.swift; sourceTree = "<group>"; };
+		09B5BC64211077450071155C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		09B5BC66211077B50071155C /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		09B5BC682110786C0071155C /* GoogleUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleUtils.swift; sourceTree = "<group>"; };
+		09CE05662110840400C4AA24 /* UserPlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlaceModel.swift; sourceTree = "<group>"; };
+		09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		0B0496CF0D3F1160AE556FB2 /* Pods-bdPresenceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4109A7E8C6D948A14C0F47EE /* Pods-bdPresenceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.release.xcconfig"; sourceTree = "<group>"; };
 		63EE7A650801BE90DFD757D6 /* Pods_bdPresenceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdPresenceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,8 +262,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				096FEA25210A01F000A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */,
-				096FEA26210A01F800A1D2EA /* BluedolphinCloudSdk.framework in Frameworks */,
+				09FAA4072111CD3100679D86 /* BluedolphinCloudSdk.framework in Frameworks */,
+				09FAA4082111CD8900679D86 /* BluedolphinCloudSdk.framework in Frameworks */,
 				42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,7 +356,7 @@
 		99BD39A01EA49B7100B6942B /* bdAttendence */ = {
 			isa = PBXGroup;
 			children = (
-				096FEA24210A01EF00A1D2EA /* BluedolphinCloudSdk.framework */,
+				09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */,
 				9924EEA920F8722000B0A661 /* GifImages */,
 				99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */,
 				99CA967B1F021E2A00E2813B /* Storyboard */,
@@ -408,6 +416,10 @@
 				992F2D4520F5E551009E1213 /* ProtocolsForController.swift */,
 				9924EEA720F8709500B0A661 /* NavigationSetup.swift */,
 				091517A321087A8800FABD3D /* LogicHelper.swift */,
+				09B5BC64211077450071155C /* Networking.swift */,
+				09B5BC66211077B50071155C /* AppConstants.swift */,
+				09B5BC682110786C0071155C /* GoogleUtils.swift */,
+				09CE05662110840400C4AA24 /* UserPlaceModel.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -803,6 +815,7 @@
 				99F84C181F28C7DB00D6AE44 /* DayCheckinList.swift in Sources */,
 				091517AA2108A8AC00FABD3D /* NewCheckoutCell.swift in Sources */,
 				990CBCF71EFAA40300F56E38 /* NewOtpViewController.swift in Sources */,
+				09B5BC692110786C0071155C /* GoogleUtils.swift in Sources */,
 				9924EEA820F8709500B0A661 /* NavigationSetup.swift in Sources */,
 				99B936911EC98706008E12C4 /* CardView.swift in Sources */,
 				99BC35051F27448A00A59A4A /* HistoryViewController.swift in Sources */,
@@ -825,6 +838,7 @@
 				99B811651F2F11E200174FD0 /* ContactUsViewController.swift in Sources */,
 				99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */,
 				99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */,
+				09CE05672110840400C4AA24 /* UserPlaceModel.swift in Sources */,
 				998461201F2AF45900D91AB7 /* TimeLineViewController.swift in Sources */,
 				9900891E1F4465FA00CED97E /* SwitchTableViewCell.swift in Sources */,
 				99E369CF1F1DFE99000A642C /* WorkHourViewController.swift in Sources */,
@@ -842,8 +856,10 @@
 				99068B1C20F7363A0018D3B8 /* MyTeamViewController.swift in Sources */,
 				99482F5920F8BB0B00324AE5 /* MyLocationTableViewCell.swift in Sources */,
 				99E046E820F4E044008DA7A8 /* UserLocationView.swift in Sources */,
+				09B5BC65211077450071155C /* Networking.swift in Sources */,
 				99FCB0C81EFBC8980022AF61 /* SideMenuViewController.swift in Sources */,
 				99482F4D20F87F1900324AE5 /* SystemSettingsCell.swift in Sources */,
+				09B5BC67211077B50071155C /* AppConstants.swift in Sources */,
 				99F07F5C1F57EF75000B4967 /* TimerView.swift in Sources */,
 				991A0ECB1ECC259D00513373 /* ProjectConstant.swift in Sources */,
 			);
