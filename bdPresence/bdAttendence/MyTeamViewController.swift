@@ -27,7 +27,7 @@ class MyTeamViewController: UIViewController{
         setupNavigation()
         getTeamLocation()
         
-       
+       userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
         
     }
     
@@ -94,7 +94,7 @@ extension MyTeamViewController{
     
     
     func setupNavigation(){
-        navigationController?.removeTransparency()
+        //navigationController?.removeTransparency()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
     }
@@ -170,7 +170,7 @@ extension MyTeamViewController{
         print("View Tapped")
         
         if userLocationCardHeightAnchor.constant == 50{
-            animateContainerView(heightToAnimate: 376)
+            animateContainerView(heightToAnimate: UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
         }else{
             // 400
             userContainerView?.tableView.isScrollEnabled = true

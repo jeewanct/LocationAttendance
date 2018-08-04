@@ -63,7 +63,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7P-ll-F5v">
-                                <rect key="frame" x="0.0" y="400" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="568" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="qGf-G7-rkI" kind="embed" identifier="userLocationSegue" id="dR5-yp-AQt"/>
@@ -72,7 +72,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="U7P-ll-F5v" firstAttribute="top" secondItem="7JT-vs-LaZ" secondAttribute="top" constant="400" id="1LW-g8-o9e"/>
+                            <constraint firstItem="U7P-ll-F5v" firstAttribute="top" secondItem="7JT-vs-LaZ" secondAttribute="top" constant="568" id="1LW-g8-o9e"/>
                             <constraint firstAttribute="trailing" secondItem="U7P-ll-F5v" secondAttribute="trailing" id="Es1-5A-qqo"/>
                             <constraint firstItem="mVU-sj-CEH" firstAttribute="leading" secondItem="7JT-vs-LaZ" secondAttribute="leading" id="KEG-uo-Wkn"/>
                             <constraint firstAttribute="trailing" secondItem="mVU-sj-CEH" secondAttribute="trailing" id="Uce-ZC-zML"/>
@@ -106,7 +106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qjk-jU-ccr" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="-100" width="320" height="668"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lY7-b5-FgH">
@@ -233,7 +233,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Wpu-am-SK2" secondAttribute="trailing" constant="8" id="Uvt-ur-UwD"/>
                             <constraint firstItem="mgc-Kb-GWu" firstAttribute="top" secondItem="qjk-jU-ccr" secondAttribute="bottom" id="YD2-r8-rFm"/>
                             <constraint firstAttribute="trailing" secondItem="lY7-b5-FgH" secondAttribute="trailing" constant="8" id="Ygw-in-pNI"/>
-                            <constraint firstItem="qjk-jU-ccr" firstAttribute="top" secondItem="cBj-Wc-AHe" secondAttribute="top" id="a0g-z9-aia"/>
+                            <constraint firstItem="qjk-jU-ccr" firstAttribute="top" secondItem="cBj-Wc-AHe" secondAttribute="top" constant="-100" id="a0g-z9-aia"/>
                             <constraint firstItem="w5t-8P-CYD" firstAttribute="top" secondItem="Wpu-am-SK2" secondAttribute="bottom" constant="8" id="aSy-pw-4uo"/>
                             <constraint firstItem="mgc-Kb-GWu" firstAttribute="top" secondItem="1kl-Gx-t4b" secondAttribute="bottom" constant="20" id="coK-Mu-juy"/>
                             <constraint firstItem="vMN-dn-Oxa" firstAttribute="leading" secondItem="1kl-Gx-t4b" secondAttribute="trailing" constant="24" id="f8b-VE-Ubk"/>
@@ -261,7 +261,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SGW-Mu-YEZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3120" y="-783.80281690140851"/>
+            <point key="canvasLocation" x="-3120" y="-772"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sZB-nN-lLw">
@@ -843,7 +843,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGI-yR-X5h">
-                                <rect key="frame" x="0.0" y="440" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="568" width="320" height="504"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="shb-sf-JMo" kind="embed" identifier="MyTeamSegueIdentifier" id="UUv-We-tZw"/>
@@ -855,7 +855,7 @@
                             <constraint firstItem="xfR-b3-6nz" firstAttribute="top" secondItem="AOL-tO-fOs" secondAttribute="bottom" id="1w4-yR-I0m"/>
                             <constraint firstItem="xfR-b3-6nz" firstAttribute="leading" secondItem="azV-T9-nj5" secondAttribute="leading" id="3pW-Th-d7c"/>
                             <constraint firstItem="gdw-tC-AaV" firstAttribute="top" secondItem="xfR-b3-6nz" secondAttribute="bottom" id="DQI-qV-hCU"/>
-                            <constraint firstItem="lGI-yR-X5h" firstAttribute="top" secondItem="AOL-tO-fOs" secondAttribute="bottom" constant="376" id="N19-zv-4ak"/>
+                            <constraint firstItem="lGI-yR-X5h" firstAttribute="top" secondItem="AOL-tO-fOs" secondAttribute="bottom" constant="504" id="N19-zv-4ak"/>
                             <constraint firstAttribute="trailing" secondItem="xfR-b3-6nz" secondAttribute="trailing" id="NO4-Ry-7PA"/>
                             <constraint firstAttribute="trailing" secondItem="lGI-yR-X5h" secondAttribute="trailing" id="dKl-09-kHX"/>
                             <constraint firstItem="lGI-yR-X5h" firstAttribute="leading" secondItem="azV-T9-nj5" secondAttribute="leading" id="pwk-fv-fut"/>
@@ -885,22 +885,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipeDown" translatesAutoresizingMaskIntoConstraints="NO" id="j5E-91-oHK">
-                                <rect key="frame" x="136" y="79" width="48" height="42"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USZ-DE-GZE" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsy-os-D3c">
+                                <rect key="frame" x="0.0" y="64" width="320" height="80"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipeDown" translatesAutoresizingMaskIntoConstraints="NO" id="j5E-91-oHK">
+                                        <rect key="frame" x="139" y="5" width="42" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="5At-XF-Wqt"/>
+                                            <constraint firstAttribute="height" constant="42" id="t0y-Ji-of8"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe down to end your day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYf-kK-yZe">
+                                        <rect key="frame" x="40" y="52" width="240" height="21.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21.5" id="3RR-WF-f15"/>
+                                            <constraint firstAttribute="width" constant="240" id="KgG-kd-Up2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="byn-uq-RIg"/>
-                                    <constraint firstAttribute="height" constant="42" id="vjm-6c-LR4"/>
+                                    <constraint firstAttribute="height" constant="80" id="CuQ-Io-c2K"/>
+                                    <constraint firstItem="YYf-kK-yZe" firstAttribute="centerX" secondItem="j5E-91-oHK" secondAttribute="centerX" id="VaX-2x-NOg"/>
+                                    <constraint firstItem="j5E-91-oHK" firstAttribute="centerX" secondItem="bsy-os-D3c" secondAttribute="centerX" id="dUg-Y3-4Dm"/>
+                                    <constraint firstItem="j5E-91-oHK" firstAttribute="top" secondItem="bsy-os-D3c" secondAttribute="top" constant="5" id="nGR-CL-6Oy"/>
+                                    <constraint firstItem="YYf-kK-yZe" firstAttribute="top" secondItem="j5E-91-oHK" secondAttribute="bottom" constant="5" id="vli-9k-Wej"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe down to end your day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYf-kK-yZe">
-                                <rect key="frame" x="40" y="131" width="240" height="21.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21.5" id="ICp-Ga-2pu"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NL-pT-kMV" customClass="CardView" customModule="bdPresence" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="528" width="320" height="40"/>
                                 <subviews>
@@ -926,12 +944,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USZ-DE-GZE" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="160.5" width="320" height="407.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iDA-Oj-aZO">
-                                <rect key="frame" x="0.0" y="397" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="568" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="56O-hC-4Zk" kind="embed" identifier="containerViewSegue" id="9gI-Lp-NYu"/>
@@ -940,21 +954,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YYf-kK-yZe" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" constant="40" id="0qC-px-4gH"/>
-                            <constraint firstItem="YYf-kK-yZe" firstAttribute="top" secondItem="j5E-91-oHK" secondAttribute="bottom" constant="10" id="769-fg-r00"/>
+                            <constraint firstItem="bsy-os-D3c" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" id="2Fu-RM-8I6"/>
                             <constraint firstAttribute="trailing" secondItem="1NL-pT-kMV" secondAttribute="trailing" id="7dW-fS-eRh"/>
                             <constraint firstItem="1NL-pT-kMV" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="8Wm-B4-zoE"/>
-                            <constraint firstAttribute="bottom" secondItem="USZ-DE-GZE" secondAttribute="bottom" id="Esm-Gu-Iy2"/>
-                            <constraint firstItem="j5E-91-oHK" firstAttribute="centerX" secondItem="U0L-Z1-1Ta" secondAttribute="centerX" id="HkQ-Y9-UKm"/>
-                            <constraint firstItem="USZ-DE-GZE" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="LFW-z6-Qoi"/>
+                            <constraint firstItem="bsy-os-D3c" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="F3z-bh-cev"/>
+                            <constraint firstItem="USZ-DE-GZE" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" id="KCn-e1-8Uv"/>
+                            <constraint firstAttribute="trailing" secondItem="USZ-DE-GZE" secondAttribute="trailing" id="KMD-pd-qi2"/>
+                            <constraint firstAttribute="trailing" secondItem="bsy-os-D3c" secondAttribute="trailing" id="Rbr-uo-yab"/>
+                            <constraint firstItem="Vzz-7a-EcF" firstAttribute="top" secondItem="USZ-DE-GZE" secondAttribute="bottom" id="S0w-ek-ZW2"/>
                             <constraint firstAttribute="bottom" secondItem="1NL-pT-kMV" secondAttribute="bottom" id="TDt-lm-h4o"/>
                             <constraint firstAttribute="trailing" secondItem="iDA-Oj-aZO" secondAttribute="trailing" id="VMc-3p-1M5"/>
                             <constraint firstItem="iDA-Oj-aZO" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="aiR-uS-qi5"/>
-                            <constraint firstAttribute="trailing" secondItem="YYf-kK-yZe" secondAttribute="trailing" constant="40" id="kMw-aV-F05"/>
-                            <constraint firstItem="USZ-DE-GZE" firstAttribute="top" secondItem="YYf-kK-yZe" secondAttribute="bottom" constant="8" id="oXw-aH-T5S"/>
-                            <constraint firstAttribute="trailing" secondItem="USZ-DE-GZE" secondAttribute="trailing" id="q5a-gs-Ia7"/>
-                            <constraint firstItem="iDA-Oj-aZO" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" constant="333" id="upZ-z6-N1g"/>
-                            <constraint firstItem="j5E-91-oHK" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" constant="15" id="xg7-CA-jLW"/>
+                            <constraint firstItem="USZ-DE-GZE" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="tBT-HN-x9n"/>
+                            <constraint firstItem="iDA-Oj-aZO" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" constant="504" id="upZ-z6-N1g"/>
                             <constraint firstItem="iDA-Oj-aZO" firstAttribute="height" secondItem="U0L-Z1-1Ta" secondAttribute="height" id="xlc-Yx-oaB"/>
                         </constraints>
                         <variation key="default">
@@ -970,13 +982,14 @@
                         <outlet property="endYourDayLabel" destination="YYf-kK-yZe" id="Kd7-Vo-tVQ"/>
                         <outlet property="lastCheckinAddressLabel" destination="ugh-5c-h6b" id="BcY-LI-vJ3"/>
                         <outlet property="mapView" destination="USZ-DE-GZE" id="Lrg-mO-NOA"/>
+                        <outlet property="upperView" destination="bsy-os-D3c" id="ovZ-6e-wx6"/>
                         <outlet property="userLocationCardHeightAnchor" destination="upZ-z6-N1g" id="YJc-RP-Wmn"/>
                         <outlet property="userLocationContainerView" destination="iDA-Oj-aZO" id="TeM-jD-ziC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6d-mk-SVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3851.25" y="1541.1971830985915"/>
+            <point key="canvasLocation" x="3901.875" y="1551.7605633802816"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Tgk-qA-Jjz">
@@ -2471,7 +2484,7 @@ mark your presence at your workplace</string>
                                 </view>
                                 <color key="backgroundColor" red="0.4823529412" green="0.73725490199999999" blue="0.83921568629999999" alpha="0.84931506849315064" colorSpace="custom" customColorSpace="sRGB"/>
                                 <vibrancyEffect>
-                                    <blurEffect style="dark"/>
+                                    <blurEffect style="light"/>
                                 </vibrancyEffect>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -2491,7 +2504,7 @@ mark your presence at your workplace</string>
                                             <rect key="frame" x="0.0" y="0.0" width="304" height="108.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="RMC Office G-84, outer cirecle, Caonnaught Place" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxC-H3-Nla">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="RMC Office G-84, outer cirecle, Caonnaught Place, New Delhi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxC-H3-Nla">
                                                     <rect key="frame" x="16" y="43" width="272" height="33"/>
                                                     <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2533,15 +2546,6 @@ mark your presence at your workplace</string>
                                             <outlet property="timeLabel" destination="gDk-7C-K14" id="8s0-MD-thA"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewCheckOutUserScreenCellLocations" rowHeight="113" id="PYV-X4-7GM">
-                                        <rect key="frame" x="0.0" y="137" width="304" height="113"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PYV-X4-7GM" id="vRW-lz-df6">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="112.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
                                 </prototypes>
                                 <sections/>
                                 <connections>
@@ -2550,7 +2554,7 @@ mark your presence at your workplace</string>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="u1G-9Z-a61" secondAttribute="trailing" constant="8" id="0hx-3A-2nn"/>
                             <constraint firstAttribute="bottom" secondItem="u1G-9Z-a61" secondAttribute="bottom" id="8Rq-j7-iUD"/>
