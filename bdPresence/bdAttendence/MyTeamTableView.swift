@@ -31,6 +31,7 @@ extension MyTeamTableView: UITableViewDelegate{
         
         let viewController = storyboard?.instantiateViewController(withIdentifier: "MyTeamLocationDetails") as! MyTeamLocationDetails
         viewController.teamMemberUserId = teamData?[indexPath.item]._id
+        viewController.teamMemberUserName = teamData?[indexPath.item].userDetails?.name
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -43,7 +44,7 @@ extension MyTeamTableView: UITableViewDataSource{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset)
         
-        if scrollView.contentOffset.y < -50 {
+        if scrollView.contentOffset.y < -5 {
             tableView.isScrollEnabled = false
             delegate?.handleOnSwipe()
         }

@@ -16,7 +16,7 @@ class NewCheckOutUserScreen: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     
     
-    var locationData: [LocationDataModel]?{
+    var locationData: [[LocationDataModel]]?{
         didSet{
             tableView.reloadData()
            
@@ -56,7 +56,7 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset)
         
-        if scrollView.contentOffset.y < -50 {
+        if scrollView.contentOffset.y < -5 {
             tableView.isScrollEnabled = false
             delegate?.handleOnSwipe()
         }
@@ -65,8 +65,8 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewCheckOutUserScreenCell", for: indexPath) as! NewCheckoutCell
-       setTeamDetails(cell: cell, indexPath: indexPath)
-
+       //setTeamDetails(cell: cell, indexPath: indexPath)
+        setTeamDetails(cell: cell, indexPath: indexPath)
         
         return cell
     }
@@ -85,42 +85,70 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
         
     }
     
+    
     func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
-        
-        
-//        if indexPath.item == 0 {
-//          cell.locationDetailLabel.text = "Current Location"
-//        }else{
-//          cell.locationDetailLabel.text = "Location name"
-//        }
-        
-        
-        if let location = locationData?[indexPath.item].address{
+    
+        if let locations = locationData{
             
-            cell.addressLabel.text = location
             
-        }else{
-            
-            if let lat = locationData?[indexPath.item].latitude, let long = locationData?[indexPath.item].longitude{
+            for location in locations{
                 
-                
-                if let locationLat = CLLocationDegrees(lat),let locationLong = CLLocationDegrees(long){
-                   
-                    let location = CLLocation(latitude: CLLocationDegrees(locationLat), longitude: CLLocationDegrees(locationLong))
-                    LogicHelper.shared.reverseGeoCode(location: location) { (address) in
-                        self.locationData?[indexPath.item].address = address
-                        cell.addressLabel.text = address
-                    }
+                for geoTaggedLocation in location{
                     
+                    if let geoTag = geoTaggedLocation.geoTaggedLocations{
+                        
+                        cell.addressLabel.text = geoTag.placeDetails?.address
+                    }else{
+                       
+                        cell.addressLabel.text = geoTaggedLocation.address
+                        
+                    }
                 }
                 
-                
             }
-            
         }
-    
         
+    
+    
+    
     }
+    
+//    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
+//
+//
+////        if indexPath.item == 0 {
+////          cell.locationDetailLabel.text = "Current Location"
+////        }else{
+////          cell.locationDetailLabel.text = "Location name"
+////        }
+//
+//
+//        if let location = locationData?[indexPath.item].address{
+//
+//            cell.addressLabel.text = location
+//
+//        }else{
+//
+//            if let lat = locationData?[indexPath.item].latitude, let long = locationData?[indexPath.item].longitude{
+//
+//
+//                if let locationLat = CLLocationDegrees(lat),let locationLong = CLLocationDegrees(long){
+//
+//                    let location = CLLocation(latitude: CLLocationDegrees(locationLat), longitude: CLLocationDegrees(locationLong))
+//                    LogicHelper.shared.reverseGeoCode(location: location) { (address) in
+//                        self.locationData?[indexPath.item].address = address
+//                        cell.addressLabel.text = address
+//                    }
+//
+//                }
+//
+//
+//            }
+//
+//        }
+//
+//
+//    }
     
     
 }

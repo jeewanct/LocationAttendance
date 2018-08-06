@@ -19,6 +19,7 @@ class MyTeamViewController: UIViewController{
     var userContainerView: MyTeamTableView?
     var teamData: [MyTeamDocument]?
     //var errorView :ErrorScanView!
+    let activityIndicator = ActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +27,21 @@ class MyTeamViewController: UIViewController{
         addGestureInContainerView()
         setupNavigation()
         getTeamLocation()
-        
-       userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
+        navigationController?.removeTransparency()
+        userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
         
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "My Team"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        title = ""
+    }
 }
 
 extension MyTeamViewController{
@@ -169,7 +180,7 @@ extension MyTeamViewController{
         
         print("View Tapped")
         
-        if userLocationCardHeightAnchor.constant == 50{
+        if userLocationCardHeightAnchor.constant == 5{
             animateContainerView(heightToAnimate: UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
         }else{
             // 400
@@ -183,11 +194,17 @@ extension MyTeamViewController{
     func animateContainerView(heightToAnimate height: CGFloat){
         
         UIView.animate(withDuration: 0.5) {
+            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
+                self.userLocationContainerView.backgroundColor = .clear
+                
+            }else{
+                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9016010123)
+            }
+            
             self.userLocationCardHeightAnchor.constant = height
             self.view.layoutIfNeeded()
             
         }
- 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -204,7 +221,7 @@ extension MyTeamViewController{
 extension MyTeamViewController: HandleUserViewDelegate{
     
     func handleOnSwipe() {
-         userLocationCardHeightAnchor.constant += 50
+         userLocationCardHeightAnchor.constant += 5
         self.view.layoutIfNeeded()
         handleTap()
     }
@@ -216,20 +233,68 @@ extension MyTeamViewController: HandleUserViewDelegate{
 extension MyTeamViewController{
     func getTeamLocation(){
         
-        self.showLoader()
+        view.showActivityIndicator(activityIndicator: activityIndicator)
         
         
         MyTeamModel.getTeamMember(completion: {[weak self] (myTeamData) in
             print("Team Member data is ",dump(myTeamData))
-            self?.hideLoader()
+            self?.hideActivityIndicator()
             self?.teamData = myTeamData
+            
+            if let teamData = myTeamData{
+                self?.getTeamAddress(location: teamData)
+            }
+            //self?.getTeamAddress(location: myTeamData)
             self?.addMarkersInMap(teamDetails: self?.teamData)
-            self?.userContainerView?.teamData = self?.teamData
+            
             
         }) { (error) in
-            self.hideLoader()
+            
+            self.hideActivityIndicator()
+           
+            
             print("the error in fetching team", error)
         }
         
     }
+    
+    func getTeamAddress(location: [MyTeamDocument]){
+        
+        
+        var dummyLocation = location
+        for index in 0..<location.count{
+            
+            if let coordinates = location[index].userStatus?.location?.coordinates{
+                
+                if coordinates.count == 2{
+                    
+                    let cllLocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
+                    
+                    
+                    LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: 0) { (address, value, value1) in
+                    
+                        
+                        dummyLocation[index].userStatus?.location?.teamAddress = address
+                       
+//                        if value == location.count - 1{
+                            self.userContainerView?.teamData = dummyLocation
+                            
+                       // }
+                        
+                        
+                    }
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    func hideActivityIndicator(){
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+    }
+    
+    
 }

@@ -11,6 +11,7 @@
 		091517A421087A8800FABD3D /* LogicHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A321087A8800FABD3D /* LogicHelper.swift */; };
 		091517AA2108A8AC00FABD3D /* NewCheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */; };
 		0982365D2109A948002BEECC /* RoughWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982365C2109A948002BEECC /* RoughWork.swift */; };
+		09A5F9E82118323F009953C6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */; };
 		09B5BC65211077450071155C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC64211077450071155C /* Networking.swift */; };
 		09B5BC67211077B50071155C /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC66211077B50071155C /* AppConstants.swift */; };
 		09B5BC692110786C0071155C /* GoogleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC682110786C0071155C /* GoogleUtils.swift */; };
@@ -145,6 +146,7 @@
 		091517A321087A8800FABD3D /* LogicHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicHelper.swift; sourceTree = "<group>"; };
 		091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCheckoutCell.swift; sourceTree = "<group>"; };
 		0982365C2109A948002BEECC /* RoughWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughWork.swift; sourceTree = "<group>"; };
+		09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		09B5BC64211077450071155C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		09B5BC66211077B50071155C /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		09B5BC682110786C0071155C /* GoogleUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleUtils.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				09B5BC66211077B50071155C /* AppConstants.swift */,
 				09B5BC682110786C0071155C /* GoogleUtils.swift */,
 				09CE05662110840400C4AA24 /* UserPlaceModel.swift */,
+				09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				99B67D5920F78C6E00308137 /* LabelWithImage.swift in Sources */,
 				0982365D2109A948002BEECC /* RoughWork.swift in Sources */,
 				99B811651F2F11E200174FD0 /* ContactUsViewController.swift in Sources */,
+				09A5F9E82118323F009953C6 /* ActivityIndicatorView.swift in Sources */,
 				99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */,
 				99CA96F91F0A3F5600E2813B /* NewPermissionViewController.swift in Sources */,
 				09CE05672110840400C4AA24 /* UserPlaceModel.swift in Sources */,
