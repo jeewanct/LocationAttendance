@@ -29,6 +29,14 @@ class GeoTagController: UIViewController{
         setupMap()
         setupFields()
         title = "Geo Tag"
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        visualEffect.layer.masksToBounds = true
+
     }
     
     @IBAction func handleClose(_ sender: Any) {
@@ -67,6 +75,7 @@ class GeoTagController: UIViewController{
         let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude, zoom: 17.0)
         mapView.camera = camera
         
+        
     }
     
     
@@ -79,7 +88,7 @@ class GeoTagController: UIViewController{
         geoFenceRadiusSlider.value = 50
         
         
-        visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        //visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         visualEffect.layer.masksToBounds = true
     }
     

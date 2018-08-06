@@ -25,8 +25,9 @@ class MyLocationViewController: UIViewController{
         addGestureInContainerView()
         setupNavigation()
         setupMap()
-        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        
+
+        userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.2)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +47,7 @@ class MyLocationViewController: UIViewController{
 extension MyLocationViewController{
     
     func setupNavigation(){
-        navigationController?.removeTransparency()
+        //navigationController?.removeTransparency()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
     }
@@ -62,12 +63,9 @@ extension MyLocationViewController{
     
     func setupMap(){
         
-        mapView.changeStyle()
+        //mapView.changeStyle()
         mapView.delegate = self
         let marker = GMSMarker()
-        
-        
-        
         marker.position = CurrentLocation.coordinate
         
         marker.title = "\(CurrentLocation.time)"
@@ -75,7 +73,7 @@ extension MyLocationViewController{
         marker.isDraggable = true
         marker.map = mapView
         
-        let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude, zoom: 12.0)
+        let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude, zoom: 17.0)
         mapView.camera = camera
         
         
@@ -98,14 +96,12 @@ extension MyLocationViewController{
         print("View Tapped")
         
         if userLocationCardHeightAnchor.constant == 49 + 50 {
-            animateContainerView(heightToAnimate: 400)
+            animateContainerView(heightToAnimate: UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.2))
         }else{
             // 400
              userContainerView?.tableView.isScrollEnabled = true
             animateContainerView(heightToAnimate: 49)
         }
-        
-        
     }
     
     func animateContainerView(heightToAnimate height: CGFloat){

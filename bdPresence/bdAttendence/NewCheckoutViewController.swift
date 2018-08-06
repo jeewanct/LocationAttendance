@@ -30,6 +30,10 @@ class NewCheckoutViewController: UIViewController {
    // @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var lastCheckinAddressLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
+    
+    @IBOutlet weak var upperView: UIView!
+    
+    
   //  @IBOutlet weak var progressView: UICircularProgressRingView!
     var  dataArray = [Date]()
     var swipedown :UISwipeGestureRecognizer?
@@ -52,15 +56,16 @@ class NewCheckoutViewController: UIViewController {
         super.viewDidLoad()
 
         navigationController?.removeTransparency()
+        let height = UIScreen.main.bounds.size.height
+        userLocationCardHeightAnchor.constant = height - (height * 0.3)
+        
        // userLocationContainerView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
        
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
 //        navigationController?.navigationBar.shadowImage = UIImage()
 //        navigationController?.navigationBar.isTranslucent = true
         
-     
-        
-        
+
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         
@@ -100,6 +105,7 @@ class NewCheckoutViewController: UIViewController {
         setupMap()
         addGestureInContainerView()
         
+        addShadowToUpperView()
         
         // Do any additional setup after loading the view.
     }
@@ -113,6 +119,16 @@ class NewCheckoutViewController: UIViewController {
 //        }
         
     }
+    
+    func addShadowToUpperView () {
+
+        upperView.layer.shadowColor = UIColor.gray.cgColor
+        upperView.layer.shadowOpacity = 0.3
+        upperView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        upperView.layer.shadowRadius = 1
+    }
+    
+    
     func updateAddress(sender: NSNotification) {
         DispatchQueue.main.async {
             self.lastCheckinAddressLabel.text = CurrentLocation.address
@@ -319,7 +335,7 @@ extension NewCheckoutViewController{
     
     func setupMap(){
       
-        mapView.changeStyle()
+        //mapView.changeStyle()
         
         let marker = GMSMarker()
        
@@ -370,7 +386,7 @@ extension NewCheckoutViewController{
         print("View Tapped")
         
         if userLocationCardHeightAnchor.constant == 0 {
-            animateContainerView(heightToAnimate: 333)
+            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
         }else{
             // 400
             userContainerView?.tableView.isScrollEnabled = true
