@@ -48,7 +48,7 @@ class NewCheckoutViewController: UIViewController {
     
     var userLocations: [LocationDataModel]?{
         didSet{
-            plotUserLocation()
+            //plotUserLocation()
         }
     }
     
@@ -139,49 +139,10 @@ class NewCheckoutViewController: UIViewController {
         updateView()
        
         
-        //processCurrentWeek()
-        
-//        if  pageControl.currentPage < dataArray.count {
-//            let value = dataArray[pageControl.currentPage]
-//            updateView(date: value)
-//        }
-        
+  
         
     }
-//    func processCurrentWeek(){
-//        dataArray = []
-//        let realm = try! Realm()
-//        guard  let firstdateofWeek = Date().startOfWeek() else {
-//            return
-//        }
-//        let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("timeStamp >= %@",firstdateofWeek).sorted(byProperty: "timeStamp", ascending: true)
-//        
-//        let totalCount = attendanceLogForToday.count
-//        if totalCount != 0{
-//            pageControl.numberOfPages = totalCount
-//        }
-//        
-//        for attendance in attendanceLogForToday{
-//            dataArray.append(attendance.timeStamp!)
-//        }
-//        pageControl.currentPage = totalCount
-//        //print(attendanceLogForToday.count)
-//        
-//        
-//    }
-//    @IBAction func pageControlAction(_ sender: UIPageControl) {
-//        if dataArray.count > pageControl.currentPage{
-//            let date = dataArray[pageControl.currentPage]
-//            updateView(date: date)
-//        }
-//        
-//    }
-    
-    //    func pageChanged(sender:UIPageControl){
-    //        let date = dataArray[pageControl.currentPage]
-    //        updateView(date: date)
-    //
-//        }
+
     func handleGesture(sender:UIGestureRecognizer){
         //print(dataArray)
         //Sourabh - When swiped down then we will not allow SDK to work as accordingly in RMCNotifier
@@ -193,20 +154,7 @@ class NewCheckoutViewController: UIViewController {
             case UISwipeGestureRecognizerDirection.down:
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
                 
-//            case UISwipeGestureRecognizerDirection.left:
-//                if pageControl.currentPage < dataArray.count {
-//                    pageControl.currentPage = pageControl.currentPage + 1
-//                    let value = dataArray[pageControl.currentPage]
-//                    updateView(date: value)
-//                }
-//                
-//                
-//            case UISwipeGestureRecognizerDirection.right:
-//                if pageControl.currentPage >= 0 {
-//                    pageControl.currentPage = pageControl.currentPage - 1
-//                    let value = dataArray[pageControl.currentPage]
-//                    updateView(date: value)
-//                }
+
                 
                 
             default:
@@ -223,8 +171,6 @@ class NewCheckoutViewController: UIViewController {
     
     func updateView(date:Date = Date()){
         
-        //progressView.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
-        //progressView.innerRingColor = APPColor.newGreen
         let isToday = Calendar.current.isDateInToday(date)
         if isToday{
             self.navigationItem.title = "Today"
@@ -245,162 +191,77 @@ class NewCheckoutViewController: UIViewController {
         
             
             self.userLocations = data
-           // UserPlace.getPlacesData(location: dat)
-            self.getGeoTagData(location: self.userLocations)
+            self.plotMarkersInMap(location: data)
+            
             
         
         }
 
-//        plotMarkers(date: date)
-        //createFrequencybarView(date: date)
-    }
-    
-    func getGeoTagData(location: [LocationDataModel]? ){
-        
-        
-        //var geoTaggedLocations = [GeoTagLocationModel]()
-        if let locationData = location{
-            
-            for locationIndex in 0..<locationData.count{
-                if let geoTagged = UserPlace.getPlacesData(location: locationData[locationIndex]){
-                    locationData[locationIndex].geoTaggedLocations = geoTagged
-                }
-                
-            }
-            
-            
-            locationAccordingToGeoTag(locations: locationData)
-        }
-   
-    
     }
     
     
-    func locationAccordingToGeoTag(locations: [LocationDataModel]){
-        
-        
-        var geoTaggedLocations = [GeoTagLocationModel]()
-        var ordinaryLocations  = [LocationDataModel]()
-        
-        for index in 0..<locations.count {
-            
-            var geolocations = [LocationDataModel]()
-            
-            for index1 in index + 1..<locations.count{
-                
-                
-                if locations[index1].isRepeated == false{
-                
-                if locations[index].geoTaggedLocations?.placeDetails?.placeId == locations[index1].geoTaggedLocations?.placeDetails?.placeId{
-                    geolocations.append(locations[index])
-                        locations[index1].isRepeated = true
-                }
-                
-                }
 
-            }
+    
+    
+    
+    func plotMarkersInMap(location: [LocationDataModel]){
+        
+        let allLocations = UserPlace.getGeoTagData(location: location)
+        
+        
+        for locations in allLocations{
             
-            if geolocations.isEmpty{
-                ordinaryLocations.append(locations[index])
+            for geoTaggedLocation in locations{
                 
-            }else{
-                
-                if let geoTaggedLocation = setClusterTaggedLocation(currentGeoLocation: locations[index], location: geolocations){
-                     geoTaggedLocations.append(geoTaggedLocation)
+                if let geoTagg = geoTaggedLocation.geoTaggedLocations{
+                   
+                    addMarker(latitude: geoTagg.latitude, longitude: geoTagg.longitude, markerColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
+                }else{
                     
+                    addMarker(latitude: geoTaggedLocation.latitude, longitude: geoTaggedLocation.longitude, markerColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                 }
-                //geoTaggedLocations.append(setClusterTaggedLocation(currentGeoLocation: locations[index], location: geolocations))
                 
             }
             
             
-            
         }
+    }
         
-        print("Jeevan the geoTagged Dta", dump(geoTaggedLocations))
-        print("Jeevan the location Dta", dump(ordinaryLocations))
+        
+    func addMarker(latitude: String?, longitude: String?, markerColor: UIColor){
+            let marker = GMSMarker()
+            if let lat = latitude, let long = longitude{
+                
+                                if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
+                
+                                    marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
+                
+                
+                                    marker.title = "Sydney"
+                                    marker.snippet = "Australia"
+                                    let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysTemplate))
+                                    iconImageView.tintColor = markerColor
+                                    marker.iconView = iconImageView
+                                        
+                                    marker.map = mapView
+                
+                
+                                    let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 17.0)
+                                    mapView.camera = camera
+                
+                
+                                    //path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
+                
+                                }
+                
+                
+                
+                            }
+            
         
     }
     
-    func setClusterTaggedLocation(currentGeoLocation: LocationDataModel,location: [LocationDataModel]) -> GeoTagLocationModel?{
-        
-      
-        
-        if let taggedLocation = currentGeoLocation.geoTaggedLocations{
-              var geoTaggedModel = GeoTagLocationModel()
-            geoTaggedModel = taggedLocation
-            geoTaggedModel.locations = location
-            
-            return geoTaggedModel
-            
-        }
-        
-        
-        return nil
-        
-        
-    }
     
-    
-    
-    func createFrequencybarView(date:Date){
-        let queue = DispatchQueue.global(qos: .userInteractive)
-
-
-
-        // submit a task to the queue for background execution
-        queue.async() {
-            let object = UserDayData.getFrequencyLocationBarData(date:date)
-            print(object)
-            
-            
-            DispatchQueue.main.async() {
-                
-            
-//                let latitudeData = attendanceLogForToday.locationList.sorted(byKeyPath: "latitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
-//
-//                let longitueData = attendanceLogForToday.locationList.sorted(byKeyPath: "longitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
-                
-                
-                
-                
-                
-                
-//                let totalTime = object.getElapsedTime()!
-//                self.progressView.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
-//
-//                }
-//                let (hour,min,_) = self.secondsToHoursMinutesSeconds(seconds: Int(totalTime))
-//
-//                let myMutableString =  NSMutableAttributedString(
-//                    string: "\(self.timeText(hour)):\(self.timeText(min))",
-//                    attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
-//                let seconndMutableString =  NSMutableAttributedString(
-//                    string: " Total hours",
-//                    attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
-//                myMutableString.append(seconndMutableString)
-//                self.timeLabel.attributedText = myMutableString
-//                self.startTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
-//                self.endTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
-//                if let lastCheckinTime = object.getLastCheckinTime() {
-//                    self.lastCheckinLabel.text = "You were last seen at \(self.currentTime(time: lastCheckinTime)) "
-//                }else{
-//                    self.lastCheckinLabel.text = "No checkins for today"
-//                }
-//                self.lastCheckinAddressLabel.numberOfLines = 0
-//                self.lastCheckinAddressLabel.lineBreakMode = .byWordWrapping
-//                self.lastCheckinAddressLabel.adjustsFontSizeToFitWidth = true
-//                self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()?.capitalized
-//                self.updateFrequencyBar(mData: object)
-                
-                
-            }
-        }
-
-
-
-
-    }
     
     func getDateInAMPM(date:Date)->String{
         print(date)
@@ -413,30 +274,7 @@ class NewCheckoutViewController: UIViewController {
     }
     
     
-//    func updateFrequencyBar(mData:FrequencyBarGraphData) {
-//        var mRectList = [CGRect]()
-//        
-//        let viewWidth = frequencyBarView.frame.size.width;
-//        let viewHeight =
-//            frequencyBarView.frame.size.height;
-//        let maxDuration = mData.getEndTime()! - mData.getStartTime()!;
-//        let widthPerDuration =  viewWidth / CGFloat(maxDuration);
-//        for  duration in mData.graphData {
-//            
-//            let left = Int(widthPerDuration * CGFloat(duration.getStartTime() - mData.getStartTime()!));
-//            var right = Int(CGFloat(left) + (widthPerDuration * CGFloat(duration.getEndTime() - duration.getStartTime())));
-//            let top = 0;
-//            let bottom = viewHeight;
-//            right = right - left < 1 ?  1 :  right - left;
-//            
-//            let rect = CGRect(x: left, y: top, width: right, height: Int(bottom))
-//            //print(rect)
-//            mRectList.append(rect)
-//        }
-//        let view = FrequencyGraphView(frame: CGRect(x: 0, y: 0, width: frequencyBarView.frame.width, height: frequencyBarView.frame.height), data: mRectList)
-//        frequencyBarView.addSubview(view)
-//        
-//    }
+
     
     
     
@@ -511,15 +349,15 @@ extension NewCheckoutViewController{
         
         if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
            
-            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            marker.title = "Sydney"
-            marker.snippet = "Australia"
-            
-            let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysTemplate))
-            iconImageView.tintColor = #colorLiteral(red: 0.5097929835, green: 0.7668902278, blue: 0.8576113582, alpha: 1)
-            
-            marker.iconView = iconImageView
-            marker.map = mapView
+//            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//            marker.title = "Sydney"
+//            marker.snippet = "Australia"
+//            
+//            let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysTemplate))
+//            iconImageView.tintColor = #colorLiteral(red: 0.5097929835, green: 0.7668902278, blue: 0.8576113582, alpha: 1)
+//            
+//            marker.iconView = iconImageView
+//            marker.map = mapView
             
             
             let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
@@ -595,57 +433,57 @@ extension NewCheckoutViewController: HandleUserViewDelegate{
 
 extension NewCheckoutViewController{
     
-    func plotUserLocation(){
-        
-        guard let markerLocations = userLocations else {
-            userLocationContainerView.isHidden = true
-            return 
-        }
-        userContainerView?.locationData = userLocations
-        
-        if markerLocations.count == 0{
-            userLocationContainerView.isHidden = true
-            }else{
-            userLocationContainerView.isHidden = false
-        }
-        
-        let path = GMSMutablePath()
-        for location in markerLocations{
-            
-            let marker = GMSMarker()
-            
-            
-            if let lat = location.latitude, let long = location.longitude{
-                
-                if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
-                    
-                    marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
-                    marker.title = "Sydney"
-                    marker.snippet = "Australia"
-                    marker.icon = #imageLiteral(resourceName: "locationBlack")
-                    marker.map = mapView
-                    
-                    
-                    let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 17.0)
-                    mapView.camera = camera
-                    
-                    
-                    
-                    path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
-                    
-                }
-                
-                
-                
-            }
-         
-            
-        }
-        
-        let polyline = GMSPolyline(path: path)
-        polyline.map = mapView
-        
-    }
+//    func plotUserLocation(){
+//
+//        guard let markerLocations = userLocations else {
+//            userLocationContainerView.isHidden = true
+//            return
+//        }
+//        userContainerView?.locationData = userLocations
+//
+//        if markerLocations.count == 0{
+//            userLocationContainerView.isHidden = true
+//            }else{
+//            userLocationContainerView.isHidden = false
+//        }
+//
+//        let path = GMSMutablePath()
+//        for location in markerLocations{
+//
+//            let marker = GMSMarker()
+//
+//
+//            if let lat = location.latitude, let long = location.longitude{
+//
+//                if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
+//
+//                    marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
+//                    marker.title = "Sydney"
+//                    marker.snippet = "Australia"
+//                    marker.icon = #imageLiteral(resourceName: "locationBlack")
+//                    marker.map = mapView
+//
+//
+//                    let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 17.0)
+//                    mapView.camera = camera
+//
+//
+//
+//                    path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
+//
+//                }
+//
+//
+//
+//            }
+//
+//
+//        }
+//
+//        let polyline = GMSPolyline(path: path)
+//        polyline.map = mapView
+//
+//    }
 }
 
 

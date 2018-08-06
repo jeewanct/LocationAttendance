@@ -14,7 +14,7 @@ import BluedolphinCloudSdk
 class LocationDataModel{
 
     var lastSeen: Date?
-    var accuracy: String?
+    var accuracy: Double?
     var altitude: String?
     var userId: String?
     var organizationId: String?
@@ -25,6 +25,8 @@ class LocationDataModel{
     var address: String?
     var geoTaggedLocations: GeoTagLocationModel?
     var isRepeated: Bool?
+    var distance: Double?
+    var isDiscarded: Bool?
     
 }
 
@@ -213,7 +215,15 @@ class UserDayData {
                 for index in 0..<locationData.count{
                  
                     let locationValue = LocationDataModel()
-                    locationValue.accuracy = locationData[index].accuracy
+                    //locationValue.accuracy = locationData[index].accuracy
+                    
+                    if let accuracy = locationData[index].accuracy{
+                        
+                        if let accuracyData = Double(accuracy){
+                            locationValue.accuracy = accuracyData
+                        }
+                    }
+                    
                     locationValue.altitude = locationData[index].altitude
                     locationValue.checkinId = locationData[index].checkinId
                     locationValue.details = locationData[index].details

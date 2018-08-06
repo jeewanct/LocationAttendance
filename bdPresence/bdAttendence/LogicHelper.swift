@@ -44,125 +44,143 @@ class LogicHelper{
     // Plotting of Map work
     func plotMarkers(date: Date, completion: @escaping([LocationDataModel]) -> Void){
         
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        
-        queue.async {
             let locations = UserDayData.getLocationData(date: date)
-            
-            DispatchQueue.main.async() {
-                
+        
                 if let getLocations = locations{
-                   
-                    
-                        
-                    
                     
                     let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: getLocations)
                     
                     let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy)
                     
-                    let locationAfterGoogleCheck = self.removeUnnecessaryLocationWithTime(locations: locationAfterTime)
+                    let locationAfterGoogle = self.removeLocationFromGoogleDistanceApi(locations: locationAfterTime)
                     
+                    //let locationAfterGoogleCheck = self.removeUnnecessaryLocationWithTime(locations: locationAfterTime)
+                   let finalLocations = self.removeDiscardedValues(locations: locationAfterGoogle)
                     
-                    completion(locationAfterGoogleCheck)
+                    completion(finalLocations)
                         
-                    }
-                    
-                    
-             
-                
-                
-                
             }
-        }
+        
+    }
+    
+     func plotMarkerInMap(locations: [LocationDataModel], completion: @escaping([LocationDataModel]) -> Void){
+        
+        
+            
+            let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations)
+            
+            let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy)
+            
+            let locationAfterGoogle = self.removeLocationFromGoogleDistanceApi(locations: locationAfterTime)
+            
+            //let locationAfterGoogleCheck = self.removeUnnecessaryLocationWithTime(locations: locationAfterTime)
+            let finalLocations = self.removeDiscardedValues(locations: locationAfterGoogle)
+            
+            completion(finalLocations)
+            
         
         
     }
     
     func removeUnneccessaryLocationsWithAccuracy(locations: [LocationDataModel]) ->  [LocationDataModel]{
         
-        var updatedLocations = [LocationDataModel]()
-        
-        
-        for location in locations{
-            
-            if let getAccuracy = location.accuracy, let accuracy = Float(getAccuracy){
-                
-                if accuracy > 700{
-                    
-                }else{
-                    updatedLocations.append(location)
-                }
+        let updatedLocations  = locations.filter{
+            if let accuracy = $0.accuracy{
+                return accuracy < 700.0
             }
+            return false
         }
-        
-        
-       // let finalLocations = removeUnnecessaryLocationWithTime(locations: updatedLocations)
-       // userLocations = finalLocations
-    
         return updatedLocations
-        
-        //print("After removing locations", finalLocations)
-        
-        
-        
+
     }
+    
     
     func removeUnnecessaryLocationWithTime(locations: [LocationDataModel]) -> [LocationDataModel]{
         
-        var updatedLocations = [LocationDataModel]()
         
-        
-        if locations.count <= 2{
-            return locations
-        }else{
-    
-        
-        for index1 in 0..<locations.count - 1 {
+        for index in 0..<locations.count{
             
-            
-            if let firstLat = locations[index1].latitude, let firstLong =  locations[index1].longitude, let secondLat = locations[index1 + 1].latitude, let secondLong = locations[index1 + 1].longitude{
+            if index == locations.count - 1{
                 
-                let distanceBetweenTwoCoordinates = distanceBetween(firstLat: firstLat, firstLong: firstLong, secondLat: secondLat, secondLong: secondLong)
+            }else{
                 
-                if distanceBetweenTwoCoordinates == 0 || distanceBetweenTwoCoordinates > 8000{
-                    
-                    
-                    GoogleUtils.findApproxTimeToTravel(firstLat: firstLat, firstLong: firstLong, secondLat: secondLat, secondLong: secondLong) { (googleDistance) in
-                        
-                        if let firstLocationDate = locations[index1].lastSeen, let secondLocationDate = locations[index1 + 1].lastSeen{
-                            
-                            let discardBool = self.discardLocationUsingGoogle(timeRequired: googleDistance, timeDifference: self.getTime(date: secondLocationDate) - self.getTime(date: firstLocationDate))
-                            
-                            if discardBool == true{
-                                updatedLocations.append(locations[index1 + 1])
-                            }
-                            
-                        }
-                        
-                    }
-                    
-                    
-                    
-                    
-                }else{
-                    
-                    updatedLocations.append(locations[index1])
-                }
                 
+                let distance = distanceBetween(firstLat: locations[index].latitude, firstLong: locations[index].longitude, secondLat: locations[index + 1].latitude, secondLong: locations[index + 1].longitude)
+                
+                locations[index + 1].distance = distance
                 
             }
             
         }
-        }
         
-        
-        
-        return updatedLocations
+        return locations
         
     }
     
     
+    func removeLocationFromGoogleDistanceApi(locations: [LocationDataModel]) -> [LocationDataModel]{
+        
+        
+        for index in 0..<locations.count{
+            
+            if let distance = locations[index].distance{
+                
+                if distance == 0 || distance > 8000{
+                    
+                    if let firstLat = locations[index].latitude, let firstLong = locations[index].longitude, let secondLat = locations[index - 1].latitude, let secondLong = locations[index - 1].longitude{
+                        
+                        GoogleUtils.findApproxTimeToTravel(firstLat: firstLat, firstLong: firstLong, secondLat: secondLat, secondLong: secondLong) { (googleDistance) in
+                            
+                            
+                            
+                            if let firstLocationDate = locations[index].lastSeen, let secondLocationDate = locations[index - 1].lastSeen{
+                                
+                                
+                                let discardBool = self.discardLocationUsingGoogle(timeRequired: googleDistance, timeDifference: self.getTime(date: secondLocationDate) - self.getTime(date: firstLocationDate))
+                                
+                                if discardBool == false {
+                                    
+                                    locations[index].isDiscarded = false
+                                }else{
+                                    locations[index].isDiscarded = true
+                                }
+                                
+                            }
+                            
+                            
+                            
+                        }
+                    }
+                    
+                }else {
+                    
+                    locations[index].isDiscarded = false
+                }
+                
+            }else{
+                locations[index].isDiscarded = false
+            }
+            
+        }
+        
+        return locations
+        
+    }
+    
+    
+    func removeDiscardedValues(locations: [LocationDataModel]) -> [LocationDataModel]{
+        
+        var updatedLocations = [LocationDataModel]()
+        
+        for location in locations{
+            
+            if location.isDiscarded == false{
+                updatedLocations.append(location)
+            }
+        }
+        
+        return updatedLocations
+    }
     
     func discardLocationUsingGoogle(timeRequired: [GoogleRowModel]?, timeDifference : Int) -> Bool{
         
@@ -205,9 +223,15 @@ class LogicHelper{
         
     }
     
-    func distanceBetween(firstLat: String, firstLong: String, secondLat: String, secondLong: String) -> Double{
+    func distanceBetween(firstLat: String?, firstLong: String?, secondLat: String?, secondLong: String?) -> Double{
         
-        if let firstLocationLat = CLLocationDegrees(firstLat), let firstLocationLong = CLLocationDegrees(firstLong), let secondLocationLat = CLLocationDegrees(secondLat), let secondLocationLong = CLLocationDegrees(secondLong){
+        
+        guard let firstUnwrappedLat = firstLat, let firstUnwrappedLong = firstLong, let secondUnwrappedLat = secondLat, let secondUnwrappedLong = secondLong else {
+            return 0
+            
+        }
+        
+        if let firstLocationLat = CLLocationDegrees(firstUnwrappedLat), let firstLocationLong = CLLocationDegrees(firstUnwrappedLong), let secondLocationLat = CLLocationDegrees(secondUnwrappedLat), let secondLocationLong = CLLocationDegrees(secondUnwrappedLong){
             
             let firstLocation = CLLocation(latitude: CLLocationDegrees(firstLocationLat), longitude: CLLocationDegrees(firstLocationLong))
             let secondLocation = CLLocation(latitude: CLLocationDegrees(secondLocationLat), longitude: CLLocationDegrees(secondLocationLong))

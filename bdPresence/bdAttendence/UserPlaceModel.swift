@@ -115,4 +115,174 @@ class UserPlace{
         
     }
     
+    
+    
+    class func getGeoTagData(location: [LocationDataModel]? ) -> [[LocationDataModel]]{
+        
+        
+        var geoTaggedLocations = [LocationDataModel]()
+        
+        
+        if let locationData = location{
+            
+            for locationIndex in 0..<locationData.count{
+                if let geoTagged = UserPlace.getPlacesData(location: locationData[locationIndex]){
+                    locationData[locationIndex].geoTaggedLocations = geoTagged
+                    geoTaggedLocations.append(locationData[locationIndex])
+                }else{
+                    geoTaggedLocations.append(locationData[locationIndex])
+                }
+                
+            }
+            
+            
+            
+        }
+        
+        
+        return locationAccordingToGeoTag(locations: geoTaggedLocations)
+        
+        
+        
+        
+    }
+    
+    class func locationAccordingToGeoTag(locations: [LocationDataModel]) -> [[LocationDataModel]]{
+        
+        
+        var clusteringData = [[LocationDataModel]]()
+        var tempData = [LocationDataModel]()
+        var lastGeoTagId = "temp"
+        
+        for location in locations{
+            
+            if let geoTagId = location.geoTaggedLocations?.placeDetails?.placeId{
+                
+                if geoTagId == lastGeoTagId{
+                    tempData.append(location)
+                }else{
+                    lastGeoTagId = geoTagId
+                    if tempData.count == 0{
+                        tempData.append(location)
+                    }else{
+                        let locationData = tempData
+                        clusteringData.append(locationData)
+                        tempData.removeAll()
+                    }
+                    
+                }
+                
+            }else{
+                lastGeoTagId = "temp"
+                clusteringData.append([location])
+            }
+            
+            
+            
+        }
+        
+        if tempData.count != 0 {
+            clusteringData.append(tempData)
+        }
+        
+        print("The location is ", clusteringData)
+        
+        return clusteringData
+        
+    }
+    
+    
+    
+    
+    
+    //    func locationAccordingToGeoTag(locations: [LocationDataModel]){
+    //
+    //
+    //        var geoTaggedLocations = [GeoTagLocationModel]()
+    //        var ordinaryLocations  = [LocationDataModel]()
+    //
+    //        for index in 0..<locations.count {
+    //
+    //            var geolocations = [LocationDataModel]()
+    //
+    //            for index1 in index + 1..<locations.count{
+    //
+    //
+    //                if locations[index1].isRepeated == false || locations[index1].isRepeated == nil{
+    //
+    //                if locations[index].geoTaggedLocations?.placeDetails?.placeId == locations[index1].geoTaggedLocations?.placeDetails?.placeId{
+    //
+    //                    geolocations.append(locations[index])
+    //                    locations[index1].isRepeated = true
+    //                    if index != 0 {
+    //                      geolocations[index].isRepeated = true
+    //                    }
+    //                   // geolocations[index].isRepeated = true
+    //
+    //
+    //                }else{
+    //                    if geolocations[index].isRepeated != true{
+    //                        geolocations[index].isRepeated = false
+    //                    }
+    //
+    //
+    //                    }
+    //
+    //                }
+    //
+    //            }
+    //
+    //            if geolocations.count == 0 && locations[index].isRepeated == false{
+    //                ordinaryLocations.append(locations[index])
+    //
+    //            }else{
+    //
+    //                if locations[index].isRepeated == false || locations[index].isRepeated == nil {
+    //
+    //                    if let geoTaggedLocation = setClusterTaggedLocation(currentGeoLocation: locations[index], location: geolocations){
+    //                        geoTaggedLocations.append(geoTaggedLocation)
+    //
+    //
+    //                    }
+    //                }
+    //
+    //
+    //                //geoTaggedLocations.append(setClusterTaggedLocation(currentGeoLocation: locations[index], location: geolocations))
+    //
+    //            }
+    //
+    //
+    //
+    //        }
+    //
+    //        print("Jeevan the geoTagged Dta", dump(geoTaggedLocations))
+    //        print("Jeevan the location Dta", dump(ordinaryLocations))
+    //
+    //        plotMarkersInMap(geoTaggedLocation: geoTaggedLocations, ordinarylocations: ordinaryLocations)
+    //
+    //
+    //    }
+    
+    func setClusterTaggedLocation(currentGeoLocation: LocationDataModel,location: [LocationDataModel]) -> GeoTagLocationModel?{
+        
+        
+        
+        if let taggedLocation = currentGeoLocation.geoTaggedLocations{
+            var geoTaggedModel = GeoTagLocationModel()
+            geoTaggedModel = taggedLocation
+            geoTaggedModel.locations = location
+            
+            return geoTaggedModel
+            
+        }
+        
+        
+        return nil
+        
+        
+    }
+    
+    
+    
+    
 }

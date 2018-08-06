@@ -25,7 +25,9 @@ class MyLocationViewController: UIViewController{
         addGestureInContainerView()
         setupNavigation()
         setupMap()
+
         userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.2)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
