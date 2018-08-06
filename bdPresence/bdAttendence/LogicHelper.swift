@@ -39,6 +39,31 @@ class LogicHelper{
         
     }
     
+    func reverseGeoCodeGeoLocations(location: CLLocation, index1: Int, index2: Int, completion: @escaping(String, Int, Int) -> Void){
+        
+        var userAddress = ""
+        
+        CLGeocoder().reverseGeocodeLocation(location) { (response , error) in
+            
+            guard let loc = response?.first else {
+                return
+            }
+            
+            let addressDict : [NSString:NSObject] = loc.addressDictionary as! [NSString: NSObject]
+            let addrList = addressDict["FormattedAddressLines"] as! [String]
+            let address = addrList.joined(separator: ", ")
+            print("address from SDK = \(address)")
+            completion(address, index1, index2)
+            userAddress = address
+            
+            
+            
+        }
+        
+        // return userAddress
+        
+    }
+    
     
     
     // Plotting of Map work

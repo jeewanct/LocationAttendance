@@ -107,6 +107,8 @@ class NewCheckoutViewController: UIViewController {
         
         addShadowToUpperView()
         
+        userLocationContainerView.isHidden = true
+        
         // Do any additional setup after loading the view.
     }
     
@@ -208,6 +210,14 @@ class NewCheckoutViewController: UIViewController {
         
         let allLocations = UserPlace.getGeoTagData(location: location)
         
+        if allLocations.count == 0{
+            userLocationContainerView.isHidden = true
+        }else{
+            getLocationCorrospondingLatLong(locations: allLocations)
+            userLocationContainerView.isHidden = false
+        }
+        
+        
         
         for locations in allLocations{
             
@@ -226,7 +236,57 @@ class NewCheckoutViewController: UIViewController {
             
         }
     }
+    
+    func getLocationCorrospondingLatLong(locations: [[LocationDataModel]]){
         
+        
+        for index in 0..<locations.count{
+            
+            for index1 in 0..<locations[index].count{
+                
+                if let geoTaggedLocation = locations[index][index1].geoTaggedLocations{
+                    
+                    
+                    
+                }else{
+                    
+                    if let lat = locations[index][index1].latitude, let long = locations[index][index1].longitude{
+                        
+                        if let latD = CLLocationDegrees(lat), let longD = CLLocationDegrees(long){
+                            
+                            let cllLocation = CLLocation(latitude: latD, longitude: longD)
+                            
+                            LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: index1) { (address, firstIndex, secondIndex) in
+                                
+                                locations[firstIndex][secondIndex].address = address
+                                
+                                if firstIndex == locations.count - 1{
+                                    
+                                    self.userContainerView?.locationData = locations
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                
+            }
+        }
+        
+        self.userContainerView?.locationData = locations
+        
+        
+    }
+    
+    
+   
         
     func addMarker(latitude: String?, longitude: String?, markerColor: UIColor){
             let marker = GMSMarker()
@@ -385,13 +445,13 @@ extension NewCheckoutViewController{
         
         print("View Tapped")
         
-        if userLocationCardHeightAnchor.constant == 0 {
+        if userLocationCardHeightAnchor.constant == 80 {
             animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
         }else{
             // 400
             userContainerView?.tableView.isScrollEnabled = true
             
-            animateContainerView(heightToAnimate: 0)
+            animateContainerView(heightToAnimate: 80)
         }
         
         
@@ -400,6 +460,13 @@ extension NewCheckoutViewController{
     func animateContainerView(heightToAnimate height: CGFloat){
         
         UIView.animate(withDuration: 0.5) {
+            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
+                self.userLocationContainerView.backgroundColor = .clear
+                
+            }else{
+                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9016010123)
+            }
+            
             self.userLocationCardHeightAnchor.constant = height
             self.view.layoutIfNeeded()
             

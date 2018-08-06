@@ -55,9 +55,15 @@ class HistoryViewController: UIViewController {
         
         /* Changes made from 10th July '18 */
         
-        
+        userLocationContainerView.isHidden = true
         setupMap()
         addGestureInContainerView()
+        
+        
+        let height = UIScreen.main.bounds.size.height
+        userLocationCardHeightAnchor.constant = height - (height * 0.3)
+        
+        
         // Do any additional setup after loading the view.
     }
     override func viewDidLayoutSubviews() {
@@ -129,6 +135,134 @@ class HistoryViewController: UIViewController {
         //progressBar.innerRingColor = APPColor.newGreen
 
         createbarchartView(date: date)
+        
+        LogicHelper.shared.plotMarkers(date: date) { (data) in
+            
+            
+            print(data)
+//            self.userLocations = data
+           self.plotMarkersInMap(location: data)
+            
+            
+            
+        }
+        
+    }
+    
+    
+    func plotMarkersInMap(location: [LocationDataModel]){
+        
+        let allLocations = UserPlace.getGeoTagData(location: location)
+        
+        if allLocations.count == 0{
+            userLocationContainerView.isHidden = true
+        }else{
+            getLocationCorrospondingLatLong(locations: allLocations)
+            userLocationContainerView.isHidden = false
+        }
+        
+        
+        
+        for locations in allLocations{
+            
+            for geoTaggedLocation in locations{
+                
+                if let geoTagg = geoTaggedLocation.geoTaggedLocations{
+                    
+                    addMarker(latitude: geoTagg.latitude, longitude: geoTagg.longitude, markerColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
+                }else{
+                    
+                    addMarker(latitude: geoTaggedLocation.latitude, longitude: geoTaggedLocation.longitude, markerColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+                }
+                
+            }
+            
+            
+        }
+    }
+    
+    
+    func addMarker(latitude: String?, longitude: String?, markerColor: UIColor){
+        let marker = GMSMarker()
+        if let lat = latitude, let long = longitude{
+            
+            if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
+                
+                marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
+                
+                
+                marker.title = "Sydney"
+                marker.snippet = "Australia"
+                let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysTemplate))
+                iconImageView.tintColor = markerColor
+                marker.iconView = iconImageView
+                
+                marker.map = mapView
+                
+                
+                let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 17.0)
+                mapView.camera = camera
+                
+                
+                //path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
+                
+            }
+            
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    func getLocationCorrospondingLatLong(locations: [[LocationDataModel]]){
+        
+        
+        for index in 0..<locations.count{
+            
+            for index1 in 0..<locations[index].count{
+                
+                if let geoTaggedLocation = locations[index][index1].geoTaggedLocations{
+                    
+                    
+                    
+                }else{
+                    
+                    if let lat = locations[index][index1].latitude, let long = locations[index][index1].longitude{
+                        
+                        if let latD = CLLocationDegrees(lat), let longD = CLLocationDegrees(long){
+                            
+                            let cllLocation = CLLocation(latitude: latD, longitude: longD)
+                            
+                            LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: index1) { (address, firstIndex, secondIndex) in
+                                
+                                locations[firstIndex][secondIndex].address = address
+                                
+                                if firstIndex == locations.count - 1{
+                                    
+                                    self.userContainerView?.locationData = locations
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                
+            }
+        }
+        
+        self.userContainerView?.locationData = locations
+        
+        
     }
     
     func createbarchartView(date:Date){
@@ -334,11 +468,7 @@ extension HistoryViewController{
         
         if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
             
-            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            marker.title = "Sydney"
-            marker.snippet = "Australia"
-            marker.map = mapView
-            marker.icon = #imageLiteral(resourceName: "locationBlack")
+            
             
             
             let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
@@ -364,20 +494,29 @@ extension HistoryViewController{
         
         print("View Tapped")
         
-        if userLocationCardHeightAnchor.constant == 0 {
-            animateContainerView(heightToAnimate: 400)
+       
+        
+        if userLocationCardHeightAnchor.constant == 91 {
+            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
         }else{
             // 400
             userContainerView?.tableView.isScrollEnabled = true
-            animateContainerView(heightToAnimate: 0)
+            
+            animateContainerView(heightToAnimate: 91)
         }
-        
         
     }
     
     func animateContainerView(heightToAnimate height: CGFloat){
         
         UIView.animate(withDuration: 0.5) {
+            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
+                self.userLocationContainerView.backgroundColor = .clear
+                
+            }else{
+                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9016010123)
+            }
+            
             self.userLocationCardHeightAnchor.constant = height
             self.view.layoutIfNeeded()
             

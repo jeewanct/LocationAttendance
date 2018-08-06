@@ -24,12 +24,12 @@ class GeoTagLocationModel{
 
 class GeoTagPlaceDetails{
     
-     var placeId: String?
-     var editedBy: String?
+    var placeId: String?
+    var editedBy: String?
     var addedBy: String?
     var fenceRadius =  RealmOptional<Int>()
-     var placeType: String?
-     var address: String?
+    var placeType: String?
+    var address: String?
     
 }
 

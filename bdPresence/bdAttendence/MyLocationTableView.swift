@@ -25,7 +25,7 @@ extension MyLocationTableView: UITableViewDelegate, UITableViewDataSource{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset)
         
-        if scrollView.contentOffset.y < -50 {
+        if scrollView.contentOffset.y < -5 {
             tableView.isScrollEnabled = false
             delegate?.handleOnSwipe()
         }

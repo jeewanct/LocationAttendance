@@ -26,7 +26,7 @@ class MyLocationViewController: UIViewController{
         setupNavigation()
         setupMap()
 
-        userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.2)
+        userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
 
     }
     
@@ -47,7 +47,7 @@ class MyLocationViewController: UIViewController{
 extension MyLocationViewController{
     
     func setupNavigation(){
-        //navigationController?.removeTransparency()
+        navigationController?.removeTransparency()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
     }
@@ -95,12 +95,12 @@ extension MyLocationViewController{
         
         print("View Tapped")
         
-        if userLocationCardHeightAnchor.constant == 49 + 50 {
-            animateContainerView(heightToAnimate: UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.2))
+        if userLocationCardHeightAnchor.constant == 49 + 25 + 5 {
+            animateContainerView(heightToAnimate: UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
         }else{
             // 400
              userContainerView?.tableView.isScrollEnabled = true
-            animateContainerView(heightToAnimate: 49)
+            animateContainerView(heightToAnimate: 49 + 25)
         }
     }
     
@@ -125,7 +125,7 @@ extension MyLocationViewController{
 extension MyLocationViewController: HandleUserViewDelegate{
     
     func handleOnSwipe() {
-        userLocationCardHeightAnchor.constant += 50
+        userLocationCardHeightAnchor.constant += 5
         self.view.layoutIfNeeded()
         handleTap()
     }
