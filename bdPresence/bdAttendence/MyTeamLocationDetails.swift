@@ -42,7 +42,7 @@ extension MyTeamLocationDetails{
         }
         
         MyTeamDetailsModel.getTeamMember(userId: getUserId, completion: { (data) in
-            dump(data)
+           // dump(data)
             self.makeTeamLocationData(teamLocationData: data)
         }, inError: { (error) in
             
@@ -62,7 +62,8 @@ extension MyTeamLocationDetails{
                 let locationData = LocationDataModel()
                 
                 if let accuracy = location.checkinData?.location?.accuracy{
-                   locationData.accuracy = String(accuracy)
+                   locationData.accuracy = Double(accuracy)
+                    
                 }
                 
                 if let altitude = location.checkinData?.location?.altitude{
@@ -83,17 +84,85 @@ extension MyTeamLocationDetails{
                 teamData.append(locationData)
             }
             
-            userContainerView?.locationData = teamData
-            userContainerView?.tableView.reloadData()
+//            userContainerView?.locationData = teamData
+//            userContainerView?.tableView.reloadData()
+            
+            
+            
+        }
+        
+        setLocationOnMap(location: teamData)
+        
+        
+        
+        
+    }
+    
+    func setLocationOnMap(location: [LocationDataModel]){
+        
+        
+        LogicHelper.shared.plotMarkerInMap(locations: location) { (data) in
+            self.plotMarkersInMap(location: data)
+            
+        }
+        
+    }
+    
+    
+    func plotMarkersInMap(location: [LocationDataModel]){
+        
+        let allLocations = UserPlace.getGeoTagData(location: location)
+        
+        
+        for locations in allLocations{
+            
+            for geoTaggedLocation in locations{
+                
+                if let geoTagg = geoTaggedLocation.geoTaggedLocations{
+                    
+                    addMarker(latitude: geoTagg.latitude, longitude: geoTagg.longitude, markerColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
+                }else{
+                    
+                    addMarker(latitude: geoTaggedLocation.latitude, longitude: geoTaggedLocation.longitude, markerColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+                }
+                
+            }
+            
+            
+        }
+    }
+    
+    
+    func addMarker(latitude: String?, longitude: String?,markerColor: UIColor){
+        let marker = GMSMarker()
+        if let lat = latitude, let long = longitude{
+            
+            if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
+                
+                marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
+                
+                
+                marker.title = "Sydney"
+                marker.snippet = "Australia"
+                marker.icon = #imageLiteral(resourceName: "locationBlack")
+                marker.map = mapView
+                
+                
+                let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 17.0)
+                mapView.camera = camera
+                
+                
+                //path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
+                
+            }
             
             
             
         }
         
         
-        
-        
     }
+    
 }
 
 
@@ -117,11 +186,7 @@ extension MyTeamLocationDetails{
         
         if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
             
-            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            marker.title = "Sydney"
-            marker.snippet = "Australia"
-            marker.icon = #imageLiteral(resourceName: "locationBlack")
-            marker.map = mapView
+            
             
             
             let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)

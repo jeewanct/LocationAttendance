@@ -25,6 +25,8 @@ class MyLocationViewController: UIViewController{
         addGestureInContainerView()
         setupNavigation()
         setupMap()
+        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
