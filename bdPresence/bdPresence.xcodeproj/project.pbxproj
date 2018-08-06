@@ -16,7 +16,6 @@
 		09B5BC692110786C0071155C /* GoogleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC682110786C0071155C /* GoogleUtils.swift */; };
 		09CE05672110840400C4AA24 /* UserPlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE05662110840400C4AA24 /* UserPlaceModel.swift */; };
 		09FAA4072111CD3100679D86 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */; };
-		09FAA4082111CD8900679D86 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */; };
 		09FAA4092111CD8900679D86 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0780D204E38BF525A133B40D /* Pods_bdPresence.framework */; };
 		901CC43E17B9E13245BD210A /* Pods_bdPresenceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6E3D50C77FAC49A06A0A14 /* Pods_bdPresenceUITests.framework */; };
@@ -263,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				09FAA4072111CD3100679D86 /* BluedolphinCloudSdk.framework in Frameworks */,
-				09FAA4082111CD8900679D86 /* BluedolphinCloudSdk.framework in Frameworks */,
 				42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,7 +564,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Raghvendra;
 				TargetAttributes = {
 					99BD399D1EA49B7100B6942B = {
