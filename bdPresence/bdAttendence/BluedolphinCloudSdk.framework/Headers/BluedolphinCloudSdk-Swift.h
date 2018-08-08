@@ -561,6 +561,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk8RMCPlace")
 @property (nonatomic, copy) NSDate * _Nullable updatedOn;
 @property (nonatomic, copy) NSString * _Nullable placeAddress;
 @property (nonatomic, strong) RMCPlaceLocation * _Nullable location;
+@property (nonatomic, copy) NSString * _Nullable geoTagName;
 @property (nonatomic, copy) NSString * _Nullable associationIds;
 @property (nonatomic, copy) NSString * _Nullable localStatus;
 @property (nonatomic, copy) NSString * _Nullable status;

@@ -11,6 +11,8 @@ import UIKit
 
 class LocationTableViewCell: UITableViewCell{
    
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var visualEffect: UIVisualEffectView!
     override func awakeFromNib() {
         super.awakeFromNib()

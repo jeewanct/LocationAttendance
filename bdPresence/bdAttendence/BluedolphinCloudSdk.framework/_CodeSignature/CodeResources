@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BluedolphinCloudSdk-Swift.h</key>
 		<data>
-		v8s8g/VOhvb4ZYdMM5OZLO71EGw=
+		zCcZepHkakvKGe2S43jPFBOi+08=
 		</data>
 		<key>Headers/BluedolphinCloudSdk.h</key>
 		<data>
@@ -14,7 +14,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		vJlHTXsLYbabLgO7weAPynsJd7U=
+		YsgV5bjWqoQdBBiCR8xnxhQYRz4=
+		</data>
+		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftdoc</key>
+		<data>
+		KftTkl/EX8/WbrvuYo11QCwwrHQ=
+		</data>
+		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftmodule</key>
+		<data>
+		4glaT57gP18vyeWNDXoywcB8aPQ=
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -22,7 +30,7 @@
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		prtuVLRyY5cg9uBtIfDfN52EH2g=
+		w29nyNuEy3oOZaqXSGlJHm1AxYU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -35,11 +43,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			v8s8g/VOhvb4ZYdMM5OZLO71EGw=
+			zCcZepHkakvKGe2S43jPFBOi+08=
 			</data>
 			<key>hash2</key>
 			<data>
-			64DobUir4dU7+XMQRVoGoyMA4MFvEtpmub4jHwdJl4M=
+			kLj8xG7u0XreuXsEYXUMPE20ur7rsdypMk+hSN2JlJM=
 			</data>
 		</dict>
 		<key>Headers/BluedolphinCloudSdk.h</key>
@@ -51,6 +59,28 @@
 			<key>hash2</key>
 			<data>
 			hatb5TuQXkq8q0xEutBnq9uy5T6VZmbquvshhosn0/I=
+			</data>
+		</dict>
+		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KftTkl/EX8/WbrvuYo11QCwwrHQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			jUg4wct2Iaw1tERD0N7TabU4klvin7z/PgZDmqXu8Ro=
+			</data>
+		</dict>
+		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftmodule</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4glaT57gP18vyeWNDXoywcB8aPQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			zXeoWbi+Kky6yUmZr27vplhN/kOkESmmYx9zIGQJw4I=
 			</data>
 		</dict>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
@@ -68,11 +98,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			prtuVLRyY5cg9uBtIfDfN52EH2g=
+			w29nyNuEy3oOZaqXSGlJHm1AxYU=
 			</data>
 			<key>hash2</key>
 			<data>
-			pgjqicqhGK/qsNeJ/DQlsoUE4DEZ1rinBwldyLhNMCM=
+			nmP15I05+hffNxeq4HyK8FmwY0bR9rU4Wsne7S6wDAo=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

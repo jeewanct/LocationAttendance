@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0907C84A211ACD9B00364DCA /* AlertsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907C849211ACD9B00364DCA /* AlertsController.swift */; };
+		090860062119726800A7F6CC /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090860052119726700A7F6CC /* BluedolphinCloudSdk.framework */; };
+		090860072119727100A7F6CC /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090860052119726700A7F6CC /* BluedolphinCloudSdk.framework */; };
+		090860082119727200A7F6CC /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 090860052119726700A7F6CC /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		091517A22108694A00FABD3D /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A12108694A00FABD3D /* LocationTableViewCell.swift */; };
 		091517A421087A8800FABD3D /* LogicHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A321087A8800FABD3D /* LogicHelper.swift */; };
 		091517AA2108A8AC00FABD3D /* NewCheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */; };
@@ -16,9 +20,6 @@
 		09B5BC67211077B50071155C /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC66211077B50071155C /* AppConstants.swift */; };
 		09B5BC692110786C0071155C /* GoogleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC682110786C0071155C /* GoogleUtils.swift */; };
 		09CE05672110840400C4AA24 /* UserPlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE05662110840400C4AA24 /* UserPlaceModel.swift */; };
-		09FAA4072111CD3100679D86 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */; };
-		09FAA4082111CD8900679D86 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */; };
-		09FAA4092111CD8900679D86 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0780D204E38BF525A133B40D /* Pods_bdPresence.framework */; };
 		901CC43E17B9E13245BD210A /* Pods_bdPresenceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6E3D50C77FAC49A06A0A14 /* Pods_bdPresenceUITests.framework */; };
 		990089161F44177400CED97E /* TwoSideLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990089141F44177400CED97E /* TwoSideLabelTableViewCell.swift */; };
@@ -133,7 +134,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				09FAA4092111CD8900679D86 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
+				090860082119727200A7F6CC /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +144,8 @@
 /* Begin PBXFileReference section */
 		048969DA26B3EABDC293FB6D /* Pods-bdPresenceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0780D204E38BF525A133B40D /* Pods_bdPresence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdPresence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0907C849211ACD9B00364DCA /* AlertsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsController.swift; sourceTree = "<group>"; };
+		090860052119726700A7F6CC /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		091517A12108694A00FABD3D /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		091517A321087A8800FABD3D /* LogicHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicHelper.swift; sourceTree = "<group>"; };
 		091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCheckoutCell.swift; sourceTree = "<group>"; };
@@ -152,7 +155,6 @@
 		09B5BC66211077B50071155C /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		09B5BC682110786C0071155C /* GoogleUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleUtils.swift; sourceTree = "<group>"; };
 		09CE05662110840400C4AA24 /* UserPlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlaceModel.swift; sourceTree = "<group>"; };
-		09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		0B0496CF0D3F1160AE556FB2 /* Pods-bdPresenceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4109A7E8C6D948A14C0F47EE /* Pods-bdPresenceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.release.xcconfig"; sourceTree = "<group>"; };
 		63EE7A650801BE90DFD757D6 /* Pods_bdPresenceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdPresenceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,8 +266,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09FAA4072111CD3100679D86 /* BluedolphinCloudSdk.framework in Frameworks */,
-				09FAA4082111CD8900679D86 /* BluedolphinCloudSdk.framework in Frameworks */,
+				090860062119726800A7F6CC /* BluedolphinCloudSdk.framework in Frameworks */,
+				090860072119727100A7F6CC /* BluedolphinCloudSdk.framework in Frameworks */,
 				42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,7 +360,7 @@
 		99BD39A01EA49B7100B6942B /* bdAttendence */ = {
 			isa = PBXGroup;
 			children = (
-				09FAA4062111CD3100679D86 /* BluedolphinCloudSdk.framework */,
+				090860052119726700A7F6CC /* BluedolphinCloudSdk.framework */,
 				9924EEA920F8722000B0A661 /* GifImages */,
 				99F1FD271EBB33B600A516C2 /* bdAttendence.entitlements */,
 				99CA967B1F021E2A00E2813B /* Storyboard */,
@@ -423,6 +425,7 @@
 				09B5BC682110786C0071155C /* GoogleUtils.swift */,
 				09CE05662110840400C4AA24 /* UserPlaceModel.swift */,
 				09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */,
+				0907C849211ACD9B00364DCA /* AlertsController.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -742,8 +745,10 @@
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/GooglePlacesSearchController/GooglePlacesSearchController.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Polyline/Polyline.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -755,8 +760,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GooglePlacesSearchController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Polyline.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -829,6 +836,7 @@
 				99482F5720F8AB7D00324AE5 /* MyTeamLocationDetails.swift in Sources */,
 				99BC35071F275A8800A59A4A /* DayCollectionViewCell.swift in Sources */,
 				999FB43220F60C0A000ABA7D /* MyLocationTableView.swift in Sources */,
+				0907C84A211ACD9B00364DCA /* AlertsController.swift in Sources */,
 				99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */,
 				A52B90672101E2EE005056AB /* MyTeamViewCell.swift in Sources */,
 				99CCF2441F2A1E56008947FA /* TimeLineTableViewCell.swift in Sources */,

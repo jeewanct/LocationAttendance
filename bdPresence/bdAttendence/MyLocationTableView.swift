@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import BluedolphinCloudSdk
+
 
 class MyLocationTableView: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var places: [RMCPlace]?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
     var delegate: HandleUserViewDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +41,9 @@ extension MyLocationTableView: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return places?.count ?? 0
+    
+    
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -41,7 +51,12 @@ extension MyLocationTableView: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyLocationIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyLocationIdentifier", for: indexPath) as! LocationTableViewCell
+        cell.addressLabel.text = places?[indexPath.item].placeDetails?.address
+        cell.nameLabel.text = places?[indexPath.item].geoTagName
         return cell
     }
 }
+
+
+

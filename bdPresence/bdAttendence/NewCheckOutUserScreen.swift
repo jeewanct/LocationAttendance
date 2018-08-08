@@ -87,31 +87,81 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
     
     
     func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
-    
         if let locations = locationData{
             
-            
-            for location in locations{
+            for index in 0..<locations.count{
                 
-                for geoTaggedLocation in location{
-                    
-                    if let geoTag = geoTaggedLocation.geoTaggedLocations{
-                        
-                        cell.addressLabel.text = geoTag.placeDetails?.address
-                    }else{
-                       
-                        cell.addressLabel.text = geoTaggedLocation.address
-                        
-                    }
+                if locations[index].count > 1{
+                    cell.addressLabel.text = locations[index][0].geoTaggedLocations?.placeDetails?.address
                 }
                 
+                if locations[index].count == 1 {
+                    
+                    if let address = locations[index][0].address{
+                        cell.addressLabel.text = address
+                    }else{
+                        
+                        if let lat = locations[index][0].latitude, let long = locations[index][0].longitude{
+                            
+                            if let cllLat = CLLocationDegrees(lat), let cllLong = CLLocationDegrees(long){
+                                LogicHelper.shared.reverseGeoCode(location: CLLocation(latitude: cllLat, longitude: cllLong)) { (address) in
+                                    
+                                    self.locationData?[index][0].address = address
+                                    cell.addressLabel.text = address
+                                    
+                                }
+                                
+                            }
+                        }
+                        
+                        
+                    }
+                    
+                    
+                }
+                
+                
             }
+            
+            
         }
-        
-    
-    
-    
     }
+    
+//    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
+//
+//        if let locations = locationData{
+//
+//            for index in 0..<locations.count{
+//
+//
+//                var firstDate = Date()
+//                for index1 in 0..<locations[index].count{
+//
+//                    if let geoTag = locations[index][index1].geoTaggedLocations{
+//
+//                         cell.addressLabel.text = locations[index][index1].address
+//
+//                    }else{
+//                         cell.addressLabel.text = locations[index][index1].address
+//
+//                        if let lastSeen = locations[index][index1].lastSeen{
+//
+//
+//                            cell.timeLabel.text = LogicHelper.shared.getLocationDate(date: lastSeen)
+//                        }
+//
+//
+//                    }
+//
+//
+//                }
+//
+//            }
+//
+//
+//        }
+//
+//    }
     
 //    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
 //

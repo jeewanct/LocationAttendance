@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 import BluedolphinCloudSdk
-
+import RealmSwift
 
 class MyLocationViewController: UIViewController{
     
@@ -17,6 +17,7 @@ class MyLocationViewController: UIViewController{
     
     @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
     @IBOutlet weak var mapView: GMSMapView!
+    var myLocationArray: [RMCPlace]?
     var userContainerView: MyLocationTableView?
     
     
@@ -25,7 +26,7 @@ class MyLocationViewController: UIViewController{
         addGestureInContainerView()
         setupNavigation()
         setupMap()
-
+        getUserLocation()
         userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
 
     }
@@ -141,6 +142,20 @@ extension MyLocationViewController: GMSMapViewDelegate{
         
     }
     
+    func getUserLocation(){
+        
+        let realm = try! Realm()
+        let rmcPlaces = realm.objects(RMCPlace.self)
+        
+        var myLocations = [RMCPlace]()
+        for places in rmcPlaces{
+            myLocations.append(places)
+            
+        }
+        
+        userContainerView?.places = myLocations
+        
+    }
     
     
 }

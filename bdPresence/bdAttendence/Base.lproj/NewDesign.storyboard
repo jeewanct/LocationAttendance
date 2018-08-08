@@ -156,17 +156,12 @@
                             </label>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1kl-Gx-t4b">
                                 <rect key="frame" x="85.5" y="498" width="50" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="avb-nZ-W7b"/>
                                     <constraint firstAttribute="width" constant="50" id="od4-kt-4yv"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="closeImage"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" title="Button" image="geoTagCancel"/>
                                 <connections>
                                     <action selector="handleClose:" destination="hxL-Uq-wHb" eventType="touchUpInside" id="lRn-wn-gse"/>
                                 </connections>
@@ -194,17 +189,15 @@
                             </label>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbA-to-qkn">
                                 <rect key="frame" x="184.5" y="498" width="50" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="BJj-lW-OAj"/>
                                     <constraint firstAttribute="width" constant="50" id="qcO-VP-IhC"/>
                                 </constraints>
-                                <state key="normal" image="doneImage"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="geoTagConfirm"/>
+                                <connections>
+                                    <action selector="handleDone:" destination="hxL-Uq-wHb" eventType="touchUpInside" id="kSA-EP-mJt"/>
+                                </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MQN-6y-J9K">
                                 <rect key="frame" x="22" y="444" width="276" height="31"/>
@@ -214,6 +207,13 @@
                                     <action selector="handleGeoFenceSlider:" destination="hxL-Uq-wHb" eventType="valueChanged" id="Cl4-cY-ja6"/>
                                 </connections>
                             </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtq-zk-ppK">
+                                <rect key="frame" x="24" y="315" width="272" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="handleGoogePlaces:" destination="hxL-Uq-wHb" eventType="touchUpInside" id="dXb-Wg-SrW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -221,9 +221,11 @@
                             <constraint firstAttribute="trailing" secondItem="qjk-jU-ccr" secondAttribute="trailing" id="1Sz-kB-cvt"/>
                             <constraint firstItem="mgc-Kb-GWu" firstAttribute="top" secondItem="LbA-to-qkn" secondAttribute="bottom" constant="20" id="2f8-lY-67e"/>
                             <constraint firstItem="LbA-to-qkn" firstAttribute="top" secondItem="MQN-6y-J9K" secondAttribute="bottom" constant="24" id="47j-S3-Lh2"/>
+                            <constraint firstItem="wtq-zk-ppK" firstAttribute="centerY" secondItem="Mug-7v-reD" secondAttribute="centerY" id="4B7-8G-CZg"/>
                             <constraint firstItem="mgc-Kb-GWu" firstAttribute="top" secondItem="lY7-b5-FgH" secondAttribute="bottom" constant="-15" id="5uN-nc-9Pf"/>
                             <constraint firstAttribute="trailing" secondItem="MQN-6y-J9K" secondAttribute="trailing" constant="24" id="8ZW-BF-e60"/>
                             <constraint firstItem="MQN-6y-J9K" firstAttribute="leading" secondItem="cBj-Wc-AHe" secondAttribute="leading" constant="24" id="9E7-he-OzI"/>
+                            <constraint firstItem="wtq-zk-ppK" firstAttribute="width" secondItem="Mug-7v-reD" secondAttribute="width" id="Dfv-5D-tgb"/>
                             <constraint firstItem="Wpu-am-SK2" firstAttribute="leading" secondItem="cBj-Wc-AHe" secondAttribute="leadingMargin" constant="8" id="GEp-QQ-jim"/>
                             <constraint firstItem="qjk-jU-ccr" firstAttribute="top" secondItem="rbR-z3-rmf" secondAttribute="bottom" id="HXZ-pR-k3l"/>
                             <constraint firstItem="Mug-7v-reD" firstAttribute="top" secondItem="i1O-kR-I5d" secondAttribute="bottom" constant="2" id="Ifg-6r-frf"/>
@@ -238,10 +240,12 @@
                             <constraint firstItem="vMN-dn-Oxa" firstAttribute="leading" secondItem="1kl-Gx-t4b" secondAttribute="trailing" constant="24" id="f8b-VE-Ubk"/>
                             <constraint firstAttribute="bottom" secondItem="qjk-jU-ccr" secondAttribute="bottom" constant="-2" id="fbq-jp-TjN"/>
                             <constraint firstAttribute="trailing" secondItem="i1O-kR-I5d" secondAttribute="trailing" constant="24" id="g61-Il-5OI"/>
+                            <constraint firstItem="wtq-zk-ppK" firstAttribute="height" secondItem="Mug-7v-reD" secondAttribute="height" id="ggB-ZT-Umz"/>
                             <constraint firstItem="Mug-7v-reD" firstAttribute="leading" secondItem="cBj-Wc-AHe" secondAttribute="leading" constant="24" id="ggh-ay-bKB"/>
                             <constraint firstItem="elY-2U-8Fq" firstAttribute="leading" secondItem="cBj-Wc-AHe" secondAttribute="leadingMargin" constant="8" id="hOp-Wo-E8l"/>
                             <constraint firstItem="lY7-b5-FgH" firstAttribute="leading" secondItem="cBj-Wc-AHe" secondAttribute="leading" constant="8" id="pqN-fp-ZnJ"/>
                             <constraint firstAttribute="trailing" secondItem="w5t-8P-CYD" secondAttribute="trailing" constant="24" id="rD1-Tk-3cJ"/>
+                            <constraint firstItem="wtq-zk-ppK" firstAttribute="centerX" secondItem="cBj-Wc-AHe" secondAttribute="centerX" id="rX1-eS-686"/>
                             <constraint firstAttribute="trailing" secondItem="Mug-7v-reD" secondAttribute="trailing" constant="24" id="s3H-Tk-3Z9"/>
                             <constraint firstItem="w5t-8P-CYD" firstAttribute="leading" secondItem="cBj-Wc-AHe" secondAttribute="leading" constant="24" id="wgE-2s-sIu"/>
                             <constraint firstItem="qjk-jU-ccr" firstAttribute="leading" secondItem="cBj-Wc-AHe" secondAttribute="leading" id="xE5-NK-nUx"/>
@@ -2663,6 +2667,8 @@ mark your presence at your workplace</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="addressLabel" destination="X5d-1g-dS8" id="D8h-6k-35P"/>
+                                            <outlet property="nameLabel" destination="t5y-Sm-fBO" id="05V-WG-wsY"/>
                                             <outlet property="visualEffect" destination="npS-OT-xT2" id="op4-LN-WR5"/>
                                         </connections>
                                     </tableViewCell>
@@ -2979,10 +2985,10 @@ mark your presence at your workplace</string>
     </scenes>
     <resources>
         <image name="addImage" width="19" height="19"/>
-        <image name="closeImage" width="56" height="56"/>
-        <image name="doneImage" width="22" height="17"/>
         <image name="edit" width="27" height="27"/>
         <image name="error" width="179" height="179"/>
+        <image name="geoTagCancel" width="71" height="71"/>
+        <image name="geoTagConfirm" width="71" height="71"/>
         <image name="logo" width="50" height="50"/>
         <image name="nextImage" width="9" height="15"/>
         <image name="phone" width="14" height="14"/>

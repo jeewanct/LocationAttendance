@@ -43,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ConfigurationModel.stopDebugging(flag: false)
             print("In Debug")
             ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+
+            //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         case .Alpha:
             ConfigurationModel.stopDebugging(flag: false)
             print("In Alpha")
