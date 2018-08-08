@@ -99,6 +99,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey(GoogleMaps.GOOGLEMAPSAPI)
         
         startUpTask()
+        
+        
         return true
     }
     
