@@ -260,34 +260,37 @@ extension MyTeamViewController{
     
     func getTeamAddress(location: [MyTeamDocument]){
         
+        userContainerView?.teamData = location
         
-        var dummyLocation = location
-        for index in 0..<location.count{
-            
-            if let coordinates = location[index].userStatus?.location?.coordinates{
-                
-                if coordinates.count == 2{
-                    
-                    let cllLocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
-                    
-                    
-                    LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: 0) { (address, value, value1) in
-                    
-                        
-                        dummyLocation[index].userStatus?.location?.teamAddress = address
-                       
-//                        if value == location.count - 1{
-                            self.userContainerView?.teamData = dummyLocation
-                            
-                       // }
-                        
-                        
-                    }
-                }
-                
-            }
-            
-        }
+        
+        
+//        var dummyLocation = location
+//        for index in 0..<location.count{
+//
+//            if let coordinates = location[index].userStatus?.location?.coordinates{
+//
+//                if coordinates.count == 2{
+//
+//                    let cllLocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
+//
+//
+//                    LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: 0) { (address, value, value1) in
+//
+//
+//                        dummyLocation[index].userStatus?.location?.teamAddress = address
+//
+////                        if value == location.count - 1{
+//                            self.userContainerView?.teamData = dummyLocation
+//
+//                       // }
+//
+//
+//                    }
+//                }
+//
+//            }
+//
+//        }
         
         
     }

@@ -55,6 +55,12 @@ class NewCheckoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        let value = NSDate().aws_stringValue("y-MM-ddH:m:ss.SSSS")
+        
+        print(value)
+        
+        
         navigationController?.removeTransparency()
         let height = UIScreen.main.bounds.size.height
         userLocationCardHeightAnchor.constant = height - (height * 0.3)

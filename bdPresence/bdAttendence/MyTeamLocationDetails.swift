@@ -1,4 +1,4 @@
-//
+ //
 //  MyTeamLocationDetails.swift
 //  bdPresence
 //
@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 import BluedolphinCloudSdk
-
+import Polyline
 class MyTeamLocationDetails: UIViewController{
     
     @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
@@ -19,6 +19,17 @@ class MyTeamLocationDetails: UIViewController{
     @IBOutlet weak var userLocationContainerView: UIView!
     
     let activityIndicator = ActivityIndicatorView()
+    
+    
+    
+    var polyline = GMSPolyline()
+    var animationPolyline = GMSPolyline()
+    var path = GMSMutablePath()
+    var animationPath = GMSMutablePath()
+    var i: UInt = 0
+    var timer: Timer!
+    
+    
     var teamMemberUserId: String?{
         didSet{
             getTeamMemberDetails()
@@ -40,7 +51,14 @@ class MyTeamLocationDetails: UIViewController{
         userLocationCardHeightAnchor.constant = (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let getTimer = self.timer{
+            self.timer.invalidate()
+        }
+       
+    }
 }
 
 
@@ -126,7 +144,14 @@ extension MyTeamLocationDetails{
             
         }
         
-       plotMarkersInMap(location: teamData)
+        
+        LogicHelper.shared.plotMarkerInMap(locations: teamData) { (data) in
+            self.plotMarkersInMap(location: teamData)
+            
+        }
+        
+        
+       
         
         
         
@@ -140,10 +165,13 @@ extension MyTeamLocationDetails{
         if allLocations.count == 0{
             userLocationContainerView.isHidden = true
         }else{
-            getLocationCorrospondingLatLong(locations: allLocations)
+            
+            userContainerView?.locationData = allLocations
             userLocationContainerView.isHidden = false
         }
         
+        
+        plotPathInMap(location: allLocations)
         
         
         for locations in allLocations{
@@ -164,53 +192,166 @@ extension MyTeamLocationDetails{
         }
     }
     
-    func getLocationCorrospondingLatLong(locations: [[LocationDataModel]]){
+    
+    func plotPathInMap(location: [[LocationDataModel]]){
         
+        var originLatLong = ""
         
-        for index in 0..<locations.count{
+        if location.count > 2 {
+        
             
-            for index1 in 0..<locations[index].count{
+                let firstLocation = location.first
+                let secondLocation = location.last
                 
-                if let geoTaggedLocation = locations[index][index1].geoTaggedLocations{
+                var orginDestinationString  =  "origin="
+                if let  origin = firstLocation{
                     
-                    
-                    
-                }else{
-                    
-                    if let lat = locations[index][index1].latitude, let long = locations[index][index1].longitude{
+                    for index in origin{
                         
-                        if let latD = CLLocationDegrees(lat), let longD = CLLocationDegrees(long){
+                        if let geoTag = index.geoTaggedLocations{
                             
-                            let cllLocation = CLLocation(latitude: latD, longitude: longD)
+                            if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
+                                
+                                orginDestinationString.append("\(latitude),\(longitude)")
+                            }
                             
-                            LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: index1) { (address, firstIndex, secondIndex) in
-                                
-                                locations[firstIndex][secondIndex].address = address
-                                
-                                if firstIndex == locations.count - 1{
-                                    
-                                    self.userContainerView?.locationData = locations
-                                }
-                                
+                        }else{
+                            
+                            if let latitude = index.latitude, let longitude = index.longitude{
+                                orginDestinationString.append("\(latitude),\(longitude)")
                             }
                             
                         }
+                    }
+                }
+        
+            orginDestinationString.append("&destination=")
+            
+            if let  destination = secondLocation{
+                
+                for index in destination{
+                    
+                    if let geoTag = index.geoTaggedLocations{
                         
+                        if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
+                            
+                            orginDestinationString.append("\(latitude),\(longitude)")
+                        }
+                        
+                    }else{
+                        
+                        if let latitude = index.latitude, let longitude = index.longitude{
+                            orginDestinationString.append("\(latitude),\(longitude)")
+                        }
                         
                     }
+                }
+            }
+            
+            
+            
+            GoogleUtils.getPolylineGoogle(originDestination: orginDestinationString) { (polyline) in
+                
+                let  coordinates: [CLLocationCoordinate2D]? = decodePolyline(polyline)
+                
+                if let getCoordinates = coordinates{
                     
-                    
-                    
+                    self.drawPath(coordinates: getCoordinates)
                 }
                 
                 
             }
+            
+            
         }
-        
-        self.userContainerView?.locationData = locations
-        
+    
         
     }
+    
+    func drawPath(coordinates: [CLLocationCoordinate2D]){
+        
+       
+        //let path = GMSMutablePath()
+        
+    
+        for coordinate in coordinates{
+            path.add(coordinate)
+            
+        }
+        
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeColor = .black
+        polyline.strokeWidth = 3
+        polyline.map = mapView
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.03, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        
+    }
+    
+    
+    func animatePolylinePath() {
+        if (self.i < self.path.count()) {
+            self.animationPath.add(self.path.coordinate(at: self.i))
+            self.animationPolyline.path = self.animationPath
+            self.animationPolyline.strokeColor = UIColor.gray
+            self.animationPolyline.strokeWidth = 3
+            self.animationPolyline.map = self.mapView
+            self.i += 1
+        }
+        else {
+            self.i = 0
+            self.animationPath = GMSMutablePath()
+            self.animationPolyline.map = nil
+        }
+    }
+    
+//    func getLocationCorrospondingLatLong(locations: [[LocationDataModel]]){
+//
+//
+//        for index in 0..<locations.count{
+//
+//            for index1 in 0..<locations[index].count{
+//
+//                if let geoTaggedLocation = locations[index][index1].geoTaggedLocations{
+//
+//                    self.userContainerView?.locationData = locations
+//
+//                }else{
+//
+//                    if let lat = locations[index][index1].latitude, let long = locations[index][index1].longitude{
+//
+//                        if let latD = CLLocationDegrees(lat), let longD = CLLocationDegrees(long){
+//
+//                            let cllLocation = CLLocation(latitude: latD, longitude: longD)
+//
+//                            LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: index1) { (address, firstIndex, secondIndex) in
+//
+//                                locations[firstIndex][secondIndex].address = address
+//
+//                               //if index == locations.count - 1{
+//
+//                                    self.userContainerView?.locationData = locations
+//                                //}
+//
+//                            }
+//
+//                        }
+//
+//
+//                    }
+//
+//
+//
+//                }
+//
+//
+//            }
+//        }
+//
+//        //self.userContainerView?.locationData = locations
+//
+//
+//    }
     
     
     

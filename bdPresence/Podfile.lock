@@ -17,8 +17,10 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (2.7.0):
     - GoogleMaps/Base (= 2.7.0)
+  - GooglePlacesSearchController (0.2.1)
   - IQKeyboardManagerSwift (5.0.7)
   - ObjectMapper (3.1.0)
+  - Polyline (4.2.0)
   - ReachabilitySwift (3)
   - Realm (3.1.1):
     - Realm/Headers (= 3.1.1)
@@ -36,7 +38,9 @@ DEPENDENCIES:
   - Fabric
   - GoogleMaps
   - GooglePlaces
+  - GooglePlacesSearchController
   - IQKeyboardManagerSwift
+  - Polyline (~> 4.0)
   - ReachabilitySwift (~> 3)
   - RealmSwift
   - SwiftGifOrigin (~> 1.6.1)
@@ -52,8 +56,10 @@ SPEC REPOS:
     - Fabric
     - GoogleMaps
     - GooglePlaces
+    - GooglePlacesSearchController
     - IQKeyboardManagerSwift
     - ObjectMapper
+    - Polyline
     - ReachabilitySwift
     - Realm
     - RealmSwift
@@ -69,13 +75,15 @@ SPEC CHECKSUMS:
   Fabric: ae7146a5f505ea370a1e44820b4b1dc8890e2890
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
+  GooglePlacesSearchController: e53b61b7497cf40cb18ec296b1d3314c11c0a1c0
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
+  Polyline: 3d69f75bb136357e27291d439d0436c6ebda57a4
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: dc4e90d0b872b0d157eee9cf008efbbe866acf7e
+PODFILE CHECKSUM: eb2b55613b4cbca22eb6dbfc8b13cccb8df1ce97
 
 COCOAPODS: 1.5.2

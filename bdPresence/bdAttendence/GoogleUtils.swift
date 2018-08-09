@@ -31,6 +31,17 @@ class GoogleDurationModel: Decodable{
     var value : Int?
 }
 
+class GoogleDirectionRoutesModel: Decodable{
+    var routes: [GooglePolylineModel]?
+}
+
+class GooglePolylineModel: Decodable{
+    var overview_polyline: GooglePointsModel?
+}
+
+class GooglePointsModel: Decodable{
+    var points: String?
+}
 
 
 class GoogleUtils{
@@ -50,6 +61,42 @@ class GoogleUtils{
         }
         
         
+    }
+    
+    class func getPolylineGoogle(originDestination: String, completion: @escaping(String) -> Void){
+        
+        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=true&travelmode=driving&key=" + AppConstants.GoogleConstants.GoogleApiKey
+        
+        
+        Networking.fetchGenericData(url, header: [:], success: { (polyline: GoogleDirectionRoutesModel) in
+            
+            if let getPolyline = polyline.routes{
+                
+                var polyLineString = ""
+                for index in getPolyline{
+                    if let getPolyLine = index.overview_polyline?.points{
+                        polyLineString.append(getPolyLine)
+                    }
+                }
+                
+                completion(polyLineString)
+                
+            }
+            
+            
+            print(polyline.routes)
+        }) { (error) in
+            print(error)
+        }
+        
+        
+//        "https://maps.googleapis.com/maps/api/directions/json?origin=28.6327328,77.2169308&destination=19.097892,72.85486&optimize=true&travelmode=driving&key=AIzaSyAEHGCnCX0R__be18wIL8sZ9UVhPO6bbAo"
+        
         
     }
+    
+    
+    
 }
+
+

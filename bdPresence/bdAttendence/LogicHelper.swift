@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 import BluedolphinCloudSdk
+import Polyline
 
 class LogicHelper{
     
@@ -281,8 +282,63 @@ class LogicHelper{
         
     }
     
+    func getMinHour(date: Date) -> (Int, Int){
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        
+        return (hour,minutes)
+        
+    }
+    
+    
+    func getLocationDate(date: Date) -> String{
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "h:mm a"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+        
+    
+        let dateString = formatter.string(from: date)
+//
+//        let (hour, minute) = getMinHour(date: date)
+//
+//        let finalString = "\(hour)"
+        return dateString
+        //print(dateString)
+    }
     
     
     
     
+}
+
+
+public extension Foundation.Date {
+    struct Date {
+        static let formatterISO8601: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.calendar = Calendar(identifier: Calendar.Identifier.iso8601)
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+            return formatter
+        }()
+    }
+    
+    
+    //    var startOfWeek: Date {
+    //        let date = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
+    //        let dslTimeOffset = NSTimeZone.local.daylightSavingTimeOffset(for: date)
+    //        return date.addingTimeInterval(dslTimeOffset)
+    //    }
+    //
+    //    var endOfWeek: Date {
+    //        return Calendar.current.date(byAdding: .second, value: 604799, to: self.startOfWeek)!
+    //    }
+    
+    var formattedISO8601: String { return Date.formatterISO8601.string(from: self) }
+
 }
