@@ -217,6 +217,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk16AssignmentHolder")
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk15AssignmentModel")
 @interface AssignmentModel : NSObject
 + (void)getAssignmentsWithAssignmentId:(NSString * _Nonnull)assignmentId completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)getAssignmentsForDesiredTimeWithQuery:(NSString * _Nonnull)query completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 + (void)getAssignmentsWithStatus:(NSString * _Nonnull)status completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 + (void)updateAssignments;
 + (void)postdbAssignments;
@@ -229,6 +230,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk15AssignmentModel")
 @interface AssignmentModel (SWIFT_EXTENSION(BluedolphinCloudSdk))
 + (void)createAssignmentWithAssignmentData:(AssignmentHolder * _Nonnull)assignmentData;
 + (void)saveAssignmentWithAssignmentData:(NSDictionary * _Nonnull)assignmentData;
++ (BOOL)statusOfUser SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
