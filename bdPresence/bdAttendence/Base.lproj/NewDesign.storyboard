@@ -967,6 +967,62 @@
                                     <segue destination="56O-hC-4Zk" kind="embed" identifier="containerViewSegue" id="9gI-Lp-NYu"/>
                                 </connections>
                             </containerView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h31-QZ-ZkL">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kindly contact your manager to change your status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkJ-zk-FR2">
+                                        <rect key="frame" x="5" y="462" width="310" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="4D5-s6-Nfb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are not working today!                      You have the day off, do something fun." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9C-dt-QSX">
+                                        <rect key="frame" x="16" y="128" width="288" height="58"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="288" id="dgf-KO-Rq9"/>
+                                            <constraint firstAttribute="height" constant="58" id="vJv-q2-nnX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unavailable till 10 August 2018, 2:30 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amv-KF-Osy">
+                                        <rect key="frame" x="16" y="194" width="288" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Kc3-Ms-01a"/>
+                                            <constraint firstAttribute="width" constant="288" id="WPZ-Sx-9GX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 August 2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmJ-Lc-XiD">
+                                        <rect key="frame" x="100" y="1" width="120" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="e1d-hl-49o"/>
+                                            <constraint firstAttribute="width" constant="120" id="zfI-lY-E4h"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Amv-KF-Osy" firstAttribute="top" secondItem="g9C-dt-QSX" secondAttribute="bottom" constant="8" id="1xf-UU-4HQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="jkJ-zk-FR2" secondAttribute="trailing" constant="5" id="F3h-bu-rAU"/>
+                                    <constraint firstAttribute="bottom" secondItem="jkJ-zk-FR2" secondAttribute="bottom" constant="21" id="HzX-kU-0LD"/>
+                                    <constraint firstItem="g9C-dt-QSX" firstAttribute="centerX" secondItem="tmJ-Lc-XiD" secondAttribute="centerX" id="PEx-hb-Nl8"/>
+                                    <constraint firstItem="jkJ-zk-FR2" firstAttribute="leading" secondItem="h31-QZ-ZkL" secondAttribute="leading" constant="5" id="dSs-WN-Ogk"/>
+                                    <constraint firstItem="tmJ-Lc-XiD" firstAttribute="centerX" secondItem="h31-QZ-ZkL" secondAttribute="centerX" id="gNW-AO-in5"/>
+                                    <constraint firstItem="g9C-dt-QSX" firstAttribute="top" secondItem="tmJ-Lc-XiD" secondAttribute="bottom" constant="106" id="mZZ-Kr-XZ8"/>
+                                    <constraint firstItem="Amv-KF-Osy" firstAttribute="centerX" secondItem="g9C-dt-QSX" secondAttribute="centerX" id="qYi-Vy-iDw"/>
+                                    <constraint firstItem="tmJ-Lc-XiD" firstAttribute="top" secondItem="h31-QZ-ZkL" secondAttribute="top" constant="1" id="yeT-2z-wSt"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -976,14 +1032,18 @@
                             <constraint firstItem="bsy-os-D3c" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="F3z-bh-cev"/>
                             <constraint firstItem="USZ-DE-GZE" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" id="KCn-e1-8Uv"/>
                             <constraint firstAttribute="trailing" secondItem="USZ-DE-GZE" secondAttribute="trailing" id="KMD-pd-qi2"/>
+                            <constraint firstItem="h31-QZ-ZkL" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" id="OLB-Nz-TbG"/>
                             <constraint firstAttribute="trailing" secondItem="bsy-os-D3c" secondAttribute="trailing" id="Rbr-uo-yab"/>
                             <constraint firstItem="Vzz-7a-EcF" firstAttribute="top" secondItem="USZ-DE-GZE" secondAttribute="bottom" id="S0w-ek-ZW2"/>
+                            <constraint firstItem="Vzz-7a-EcF" firstAttribute="top" secondItem="h31-QZ-ZkL" secondAttribute="bottom" id="SaU-S0-QtK"/>
                             <constraint firstAttribute="bottom" secondItem="1NL-pT-kMV" secondAttribute="bottom" id="TDt-lm-h4o"/>
                             <constraint firstAttribute="trailing" secondItem="iDA-Oj-aZO" secondAttribute="trailing" id="VMc-3p-1M5"/>
                             <constraint firstItem="iDA-Oj-aZO" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="aiR-uS-qi5"/>
+                            <constraint firstItem="h31-QZ-ZkL" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="qiv-AM-f4f"/>
                             <constraint firstItem="USZ-DE-GZE" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="tBT-HN-x9n"/>
                             <constraint firstItem="iDA-Oj-aZO" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" constant="504" id="upZ-z6-N1g"/>
                             <constraint firstItem="iDA-Oj-aZO" firstAttribute="height" secondItem="U0L-Z1-1Ta" secondAttribute="height" id="xlc-Yx-oaB"/>
+                            <constraint firstAttribute="trailing" secondItem="h31-QZ-ZkL" secondAttribute="trailing" id="yF7-xa-SLb"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -991,13 +1051,24 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Today" id="TQW-WG-E9r"/>
+                    <navigationItem key="navigationItem" title="Today" id="TQW-WG-E9r">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="sync" id="KgA-Sm-Kzr">
+                            <connections>
+                                <action selector="syncTapped:" destination="sia-RL-Dab" id="Icj-b6-tfs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="bottomMessageLabel" destination="jkJ-zk-FR2" id="t1X-cC-a45"/>
                         <outlet property="checkoutButton" destination="j5E-91-oHK" id="lJ0-oK-L2e"/>
                         <outlet property="endTimeLabel" destination="k4P-BA-hhg" id="yHl-nJ-oKg"/>
                         <outlet property="endYourDayLabel" destination="YYf-kK-yZe" id="Kd7-Vo-tVQ"/>
                         <outlet property="lastCheckinAddressLabel" destination="ugh-5c-h6b" id="BcY-LI-vJ3"/>
                         <outlet property="mapView" destination="USZ-DE-GZE" id="Lrg-mO-NOA"/>
+                        <outlet property="statusChangeView" destination="h31-QZ-ZkL" id="deV-hO-v7U"/>
+                        <outlet property="syncButton" destination="KgA-Sm-Kzr" id="Okd-No-weg"/>
+                        <outlet property="todayDateLabel" destination="tmJ-Lc-XiD" id="bA2-hk-RsD"/>
+                        <outlet property="unavailableTillLabel" destination="Amv-KF-Osy" id="6Y8-sd-UQd"/>
                         <outlet property="upperView" destination="bsy-os-D3c" id="ovZ-6e-wx6"/>
                         <outlet property="userLocationCardHeightAnchor" destination="upZ-z6-N1g" id="YJc-RP-Wmn"/>
                         <outlet property="userLocationContainerView" destination="iDA-Oj-aZO" id="TeM-jD-ziC"/>
@@ -2010,7 +2081,7 @@ mark your presence at your workplace</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttS-lP-Vcl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4479" y="2613"/>
+            <point key="canvasLocation" x="3902" y="2474"/>
         </scene>
         <!--Work Hour View Controller-->
         <scene sceneID="u9G-2a-gKW">
@@ -3010,9 +3081,10 @@ mark your presence at your workplace</string>
         <image name="swipeDown" width="42" height="42"/>
         <image name="swipe_up" width="48" height="42"/>
         <image name="swipe_up_two" width="35" height="35"/>
+        <image name="sync" width="12" height="17"/>
         <image name="unquote" width="21" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="228-Kj-YEd"/>
+        <segue reference="9gI-Lp-NYu"/>
     </inferredMetricsTieBreakers>
 </document>

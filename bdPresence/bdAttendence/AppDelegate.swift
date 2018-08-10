@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
         ConfigurationModel.setCheckinInteral(val: 600)
+        ConfigurationModel.setAppName(name: "BDPresence")
         print("appversion = \(APPVERSION)")
         switch(ReleaseType.currentConfiguration()) {
         case .Debug:
@@ -104,17 +105,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if isInternetAvailable() {
                 // Adding data to download assignment for status change feature if internet is there and meanwhile
                 // I will start work to check the data from database and act accordingly for STATUS CHANGE FEATURE.
-                let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
-                AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
-                    print("completionstatus = \(completionStatus)")
+                if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
+                    let interval = Date().timeIntervalSince(lastAssignmentFetched)
+                    print(interval)
+                    if interval > 10 {
+                        let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                            print("completionstatus = \(completionStatus)")
+                            if completionStatus == "Success" {
+                                UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                            }
+                            print(AssignmentModel.statusOfUser())
+                            
+                        }
+                    } else {
+                        print(AssignmentModel.statusOfUser())
+                        
+                    }
+                }else {
+                    let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                    AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                        print("completionstatus = \(completionStatus)")
+                        if completionStatus == "Success" {
+                            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                        }
+                        print(AssignmentModel.statusOfUser())
+                    }
                 }
-                print(AssignmentModel.statusOfUser())
             }
         }
         
+        
         return true
     }
-    
     
     
     /*
@@ -157,9 +180,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 CheckinModel.postCheckin()
                 // Adding data to download assignment for status change feature if internet is there and meanwhile
                 // I will start work to check the data from database and act accordingly for STATUS CHANGE FEATURE.
-                let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
-                AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
-                    print("completionstatus = \(completionStatus)")
+                if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
+                    let interval = Date().timeIntervalSince(lastAssignmentFetched)
+                    print(interval)
+                    if interval > 600 {
+                        let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                            print("completionstatus = \(completionStatus)")
+                            if completionStatus == "Success" {
+                                UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                            }
+                            print(AssignmentModel.statusOfUser())
+                            
+                        }
+                    } else {
+                        print(AssignmentModel.statusOfUser())
+                        
+                    }
+                }else {
+                    let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                    AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                        print("completionstatus = \(completionStatus)")
+                        if completionStatus == "Success" {
+                            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                        }
+                        print(AssignmentModel.statusOfUser())
+                    }
                 }
             }
         }

@@ -44,6 +44,15 @@ class NewCheckoutViewController: UIViewController {
     
     @IBOutlet weak var userLocationContainerView: UIView!
     
+    
+    // Status change view
+    @IBOutlet var statusChangeView: UIView!
+    @IBOutlet weak var bottomMessageLabel: UILabel!
+    @IBOutlet weak var unavailableTillLabel: UILabel!
+    @IBOutlet weak var todayDateLabel: UILabel!
+    @IBOutlet weak var syncButton: UIBarButtonItem!
+    
+    
     var userContainerView: NewCheckOutUserScreen?
     
     var userLocations: [LocationDataModel]?{
@@ -51,6 +60,7 @@ class NewCheckoutViewController: UIViewController {
             //plotUserLocation()
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +130,14 @@ class NewCheckoutViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         updateView()
+        
+        if AssignmentModel.statusOfUser() {
+            self.statusChangeView.isHidden = false
+            self.syncButton.isEnabled = true
+        } else {
+            self.statusChangeView.isHidden = true
+            self.syncButton.isEnabled = false
+        }
 //        processCurrentWeek()
 //        if  pageControl.currentPage < dataArray.count {
 //            let value = dataArray[pageControl.currentPage]
@@ -127,6 +145,29 @@ class NewCheckoutViewController: UIViewController {
 //        }
         
     }
+    
+    @IBAction func syncTapped(_ sender: Any) {
+        self.syncButton.isEnabled = false
+        //"&status=" + AssignmentStatus.Assigned.rawValue
+        let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+            UI {
+                print("completionstatus = \(completionStatus)")
+                if completionStatus == "Success" {
+                    UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                }
+                if AssignmentModel.statusOfUser() {
+                    self.statusChangeView.isHidden = false
+                    self.syncButton.isEnabled = true
+                } else {
+                    self.statusChangeView.isHidden = true
+                    self.syncButton.isEnabled = false
+                }
+            }
+        }
+        
+    }
+    
     
     func addShadowToUpperView () {
 
