@@ -658,6 +658,7 @@ extension SuperViewController{
             
         }else{
             UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
+            RMCPlacesManager.getPlaces()
             
         }
         

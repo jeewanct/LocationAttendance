@@ -18,6 +18,8 @@ class NewOtpViewController: UIViewController {
     var codeInputView : CodeInputView!
     fileprivate var otpToken = String()
     var mobileNumber = "9015620820"
+    let activityIndicator = ActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     //self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
@@ -94,10 +96,14 @@ class NewOtpViewController: UIViewController {
         }
         print(objectdata)
         //UserDataModel.createUserData(userObject: objectdata as! [String : AnyObject])
-        AlertView.sharedInstance.setLabelText("Verifying")
-        AlertView.sharedInstance.showActivityIndicator(self.view)
+//        AlertView.sharedInstance.setLabelText("Verifying")
+//        AlertView.sharedInstance.showActivityIndicator(self.view)
+        
+        
+        view.showActivityIndicator(activityIndicator: activityIndicator)
         UserDataModel.userSignUp(param:objectdata) { (value) in
-        AlertView.sharedInstance.hideActivityIndicator(self.view)
+//        AlertView.sharedInstance.hideActivityIndicator(self.view)
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (value){
             case APIResult.Success.rawValue:
                 
@@ -144,11 +150,12 @@ class NewOtpViewController: UIViewController {
         print(param)
         if isInternetAvailable() {
             //showLoader(text: "Verifying")
-            AlertView.sharedInstance.setLabelText("Verifying")
-            AlertView.sharedInstance.showActivityIndicator(self.view)
+//            AlertView.sharedInstance.setLabelText("Verifying")
+//            AlertView.sharedInstance.showActivityIndicator(self.view)
+            view.showActivityIndicator(activityIndicator: activityIndicator)
             OauthModel.getToken(userObject: param) { (result) in
-                AlertView.sharedInstance.hideActivityIndicator(self.view)
-                
+                //AlertView.sharedInstance.hideActivityIndicator(self.view)
+                self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
                 switch (result){
                 case APIResult.Success.rawValue:
                     self.updateUser()
@@ -180,8 +187,11 @@ class NewOtpViewController: UIViewController {
     
     func sendOTP(){
         
-        showLoader()
+        //showLoader()
+        view.showActivityIndicator(activityIndicator: activityIndicator)
+        
         OTPModel.getOtp(mobile: mobileNumber) { (result) in
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (result){
             case APIResult.Success.rawValue:
                 self.showAlert("Otp Sent")

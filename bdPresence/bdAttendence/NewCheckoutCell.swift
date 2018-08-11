@@ -13,6 +13,7 @@ class NewCheckoutCell: UITableViewCell{
     
     @IBOutlet weak var locationDetailLabel: UILabel!
     
+    @IBOutlet weak var geoTagLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     override func awakeFromNib() {

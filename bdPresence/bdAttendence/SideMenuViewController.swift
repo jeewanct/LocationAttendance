@@ -19,14 +19,21 @@ class SideMenuViewController: UIViewController  {
         @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var userImageView: UIImageView!
         var menuindex = 0
-        var sideMenuOptionsArray =  [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.HistoricData.rawValue, SideMenuOptions.MyTeam.rawValue,SideMenuOptions.Locations.rawValue,SideMenuOptions.MyProfile.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ContactUs.rawValue]
+    
+        var sideMenuOptionsArray = [SideMenuOptions.MyDashboard.rawValue,SideMenuOptions.HistoricData.rawValue, SideMenuOptions.MyTeam.rawValue,SideMenuOptions.Locations.rawValue,SideMenuOptions.MyProfile.rawValue,SideMenuOptions.SystemDetail.rawValue,SideMenuOptions.ContactUs.rawValue]
     
         override func viewDidLoad() {
             super.viewDidLoad()
             if !SDKSingleton.sharedInstance.transmitter{
                //sideMenuOptionsArray.remove(at: sideMenuOptionsArray.index(of: SideMenuOptions.Transmit.rawValue)!)
+
             }
 
+            if SDKSingleton.sharedInstance.userType == "Field-Executive"{
+                sideMenuOptionsArray.remove(at: 2)
+                sideMenuTable.reloadData()
+            }
+            
             userImageView.layer.cornerRadius = 30
             self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.GreenGradient, APPColor.BlueGradient])
             

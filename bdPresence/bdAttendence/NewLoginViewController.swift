@@ -13,6 +13,8 @@ class NewLoginViewController: UIViewController {
     @IBOutlet weak var mobileTextfield: UITextField!
 
     @IBOutlet weak var sendOtpButton: UIButton!
+    
+    let activityIndicator = ActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -68,8 +70,11 @@ class NewLoginViewController: UIViewController {
 
     func sendOTP(){
         
-        showLoader()
+       view.showActivityIndicator(activityIndicator: activityIndicator)
+        
+        
         OTPModel.getOtp(mobile: mobileTextfield.text!) { (result) in
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (result){
             case APIResult.Success.rawValue:
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? NewOtpViewController

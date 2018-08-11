@@ -6,6 +6,7 @@ PODS:
   - AWSCore (2.6.12)
   - AWSS3 (2.6.12):
     - AWSCore (= 2.6.12)
+  - CountriesViewController (0.1.2)
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - Fabric (1.7.5)
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
   - AWSS3
+  - CountriesViewController
   - Crashlytics
   - Fabric
   - GoogleMaps
@@ -49,6 +51,7 @@ SPEC REPOS:
     - AlamofireObjectMapper
     - AWSCore
     - AWSS3
+    - CountriesViewController
     - Crashlytics
     - Fabric
     - GoogleMaps
@@ -67,6 +70,7 @@ SPEC CHECKSUMS:
   AlamofireObjectMapper: 5fafc816351cbbc0d486611aaeba7461c0cbad49
   AWSCore: d0d6e4f6831754aaf98058d2306a016ae71510fe
   AWSS3: c35608e0cdd5172f9e1d943221fd5fde01c5f749
+  CountriesViewController: 9bd7c0edee8b132015fafc40113efb5283cca73e
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   Fabric: ae7146a5f505ea370a1e44820b4b1dc8890e2890
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
@@ -80,6 +84,6 @@ SPEC CHECKSUMS:
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: 76877c3e61f59e48c64c87604e175c46309a2080
+PODFILE CHECKSUM: 55a0de37ea0215a2789859f0c1dc40d3e7da58fb
 
 COCOAPODS: 1.5.3

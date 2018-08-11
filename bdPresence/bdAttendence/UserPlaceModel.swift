@@ -27,7 +27,7 @@ class GeoTagPlaceDetails{
     var placeId: String?
     var editedBy: String?
     var addedBy: String?
-    var fenceRadius =  RealmOptional<Int>()
+    var fenceRadius =  RealmOptional<Float>()
     var placeType: String?
     var address: String?
     

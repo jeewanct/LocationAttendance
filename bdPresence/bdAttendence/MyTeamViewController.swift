@@ -17,7 +17,7 @@ class MyTeamViewController: UIViewController{
     
     @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
     var userContainerView: MyTeamTableView?
-    var teamData: [MyTeamDocument]?
+    var teamData: [MyTeamData]?
     //var errorView :ErrorScanView!
     let activityIndicator = ActivityIndicatorView()
     
@@ -46,7 +46,7 @@ class MyTeamViewController: UIViewController{
 
 extension MyTeamViewController{
     
-    func addMarkersInMap(teamDetails: [MyTeamDocument]?){
+    func addMarkersInMap(teamDetails: [MyTeamData]?){
         
         guard let getTeamDetails = teamDetails else {
             return
@@ -54,7 +54,7 @@ extension MyTeamViewController{
         
         for teams in getTeamDetails{
             
-            if let coordinates = teams.userStatus?.location?.coordinates{
+            if let coordinates = teams.userOb?.userStatus?.location?.coordinates{
                 
                 if coordinates.count == 2 {
                     let long = coordinates[0]
@@ -69,14 +69,14 @@ extension MyTeamViewController{
                     marker.snippet = "Australia"
                     marker.map = mapView
                     
-                    if let name = teams.userDetails?.name{
+                    if let name = teams.userOb?.userDetails?.name{
                         
                         var userName = ""
-                        if let firstname = name["first"]{
+                        if let firstname = name.first{
                             userName = firstname + " "
                         }
                         
-                        if let lastname = name["last"]{
+                        if let lastname = name.last{
                             userName = userName + lastname
                         }
                         
@@ -198,7 +198,7 @@ extension MyTeamViewController{
                 self.userLocationContainerView.backgroundColor = .clear
                 
             }else{
-                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9016010123)
+                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7508527729)
             }
             
             self.userLocationCardHeightAnchor.constant = height
@@ -237,7 +237,7 @@ extension MyTeamViewController{
         
         
         MyTeamModel.getTeamMember(completion: {[weak self] (myTeamData) in
-            print("Team Member data is ",dump(myTeamData))
+           // print("Team Member data is ",dump(myTeamData))
             self?.hideActivityIndicator()
             self?.teamData = myTeamData
             
@@ -258,7 +258,7 @@ extension MyTeamViewController{
         
     }
     
-    func getTeamAddress(location: [MyTeamDocument]){
+    func getTeamAddress(location: [MyTeamData]){
         
         userContainerView?.teamData = location
         

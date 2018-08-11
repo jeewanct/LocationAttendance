@@ -18,7 +18,7 @@ class LogicHelper{
     func reverseGeoCode(location: CLLocation, completion: @escaping(String) -> Void){
         
         var userAddress = ""
-       
+        
         CLGeocoder().reverseGeocodeLocation(location) { (response , error) in
             
             guard let loc = response?.first else {
@@ -36,7 +36,7 @@ class LogicHelper{
             
         }
         
-       // return userAddress
+        // return userAddress
         
     }
     
@@ -70,40 +70,45 @@ class LogicHelper{
     // Plotting of Map work
     func plotMarkers(date: Date, completion: @escaping([LocationDataModel]) -> Void){
         
-            let locations = UserDayData.getLocationData(date: date)
+        let locations = UserDayData.getLocationData(date: date)
         
-                if let getLocations = locations{
+       
+            if let getLocations = locations{
+                
+                let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: getLocations)
+                
+                if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
+                    completion(locationAfterTime)
                     
-                    let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: getLocations)
-                    
-                    let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy)
-                    
-                    let locationAfterGoogle = self.removeLocationFromGoogleDistanceApi(locations: locationAfterTime)
-                    
-                    //let locationAfterGoogleCheck = self.removeUnnecessaryLocationWithTime(locations: locationAfterTime)
-                   let finalLocations = self.removeDiscardedValues(locations: locationAfterGoogle)
-                    
-                    completion(finalLocations)
-                        
+                }
+                
+               // let finalLocations = self.findFaultyLocations(locations: locationAfterTime)
+                
+                
+                
+                
+                
             }
+          
         
     }
     
-     func plotMarkerInMap(locations: [LocationDataModel], completion: @escaping([LocationDataModel]) -> Void){
+    func plotMarkerInMap(locations: [LocationDataModel], completion: @escaping([LocationDataModel]) -> Void){
         
         
+        
+        let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations)
+        
+        
+        if  let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
+            completion(locationAfterTime)
             
-            let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations)
-            
-            let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy)
-            
-            let locationAfterGoogle = self.removeLocationFromGoogleDistanceApi(locations: locationAfterTime)
-            
-            //let locationAfterGoogleCheck = self.removeUnnecessaryLocationWithTime(locations: locationAfterTime)
-            let finalLocations = self.removeDiscardedValues(locations: locationAfterGoogle)
-            
-            completion(finalLocations)
-            
+        }
+        
+       
+        
+       // completion(finalLocations)
+        
         
         
     }
@@ -117,14 +122,14 @@ class LogicHelper{
             return false
         }
         return updatedLocations
-
+        
     }
     
     
-    func removeUnnecessaryLocationWithTime(locations: [LocationDataModel]) -> [LocationDataModel]{
+    func removeUnnecessaryLocationWithTime(locations: [LocationDataModel], currentIndex: Int) -> [LocationDataModel]?{
         
         
-        for index in 0..<locations.count{
+        for index in currentIndex..<locations.count{
             
             if index == locations.count - 1{
                 
@@ -133,13 +138,82 @@ class LogicHelper{
                 
                 let distance = distanceBetween(firstLat: locations[index].latitude, firstLong: locations[index].longitude, secondLat: locations[index + 1].latitude, secondLong: locations[index + 1].longitude)
                 
-                locations[index + 1].distance = distance
+                
+                if distance == 0 || distance > 8000{
+                    
+                    removeFromGoogleApi(locations: locations, index: index + 1)
+                    return nil
+                    
+                    
+                }
                 
             }
             
         }
         
+        print(locations)
+        
         return locations
+        
+    }
+    
+//    func findFaultyLocations(locations: [LocationDataModel]) -> [LocationDataModel]?{
+//
+//
+//
+//        for index in 0..<locations.count{
+//
+//            if let distance = locations[index].distance{
+//
+//                if distance == 0 || distance > 8000{
+//                     removeFromGoogleApi(locations: locations, index: index)
+//
+//                    return nil
+//
+//                }
+//
+//            }
+//
+//
+//        }
+//
+//        return locations
+//
+//    }
+    
+    func removeFromGoogleApi(locations: [LocationDataModel], index: Int){
+        
+        var removeLocation = locations
+        if let firstLat = locations[index].latitude, let firstLong = locations[index].longitude, let secondLat = locations[index - 1].latitude, let secondLong = locations[index - 1].longitude{
+            
+            GoogleUtils.findApproxTimeToTravel(firstLat: firstLat, firstLong: firstLong, secondLat: secondLat, secondLong: secondLong) { (googleDistance) in
+                
+                
+                if let firstLocationDate = locations[index].lastSeen, let secondLocationDate = locations[index - 1].lastSeen{
+                    
+                    
+                    let discardBool = self.discardLocationUsingGoogle(timeRequired: googleDistance, timeDifference: self.getTime(date: firstLocationDate) - self.getTime(date: secondLocationDate))
+                    
+                    if discardBool == false {
+                        
+                        self.removeUnnecessaryLocationWithTime(locations: removeLocation, currentIndex: index)
+                       // locations[index].isDiscarded = false
+                    }else{
+                        
+                        
+                        removeLocation.remove(at: index)
+                        self.removeUnnecessaryLocationWithTime(locations: removeLocation, currentIndex: index - 1)
+                       // locations[index].isDiscarded = true
+                    }
+                    
+                }
+                
+                
+            }
+        }
+        
+        
+        
         
     }
     
@@ -234,11 +308,11 @@ class LogicHelper{
             
         }
         
-        if 0.45 * Double(timeTaken) <= Double(timeDifference){
-            return true
+        if 0.60 * Double(timeTaken) <= Double(timeDifference){
+            return false
         }
         
-        return false
+        return true
         
     }
     
@@ -282,6 +356,14 @@ class LogicHelper{
         
     }
     
+    func getTimeStamp() -> CLong{
+        
+        let time = Date().timeIntervalSince1970
+        
+        return CLong(time)
+        
+    }
+    
     func getMinHour(date: Date) -> (Int, Int){
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
@@ -300,12 +382,12 @@ class LogicHelper{
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
         
-    
+        
         let dateString = formatter.string(from: date)
-//
-//        let (hour, minute) = getMinHour(date: date)
-//
-//        let finalString = "\(hour)"
+        //
+        //        let (hour, minute) = getMinHour(date: date)
+        //
+        //        let finalString = "\(hour)"
         return dateString
         //print(dateString)
     }
@@ -340,5 +422,5 @@ public extension Foundation.Date {
     //    }
     
     var formattedISO8601: String { return Date.formatterISO8601.string(from: self) }
-
+    
 }

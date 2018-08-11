@@ -11,7 +11,7 @@ import RealmSwift
 import BluedolphinCloudSdk
 import GoogleMaps
 import Alamofire
-
+import Polyline
 
 class NewCheckoutViewController: UIViewController {
     @IBOutlet weak var checkoutButton: UIImageView!
@@ -51,6 +51,18 @@ class NewCheckoutViewController: UIViewController {
             //plotUserLocation()
         }
     }
+    
+    
+    
+    
+    var polyline = GMSPolyline()
+    var animationPolyline = GMSPolyline()
+    var path = GMSMutablePath()
+    var animationPath = GMSMutablePath()
+    var i: UInt = 0
+    var timer: Timer!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,11 +127,18 @@ class NewCheckoutViewController: UIViewController {
         
         userLocationContainerView.isHidden = true
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+        
+        
+        
+        
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        updateView()
+       updateView()
 //        processCurrentWeek()
 //        if  pageControl.currentPage < dataArray.count {
 //            let value = dataArray[pageControl.currentPage]
@@ -144,7 +163,7 @@ class NewCheckoutViewController: UIViewController {
     }
     
     func updateTime(sender:NSNotification){
-        updateView()
+       // updateView()
        
         
   
@@ -176,6 +195,10 @@ class NewCheckoutViewController: UIViewController {
 //
     
     
+    func discardFakeLocations(){
+        updateView()
+    }
+    
     
     func updateView(date:Date = Date()){
         
@@ -195,15 +218,20 @@ class NewCheckoutViewController: UIViewController {
          }
         
         
-        LogicHelper.shared.plotMarkers(date: date) { (data) in
+//        LogicHelper.shared.plotMarkers(date: date) { (data) in
+//
+//
+//            self.userLocations = data
+//            self.plotMarkersInMap(location: data)
+//
+//
+//
+//        }
         
-            
-            self.userLocations = data
-            self.plotMarkersInMap(location: data)
-            
-            
         
-        }
+        let locationFilters = LocationFilters()
+        locationFilters.delegate = self
+        locationFilters.plotMarkers(date: date)
 
     }
     
@@ -219,7 +247,13 @@ class NewCheckoutViewController: UIViewController {
         if allLocations.count == 0{
             userLocationContainerView.isHidden = true
         }else{
-            getLocationCorrospondingLatLong(locations: allLocations)
+            //plotPathInMap(location: allLocations)
+            userContainerView?.locationData = allLocations.reversed()
+            let polyLine = PolyLineMap()
+            polyLine.delegate = self
+            polyLine.getPolyline(location: allLocations)
+            
+           // getLocationCorrospondingLatLong(locations: allLocations)
             userLocationContainerView.isHidden = false
         }
         
@@ -243,54 +277,121 @@ class NewCheckoutViewController: UIViewController {
         }
     }
     
-    func getLocationCorrospondingLatLong(locations: [[LocationDataModel]]){
+    
+    
+    func plotPathInMap(location: [[LocationDataModel]]){
         
+        var originLatLong = ""
         
-        for index in 0..<locations.count{
+        if location.count >= 2 {
             
-            for index1 in 0..<locations[index].count{
+            
+            let firstLocation = location.first
+            let secondLocation = location.last
+            
+            var orginDestinationString  =  "origin="
+            if let  origin = firstLocation{
                 
-                if let geoTaggedLocation = locations[index][index1].geoTaggedLocations{
+                for index in origin{
                     
-                    
-                    
-                }else{
-                    
-                    if let lat = locations[index][index1].latitude, let long = locations[index][index1].longitude{
+                    if let geoTag = index.geoTaggedLocations{
                         
-                        if let latD = CLLocationDegrees(lat), let longD = CLLocationDegrees(long){
+                        if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
                             
-                            let cllLocation = CLLocation(latitude: latD, longitude: longD)
-                            
-                            LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: index1) { (address, firstIndex, secondIndex) in
-                                
-                                locations[firstIndex][secondIndex].address = address
-                                
-                                if firstIndex == locations.count - 1{
-                                    
-                                    self.userContainerView?.locationData = locations
-                                }
-                                
-                            }
-                            
+                            orginDestinationString.append("\(latitude),\(longitude)")
                         }
                         
+                    }else{
+                        
+                        if let latitude = index.latitude, let longitude = index.longitude{
+                            orginDestinationString.append("\(latitude),\(longitude)")
+                        }
                         
                     }
+                }
+            }
+            
+            orginDestinationString.append("&destination=")
+            
+            if let  destination = secondLocation{
+                
+                for index in destination{
                     
+                    if let geoTag = index.geoTaggedLocations{
+                        
+                        if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
+                            
+                            orginDestinationString.append("\(latitude),\(longitude)")
+                        }
+                        
+                    }else{
+                        
+                        if let latitude = index.latitude, let longitude = index.longitude{
+                            orginDestinationString.append("\(latitude),\(longitude)")
+                        }
+                        
+                    }
+                }
+            }
+            
+            
+            
+            GoogleUtils.getPolylineGoogle(originDestination: orginDestinationString, wayPoints: "") { (polyline) in
+                
+                let  coordinates: [CLLocationCoordinate2D]? = decodePolyline(polyline)
+                
+                if let getCoordinates = coordinates{
                     
-                    
+                    self.drawPath(coordinates: getCoordinates)
                 }
                 
                 
             }
+            
+            
         }
-        
-        self.userContainerView?.locationData = locations
         
         
     }
     
+    func drawPath(coordinates: [CLLocationCoordinate2D]){
+        
+        
+        for coordinate in coordinates{
+            path.add(coordinate)
+            
+        }
+        
+        let bounds = GMSCoordinateBounds(path: path)
+        mapView.animate(with: GMSCameraUpdate.fit(bounds))
+       // mapView.animate(with: GMSCameraUpdate()
+       // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
+        
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeColor = .black
+        polyline.strokeWidth = 3
+        polyline.map = mapView
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        
+    }
+    
+    
+    func animatePolylinePath() {
+        if (self.i < self.path.count()) {
+            self.animationPath.add(self.path.coordinate(at: self.i))
+            self.animationPolyline.path = self.animationPath
+            self.animationPolyline.strokeColor = UIColor.gray
+            self.animationPolyline.strokeWidth = 3
+            self.animationPolyline.map = self.mapView
+            self.i += 1
+        }
+        else {
+            self.i = 0
+            self.animationPath = GMSMutablePath()
+            self.animationPolyline.map = nil
+        }
+    }
     
    
         
@@ -339,29 +440,29 @@ class NewCheckoutViewController: UIViewController {
         
     }
     
-    
-
-    
-    
-    
-    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
-        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
-    
-    func timeText(_ s: Int) -> String {
-        return s < 10 ? "0\(s)" : "\(s)"
-    }
-    func currentTime(time:TimeInterval) -> String {
-        
-        //        if let value = UserDefaults.standard.value(forKey: "LastCheckinTime") as? Date {
-        //            date = value
-        //        }
-        let date = Date(timeIntervalSince1970: time)
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        return "\(timeText(hour)):\(timeText(minutes))"
-    }
+//
+//
+//
+//
+//
+//    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+//        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+//    }
+//
+//    func timeText(_ s: Int) -> String {
+//        return s < 10 ? "0\(s)" : "\(s)"
+//    }
+//    func currentTime(time:TimeInterval) -> String {
+//
+//        //        if let value = UserDefaults.standard.value(forKey: "LastCheckinTime") as? Date {
+//        //            date = value
+//        //        }
+//        let date = Date(timeIntervalSince1970: time)
+//        let calendar = Calendar.current
+//        let hour = calendar.component(.hour, from: date)
+//        let minutes = calendar.component(.minute, from: date)
+//        return "\(timeText(hour)):\(timeText(minutes))"
+//    }
     
     func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
@@ -373,23 +474,7 @@ class NewCheckoutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-//    let mapView1: GMSMapView = {
-//        let camera = GMSCameraPosition.camera(withLatitude: 51.527669000000003, longitude: -0.089038999999999993, zoom: 17)
-//        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
-//        return mapView
-//    }()
-    
+  
 }
 
 
@@ -401,36 +486,8 @@ extension NewCheckoutViewController{
     
     func setupMap(){
       
-        //mapView.changeStyle()
-        
-        let marker = GMSMarker()
-       
-        
-        
-        
-        var locationManage = CLLocationManager()
-         locationManage.location?.coordinate.latitude
-        
-        
-        
-        if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
-           
-//            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-//            marker.title = "Sydney"
-//            marker.snippet = "Australia"
-//            
-//            let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysTemplate))
-//            iconImageView.tintColor = #colorLiteral(red: 0.5097929835, green: 0.7668902278, blue: 0.8576113582, alpha: 1)
-//            
-//            marker.iconView = iconImageView
-//            marker.map = mapView
-            
-            
-            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
+            let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude, zoom: 17.0)
             mapView.camera = camera
-        }
-        
-        
         
         
     }
@@ -470,7 +527,7 @@ extension NewCheckoutViewController{
                 self.userLocationContainerView.backgroundColor = .clear
                 
             }else{
-                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9016010123)
+                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7477992958)
             }
             
             self.userLocationCardHeightAnchor.constant = height
@@ -504,83 +561,36 @@ extension NewCheckoutViewController: HandleUserViewDelegate{
 
 
 
-extension NewCheckoutViewController{
+
+
+
+
+
+
+
+extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
+   
+    func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
+        drawPath(coordinates: coordinates)
+    }
     
-//    func plotUserLocation(){
-//
-//        guard let markerLocations = userLocations else {
-//            userLocationContainerView.isHidden = true
-//            return
-//        }
-//        userContainerView?.locationData = userLocations
-//
-//        if markerLocations.count == 0{
-//            userLocationContainerView.isHidden = true
-//            }else{
-//            userLocationContainerView.isHidden = false
-//        }
-//
-//        let path = GMSMutablePath()
-//        for location in markerLocations{
-//
-//            let marker = GMSMarker()
-//
-//
-//            if let lat = location.latitude, let long = location.longitude{
-//
-//                if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
-//
-//                    marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
-//                    marker.title = "Sydney"
-//                    marker.snippet = "Australia"
-//                    marker.icon = #imageLiteral(resourceName: "locationBlack")
-//                    marker.map = mapView
-//
-//
-//                    let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 17.0)
-//                    mapView.camera = camera
-//
-//
-//
-//                    path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
-//
-//                }
-//
-//
-//
-//            }
-//
-//
-//        }
-//
-//        let polyline = GMSPolyline(path: path)
-//        polyline.map = mapView
-//
-//    }
-}
-
-
-
-
-
-
-
-extension  NewCheckoutViewController{
     
-//    func getPlaceList(){
-//      
-//        RMCPlacesManager.getPlaces(completion: { (data) in
-//
-//            dump(data)
-//        }) { (error) in
-//            dump(error)
-//        }
-//        
-//        
-//    }
+    
+    func finalLocations(locations: [LocationDataModel]) {
+        
+        plotMarkersInMap(location: locations)
+        
+        
+    }
+    
+    
+
     
     
 }
+
+
+
 
 
 

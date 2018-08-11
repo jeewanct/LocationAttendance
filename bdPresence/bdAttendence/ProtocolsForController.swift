@@ -7,7 +7,21 @@
 //
 
 import Foundation
+import MapKit
+
 
 protocol HandleUserViewDelegate {
     func handleOnSwipe()
+}
+
+
+protocol LocationsFilterDelegate{
+    
+    func finalLocations(locations: [LocationDataModel])
+    
+}
+
+
+protocol PolylineStringDelegate {
+    func drawPolyline(coordinates: [CLLocationCoordinate2D])
 }

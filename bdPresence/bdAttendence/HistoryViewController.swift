@@ -31,6 +31,17 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var userLocationContainerView: UIView!
     
     @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
+    
+    
+    
+    
+    
+    var polyline = GMSPolyline()
+    var animationPolyline = GMSPolyline()
+    var path = GMSMutablePath()
+    var animationPath = GMSMutablePath()
+    var i: UInt = 0
+    var timer: Timer!
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -134,18 +145,10 @@ class HistoryViewController: UIViewController {
         //progressBar.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
         //progressBar.innerRingColor = APPColor.newGreen
 
-        createbarchartView(date: date)
+        let locationFilters = LocationFilters()
+        locationFilters.delegate = self
+        locationFilters.plotMarkers(date: date)
         
-        LogicHelper.shared.plotMarkers(date: date) { (data) in
-            
-            
-            print(data)
-//            self.userLocations = data
-           self.plotMarkersInMap(location: data)
-            
-            
-            
-        }
         
     }
     
@@ -157,7 +160,9 @@ class HistoryViewController: UIViewController {
         if allLocations.count == 0{
             userLocationContainerView.isHidden = true
         }else{
-            getLocationCorrospondingLatLong(locations: allLocations)
+            let polyLine = PolyLineMap()
+            polyLine.delegate = self
+            polyLine.getPolyline(location: allLocations)
             userLocationContainerView.isHidden = false
         }
         
@@ -216,61 +221,51 @@ class HistoryViewController: UIViewController {
     }
     
     
-    
-    func getLocationCorrospondingLatLong(locations: [[LocationDataModel]]){
+    func drawPath(coordinates: [CLLocationCoordinate2D]){
         
         
-        for index in 0..<locations.count{
+        for coordinate in coordinates{
+            path.add(coordinate)
             
-            for index1 in 0..<locations[index].count{
-                
-                if let geoTaggedLocation = locations[index][index1].geoTaggedLocations{
-                    
-                    
-                    
-                }else{
-                    
-                    if let lat = locations[index][index1].latitude, let long = locations[index][index1].longitude{
-                        
-                        if let latD = CLLocationDegrees(lat), let longD = CLLocationDegrees(long){
-                            
-                            let cllLocation = CLLocation(latitude: latD, longitude: longD)
-                            
-                            LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: index1) { (address, firstIndex, secondIndex) in
-                                
-                                locations[firstIndex][secondIndex].address = address
-                                
-                                if firstIndex == locations.count - 1{
-                                    
-                                    self.userContainerView?.locationData = locations
-                                }
-                                
-                            }
-                            
-                        }
-                        
-                        
-                    }
-                    
-                    
-                    
-                }
-                
-                
-            }
         }
         
-        self.userContainerView?.locationData = locations
+        let bounds = GMSCoordinateBounds(path: path)
+        mapView.animate(with: GMSCameraUpdate.fit(bounds))
+        // mapView.animate(with: GMSCameraUpdate()
+        // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
         
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeColor = .black
+        polyline.strokeWidth = 3
+        polyline.map = mapView
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
         
     }
+    
+    
+    func animatePolylinePath() {
+        if (self.i < self.path.count()) {
+            self.animationPath.add(self.path.coordinate(at: self.i))
+            self.animationPolyline.path = self.animationPath
+            self.animationPolyline.strokeColor = UIColor.gray
+            self.animationPolyline.strokeWidth = 3
+            self.animationPolyline.map = self.mapView
+            self.i += 1
+        }
+        else {
+            self.i = 0
+            self.animationPath = GMSMutablePath()
+            self.animationPolyline.map = nil
+        }
+    }
+    
     
     func createbarchartView(date:Date){
         
         
         let object = UserDayData.getFrequencyLocationBarData(date:date)
         
-        print("The data object is ", dump(object))
         
 //        let queue = DispatchQueue.global(qos: .userInteractive)
 //
@@ -325,61 +320,11 @@ class HistoryViewController: UIViewController {
         
     }
     
-    
-//    func updateFrequencyBar(mData:FrequencyBarGraphData) {
-//        var mRectList = [CGRect]()
-//
-//        let viewWidth = barchartView.frame.size.width;
-//        let viewHeight =
-//            barchartView.frame.size.height;
-//        let maxDuration = mData.getEndTime()! - mData.getStartTime()!;
-//        let widthPerDuration =  viewWidth / CGFloat(maxDuration);
-//        for  duration in mData.graphData {
-//
-//            let left = Int(widthPerDuration * CGFloat(duration.getStartTime() - mData.getStartTime()!));
-//            var right = Int(CGFloat(left) + (widthPerDuration * CGFloat(duration.getEndTime() - duration.getStartTime())));
-//            let top = 0;
-//            let bottom = viewHeight;
-//            right = right - left < 1 ?  1 :  right - left;
-//
-//            let rect = CGRect(x: left, y: top, width: right, height: Int(bottom))
-//            //print(rect)
-//            mRectList.append(rect)
-//        }
-//        let view = FrequencyGraphView(frame: CGRect(x: 0, y: 0, width: barchartView.frame.width, height: barchartView.frame.height), data: mRectList)
-//        barchartView.addSubview(view)
-//
-//    }
-//
-    
-    
-    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
-        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
-    
-    func timeText(_ s: Int) -> String {
-        return s < 10 ? "0\(s)" : "\(s)"
-    }
-    func currentTime(time:TimeInterval) -> String {
-        
-        //        if let value = UserDefaults.standard.value(forKey: "LastCheckinTime") as? Date {
-        //            date = value
-        //        }
-        let date = Date(timeIntervalSince1970: time)
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        return "\(timeText(hour)):\(timeText(minutes))"
-    }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+
+    
+    
+  
 
 }
 
@@ -514,7 +459,7 @@ extension HistoryViewController{
                 self.userLocationContainerView.backgroundColor = .clear
                 
             }else{
-                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9016010123)
+                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.75)
             }
             
             self.userLocationCardHeightAnchor.constant = height
@@ -541,6 +486,21 @@ extension HistoryViewController: HandleUserViewDelegate{
         self.view.layoutIfNeeded()
         handleTap()
     }
+    
+    
+}
+
+
+extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate{
+    func finalLocations(locations: [LocationDataModel]) {
+        plotMarkersInMap(location: locations)
+        
+    }
+    
+    func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
+        drawPath(coordinates: coordinates)
+    }
+    
     
     
 }

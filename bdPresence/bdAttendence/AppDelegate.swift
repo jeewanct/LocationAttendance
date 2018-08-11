@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .Debug:
             ConfigurationModel.stopDebugging(flag: false)
             print("In Debug")
-            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
 
             //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
         case .Alpha:
@@ -229,10 +229,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !SDKSingleton.sharedInstance.userId.isBlank{
             
-            // Changes made for RMCPlaces
-            RMCPlacesManager.getPlaces()
-            
-            
+        
             let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
             let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
             if self.window != nil {

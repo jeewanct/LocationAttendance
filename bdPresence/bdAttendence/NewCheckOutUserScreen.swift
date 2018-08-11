@@ -8,6 +8,21 @@
 
 import UIKit
 import CoreLocation
+
+
+class UserDetailsDataModel{
+    
+    var lastSeen: String?
+    var address: String?
+    var isGeoTagged: Bool?
+    var lat: CLLocationDegrees = 0
+    var long: CLLocationDegrees = 0
+    var cllLocation:  CLLocation = CLLocation()
+}
+
+
+
+
 class NewCheckOutUserScreen: UIViewController{
     
     
@@ -18,8 +33,17 @@ class NewCheckOutUserScreen: UIViewController{
     
     var locationData: [[LocationDataModel]]?{
         didSet{
-            tableView.reloadData()
+            
+            makeRelevantData()
+           // tableView.reloadData()
            
+        }
+    }
+    
+    var userDetails =  [UserDetailsDataModel](){
+        
+        didSet{
+            tableView.reloadData()
         }
     }
     override func viewDidLoad() {
@@ -38,8 +62,92 @@ class NewCheckOutUserScreen: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        visualEffectView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        visualEffectView.applyGradient(isTopBottom: false, colorArray:
+            [#colorLiteral(red: 0.4470588235, green: 0.662745098, blue: 0.8705882353, alpha: 1),#colorLiteral(red: 0.5019607843, green: 0.9294117647, blue: 0.968627451, alpha: 1)])
+        
+        
     }
+    
+    func makeRelevantData(){
+    
+        var user = [UserDetailsDataModel]()
+        if let locations = locationData{
+            
+            
+            
+            for location in locations{
+                
+                let userData = UserDetailsDataModel()
+                
+                for locationDetail in location{
+                    
+                    if let geoTagged = locationDetail.geoTaggedLocations{
+                        var lastSeenString = ""
+                        userData.isGeoTagged = true
+                        if let lastGeoTaggedElement = location.first{
+                            
+                            if let lastSeen = lastGeoTaggedElement.lastSeen{
+                                lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+                            }
+                            //userData.address = geoTagged.placeDetails?.address
+                            
+                        }
+                        
+                        
+                        if let lastGeoTaggedElement = location.last{
+                          
+                            lastSeenString.append("-")
+                            if let lastSeen = lastGeoTaggedElement.lastSeen{
+                                lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+                            }
+                            //userData.address = geoTagged.placeDetails?.address
+                            
+                        }
+                        userData.address = geoTagged.placeDetails?.address
+                        userData.lastSeen = lastSeenString
+                    
+                        
+                    }else{
+                        
+                        userData.isGeoTagged = false
+                        if let lastSeen = locationDetail.lastSeen{
+                            userData.lastSeen = LogicHelper.shared.getLocationDate(date: lastSeen)
+                        }
+                        
+                        if let lat = locationDetail.latitude, let long = locationDetail.longitude{
+                            
+                            if let latitude = CLLocationDegrees(lat), let longitude = CLLocationDegrees(long){
+                                userData.cllLocation = CLLocation(latitude: latitude, longitude: longitude)
+                            
+                            }
+                            
+                            
+                           
+                        }
+                        
+                        
+                    }
+                    
+                    
+                }
+                
+                user.append(userData)
+                
+                
+            }
+            
+            userDetails = user
+            
+            
+            
+        }
+        
+        
+        
+        
+    }
+    
+    
     
 }
 
@@ -66,9 +174,34 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewCheckOutUserScreenCell", for: indexPath) as! NewCheckoutCell
        //setTeamDetails(cell: cell, indexPath: indexPath)
+        //setTeamDetails(cell: cell, indexPath: indexPath)
         setTeamDetails(cell: cell, indexPath: indexPath)
-        
         return cell
+    }
+    
+    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
+        
+        if userDetails[indexPath.item].isGeoTagged == true{
+            cell.geoTagLabel.text = ""
+        }else{
+            cell.geoTagLabel.text = "Geo-Tag this location"
+        }
+        
+        
+        cell.timeLabel.text = userDetails[indexPath.item].lastSeen
+        if let address = userDetails[indexPath.item].address{
+            cell.addressLabel.text = address
+            
+        }else{
+            
+            LogicHelper.shared.reverseGeoCodeGeoLocations(location: userDetails[indexPath.item].cllLocation, index1: indexPath.item, index2: 0) { (addrress, start, end) in
+                
+                self.userDetails[start].address =  addrress
+                cell.addressLabel.text = addrress
+                
+            }
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -86,46 +219,83 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
     }
     
     
-    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
-        if let locations = locationData{
-            
-            for index in 0..<locations.count{
-                
-                if locations[index].count > 1{
-                    cell.addressLabel.text = locations[index][0].geoTaggedLocations?.placeDetails?.address
-                }
-                
-                if locations[index].count == 1 {
-                    
-                    if let address = locations[index][0].address{
-                        cell.addressLabel.text = address
-                    }else{
-                        
-                        if let lat = locations[index][0].latitude, let long = locations[index][0].longitude{
-                            
-                            if let cllLat = CLLocationDegrees(lat), let cllLong = CLLocationDegrees(long){
-                                LogicHelper.shared.reverseGeoCode(location: CLLocation(latitude: cllLat, longitude: cllLong)) { (address) in
-                                    
-                                    self.locationData?[index][0].address = address
-                                    cell.addressLabel.text = address
-                                    
-                                }
-                                
-                            }
-                        }
-                        
-                        
-                    }
-                    
-                    
-                }
-                
-                
-            }
-            
-            
-        }
-    }
+//    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
+//        if let locations = locationData{
+//
+//            for index in 0..<locations.count{
+//
+//                if locations[index].count > 1{
+//                    setTimeSpend(locationData: locations[index], indexPath: indexPath, cell: cell)
+//                    cell.addressLabel.text = locations[index][0].geoTaggedLocations?.placeDetails?.address
+//                }
+//
+//                if locations[index].count == 1 {
+//
+//                    setTimeSpend(locationData: locations[index], indexPath: indexPath, cell: cell)
+//                    if let address = locations[index][0].address{
+//                        cell.addressLabel.text = address
+//                    }else{
+//
+//                        if let lat = locations[index][0].latitude, let long = locations[index][0].longitude{
+//
+//                            if let cllLat = CLLocationDegrees(lat), let cllLong = CLLocationDegrees(long){
+//                                LogicHelper.shared.reverseGeoCode(location: CLLocation(latitude: cllLat, longitude: cllLong)) { (address) in
+//
+//                                    self.locationData?[index][0].address = address
+//                                    cell.addressLabel.text = address
+//
+//                                }
+//
+//                            }
+//                        }
+//
+//
+//                    }
+//
+//
+//                }
+//
+//
+//            }
+//
+//
+//        }
+//    }
+//
+//    func setTimeSpend(locationData: [LocationDataModel], indexPath: IndexPath, cell: NewCheckoutCell){
+//
+//        if locationData.count == 1{
+//
+//            if let firstLocation = locationData.first{
+//                if let startingDate = firstLocation.lastSeen{
+//                   cell.timeLabel.text = LogicHelper.shared.getLocationDate(date: startingDate)
+//                }
+//
+//            }
+//
+//        }else{
+//
+//
+//        if let firstLocation = locationData.first, let lastLocation = locationData.last{
+//
+//            var time = ""
+//
+//            if let startingDate = firstLocation.lastSeen{
+//                time.append(LogicHelper.shared.getLocationDate(date: startingDate))
+//            }
+//
+//            time.append("-")
+//            if let endingDate = lastLocation.lastSeen{
+//                time.append(LogicHelper.shared.getLocationDate(date: endingDate))
+//            }
+//
+//
+//            cell.timeLabel.text = time
+//        }
+//
+//        }
+//
+//    }
     
 //    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
 //

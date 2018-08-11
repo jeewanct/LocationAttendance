@@ -49,7 +49,7 @@ class GoogleUtils{
     class func findApproxTimeToTravel(firstLat: String, firstLong: String, secondLat: String, secondLong: String,completion:  @escaping([GoogleRowModel]?) -> Void){
         
     
-        let url  =  AppConstants.GoogleConstants.GoogleDistanceMatrixApi +  "/json?origins=\(firstLat),\(firstLong)&destinations=\(secondLat),\(secondLong)&key=\(AppConstants.GoogleConstants.GoogleApiKey)&departure_time=\(LogicHelper.shared.getTime(date: Date()))&traffic_model=optimistic"
+        let url  =  AppConstants.GoogleConstants.GoogleDistanceMatrixApi +  "/json?origins=\(firstLat),\(firstLong)&destinations=\(secondLat),\(secondLong)&key=\(AppConstants.GoogleConstants.GoogleApiKey)&departure_time=\(LogicHelper.shared.getTimeStamp())&traffic_model=optimistic"
         
         Networking.fetchGenericData(url, header: [:], success: { (timeRequired: GoogleDistanceCoveredTimeModel) in
             
@@ -58,14 +58,15 @@ class GoogleUtils{
             
         }) { (error) in
             
+            print(error)
         }
         
         
     }
     
-    class func getPolylineGoogle(originDestination: String, completion: @escaping(String) -> Void){
+    class func getPolylineGoogle(originDestination: String,wayPoints: String, completion: @escaping(String) -> Void){
         
-        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=true&travelmode=driving&key=" + AppConstants.GoogleConstants.GoogleApiKey
+        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=true&travelmode=driving&waypoints=\(wayPoints)&key=" + AppConstants.GoogleConstants.GoogleApiKey
         
         
         Networking.fetchGenericData(url, header: [:], success: { (polyline: GoogleDirectionRoutesModel) in
@@ -82,7 +83,6 @@ class GoogleUtils{
                 completion(polyLineString)
                 
             }
-            
             
             print(polyline.routes)
         }) { (error) in

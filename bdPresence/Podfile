@@ -17,8 +17,9 @@ pod 'ReachabilitySwift', '~> 3'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'SwiftGifOrigin', '~> 1.6.1'
+pod 'CountriesViewController'
 pod 'Polyline', '~> 4.0'
-pod "GooglePlacesSearchController"
+pod 'GooglePlacesSearchController'
   target 'bdPresenceTests' do
     inherit! :search_paths
     # Pods for testing

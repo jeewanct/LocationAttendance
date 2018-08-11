@@ -35,7 +35,7 @@ class MyTeamLocationDetails: UIViewController{
             getTeamMemberDetails()
         }
     }
-    var teamMemberUserName: [String: String]?{
+    var teamMemberUserName: Name?{
         didSet{
            setUpTitle()
         }
@@ -89,11 +89,11 @@ extension MyTeamLocationDetails{
         if let teamMember = teamMemberUserName{
             
             var userName = ""
-            if let firstname = teamMember["first"]{
+            if let firstname = teamMember.first{
                 userName = firstname + " "
             }
             
-            if let lastname = teamMember["last"]{
+            if let lastname = teamMember.last{
                 userName = userName + lastname
             }
             
@@ -250,7 +250,7 @@ extension MyTeamLocationDetails{
             
             
             
-            GoogleUtils.getPolylineGoogle(originDestination: orginDestinationString) { (polyline) in
+            GoogleUtils.getPolylineGoogle(originDestination: orginDestinationString, wayPoints: "") { (polyline) in
                 
                 let  coordinates: [CLLocationCoordinate2D]? = decodePolyline(polyline)
                 
