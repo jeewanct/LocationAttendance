@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BluedolphinCloudSdk-Swift.h</key>
 		<data>
-		zCcZepHkakvKGe2S43jPFBOi+08=
+		3tjw0mbw1Ou/DFKOawzVYkwc9bs=
 		</data>
 		<key>Headers/BluedolphinCloudSdk.h</key>
 		<data>
@@ -14,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		YsgV5bjWqoQdBBiCR8xnxhQYRz4=
+		+u4aan0qBAQt4e0SkjZvrids4mc=
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftdoc</key>
 		<data>
@@ -22,7 +22,13 @@
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftmodule</key>
 		<data>
+<<<<<<< HEAD:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 		BqcuJKqrMKOBMkSyCKQrxshEXFE=
+||||||| merged common ancestors
+		4glaT57gP18vyeWNDXoywcB8aPQ=
+=======
+		hSFFPqPXBFwZe9KUiszUuDzE7Oc=
+>>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -30,7 +36,13 @@
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftmodule</key>
 		<data>
+<<<<<<< HEAD:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 		kkNrtMvh0giR+0biWWNRH4ZTj8I=
+||||||| merged common ancestors
+		w29nyNuEy3oOZaqXSGlJHm1AxYU=
+=======
+		z4+rl7nG/L5iu/0CUtj+vBKBP14=
+>>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,11 +55,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zCcZepHkakvKGe2S43jPFBOi+08=
+			3tjw0mbw1Ou/DFKOawzVYkwc9bs=
 			</data>
 			<key>hash2</key>
 			<data>
-			kLj8xG7u0XreuXsEYXUMPE20ur7rsdypMk+hSN2JlJM=
+			onxi/PC0YIBZkURfHKBN2Gmc0vEc/DiRcW0kg0lKM5I=
 			</data>
 		</dict>
 		<key>Headers/BluedolphinCloudSdk.h</key>
@@ -76,11 +88,23 @@
 		<dict>
 			<key>hash</key>
 			<data>
+<<<<<<< HEAD:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 			BqcuJKqrMKOBMkSyCKQrxshEXFE=
+||||||| merged common ancestors
+			4glaT57gP18vyeWNDXoywcB8aPQ=
+=======
+			hSFFPqPXBFwZe9KUiszUuDzE7Oc=
+>>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 			</data>
 			<key>hash2</key>
 			<data>
+<<<<<<< HEAD:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 			CRhHaF/RT5jA6C5g397fO1MPlDVHgig+hPdvcydAxvY=
+||||||| merged common ancestors
+			zXeoWbi+Kky6yUmZr27vplhN/kOkESmmYx9zIGQJw4I=
+=======
+			E2oLGwSZ6ozcKF1a38e/O6AUq6qhA/W1i8HOk7WNVr4=
+>>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 			</data>
 		</dict>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
@@ -98,11 +122,23 @@
 		<dict>
 			<key>hash</key>
 			<data>
+<<<<<<< HEAD:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 			kkNrtMvh0giR+0biWWNRH4ZTj8I=
+||||||| merged common ancestors
+			w29nyNuEy3oOZaqXSGlJHm1AxYU=
+=======
+			z4+rl7nG/L5iu/0CUtj+vBKBP14=
+>>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 			</data>
 			<key>hash2</key>
 			<data>
+<<<<<<< HEAD:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 			2rAexNbxWueiX2OtN4eJELcxvYQeh+qaUI93Yo2lfAg=
+||||||| merged common ancestors
+			nmP15I05+hffNxeq4HyK8FmwY0bR9rU4Wsne7S6wDAo=
+=======
+			bT1TVuTR9beDFa74TTJkWxbu0Gc55ni5b/TV7dH4uaw=
+>>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25:bdPresence/BluedolphinCloudSdk.framework/_CodeSignature/CodeResources
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

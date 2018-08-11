@@ -37,14 +37,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
         ConfigurationModel.setCheckinInteral(val: 600)
+        ConfigurationModel.setAppName(name: "BDPresence")
         print("appversion = \(APPVERSION)")
         switch(ReleaseType.currentConfiguration()) {
         case .Debug:
             ConfigurationModel.stopDebugging(flag: false)
             print("In Debug")
+<<<<<<< HEAD
             ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
 
+||||||| merged common ancestors
+            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+
+=======
+>>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
             //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+
         case .Alpha:
             ConfigurationModel.stopDebugging(flag: false)
             print("In Alpha")
@@ -94,16 +103,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
         }
-
-        
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        //print(Realm.Configuration.defaultConfiguration.fileURL)
         GMSServices.provideAPIKey(GoogleMaps.GOOGLEMAPSAPI)
         GMSPlacesClient.provideAPIKey(GoogleMaps.GOOGLEMAPSAPI)
         
         startUpTask()
+        
+        if !SDKSingleton.sharedInstance.userId.isBlank{
+            if isInternetAvailable() {
+                // Adding data to download assignment for status change feature if internet is there and meanwhile
+                // I will start work to check the data from database and act accordingly for STATUS CHANGE FEATURE.
+                if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
+                    let interval = Date().timeIntervalSince(lastAssignmentFetched)
+                    print(interval)
+                    if interval > 10 {
+                        let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                            print("completionstatus = \(completionStatus)")
+                            if completionStatus == "Success" {
+                                UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                            }
+                            print(AssignmentModel.statusOfUser())
+                            
+                        }
+                    } else {
+                        print(AssignmentModel.statusOfUser())
+                        
+                    }
+                }else {
+                    let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                    AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                        print("completionstatus = \(completionStatus)")
+                        if completionStatus == "Success" {
+                            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                        }
+                        print(AssignmentModel.statusOfUser())
+                    }
+                }
+            }
+        }
+        
+        
         return true
     }
-    
     
     
     /*
@@ -137,19 +179,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            //get the value for key here
 //        }
 //    }
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if !SDKSingleton.sharedInstance.userId.isBlank{
             if isInternetAvailable() {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: self, userInfo: nil)
                 CheckinModel.postCheckin()
+                // Adding data to download assignment for status change feature if internet is there and meanwhile
+                // I will start work to check the data from database and act accordingly for STATUS CHANGE FEATURE.
+                if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
+                    let interval = Date().timeIntervalSince(lastAssignmentFetched)
+                    print(interval)
+                    if interval > 600 {
+                        let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                            print("completionstatus = \(completionStatus)")
+                            if completionStatus == "Success" {
+                                UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                            }
+                            print(AssignmentModel.statusOfUser())
+                            
+                        }
+                    } else {
+                        print(AssignmentModel.statusOfUser())
+                        
+                    }
+                }else {
+                    let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                    AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                        print("completionstatus = \(completionStatus)")
+                        if completionStatus == "Success" {
+                            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                        }
+                        print(AssignmentModel.statusOfUser())
+                    }
+                }
             }
-            
         }
     }
     
-    
-    
+
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.

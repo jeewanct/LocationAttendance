@@ -8,32 +8,66 @@
 
 import UIKit
 import BluedolphinCloudSdk
+import CountriesViewController
 
 class NewLoginViewController: UIViewController {
     @IBOutlet weak var mobileTextfield: UITextField!
-
     @IBOutlet weak var sendOtpButton: UIButton!
+<<<<<<< HEAD
     
     let activityIndicator = ActivityIndicatorView()
+||||||| merged common ancestors
+=======
+    
+    @IBOutlet weak var selectCountryButton: UIButton!
+    @IBOutlet weak var countryCodeLabel: UILabel!
+    let countriesViewController = CountriesViewController()
+    
+>>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
-        self.sendOtpButton.layer.cornerRadius = 15.0
+        //self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        self.sendOtpButton.layer.cornerRadius = 19.0
         self.sendOtpButton.clipsToBounds = true
         self.sendOtpButton.titleLabel?.font = APPFONT.OTPACTION
         self.sendOtpButton.addTarget(self, action: #selector(sendOtpAction), for: .touchUpInside)
         self.mobileTextfield.font = APPFONT.BODYTEXT
+        self.mobileTextfield.layer.borderWidth = 0.5
+        self.mobileTextfield.layer.borderColor = UIColor.gray.cgColor
+        self.mobileTextfield.setLeftPaddingPoints(10)
         mobileTextfield.delegate = self
-         createGradientLayer()
+        
+        self.countryCodeLabel.font = APPFONT.BODYTEXT
+        self.countryCodeLabel.layer.borderColor = UIColor.gray.cgColor
+        self.countryCodeLabel.layer.borderWidth = 0.5
+        
+        self.selectCountryButton.setTitle("Please select your Country ", for: UIControlState.normal)
+        self.selectCountryButton.setImage(#imageLiteral(resourceName: "chevron"), for: .normal)
+        self.selectCountryButton.semanticContentAttribute = .forceRightToLeft
+        //self.selectCountryButton.titleLabel?.font = APPFONT.OTPNOTES
+        self.selectCountryButton.tintColor = APPColor.greenGradient
+         //createGradientLayer()
         
         // Do any additional setup after loading the view.
         
         /* Changes made on 10 July '18 */
         
        // navigationController?.present(TutorialController(), animated: true, completion: nil)
+        countriesViewController.majorCountryLocaleIdentifiers = ["IN"]
+        countriesViewController.allowMultipleSelection = false
+        countriesViewController.delegate = self
+        
+        if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
+            print(countryCode)
+            
+            self.selectCountryButton.setTitle((Locale.current).localizedString(forRegionCode: countryCode), for: .normal)
+            self.selectCountryButton.setImage(#imageLiteral(resourceName: "editnew"), for: .normal)
+            //self.countryCodeLabel.text =
+        }
+        
     }
     
     func createGradientLayer() {
@@ -45,6 +79,14 @@ class NewLoginViewController: UIViewController {
         
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
+    
+    
+    @IBAction func selectCountryTapped(_ sender: Any) {
+        
+        CountriesViewController.Show(countriesViewController: countriesViewController, to: self)
+    }
+    
+    
     
     func sendOtpAction(){
         
@@ -122,6 +164,10 @@ class NewLoginViewController: UIViewController {
         })
     }
     
+    
+   
+
+    
     /*
      // MARK: - Navigation
      
@@ -144,4 +190,44 @@ extension NewLoginViewController:UITextFieldDelegate{
         
     }
     
+}
+
+extension NewLoginViewController : CountriesViewControllerDelegate {
+    func countriesViewControllerDidCancel(_ countriesViewController: CountriesViewController) {
+        
+    }
+    
+    func countriesViewController(_ countriesViewController: CountriesViewController, didSelectCountry country: Country) {
+        
+        self.selectCountryButton.setTitle(country.name + " ", for: UIControlState.normal)
+        self.selectCountryButton.setImage(#imageLiteral(resourceName: "editnew"), for: .normal)
+        //        self.countryNameButton.semanticContentAttribute = .ForceRightToLeft
+        self.countryCodeLabel.text = "+" + country.phoneExtension
+//        self.dismiss(animated: true) {
+//            self.countryCodeLabel.text = "+\(country.phoneExtension)"
+//            self.selectCountryButton.titleLabel?.text = country.name
+//        }
+        
+    }
+    
+    func countriesViewController(_ countriesViewController: CountriesViewController, didUnselectCountry country: Country) {
+        
+    }
+    
+    func countriesViewController(_ countriesViewController: CountriesViewController, didSelectCountries countries: [Country]) {
+        
+    }
+}
+
+extension UITextField {
+    func setLeftPaddingPoints(_ amount:CGFloat){
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+    func setRightPaddingPoints(_ amount:CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.rightView = paddingView
+        self.rightViewMode = .always
+    }
 }

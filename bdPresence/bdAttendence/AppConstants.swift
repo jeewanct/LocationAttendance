@@ -15,13 +15,6 @@ struct AppConstants{
         
         static let GoogleDistanceMatrixApi = "https://maps.googleapis.com/maps/api/distancematrix"
         static let googleDirectionApi = "https://maps.googleapis.com/maps/api/directions/json?"
-        
-        
         static let GoogleApiKey = "AIzaSyAEHGCnCX0R__be18wIL8sZ9UVhPO6bbAo"
-        
-        
-        
-        
-        
     }
 }
