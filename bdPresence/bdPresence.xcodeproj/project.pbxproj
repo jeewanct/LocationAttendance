@@ -8,16 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0907C84A211ACD9B00364DCA /* AlertsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907C849211ACD9B00364DCA /* AlertsController.swift */; };
-<<<<<<< HEAD
-		0909F393211C07FB0069E3F1 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0909F392211C07FA0069E3F1 /* BluedolphinCloudSdk.framework */; };
-		0909F394211C08310069E3F1 /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0909F392211C07FA0069E3F1 /* BluedolphinCloudSdk.framework */; };
-		0909F395211C08310069E3F1 /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0909F392211C07FA0069E3F1 /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-||||||| merged common ancestors
-		090860062119726800A7F6CC /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090860052119726700A7F6CC /* BluedolphinCloudSdk.framework */; };
-		090860072119727100A7F6CC /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090860052119726700A7F6CC /* BluedolphinCloudSdk.framework */; };
-		090860082119727200A7F6CC /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 090860052119726700A7F6CC /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-=======
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
+
 		091517A22108694A00FABD3D /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A12108694A00FABD3D /* LocationTableViewCell.swift */; };
 		091517A421087A8800FABD3D /* LogicHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A321087A8800FABD3D /* LogicHelper.swift */; };
 		091517AA2108A8AC00FABD3D /* NewCheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */; };
@@ -145,13 +136,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-<<<<<<< HEAD
-				0909F395211C08310069E3F1 /* BluedolphinCloudSdk.framework in Embed Frameworks */,
-||||||| merged common ancestors
-				090860082119727200A7F6CC /* BluedolphinCloudSdk.framework in Embed Frameworks */,
-=======
+
 				C8286F30211AF2D8007E290C /* BluedolphinCloudSdk.framework in Embed Frameworks */,
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,12 +148,7 @@
 		048969DA26B3EABDC293FB6D /* Pods-bdPresenceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0780D204E38BF525A133B40D /* Pods_bdPresence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdPresence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0907C849211ACD9B00364DCA /* AlertsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsController.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		0909F392211C07FA0069E3F1 /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
-||||||| merged common ancestors
-		090860052119726700A7F6CC /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
-=======
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
+
 		091517A12108694A00FABD3D /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		091517A321087A8800FABD3D /* LogicHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicHelper.swift; sourceTree = "<group>"; };
 		091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCheckoutCell.swift; sourceTree = "<group>"; };
@@ -291,15 +272,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
-				0909F393211C07FB0069E3F1 /* BluedolphinCloudSdk.framework in Frameworks */,
-				0909F394211C08310069E3F1 /* BluedolphinCloudSdk.framework in Frameworks */,
-||||||| merged common ancestors
-				090860062119726800A7F6CC /* BluedolphinCloudSdk.framework in Frameworks */,
-				090860072119727100A7F6CC /* BluedolphinCloudSdk.framework in Frameworks */,
-=======
+
 				C8286F2F211AF2D8007E290C /* BluedolphinCloudSdk.framework in Frameworks */,
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
 				42E302575BF44137BA4DC3E0 /* Pods_bdPresence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,12 +346,8 @@
 			isa = PBXGroup;
 			children = (
 				999FB43320F61368000ABA7D /* BDFF-README.md */,
-<<<<<<< HEAD
-				0909F392211C07FA0069E3F1 /* BluedolphinCloudSdk.framework */,
-||||||| merged common ancestors
-=======
+
 				C8286F2B2119B9E1007E290C /* BluedolphinCloudSdk.framework */,
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD399F1EA49B7100B6942B /* Products */,
 				C651DF381E775D951C454493 /* Pods */,

@@ -37,20 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
         ConfigurationModel.setCheckinInteral(val: 600)
+        // Update the SDK because i have added one function there
         ConfigurationModel.setAppName(name: "BDPresence")
         print("appversion = \(APPVERSION)")
         switch(ReleaseType.currentConfiguration()) {
         case .Debug:
             ConfigurationModel.stopDebugging(flag: false)
             print("In Debug")
-<<<<<<< HEAD
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
 
-||||||| merged common ancestors
-            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-
-=======
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
             //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
             ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
 
