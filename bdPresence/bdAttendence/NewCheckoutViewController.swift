@@ -52,7 +52,7 @@ class NewCheckoutViewController: UIViewController {
     @IBOutlet weak var todayDateLabel: UILabel!
     @IBOutlet weak var syncButton: UIBarButtonItem!
     
-    
+    var tapGesture: UITapGestureRecognizer?
     var userContainerView: NewCheckOutUserScreen?
     
     var userLocations: [LocationDataModel]?{
@@ -61,7 +61,7 @@ class NewCheckoutViewController: UIViewController {
         }
     }
     
-<<<<<<< HEAD
+
     
     
     
@@ -74,10 +74,6 @@ class NewCheckoutViewController: UIViewController {
     
     
     
-||||||| merged common ancestors
-=======
-    
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -152,11 +148,7 @@ class NewCheckoutViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-<<<<<<< HEAD
-       updateView()
-||||||| merged common ancestors
-        updateView()
-=======
+
         updateView()
         
         if AssignmentModel.statusOfUser() {
@@ -166,7 +158,6 @@ class NewCheckoutViewController: UIViewController {
             self.statusChangeView.isHidden = true
             self.syncButton.isEnabled = false
         }
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
 //        processCurrentWeek()
 //        if  pageControl.currentPage < dataArray.count {
 //            let value = dataArray[pageControl.currentPage]
@@ -545,8 +536,8 @@ extension NewCheckoutViewController{
     
     func addGestureInContainerView(){
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        userLocationContainerView.addGestureRecognizer(tapGesture)
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        userLocationContainerView.addGestureRecognizer(tapGesture!)
         
         let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
         downGesture.direction = .up
@@ -560,11 +551,13 @@ extension NewCheckoutViewController{
         print("View Tapped")
         
         if userLocationCardHeightAnchor.constant == 80 {
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+            userLocationContainerView.addGestureRecognizer(tapGesture!)
             animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
         }else{
             // 400
             userContainerView?.tableView.isScrollEnabled = true
-            
+            view.removeGestureRecognizer(tapGesture!)
             animateContainerView(heightToAnimate: 80)
         }
         

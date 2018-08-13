@@ -25,3 +25,8 @@ protocol LocationsFilterDelegate{
 protocol PolylineStringDelegate {
     func drawPolyline(coordinates: [CLLocationCoordinate2D])
 }
+
+
+protocol GeoTagLocationDelegate {
+    func handleTap(currentIndex: Int)
+}

@@ -8,6 +8,8 @@
 
 import UIKit
 import GoogleMaps
+import BluedolphinCloudSdk
+
 class HistoryViewController: UIViewController {
 
     @IBOutlet weak var swipeUpButton: UIButton!
@@ -74,6 +76,9 @@ class HistoryViewController: UIViewController {
         let height = UIScreen.main.bounds.size.height
         userLocationCardHeightAnchor.constant = height - (height * 0.3)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -91,6 +96,10 @@ class HistoryViewController: UIViewController {
         //alenderView.contentSize = CGSize(width: 40.0, height: 40.0)
     }
 
+    
+    func discardFakeLocations(){
+        updateView()
+    }
     
     func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)

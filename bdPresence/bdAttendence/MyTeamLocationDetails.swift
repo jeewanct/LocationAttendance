@@ -49,6 +49,7 @@ class MyTeamLocationDetails: UIViewController{
         addGestureInContainerView()
         userLocationContainerView.isHidden = true
         userLocationCardHeightAnchor.constant = (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
+    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,6 +59,11 @@ class MyTeamLocationDetails: UIViewController{
             self.timer.invalidate()
         }
        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
     }
 }
 
@@ -145,14 +151,9 @@ extension MyTeamLocationDetails{
         }
         
         
-        LogicHelper.shared.plotMarkerInMap(locations: teamData) { (data) in
-            self.plotMarkersInMap(location: teamData)
-            
-        }
-        
-        
-       
-        
+        let locationFilters = LocationFilters()
+        locationFilters.delegate = self
+        locationFilters.plotMarkerInMap(locations: teamData)
         
         
         
@@ -166,12 +167,17 @@ extension MyTeamLocationDetails{
             userLocationContainerView.isHidden = true
         }else{
             
-            userContainerView?.locationData = allLocations
+           // userContainerView?.locationData = allLocations
             userLocationContainerView.isHidden = false
+            
+            userContainerView?.locationData = allLocations.reversed()
+            let polyLine = PolyLineMap()
+            polyLine.delegate = self
+            polyLine.getPolyline(location: allLocations)
         }
         
         
-        plotPathInMap(location: allLocations)
+        //plotPathInMap(location: allLocations)
         
         
         for locations in allLocations{
@@ -270,21 +276,23 @@ extension MyTeamLocationDetails{
     
     func drawPath(coordinates: [CLLocationCoordinate2D]){
         
-       
-        //let path = GMSMutablePath()
         
-    
         for coordinate in coordinates{
             path.add(coordinate)
             
         }
+        
+        let bounds = GMSCoordinateBounds(path: path)
+        mapView.animate(with: GMSCameraUpdate.fit(bounds))
+        // mapView.animate(with: GMSCameraUpdate()
+        // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
         
         let polyline = GMSPolyline(path: path)
         polyline.strokeColor = .black
         polyline.strokeWidth = 3
         polyline.map = mapView
         
-        self.timer = Timer.scheduledTimer(timeInterval: 0.03, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
         
     }
     
@@ -494,3 +502,28 @@ extension MyTeamLocationDetails: HandleUserViewDelegate{
     
     
 }
+
+ 
+ 
+ 
+ extension  MyTeamLocationDetails: LocationsFilterDelegate, PolylineStringDelegate{
+    
+    func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
+        drawPath(coordinates: coordinates)
+    }
+    
+    
+    
+    func finalLocations(locations: [LocationDataModel]) {
+        
+        plotMarkersInMap(location: locations)
+        
+        
+    }
+    
+    
+    
+    
+    
+ }
+

@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import BluedolphinCloudSdk
 import GooglePlacesSearchController
-
+import MapKit
 class GeoTagController: UIViewController{
     
     
@@ -22,6 +22,14 @@ class GeoTagController: UIViewController{
     @IBOutlet weak var saveLocationTextField: UITextField!
     @IBOutlet weak var visualEffect: UIVisualEffectView!
     @IBOutlet weak var geoFenceRadiusDistance: UILabel!
+    
+    var geoTagLocation: CLLocation?
+    var geoTagAddress: String?{
+        didSet{
+            geoTagOnMap()
+        }
+    }
+    
     
     let marker = GMSMarker()
     
@@ -66,6 +74,19 @@ class GeoTagController: UIViewController{
             present(alerControlle, animated: true , completion: nil)
         }
         
+        
+    }
+    
+    func geoTagOnMap(){
+        
+        currenLocationTextField.text = geoTagAddress
+        
+        if let coordinates = geoTagLocation{
+            marker.position = coordinates.coordinate
+            geoFenceCircle.position = coordinates.coordinate
+            
+            mapView.animate(toLocation: coordinates.coordinate)
+        }
         
     }
     

@@ -16,10 +16,23 @@ class NewCheckoutCell: UITableViewCell{
     @IBOutlet weak var geoTagLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    
+    var currentIndex: Int?
+    var delegate: GeoTagLocationDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addressLabel.addGestureRecognizer(tapGesture)
         
+    }
+    
+    @objc func handleTap(){
+        
+        if let index = currentIndex{
+            delegate?.handleTap(currentIndex: index)
+        }
     }
     
   
