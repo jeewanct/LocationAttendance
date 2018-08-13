@@ -65,6 +65,9 @@ class TimeLineViewController: UIViewController {
     }
     */
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 

@@ -131,6 +131,9 @@ class ProfileViewController: UIViewController {
      }
      */
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension ProfileViewController:UITableViewDelegate,UITableViewDataSource{

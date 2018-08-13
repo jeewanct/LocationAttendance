@@ -322,7 +322,9 @@ class HistoryViewController: UIViewController {
     
 
 
-    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
   
 

@@ -75,11 +75,17 @@ class NewCheckoutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
+        let application = UIApplication.shared
+        let co = application.topViewController as? UINavigationController
+        let arr = co?.viewControllers
+        print("application.topViewController = \(String(describing: arr?.last))")
+        
         
         let value = NSDate().aws_stringValue("y-MM-ddH:m:ss.SSSS")
         
-        print(value)
+        print(value ?? "")
         
         
         navigationController?.removeTransparency()
@@ -168,7 +174,7 @@ class NewCheckoutViewController: UIViewController {
     @IBAction func syncTapped(_ sender: Any) {
         self.syncButton.isEnabled = false
         //"&status=" + AssignmentStatus.Assigned.rawValue
-        let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
         AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
             UI {
                 print("completionstatus = \(completionStatus)")
@@ -176,6 +182,8 @@ class NewCheckoutViewController: UIViewController {
                     UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
                 }
                 if AssignmentModel.statusOfUser() {
+                    // Here i have to swipe down the user screen to stop mobitoring
+                    bdCloudStopMonitoring()
                     self.statusChangeView.isHidden = false
                     self.syncButton.isEnabled = true
                 } else {
@@ -221,10 +229,6 @@ class NewCheckoutViewController: UIViewController {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
-                
-
-                
-                
             default:
                 break
                 
@@ -514,6 +518,9 @@ class NewCheckoutViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
   
 }
@@ -629,9 +636,6 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
     
     
 }
-
-
-
 
 
 
