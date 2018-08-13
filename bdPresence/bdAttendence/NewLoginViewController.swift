@@ -16,12 +16,9 @@ class NewLoginViewController: UIViewController {
 
     
     let activityIndicator = ActivityIndicatorView()
-
-    
     @IBOutlet weak var selectCountryButton: UIButton!
     @IBOutlet weak var countryCodeLabel: UILabel!
     let countriesViewController = CountriesViewController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)

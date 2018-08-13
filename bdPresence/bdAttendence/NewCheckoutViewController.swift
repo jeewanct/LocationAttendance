@@ -72,8 +72,7 @@ class NewCheckoutViewController: UIViewController {
     var i: UInt = 0
     var timer: Timer!
     
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -141,8 +140,6 @@ class NewCheckoutViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
         
         
-        startupCall()
-        
         
         
         // Do any additional setup after loading the view.
@@ -153,7 +150,9 @@ class NewCheckoutViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func startupCall(){
+  
+    override func viewDidAppear(_ animated: Bool) {
+
         updateView()
         
         if AssignmentModel.statusOfUser() {
