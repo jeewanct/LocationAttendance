@@ -61,7 +61,6 @@ class NewCheckoutViewController: UIViewController {
         }
     }
     
-<<<<<<< HEAD
     
     
     
@@ -72,12 +71,8 @@ class NewCheckoutViewController: UIViewController {
     var i: UInt = 0
     var timer: Timer!
     
-    
-    
-||||||| merged common ancestors
-=======
-    
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -152,11 +147,7 @@ class NewCheckoutViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-<<<<<<< HEAD
-       updateView()
-||||||| merged common ancestors
-        updateView()
-=======
+
         updateView()
         
         if AssignmentModel.statusOfUser() {
@@ -166,7 +157,6 @@ class NewCheckoutViewController: UIViewController {
             self.statusChangeView.isHidden = true
             self.syncButton.isEnabled = false
         }
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
 //        processCurrentWeek()
 //        if  pageControl.currentPage < dataArray.count {
 //            let value = dataArray[pageControl.currentPage]

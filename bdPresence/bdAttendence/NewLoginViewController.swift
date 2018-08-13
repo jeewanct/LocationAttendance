@@ -13,17 +13,11 @@ import CountriesViewController
 class NewLoginViewController: UIViewController {
     @IBOutlet weak var mobileTextfield: UITextField!
     @IBOutlet weak var sendOtpButton: UIButton!
-<<<<<<< HEAD
-    
-    let activityIndicator = ActivityIndicatorView()
-||||||| merged common ancestors
-=======
-    
+
     @IBOutlet weak var selectCountryButton: UIButton!
     @IBOutlet weak var countryCodeLabel: UILabel!
     let countriesViewController = CountriesViewController()
-    
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
+    let activityIndicator = ActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)

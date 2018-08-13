@@ -43,14 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .Debug:
             ConfigurationModel.stopDebugging(flag: false)
             print("In Debug")
-<<<<<<< HEAD
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
-
-||||||| merged common ancestors
-            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-
-=======
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
             //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
             ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
 
@@ -117,7 +109,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let interval = Date().timeIntervalSince(lastAssignmentFetched)
                     print(interval)
                     if interval > 10 {
-                        let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                        //let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+
                         AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
                             print("completionstatus = \(completionStatus)")
                             if completionStatus == "Success" {
@@ -131,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                     }
                 }else {
-                    let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                    let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
                     AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
                         print("completionstatus = \(completionStatus)")
                         if completionStatus == "Success" {
