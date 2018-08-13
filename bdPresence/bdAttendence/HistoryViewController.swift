@@ -8,6 +8,8 @@
 
 import UIKit
 import GoogleMaps
+import BluedolphinCloudSdk
+
 class HistoryViewController: UIViewController {
 
     @IBOutlet weak var swipeUpButton: UIButton!
@@ -74,6 +76,9 @@ class HistoryViewController: UIViewController {
         let height = UIScreen.main.bounds.size.height
         userLocationCardHeightAnchor.constant = height - (height * 0.3)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -91,6 +96,10 @@ class HistoryViewController: UIViewController {
         //alenderView.contentSize = CGSize(width: 40.0, height: 40.0)
     }
 
+    
+    func discardFakeLocations(){
+        updateView()
+    }
     
     func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
@@ -157,12 +166,17 @@ class HistoryViewController: UIViewController {
         
         let allLocations = UserPlace.getGeoTagData(location: location)
         
+        
         if allLocations.count == 0{
             userLocationContainerView.isHidden = true
         }else{
+            //plotPathInMap(location: allLocations)
+            userContainerView?.locationData = allLocations.reversed()
             let polyLine = PolyLineMap()
             polyLine.delegate = self
             polyLine.getPolyline(location: allLocations)
+            
+            // getLocationCorrospondingLatLong(locations: allLocations)
             userLocationContainerView.isHidden = false
         }
         
@@ -184,6 +198,30 @@ class HistoryViewController: UIViewController {
             
             
         }
+    }
+    
+    
+    
+    func drawPath(coordinates: [CLLocationCoordinate2D]){
+        
+        
+        for coordinate in coordinates{
+            path.add(coordinate)
+            
+        }
+        
+        let bounds = GMSCoordinateBounds(path: path)
+        mapView.animate(with: GMSCameraUpdate.fit(bounds))
+        // mapView.animate(with: GMSCameraUpdate()
+        // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
+        
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeColor = .black
+        polyline.strokeWidth = 3
+        polyline.map = mapView
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        
     }
     
     
@@ -221,27 +259,7 @@ class HistoryViewController: UIViewController {
     }
     
     
-    func drawPath(coordinates: [CLLocationCoordinate2D]){
-        
-        
-        for coordinate in coordinates{
-            path.add(coordinate)
-            
-        }
-        
-        let bounds = GMSCoordinateBounds(path: path)
-        mapView.animate(with: GMSCameraUpdate.fit(bounds))
-        // mapView.animate(with: GMSCameraUpdate()
-        // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
-        
-        let polyline = GMSPolyline(path: path)
-        polyline.strokeColor = .black
-        polyline.strokeWidth = 3
-        polyline.map = mapView
-        
-        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
-        
-    }
+    
     
     
     func animatePolylinePath() {
@@ -261,54 +279,7 @@ class HistoryViewController: UIViewController {
     }
     
     
-    func createbarchartView(date:Date){
-        
-        
-        let object = UserDayData.getFrequencyLocationBarData(date:date)
-        
-        
-//        let queue = DispatchQueue.global(qos: .userInteractive)
-//
-//
-//
-//        // submit a task to the queue for background execution
-//        queue.async() {
-//           let object = UserDayData.getFrequencyLocationBarData(date:date)
-//            DispatchQueue.main.async() {
-//                let totalTime = object.getElapsedTime()!
-////                if totalTime == 0{
-////                    self.swipeUpButton.isHidden = true
-////                }else{
-////                    self.swipeUpButton.isHidden = false
-////                }
-//                self.progressBar.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
-//
-//                }
-//                let (hour,min,_) = self.secondsToHoursMinutesSeconds(seconds: Int(totalTime))
-//
-//                let myMutableString =  NSMutableAttributedString(
-//                    string: "\(self.timeText(hour)):\(self.timeText(min))",
-//                    attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
-//                let seconndMutableString =  NSMutableAttributedString(
-//                    string: " Total hours",
-//                    attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
-//                myMutableString.append(seconndMutableString)
-//                self.timeLabel.attributedText = myMutableString
-//                self.startLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
-//                self.endLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
-//               self.addressLabel.numberOfLines = 0
-//               self.addressLabel.lineBreakMode = .byWordWrapping
-//               self.addressLabel.adjustsFontSizeToFitWidth = true
-//                self.addressLabel.text = object.getLastCheckInAddress()?.capitalized
-//                self.updateFrequencyBar(mData: object)
-//            }
-
-      //  }
-
-
-
-
-    }
+    
     
     func getDateInAMPM(date:Date)->String{
         print(date)
@@ -380,7 +351,8 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         
-        
+        mapView.clear()
+        userLocationContainerView.isHidden = true
         let currentData = thisWeekDays[indexPath.row]
         currentDisplayDate = currentData
         updateView(date: currentData)

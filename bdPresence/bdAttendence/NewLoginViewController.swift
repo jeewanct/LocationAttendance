@@ -14,10 +14,11 @@ class NewLoginViewController: UIViewController {
     @IBOutlet weak var mobileTextfield: UITextField!
     @IBOutlet weak var sendOtpButton: UIButton!
 
+    
+    let activityIndicator = ActivityIndicatorView()
     @IBOutlet weak var selectCountryButton: UIButton!
     @IBOutlet weak var countryCodeLabel: UILabel!
     let countriesViewController = CountriesViewController()
-    let activityIndicator = ActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)

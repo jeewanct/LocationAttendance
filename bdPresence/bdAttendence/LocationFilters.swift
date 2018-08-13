@@ -43,6 +43,17 @@ class LocationFilters{
 
     }
     
+    func plotMarkerInMap(locations: [LocationDataModel]){
+        
+        let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations)
+        
+        if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
+            //completion(locationAfterTime)
+            
+        }
+        
+    }
+    
     
     
     

@@ -175,6 +175,8 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewCheckOutUserScreenCell", for: indexPath) as! NewCheckoutCell
        //setTeamDetails(cell: cell, indexPath: indexPath)
         //setTeamDetails(cell: cell, indexPath: indexPath)
+        cell.delegate = self
+        cell.currentIndex = indexPath.item
         setTeamDetails(cell: cell, indexPath: indexPath)
         return cell
     }
@@ -219,156 +221,25 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
     }
     
     
-//    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
-//        if let locations = locationData{
-//
-//            for index in 0..<locations.count{
-//
-//                if locations[index].count > 1{
-//                    setTimeSpend(locationData: locations[index], indexPath: indexPath, cell: cell)
-//                    cell.addressLabel.text = locations[index][0].geoTaggedLocations?.placeDetails?.address
-//                }
-//
-//                if locations[index].count == 1 {
-//
-//                    setTimeSpend(locationData: locations[index], indexPath: indexPath, cell: cell)
-//                    if let address = locations[index][0].address{
-//                        cell.addressLabel.text = address
-//                    }else{
-//
-//                        if let lat = locations[index][0].latitude, let long = locations[index][0].longitude{
-//
-//                            if let cllLat = CLLocationDegrees(lat), let cllLong = CLLocationDegrees(long){
-//                                LogicHelper.shared.reverseGeoCode(location: CLLocation(latitude: cllLat, longitude: cllLong)) { (address) in
-//
-//                                    self.locationData?[index][0].address = address
-//                                    cell.addressLabel.text = address
-//
-//                                }
-//
-//                            }
-//                        }
-//
-//
-//                    }
-//
-//
-//                }
-//
-//
-//            }
-//
-//
-//        }
-//    }
-//
-//    func setTimeSpend(locationData: [LocationDataModel], indexPath: IndexPath, cell: NewCheckoutCell){
-//
-//        if locationData.count == 1{
-//
-//            if let firstLocation = locationData.first{
-//                if let startingDate = firstLocation.lastSeen{
-//                   cell.timeLabel.text = LogicHelper.shared.getLocationDate(date: startingDate)
-//                }
-//
-//            }
-//
-//        }else{
-//
-//
-//        if let firstLocation = locationData.first, let lastLocation = locationData.last{
-//
-//            var time = ""
-//
-//            if let startingDate = firstLocation.lastSeen{
-//                time.append(LogicHelper.shared.getLocationDate(date: startingDate))
-//            }
-//
-//            time.append("-")
-//            if let endingDate = lastLocation.lastSeen{
-//                time.append(LogicHelper.shared.getLocationDate(date: endingDate))
-//            }
-//
-//
-//            cell.timeLabel.text = time
-//        }
-//
-//        }
-//
-//    }
+}
+
+
+
+extension NewCheckOutUserScreen: GeoTagLocationDelegate{
+   
+    func handleTap(currentIndex: Int) {
+        
+        let cllLocation = userDetails[currentIndex].cllLocation
+        let address = userDetails[currentIndex].address
+        
+        let geoTagController = GeoTagController()
+        geoTagController.geoTagLocation = cllLocation
+        geoTagController.geoTagAddress = address
+        
+        navigationController?.pushViewController(geoTagController, animated: true)
+        
+    }
     
-//    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
-//
-//        if let locations = locationData{
-//
-//            for index in 0..<locations.count{
-//
-//
-//                var firstDate = Date()
-//                for index1 in 0..<locations[index].count{
-//
-//                    if let geoTag = locations[index][index1].geoTaggedLocations{
-//
-//                         cell.addressLabel.text = locations[index][index1].address
-//
-//                    }else{
-//                         cell.addressLabel.text = locations[index][index1].address
-//
-//                        if let lastSeen = locations[index][index1].lastSeen{
-//
-//
-//                            cell.timeLabel.text = LogicHelper.shared.getLocationDate(date: lastSeen)
-//                        }
-//
-//
-//                    }
-//
-//
-//                }
-//
-//            }
-//
-//
-//        }
-//
-//    }
-    
-//    func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
-//
-//
-////        if indexPath.item == 0 {
-////          cell.locationDetailLabel.text = "Current Location"
-////        }else{
-////          cell.locationDetailLabel.text = "Location name"
-////        }
-//
-//
-//        if let location = locationData?[indexPath.item].address{
-//
-//            cell.addressLabel.text = location
-//
-//        }else{
-//
-//            if let lat = locationData?[indexPath.item].latitude, let long = locationData?[indexPath.item].longitude{
-//
-//
-//                if let locationLat = CLLocationDegrees(lat),let locationLong = CLLocationDegrees(long){
-//
-//                    let location = CLLocation(latitude: CLLocationDegrees(locationLat), longitude: CLLocationDegrees(locationLong))
-//                    LogicHelper.shared.reverseGeoCode(location: location) { (address) in
-//                        self.locationData?[indexPath.item].address = address
-//                        cell.addressLabel.text = address
-//                    }
-//
-//                }
-//
-//
-//            }
-//
-//        }
-//
-//
-//    }
     
     
 }

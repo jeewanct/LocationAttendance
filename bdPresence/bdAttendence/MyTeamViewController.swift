@@ -42,6 +42,11 @@ class MyTeamViewController: UIViewController{
         super.viewWillDisappear(animated)
         title = ""
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+    }
 }
 
 extension MyTeamViewController{
@@ -235,65 +240,30 @@ extension MyTeamViewController{
         
         view.showActivityIndicator(activityIndicator: activityIndicator)
         
-        
-        MyTeamModel.getTeamMember(completion: {[weak self] (myTeamData) in
-           // print("Team Member data is ",dump(myTeamData))
-            self?.hideActivityIndicator()
-            self?.teamData = myTeamData
+        MyTeamModel.getTeamMember(completion: { (data) in
             
-            if let teamData = myTeamData{
-                self?.getTeamAddress(location: teamData)
-            }
-            //self?.getTeamAddress(location: myTeamData)
-            self?.addMarkersInMap(teamDetails: self?.teamData)
-            
-            
+            self.performOperations(data: data)
         }) { (error) in
-            
             self.hideActivityIndicator()
-           
-            
-            print("the error in fetching team", error)
         }
         
     }
     
-    func getTeamAddress(location: [MyTeamData]){
+    func performOperations(data: [MyTeamData]?){
         
-        userContainerView?.teamData = location
+        self.hideActivityIndicator()
         
-        
-        
-//        var dummyLocation = location
-//        for index in 0..<location.count{
-//
-//            if let coordinates = location[index].userStatus?.location?.coordinates{
-//
-//                if coordinates.count == 2{
-//
-//                    let cllLocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
-//
-//
-//                    LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: 0) { (address, value, value1) in
-//
-//
-//                        dummyLocation[index].userStatus?.location?.teamAddress = address
-//
-////                        if value == location.count - 1{
-//                            self.userContainerView?.teamData = dummyLocation
-//
-//                       // }
-//
-//
-//                    }
-//                }
-//
-//            }
-//
-//        }
-        
+        if let myTeamData = data{
+            self.teamData = myTeamData
+            addMarkersInMap(teamDetails: myTeamData)
+            userContainerView?.teamData = myTeamData
+            
+        }
+       
         
     }
+    
+  
     
     func hideActivityIndicator(){
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)

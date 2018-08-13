@@ -9,18 +9,80 @@
 import UIKit
 import BluedolphinCloudSdk
 import CoreLocation
+
+
+class MyTeamDetailsScreen{
+    
+    var name: String?
+    var address: String?
+    var cllocation = CLLocation()
+}
+
+
 class MyTeamTableView: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     var teamData: [MyTeamData]?{
         didSet{
+            setData()
             tableView.reloadData()
         }
     }
     var delegate: HandleUserViewDelegate?
+    var myTeamLocations = [MyTeamDetailsScreen]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    func setData(){
+    
+        
+        if let myTeamData = teamData{
+            
+            
+            
+            for location in myTeamData{
+                
+                let locations = MyTeamDetailsScreen()
+                
+                if let teamMember = location.userOb?.userDetails?.name{
+                    
+                    var userName = ""
+                    if let firstname = teamMember.first{
+                        userName = firstname + " "
+                    }
+                    
+                    if let lastname = teamMember.last{
+                        userName = userName + lastname
+                    }
+                    
+                    locations.name = userName
+                }
+                
+                
+                if let coordinates = location.userOb?.userStatus?.location?.coordinates{
+                    
+                    if coordinates.count > 0 {
+                        
+                        
+                        locations.cllocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
+                        
+                    }
+                    
+                    
+                }
+                
+                
+                myTeamLocations.append(locations)
+            }
+            
+            tableView.reloadData()
+            
+        }
+    
     }
 }
 
@@ -68,45 +130,17 @@ extension MyTeamTableView: UITableViewDataSource{
     
     func setTeamDetails(cell: MyLocationTableViewCell, indexPath: IndexPath){
         
-        if let teamMember = teamData?[indexPath.item].userOb?.userDetails?.name{
-            
-            var userName = ""
-            if let firstname = teamMember.first{
-                userName = firstname + " "
-            }
-            
-            if let lastname = teamMember.last{
-                userName = userName + lastname
-            }
-            
-            cell.nameLabel.text = userName
-        }
+        cell.nameLabel.text = myTeamLocations[indexPath.item].name
         
-        if let location = teamData?[indexPath.item].userOb?.userStatus?.location?.address{
-            
-            cell.locationLabel.text = location
-            
+        if let address = myTeamLocations[indexPath.item].address{
+            cell.locationLabel.text = myTeamLocations[indexPath.item].address
         }else{
-           
-            if let teamLocation = teamData?[indexPath.item].userOb?.userStatus?.location?.coordinates{
-                
-                if teamLocation.count == 2{
-                    let location = CLLocation(latitude: CLLocationDegrees(teamLocation[1]), longitude: CLLocationDegrees(teamLocation[0]))
-                    
-                    LogicHelper.shared.reverseGeoCode(location: location) { (address) in
-                        self.teamData?[indexPath.item].userOb?.userStatus?.location?.address = address
-                        cell.locationLabel.text = address
-                    }
-                }
-                
+            LogicHelper.shared.reverseGeoCodeGeoLocations(location: myTeamLocations[indexPath.item].cllocation, index1: indexPath.item, index2: 0) { (address, first, last) in
+                self.myTeamLocations[first].address = address
+                cell.locationLabel.text = address
                 
             }
-            
         }
-        
-        
-        
-        
         
     }
     

@@ -66,7 +66,12 @@ class GoogleUtils{
     
     class func getPolylineGoogle(originDestination: String,wayPoints: String, completion: @escaping(String) -> Void){
         
-        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=true&travelmode=driving&waypoints=\(wayPoints)&key=" + AppConstants.GoogleConstants.GoogleApiKey
+        
+        guard let escapedString = wayPoints.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            return
+        }
+        
+        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=true&travelmode=driving&waypoints=\(escapedString)&key=" + AppConstants.GoogleConstants.GoogleApiKey
         
         
         Networking.fetchGenericData(url, header: [:], success: { (polyline: GoogleDirectionRoutesModel) in
@@ -90,7 +95,7 @@ class GoogleUtils{
         }
         
         
-//        "https://maps.googleapis.com/maps/api/directions/json?origin=28.6327328,77.2169308&destination=19.097892,72.85486&optimize=true&travelmode=driving&key=AIzaSyAEHGCnCX0R__be18wIL8sZ9UVhPO6bbAo"
+
         
         
     }
