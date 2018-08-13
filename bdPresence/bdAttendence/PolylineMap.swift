@@ -43,10 +43,7 @@ class PolyLineMap{
             
         }
         
-        
-        
-        
-        
+
         
         
     }

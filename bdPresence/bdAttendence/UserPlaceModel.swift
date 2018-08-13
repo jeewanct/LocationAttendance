@@ -37,19 +37,19 @@ class GeoTagPlaceDetails{
 class UserPlace{
     
     
-    class func getPlacesData(location: LocationDataModel) -> GeoTagLocationModel?{
+    class func getPlacesData(location: LocationDataModel, rmcPlaces: [RMCPlace]) -> GeoTagLocationModel?{
         
         
         var geoTagLocation: GeoTagLocationModel?
         
         var nearestDistance = -1.0
-        let realm = try! Realm()
+      
         
-        let places = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeStatus = %@",true)
+       
         //let places = realm.objects(RMCPlace.self)
         
         
-        for place in places{
+        for place in rmcPlaces{
             
             
             if let firstLat = place.location?.latitude, let firstLong = place.location?.longitude, let fenceRadius = place.placeDetails?.fenceRadius.value {
@@ -80,7 +80,7 @@ class UserPlace{
             
             
         }
-        print(places)
+      //  print(places)
         
         return geoTagLocation
         
@@ -122,11 +122,22 @@ class UserPlace{
         
         var geoTaggedLocations = [LocationDataModel]()
         
+        let realm = try! Realm()
+        let rmcPlaces  = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeStatus = %@",true)
+        
+        var allGeoTagLocations = [RMCPlace]()
+        
+        for place in rmcPlaces{
+            
+            allGeoTagLocations.append(place)
+        }
+        
+        
         
         if let locationData = location{
             
             for locationIndex in 0..<locationData.count{
-                if let geoTagged = UserPlace.getPlacesData(location: locationData[locationIndex]){
+                if let geoTagged = UserPlace.getPlacesData(location: locationData[locationIndex], rmcPlaces: allGeoTagLocations){
                     locationData[locationIndex].geoTaggedLocations = geoTagged
                     geoTaggedLocations.append(locationData[locationIndex])
                 }else{

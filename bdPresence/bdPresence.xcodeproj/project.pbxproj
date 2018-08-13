@@ -1079,7 +1079,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDEBUG $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.poc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdPresence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1117,7 +1117,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DRELEASE $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.poc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdPresence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1286,7 +1286,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DALPHA $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.poc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raremedia.bdPresence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

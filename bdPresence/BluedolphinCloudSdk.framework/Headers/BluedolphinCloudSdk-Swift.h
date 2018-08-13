@@ -389,6 +389,8 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk12LocationData")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk18MyTeamDetailsModel")
 @interface MyTeamDetailsModel : NSObject
++ (void)getTeamMemberWithUserId:(NSString * _Nonnull)userId;
++ (void)removeUnnecessaryData;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

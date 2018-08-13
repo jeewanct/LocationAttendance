@@ -141,14 +141,19 @@ class NewCheckoutViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
         
         
+        startupCall()
         
         
         
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func startupCall(){
         updateView()
         
         if AssignmentModel.statusOfUser() {
@@ -158,13 +163,21 @@ class NewCheckoutViewController: UIViewController {
             self.statusChangeView.isHidden = true
             self.syncButton.isEnabled = false
         }
-//        processCurrentWeek()
-//        if  pageControl.currentPage < dataArray.count {
-//            let value = dataArray[pageControl.currentPage]
-//            updateView(date: value)
-//        }
         
     }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let getTimer = self.timer{
+            self.timer.invalidate()
+        }
+        
+    }
+    
+    
+    
     
     @IBAction func syncTapped(_ sender: Any) {
         self.syncButton.isEnabled = false
@@ -258,18 +271,7 @@ class NewCheckoutViewController: UIViewController {
             self.view.removeGestureRecognizer(swipedown!)
         
          }
-        
-        
-//        LogicHelper.shared.plotMarkers(date: date) { (data) in
-//
-//
-//            self.userLocations = data
-//            self.plotMarkersInMap(location: data)
-//
-//
-//
-//        }
-        
+
         
         let locationFilters = LocationFilters()
         locationFilters.delegate = self
@@ -319,83 +321,6 @@ class NewCheckoutViewController: UIViewController {
         }
     }
     
-    
-    
-    func plotPathInMap(location: [[LocationDataModel]]){
-        
-        var originLatLong = ""
-        
-        if location.count >= 2 {
-            
-            
-            let firstLocation = location.first
-            let secondLocation = location.last
-            
-            var orginDestinationString  =  "origin="
-            if let  origin = firstLocation{
-                
-                for index in origin{
-                    
-                    if let geoTag = index.geoTaggedLocations{
-                        
-                        if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
-                            
-                            orginDestinationString.append("\(latitude),\(longitude)")
-                        }
-                        
-                    }else{
-                        
-                        if let latitude = index.latitude, let longitude = index.longitude{
-                            orginDestinationString.append("\(latitude),\(longitude)")
-                        }
-                        
-                    }
-                }
-            }
-            
-            orginDestinationString.append("&destination=")
-            
-            if let  destination = secondLocation{
-                
-                for index in destination{
-                    
-                    if let geoTag = index.geoTaggedLocations{
-                        
-                        if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
-                            
-                            orginDestinationString.append("\(latitude),\(longitude)")
-                        }
-                        
-                    }else{
-                        
-                        if let latitude = index.latitude, let longitude = index.longitude{
-                            orginDestinationString.append("\(latitude),\(longitude)")
-                        }
-                        
-                    }
-                }
-            }
-            
-            
-            
-            GoogleUtils.getPolylineGoogle(originDestination: orginDestinationString, wayPoints: "") { (polyline) in
-                
-                let  coordinates: [CLLocationCoordinate2D]? = decodePolyline(polyline)
-                
-                if let getCoordinates = coordinates{
-                    
-                    self.drawPath(coordinates: getCoordinates)
-                }
-                
-                
-            }
-            
-            
-        }
-        
-        
-    }
-    
     func drawPath(coordinates: [CLLocationCoordinate2D]){
         
         
@@ -414,7 +339,7 @@ class NewCheckoutViewController: UIViewController {
         polyline.strokeWidth = 3
         polyline.map = mapView
         
-        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        //self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
         
     }
     
@@ -551,13 +476,14 @@ extension NewCheckoutViewController{
         print("View Tapped")
         
         if userLocationCardHeightAnchor.constant == 80 {
-            tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-            userLocationContainerView.addGestureRecognizer(tapGesture!)
+            view.removeGestureRecognizer(tapGesture!)
+            
             animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
         }else{
             // 400
             userContainerView?.tableView.isScrollEnabled = true
-            view.removeGestureRecognizer(tapGesture!)
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+            userLocationContainerView.addGestureRecognizer(tapGesture!)
             animateContainerView(heightToAnimate: 80)
         }
         

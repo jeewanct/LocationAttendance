@@ -22,6 +22,7 @@ class MyTeamLocationDetails: UIViewController{
     
     
     
+    var count = 0
     var polyline = GMSPolyline()
     var animationPolyline = GMSPolyline()
     var path = GMSMutablePath()
@@ -30,11 +31,7 @@ class MyTeamLocationDetails: UIViewController{
     var timer: Timer!
     
     
-    var teamMemberUserId: String?{
-        didSet{
-            getTeamMemberDetails()
-        }
-    }
+    var teamMemberUserId: String?
     var teamMemberUserName: Name?{
         didSet{
            setUpTitle()
@@ -45,10 +42,14 @@ class MyTeamLocationDetails: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupMap()
         addGestureInContainerView()
         userLocationContainerView.isHidden = true
         userLocationCardHeightAnchor.constant = (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(MyTeamLocationDetails.teamDetailsFetch(locatins:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyTeamDetailsByUserId.rawValue), object: nil)
     
     }
     
@@ -61,12 +62,49 @@ class MyTeamLocationDetails: UIViewController{
        
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getTeamMemberDetails()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-}
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+       // NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
+    func teamDetailsFetch(locatins: Notification){
+    
+        
+        print("LocationsCount = \(locatins.userInfo)")
+        view.removeActivityIndicator(activityIndicator: activityIndicator)
+        
+        
+        if let teamDetails = locatins.userInfo{
+            
+            if let teamDetailsModel = teamDetails["teamDetails"] as? [MyTeamDetailsDocument]{
+                
+                //print(teamDetailsModel)
+                self.makeTeamLocationData(teamLocationData: teamDetailsModel)
+            }
+            
+        }
+        
+    
+        
+    }
+    
+    
+ 
+ }
+
+ 
+ 
 
 extension MyTeamLocationDetails{
     
@@ -79,14 +117,9 @@ extension MyTeamLocationDetails{
         view.showActivityIndicator(activityIndicator: activityIndicator)
         
         
-        MyTeamDetailsModel.getTeamMember(userId: getUserId, completion: { (data) in
-           // dump(data)
-            
-            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
-            self.makeTeamLocationData(teamLocationData: data)
-        }, inError: { (error) in
-            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
-        })
+        MyTeamDetailsModel.getTeamMember(userId: getUserId)
+ self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+//        })
     }
     
     
@@ -110,14 +143,14 @@ extension MyTeamLocationDetails{
     
     
     
-    func makeTeamLocationData(teamLocationData: [MyTeamDetailsDocument]?){
+    func makeTeamLocationData(teamLocationData: [MyTeamDetailsDocument]){
         
         var teamData = [LocationDataModel]()
         
         
-        if let getTeamLocation = teamLocationData{
+       
             
-            for location in getTeamLocation{
+            for location in teamLocationData{
                 
                 let locationData = LocationDataModel()
                 
@@ -140,20 +173,23 @@ extension MyTeamLocationDetails{
                     }
                     
                 }
-            
+                
+                if let lastSeen = location.checkinData?.time{
+                    locationData.lastSeen = Formatter.iso8601.date(from: lastSeen)
+                }
+                
+                
+                
                 teamData.append(locationData)
             }
             
-
-            
-            
-            
-        }
+        
+        
         
         
         let locationFilters = LocationFilters()
         locationFilters.delegate = self
-        locationFilters.plotMarkerInMap(locations: teamData)
+        locationFilters.plotMarkerInMap(locations: teamData.reversed())
         
         
         
@@ -199,80 +235,7 @@ extension MyTeamLocationDetails{
     }
     
     
-    func plotPathInMap(location: [[LocationDataModel]]){
-        
-        var originLatLong = ""
-        
-        if location.count > 2 {
-        
-            
-                let firstLocation = location.first
-                let secondLocation = location.last
-                
-                var orginDestinationString  =  "origin="
-                if let  origin = firstLocation{
-                    
-                    for index in origin{
-                        
-                        if let geoTag = index.geoTaggedLocations{
-                            
-                            if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
-                                
-                                orginDestinationString.append("\(latitude),\(longitude)")
-                            }
-                            
-                        }else{
-                            
-                            if let latitude = index.latitude, let longitude = index.longitude{
-                                orginDestinationString.append("\(latitude),\(longitude)")
-                            }
-                            
-                        }
-                    }
-                }
-        
-            orginDestinationString.append("&destination=")
-            
-            if let  destination = secondLocation{
-                
-                for index in destination{
-                    
-                    if let geoTag = index.geoTaggedLocations{
-                        
-                        if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
-                            
-                            orginDestinationString.append("\(latitude),\(longitude)")
-                        }
-                        
-                    }else{
-                        
-                        if let latitude = index.latitude, let longitude = index.longitude{
-                            orginDestinationString.append("\(latitude),\(longitude)")
-                        }
-                        
-                    }
-                }
-            }
-            
-            
-            
-            GoogleUtils.getPolylineGoogle(originDestination: orginDestinationString, wayPoints: "") { (polyline) in
-                
-                let  coordinates: [CLLocationCoordinate2D]? = decodePolyline(polyline)
-                
-                if let getCoordinates = coordinates{
-                    
-                    self.drawPath(coordinates: getCoordinates)
-                }
-                
-                
-            }
-            
-            
-        }
-    
-        
-    }
+
     
     func drawPath(coordinates: [CLLocationCoordinate2D]){
         
@@ -526,4 +489,8 @@ extension MyTeamLocationDetails: HandleUserViewDelegate{
     
     
  }
+ 
+ 
+ 
+ 
 

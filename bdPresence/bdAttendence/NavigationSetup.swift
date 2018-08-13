@@ -13,6 +13,6 @@ extension UINavigationController{
     func removeTransparency(){
         navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = true
+        navigationBar.isTranslucent = false
     }
 }
