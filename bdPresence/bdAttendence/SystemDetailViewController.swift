@@ -150,7 +150,7 @@ class SystemDetailViewController: UIViewController {
         let userDataForToday = UserDayData.getFrequencyLocationBarData(date: Date())
         var  lastCheckinTime = String()
         if let data = userDataForToday.getLastCheckinTime() {
-        lastCheckinTime = "Last location check-in : \(Date(timeIntervalSince1970: data).formatted)"
+        lastCheckinTime = " \(Date(timeIntervalSince1970: data).formatted)"
         }else{
            lastCheckinTime = "No last Checkin Found"
         }
@@ -164,12 +164,18 @@ class SystemDetailViewController: UIViewController {
 //
 //        }
         
-        let pendingCheckins = "Pending check-ins : \(CheckinModel.getCheckinsTypeCount(type: .Location))"
-        systemDetail.append(pendingCheckins)
+        
         if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastSyncTime.rawValue ) as? Date {
-            let detail = "Last synced at : " + data.formatted
+            let detail = data.formatted
             systemDetail.append(detail)
             
+        }
+        let pendingCheckins = " \(CheckinModel.getCheckinsTypeCount(type: .Location))"
+        systemDetail.append(pendingCheckins)
+        if SDKSingleton.sharedInstance.noTouchMode {
+            systemDetail.append("ON")
+        } else {
+            systemDetail.append("OFF")
         }
         DispatchQueue.main.async {
             self.systemTableview.reloadData()
@@ -228,9 +234,9 @@ extension SystemDetailViewController:UITableViewDelegate,UITableViewDataSource {
 //        cell.valueLabel.text = "Available"
         
         cell.imageView?.image = imageIcons[indexPath.item]
-        cell.headerLabel.text = ["Auto sync status", "Last synced", "Pending check ins", "No touch mode"][indexPath.item]
+        cell.headerLabel.text = ["Last Location Check-in:", "Last synced at:", "Pending check-ins", "No touch mode"][indexPath.item]
         
-        
+        cell.valueLabel.text = systemDetail[indexPath.row]
 //        cell.textLabel?.font = APPFONT.DAYHOURTEXT
 //        cell.textLabel?.text = systemDetail[indexPath.row]
 //        cell.textLabel?.numberOfLines = 0

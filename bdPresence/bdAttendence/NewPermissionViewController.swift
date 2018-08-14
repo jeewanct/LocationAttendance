@@ -121,7 +121,6 @@ class NewPermissionViewController: UIViewController {
     }
     
     
-    
     /*
      // MARK: - Navigation
      

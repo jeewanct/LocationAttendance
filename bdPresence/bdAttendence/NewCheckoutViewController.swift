@@ -151,11 +151,7 @@ class NewCheckoutViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+
   
     override func viewDidAppear(_ animated: Bool) {
 

@@ -200,7 +200,8 @@ class UserDayData {
         let realm = try! Realm()
         let weekDay = Calendar.current.component(.weekday, from: date)
         let weekOfYear = Calendar.current.component(.weekOfYear, from: date)
-        
+        //let frequencyGraphData = FrequencyBarGraphData()
+
         if let attendanceLogForToday = realm.objects(LocationAttendanceLog.self).filter("dayofWeek = %@","\(weekDay)").first {
             if weekOfYear == Calendar.current.component(.weekOfYear, from: attendanceLogForToday.timeStamp!){
                 
@@ -208,15 +209,12 @@ class UserDayData {
                 
                 let locationData = attendanceLogForToday.locationList.filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
                 
-                
-                
                 var locationDataArray = [LocationDataModel]()
                 
                 for index in 0..<locationData.count{
                  
                     let locationValue = LocationDataModel()
-                    //locationValue.accuracy = locationData[index].accuracy
-                    
+                    //frequencyGraphData.setLastCheckinTime(lastCheckinTime: (locationData[index].lastSeen?.timeIntervalSince1970)!);
                     if let accuracy = locationData[index].accuracy{
                         
                         if let accuracyData = Double(accuracy){
@@ -234,6 +232,7 @@ class UserDayData {
                     locationValue.organizationId = locationData[index].organizationId
                     
                     locationDataArray.append(locationValue)
+                    
                 }
                 return locationDataArray
                 
@@ -276,6 +275,7 @@ class UserDayData {
                 
                 let longitueData = attendanceLogForToday.locationList.sorted(byKeyPath: "longitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
                 
+                frequencyGraphData.setLastCheckinTime(lastCheckinTime: (beaconData.last?.lastSeen?.timeIntervalSince1970)!)
                 
                 print("============")
              
