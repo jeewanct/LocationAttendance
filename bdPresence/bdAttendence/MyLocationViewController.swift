@@ -153,8 +153,40 @@ extension MyLocationViewController: GMSMapViewDelegate{
             
         }
         
+        addMarkersGeoTaggedArea(locations: myLocations)
         userContainerView?.places = myLocations
         
+    }
+    
+    func addMarkersGeoTaggedArea(locations: [RMCPlace]){
+
+        for location in locations{
+
+            let marker = GMSMarker()
+
+            if let lat = location.location?.latitude, let long = location.location?.longitude{
+
+                if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
+
+                    marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
+
+                    let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysOriginal))
+                    marker.iconView = iconImageView
+
+                    marker.map = mapView
+
+
+                    let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 15.0)
+                    mapView.camera = camera
+
+
+                    //path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
+
+                }
+
+            }
+
+        }
     }
     
     

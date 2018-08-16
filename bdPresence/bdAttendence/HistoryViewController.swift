@@ -37,13 +37,15 @@ class HistoryViewController: UIViewController {
     
     
     
-    
+    var pullController: SearchViewController!
     var polyline = GMSPolyline()
     var animationPolyline = GMSPolyline()
     var path = GMSMutablePath()
     var animationPath = GMSMutablePath()
     var i: UInt = 0
     var timer: Timer!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -80,8 +82,13 @@ class HistoryViewController: UIViewController {
         
         
         
+        
+        
+        
         // Do any additional setup after loading the view.
     }
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -96,6 +103,10 @@ class HistoryViewController: UIViewController {
         //alenderView.contentSize = CGSize(width: 40.0, height: 40.0)
     }
 
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     func discardFakeLocations(){
         updateView()
@@ -126,16 +137,23 @@ class HistoryViewController: UIViewController {
         calenderView.reloadData()
         
     }
+    
     override func viewDidAppear(_ animated: Bool) {
+        
+        
         if let index = thisWeekDays.index(of: currentDisplayDate) {
             
             let indexPath = IndexPath(row: index, section: 0)
             self.collectionView(calenderView, didSelectItemAt: indexPath)
-            
+
             calenderView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.bottom)
-            updateView()
+            
         }
+        
+        
     }
+    
+    
     
     func formattedDaysInThisWeek()->[Date]  {
         let calendar = Calendar.current
@@ -171,7 +189,17 @@ class HistoryViewController: UIViewController {
             userLocationContainerView.isHidden = true
         }else{
             //plotPathInMap(location: allLocations)
-            userContainerView?.locationData = allLocations.reversed()
+            
+            
+            pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+            pullController.screenType = LocationDetailsScreenEnum.historyScreen
+            self.addPullUpController(pullController, animated: true)
+            
+            
+            pullController.locationData = allLocations
+            pullController.tableView.reloadData()
+            
             let polyLine = PolyLineMap()
             polyLine.delegate = self
             polyLine.getPolyline(location: allLocations)
@@ -210,8 +238,12 @@ class HistoryViewController: UIViewController {
             
         }
         
-        let bounds = GMSCoordinateBounds(path: path)
-        mapView.animate(with: GMSCameraUpdate.fit(bounds))
+        if coordinates.count > 1{
+            let bounds = GMSCoordinateBounds(path: path)
+            mapView.animate(with: GMSCameraUpdate.fit(bounds))
+        }
+        
+
         // mapView.animate(with: GMSCameraUpdate()
         // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
         
@@ -292,13 +324,6 @@ class HistoryViewController: UIViewController {
     }
     
 
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-  
-
 }
 
 extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSource{
@@ -352,11 +377,29 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
 
         
         mapView.clear()
-        userLocationContainerView.isHidden = true
+    
+        animationPolyline = GMSPolyline()
+        if let _ = timer{
+            timer.invalidate()
+        }
+        
+        polyline = GMSPolyline()
+        path.removeAllCoordinates()
+        animationPath = GMSMutablePath()
+        i = 0
+       
+        
+       
+        if let _ = pullController{
+            self.removePullUpController(pullController, animated: true)
+        
+        }
+        
+    
         let currentData = thisWeekDays[indexPath.row]
         currentDisplayDate = currentData
         updateView(date: currentData)
-         self.applyForCell(indexPath) { cell in cell.highlight() }
+        self.applyForCell(indexPath) { cell in cell.highlight() }
 
     }
    
@@ -377,7 +420,7 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
 extension HistoryViewController{
     func setupMap(){
         
-        // mapView.changeStyle()
+         mapView.changeStyle()
         
         let marker = GMSMarker()
         

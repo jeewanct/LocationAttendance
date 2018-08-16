@@ -150,7 +150,7 @@ extension MyTeamViewController{
     
     func setupMap(){
         
-        // mapView.changeStyle()
+         mapView.changeStyle()
         
        
         let locationManage = CLLocationManager()

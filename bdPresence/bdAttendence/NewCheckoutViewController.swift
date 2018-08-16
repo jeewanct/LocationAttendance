@@ -13,31 +13,32 @@ import GoogleMaps
 import Alamofire
 import Polyline
 
+
 class NewCheckoutViewController: UIViewController {
     @IBOutlet weak var checkoutButton: UIImageView!
-   // @IBOutlet weak var timeLabel: UILabel!
+    // @IBOutlet weak var timeLabel: UILabel!
     
-   // @IBOutlet weak var lastCheckinLabel: UILabel!
-   // @IBOutlet weak var frequencyBarView: UIView!
+    // @IBOutlet weak var lastCheckinLabel: UILabel!
+    // @IBOutlet weak var frequencyBarView: UIView!
     
-   
+    
     @IBOutlet weak var mapView: GMSMapView!
     
-   // @IBOutlet weak var mapView: GMSMapView!
+    // @IBOutlet weak var mapView: GMSMapView!
     
-   // @IBOutlet weak var startTimeLabel: UILabel!
+    // @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var endYourDayLabel: UILabel!
-   // @IBOutlet weak var pageControl: UIPageControl!
+    // @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var lastCheckinAddressLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
     
     @IBOutlet weak var upperView: UIView!
     
     
-  //  @IBOutlet weak var progressView: UICircularProgressRingView!
+    //  @IBOutlet weak var progressView: UICircularProgressRingView!
     var  dataArray = [Date]()
     var swipedown :UISwipeGestureRecognizer?
-   
+    
     /* Changes done from 10 July '18 New Design */
     
     @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
@@ -61,7 +62,7 @@ class NewCheckoutViewController: UIViewController {
         }
     }
     
-
+    
     
     
     
@@ -71,52 +72,56 @@ class NewCheckoutViewController: UIViewController {
     var animationPath = GMSMutablePath()
     var i: UInt = 0
     var timer: Timer!
+    var pullController: SearchViewController!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
 
-        let application = UIApplication.shared
-        let co = application.topViewController as? UINavigationController
-        let arr = co?.viewControllers
-        print("application.topViewController = \(String(describing: arr?.last))")
+//        let application = UIApplication.shared
+//        let co = application.topViewController as? UINavigationController
+//        let arr = co?.viewControllers
+//        print("application.topViewController = \(String(describing: arr?.last))")
         
         
         let value = NSDate().aws_stringValue("y-MM-ddH:m:ss.SSSS")
         
         print(value ?? "")
+
         
         
+       
+       
         navigationController?.removeTransparency()
         let height = UIScreen.main.bounds.size.height
         userLocationCardHeightAnchor.constant = height - (height * 0.3)
         
-       // userLocationContainerView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
-       
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.isTranslucent = true
+        // userLocationContainerView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         
-
+        //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        //        navigationController?.navigationBar.shadowImage = UIImage()
+        //        navigationController?.navigationBar.isTranslucent = true
+        
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         
-//        let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
-//        swipeleft.direction = .left
-//        let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
-//        swiperight.direction = .right
-//        
-//        self.view.addGestureRecognizer(swipeleft)
-//        self.view.addGestureRecognizer(swiperight)
+        //        let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        //        swipeleft.direction = .left
+        //        let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        //        swiperight.direction = .right
+        //
+        //        self.view.addGestureRecognizer(swipeleft)
+        //        self.view.addGestureRecognizer(swiperight)
         
-//        let image: UIImage = UIImage(named: "s")!
-//        let imageRotated: UIImage =
-//            UIImage(cgImage: image.cgImage!, scale: 1, orientation: UIImageOrientation.down)
-//        checkoutButton.image = imageRotated
+        //        let image: UIImage = UIImage(named: "s")!
+        //        let imageRotated: UIImage =
+        //            UIImage(cgImage: image.cgImage!, scale: 1, orientation: UIImageOrientation.down)
+        //        checkoutButton.image = imageRotated
         endYourDayLabel.font = APPFONT.DAYHEADER
-      //  lastCheckinLabel.font = APPFONT.DAYHOURTEXT
-       
+        //  lastCheckinLabel.font = APPFONT.DAYHOURTEXT
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
         
@@ -136,7 +141,7 @@ class NewCheckoutViewController: UIViewController {
         
         /* Changes made on 10 July '18 New Design */
         setupMap()
-        addGestureInContainerView()
+        //addGestureInContainerView()
         
         addShadowToUpperView()
         
@@ -152,12 +157,36 @@ class NewCheckoutViewController: UIViewController {
     }
     
 
+    
+    
+    
+   
+    
+
   
     override func viewDidAppear(_ animated: Bool) {
-
+        
         updateView()
         
         if AssignmentModel.statusOfUser() {
+            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                if screenFlag == "1" {
+                    UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+                    
+                    UI {
+                        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                        // New change on 20/06/2018 to create one checkin
+                        if isInternetAvailable(){
+                            CheckinModel.postCheckin()
+                        }
+                        bdCloudStopMonitoring()
+                        
+                        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                        
+                        //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
+                    }
+                }
+            }
             self.statusChangeView.isHidden = false
             self.syncButton.isEnabled = true
         } else {
@@ -165,11 +194,18 @@ class NewCheckoutViewController: UIViewController {
             self.syncButton.isEnabled = false
         }
         
+       // addPullUpController()
+        
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        if let _ = pullController{
+            self.removePullUpController(pullController, animated: true)
+        }
+        
         
         if let getTimer = self.timer{
             self.timer.invalidate()
@@ -192,9 +228,26 @@ class NewCheckoutViewController: UIViewController {
                 }
                 if AssignmentModel.statusOfUser() {
                     // Here i have to swipe down the user screen to stop mobitoring
-                    bdCloudStopMonitoring()
                     self.statusChangeView.isHidden = false
                     self.syncButton.isEnabled = true
+                    if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                        if screenFlag == "1" {
+                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+                            
+                            UI {
+                                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                                // New change on 20/06/2018 to create one checkin
+                                if isInternetAvailable(){
+                                    CheckinModel.postCheckin()
+                                }
+                                bdCloudStopMonitoring()
+                                
+                                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                                
+                                //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
+                            }
+                        }
+                    }
                 } else {
                     self.statusChangeView.isHidden = true
                     self.syncButton.isEnabled = false
@@ -206,7 +259,7 @@ class NewCheckoutViewController: UIViewController {
     
     
     func addShadowToUpperView () {
-
+        
         upperView.layer.shadowColor = UIColor.gray.cgColor
         upperView.layer.shadowOpacity = 0.3
         upperView.layer.shadowOffset = CGSize(width: 0, height: 3)
@@ -221,13 +274,13 @@ class NewCheckoutViewController: UIViewController {
     }
     
     func updateTime(sender:NSNotification){
-       // updateView()
-       
+        // updateView()
         
-  
+        
+        
         
     }
-
+    
     func handleGesture(sender:UIGestureRecognizer){
         //print(dataArray)
         //Sourabh - When swiped down then we will not allow SDK to work as accordingly in RMCNotifier
@@ -238,6 +291,7 @@ class NewCheckoutViewController: UIViewController {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
+
             default:
                 break
                 
@@ -246,10 +300,24 @@ class NewCheckoutViewController: UIViewController {
         }
         
     }
-//
+    //
     
     
     func discardFakeLocations(){
+        
+        mapView.clear()
+        
+        animationPolyline = GMSPolyline()
+        if let _ = timer{
+            timer.invalidate()
+        }
+        
+        polyline = GMSPolyline()
+        path.removeAllCoordinates()
+        animationPath = GMSMutablePath()
+        i = 0
+        
+        
         updateView()
     }
     
@@ -259,7 +327,7 @@ class NewCheckoutViewController: UIViewController {
         let isToday = Calendar.current.isDateInToday(date)
         if isToday{
             self.navigationItem.title = "Today"
-
+            
             self.view.addGestureRecognizer(swipedown!)
             checkoutButton.isHidden = false
             endYourDayLabel.isHidden = false
@@ -268,18 +336,18 @@ class NewCheckoutViewController: UIViewController {
             checkoutButton.isHidden = true
             endYourDayLabel.isHidden = true
             self.view.removeGestureRecognizer(swipedown!)
+            
+        }
         
-         }
-
         
         let locationFilters = LocationFilters()
         locationFilters.delegate = self
         locationFilters.plotMarkers(date: date)
-
+        
     }
     
     
-
+    
     
     
     
@@ -288,16 +356,24 @@ class NewCheckoutViewController: UIViewController {
         let allLocations = UserPlace.getGeoTagData(location: location)
         
         if allLocations.count == 0{
-            userLocationContainerView.isHidden = true
+         
         }else{
             //plotPathInMap(location: allLocations)
-            userContainerView?.locationData = allLocations.reversed()
+            
+            pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+           pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
+            pullController.locationData = allLocations.reversed()
+            self.addPullUpController(pullController, animated: true)
+            
+            
+            
             let polyLine = PolyLineMap()
             polyLine.delegate = self
             polyLine.getPolyline(location: allLocations)
             
-           // getLocationCorrospondingLatLong(locations: allLocations)
-            userLocationContainerView.isHidden = false
+            // getLocationCorrospondingLatLong(locations: allLocations)
+           
         }
         
         
@@ -307,7 +383,7 @@ class NewCheckoutViewController: UIViewController {
             for geoTaggedLocation in locations{
                 
                 if let geoTagg = geoTaggedLocation.geoTaggedLocations{
-                   
+                    
                     addMarker(latitude: geoTagg.latitude, longitude: geoTagg.longitude, markerColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
                 }else{
                     
@@ -328,17 +404,28 @@ class NewCheckoutViewController: UIViewController {
             
         }
         
-        let bounds = GMSCoordinateBounds(path: path)
-        mapView.animate(with: GMSCameraUpdate.fit(bounds))
-       // mapView.animate(with: GMSCameraUpdate()
-       // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
+        if coordinates.count > 1 {
+             let bounds = GMSCoordinateBounds(path: path)
+            mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 40))
+        }
+        
+        
+       
+       // mapView.animate(with: GMSCameraUpdate.fit(bounds))
+        
+     //
+        // mapView.animate(with: GMSCameraUpdate()
+        // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
+        
+        
+        
         
         let polyline = GMSPolyline(path: path)
         polyline.strokeColor = .black
         polyline.strokeWidth = 3
         polyline.map = mapView
         
-        //self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
         
     }
     
@@ -359,38 +446,38 @@ class NewCheckoutViewController: UIViewController {
         }
     }
     
-   
-        
+    
+    
     func addMarker(latitude: String?, longitude: String?, markerColor: UIColor){
-            let marker = GMSMarker()
-            if let lat = latitude, let long = longitude{
-                
-                                if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
-                
-                                    marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
-                
-                
-                                    marker.title = "Sydney"
-                                    marker.snippet = "Australia"
-                                    let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysTemplate))
-                                    iconImageView.tintColor = markerColor
-                                    marker.iconView = iconImageView
-                                        
-                                    marker.map = mapView
-                
-                
-                                    let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 17.0)
-                                    mapView.camera = camera
-                
-                
-                                    //path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
-                
-                                }
-                
-                
-                
-                            }
+        let marker = GMSMarker()
+        if let lat = latitude, let long = longitude{
             
+            if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
+                
+                marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
+                
+                
+                marker.title = "Sydney"
+                marker.snippet = "Australia"
+                let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysTemplate))
+                iconImageView.tintColor = markerColor
+                marker.iconView = iconImageView
+                
+                marker.map = mapView
+                
+                
+                let camera = GMSCameraPosition.camera(withLatitude: locationLat, longitude: locationLong, zoom: 15.0)
+                mapView.camera = camera
+                
+                
+                //path.add(CLLocationCoordinate2D(latitude: locationLat, longitude: locationLong))
+                
+            }
+            
+            
+            
+        }
+        
         
     }
     
@@ -406,29 +493,29 @@ class NewCheckoutViewController: UIViewController {
         
     }
     
-//
-//
-//
-//
-//
-//    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
-//        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-//    }
-//
-//    func timeText(_ s: Int) -> String {
-//        return s < 10 ? "0\(s)" : "\(s)"
-//    }
-//    func currentTime(time:TimeInterval) -> String {
-//
-//        //        if let value = UserDefaults.standard.value(forKey: "LastCheckinTime") as? Date {
-//        //            date = value
-//        //        }
-//        let date = Date(timeIntervalSince1970: time)
-//        let calendar = Calendar.current
-//        let hour = calendar.component(.hour, from: date)
-//        let minutes = calendar.component(.minute, from: date)
-//        return "\(timeText(hour)):\(timeText(minutes))"
-//    }
+    //
+    //
+    //
+    //
+    //
+    //    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+    //        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    //    }
+    //
+    //    func timeText(_ s: Int) -> String {
+    //        return s < 10 ? "0\(s)" : "\(s)"
+    //    }
+    //    func currentTime(time:TimeInterval) -> String {
+    //
+    //        //        if let value = UserDefaults.standard.value(forKey: "LastCheckinTime") as? Date {
+    //        //            date = value
+    //        //        }
+    //        let date = Date(timeIntervalSince1970: time)
+    //        let calendar = Calendar.current
+    //        let hour = calendar.component(.hour, from: date)
+    //        let minutes = calendar.component(.minute, from: date)
+    //        return "\(timeText(hour)):\(timeText(minutes))"
+    //    }
     
     func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
@@ -443,7 +530,7 @@ class NewCheckoutViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-  
+    
 }
 
 
@@ -454,9 +541,10 @@ class NewCheckoutViewController: UIViewController {
 extension NewCheckoutViewController{
     
     func setupMap(){
-      
-            let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude, zoom: 17.0)
-            mapView.camera = camera
+        
+        mapView.changeStyle()
+        let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude, zoom: 15.0)
+        mapView.camera = camera
         
         
     }
@@ -506,7 +594,7 @@ extension NewCheckoutViewController{
             self.view.layoutIfNeeded()
             
         }
-       
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -521,9 +609,9 @@ extension NewCheckoutViewController{
 
 
 extension NewCheckoutViewController: HandleUserViewDelegate{
-   
+    
     func handleOnSwipe() {
-       // userLocationCardHeightAnchor.constant += 50
+        // userLocationCardHeightAnchor.constant += 50
         self.view.layoutIfNeeded()
         handleTap()
     }
@@ -541,7 +629,7 @@ extension NewCheckoutViewController: HandleUserViewDelegate{
 
 
 extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
-   
+    
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
         drawPath(coordinates: coordinates)
     }
@@ -556,7 +644,7 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
     }
     
     
-
+    
     
     
 }

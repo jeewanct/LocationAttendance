@@ -21,6 +21,7 @@ PODS:
   - IQKeyboardManagerSwift (5.0.7)
   - ObjectMapper (3.1.0)
   - Polyline (4.2.0)
+  - PullUpController (0.3.0)
   - ReachabilitySwift (3)
   - Realm (3.1.1):
     - Realm/Headers (= 3.1.1)
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - GooglePlacesSearchController
   - IQKeyboardManagerSwift
   - Polyline (~> 4.0)
+  - PullUpController
   - ReachabilitySwift (~> 3)
   - RealmSwift
   - SwiftGifOrigin (~> 1.6.1)
@@ -60,6 +62,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - ObjectMapper
     - Polyline
+    - PullUpController
     - ReachabilitySwift
     - Realm
     - RealmSwift
@@ -79,17 +82,12 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   Polyline: 3d69f75bb136357e27291d439d0436c6ebda57a4
+  PullUpController: 2f9e3852538a1fc1b3af79ee2ad29ec5c1a44efd
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: 55a0de37ea0215a2789859f0c1dc40d3e7da58fb
-||||||| merged common ancestors
-PODFILE CHECKSUM: 76877c3e61f59e48c64c87604e175c46309a2080
-=======
-PODFILE CHECKSUM: eb2b55613b4cbca22eb6dbfc8b13cccb8df1ce97
->>>>>>> c6e4a8bd8abe91a3d9848fa3de3b187addd52f25
+PODFILE CHECKSUM: 6abb4729ff793b23e4577a9317aa1fecdd97e464
 
 COCOAPODS: 1.5.2

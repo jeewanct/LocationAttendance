@@ -19,6 +19,8 @@ class NewOrganisationSelectViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
      var accessTokensList:Results<AccessTokenObject>!
     var orgId = String()
+    
+    let activityIndicator = ActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
@@ -32,6 +34,7 @@ class NewOrganisationSelectViewController: UIViewController {
         nextButton.addTarget(self, action: #selector(nextAction), for: UIControlEvents.touchUpInside)
         
         
+        NotificationCenter.default.addObserver(self, selector: #selector(NewOtpViewController.goToHome), name: NSNotification.Name(rawValue:  LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
         
         // Do any additional setup after loading the view.
     }
@@ -41,6 +44,17 @@ class NewOrganisationSelectViewController: UIViewController {
            self.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
         }
         
+    }
+    
+    
+    func goToHome(){
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        let destVc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadPlaceController") as! DownloadPlaceController
+        self.navigationController?.pushViewController(destVc, animated: true)
+        
+//        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+//        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+//        UIApplication.shared.keyWindow?.rootViewController = destVC
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,15 +75,26 @@ class NewOrganisationSelectViewController: UIViewController {
             UserDefaults.standard.synchronize()
             getUserData()
             
-            AlertView.sharedInstance.showActivityIndicator(self.view)
+            self.view.showActivityIndicator(activityIndicator: activityIndicator)
             if isInternetAvailable(){
                 checkShiftStatus { (apiResultStatus) in
-                    AlertView.sharedInstance.hideActivityIndicator(self.view)
+                    //AlertView.sharedInstance.hideActivityIndicator(self.view)
                     if apiResultStatus == APIResult.Success {
-                        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                        UIApplication.shared.keyWindow?.rootViewController = destVC
+                        
+                        if apiResultStatus == APIResult.Success {
+                            
+                            if LocationHistoryData.getLocationDataCount() == 0{
+                                LocationHistoryData.getTeamMember()
+                            }
+                            
+                        }else{
+                            self.goToHome()
+                        }
+                        
+                        
                     }
                 }
+                
                 
             }
             

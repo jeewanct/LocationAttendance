@@ -10,6 +10,9 @@ import UIKit
 import GoogleMaps
 import BluedolphinCloudSdk
 import Polyline
+ 
+ 
+ 
 class MyTeamLocationDetails: UIViewController{
     
     @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
@@ -39,6 +42,7 @@ class MyTeamLocationDetails: UIViewController{
         
     }
     
+     var pullController: SearchViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,7 +122,7 @@ extension MyTeamLocationDetails{
         
         
         MyTeamDetailsModel.getTeamMember(userId: getUserId)
- self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+ 
 //        })
     }
     
@@ -204,9 +208,13 @@ extension MyTeamLocationDetails{
         }else{
             
            // userContainerView?.locationData = allLocations
-            userLocationContainerView.isHidden = false
             
-            userContainerView?.locationData = allLocations.reversed()
+            pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+            pullController.locationData = allLocations.reversed()
+            pullController.screenType = LocationDetailsScreenEnum.myTeamScreen
+            self.addPullUpController(pullController, animated: true)
+            
             let polyLine = PolyLineMap()
             polyLine.delegate = self
             polyLine.getPolyline(location: allLocations)
@@ -369,7 +377,7 @@ extension MyTeamLocationDetails{
     
     func setupMap(){
         
-        // mapView.changeStyle()
+         mapView.changeStyle()
         
         let marker = GMSMarker()
         
