@@ -23,7 +23,6 @@ pod 'GooglePlacesSearchController'
 pod 'PullUpController'
 
 
-
   target 'bdPresenceTests' do
     inherit! :search_paths
     # Pods for testing

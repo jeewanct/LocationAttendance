@@ -325,6 +325,11 @@ class NewCheckoutViewController: UIViewController {
         }else{
             //plotPathInMap(location: allLocations)
             
+            if let _ = pullController{
+                self.removePullUpController(pullController, animated: true)
+            }
+            
+            
             pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
            pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
