@@ -79,10 +79,10 @@ class NewCheckoutViewController: UIViewController {
 
         
 
-        let application = UIApplication.shared
-        let co = application.topViewController as? UINavigationController
-        let arr = co?.viewControllers
-        print("application.topViewController = \(String(describing: arr?.last))")
+//        let application = UIApplication.shared
+//        let co = application.topViewController as? UINavigationController
+//        let arr = co?.viewControllers
+//        print("application.topViewController = \(String(describing: arr?.last))")
         
         
         let value = NSDate().aws_stringValue("y-MM-ddH:m:ss.SSSS")
@@ -169,6 +169,24 @@ class NewCheckoutViewController: UIViewController {
         updateView()
         
         if AssignmentModel.statusOfUser() {
+            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                if screenFlag == "1" {
+                    UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+                    
+                    UI {
+                        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                        // New change on 20/06/2018 to create one checkin
+                        if isInternetAvailable(){
+                            CheckinModel.postCheckin()
+                        }
+                        bdCloudStopMonitoring()
+                        
+                        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                        
+                        //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
+                    }
+                }
+            }
             self.statusChangeView.isHidden = false
             self.syncButton.isEnabled = true
         } else {
@@ -210,9 +228,26 @@ class NewCheckoutViewController: UIViewController {
                 }
                 if AssignmentModel.statusOfUser() {
                     // Here i have to swipe down the user screen to stop mobitoring
-                    bdCloudStopMonitoring()
                     self.statusChangeView.isHidden = false
                     self.syncButton.isEnabled = true
+                    if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                        if screenFlag == "1" {
+                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+                            
+                            UI {
+                                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                                // New change on 20/06/2018 to create one checkin
+                                if isInternetAvailable(){
+                                    CheckinModel.postCheckin()
+                                }
+                                bdCloudStopMonitoring()
+                                
+                                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                                
+                                //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
+                            }
+                        }
+                    }
                 } else {
                     self.statusChangeView.isHidden = true
                     self.syncButton.isEnabled = false

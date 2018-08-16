@@ -194,11 +194,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             if completionStatus == "Success" {
                                 UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
                             }
-                            print(AssignmentModel.statusOfUser())
+                            //print(AssignmentModel.statusOfUser())
                             
                         }
                     } else {
-                        print(AssignmentModel.statusOfUser())
+                        //print(AssignmentModel.statusOfUser())
                         
                     }
                 }else {
@@ -208,7 +208,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if completionStatus == "Success" {
                             UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
                         }
-                        print(AssignmentModel.statusOfUser())
+                        //print(AssignmentModel.statusOfUser())
                     }
                 }
             }
