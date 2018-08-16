@@ -356,23 +356,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 5,
+            schemaVersion: 6,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
 
-                if oldSchemaVersion < 5 {
+                if oldSchemaVersion < 6 {
 //                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
 //
 //                    }
                     migration.enumerateObjects(ofType: AccessTokenObject.className()) { oldObject, newObject in
                     }
                     migration.enumerateObjects(ofType: RMCAssignmentObject.className()) { oldObject, newObject in
-
+                    
                     }
 
                 }
+                // Here we know app is being update so we have to call RMCPlaces
+                RMCPlacesManager.getPlaces()
         }
 
         )
