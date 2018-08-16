@@ -387,6 +387,15 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk12LocationData")
 @end
 
 
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk19LocationHistoryData")
+@interface LocationHistoryData : NSObject
++ (void)getTeamMember;
++ (NSInteger)getLocationDataCount SWIFT_WARN_UNUSED_RESULT;
++ (void)makeAttendanceLogModel;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk18MyTeamDetailsModel")
 @interface MyTeamDetailsModel : NSObject
 + (void)getTeamMemberWithUserId:(NSString * _Nonnull)userId;
@@ -425,8 +434,8 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk10OauthModel")
 @end
 
 
-SWIFT_CLASS("_TtC19BluedolphinCloudSdk12PlaceDetails")
-@interface PlaceDetails : RealmSwiftObject
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk11PlaceDetail")
+@interface PlaceDetail : RealmSwiftObject
 @property (nonatomic, copy) NSString * _Nullable placeId;
 @property (nonatomic, copy) NSString * _Nullable editedBy;
 @property (nonatomic, copy) NSString * _Nullable addedBy;
@@ -569,7 +578,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk8RMCPlace")
 @property (nonatomic, copy) NSString * _Nullable associationIds;
 @property (nonatomic, copy) NSString * _Nullable localStatus;
 @property (nonatomic, copy) NSString * _Nullable status;
-@property (nonatomic, strong) PlaceDetails * _Nullable placeDetails;
+@property (nonatomic, strong) PlaceDetail * _Nullable placeDetails;
 + (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;

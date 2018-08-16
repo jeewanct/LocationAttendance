@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreLocation
-
+import PullUpController
 
 class UserDetailsDataModel{
     
@@ -23,7 +23,7 @@ class UserDetailsDataModel{
 
 
 
-class NewCheckOutUserScreen: UIViewController{
+class NewCheckOutUserScreen: PullUpController{
     
     
     var delegate: HandleUserViewDelegate?
@@ -35,8 +35,8 @@ class NewCheckOutUserScreen: UIViewController{
         didSet{
             
             makeRelevantData()
-           // tableView.reloadData()
-           
+            // tableView.reloadData()
+            
         }
     }
     
@@ -46,13 +46,37 @@ class NewCheckOutUserScreen: UIViewController{
             tableView.reloadData()
         }
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         
-            tableView.estimatedRowHeight = 50
+        tableView.attach(to: self)
+        tableView.estimatedRowHeight = 50
         
     }
+    
+    override var pullUpControllerPreferredSize: CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 300.0)
+    }
+    
+    override var pullUpControllerPreviewOffset: CGFloat {
+        return 500
+    }
+    
+    override var pullUpControllerMiddleStickyPoints: [CGFloat] {
+        return [40.0]
+    }
+    
+    override var pullUpControllerIsBouncingEnabled: Bool {
+        return false
+    }
+    
+    override var pullUpControllerPreferredLandscapeFrame: CGRect {
+        return CGRect(x: 5, y: 5, width: 280, height: UIScreen.main.bounds.height - 10)
+    }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -69,7 +93,7 @@ class NewCheckOutUserScreen: UIViewController{
     }
     
     func makeRelevantData(){
-    
+        
         var user = [UserDetailsDataModel]()
         if let locations = locationData{
             
@@ -95,7 +119,7 @@ class NewCheckOutUserScreen: UIViewController{
                         
                         
                         if let lastGeoTaggedElement = location.last{
-                          
+                            
                             lastSeenString.append("-")
                             if let lastSeen = lastGeoTaggedElement.lastSeen{
                                 lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
@@ -105,7 +129,7 @@ class NewCheckOutUserScreen: UIViewController{
                         }
                         userData.address = geoTagged.placeDetails?.address
                         userData.lastSeen = lastSeenString
-                    
+                        
                         
                     }else{
                         
@@ -118,11 +142,11 @@ class NewCheckOutUserScreen: UIViewController{
                             
                             if let latitude = CLLocationDegrees(lat), let longitude = CLLocationDegrees(long){
                                 userData.cllLocation = CLLocation(latitude: latitude, longitude: longitude)
-                            
+                                
                             }
                             
                             
-                           
+                            
                         }
                         
                         
@@ -173,7 +197,7 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewCheckOutUserScreenCell", for: indexPath) as! NewCheckoutCell
-       //setTeamDetails(cell: cell, indexPath: indexPath)
+        //setTeamDetails(cell: cell, indexPath: indexPath)
         //setTeamDetails(cell: cell, indexPath: indexPath)
         cell.delegate = self
         cell.currentIndex = indexPath.item
@@ -226,7 +250,7 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
 
 
 extension NewCheckOutUserScreen: GeoTagLocationDelegate{
-   
+    
     func handleTap(currentIndex: Int) {
         
         let cllLocation = userDetails[currentIndex].cllLocation
@@ -240,6 +264,13 @@ extension NewCheckOutUserScreen: GeoTagLocationDelegate{
         
     }
     
+    
+    
+}
+
+
+extension NewCheckOutUserScreen{
+   
     
     
 }

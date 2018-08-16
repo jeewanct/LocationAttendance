@@ -33,7 +33,7 @@ class GeoTagController: UIViewController{
     
     let marker = GMSMarker()
     
-    var placeDetails: PlaceGoogleDetails?
+    var placeDetails: PlaceDetails?
     
     let activityIndicator = ActivityIndicatorView()
     override func viewDidLoad() {
@@ -286,7 +286,7 @@ class GeoTagController: UIViewController{
 
 
 extension GeoTagController: GooglePlacesAutocompleteViewControllerDelegate {
-    func viewController(didAutocompleteWith place: PlaceGoogleDetails) {
+    func viewController(didAutocompleteWith place: PlaceDetails) {
         print(place.description)
         
         placeDetails = place

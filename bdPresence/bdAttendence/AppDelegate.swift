@@ -110,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
                     let interval = Date().timeIntervalSince(lastAssignmentFetched)
                     print(interval)
-                    if interval > 10 {
+                    if interval > 600 {
                         //let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
                         let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
 

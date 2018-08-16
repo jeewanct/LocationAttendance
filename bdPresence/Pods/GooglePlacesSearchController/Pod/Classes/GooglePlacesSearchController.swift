@@ -47,7 +47,7 @@ open class Place: NSObject {
     }
 }
 
-open class PlaceGoogleDetails: CustomStringConvertible {
+open class PlaceDetails: CustomStringConvertible {
     open let formattedAddress: String
     open var name: String? = nil
 
@@ -100,7 +100,7 @@ open class PlaceGoogleDetails: CustomStringConvertible {
     }
 }
 
-private extension PlaceGoogleDetails {
+private extension PlaceDetails {
     
     enum ComponentType: String {
         case short = "short_name"
@@ -143,7 +143,7 @@ open class GooglePlacesSearchController: UISearchController, UISearchBarDelegate
 }
 
 public protocol GooglePlacesAutocompleteViewControllerDelegate: class {
-    func viewController(didAutocompleteWith place: PlaceGoogleDetails)
+    func viewController(didAutocompleteWith place: PlaceDetails)
 }
 
 open class GooglePlacesAutocompleteContainer: UITableViewController {
@@ -309,11 +309,11 @@ private class GooglePlacesRequestHelpers {
         )
     }
     
-    static func getPlaceDetails(id: String, apiKey: String, completion: @escaping (PlaceGoogleDetails?) -> Void) {
+    static func getPlaceDetails(id: String, apiKey: String, completion: @escaping (PlaceDetails?) -> Void) {
         doRequest(
             "https://maps.googleapis.com/maps/api/place/details/json",
             params: [ "placeid": id, "key": apiKey ],
-            completion: { completion(PlaceGoogleDetails(json: $0 as? [String: Any] ?? [:])) }
+            completion: { completion(PlaceDetails(json: $0 as? [String: Any] ?? [:])) }
         )
     }
 }

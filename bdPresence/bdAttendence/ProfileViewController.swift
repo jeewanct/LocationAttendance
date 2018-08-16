@@ -53,6 +53,8 @@ class ProfileViewController: UIViewController {
         self.profileTableView.estimatedRowHeight =  50
         self.profileTableView.rowHeight = UITableViewAutomaticDimension;
        
+        
+        //addPullUpController()
         // Do any additional setup after loading the view.
     }
     func getOrganisationName(){
@@ -65,6 +67,8 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }
+    
+   
     
     func handleTap(sender : UITapGestureRecognizer) {
         
@@ -172,32 +176,34 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource{
             cell.valueLabel.text = "\(getDateInAMPM(date: startDate!)) -  \(getDateInAMPM(date: endDate!))"
             cell.setDisclosure(toColour: APPColor.blueGradient)
             return cell
-        case 3:
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "switch", for: indexPath as IndexPath) as! SwitchTableViewCell
-            cell.headerLabel.textColor = UIColor(hex: "333333")
-            
-            cell.headerLabel.font = APPFONT.HELPTEXT
-            cell.headerLabel.text = "Notification"
-            
-            return cell
-            
-        case 4:
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "twoLabelWithImage", for: indexPath as IndexPath) as! LabelWithImage
-            cell.headerLabel.textColor = UIColor(hex: "333333")
-            cell.headerLabel.font = APPFONT.HELPTEXT
-            cell.headerLabel.text = "Logout"
-            return cell
+//        case 3:
+//            let cell =  tableView.dequeueReusableCell(withIdentifier: "switch", for: indexPath as IndexPath) as! SwitchTableViewCell
+//            cell.headerLabel.textColor = UIColor(hex: "333333")
+//
+//            cell.headerLabel.font = APPFONT.HELPTEXT
+//            cell.headerLabel.text = "Notification"
+//
+//            return cell
+//
+//        case 4:
+//            let cell =  tableView.dequeueReusableCell(withIdentifier: "twoLabelWithImage", for: indexPath as IndexPath) as! LabelWithImage
+//            cell.headerLabel.textColor = UIColor(hex: "333333")
+//            cell.headerLabel.font = APPFONT.HELPTEXT
+//            cell.headerLabel.text = "Logout"
+//            return cell
         default:
             break
         }
         return newcell
+        
+        
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     
 }

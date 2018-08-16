@@ -12,7 +12,7 @@ import BluedolphinCloudSdk
 
 class NewOtpViewController: UIViewController {
     @IBOutlet weak var otpView: UIView!
-
+    
     @IBOutlet weak var sendOtpButton: UIButton!
     @IBOutlet weak var otpLabel: UILabel!
     var codeInputView : CodeInputView!
@@ -22,7 +22,7 @@ class NewOtpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    //self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        //self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -46,10 +46,28 @@ class NewOtpViewController: UIViewController {
         downGesturee.direction = .down
         view.addGestureRecognizer(downGesturee)
         otpView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        
+        
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(NewOtpViewController.goToHome), name: NSNotification.Name(rawValue:  LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
+        
     }
     
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        title = ""
+    }
+    
+    
     @objc func handleHideKeyBoard(){
-            codeInputView.resignFirstResponder()
+        codeInputView.resignFirstResponder()
     }
     
     
@@ -60,20 +78,22 @@ class NewOtpViewController: UIViewController {
     func backbuttonAction(sender:Any){
         self.navigationController?.popViewController(animated: true)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-         codeInputView.becomeFirstResponder()
+        codeInputView.becomeFirstResponder()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         codeInputView.resignFirstResponder()
     }
+    
+    
     func updateUser(updateflag:Bool = false){
         
         var deviceToken = "3273a5f0598cd8e9518ccf07c67fbdd1ebb079d2a95aa890e259a4b70ecad57e"
@@ -96,13 +116,13 @@ class NewOtpViewController: UIViewController {
         }
         print(objectdata)
         //UserDataModel.createUserData(userObject: objectdata as! [String : AnyObject])
-//        AlertView.sharedInstance.setLabelText("Verifying")
-//        AlertView.sharedInstance.showActivityIndicator(self.view)
+        //        AlertView.sharedInstance.setLabelText("Verifying")
+        //        AlertView.sharedInstance.showActivityIndicator(self.view)
         
         
         view.showActivityIndicator(activityIndicator: activityIndicator)
         UserDataModel.userSignUp(param:objectdata) { (value) in
-//        AlertView.sharedInstance.hideActivityIndicator(self.view)
+            //        AlertView.sharedInstance.hideActivityIndicator(self.view)
             self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (value){
             case APIResult.Success.rawValue:
@@ -113,8 +133,8 @@ class NewOtpViewController: UIViewController {
                 let tokensList = realm.objects(AccessTokenObject.self)
                 if tokensList.count > 1{
                     let destVC = self.storyboard?.instantiateViewController(withIdentifier: "orgList") as! UINavigationController
-//                    let topController = destVC.topViewController as! NewOrganisationSelectViewController
-//                    topController.accessTokensList = tokensList
+                    //                    let topController = destVC.topViewController as! NewOrganisationSelectViewController
+                    //                    topController.accessTokensList = tokensList
                     UIApplication.shared.keyWindow?.rootViewController = destVC
                     
                 }else{
@@ -124,8 +144,23 @@ class NewOtpViewController: UIViewController {
                     }
                     
                     getUserData()
-                    let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                    UIApplication.shared.keyWindow?.rootViewController = destVC
+                    self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
+                    if isInternetAvailable(){
+                        checkShiftStatus { (apiResultStatus) in
+                            
+                            if apiResultStatus == APIResult.Success {
+                                
+                                if LocationHistoryData.getLocationDataCount() == 0{
+                                    self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
+                                    LocationHistoryData.getTeamMember()
+                                }else{
+                                    self.goToHome()
+                                }
+                                
+                            }
+                        }
+                        
+                    }
                 }
             case APIResult.UserInteractionRequired.rawValue:
                 self.showInteractionAlert(ErrorMessage.MultipleUser.rawValue )
@@ -139,6 +174,19 @@ class NewOtpViewController: UIViewController {
     }
     
     
+    func goToHome(){
+        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+//        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+//        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+//        UIApplication.shared.keyWindow?.rootViewController = destVC
+        
+        
+        let destVc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadPlaceController") as! DownloadPlaceController
+        self.navigationController?.pushViewController(destVc, animated: true)
+        
+        
+    }
+    
     func getOauth(){
         let param = [
             "grantType":"accessToken",
@@ -150,12 +198,12 @@ class NewOtpViewController: UIViewController {
         print(param)
         if isInternetAvailable() {
             //showLoader(text: "Verifying")
-//            AlertView.sharedInstance.setLabelText("Verifying")
-//            AlertView.sharedInstance.showActivityIndicator(self.view)
+            //            AlertView.sharedInstance.setLabelText("Verifying")
+            //            AlertView.sharedInstance.showActivityIndicator(self.view)
             view.showActivityIndicator(activityIndicator: activityIndicator)
             OauthModel.getToken(userObject: param) { (result) in
                 //AlertView.sharedInstance.hideActivityIndicator(self.view)
-                self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+                
                 switch (result){
                 case APIResult.Success.rawValue:
                     self.updateUser()
@@ -183,7 +231,7 @@ class NewOtpViewController: UIViewController {
         
     }
     
-
+    
     
     func sendOTP(){
         
