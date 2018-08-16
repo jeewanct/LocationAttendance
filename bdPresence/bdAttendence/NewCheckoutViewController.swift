@@ -76,9 +76,22 @@ class NewCheckoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+
+        let application = UIApplication.shared
+        let co = application.topViewController as? UINavigationController
+        let arr = co?.viewControllers
+        print("application.topViewController = \(String(describing: arr?.last))")
         
         
         let value = NSDate().aws_stringValue("y-MM-ddH:m:ss.SSSS")
+        
+        print(value ?? "")
+
+        
+        
+       
        
         navigationController?.removeTransparency()
         let height = UIScreen.main.bounds.size.height
@@ -143,24 +156,14 @@ class NewCheckoutViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+
     
     
     
-    private func addPullUpController() {
-//        guard let
-//             pullController = UIStoryboard(name: "NewDesign", bundle: nil)
-//                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-//
-//
-//
-//
-//        addPullUpController(pullController, animated: true)
-    }
+   
     
+
+  
     override func viewDidAppear(_ animated: Bool) {
         
         updateView()
@@ -173,7 +176,7 @@ class NewCheckoutViewController: UIViewController {
             self.syncButton.isEnabled = false
         }
         
-        addPullUpController()
+       // addPullUpController()
         
     }
     
@@ -198,7 +201,7 @@ class NewCheckoutViewController: UIViewController {
     @IBAction func syncTapped(_ sender: Any) {
         self.syncButton.isEnabled = false
         //"&status=" + AssignmentStatus.Assigned.rawValue
-        let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
         AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
             UI {
                 print("completionstatus = \(completionStatus)")
@@ -206,6 +209,8 @@ class NewCheckoutViewController: UIViewController {
                     UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
                 }
                 if AssignmentModel.statusOfUser() {
+                    // Here i have to swipe down the user screen to stop mobitoring
+                    bdCloudStopMonitoring()
                     self.statusChangeView.isHidden = false
                     self.syncButton.isEnabled = true
                 } else {
@@ -251,10 +256,7 @@ class NewCheckoutViewController: UIViewController {
             switch swipeGesture.direction{
             case UISwipeGestureRecognizerDirection.down:
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
-                
-                
-                
-                
+
             default:
                 break
                 
@@ -325,6 +327,7 @@ class NewCheckoutViewController: UIViewController {
             
             pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+           pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
             pullController.locationData = allLocations.reversed()
             self.addPullUpController(pullController, animated: true)
             
@@ -488,6 +491,9 @@ class NewCheckoutViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     
 }
@@ -607,9 +613,6 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
     
     
 }
-
-
-
 
 
 

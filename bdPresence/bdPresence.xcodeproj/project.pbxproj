@@ -15,6 +15,7 @@
 		091517AA2108A8AC00FABD3D /* NewCheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */; };
 		091FD601211D9FAB007F6ECC /* LocationFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091FD600211D9FAB007F6ECC /* LocationFilters.swift */; };
 		0941028E2125481900842BE4 /* LocationLoader.json in Resources */ = {isa = PBXBuildFile; fileRef = 0941028D2125481900842BE4 /* LocationLoader.json */; };
+		0941029021257F5400842BE4 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0941028F21257F5400842BE4 /* Enums.swift */; };
 		094E034621230E70006E44EE /* DownloadPlacesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E034521230E70006E44EE /* DownloadPlacesController.swift */; };
 		0982365D2109A948002BEECC /* RoughWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982365C2109A948002BEECC /* RoughWork.swift */; };
 		09A5F9E82118323F009953C6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */; };
@@ -156,6 +157,7 @@
 		091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCheckoutCell.swift; sourceTree = "<group>"; };
 		091FD600211D9FAB007F6ECC /* LocationFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFilters.swift; sourceTree = "<group>"; };
 		0941028D2125481900842BE4 /* LocationLoader.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LocationLoader.json; sourceTree = "<group>"; };
+		0941028F21257F5400842BE4 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		094E034521230E70006E44EE /* DownloadPlacesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadPlacesController.swift; sourceTree = "<group>"; };
 		0982365C2109A948002BEECC /* RoughWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughWork.swift; sourceTree = "<group>"; };
 		09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				09CE8F86211DA41E00BCF2ED /* PolylineMap.swift */,
 				094E034521230E70006E44EE /* DownloadPlacesController.swift */,
 				0941028D2125481900842BE4 /* LocationLoader.json */,
+				0941028F21257F5400842BE4 /* Enums.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -890,6 +893,7 @@
 				990089161F44177400CED97E /* TwoSideLabelTableViewCell.swift in Sources */,
 				9974903B1F0CFC0600AC92B9 /* CorouselEffect.swift in Sources */,
 				997490291F0CD8A000AC92B9 /* UserDataModel.swift in Sources */,
+				0941029021257F5400842BE4 /* Enums.swift in Sources */,
 				99068B1C20F7363A0018D3B8 /* MyTeamViewController.swift in Sources */,
 				99482F5920F8BB0B00324AE5 /* MyLocationTableViewCell.swift in Sources */,
 				99E046E820F4E044008DA7A8 /* UserLocationView.swift in Sources */,

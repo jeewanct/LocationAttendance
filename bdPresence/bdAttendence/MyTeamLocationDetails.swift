@@ -212,6 +212,7 @@ extension MyTeamLocationDetails{
             pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
             pullController.locationData = allLocations.reversed()
+            pullController.screenType = LocationDetailsScreenEnum.myTeamScreen
             self.addPullUpController(pullController, animated: true)
             
             let polyLine = PolyLineMap()

@@ -44,17 +44,38 @@ class SearchViewController: PullUpController {
         }
     }
     
+    var screenType: LocationDetailsScreenEnum?
+    
+    
     // MARK: - Lifecycle
+    
+    
+    func setPreviewHeightConstant(){
+        
+        
+        
+        
+        if screenType == LocationDetailsScreenEnum.dashBoardScreen{
+             secondPreviewHeight.constant = UIScreen.main.bounds.height - 315
+        }else if screenType == LocationDetailsScreenEnum.historyScreen{
+            secondPreviewHeight.constant = UIScreen.main.bounds.height - 325
+        }else{
+            secondPreviewHeight.constant = UIScreen.main.bounds.height - 234
+        }
+        
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print(UIScreen.main.bounds.height)
         
-        secondPreviewHeight.constant = UIScreen.main.bounds.height - 315
+       
         
         //visualEffectView.roundCorners([.topLeft, .topRight], radius: 15)
-        
+        setPreviewHeightConstant()
         tableView.estimatedRowHeight = 200
         
         tableView.attach(to: self)

@@ -111,6 +111,8 @@ class SuperViewController: UIViewController {
         
     }
     
+    
+    
     func wakeUp (sender : NSNotification) {
         self.wakeUpCall(notify: NotifyingFrom.SilentPush)
     }
@@ -267,6 +269,9 @@ class SuperViewController: UIViewController {
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     
     

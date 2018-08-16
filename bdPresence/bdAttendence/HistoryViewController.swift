@@ -193,7 +193,7 @@ class HistoryViewController: UIViewController {
             
             pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-            
+            pullController.screenType = LocationDetailsScreenEnum.historyScreen
             self.addPullUpController(pullController, animated: true)
             
             
@@ -323,11 +323,6 @@ class HistoryViewController: UIViewController {
         
     }
     
-
-
-    
-    
-  
 
 }
 

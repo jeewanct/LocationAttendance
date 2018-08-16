@@ -188,7 +188,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let interval = Date().timeIntervalSince(lastAssignmentFetched)
                     print(interval)
                     if interval > 600 {
-                        let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
                         AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
                             print("completionstatus = \(completionStatus)")
                             if completionStatus == "Success" {
@@ -202,7 +202,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                     }
                 }else {
-                    let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                    let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
                     AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
                         print("completionstatus = \(completionStatus)")
                         if completionStatus == "Success" {
@@ -617,14 +617,27 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             CheckinModel.postCheckin()
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
+extension UIApplication{
+    var topViewController: UIViewController?{
+        if keyWindow?.rootViewController == nil{
+            return keyWindow?.rootViewController
+        }
+        
+        var pointedViewController = keyWindow?.rootViewController
+        
+        while  pointedViewController?.presentedViewController != nil {
+            switch pointedViewController?.presentedViewController {
+            case let navagationController as UINavigationController:
+                pointedViewController = navagationController.viewControllers.last
+            case let tabBarController as UITabBarController:
+                pointedViewController = tabBarController.selectedViewController
+            default:
+                pointedViewController = pointedViewController?.presentedViewController
+            }
+        }
+        return pointedViewController
+        
+    }
+}
