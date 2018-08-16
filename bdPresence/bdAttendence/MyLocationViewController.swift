@@ -11,6 +11,19 @@ import GoogleMaps
 import BluedolphinCloudSdk
 import RealmSwift
 
+
+
+class POIItem: NSObject, GMUClusterItem {
+    var position: CLLocationCoordinate2D
+    var name: String!
+    
+    init(position: CLLocationCoordinate2D, name: String) {
+        self.position = position
+        self.name = name
+    }
+}
+
+
 class MyLocationViewController: UIViewController{
     
     @IBOutlet weak var userLocationContainerView: UIView!
@@ -20,12 +33,14 @@ class MyLocationViewController: UIViewController{
     var myLocationArray: [RMCPlace]?
     var userContainerView: MyLocationTableView?
     
+     var clusterManager: GMUClusterManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureInContainerView()
         setupNavigation()
         setupMap()
+        setupClustering()
         getUserLocation()
         userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
 
@@ -42,6 +57,29 @@ class MyLocationViewController: UIViewController{
     }
     
     
+    
+    func setupClustering(){
+        
+        // Set up the cluster manager with default icon generator and renderer.
+        let iconGenerator = GMUDefaultClusterIconGenerator()
+        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+    
+        
+        let renderer = GMUDefaultClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
+        
+        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
+        
+        // Generate and add random items to the cluster manager.
+        //generateClusterItems()
+        
+        // Call cluster() after items have been added to perform the clustering and rendering on map.
+       // clusterManager.cluster()
+        
+        // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
+        clusterManager.setDelegate(self, mapDelegate: self)
+        
+        
+    }
 }
 
 
@@ -64,17 +102,10 @@ extension MyLocationViewController{
     
     func setupMap(){
         
-        //mapView.changeStyle()
+        mapView.changeStyle()
         mapView.delegate = self
-        let marker = GMSMarker()
-        marker.position = CurrentLocation.coordinate
         
-        marker.title = "\(CurrentLocation.time)"
-        marker.snippet = CurrentLocation.address
-        marker.isDraggable = true
-        marker.map = mapView
-        
-        let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude, zoom: 17.0)
+        let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude, zoom: 1.0)
         mapView.camera = camera
         
         
@@ -153,7 +184,8 @@ extension MyLocationViewController: GMSMapViewDelegate{
             
         }
         
-        addMarkersGeoTaggedArea(locations: myLocations)
+        //addMarkersGeoTaggedArea(locations: myLocations)
+        generateClusterItems(location: myLocations)
         userContainerView?.places = myLocations
         
     }
@@ -191,3 +223,63 @@ extension MyLocationViewController: GMSMapViewDelegate{
     
     
 }
+
+
+extension MyLocationViewController:  GMUClusterManagerDelegate{
+    
+    // MARK: - GMUClusterManagerDelegate
+    
+    func clusterManager(_ clusterManager: GMUClusterManager, didTap cluster: GMUCluster) -> Bool {
+        let newCamera = GMSCameraPosition.camera(withTarget: cluster.position,
+                                                 zoom: mapView.camera.zoom + 1)
+        let update = GMSCameraUpdate.setCamera(newCamera)
+        mapView.moveCamera(update)
+        return false
+    }
+    
+    // MARK: - GMUMapViewDelegate
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        if let poiItem = marker.userData as? POIItem {
+            NSLog("Did tap marker for cluster item \(poiItem.name)")
+        } else {
+            NSLog("Did tap a normal marker")
+        }
+        return false
+    }
+    
+    // MARK: - Private
+    
+    /// Randomly generates cluster items within some extent of the camera and adds them to the
+    /// cluster manager.
+    func generateClusterItems(location: [RMCPlace]) {
+      
+        for index in location{
+            
+            if let latString = index.location?.latitude, let longString = index.location?.longitude{
+                
+                if let lat = CLLocationDegrees(latString), let long = CLLocationDegrees(longString), let name = index.geoTagName{
+                    
+                    let item = POIItem(position: CLLocationCoordinate2D(latitude: lat, longitude: long), name: name)
+                     clusterManager.add(item)
+                    
+                }
+                
+            }
+            
+        }
+        
+        clusterManager.cluster()
+        
+    }
+    
+    
+    
+    
+   
+}
+
+ 
+
+
+

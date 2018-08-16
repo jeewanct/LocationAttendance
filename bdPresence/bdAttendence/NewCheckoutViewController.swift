@@ -123,7 +123,7 @@ class NewCheckoutViewController: UIViewController {
         //  lastCheckinLabel.font = APPFONT.DAYHOURTEXT
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
         swipedown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
@@ -206,8 +206,8 @@ class NewCheckoutViewController: UIViewController {
             self.removePullUpController(pullController, animated: true)
         }
         
-        
-        if let getTimer = self.timer{
+
+        if let _ = self.timer{
             self.timer.invalidate()
         }
         
@@ -360,6 +360,11 @@ class NewCheckoutViewController: UIViewController {
         }else{
             //plotPathInMap(location: allLocations)
             
+            if let _ = pullController{
+                self.removePullUpController(pullController, animated: true)
+            }
+            
+            
             pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
            pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
@@ -425,24 +430,36 @@ class NewCheckoutViewController: UIViewController {
         polyline.strokeWidth = 3
         polyline.map = mapView
         
-        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        //self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
         
     }
     
     
     func animatePolylinePath() {
-        if (self.i < self.path.count()) {
-            self.animationPath.add(self.path.coordinate(at: self.i))
-            self.animationPolyline.path = self.animationPath
-            self.animationPolyline.strokeColor = UIColor.gray
-            self.animationPolyline.strokeWidth = 3
-            self.animationPolyline.map = self.mapView
-            self.i += 1
+        let state = UIApplication.shared.applicationState
+        
+        if state == .background {
+            if let _ = self.timer {
+                self.timer.invalidate()
+            }
+            // background
         }
-        else {
-            self.i = 0
-            self.animationPath = GMSMutablePath()
-            self.animationPolyline.map = nil
+        else if state == .active {
+            if (self.i < self.path.count()) {
+                self.animationPath.add(self.path.coordinate(at: self.i))
+                self.animationPolyline.path = self.animationPath
+                self.animationPolyline.strokeColor = UIColor.gray
+                self.animationPolyline.strokeWidth = 3
+                self.animationPolyline.map = self.mapView
+                self.i += 1
+            }
+            else {
+                self.i = 0
+                self.animationPath = GMSMutablePath()
+                self.animationPolyline.map = nil
+            }
+
+            // foreground
         }
     }
     
@@ -527,6 +544,7 @@ class NewCheckoutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     deinit {
+        
         NotificationCenter.default.removeObserver(self)
     }
     

@@ -21,8 +21,8 @@ class MyLocationTableViewCell: UITableViewCell{
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
-        visualEffect.layer.masksToBounds = true
+//        visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+//        visualEffect.layer.masksToBounds = true
         
     }
 }

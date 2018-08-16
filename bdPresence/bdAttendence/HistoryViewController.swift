@@ -35,8 +35,6 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
     
     
-    
-    
     var pullController: SearchViewController!
     var polyline = GMSPolyline()
     var animationPolyline = GMSPolyline()
@@ -48,9 +46,10 @@ class HistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.removeTransparency()
+        
+        
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationItem.title = Date().formattedWith(format: "MMMM yyyy")
@@ -74,9 +73,6 @@ class HistoryViewController: UIViewController {
         setupMap()
         addGestureInContainerView()
         
-        
-        let height = UIScreen.main.bounds.size.height
-        userLocationCardHeightAnchor.constant = height - (height * 0.3)
         
         NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
         
@@ -153,6 +149,19 @@ class HistoryViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let _ = pullController{
+            self.removePullUpController(pullController, animated: true)
+        }
+        
+        
+        if let _ = self.timer{
+            self.timer.invalidate()
+        }
+        
+    }
     
     
     func formattedDaysInThisWeek()->[Date]  {
@@ -252,7 +261,7 @@ class HistoryViewController: UIViewController {
         polyline.strokeWidth = 3
         polyline.map = mapView
         
-        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        //self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
         
     }
     
