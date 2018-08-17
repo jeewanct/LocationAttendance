@@ -30,10 +30,6 @@ class HistoryViewController: UIViewController {
     
     var userContainerView: NewCheckOutUserScreen?
     
-    @IBOutlet weak var userLocationContainerView: UIView!
-    
-    @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
-    
     
     
     
@@ -71,10 +67,9 @@ class HistoryViewController: UIViewController {
         
         /* Changes made from 10th July '18 */
         
-        userLocationContainerView.isHidden = true
         setupMap()
-        addGestureInContainerView()
-        
+//        addGestureInContainerView()
+
         
         NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
         
@@ -166,7 +161,7 @@ class HistoryViewController: UIViewController {
         
     }
     
-    
+   
     
     func formattedDaysInThisWeek()->[Date]  {
         let calendar = Calendar.current
@@ -199,7 +194,6 @@ class HistoryViewController: UIViewController {
         
        
         if allLocations.count == 0{
-            userLocationContainerView.isHidden = true
         }else{
             //plotPathInMap(location: allLocations)
             
@@ -218,7 +212,6 @@ class HistoryViewController: UIViewController {
             polyLine.getPolyline(location: allLocations)
             
             // getLocationCorrospondingLatLong(locations: allLocations)
-            userLocationContainerView.isHidden = false
         }
         
         
@@ -265,7 +258,7 @@ class HistoryViewController: UIViewController {
         polyline.strokeWidth = 3
         polyline.map = mapView
         
-        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        //self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
         
     }
     
@@ -453,58 +446,58 @@ extension HistoryViewController{
         
     }
     
-    func addGestureInContainerView(){
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        userLocationContainerView.addGestureRecognizer(tapGesture)
-        
-        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
-        downGesture.direction = .up
-        
-        userLocationContainerView.addGestureRecognizer(downGesture)
-        
-    }
+//    func addGestureInContainerView(){
+//
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+//        userLocationContainerView.addGestureRecognizer(tapGesture)
+//
+//        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
+//        downGesture.direction = .up
+//
+//        userLocationContainerView.addGestureRecognizer(downGesture)
+//
+//    }
+
+//    @objc func handleTap(){
+//        
+//        print("View Tapped")
+//        
+//       
+//        
+//        if userLocationCardHeightAnchor.constant == 91 {
+//            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
+//        }else{
+//            // 400
+//            userContainerView?.tableView.isScrollEnabled = true
+//            
+//            animateContainerView(heightToAnimate: 91)
+//        }
+//        
+//    }
+//    
+//    func animateContainerView(heightToAnimate height: CGFloat){
+//        
+//        UIView.animate(withDuration: 0.5) {
+//            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
+//                self.userLocationContainerView.backgroundColor = .clear
+//                
+//            }else{
+//                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.75)
+//            }
+//            
+//            self.userLocationCardHeightAnchor.constant = height
+//            self.view.layoutIfNeeded()
+//            
+//        }
+//    }
     
-    @objc func handleTap(){
-        
-        print("View Tapped")
-        
-       
-        
-        if userLocationCardHeightAnchor.constant == 91 {
-            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
-        }else{
-            // 400
-            userContainerView?.tableView.isScrollEnabled = true
-            
-            animateContainerView(heightToAnimate: 91)
-        }
-        
-    }
-    
-    func animateContainerView(heightToAnimate height: CGFloat){
-        
-        UIView.animate(withDuration: 0.5) {
-            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
-                self.userLocationContainerView.backgroundColor = .clear
-                
-            }else{
-                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.75)
-            }
-            
-            self.userLocationCardHeightAnchor.constant = height
-            self.view.layoutIfNeeded()
-            
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userContainerViewSegue"{
-            userContainerView = segue.destination as! NewCheckOutUserScreen
-            userContainerView?.delegate = self
-        }
-    }
-    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "userContainerViewSegue"{
+//            userContainerView = segue.destination as! NewCheckOutUserScreen
+//            userContainerView?.delegate = self
+//        }
+//    }
+
     
 }
 
@@ -514,7 +507,7 @@ extension HistoryViewController: HandleUserViewDelegate{
     func handleOnSwipe() {
         // userLocationCardHeightAnchor.constant += 50
         self.view.layoutIfNeeded()
-        handleTap()
+        //handleTap()
     }
     
     

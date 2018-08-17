@@ -21,9 +21,9 @@ class LocationFilters: UIViewController{
         
         let queue = DispatchQueue(label: "filter")
         
-        queue.sync {
+        queue.async {
             let locations = UserDayData.getLocationData(date: date)
-            
+            print("locations = \(locations?.count)")
             DispatchQueue.main.async {
             
                 if let getLocations = locations{

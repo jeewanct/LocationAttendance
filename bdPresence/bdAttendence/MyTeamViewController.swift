@@ -27,7 +27,6 @@ class MyTeamViewController: UIViewController{
         addGestureInContainerView()
         setupNavigation()
         getTeamLocation()
-        navigationController?.removeTransparency()
         userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
         
     }

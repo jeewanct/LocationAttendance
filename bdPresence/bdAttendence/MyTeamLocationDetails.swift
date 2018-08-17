@@ -264,7 +264,7 @@ extension MyTeamLocationDetails{
         polyline.strokeWidth = 3
         polyline.map = mapView
         
-        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+        //self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
         
     }
     

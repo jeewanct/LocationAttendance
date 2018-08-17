@@ -12,7 +12,6 @@ import UIKit
 class NewCheckoutCell: UITableViewCell{
     
     @IBOutlet weak var locationDetailLabel: UILabel!
-    
     @IBOutlet weak var geoTagLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
@@ -25,7 +24,7 @@ class NewCheckoutCell: UITableViewCell{
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addressLabel.addGestureRecognizer(tapGesture)
-        
+        geoTagLabel.textColor = UIColor.white
     }
     
     @objc func handleTap(){

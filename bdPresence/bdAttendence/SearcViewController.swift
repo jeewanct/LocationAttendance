@@ -113,7 +113,12 @@ class SearchViewController: PullUpController {
     // MARK: - PullUpController
     
     override var pullUpControllerPreferredSize: CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: secondPreviewView.frame.maxY)
+        if screenType == LocationDetailsScreenEnum.myTeamScreen{
+            return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 86)
+        } else if screenType == LocationDetailsScreenEnum.dashBoardScreen {
+            return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 164)
+        }
+        return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 175)
     }
     
     override var pullUpControllerPreviewOffset: CGFloat {

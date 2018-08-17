@@ -44,7 +44,7 @@ class NewCheckoutViewController: UIViewController {
     
     @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
     
-    @IBOutlet weak var userLocationContainerView: UIView!
+//    @IBOutlet weak var userLocationContainerView: UIView!
     
     
     // Status change view
@@ -97,8 +97,8 @@ class NewCheckoutViewController: UIViewController {
        
        
         navigationController?.removeTransparency()
-        let height = UIScreen.main.bounds.size.height
-        userLocationCardHeightAnchor.constant = height - (height * 0.3)
+//        let height = UIScreen.main.bounds.size.height
+//        userLocationCardHeightAnchor.constant = height - (height * 0.3)
         
         // userLocationContainerView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         
@@ -126,7 +126,7 @@ class NewCheckoutViewController: UIViewController {
         //  lastCheckinLabel.font = APPFONT.DAYHOURTEXT
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
         swipedown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
@@ -148,7 +148,7 @@ class NewCheckoutViewController: UIViewController {
         
         addShadowToUpperView()
         
-        userLocationContainerView.isHidden = true
+//        userLocationContainerView.isHidden = true
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
@@ -209,8 +209,8 @@ class NewCheckoutViewController: UIViewController {
             self.removePullUpController(pullController, animated: true)
         }
         
-        
-        if let getTimer = self.timer{
+
+        if let _ = self.timer{
             self.timer.invalidate()
         }
         
@@ -326,32 +326,35 @@ class NewCheckoutViewController: UIViewController {
     
     
     func updateView(date:Date = Date()){
-        
-        let isToday = Calendar.current.isDateInToday(date)
-        if isToday{
-            self.navigationItem.title = "Today"
+        UI {
+            let isToday = Calendar.current.isDateInToday(date)
+            if isToday{
+                self.navigationItem.title = "Today"
+                
+                self.view.addGestureRecognizer(self.swipedown!)
+                self.checkoutButton.isHidden = false
+                self.endYourDayLabel.isHidden = false
+            }else{
+                self.navigationItem.title = date.dayOfWeekFull()
+                self.checkoutButton.isHidden = true
+                self.endYourDayLabel.isHidden = true
+                self.view.removeGestureRecognizer(self.swipedown!)
+                
+            }
             
-            self.view.addGestureRecognizer(swipedown!)
-            checkoutButton.isHidden = false
-            endYourDayLabel.isHidden = false
-        }else{
-            self.navigationItem.title = date.dayOfWeekFull()
-            checkoutButton.isHidden = true
-            endYourDayLabel.isHidden = true
-            self.view.removeGestureRecognizer(swipedown!)
             
+            let locationFilters = LocationFilters()
+            locationFilters.delegate = self
+            locationFilters.plotMarkers(date: date)
         }
         
         
-        print("Now calling filter location")
 
-        //LocationFilters.plotMarkers(date: dat)
-        
-        
         let locationFilters = LocationFilters()
         locationFilters.delegate = self
         locationFilters.plotMarkers(date: date)
         
+
     }
     
     
@@ -452,24 +455,38 @@ class NewCheckoutViewController: UIViewController {
             
         }
         
-       // self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+
+        //self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+
         
     }
     
     
     func animatePolylinePath() {
-        if (self.i < self.path.count()) {
-            self.animationPath.add(self.path.coordinate(at: self.i))
-            self.animationPolyline.path = self.animationPath
-            self.animationPolyline.strokeColor = UIColor.gray
-            self.animationPolyline.strokeWidth = 3
-            self.animationPolyline.map = self.mapView
-            self.i += 1
+        let state = UIApplication.shared.applicationState
+        
+        if state == .background {
+            if let _ = self.timer {
+                self.timer.invalidate()
+            }
+            // background
         }
-        else {
-            self.i = 0
-            self.animationPath = GMSMutablePath()
-            self.animationPolyline.map = nil
+        else if state == .active {
+            if (self.i < self.path.count()) {
+                self.animationPath.add(self.path.coordinate(at: self.i))
+                self.animationPolyline.path = self.animationPath
+                self.animationPolyline.strokeColor = UIColor.gray
+                self.animationPolyline.strokeWidth = 3
+                self.animationPolyline.map = self.mapView
+                self.i += 1
+            }
+            else {
+                self.i = 0
+                self.animationPath = GMSMutablePath()
+                self.animationPolyline.map = nil
+            }
+
+            // foreground
         }
     }
     
@@ -554,6 +571,7 @@ class NewCheckoutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     deinit {
+        
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -576,60 +594,60 @@ extension NewCheckoutViewController{
         
     }
     
-    func addGestureInContainerView(){
-        
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        userLocationContainerView.addGestureRecognizer(tapGesture!)
-        
-        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
-        downGesture.direction = .up
-        
-        userLocationContainerView.addGestureRecognizer(downGesture)
-        
-    }
+//    func addGestureInContainerView(){
+//
+//        tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+//        userLocationContainerView.addGestureRecognizer(tapGesture!)
+//
+//        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
+//        downGesture.direction = .up
+//
+//        userLocationContainerView.addGestureRecognizer(downGesture)
+//
+//    }
+//
+//    @objc func handleTap(){
+//
+//        print("View Tapped")
+//
+//        if userLocationCardHeightAnchor.constant == 80 {
+//            view.removeGestureRecognizer(tapGesture!)
+//
+//            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
+//        }else{
+//            // 400
+//            userContainerView?.tableView.isScrollEnabled = true
+//            tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+//            userLocationContainerView.addGestureRecognizer(tapGesture!)
+//            animateContainerView(heightToAnimate: 80)
+//        }
+//
+//
+//    }
+//
+//    func animateContainerView(heightToAnimate height: CGFloat){
+//
+//        UIView.animate(withDuration: 0.5) {
+//            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
+//                self.userLocationContainerView.backgroundColor = .clear
+//
+//            }else{
+//                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7477992958)
+//            }
+//
+//            self.userLocationCardHeightAnchor.constant = height
+//            self.view.layoutIfNeeded()
+//
+//        }
+//
+//    }
     
-    @objc func handleTap(){
-        
-        print("View Tapped")
-        
-        if userLocationCardHeightAnchor.constant == 80 {
-            view.removeGestureRecognizer(tapGesture!)
-            
-            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
-        }else{
-            // 400
-            userContainerView?.tableView.isScrollEnabled = true
-            tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-            userLocationContainerView.addGestureRecognizer(tapGesture!)
-            animateContainerView(heightToAnimate: 80)
-        }
-        
-        
-    }
-    
-    func animateContainerView(heightToAnimate height: CGFloat){
-        
-        UIView.animate(withDuration: 0.5) {
-            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
-                self.userLocationContainerView.backgroundColor = .clear
-                
-            }else{
-                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7477992958)
-            }
-            
-            self.userLocationCardHeightAnchor.constant = height
-            self.view.layoutIfNeeded()
-            
-        }
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "containerViewSegue"{
-            userContainerView = segue.destination as! NewCheckOutUserScreen
-            userContainerView?.delegate = self
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "containerViewSegue"{
+//            userContainerView = segue.destination as! NewCheckOutUserScreen
+//            userContainerView?.delegate = self
+//        }
+//    }
     
     
 }
@@ -640,7 +658,7 @@ extension NewCheckoutViewController: HandleUserViewDelegate{
     func handleOnSwipe() {
         // userLocationCardHeightAnchor.constant += 50
         self.view.layoutIfNeeded()
-        handleTap()
+//        handleTap()
     }
     
     
@@ -658,14 +676,17 @@ extension NewCheckoutViewController: HandleUserViewDelegate{
 extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
-        drawPath(coordinates: coordinates)
+        UI {
+            self.drawPath(coordinates: coordinates)
+        }
     }
     
     
     
     func finalLocations(locations: [LocationDataModel]) {
-        
-        plotMarkersInMap(location: locations)
+        UI {
+            self.plotMarkersInMap(location: locations)
+        }
         
       
         
