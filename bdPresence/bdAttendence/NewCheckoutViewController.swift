@@ -38,6 +38,7 @@ class NewCheckoutViewController: UIViewController {
     //  @IBOutlet weak var progressView: UICircularProgressRingView!
     var  dataArray = [Date]()
     var swipedown :UISwipeGestureRecognizer?
+    var message = ""
     
     /* Changes done from 10 July '18 New Design */
     
@@ -73,6 +74,8 @@ class NewCheckoutViewController: UIViewController {
     var i: UInt = 0
     var timer: Timer!
     var pullController: SearchViewController!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -340,6 +343,11 @@ class NewCheckoutViewController: UIViewController {
         }
         
         
+        print("Now calling filter location")
+
+        //LocationFilters.plotMarkers(date: dat)
+        
+        
         let locationFilters = LocationFilters()
         locationFilters.delegate = self
         locationFilters.plotMarkers(date: date)
@@ -355,6 +363,15 @@ class NewCheckoutViewController: UIViewController {
         
         let allLocations = UserPlace.getGeoTagData(location: location)
         
+        
+        
+        
+        
+        
+       
+        
+        
+        
         if allLocations.count == 0{
          
         }else{
@@ -365,12 +382,15 @@ class NewCheckoutViewController: UIViewController {
             }
             
             
-            pullController = UIStoryboard(name: "NewDesign", bundle: nil)
-                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-           pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
-            pullController.locationData = allLocations.reversed()
-            self.addPullUpController(pullController, animated: true)
+                    
             
+            self.pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+           self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
+            self.pullController.locationData = allLocations.reversed()
+            self.addPullUpController(self.pullController, animated: true)
+            
+     
             
             
             let polyLine = PolyLineMap()
@@ -423,14 +443,16 @@ class NewCheckoutViewController: UIViewController {
         // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
         
         
+        UI{
         
-        
-        let polyline = GMSPolyline(path: path)
+        let polyline = GMSPolyline(path: self.path)
         polyline.strokeColor = .black
         polyline.strokeWidth = 3
-        polyline.map = mapView
+        polyline.map = self.mapView
+            
+        }
         
-        self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+       // self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
         
     }
     
@@ -645,6 +667,7 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
         
         plotMarkersInMap(location: locations)
         
+      
         
     }
     

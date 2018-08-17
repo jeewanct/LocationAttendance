@@ -27,7 +27,7 @@ class GeoTagPlaceDetails{
     var placeId: String?
     var editedBy: String?
     var addedBy: String?
-    var fenceRadius =  RealmOptional<Float>()
+    var fenceRadius:  Float?
     var placeType: String?
     var address: String?
     
@@ -52,7 +52,7 @@ class UserPlace{
         for place in rmcPlaces{
             
             
-            if let firstLat = place.location?.latitude, let firstLong = place.location?.longitude, let fenceRadius = place.placeDetails?.fenceRadius.value {
+            if let firstLat = place.location?.latitude, let firstLong = place.location?.longitude, let fenceRadius = place.placeDetails?.fenceRadius{
                 
                 
                     
@@ -66,9 +66,13 @@ class UserPlace{
                         if nearestDistance == -1.0 {
                             nearestDistance = distance
                             geoTagLocation = setGeoTagData(place: place)
+                            
+                            
                         }else if nearestDistance > distance{
                             nearestDistance = distance
                             geoTagLocation = setGeoTagData(place: place)
+                            
+                            
                         }
                     }
                         
@@ -126,6 +130,7 @@ class UserPlace{
         let rmcPlaces  = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeStatus = %@",true)
         
         var allGeoTagLocations = [RMCPlace]()
+        
         
         for place in rmcPlaces{
             

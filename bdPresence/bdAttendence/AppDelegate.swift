@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Fabric.with([Crashlytics.self])
         case .Release:
             print("In Release")
-            ConfigurationModel.stopDebugging(flag: true)
+            ConfigurationModel.stopDebugging(flag: false)
             ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
             Fabric.with([Crashlytics.self])
         case .Unknown:

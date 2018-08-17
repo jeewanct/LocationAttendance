@@ -120,22 +120,7 @@ extension MyTeamViewController{
         
     }
     
-    func showLoader(text:String = "Loading ..." ){
-        AlertView.sharedInstance.setLabelText(text)
-        AlertView.sharedInstance.showActivityIndicator(self.view)
-        let delay = 10.0 * Double(NSEC_PER_SEC)
-        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: time, execute: {
-            AlertView.sharedInstance.hideActivityIndicator(self.view)
-            //self.dismiss(animated: true, completion: nil)
-        })
-    }
-    
-    func hideLoader() {
-        DispatchQueue.main.async {
-            AlertView.sharedInstance.hideActivityIndicator(self.view)
-        }
-    }
+   
     
     
 }

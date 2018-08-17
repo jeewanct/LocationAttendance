@@ -11,7 +11,7 @@ import CoreLocation
 import BluedolphinCloudSdk
 import Polyline
 
-class LocationFilters{
+class LocationFilters: UIViewController{
     
     var delegate: LocationsFilterDelegate?
     
@@ -130,7 +130,10 @@ class LocationFilters{
                 
                 
             }
+            
+            
         }
+        
         
         
         

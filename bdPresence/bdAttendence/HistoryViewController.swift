@@ -25,7 +25,7 @@ class HistoryViewController: UIViewController {
     
     @IBOutlet weak var mapView: GMSMapView!
     
-    
+    var message = ""
     /* Changes made from 10th July '18 */
     
     var userContainerView: NewCheckOutUserScreen?
@@ -84,6 +84,21 @@ class HistoryViewController: UIViewController {
         
         
         // Do any additional setup after loading the view.
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let _ = pullController{
+            self.removePullUpController(pullController, animated: true)
+        }
+        
+        
+        if let getTimer = self.timer{
+            self.timer.invalidate()
+        }
+        
     }
     
     
@@ -182,7 +197,7 @@ class HistoryViewController: UIViewController {
         
         let allLocations = UserPlace.getGeoTagData(location: location)
         
-        
+       
         if allLocations.count == 0{
             userLocationContainerView.isHidden = true
         }else{
@@ -509,6 +524,7 @@ extension HistoryViewController: HandleUserViewDelegate{
 extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate{
     func finalLocations(locations: [LocationDataModel]) {
         plotMarkersInMap(location: locations)
+      //  message = "final locations are \(locations.count)"
         
     }
     

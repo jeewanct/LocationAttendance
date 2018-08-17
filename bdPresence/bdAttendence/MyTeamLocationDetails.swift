@@ -47,6 +47,7 @@ class MyTeamLocationDetails: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.removeTransparency()
         setupMap()
         addGestureInContainerView()
         userLocationContainerView.isHidden = true

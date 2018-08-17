@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BluedolphinCloudSdk-Swift.h</key>
 		<data>
-		PmlPBRagQW3bjK2g9HS0THXBAYA=
+		r7VV134fUqwvlrv5B0lncP7e2DU=
 		</data>
 		<key>Headers/BluedolphinCloudSdk.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftmodule</key>
 		<data>
-		YCXa/skUx2H/PolJOX3A7ZQs97o=
+		6soOoSG5md+XC60TUdILL43BUck=
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		FltNbKRULf2SGqITV0XM00wdf9s=
+		Tzwu1E7ckdgi952wDbSyR7Dre5U=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,11 +43,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PmlPBRagQW3bjK2g9HS0THXBAYA=
+			r7VV134fUqwvlrv5B0lncP7e2DU=
 			</data>
 			<key>hash2</key>
 			<data>
-			jx7JrYabVLOOqkO0JUvZEAgXLeo0iojfuxtD+V0vI8g=
+			qpHSXIO3QbogTHPSVnrJ6QoWsJIh6XS3JR1DRTQGQzU=
 			</data>
 		</dict>
 		<key>Headers/BluedolphinCloudSdk.h</key>
@@ -76,11 +76,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YCXa/skUx2H/PolJOX3A7ZQs97o=
+			6soOoSG5md+XC60TUdILL43BUck=
 			</data>
 			<key>hash2</key>
 			<data>
-			dbv5whotTPV9S1FOhqF906T/9OnnroadwOfBRpFXt9M=
+			ryGZLpGVVed1cTomPvCKeK7Rl731xaW+7fNV7+SemwI=
 			</data>
 		</dict>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
@@ -98,11 +98,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			FltNbKRULf2SGqITV0XM00wdf9s=
+			Tzwu1E7ckdgi952wDbSyR7Dre5U=
 			</data>
 			<key>hash2</key>
 			<data>
-			Y/B6DZyBLFSDIITYtDlMDEffuju+3jfTOxLpCauk+HQ=
+			ejLCm7eTBSeG8sxkRJRgvqKYsZ3deJt9dJEER/pHhA4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

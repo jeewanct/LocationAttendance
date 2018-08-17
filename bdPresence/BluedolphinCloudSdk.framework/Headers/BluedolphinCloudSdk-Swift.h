@@ -439,6 +439,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk11PlaceDetail")
 @property (nonatomic, copy) NSString * _Nullable placeId;
 @property (nonatomic, copy) NSString * _Nullable editedBy;
 @property (nonatomic, copy) NSString * _Nullable addedBy;
+@property (nonatomic) float fenceRadius;
 @property (nonatomic, copy) NSString * _Nullable placeType;
 @property (nonatomic, copy) NSString * _Nullable address;
 + (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;

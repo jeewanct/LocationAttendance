@@ -3293,6 +3293,9 @@ mark your presence at your workplace</string>
                                     <constraint firstAttribute="bottom" secondItem="I7D-QF-9v1" secondAttribute="bottom" id="bnH-Zo-Jc4"/>
                                 </constraints>
                                 <blurEffect style="light"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3316,7 +3319,7 @@ mark your presence at your workplace</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTb-hm-Iqm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5580" y="1575"/>
+            <point key="canvasLocation" x="5527" y="1575"/>
         </scene>
     </scenes>
     <resources>

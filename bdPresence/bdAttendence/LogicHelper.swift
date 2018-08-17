@@ -157,29 +157,7 @@ class LogicHelper{
         
     }
     
-//    func findFaultyLocations(locations: [LocationDataModel]) -> [LocationDataModel]?{
-//
-//
-//
-//        for index in 0..<locations.count{
-//
-//            if let distance = locations[index].distance{
-//
-//                if distance == 0 || distance > 8000{
-//                     removeFromGoogleApi(locations: locations, index: index)
-//
-//                    return nil
-//
-//                }
-//
-//            }
-//
-//
-//        }
-//
-//        return locations
-//
-//    }
+
     
     func removeFromGoogleApi(locations: [LocationDataModel], index: Int){
         
@@ -328,6 +306,7 @@ class LogicHelper{
         
         guard let firstUnwrappedLat = firstLat, let firstUnwrappedLong = firstLong, let secondUnwrappedLat = secondLat, let secondUnwrappedLong = secondLong else {
             return 0
+            
             
         }
         
