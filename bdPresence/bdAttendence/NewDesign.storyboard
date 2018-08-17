@@ -429,7 +429,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="128.5" y="212" width="119" height="19"/>
+                                <rect key="frame" x="129" y="212" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -449,7 +449,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="215" y="329" width="72" height="29"/>
+                                <rect key="frame" x="215" y="329.5" width="72" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -465,7 +465,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zem-fm-UdE">
-                                <rect key="frame" x="249" y="361" width="76" height="29"/>
+                                <rect key="frame" x="249" y="361.5" width="76" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Change No.">
                                     <color key="titleColor" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -999,10 +999,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iDA-Oj-aZO">
-                                <rect key="frame" x="0.0" y="568" width="375" height="587"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h31-QZ-ZkL">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
@@ -1073,12 +1069,8 @@
                             <constraint firstItem="Vzz-7a-EcF" firstAttribute="top" secondItem="USZ-DE-GZE" secondAttribute="bottom" id="S0w-ek-ZW2"/>
                             <constraint firstItem="Vzz-7a-EcF" firstAttribute="top" secondItem="h31-QZ-ZkL" secondAttribute="bottom" id="SaU-S0-QtK"/>
                             <constraint firstAttribute="bottom" secondItem="1NL-pT-kMV" secondAttribute="bottom" id="TDt-lm-h4o"/>
-                            <constraint firstAttribute="trailing" secondItem="iDA-Oj-aZO" secondAttribute="trailing" id="VMc-3p-1M5"/>
-                            <constraint firstItem="iDA-Oj-aZO" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="aiR-uS-qi5"/>
                             <constraint firstItem="h31-QZ-ZkL" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="qiv-AM-f4f"/>
                             <constraint firstItem="USZ-DE-GZE" firstAttribute="leading" secondItem="U0L-Z1-1Ta" secondAttribute="leading" id="tBT-HN-x9n"/>
-                            <constraint firstItem="iDA-Oj-aZO" firstAttribute="top" secondItem="K06-7g-v0G" secondAttribute="bottom" constant="504" id="upZ-z6-N1g"/>
-                            <constraint firstItem="iDA-Oj-aZO" firstAttribute="height" secondItem="U0L-Z1-1Ta" secondAttribute="height" constant="-80" id="xlc-Yx-oaB"/>
                             <constraint firstAttribute="trailing" secondItem="h31-QZ-ZkL" secondAttribute="trailing" id="yF7-xa-SLb"/>
                         </constraints>
                         <variation key="default">
@@ -1106,8 +1098,6 @@
                         <outlet property="todayDateLabel" destination="tmJ-Lc-XiD" id="bA2-hk-RsD"/>
                         <outlet property="unavailableTillLabel" destination="Amv-KF-Osy" id="6Y8-sd-UQd"/>
                         <outlet property="upperView" destination="bsy-os-D3c" id="ovZ-6e-wx6"/>
-                        <outlet property="userLocationCardHeightAnchor" destination="upZ-z6-N1g" id="YJc-RP-Wmn"/>
-                        <outlet property="userLocationContainerView" destination="iDA-Oj-aZO" id="TeM-jD-ziC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6d-mk-SVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1176,7 +1166,7 @@
                                 <rect key="frame" x="0.0" y="126" width="220" height="501"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
                                         <rect key="frame" x="0.0" y="22" width="220" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXN-ad-IkB" id="syQ-Lf-NEi">
@@ -1766,24 +1756,16 @@ mark your presence at your workplace</string>
                                 <rect key="frame" x="0.0" y="163" width="375" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYC-wy-nbl">
-                                <rect key="frame" x="0.0" y="464" width="375" height="576"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="h81-3A-3Ot" secondAttribute="trailing" id="6hq-yZ-kkm"/>
                             <constraint firstAttribute="trailing" secondItem="sSH-Tk-daT" secondAttribute="trailing" id="7ua-06-rlW"/>
                             <constraint firstAttribute="trailing" secondItem="YbX-sf-Blk" secondAttribute="trailing" constant="5" id="AdR-OZ-ZcT"/>
-                            <constraint firstItem="KYC-wy-nbl" firstAttribute="height" secondItem="tkc-JQ-I4r" secondAttribute="height" constant="-91" id="B64-vc-ifo"/>
-                            <constraint firstItem="KYC-wy-nbl" firstAttribute="top" secondItem="GTL-ws-lUE" secondAttribute="bottom" constant="400" id="BGj-gp-3NR"/>
                             <constraint firstItem="9JT-gB-fjH" firstAttribute="trailing" secondItem="Lf5-Id-W3q" secondAttribute="trailing" id="CFx-X2-3za"/>
                             <constraint firstItem="ie3-CP-fhQ" firstAttribute="top" secondItem="sSH-Tk-daT" secondAttribute="bottom" id="GZV-DN-J0W"/>
-                            <constraint firstItem="KYC-wy-nbl" firstAttribute="leading" secondItem="tkc-JQ-I4r" secondAttribute="leading" id="GmW-kD-W2H"/>
                             <constraint firstItem="n2g-Jo-5yq" firstAttribute="top" secondItem="Lf5-Id-W3q" secondAttribute="bottom" id="Gmn-B9-15p"/>
                             <constraint firstAttribute="trailing" secondItem="Lf5-Id-W3q" secondAttribute="trailing" constant="23" id="JEf-u8-oXe"/>
-                            <constraint firstAttribute="trailing" secondItem="KYC-wy-nbl" secondAttribute="trailing" id="M5p-0F-8qO"/>
                             <constraint firstItem="Lf5-Id-W3q" firstAttribute="leading" secondItem="tkc-JQ-I4r" secondAttribute="leading" constant="23" id="WY0-hG-xKf"/>
                             <constraint firstItem="h81-3A-3Ot" firstAttribute="top" secondItem="Lf5-Id-W3q" secondAttribute="bottom" constant="50" id="ZGY-bj-C4v"/>
                             <constraint firstItem="h81-3A-3Ot" firstAttribute="leading" secondItem="tkc-JQ-I4r" secondAttribute="leading" id="do2-nv-kRR"/>
@@ -1816,8 +1798,6 @@ mark your presence at your workplace</string>
                         <outlet property="mapView" destination="sSH-Tk-daT" id="Rta-zJ-HgO"/>
                         <outlet property="startLabel" destination="n2g-Jo-5yq" id="iFd-oD-skV"/>
                         <outlet property="swipeUpButton" destination="Uvp-Mx-7h8" id="2Da-Do-CgA"/>
-                        <outlet property="userLocationCardHeightAnchor" destination="BGj-gp-3NR" id="qBl-kV-heU"/>
-                        <outlet property="userLocationContainerView" destination="KYC-wy-nbl" id="vAN-51-ZTV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="teM-HJ-mnh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3064,29 +3044,17 @@ mark your presence at your workplace</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zd-ng-LxQ">
-                                <rect key="frame" x="0.0" y="420" width="375" height="667"/>
-                                <connections>
-                                    <segue destination="56O-hC-4Zk" kind="embed" identifier="MyTeamLocationDetailsSegue" id="228-Kj-YEd"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="MH9-bj-lUe" secondAttribute="trailing" id="9Aa-fG-qgE"/>
                             <constraint firstItem="MH9-bj-lUe" firstAttribute="leading" secondItem="gy4-2L-jDK" secondAttribute="leading" id="FrL-rH-ZOj"/>
                             <constraint firstItem="MH9-bj-lUe" firstAttribute="top" secondItem="gy4-2L-jDK" secondAttribute="top" id="KNo-Fw-kXO"/>
-                            <constraint firstItem="6Zd-ng-LxQ" firstAttribute="top" secondItem="5cO-5m-B3F" secondAttribute="bottom" constant="400" id="aNW-5X-AS0"/>
-                            <constraint firstItem="6Zd-ng-LxQ" firstAttribute="height" secondItem="gy4-2L-jDK" secondAttribute="height" id="omC-1R-dDP"/>
-                            <constraint firstAttribute="trailing" secondItem="6Zd-ng-LxQ" secondAttribute="trailing" id="pGS-Q8-UaG"/>
-                            <constraint firstItem="6Zd-ng-LxQ" firstAttribute="leading" secondItem="gy4-2L-jDK" secondAttribute="leading" id="v6r-x7-8Fx"/>
                             <constraint firstItem="mCx-WK-erV" firstAttribute="top" secondItem="MH9-bj-lUe" secondAttribute="bottom" id="x59-Td-Lcq"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="MH9-bj-lUe" id="98K-DI-XAK"/>
-                        <outlet property="userLocationCardHeightAnchor" destination="aNW-5X-AS0" id="Yy3-SK-HsJ"/>
-                        <outlet property="userLocationContainerView" destination="6Zd-ng-LxQ" id="xb0-Pg-BPU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72G-jf-jJ0" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -151,6 +151,7 @@ class UserPlace{
         }
         
         
+        
         return locationAccordingToGeoTag(locations: geoTaggedLocations)
         
         
