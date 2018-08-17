@@ -24,11 +24,7 @@ class GeoTagController: UIViewController{
     @IBOutlet weak var geoFenceRadiusDistance: UILabel!
     
     var geoTagLocation: CLLocation?
-    var geoTagAddress: String?{
-        didSet{
-            geoTagOnMap()
-        }
-    }
+    var geoTagAddress: String?
     
     
     let marker = GMSMarker()
@@ -38,9 +34,21 @@ class GeoTagController: UIViewController{
     let activityIndicator = ActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        
         setupMap()
         setupFields()
         title = "Geo Tag"
+        
+        
+        if let address = geoTagAddress,  let coordinates = geoTagLocation{
+            
+            marker.position = coordinates.coordinate
+            geoFenceCircle.position = coordinates.coordinate
+            currenLocationTextField.text = address
+            mapView.animate(toLocation: coordinates.coordinate)
+        }
+        
         
         
     }
@@ -79,14 +87,9 @@ class GeoTagController: UIViewController{
     
     func geoTagOnMap(){
         
-        currenLocationTextField.text = geoTagAddress
         
-        if let coordinates = geoTagLocation{
-            marker.position = coordinates.coordinate
-            geoFenceCircle.position = coordinates.coordinate
-            
-            mapView.animate(toLocation: coordinates.coordinate)
-        }
+        
+        
         
     }
     

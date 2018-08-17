@@ -208,9 +208,11 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
     func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
         
         if userDetails[indexPath.item].isGeoTagged == true{
-            cell.geoTagLabel.text = ""
+            cell.geoTagButton.setTitle("", for: .normal)
+           // cell.geoTagLabel.text = ""
         }else{
-            cell.geoTagLabel.text = "Geo-Tag this location"
+            cell.geoTagButton.setTitle("Geo-Tag this location", for: .normal)
+          //  cell.geoTagLabel.text = "Geo-Tag this location"
         }
         
         

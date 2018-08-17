@@ -27,13 +27,17 @@ class LocationFilters: UIViewController{
             DispatchQueue.main.async {
             
                 if let getLocations = locations{
-                    
-                    let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: getLocations)
-                    
-                    if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
-                        //completion(locationAfterTime)
+                    if getLocations.count > 1 {
+                        let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: getLocations)
                         
+                        if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
+                            //completion(locationAfterTime)
+                            
+                        }
+                    } else {
+                        self.delegate?.finalLocations(locations: getLocations)
                     }
+                   
                     
                     // let finalLocations = self.findFaultyLocations(locations: locationAfterTime)
                     

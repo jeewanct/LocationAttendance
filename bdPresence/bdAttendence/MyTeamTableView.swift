@@ -9,7 +9,7 @@
 import UIKit
 import BluedolphinCloudSdk
 import CoreLocation
-
+import PullUpController
 
 class MyTeamDetailsScreen{
     
@@ -19,30 +19,93 @@ class MyTeamDetailsScreen{
 }
 
 
-class MyTeamTableView: UIViewController{
+class MyTeamTableView: PullUpController{
     
+    
+   
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    @IBOutlet weak var secondPreviewHeightAnchor: NSLayoutConstraint!
+    @IBOutlet weak var secondPreviewHeight: UIView!
+   @IBOutlet weak var secondPreviewView: UIView!
+    
+    @IBOutlet weak var firstPreviewView: UIView!
+  
+  
     @IBOutlet weak var tableView: UITableView!
+    
     var teamData: [MyTeamData]?{
         didSet{
             setData()
-            tableView.reloadData()
+           // tableView.reloadData()
         }
     }
     var delegate: HandleUserViewDelegate?
+  
     var myTeamLocations = [MyTeamDetailsScreen]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       // tableView.attach(to: self)
+        //setupDataSource()
+        
+        secondPreviewHeightAnchor.constant = UIScreen.main.bounds.height - 214
+        
+        willMoveToStickyPoint = { point in
+            if point == UIScreen.main.bounds.height - 64{
+          //      self.visualEffectView.isHidden = false
+            }else{
+            //    self.visualEffectView.isHidden = true
+            }
+            print("willMoveToStickyPoint \(point)")
+        }
+        
+        didMoveToStickyPoint = { point in
+            
+            print("didMoveToStickyPoint \(point)")
+        }
+        
+        onDrag = { point in
+            print("onDrag: \(point)")
+        }
+        
+        
+        tableView.reloadData()
+        
     }
+    
+    
+    
+    // MARK: - PullUpController
+    
+    override var pullUpControllerPreferredSize: CGSize {
+         return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 64)
+    }
+    
+    override var pullUpControllerPreviewOffset: CGFloat {
+        print(UIScreen.main.bounds.height * 0.2)
+        return UIScreen.main.bounds.height * 0.2
+    }
+    
+    override var pullUpControllerMiddleStickyPoints: [CGFloat] {
+        return [firstPreviewView.frame.maxY]
+    }
+    
+    
+    override var pullUpControllerIsBouncingEnabled: Bool {
+        return false
+    }
+    
+    override var pullUpControllerPreferredLandscapeFrame: CGRect {
+        return CGRect(x: 5, y: 5, width: 280, height: UIScreen.main.bounds.height - 10)
+    }
+    
     
     func setData(){
     
         
         if let myTeamData = teamData{
-            
-            
             
             for location in myTeamData{
                 
@@ -67,19 +130,23 @@ class MyTeamTableView: UIViewController{
                     
                     if coordinates.count > 0 {
                         
-                        
+                        if Int(coordinates[0]) == 0 &&  Int(coordinates[0]) == 0 {
+                            
+                            locations.address = "No location found"
+                            
+                        }else{
                         locations.cllocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
+                        }
                         
                     }
                     
                     
                 }
                 
-                
                 myTeamLocations.append(locations)
             }
             
-            tableView.reloadData()
+            
             
         }
     
@@ -90,7 +157,6 @@ class MyTeamTableView: UIViewController{
 extension MyTeamTableView: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let viewController = storyboard?.instantiateViewController(withIdentifier: "MyTeamLocationDetails") as! MyTeamLocationDetails
         viewController.teamMemberUserId = teamData?[indexPath.item].userId
         viewController.teamMemberUserName = teamData?[indexPath.item].userOb?.userDetails?.name
@@ -131,14 +197,14 @@ extension MyTeamTableView: UITableViewDataSource{
     func setTeamDetails(cell: MyLocationTableViewCell, indexPath: IndexPath){
         
         cell.nameLabel.text = myTeamLocations[indexPath.item].name
-        
-        if let address = myTeamLocations[indexPath.item].address{
+
+        if let _ = myTeamLocations[indexPath.item].address{
             cell.locationLabel.text = myTeamLocations[indexPath.item].address
         }else{
             LogicHelper.shared.reverseGeoCodeGeoLocations(location: myTeamLocations[indexPath.item].cllocation, index1: indexPath.item, index2: 0) { (address, first, last) in
                 self.myTeamLocations[first].address = address
                 cell.locationLabel.text = address
-                
+
             }
         }
         

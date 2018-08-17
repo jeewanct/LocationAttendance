@@ -15,11 +15,11 @@ import Polyline
  
 class MyTeamLocationDetails: UIViewController{
     
-    @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
+   
     var userContainerView: NewCheckOutUserScreen?
     
     @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var userLocationContainerView: UIView!
+   
     
     let activityIndicator = ActivityIndicatorView()
     
@@ -49,10 +49,10 @@ class MyTeamLocationDetails: UIViewController{
         
         navigationController?.removeTransparency()
         setupMap()
-        addGestureInContainerView()
-        userLocationContainerView.isHidden = true
-        userLocationCardHeightAnchor.constant = (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
-        
+//        addGestureInContainerView()
+//        userLocationContainerView.isHidden = true
+//        userLocationCardHeightAnchor.constant = (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
+//
         
         NotificationCenter.default.addObserver(self, selector: #selector(MyTeamLocationDetails.teamDetailsFetch(locatins:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyTeamDetailsByUserId.rawValue), object: nil)
     
@@ -205,7 +205,7 @@ extension MyTeamLocationDetails{
         let allLocations = UserPlace.getGeoTagData(location: location)
         
         if allLocations.count == 0{
-            userLocationContainerView.isHidden = true
+           // userLocationContainerView.isHidden = true
         }else{
             
            // userContainerView?.locationData = allLocations
@@ -406,74 +406,74 @@ extension MyTeamLocationDetails{
         
     }
     
-    func addGestureInContainerView(){
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        userLocationContainerView.addGestureRecognizer(tapGesture)
-        
-        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
-        downGesture.direction = .up
-        
-        userLocationContainerView.addGestureRecognizer(downGesture)
-        
-    }
-
+//    func addGestureInContainerView(){
+//
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+//        userLocationContainerView.addGestureRecognizer(tapGesture)
+//
+//        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
+//        downGesture.direction = .up
+//
+//        userLocationContainerView.addGestureRecognizer(downGesture)
+//
+//    }
+//
+//
+//    @objc func handleTap(){
+//
+//        print("View Tapped")
+//
+//        if userLocationCardHeightAnchor.constant == 0 {
+//            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
+//        }else{
+//            // 400
+//            userContainerView?.tableView.isScrollEnabled = true
+//
+//            animateContainerView(heightToAnimate: 0)
+//        }
+//
+//
+//    }
+//
+//    func animateContainerView(heightToAnimate height: CGFloat){
+//
+//        UIView.animate(withDuration: 0.5) {
+//            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
+//                self.userLocationContainerView.backgroundColor = .clear
+//
+//            }else{
+//                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9016010123)
+//            }
+//
+//            self.userLocationCardHeightAnchor.constant = height
+//            self.view.layoutIfNeeded()
+//
+//        }
+//
+//    }
     
-    @objc func handleTap(){
-        
-        print("View Tapped")
-        
-        if userLocationCardHeightAnchor.constant == 0 {
-            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
-        }else{
-            // 400
-            userContainerView?.tableView.isScrollEnabled = true
-            
-            animateContainerView(heightToAnimate: 0)
-        }
-        
-        
-    }
-    
-    func animateContainerView(heightToAnimate height: CGFloat){
-        
-        UIView.animate(withDuration: 0.5) {
-            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
-                self.userLocationContainerView.backgroundColor = .clear
-                
-            }else{
-                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9016010123)
-            }
-            
-            self.userLocationCardHeightAnchor.constant = height
-            self.view.layoutIfNeeded()
-            
-        }
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MyTeamLocationDetailsSegue"{
-            userContainerView = segue.destination as! NewCheckOutUserScreen
-            userContainerView?.delegate = self
-        }
-    }
-    
-    
-}
-
-
-
-extension MyTeamLocationDetails: HandleUserViewDelegate{
-    
-    func handleOnSwipe() {
-        // userLocationCardHeightAnchor.constant += 50
-        self.view.layoutIfNeeded()
-        handleTap()
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "MyTeamLocationDetailsSegue"{
+//            userContainerView = segue.destination as! NewCheckOutUserScreen
+//            userContainerView?.delegate = self
+//        }
+//    }
     
     
 }
+
+
+//
+//extension MyTeamLocationDetails: HandleUserViewDelegate{
+//
+//    func handleOnSwipe() {
+//        // userLocationCardHeightAnchor.constant += 50
+//        self.view.layoutIfNeeded()
+//        handleTap()
+//    }
+//
+//
+//}
 
  
  
@@ -487,12 +487,29 @@ extension MyTeamLocationDetails: HandleUserViewDelegate{
     
     
     func finalLocations(locations: [LocationDataModel]) {
+        //            self.plotMarkersInMap(location: locations)
+        var finalLocations = locations
         
-        plotMarkersInMap(location: locations)
+        
+        
+        finalLocations.sort(by: { (first, second) -> Bool in
+            
+            
+            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
+                return  firstDate.compare(secondDate) == .orderedAscending
+                
+                
+            }
+            
+            return false
+        })
+        
+        print(finalLocations)
+        self.plotMarkersInMap(location: finalLocations)
+        
         
         
     }
-    
     
     
     

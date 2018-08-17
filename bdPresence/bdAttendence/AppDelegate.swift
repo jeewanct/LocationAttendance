@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Fabric.with([Crashlytics.self])
         case .Release:
             print("In Release")
-            ConfigurationModel.stopDebugging(flag: false)
+            ConfigurationModel.stopDebugging(flag: true)
             ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
             Fabric.with([Crashlytics.self])
         case .Unknown:
@@ -158,7 +158,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 
         //NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
-        
+//        window?.rootViewController?.beginAppearanceTransition(false, animated: false)
+//        window?.rootViewController?.endAppearanceTransition()
         if !SDKSingleton.sharedInstance.userId.isBlank{
             if isInternetAvailable() {
                 CheckinModel.postCheckin()
@@ -176,6 +177,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
+//        window?.rootViewController?.beginAppearanceTransition(true, animated: false)
+//        window?.rootViewController?.endAppearanceTransition()
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if !SDKSingleton.sharedInstance.userId.isBlank{
             if isInternetAvailable() {
@@ -294,7 +297,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !SDKSingleton.sharedInstance.userId.isBlank{
             
-        
             let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
             let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
             if self.window != nil {

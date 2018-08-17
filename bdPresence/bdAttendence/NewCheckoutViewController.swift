@@ -153,8 +153,8 @@ class NewCheckoutViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
         
-        
-        
+        updateView()
+
         
         // Do any additional setup after loading the view.
     }
@@ -169,7 +169,7 @@ class NewCheckoutViewController: UIViewController {
   
     override func viewDidAppear(_ animated: Bool) {
         
-        updateView()
+        
         
         if AssignmentModel.statusOfUser() {
             if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
@@ -184,7 +184,7 @@ class NewCheckoutViewController: UIViewController {
                         }
                         bdCloudStopMonitoring()
                         
-                        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
                         
                         //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
                     }
@@ -205,14 +205,14 @@ class NewCheckoutViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if let _ = pullController{
-            self.removePullUpController(pullController, animated: true)
-        }
+//        if let _ = pullController{
+//            self.removePullUpController(pullController, animated: true)
+//        }
         
-
-        if let _ = self.timer{
+        if let _ = self.timer {
             self.timer.invalidate()
         }
+
         
     }
     
@@ -245,7 +245,7 @@ class NewCheckoutViewController: UIViewController {
                                 }
                                 bdCloudStopMonitoring()
                                 
-                                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
                                 
                                 //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
                             }
@@ -326,33 +326,33 @@ class NewCheckoutViewController: UIViewController {
     
     
     func updateView(date:Date = Date()){
-        UI {
-            let isToday = Calendar.current.isDateInToday(date)
-            if isToday{
-                self.navigationItem.title = "Today"
+        
+        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+            if screenFlag == "1" {
                 
-                self.view.addGestureRecognizer(self.swipedown!)
-                self.checkoutButton.isHidden = false
-                self.endYourDayLabel.isHidden = false
-            }else{
-                self.navigationItem.title = date.dayOfWeekFull()
-                self.checkoutButton.isHidden = true
-                self.endYourDayLabel.isHidden = true
-                self.view.removeGestureRecognizer(self.swipedown!)
+                let isToday = Calendar.current.isDateInToday(date)
+                if isToday{
+                    self.navigationItem.title = "Today"
+                    
+                    self.view.addGestureRecognizer(self.swipedown!)
+                    self.checkoutButton.isHidden = false
+                    self.endYourDayLabel.isHidden = false
+                }else{
+                    self.navigationItem.title = date.dayOfWeekFull()
+                    self.checkoutButton.isHidden = true
+                    self.endYourDayLabel.isHidden = true
+                    self.view.removeGestureRecognizer(self.swipedown!)
+                    
+                }
                 
+                
+                let locationFilters = LocationFilters()
+                locationFilters.delegate = self
+                locationFilters.plotMarkers(date: date)
             }
-            
-            
-            let locationFilters = LocationFilters()
-            locationFilters.delegate = self
-            locationFilters.plotMarkers(date: date)
+        
         }
-        
-        
-
-        let locationFilters = LocationFilters()
-        locationFilters.delegate = self
-        locationFilters.plotMarkers(date: date)
+    
         
 
     }
@@ -366,14 +366,7 @@ class NewCheckoutViewController: UIViewController {
         
         let allLocations = UserPlace.getGeoTagData(location: location)
         
-        
-        
-        
-        
-        
-       
-        
-        
+    
         
         if allLocations.count == 0{
          
@@ -446,17 +439,16 @@ class NewCheckoutViewController: UIViewController {
         // mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
         
         
-        UI{
         
         let polyline = GMSPolyline(path: self.path)
         polyline.strokeColor = .black
         polyline.strokeWidth = 3
         polyline.map = self.mapView
             
-        }
+    
         
 
-        //self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+      //  self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
 
         
     }
@@ -466,9 +458,6 @@ class NewCheckoutViewController: UIViewController {
         let state = UIApplication.shared.applicationState
         
         if state == .background {
-            if let _ = self.timer {
-                self.timer.invalidate()
-            }
             // background
         }
         else if state == .active {
@@ -488,6 +477,8 @@ class NewCheckoutViewController: UIViewController {
 
             // foreground
         }
+        
+        
     }
     
     
@@ -499,10 +490,10 @@ class NewCheckoutViewController: UIViewController {
             if let locationLat = CLLocationDegrees(lat), let locationLong = CLLocationDegrees(long){
                 
                 marker.position = CLLocationCoordinate2D(latitude:  locationLat, longitude: locationLong)
-                
-                
-                marker.title = "Sydney"
-                marker.snippet = "Australia"
+//
+//
+//                marker.title = "Sydney"
+//                marker.snippet = "Australia"
                 let iconImageView = UIImageView(image: #imageLiteral(resourceName: "locationBlack").withRenderingMode(.alwaysTemplate))
                 iconImageView.tintColor = markerColor
                 marker.iconView = iconImageView
@@ -676,17 +667,32 @@ extension NewCheckoutViewController: HandleUserViewDelegate{
 extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
-        UI {
             self.drawPath(coordinates: coordinates)
-        }
+        
     }
     
     
     
     func finalLocations(locations: [LocationDataModel]) {
-        UI {
-            self.plotMarkersInMap(location: locations)
-        }
+//            self.plotMarkersInMap(location: locations)
+        var finalLocations = locations
+        
+        
+        
+        finalLocations.sort(by: { (first, second) -> Bool in
+            
+            
+            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
+                return  firstDate.compare(secondDate) == .orderedAscending
+                
+                
+            }
+            
+            return false
+        })
+        
+        print(finalLocations)
+        self.plotMarkersInMap(location: finalLocations)
         
       
         

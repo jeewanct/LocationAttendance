@@ -180,9 +180,10 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
         
         if userDetails[indexPath.item].isGeoTagged == true{
-            cell.geoTagLabel.text = ""
+            
         }else{
-            cell.geoTagLabel.text = "Geo-Tag this location"
+            
+            cell.geoTagButton.setTitle("Geo-Tag this location", for: .normal)
         }
         
         
@@ -322,7 +323,7 @@ extension SearchViewController: GeoTagLocationDelegate{
         let cllLocation = userDetails[currentIndex].cllLocation
         let address = userDetails[currentIndex].address
         
-        let geoTagController = GeoTagController()
+        let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
         geoTagController.geoTagLocation = cllLocation
         geoTagController.geoTagAddress = address
         

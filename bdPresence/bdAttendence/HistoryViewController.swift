@@ -25,12 +25,8 @@ class HistoryViewController: UIViewController {
     
     @IBOutlet weak var mapView: GMSMapView!
     
-    var message = ""
+  
     /* Changes made from 10th July '18 */
-    
-    var userContainerView: NewCheckOutUserScreen?
-    
-    
     
     
     var pullController: SearchViewController!
@@ -100,15 +96,6 @@ class HistoryViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-//        var insets = self.calenderView.contentInset
-//        //let value = (self.calenderView.frame.size.height - (self.calenderView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize.height)
-//        insets.top = 0.0
-//        insets.bottom = 0.0
-//        insets.left = 0.0
-//        insets.right = 0.0
-//        self.calenderView.contentInset = insets
-        
-        //alenderView.contentSize = CGSize(width: 40.0, height: 40.0)
     }
 
     
@@ -428,11 +415,7 @@ extension HistoryViewController{
         
          mapView.changeStyle()
         
-        let marker = GMSMarker()
-        
-        
         var locationManage = CLLocationManager()
-        locationManage.location?.coordinate.latitude
         
         if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
             
@@ -446,57 +429,6 @@ extension HistoryViewController{
         
     }
     
-//    func addGestureInContainerView(){
-//
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-//        userLocationContainerView.addGestureRecognizer(tapGesture)
-//
-//        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
-//        downGesture.direction = .up
-//
-//        userLocationContainerView.addGestureRecognizer(downGesture)
-//
-//    }
-
-//    @objc func handleTap(){
-//        
-//        print("View Tapped")
-//        
-//       
-//        
-//        if userLocationCardHeightAnchor.constant == 91 {
-//            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
-//        }else{
-//            // 400
-//            userContainerView?.tableView.isScrollEnabled = true
-//            
-//            animateContainerView(heightToAnimate: 91)
-//        }
-//        
-//    }
-//    
-//    func animateContainerView(heightToAnimate height: CGFloat){
-//        
-//        UIView.animate(withDuration: 0.5) {
-//            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
-//                self.userLocationContainerView.backgroundColor = .clear
-//                
-//            }else{
-//                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.75)
-//            }
-//            
-//            self.userLocationCardHeightAnchor.constant = height
-//            self.view.layoutIfNeeded()
-//            
-//        }
-//    }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "userContainerViewSegue"{
-//            userContainerView = segue.destination as! NewCheckOutUserScreen
-//            userContainerView?.delegate = self
-//        }
-//    }
 
     
 }
@@ -515,9 +447,30 @@ extension HistoryViewController: HandleUserViewDelegate{
 
 
 extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate{
+    
+    
     func finalLocations(locations: [LocationDataModel]) {
-        plotMarkersInMap(location: locations)
-      //  message = "final locations are \(locations.count)"
+        //            self.plotMarkersInMap(location: locations)
+        var finalLocations = locations
+        
+        
+        
+        finalLocations.sort(by: { (first, second) -> Bool in
+            
+            
+            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
+                return  firstDate.compare(secondDate) == .orderedAscending
+                
+                
+            }
+            
+            return false
+        })
+        
+        print(finalLocations)
+        self.plotMarkersInMap(location: finalLocations)
+        
+        
         
     }
     

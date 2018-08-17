@@ -11,6 +11,7 @@ import UIKit
 class MyLocationTableViewCell: UITableViewCell{
     @IBOutlet weak var visualEffect: UIVisualEffectView!
     
+    @IBOutlet weak var effectView: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -21,8 +22,9 @@ class MyLocationTableViewCell: UITableViewCell{
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-//        visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
-//        visualEffect.layer.masksToBounds = true
+        selectionStyle = .none
+        effectView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        effectView.layer.masksToBounds = true
         
     }
 }
