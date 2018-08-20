@@ -80,7 +80,7 @@ extension MyTeamViewController{
                     
                    // marker.title = "Sydney"
                     marker.icon = #imageLiteral(resourceName: "employeeImage")
-                    marker.snippet = "Australia"
+                    //marker.snippet = "Australia"
                     marker.map = mapView
                     
                     if let name = teams.userOb?.userDetails?.name{

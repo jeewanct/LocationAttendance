@@ -211,6 +211,7 @@ class NewCheckoutViewController: UIViewController {
         
         if let _ = self.timer {
             self.timer.invalidate()
+            self.timer = nil
         }
 
         
@@ -313,6 +314,7 @@ class NewCheckoutViewController: UIViewController {
         animationPolyline = GMSPolyline()
         if let _ = timer{
             timer.invalidate()
+            timer = nil
         }
         
         polyline = GMSPolyline()
@@ -447,9 +449,11 @@ class NewCheckoutViewController: UIViewController {
             
     
         
-
-      //  self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
-
+//        if self.timer == nil && coordinates.count > 1{
+//            self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+//
+//        }
+        
         
     }
     
@@ -697,10 +701,6 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
       
         
     }
-    
-    
-    
-    
     
 }
 

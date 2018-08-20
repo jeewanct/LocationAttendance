@@ -190,11 +190,22 @@ extension MyTeamLocationDetails{
             
         
         
-        
+        //reversing the team data
+        teamData.sort(by: { (first, second) -> Bool in
+            
+            
+            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
+                return  firstDate.compare(secondDate) == .orderedAscending
+                
+                
+            }
+            
+            return false
+        })
         
         let locationFilters = LocationFilters()
         locationFilters.delegate = self
-        locationFilters.plotMarkerInMap(locations: teamData.reversed())
+        locationFilters.plotMarkerInMap(locations: teamData)
         
         
         

@@ -92,7 +92,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !SDKSingleton.sharedInstance.userId.isBlank {
             if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
                 BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
-                BlueDolphinManager.manager.startLocationMonitoring()
+                // Here check whether the shift is runing or not then only start location monitoring
+                let notifier = RMCNotifier.shared
+                if notifier.getShiftRunningStatus() {
+                    BlueDolphinManager.manager.startLocationMonitoring()
+                }
+//                if SDKSingleton.sharedInstance.isShiftRunning {
+//                    BlueDolphinManager.manager.startLocationMonitoring()
+//                }
             }
 
         }
@@ -102,7 +109,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         startUpTask()
         
-        if !SDKSingleton.sharedInstance.userId.isBlank{
+        if !SDKSingleton.sharedInstance.userId.isBlank {
+            
             if isInternetAvailable() {
                 // Adding data to download assignment for status change feature if internet is there and meanwhile
                 // I will start work to check the data from database and act accordingly for STATUS CHANGE FEATURE.
@@ -181,7 +189,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.rootViewController?.endAppearanceTransition()
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if !SDKSingleton.sharedInstance.userId.isBlank{
-            if isInternetAvailable() {
+
+            if isInternetAvailable()  {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: self, userInfo: nil)
                 CheckinModel.postCheckin()
                 // Adding data to download assignment for status change feature if internet is there and meanwhile
@@ -219,7 +228,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
+        if !SDKSingleton.sharedInstance.userId.isBlank{
+            let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String
+            
+            if isInternetAvailable() && screenFlag == "1" {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
+
+            }
+        }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //        BlueDolphinManager.manager.gpsAuthorizationStatus { (newStatus) in
 //            print("newStatus = \(newStatus.rawValue)")

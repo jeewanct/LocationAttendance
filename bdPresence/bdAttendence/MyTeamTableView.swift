@@ -64,12 +64,19 @@ class MyTeamTableView: PullUpController{
         didMoveToStickyPoint = { point in
             
             print("didMoveToStickyPoint \(point)")
+            
         }
         
+        // New change - Sourabh
         onDrag = { point in
             print("onDrag: \(point)")
+            if point > 100 {
+                self.tableView.isScrollEnabled = true
+            } else {
+                self.tableView.isScrollEnabled = false
+                self.delegate?.handleOnSwipe()
+            }
         }
-        
         
         tableView.reloadData()
         
@@ -125,8 +132,7 @@ class MyTeamTableView: PullUpController{
                     locations.name = userName
                 }
                 
-                
-                if let coordinates = location.userOb?.userStatus?.location?.coordinates{
+                if let coordinates = location.checkinData?.location?.coordinates {
                     
                     if coordinates.count > 0 {
                         
@@ -135,13 +141,30 @@ class MyTeamTableView: PullUpController{
                             locations.address = "No location found"
                             
                         }else{
-                        locations.cllocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
+                            locations.cllocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
                         }
                         
                     }
                     
                     
                 }
+                
+//                if let coordinates = location.userOb?.userStatus?.location?.coordinates{
+//
+//                    if coordinates.count > 0 {
+//
+//                        if Int(coordinates[0]) == 0 &&  Int(coordinates[0]) == 0 {
+//
+//                            locations.address = "No location found"
+//
+//                        }else{
+//                        locations.cllocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
+//                        }
+//
+//                    }
+//
+//
+//                }
                 
                 myTeamLocations.append(locations)
             }

@@ -1153,7 +1153,7 @@
                                 <rect key="frame" x="0.0" y="126" width="220" height="501"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
+                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
                                         <rect key="frame" x="0.0" y="22" width="220" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXN-ad-IkB" id="syQ-Lf-NEi">
@@ -3115,8 +3115,11 @@ mark your presence at your workplace</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="144.5"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="RMC Office G-84, outer cirecle, Caonnaught Place, New Delhi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeL-Dn-fIg">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Fetching Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeL-Dn-fIg">
                                                                 <rect key="frame" x="16" y="43" width="311" height="33"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="33" id="cHV-T4-TjY"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
@@ -3139,7 +3142,7 @@ mark your presence at your workplace</string>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ik3-Ug-n3Z">
                                                                 <rect key="frame" x="16" y="108" width="311" height="28"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                                <state key="normal">
+                                                                <state key="normal" title="Geo-Tag this location">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
@@ -3158,6 +3161,7 @@ mark your presence at your workplace</string>
                                                             <constraint firstAttribute="trailing" secondItem="ik3-Ug-n3Z" secondAttribute="trailing" constant="16" id="2ZY-Iq-qeB"/>
                                                             <constraint firstAttribute="trailing" secondItem="RSu-ec-gzH" secondAttribute="trailing" constant="16" id="FVo-QP-a2j"/>
                                                             <constraint firstItem="RSu-ec-gzH" firstAttribute="top" secondItem="Ptq-Ws-yXv" secondAttribute="top" constant="16" id="LVx-ua-06P"/>
+                                                            <constraint firstAttribute="bottom" secondItem="LmO-OA-WgN" secondAttribute="bottom" constant="44" id="Ppi-mZ-5gh"/>
                                                             <constraint firstItem="LmO-OA-WgN" firstAttribute="top" secondItem="EeL-Dn-fIg" secondAttribute="bottom" constant="8" id="RBV-pe-KFa"/>
                                                             <constraint firstItem="EeL-Dn-fIg" firstAttribute="leading" secondItem="Ptq-Ws-yXv" secondAttribute="leading" constant="16" id="Uh7-jC-BAV"/>
                                                             <constraint firstItem="ik3-Ug-n3Z" firstAttribute="leading" secondItem="Ptq-Ws-yXv" secondAttribute="leading" constant="16" id="glV-ga-LYA"/>
@@ -3165,7 +3169,6 @@ mark your presence at your workplace</string>
                                                             <constraint firstItem="RSu-ec-gzH" firstAttribute="leading" secondItem="Ptq-Ws-yXv" secondAttribute="leading" constant="16" id="mIV-ON-f5p"/>
                                                             <constraint firstAttribute="bottom" secondItem="ik3-Ug-n3Z" secondAttribute="bottom" constant="8.5" id="n8Y-HI-Oo6"/>
                                                             <constraint firstItem="EeL-Dn-fIg" firstAttribute="top" secondItem="RSu-ec-gzH" secondAttribute="bottom" constant="8" id="nZX-ao-47m"/>
-                                                            <constraint firstItem="ik3-Ug-n3Z" firstAttribute="top" secondItem="LmO-OA-WgN" secondAttribute="bottom" constant="8" id="ptt-hM-hVu"/>
                                                             <constraint firstAttribute="trailing" secondItem="LmO-OA-WgN" secondAttribute="trailing" constant="16" id="qOJ-6i-yz9"/>
                                                         </constraints>
                                                     </tableViewCellContentView>
@@ -3174,6 +3177,7 @@ mark your presence at your workplace</string>
                                                         <outlet property="addressLabel" destination="EeL-Dn-fIg" id="l4G-rg-Fcg"/>
                                                         <outlet property="geoTagButton" destination="ik3-Ug-n3Z" id="uSY-cQ-MzF"/>
                                                         <outlet property="locationDetailLabel" destination="RSu-ec-gzH" id="Nge-af-9v0"/>
+                                                        <outlet property="timeBottomConstraint" destination="Ppi-mZ-5gh" id="kaY-On-VFn"/>
                                                         <outlet property="timeLabel" destination="LmO-OA-WgN" id="oW5-oF-Gjn"/>
                                                     </connections>
                                                 </tableViewCell>

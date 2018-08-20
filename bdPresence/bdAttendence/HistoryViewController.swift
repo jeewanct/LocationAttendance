@@ -68,11 +68,7 @@ class HistoryViewController: UIViewController {
 
         
         NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
-        
-        
-        
-        
-        
+
         
         // Do any additional setup after loading the view.
     }
@@ -88,6 +84,7 @@ class HistoryViewController: UIViewController {
         
         if let getTimer = self.timer{
             self.timer.invalidate()
+            self.timer = nil
         }
         
     }
@@ -178,12 +175,24 @@ class HistoryViewController: UIViewController {
     func plotMarkersInMap(location: [LocationDataModel]){
         
         let allLocations = UserPlace.getGeoTagData(location: location)
-        
+        var finalLocations = allLocations
+
        
         if allLocations.count == 0{
         }else{
             //plotPathInMap(location: allLocations)
-            
+            // first change the location in ascending order
+//            finalLocations.sort(by: { (first, second) -> Bool in
+//                
+//                if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
+//                    return  firstDate.compare(secondDate) == .orderedAscending
+//
+//
+//                }
+//                
+//                return false
+//            })
+
             
             pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
@@ -245,7 +254,10 @@ class HistoryViewController: UIViewController {
         polyline.strokeWidth = 3
         polyline.map = mapView
         
-        //self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+//        if self.timer == nil && coordinates.count > 1 {
+//            self.timer = Timer.scheduledTimer(timeInterval: 0.0003, target: self, selector: #selector(animatePolylinePath), userInfo: nil, repeats: true)
+//
+//        }
         
     }
     
@@ -374,6 +386,7 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         animationPolyline = GMSPolyline()
         if let _ = timer{
             timer.invalidate()
+            timer = nil
         }
         
         polyline = GMSPolyline()
@@ -456,14 +469,14 @@ extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate
         
         
         finalLocations.sort(by: { (first, second) -> Bool in
-            
-            
+
+
             if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
                 return  firstDate.compare(secondDate) == .orderedAscending
-                
-                
+
+
             }
-            
+
             return false
         })
         
