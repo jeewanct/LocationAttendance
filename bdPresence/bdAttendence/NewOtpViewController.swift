@@ -123,7 +123,7 @@ class NewOtpViewController: UIViewController {
         view.showActivityIndicator(activityIndicator: activityIndicator)
         UserDataModel.userSignUp(param:objectdata) { (value) in
             //        AlertView.sharedInstance.hideActivityIndicator(self.view)
-            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+            
             switch (value){
             case APIResult.Success.rawValue:
                 
@@ -132,6 +132,9 @@ class NewOtpViewController: UIViewController {
                 let realm = try! Realm()
                 let tokensList = realm.objects(AccessTokenObject.self)
                 if tokensList.count > 1{
+                    
+                    self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+                    
                     let destVC = self.storyboard?.instantiateViewController(withIdentifier: "orgList") as! UINavigationController
                     //                    let topController = destVC.topViewController as! NewOrganisationSelectViewController
                     //                    topController.accessTokensList = tokensList
@@ -144,14 +147,14 @@ class NewOtpViewController: UIViewController {
                     }
                     
                     getUserData()
-                    self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
+                    //self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
                     if isInternetAvailable(){
                         checkShiftStatus { (apiResultStatus) in
                             
                             if apiResultStatus == APIResult.Success {
                                 
                                 if LocationHistoryData.getLocationDataCount() == 0{
-                                    self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
+                                   // self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
                                     LocationHistoryData.getTeamMember()
                                 }else{
                                     self.goToHome()

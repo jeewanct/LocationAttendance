@@ -24,7 +24,7 @@ class NewCheckoutCell: UITableViewCell{
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addressLabel.addGestureRecognizer(tapGesture)
-        geoTagLabel.textColor = UIColor.white
+      //  geoTagLabel.textColor = UIColor.white
     }
     
     @objc func handleTap(){

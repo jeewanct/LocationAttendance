@@ -33,7 +33,7 @@ class NewCheckoutViewController: UIViewController {
     @IBOutlet weak var endTimeLabel: UILabel!
     
     @IBOutlet weak var upperView: UIView!
-    
+
     
     //  @IBOutlet weak var progressView: UICircularProgressRingView!
     var  dataArray = [Date]()
@@ -326,7 +326,7 @@ class NewCheckoutViewController: UIViewController {
     
     
     func updateView(date:Date = Date()){
-        UI {
+     
             let isToday = Calendar.current.isDateInToday(date)
             if isToday{
                 self.navigationItem.title = "Today"
@@ -346,13 +346,9 @@ class NewCheckoutViewController: UIViewController {
             let locationFilters = LocationFilters()
             locationFilters.delegate = self
             locationFilters.plotMarkers(date: date)
-        }
+    
         
         
-
-        let locationFilters = LocationFilters()
-        locationFilters.delegate = self
-        locationFilters.plotMarkers(date: date)
         
 
     }
@@ -366,14 +362,7 @@ class NewCheckoutViewController: UIViewController {
         
         let allLocations = UserPlace.getGeoTagData(location: location)
         
-        
-        
-        
-        
-        
-       
-        
-        
+    
         
         if allLocations.count == 0{
          
@@ -676,17 +665,36 @@ extension NewCheckoutViewController: HandleUserViewDelegate{
 extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
-        UI {
+        
             self.drawPath(coordinates: coordinates)
-        }
+        
     }
     
     
     
     func finalLocations(locations: [LocationDataModel]) {
-        UI {
-            self.plotMarkersInMap(location: locations)
-        }
+       
+        
+        
+        var finalLocations = locations
+        
+        
+       
+             finalLocations.sort(by: { (first, second) -> Bool in
+                
+                
+                if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
+                      return  firstDate.compare(secondDate) == .orderedDescending
+                    
+                
+                }
+             
+                return false
+            })
+        
+        print(finalLocations)
+            self.plotMarkersInMap(location: finalLocations)
+        
         
       
         

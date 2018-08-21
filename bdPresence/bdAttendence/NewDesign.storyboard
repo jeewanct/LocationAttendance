@@ -3122,21 +3122,21 @@ mark your presence at your workplace</string>
                                                 <constraint firstAttribute="height" constant="360" id="wh5-fj-gUr"/>
                                             </constraints>
                                         </view>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="171" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L92-QZ-zZY">
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="148" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L92-QZ-zZY">
                                             <rect key="frame" x="8" y="0.0" width="343" height="515"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="separatorColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <prototypes>
-                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewCheckOutUserScreenCell" rowHeight="171" id="MCC-3E-VSz" customClass="NewCheckoutCell" customModule="bdPresence" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="28" width="343" height="171"/>
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewCheckOutUserScreenCell" rowHeight="148" id="MCC-3E-VSz" customClass="NewCheckoutCell" customModule="bdPresence" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="28" width="343" height="148"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MCC-3E-VSz" id="Ptq-Ws-yXv">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="170.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="147.5"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="RMC Office G-84, outer cirecle, Caonnaught Place, New Delhi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeL-Dn-fIg">
-                                                                <rect key="frame" x="16" y="43" width="311" height="62.5"/>
+                                                                <rect key="frame" x="16" y="43" width="311" height="33"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
@@ -3151,39 +3151,39 @@ mark your presence at your workplace</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 hrs 11 min" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LmO-OA-WgN">
-                                                                <rect key="frame" x="16" y="113.5" width="311" height="16.5"/>
+                                                                <rect key="frame" x="16" y="84" width="311" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Geo-Tag this location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRd-2N-ojY">
-                                                                <rect key="frame" x="16" y="138" width="311" height="16.5"/>
-                                                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="13"/>
-                                                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <color key="highlightedColor" red="0.42352941179999998" green="0.72941176470000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVa-O0-lSt">
+                                                                <rect key="frame" x="16" y="108.5" width="311" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                <state key="normal" title="Geo-Tag this location">
+                                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="EeL-Dn-fIg" secondAttribute="trailing" constant="16" id="0sD-lZ-NGJ"/>
-                                                            <constraint firstAttribute="trailing" secondItem="fRd-2N-ojY" secondAttribute="trailing" constant="16" id="4oa-O0-xdW"/>
-                                                            <constraint firstAttribute="bottom" secondItem="fRd-2N-ojY" secondAttribute="bottom" constant="16" id="D1V-x8-QdV"/>
-                                                            <constraint firstItem="fRd-2N-ojY" firstAttribute="leading" secondItem="Ptq-Ws-yXv" secondAttribute="leading" constant="16" id="DlG-ve-8xF"/>
                                                             <constraint firstAttribute="trailing" secondItem="RSu-ec-gzH" secondAttribute="trailing" constant="16" id="FVo-QP-a2j"/>
                                                             <constraint firstItem="RSu-ec-gzH" firstAttribute="top" secondItem="Ptq-Ws-yXv" secondAttribute="top" constant="16" id="LVx-ua-06P"/>
                                                             <constraint firstItem="LmO-OA-WgN" firstAttribute="top" secondItem="EeL-Dn-fIg" secondAttribute="bottom" constant="8" id="RBV-pe-KFa"/>
                                                             <constraint firstItem="EeL-Dn-fIg" firstAttribute="leading" secondItem="Ptq-Ws-yXv" secondAttribute="leading" constant="16" id="Uh7-jC-BAV"/>
+                                                            <constraint firstItem="VVa-O0-lSt" firstAttribute="top" secondItem="LmO-OA-WgN" secondAttribute="bottom" constant="8" id="fBz-1F-QHI"/>
                                                             <constraint firstItem="LmO-OA-WgN" firstAttribute="leading" secondItem="Ptq-Ws-yXv" secondAttribute="leading" constant="16" id="kDZ-6d-JV3"/>
                                                             <constraint firstItem="RSu-ec-gzH" firstAttribute="leading" secondItem="Ptq-Ws-yXv" secondAttribute="leading" constant="16" id="mIV-ON-f5p"/>
                                                             <constraint firstItem="EeL-Dn-fIg" firstAttribute="top" secondItem="RSu-ec-gzH" secondAttribute="bottom" constant="8" id="nZX-ao-47m"/>
                                                             <constraint firstAttribute="trailing" secondItem="LmO-OA-WgN" secondAttribute="trailing" constant="16" id="qOJ-6i-yz9"/>
-                                                            <constraint firstItem="fRd-2N-ojY" firstAttribute="top" secondItem="LmO-OA-WgN" secondAttribute="bottom" constant="8" id="vjC-yZ-1Wk"/>
+                                                            <constraint firstAttribute="bottom" secondItem="VVa-O0-lSt" secondAttribute="bottom" constant="9" id="tKx-PQ-hSl"/>
+                                                            <constraint firstItem="VVa-O0-lSt" firstAttribute="leading" secondItem="Ptq-Ws-yXv" secondAttribute="leading" constant="16" id="vef-uf-FGn"/>
+                                                            <constraint firstAttribute="trailing" secondItem="VVa-O0-lSt" secondAttribute="trailing" constant="16" id="yPa-Tw-SWu"/>
                                                         </constraints>
                                                     </tableViewCellContentView>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
                                                         <outlet property="addressLabel" destination="EeL-Dn-fIg" id="l4G-rg-Fcg"/>
-                                                        <outlet property="geoTagLabel" destination="fRd-2N-ojY" id="Usb-JX-Cgk"/>
                                                         <outlet property="locationDetailLabel" destination="RSu-ec-gzH" id="Nge-af-9v0"/>
                                                         <outlet property="timeLabel" destination="LmO-OA-WgN" id="oW5-oF-Gjn"/>
                                                     </connections>
@@ -3243,7 +3243,7 @@ mark your presence at your workplace</string>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.44705882349999998" green="0.56862745100000001" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="I7D-QF-9v1" secondAttribute="bottom" id="bnH-Zo-Jc4"/>
                                 </constraints>
@@ -3274,7 +3274,7 @@ mark your presence at your workplace</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTb-hm-Iqm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5527" y="1575"/>
+            <point key="canvasLocation" x="5525.6000000000004" y="1574.6626686656673"/>
         </scene>
     </scenes>
     <resources>
