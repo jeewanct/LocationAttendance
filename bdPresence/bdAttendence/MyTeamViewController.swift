@@ -12,11 +12,10 @@ import BluedolphinCloudSdk
 
 class MyTeamViewController: UIViewController{
     
-    @IBOutlet weak var userLocationContainerView: UIView!
+   
     @IBOutlet weak var mapView: GMSMapView!
     
-    @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
-    var userContainerView: MyTeamTableView?
+
     var teamData: [MyTeamData]?
     //var errorView :ErrorScanView!
     let activityIndicator = ActivityIndicatorView()
@@ -24,11 +23,22 @@ class MyTeamViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMap()
-        addGestureInContainerView()
         setupNavigation()
         getTeamLocation()
-        userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
         
+        
+    }
+    
+    func addPullController(teamData: [MyTeamData]?){
+        guard let pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+            
+            .instantiateViewController(withIdentifier: "MyTeamTableView") as? MyTeamTableView else{
+                return 
+        }
+        pullController.teamData = teamData
+      //  self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
+      //  self.pullController.locationData = allLocations.reversed()
+        self.addPullUpController(pullController, animated: true)
     }
     
     
@@ -70,7 +80,7 @@ extension MyTeamViewController{
                     
                    // marker.title = "Sydney"
                     marker.icon = #imageLiteral(resourceName: "employeeImage")
-                    marker.snippet = "Australia"
+                    //marker.snippet = "Australia"
                     marker.map = mapView
                     
                     if let name = teams.userOb?.userDetails?.name{
@@ -153,70 +163,30 @@ extension MyTeamViewController{
         
     }
     
-    func addGestureInContainerView(){
-        
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-//        userLocationContainerView.addGestureRecognizer(tapGesture)
-        
-        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
-        downGesture.direction = .up
-        
-        userLocationContainerView.addGestureRecognizer(downGesture)
-        
-    }
+   
     
-    @objc func handleTap(){
-        
-        print("View Tapped")
-        
-        if userLocationCardHeightAnchor.constant == 5{
-            animateContainerView(heightToAnimate: UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
-        }else{
-            // 400
-            userContainerView?.tableView.isScrollEnabled = true
-            animateContainerView(heightToAnimate: 0)
-        }
-        
-        
-    }
     
-    func animateContainerView(heightToAnimate height: CGFloat){
-        
-        UIView.animate(withDuration: 0.5) {
-            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
-                self.userLocationContainerView.backgroundColor = .clear
-                
-            }else{
-                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7508527729)
-            }
-            
-            self.userLocationCardHeightAnchor.constant = height
-            self.view.layoutIfNeeded()
-            
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MyTeamSegueIdentifier"{
-            userContainerView = segue.destination as! MyTeamTableView
-            userContainerView?.delegate = self
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "MyTeamSegueIdentifier"{
+//            userContainerView = segue.destination as! MyTeamTableView
+//            userContainerView?.delegate = self
+//        }
+//    }
     
     
 }
 
 
-extension MyTeamViewController: HandleUserViewDelegate{
-    
-    func handleOnSwipe() {
-         userLocationCardHeightAnchor.constant += 5
-        self.view.layoutIfNeeded()
-        handleTap()
-    }
-    
-    
-}
+//extension MyTeamViewController: HandleUserViewDelegate{
+//
+////    func handleOnSwipe() {
+////         userLocationCardHeightAnchor.constant += 5
+////        self.view.layoutIfNeeded()
+////        handleTap()
+////    }
+//
+//
+//}
 
 
 extension MyTeamViewController{
@@ -239,8 +209,10 @@ extension MyTeamViewController{
         
         if let myTeamData = data{
             self.teamData = myTeamData
-            addMarkersInMap(teamDetails: myTeamData)
-            userContainerView?.teamData = myTeamData
+            if myTeamData.count > 0 {
+                addMarkersInMap(teamDetails: myTeamData)
+                addPullController(teamData: myTeamData)
+            }
             
         }
        

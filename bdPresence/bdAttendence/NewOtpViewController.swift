@@ -154,7 +154,9 @@ class NewOtpViewController: UIViewController {
                             if apiResultStatus == APIResult.Success {
                                 
                                 if LocationHistoryData.getLocationDataCount() == 0{
-                                   // self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
+
+                                    self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
+
                                     LocationHistoryData.getTeamMember()
                                 }else{
                                     self.goToHome()
@@ -179,9 +181,9 @@ class NewOtpViewController: UIViewController {
     
     func goToHome(){
         self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
-//        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
-//        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-//        UIApplication.shared.keyWindow?.rootViewController = destVC
+        //        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+        //        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+        //        UIApplication.shared.keyWindow?.rootViewController = destVC
         
         
         let destVc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadPlaceController") as! DownloadPlaceController
@@ -316,5 +318,3 @@ extension NewOtpViewController:CodeInputViewDelegate{
         getOauth()
     }
 }
-
-

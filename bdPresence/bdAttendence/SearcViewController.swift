@@ -27,6 +27,7 @@ class SearchViewController: PullUpController {
    
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var timeLabelBottomContraint: NSLayoutConstraint!
     
     var locationData: [[LocationDataModel]]?{
         didSet{
@@ -73,11 +74,12 @@ class SearchViewController: PullUpController {
         print(UIScreen.main.bounds.height)
         
        
-        
+
         //visualEffectView.roundCorners([.topLeft, .topRight], radius: 15)
         setPreviewHeightConstant()
-        tableView.estimatedRowHeight = 200
-        
+        tableView.estimatedRowHeight = 145
+        tableView.rowHeight = UITableViewAutomaticDimension
+
         tableView.attach(to: self)
         //setupDataSource()
         
@@ -164,6 +166,11 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if userDetails[indexPath.item].isGeoTagged == true {
+//            return 112.0
+//        } else {
+//            return UITableViewAutomaticDimension
+//        }
         return UITableViewAutomaticDimension
     }
     
@@ -180,9 +187,17 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
         
         if userDetails[indexPath.item].isGeoTagged == true{
-           // cell.geoTagLabel.text = ""
+
+            cell.timeBottomConstraint.constant = 10
+            cell.geoTagButton.isHidden = true
+            cell.geoTagButton.setTitle("", for: .normal)
+
         }else{
-            //cell.geoTagLabel.text = "Geo-Tag this location"
+
+            cell.timeBottomConstraint.constant = 44
+            cell.geoTagButton.isHidden = false
+            cell.geoTagButton.setTitle("Geo-Tag this location", for: .normal)
+
         }
         
         
@@ -225,6 +240,11 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         //(parent as? MapViewController)?.zoom(to: locations[indexPath.row].location)
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
 }
 
 
@@ -299,6 +319,18 @@ extension SearchViewController{
                 
                 
             }
+            // First short in ascending then assign to userDetails
+            user.sort(by: { (first, second) -> Bool in
+                
+                
+                if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
+                    return  firstDate.compare(secondDate) == .orderedDescending
+                    
+                    
+                }
+                
+                return false
+            })
             
             userDetails = user
             
@@ -322,7 +354,7 @@ extension SearchViewController: GeoTagLocationDelegate{
         let cllLocation = userDetails[currentIndex].cllLocation
         let address = userDetails[currentIndex].address
         
-        let geoTagController = GeoTagController()
+        let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
         geoTagController.geoTagLocation = cllLocation
         geoTagController.geoTagAddress = address
         

@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Fabric.with([Crashlytics.self])
         case .Release:
             print("In Release")
-            ConfigurationModel.stopDebugging(flag: false)
+            ConfigurationModel.stopDebugging(flag: true)
             ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
             Fabric.with([Crashlytics.self])
         case .Unknown:
@@ -92,7 +92,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !SDKSingleton.sharedInstance.userId.isBlank {
             if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
                 BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
-                BlueDolphinManager.manager.startLocationMonitoring()
+                // Here check whether the shift is runing or not then only start location monitoring
+                let notifier = RMCNotifier.shared
+                if notifier.getShiftRunningStatus() {
+                    BlueDolphinManager.manager.startLocationMonitoring()
+                }
+//                if SDKSingleton.sharedInstance.isShiftRunning {
+//                    BlueDolphinManager.manager.startLocationMonitoring()
+//                }
             }
 
         }
@@ -102,7 +109,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         startUpTask()
         
-        if !SDKSingleton.sharedInstance.userId.isBlank{
+        if !SDKSingleton.sharedInstance.userId.isBlank {
+            
             if isInternetAvailable() {
                 // Adding data to download assignment for status change feature if internet is there and meanwhile
                 // I will start work to check the data from database and act accordingly for STATUS CHANGE FEATURE.
@@ -158,7 +166,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 
         //NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
-        
+//        window?.rootViewController?.beginAppearanceTransition(false, animated: false)
+//        window?.rootViewController?.endAppearanceTransition()
         if !SDKSingleton.sharedInstance.userId.isBlank{
             if isInternetAvailable() {
                 CheckinModel.postCheckin()
@@ -176,9 +185,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
+//        window?.rootViewController?.beginAppearanceTransition(true, animated: false)
+//        window?.rootViewController?.endAppearanceTransition()
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if !SDKSingleton.sharedInstance.userId.isBlank{
-            if isInternetAvailable() {
+
+            if isInternetAvailable()  {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: self, userInfo: nil)
                 CheckinModel.postCheckin()
                 // Adding data to download assignment for status change feature if internet is there and meanwhile
@@ -216,7 +228,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
+        if !SDKSingleton.sharedInstance.userId.isBlank{
+            let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String
+            
+            if isInternetAvailable() && screenFlag == "1" {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
+
+            }
+        }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //        BlueDolphinManager.manager.gpsAuthorizationStatus { (newStatus) in
 //            print("newStatus = \(newStatus.rawValue)")
@@ -294,7 +313,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !SDKSingleton.sharedInstance.userId.isBlank{
             
-        
             let storyboard = UIStoryboard(name: "NewDesign", bundle: nil)
             let destVC = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
             if self.window != nil {

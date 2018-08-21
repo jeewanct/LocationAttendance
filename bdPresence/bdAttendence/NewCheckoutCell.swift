@@ -12,9 +12,11 @@ import UIKit
 class NewCheckoutCell: UITableViewCell{
     
     @IBOutlet weak var locationDetailLabel: UILabel!
-    @IBOutlet weak var geoTagLabel: UILabel!
+    
+    @IBOutlet weak var geoTagButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var timeBottomConstraint: NSLayoutConstraint!
     
     var currentIndex: Int?
     var delegate: GeoTagLocationDelegate?
@@ -22,18 +24,30 @@ class NewCheckoutCell: UITableViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        addressLabel.addGestureRecognizer(tapGesture)
-      //  geoTagLabel.textColor = UIColor.white
+
+        geoTagButton.titleLabel?.sizeToFit()
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+//        addressLabel.addGestureRecognizer(tapGesture)
+//        geoTagLabel.textColor = UIColor.white
+
     }
     
-    @objc func handleTap(){
-        
+    @IBAction func handleGeoTag(_ sender: Any) {
         if let index = currentIndex{
             delegate?.handleTap(currentIndex: index)
         }
+        
     }
     
-  
+    
+    
+    //    @objc func handleTap(){
+    //
+    //        if let index = currentIndex{
+    //            delegate?.handleTap(currentIndex: index)
+    //        }
+    //    }
+    
+    
     
 }

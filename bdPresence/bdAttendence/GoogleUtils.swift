@@ -71,7 +71,7 @@ class GoogleUtils{
             return
         }
         
-        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=true&travelmode=driving&waypoints=\(escapedString)&key=" + AppConstants.GoogleConstants.GoogleApiKey
+        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=false&travelmode=driving&waypoints=\(escapedString)&key=" + AppConstants.GoogleConstants.GoogleApiKey
         
         
         Networking.fetchGenericData(url, header: [:], success: { (polyline: GoogleDirectionRoutesModel) in
