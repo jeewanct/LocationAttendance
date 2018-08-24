@@ -132,21 +132,23 @@ class MyTeamTableView: PullUpController{
                     locations.name = userName
                 }
                 
+               // Change here coordinate not finding
+                
                 if let coordinates = location.checkinData?.location?.coordinates {
-                    
+
                     if coordinates.count > 0 {
-                        
+
                         if Int(coordinates[0]) == 0 &&  Int(coordinates[0]) == 0 {
-                            
+
                             locations.address = "No location found"
-                            
+
                         }else{
                             locations.cllocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
                         }
-                        
+
                     }
-                    
-                    
+
+
                 }
                 
 //                if let coordinates = location.userOb?.userStatus?.location?.coordinates{

@@ -109,8 +109,18 @@ class NewLoginViewController: UIViewController {
         
        view.showActivityIndicator(activityIndicator: activityIndicator)
         
+        var  countryCode = countryCodeLabel.text!
         
-        OTPModel.getOtp(mobile: mobileTextfield.text!) { (result) in
+//        guard let escapedString = countryCode.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) else {
+//            return
+//        }
+//
+        
+        
+        let converterCountryCode = countryCode.replacingOccurrences(of: "+", with: "%2B")
+        
+        
+        OTPModel.getOtp(mobile: mobileTextfield.text!, countryCode: converterCountryCode) { (result) in
             self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (result){
             case APIResult.Success.rawValue:

@@ -28,7 +28,7 @@ class LocationFilters: UIViewController{
             
                 if let getLocations = locations{
                     if getLocations.count > 1 {
-                        let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: getLocations)
+                        let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: getLocations.reversed())
                         
                         if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
                             //completion(locationAfterTime)
@@ -41,6 +41,8 @@ class LocationFilters: UIViewController{
                     
                     // let finalLocations = self.findFaultyLocations(locations: locationAfterTime)
                     
+                }else{
+                    self.delegate?.onFailure()
                 }
             }
         }
@@ -49,12 +51,25 @@ class LocationFilters: UIViewController{
     
     func plotMarkerInMap(locations: [LocationDataModel]){
         
-        let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations)
+//        let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations)
+//
+//        if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
+//            //completion(locationAfterTime)
+//
+//        }
+
         
-        if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
-            //completion(locationAfterTime)
-            
-        }
+            if locations.count > 1 {
+                let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations)
+                
+                if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
+                    //completion(locationAfterTime)
+                    
+                }
+            } else {
+                self.delegate?.finalLocations(locations: locations)
+            }
+        
         
     }
     

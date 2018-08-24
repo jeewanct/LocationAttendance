@@ -46,6 +46,8 @@
 		094E034621230E70006E44EE /* DownloadPlacesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E034521230E70006E44EE /* DownloadPlacesController.swift */; };
 		0982365D2109A948002BEECC /* RoughWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982365C2109A948002BEECC /* RoughWork.swift */; };
 		09A5F9E82118323F009953C6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */; };
+		09B1CC68212C284000A11D5A /* SearchGeoTagLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B1CC67212C284000A11D5A /* SearchGeoTagLocationController.swift */; };
+		09B1CC6A212C33AF00A11D5A /* SearchGeoTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B1CC69212C33AF00A11D5A /* SearchGeoTagCell.swift */; };
 		09B5BC65211077450071155C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC64211077450071155C /* Networking.swift */; };
 		09B5BC67211077B50071155C /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC66211077B50071155C /* AppConstants.swift */; };
 		09B5BC692110786C0071155C /* GoogleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5BC682110786C0071155C /* GoogleUtils.swift */; };
@@ -254,6 +256,8 @@
 		094E034521230E70006E44EE /* DownloadPlacesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadPlacesController.swift; sourceTree = "<group>"; };
 		0982365C2109A948002BEECC /* RoughWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughWork.swift; sourceTree = "<group>"; };
 		09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		09B1CC67212C284000A11D5A /* SearchGeoTagLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGeoTagLocationController.swift; sourceTree = "<group>"; };
+		09B1CC69212C33AF00A11D5A /* SearchGeoTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGeoTagCell.swift; sourceTree = "<group>"; };
 		09B5BC64211077450071155C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		09B5BC66211077B50071155C /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		09B5BC682110786C0071155C /* GoogleUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleUtils.swift; sourceTree = "<group>"; };
@@ -580,6 +584,7 @@
 				A52B90662101E2EE005056AB /* MyTeamViewCell.swift */,
 				0912CD552122A4C1008323F0 /* SearcViewController.swift */,
 				0912CD592122C365008323F0 /* GradientViewController.swift */,
+				09B1CC67212C284000A11D5A /* SearchGeoTagLocationController.swift */,
 			);
 			name = NewDesign;
 			sourceTree = "<group>";
@@ -691,6 +696,7 @@
 				094E034521230E70006E44EE /* DownloadPlacesController.swift */,
 				0941028D2125481900842BE4 /* LocationLoader.json */,
 				0941028F21257F5400842BE4 /* Enums.swift */,
+				09B1CC69212C33AF00A11D5A /* SearchGeoTagCell.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1096,6 +1102,7 @@
 				091C3127212BDF3A006507FE /* GMUStyle.m in Sources */,
 				091517A22108694A00FABD3D /* LocationTableViewCell.swift in Sources */,
 				091C312C212BDF3A006507FE /* GQTPointQuadTreeChild.m in Sources */,
+				09B1CC68212C284000A11D5A /* SearchGeoTagLocationController.swift in Sources */,
 				0912CD5A2122C365008323F0 /* GradientViewController.swift in Sources */,
 				0912CD562122A4C1008323F0 /* SearcViewController.swift in Sources */,
 				99FB1E671F1607B100FA8A9E /* ProjectExtensions.swift in Sources */,
@@ -1103,6 +1110,7 @@
 				09410297212599F900842BE4 /* BridgingHeader.m in Sources */,
 				99BC35071F275A8800A59A4A /* DayCollectionViewCell.swift in Sources */,
 				999FB43220F60C0A000ABA7D /* MyLocationTableView.swift in Sources */,
+				09B1CC6A212C33AF00A11D5A /* SearchGeoTagCell.swift in Sources */,
 				0907C84A211ACD9B00364DCA /* AlertsController.swift in Sources */,
 				99FB1E661F1607B100FA8A9E /* ProgressBar.swift in Sources */,
 				A52B90672101E2EE005056AB /* MyTeamViewCell.swift in Sources */,

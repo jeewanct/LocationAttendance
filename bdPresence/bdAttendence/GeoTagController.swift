@@ -31,6 +31,8 @@ class GeoTagController: UIViewController{
     
     var placeDetails: PlaceDetails?
     
+    var editGeoTagPlace: RMCPlace?
+    
     let activityIndicator = ActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,11 @@ class GeoTagController: UIViewController{
             geoFenceCircle.position = coordinates.coordinate
             currenLocationTextField.text = address
             mapView.animate(toLocation: coordinates.coordinate)
+        }
+        
+        if let editPlace = editGeoTagPlace{
+            
+            setupEdit(place: editPlace)
         }
         
         
@@ -80,6 +87,33 @@ class GeoTagController: UIViewController{
             alerControlle.addAction(okButton)
             
             present(alerControlle, animated: true , completion: nil)
+        }
+        
+        
+    }
+    
+    
+    func setupEdit(place: RMCPlace){
+        
+        currenLocationTextField.text = place.placeDetails?.address
+        
+        if let lat = place.location?.latitude, let long = place.location?.longitude{
+            
+            if let cllLat = CLLocationDegrees(lat), let cllLong = CLLocationDegrees(long){
+                
+                marker.position = CLLocationCoordinate2D(latitude: cllLat, longitude: cllLong)
+                geoFenceCircle.position = CLLocationCoordinate2D(latitude: cllLat, longitude: cllLong)
+                //currenLocationTextField.text = address
+                mapView.animate(toLocation: CLLocationCoordinate2D(latitude: cllLat, longitude: cllLong))
+                
+            }
+            
+        }
+        
+        if let fenceRadius = place.placeDetails?.fenceRadius{
+            
+            geoFenceRadiusSlider.value = fenceRadius
+            geoFenceRadiusDistance.text = "Geo fence radius - \(Int(fenceRadius))m"
         }
         
         
@@ -140,10 +174,6 @@ class GeoTagController: UIViewController{
             geoTag.latitude = CurrentLocation.coordinate.latitude
             geoTag.longitude = CurrentLocation.coordinate.longitude
             
-            
-            
-            
-            
             LogicHelper.shared.reverseGeoCode(location: CLLocation(latitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude)) { (address) in
                 placeDetailsData.address = address
             }
@@ -156,8 +186,15 @@ class GeoTagController: UIViewController{
         geoTag.placeDetails = placeDetailsData
         
         
-        
+        callServer(geoTag: geoTag)
       
+        
+        
+    }
+    
+    
+    func callServer(geoTag: CreateGeoTagModel){
+        
         view.showActivityIndicator(activityIndicator: activityIndicator)
         
         GeoTagManager.createGeoTag(geoTaggedData: [geoTag], completion: { (message) in
@@ -169,7 +206,80 @@ class GeoTagController: UIViewController{
             self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             self.showAlert(error: true, message: errorMessage)
         }
+    }
+    
+    func createEditServerBody(){
         
+        let geoTag = CreateGeoTagModel()
+        
+        let placeDetailsData = CreateGeoTagPlaceDetails()
+        
+        let updatedOn = Date().formattedISO8601
+        
+        //let placeId = UUID().uuidString
+        
+        
+        placeDetailsData.editedBy = SDKSingleton.sharedInstance.userId
+        
+        if let addedBy = editGeoTagPlace?.placeDetails?.addedBy{
+            placeDetailsData.addedBy = addedBy
+            
+        }
+        
+        placeDetailsData.fenceRadius = Int(geoFenceRadiusSlider.value)
+        
+        if let placeId = editGeoTagPlace?.placeId{
+            placeDetailsData.placeId = placeId
+            geoTag.placeId = placeId
+            
+        }
+        
+     
+        placeDetailsData.placeType = "geofence"
+        placeDetailsData.placeStatus = false
+        
+        
+        if let addedOn = editGeoTagPlace?.addedOn{
+            geoTag.addedOn = addedOn.formattedISO8601
+        }
+        
+       // geoTag.addedOn = addedOn
+        geoTag.updateOn = updatedOn
+        geoTag.dObjectIds = []
+        geoTag.userIds = [SDKSingleton.sharedInstance.userId]
+        geoTag.PlaceLog = true
+        geoTag.placeAddress = saveLocationTextField.text
+        
+        if let getPlacesFromGoogle = placeDetails{
+            placeDetailsData.address = getPlacesFromGoogle.formattedAddress
+            geoTag.latitude = getPlacesFromGoogle.coordinate?.latitude
+            geoTag.longitude = getPlacesFromGoogle.coordinate?.longitude
+            geoTag.placeAddress = getPlacesFromGoogle.formattedAddress
+            geoTag.accuracy = "0"
+            geoTag.altitude = "0"
+            
+        }else{
+            
+            geoTag.accuracy = CurrentLocation.accuracy
+            geoTag.altitude = CurrentLocation.altitude
+            
+            
+            geoTag.latitude = CurrentLocation.coordinate.latitude
+            geoTag.longitude = CurrentLocation.coordinate.longitude
+            
+            LogicHelper.shared.reverseGeoCode(location: CLLocation(latitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude)) { (address) in
+                placeDetailsData.address = address
+            }
+            
+            
+        }
+        
+        
+        
+        geoTag.placeDetails = placeDetailsData
+        
+        
+        callServer(geoTag: geoTag)
     }
     
     func showAlert(error: Bool, message: String){

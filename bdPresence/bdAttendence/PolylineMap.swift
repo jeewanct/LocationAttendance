@@ -16,6 +16,8 @@ class PolyLineMap{
     
      func getPolyline(location: [[LocationDataModel]]){
         
+    
+        
         let origin = returnLatLongString(location: location.first)
         let destination = returnLatLongString(location: location.last)
         var wayPoints = ""
@@ -70,7 +72,9 @@ class PolyLineMap{
                     
                     if let latitude = index.latitude, let longitude = index.longitude{
                         locationString.append("\(latitude),\(longitude)")
+                         break
                     }
+                   
                     
                 }
             }

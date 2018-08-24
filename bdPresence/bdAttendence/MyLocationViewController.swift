@@ -26,24 +26,27 @@ class POIItem: NSObject, GMUClusterItem {
 
 class MyLocationViewController: UIViewController{
     
-    @IBOutlet weak var userLocationContainerView: UIView!
     
-    @IBOutlet weak var userLocationCardHeightAnchor: NSLayoutConstraint!
+    
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var searchButton: UIButton!
     var myLocationArray: [RMCPlace]?
-    var userContainerView: MyLocationTableView?
+   
     
      var clusterManager: GMUClusterManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addGestureInContainerView()
+        //addGestureInContainerView()
+        
         setupNavigation()
         setupMap()
         setupClustering()
         getUserLocation()
-        userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
-
+       // addBottomConstraint.constant = UIScreen.main.bounds.height * 0.2 - 32.5
+      //  userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
+        searchButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +57,33 @@ class MyLocationViewController: UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         title = ""
+    }
+    
+    func addPullController(myLocations: [RMCPlace]){
+        guard let pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+            
+            .instantiateViewController(withIdentifier: "MyLocationTableView") as? MyLocationTableView else{
+                return
+        }
+        pullController.places = myLocations
+        myLocationArray = myLocations
+        //  self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
+        //  self.pullController.locationData = allLocations.reversed()
+        self.addPullUpController(pullController, animated: true)
+        
+        
+   
+    }
+    @IBAction func handleAdd(_ sender: Any) {
+    
+    }
+    
+    @IBAction func handleSearch(_ sender: Any) {
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "SearchGeoTagLocationController") as! SearchGeoTagLocationController
+        vc.myLocationArray = myLocationArray
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     
@@ -80,6 +110,8 @@ class MyLocationViewController: UIViewController{
         
         
     }
+    @IBOutlet weak var handleAdd: UIButton!
+    
 }
 
 
@@ -89,12 +121,19 @@ extension MyLocationViewController{
         navigationController?.removeTransparency()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        
+        
+        
     }
     
     func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }
+    
+    
+    
+    
 }
 
 
@@ -111,60 +150,24 @@ extension MyLocationViewController{
         
     }
     
-    func addGestureInContainerView(){
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        userLocationContainerView.addGestureRecognizer(tapGesture)
-        
-        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
-        downGesture.direction = .up
-        
-        userLocationContainerView.addGestureRecognizer(downGesture)
-        
-    }
+   
+   
     
-    @objc func handleTap(){
-        
-        print("View Tapped")
-        
-        if userLocationCardHeightAnchor.constant == 49 + 25 + 5 {
-            animateContainerView(heightToAnimate: UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
-        }else{
-            // 400
-             userContainerView?.tableView.isScrollEnabled = true
-            animateContainerView(heightToAnimate: 49 + 25)
-        }
-    }
-    
-    func animateContainerView(heightToAnimate height: CGFloat){
-        
-        UIView.animate(withDuration: 0.5) {
-            self.userLocationCardHeightAnchor.constant = height
-            self.view.layoutIfNeeded()
-            
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userLocationSegue"{
-            userContainerView = segue.destination as! MyLocationTableView
-            userContainerView?.delegate = self
-        }
-    }
+   
 }
 
 
-extension MyLocationViewController: HandleUserViewDelegate{
-    
-    func handleOnSwipe() {
-        userLocationCardHeightAnchor.constant += 5
-        self.view.layoutIfNeeded()
-        handleTap()
-    }
-    
-    
-    
-}
+//extension MyLocationViewController: HandleUserViewDelegate{
+//
+//    func handleOnSwipe() {
+//        userLocationCardHeightAnchor.constant += 5
+//        self.view.layoutIfNeeded()
+//        handleTap()
+//    }
+//
+//
+//
+//}
 
 
 extension MyLocationViewController: GMSMapViewDelegate{
@@ -186,7 +189,9 @@ extension MyLocationViewController: GMSMapViewDelegate{
         
         //addMarkersGeoTaggedArea(locations: myLocations)
         generateClusterItems(location: myLocations)
-        userContainerView?.places = myLocations
+    
+        addPullController(myLocations: myLocations)
+        //userContainerView?.places = myLocations
         
     }
     

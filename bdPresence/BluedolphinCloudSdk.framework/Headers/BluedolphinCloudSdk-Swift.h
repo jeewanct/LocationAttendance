@@ -414,7 +414,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk11MyTeamModel")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk8OTPModel")
 @interface OTPModel : NSObject
-+ (void)getOtpWithMobile:(NSString * _Nonnull)mobile completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
++ (void)getOtpWithMobile:(NSString * _Nonnull)mobile countryCode:(NSString * _Nonnull)countryCode completion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

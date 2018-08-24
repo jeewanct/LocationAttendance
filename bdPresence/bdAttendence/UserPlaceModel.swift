@@ -18,6 +18,7 @@ class GeoTagLocationModel{
     var longitude: String?
     var addedOn: Date?
     var updatedOn: Date?
+    var locationName: String?
     var placeDetails: GeoTagPlaceDetails?
     var locations: [LocationDataModel]?
 }
@@ -99,7 +100,7 @@ class UserPlace{
         geoTagPlace.updatedOn = place.updatedOn
         geoTagPlace.latitude = place.location?.latitude
         geoTagPlace.longitude = place.location?.longitude
-        
+        geoTagPlace.locationName = place.placeAddress
         let geoPlaceDetails = GeoTagPlaceDetails()
         geoPlaceDetails.addedBy = place.placeDetails?.addedBy
         geoPlaceDetails.address = place.placeDetails?.address
@@ -152,15 +153,12 @@ class UserPlace{
             }
             
             
-            
         }
         
-        
-        
-        return locationAccordingToGeoTag(locations: geoTaggedLocations)
-        
-        
-        
+        let clusterGeoTagLocatins = locationAccordingToGeoTag(locations: geoTaggedLocations)
+    
+        return clusterNonGeoLocations(locations: clusterGeoTagLocatins)
+    
         
     }
     
@@ -176,12 +174,41 @@ class UserPlace{
             if let geoTagId = location.geoTaggedLocations?.placeDetails?.placeId{
                 
                 if geoTagId == lastGeoTagId{
-                    tempData.append(location)
+                    
+                    
+                    // Changes here for breaks
+                    
+                    if let lastLocation = tempData.last{
+                        
+                        if let firstlastSeen = lastLocation.lastSeen, let secondLastSeen = location.lastSeen{
+                            
+                            let firstTime = LogicHelper.shared.getTime(date: firstlastSeen)
+                            let secondTime = LogicHelper.shared.getTime(date: secondLastSeen)
+                            
+                            if abs(firstTime - secondTime) >= 1800{
+                                let locationData = tempData
+                                clusteringData.append(locationData)
+                                tempData.removeAll()
+                            }else{
+                                 tempData.append(location)
+                            }
+                            
+                        }
+                        
+                        
+                    }else{
+                       tempData.append(location)
+                    }
+                    
+                    // Changes here
+                    
+                   
                 }else{
                     lastGeoTagId = geoTagId
                     if tempData.count == 0{
                         tempData.append(location)
                     }else{
+                        
                         let locationData = tempData
                         clusteringData.append(locationData)
                         tempData.removeAll()
@@ -190,6 +217,12 @@ class UserPlace{
                 }
                 
             }else{
+                
+                if tempData.count > 0 {
+                    clusteringData.append(tempData)
+                    tempData.removeAll()
+                }
+                
                 lastGeoTagId = "temp"
                 clusteringData.append([location])
             }
@@ -209,76 +242,77 @@ class UserPlace{
     }
     
     
+    class func clusterNonGeoLocations(locations: [[LocationDataModel]]) -> [[LocationDataModel]]{
+        
+    
+        var finalLocations = [[LocationDataModel]]()
+      
+        var firstLocation = LocationDataModel()
+        
+        var tempLocations = [LocationDataModel]()
+        
+        for index in locations{
+            
+            if let firstLoc = index.first{
+                
+                if let _ = firstLoc.geoTaggedLocations{
+                    
+                    if tempLocations.count > 0 {
+                        finalLocations.append(tempLocations)
+                        tempLocations.removeAll()
+                        firstLocation = LocationDataModel()
+                    }
+                    finalLocations.append(index)
+                }else{
+                    
+                    if let _ = firstLocation.lastSeen{
+                       
+                       let distance = LogicHelper.shared.distanceBetween(firstLat: firstLocation.latitude, firstLong: firstLocation.longitude, secondLat: firstLoc.latitude, secondLong: firstLoc.longitude)
+                        
+                        if distance <= 100 {
+                            
+                            tempLocations.append(firstLoc)
+                        }else{
+                            
+                            //tempLocations.append(firstLocation)
+                            
+                            firstLocation = firstLoc
+                            
+                            finalLocations.append(tempLocations)
+                            
+                            tempLocations.removeAll()
+                            tempLocations.append(firstLocation)
+                            
+                            
+                           // firstLocation =  LocationDataModel()
+                            
+                        }
+                        
+                        
+                    }else{
+                            firstLocation = firstLoc
+                            tempLocations.append(firstLocation)
+                    }
+                    
+                }
+                
+            }
+       
+        
+        }
+        
+        if tempLocations.count > 0 {
+            finalLocations.append(tempLocations)
+        }
+        
+        return finalLocations
+        
+        
+    }
     
     
-    
-    //    func locationAccordingToGeoTag(locations: [LocationDataModel]){
-    //
-    //
-    //        var geoTaggedLocations = [GeoTagLocationModel]()
-    //        var ordinaryLocations  = [LocationDataModel]()
-    //
-    //        for index in 0..<locations.count {
-    //
-    //            var geolocations = [LocationDataModel]()
-    //
-    //            for index1 in index + 1..<locations.count{
-    //
-    //
-    //                if locations[index1].isRepeated == false || locations[index1].isRepeated == nil{
-    //
-    //                if locations[index].geoTaggedLocations?.placeDetails?.placeId == locations[index1].geoTaggedLocations?.placeDetails?.placeId{
-    //
-    //                    geolocations.append(locations[index])
-    //                    locations[index1].isRepeated = true
-    //                    if index != 0 {
-    //                      geolocations[index].isRepeated = true
-    //                    }
-    //                   // geolocations[index].isRepeated = true
-    //
-    //
-    //                }else{
-    //                    if geolocations[index].isRepeated != true{
-    //                        geolocations[index].isRepeated = false
-    //                    }
-    //
-    //
-    //                    }
-    //
-    //                }
-    //
-    //            }
-    //
-    //            if geolocations.count == 0 && locations[index].isRepeated == false{
-    //                ordinaryLocations.append(locations[index])
-    //
-    //            }else{
-    //
-    //                if locations[index].isRepeated == false || locations[index].isRepeated == nil {
-    //
-    //                    if let geoTaggedLocation = setClusterTaggedLocation(currentGeoLocation: locations[index], location: geolocations){
-    //                        geoTaggedLocations.append(geoTaggedLocation)
-    //
-    //
-    //                    }
-    //                }
-    //
-    //
-    //                //geoTaggedLocations.append(setClusterTaggedLocation(currentGeoLocation: locations[index], location: geolocations))
-    //
-    //            }
-    //
-    //
-    //
-    //        }
-    //
-    //        print("Jeevan the geoTagged Dta", dump(geoTaggedLocations))
-    //        print("Jeevan the location Dta", dump(ordinaryLocations))
-    //
-    //        plotMarkersInMap(geoTaggedLocation: geoTaggedLocations, ordinarylocations: ordinaryLocations)
-    //
-    //
-    //    }
+   
+
     
     func setClusterTaggedLocation(currentGeoLocation: LocationDataModel,location: [LocationDataModel]) -> GeoTagLocationModel?{
         

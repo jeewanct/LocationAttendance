@@ -490,6 +490,10 @@ extension MyTeamLocationDetails{
  
  
  extension  MyTeamLocationDetails: LocationsFilterDelegate, PolylineStringDelegate{
+    func onFailure() {
+        
+    }
+    
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
         drawPath(coordinates: coordinates)

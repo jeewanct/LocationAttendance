@@ -18,6 +18,7 @@ protocol HandleUserViewDelegate {
 protocol LocationsFilterDelegate{
     
     func finalLocations(locations: [LocationDataModel])
+    func onFailure()
     
 }
 

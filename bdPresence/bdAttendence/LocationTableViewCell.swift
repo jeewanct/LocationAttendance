@@ -13,16 +13,18 @@ class LocationTableViewCell: UITableViewCell{
    
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var visualEffect: UIVisualEffectView!
+    @IBOutlet weak var visualEffect: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        selectionStyle = .none
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-//        visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
-//        visualEffect.layer.masksToBounds = true
+        visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        visualEffect.layer.masksToBounds = true
         
     }
 }

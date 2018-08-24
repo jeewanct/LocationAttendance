@@ -372,6 +372,52 @@ class LogicHelper{
     }
     
     
+    func sortOnlyLocations(location: [LocationDataModel]) -> [LocationDataModel]{
+        var finalLocations = location
+        
+        finalLocations.sort(by: { (first, second) -> Bool in
+            
+            
+            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
+                return  firstDate.compare(secondDate) == .orderedAscending
+                
+            }
+            
+            return false
+        })
+        
+        return finalLocations
+        
+    }
+    
+    func sortGeoLocations(locations: [[LocationDataModel]]) -> [[LocationDataModel]]{
+        
+        var finalLocations = locations
+        
+        
+        finalLocations.sort { (first, second) -> Bool in
+            
+            if let firstElement = first.first, let secondElement = second.first{
+                
+                if let firstDate = firstElement.lastSeen , let secondDate = secondElement.lastSeen{
+                    return  firstDate.compare(secondDate) == .orderedAscending
+                    
+                }
+                
+                return false
+                
+                
+            }
+            
+            return false
+        }
+        
+        
+        
+        return finalLocations
+        
+    }
+    
     
     
 }

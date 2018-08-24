@@ -230,7 +230,7 @@ class UserDayData {
                     locationValue.longitude = locationData[index].longitude
                     locationValue.userId = locationData[index].userId
                     locationValue.organizationId = locationData[index].organizationId
-                    
+                    locationValue.address = locationData[index].details
                     locationDataArray.append(locationValue)
                     
                 }

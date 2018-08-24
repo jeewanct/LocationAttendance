@@ -8,40 +8,164 @@
 
 import UIKit
 import BluedolphinCloudSdk
+import PullUpController
 
+class MyLocationTableView: PullUpController{
 
-class MyLocationTableView: UIViewController{
+    
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    @IBOutlet weak var secondPreviewHeightAnchor: NSLayoutConstraint!
+    @IBOutlet weak var secondPreviewHeight: UIView!
+    @IBOutlet weak var secondPreviewView: UIView!
+    
+    @IBOutlet weak var firstPreviewView: UIView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var addButton: UIButton!
+    
     var places: [RMCPlace]?{
         didSet{
-            tableView.reloadData()
+            myLocationSearchArray = places
         }
     }
+    
+    var myLocationSearchArray: [RMCPlace]?
+    
+    
     var delegate: HandleUserViewDelegate?
+  
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+         secondPreviewHeightAnchor.constant = UIScreen.main.bounds.height - 214
+       //  tableView.reloadData()
+        visualEffectView.effect = nil
+        
+        navigationController?.removeTransparency()
+        willMoveToStickyPoint = { point in
+            
+            print("willMoveToStickyPoint \(point)")
+            
+            if point > UIScreen.main.bounds.height / 2{
+                self.addBlurEffect()
+               //  self.setupConstraint()
+            }else{
+                self.visualEffectView.effect = nil
+                // self.setupConstraint()
+            }
+            
+        }
+        
+        didMoveToStickyPoint = { point in
+            
+            print("didMoveToStickyPoint \(point)")
+        }
+        
+        onDrag = { point in
+            
+            
+            
+            
+            print("onDrag: \(point)")
+        }
+        
+      
+        
         
     }
+    
+    @IBAction func handleAdd(_ sender: Any) {
+        let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
+        navigationController?.pushViewController(geoTagController, animated: true)
+    }
+    
+    
+    func addBlurEffect(){
+        
+        let blurEffect = UIBlurEffect(style: .regular)
+        visualEffectView.effect = blurEffect
+    }
+    
+//    func setupConstraint(){
+//        if locationTopAnchor.constant == 24.5{
+//                locationTopAnchor.constant = 24.5 + 49 + 8
+//            searchBar.isHidden = false
+//            self.addButton.isHidden = false
+//
+//        }else{
+//            locationTopAnchor.constant = 24.5
+//            self.addButton.isHidden = false
+//            searchBar.isHidden = true
+//
+//        }
+//
+//    }
+    
+    // MARK: - PullUpController
+    
+    override var pullUpControllerPreferredSize: CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 64)
+    }
+    
+    override var pullUpControllerPreviewOffset: CGFloat {
+        print(UIScreen.main.bounds.height * 0.2)
+        return UIScreen.main.bounds.height * 0.2 + 64
+    }
+    
+    override var pullUpControllerMiddleStickyPoints: [CGFloat] {
+        return [firstPreviewView.frame.maxY]
+    }
+    
+    
+    override var pullUpControllerIsBouncingEnabled: Bool {
+        return false
+    }
+    
+    override var pullUpControllerPreferredLandscapeFrame: CGRect {
+        return CGRect(x: 5, y: 5, width: 280, height: UIScreen.main.bounds.height - 10)
+    }
+    
+
+    
+    
 }
+
+
 
 
 extension MyLocationTableView: UITableViewDelegate, UITableViewDataSource{
     
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset)
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print(scrollView.contentOffset)
+//
+//        if scrollView.contentOffset.y < -5 {
+//            tableView.isScrollEnabled = false
+//            delegate?.handleOnSwipe()
+//        }
+//
+//    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
         
-        if scrollView.contentOffset.y < -5 {
-            tableView.isScrollEnabled = false
-            delegate?.handleOnSwipe()
-        }
+        let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
+       // geoTagController.geoTagLocation = cllLocation
+       // geoTagController.geoTagAddress = address
+        geoTagController.editGeoTagPlace = myLocationSearchArray?[indexPath.item]
+        
+        navigationController?.pushViewController(geoTagController, animated: true)
+        
+        
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return places?.count ?? 0
+        return myLocationSearchArray?.count ?? 0
     
     
     }
@@ -52,11 +176,13 @@ extension MyLocationTableView: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyLocationIdentifier", for: indexPath) as! LocationTableViewCell
-        cell.addressLabel.text = places?[indexPath.item].placeDetails?.address
-        cell.nameLabel.text = places?[indexPath.item].geoTagName
+        cell.addressLabel.text = myLocationSearchArray?[indexPath.item].placeDetails?.address
+        cell.nameLabel.text = myLocationSearchArray?[indexPath.item].geoTagName
         return cell
     }
 }
+
+
 
 
 

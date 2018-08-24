@@ -22,9 +22,9 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var progressBar: UICircularProgressRingView!
     var thisWeekDays = [Date]()
     var currentDisplayDate = Date()
-    
+    var selectedDate = Date()
     @IBOutlet weak var mapView: GMSMapView!
-    
+    var activityIndicator = ActivityIndicatorView()
   
     /* Changes made from 10th July '18 */
     
@@ -163,7 +163,12 @@ class HistoryViewController: UIViewController {
         
         //progressBar.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
         //progressBar.innerRingColor = APPColor.newGreen
-
+        activityIndicator = ActivityIndicatorView()
+        self.view.showActivityIndicator(activityIndicator: activityIndicator)
+        selectedDate = date
+        
+        
+        
         let locationFilters = LocationFilters()
         locationFilters.delegate = self
         locationFilters.plotMarkers(date: date)
@@ -177,35 +182,27 @@ class HistoryViewController: UIViewController {
         let allLocations = UserPlace.getGeoTagData(location: location)
         var finalLocations = allLocations
 
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
        
         if allLocations.count == 0{
         }else{
-            //plotPathInMap(location: allLocations)
-            // first change the location in ascending order
-//            finalLocations.sort(by: { (first, second) -> Bool in
-//                
-//                if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
-//                    return  firstDate.compare(secondDate) == .orderedAscending
-//
-//
-//                }
-//                
-//                return false
-//            })
-
+            
             
             pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
             pullController.screenType = LocationDetailsScreenEnum.historyScreen
+            
+            pullController.selectedDate = selectedDate
+            pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
+            
             self.addPullUpController(pullController, animated: true)
             
             
-            pullController.locationData = allLocations
-            pullController.tableView.reloadData()
+            
             
             let polyLine = PolyLineMap()
             polyLine.delegate = self
-            polyLine.getPolyline(location: allLocations)
+            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
             
             // getLocationCorrospondingLatLong(locations: allLocations)
         }
@@ -214,17 +211,19 @@ class HistoryViewController: UIViewController {
         
         for locations in allLocations{
             
-            for geoTaggedLocation in locations{
+            if let firstLocation = locations.first{
                 
-                if let geoTagg = geoTaggedLocation.geoTaggedLocations{
-                    
-                    addMarker(latitude: geoTagg.latitude, longitude: geoTagg.longitude, markerColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
+                if let firstLoc = firstLocation.geoTaggedLocations{
+                    addMarker(latitude: firstLoc.latitude, longitude: firstLoc.longitude, markerColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
                 }else{
-                    
-                    addMarker(latitude: geoTaggedLocation.latitude, longitude: geoTaggedLocation.longitude, markerColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+                    addMarker(latitude: firstLocation.latitude, longitude: firstLocation.longitude, markerColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                 }
                 
+                
+                
+                
             }
+            
             
             
         }
@@ -381,6 +380,7 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         
+        
         mapView.clear()
     
         animationPolyline = GMSPolyline()
@@ -425,24 +425,21 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
 
 extension HistoryViewController{
     func setupMap(){
+    
+        mapView.changeStyle()
         
-         mapView.changeStyle()
+        let currentLocation = CLLocationManager()
+        currentLocation.location?.coordinate
         
-        var locationManage = CLLocationManager()
-        
-        if let lat = locationManage.location?.coordinate.latitude, let long = locationManage.location?.coordinate.longitude {
+        if let coordinates = currentLocation.location?.coordinate{
             
-            
-            
-            
-            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
+            let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: 15.0)
             mapView.camera = camera
+            
         }
         
         
     }
-    
-
     
 }
 
@@ -460,31 +457,15 @@ extension HistoryViewController: HandleUserViewDelegate{
 
 
 extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate{
+    func onFailure() {
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkin found!")
+    }
+    
     
     
     func finalLocations(locations: [LocationDataModel]) {
-        //            self.plotMarkersInMap(location: locations)
-        var finalLocations = locations
-        
-        
-        
-        finalLocations.sort(by: { (first, second) -> Bool in
-
-
-            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
-                return  firstDate.compare(secondDate) == .orderedAscending
-
-
-            }
-
-            return false
-        })
-        
-        print(finalLocations)
-        self.plotMarkersInMap(location: finalLocations)
-        
-        
-        
+        self.plotMarkersInMap(location: LogicHelper.shared.sortOnlyLocations(location: locations))
     }
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {

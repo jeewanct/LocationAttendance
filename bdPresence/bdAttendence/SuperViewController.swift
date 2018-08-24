@@ -344,6 +344,11 @@ extension SuperViewController{
 //            UIApplication.shared.scheduleLocalNotification(notification)
             let message = NotificationMessage.AttendanceMarked.rawValue + "\(Date().formatted)"
             self.showAlert(message )
+            
+            // Change by me
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil, userInfo: nil)
+            
+            
 //
             
             
@@ -512,6 +517,7 @@ extension SuperViewController{
                         
                         CheckinModel.createCheckin(checkinData: checkin)
                        
+                        
                         if isInternetAvailable(){
                             CheckinModel.postCheckin()
                         }

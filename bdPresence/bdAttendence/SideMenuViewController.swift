@@ -30,7 +30,7 @@ class SideMenuViewController: UIViewController  {
             }
 
             if SDKSingleton.sharedInstance.userType == "Field-Executive"{
-              //  sideMenuOptionsArray.remove(at: 2)
+                sideMenuOptionsArray.remove(at: 2)
                 sideMenuTable.reloadData()
             }
             

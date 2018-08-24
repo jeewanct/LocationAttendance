@@ -18,6 +18,9 @@ class UserDetailsDataModel{
     var lat: CLLocationDegrees = 0
     var long: CLLocationDegrees = 0
     var cllLocation:  CLLocation = CLLocation()
+    var geoLocationName =  ""
+    
+    
 }
 
 
@@ -108,7 +111,7 @@ class NewCheckOutUserScreen: PullUpController{
                     if let geoTagged = locationDetail.geoTaggedLocations{
                         var lastSeenString = ""
                         userData.isGeoTagged = true
-                        if let lastGeoTaggedElement = location.first{
+                        if let lastGeoTaggedElement = location.last{
                             
                             if let lastSeen = lastGeoTaggedElement.lastSeen{
                                 lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
@@ -118,7 +121,7 @@ class NewCheckOutUserScreen: PullUpController{
                         }
                         
                         
-                        if let lastGeoTaggedElement = location.last{
+                        if let lastGeoTaggedElement = location.first{
                             
                             lastSeenString.append("-")
                             if let lastSeen = lastGeoTaggedElement.lastSeen{
@@ -127,6 +130,10 @@ class NewCheckOutUserScreen: PullUpController{
                             //userData.address = geoTagged.placeDetails?.address
                             
                         }
+                        if let locationName = locationDetail.geoTaggedLocations?.locationName{
+                           userData.geoLocationName = locationName
+                        }
+                        
                         userData.address = geoTagged.placeDetails?.address
                         userData.lastSeen = lastSeenString
                         
@@ -144,8 +151,6 @@ class NewCheckOutUserScreen: PullUpController{
                                 userData.cllLocation = CLLocation(latitude: latitude, longitude: longitude)
                                 
                             }
-                            
-                            
                             
                         }
                         

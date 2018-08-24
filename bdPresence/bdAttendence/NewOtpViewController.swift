@@ -179,6 +179,9 @@ class NewOtpViewController: UIViewController {
     }
     
     
+    @IBAction func handleChangeNumber(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     func goToHome(){
         self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
         //        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
@@ -243,7 +246,7 @@ class NewOtpViewController: UIViewController {
         //showLoader()
         view.showActivityIndicator(activityIndicator: activityIndicator)
         
-        OTPModel.getOtp(mobile: mobileNumber) { (result) in
+        OTPModel.getOtp(mobile: mobileNumber, countryCode: "") { (result) in
             self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (result){
             case APIResult.Success.rawValue:
