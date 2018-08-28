@@ -17,7 +17,7 @@ class LogicHelper{
     
     func reverseGeoCode(location: CLLocation, completion: @escaping(String) -> Void){
         
-        var userAddress = ""
+        //var userAddress = ""
         
         CLGeocoder().reverseGeocodeLocation(location) { (response , error) in
             
@@ -30,7 +30,7 @@ class LogicHelper{
             let address = addrList.joined(separator: ", ")
             print("address from SDK = \(address)")
             completion(address)
-            userAddress = address
+            //userAddress = address
             
             
             
@@ -42,7 +42,7 @@ class LogicHelper{
     
     func reverseGeoCodeGeoLocations(location: CLLocation, index1: Int, index2: Int, completion: @escaping(String, Int, Int) -> Void){
         
-        var userAddress = ""
+        //var userAddress = ""
         
         CLGeocoder().reverseGeocodeLocation(location) { (response , error) in
             
@@ -55,7 +55,7 @@ class LogicHelper{
             let address = addrList.joined(separator: ", ")
             print("address from SDK = \(address)")
             completion(address, index1, index2)
-            userAddress = address
+            //userAddress = address
             
             
             
@@ -335,6 +335,25 @@ class LogicHelper{
         
     }
     
+    func convertToTimeSpendInLocation(firstDate: Date, secondDate: Date) -> String {
+        
+        let firstTime = LogicHelper.shared.getTime(date: firstDate)
+        let secondTime = LogicHelper.shared.getTime(date: secondDate)
+        
+        let difference  = abs(firstTime - secondTime)
+        
+        let hour = Int(difference / 3600)
+        let minute = Int((difference % 3600) / 60 )
+        
+        if hour == 0 {
+            return "\(minute)min"
+        }
+        
+        
+        return "\(hour)hr \(minute)min "
+        
+    }
+    
     func getTimeStamp() -> CLong{
         
         let time = Date().timeIntervalSince1970
@@ -349,6 +368,7 @@ class LogicHelper{
         let minutes = calendar.component(.minute, from: date)
         let seconds = calendar.component(.second, from: date)
         
+    
         return (hour,minutes)
         
     }

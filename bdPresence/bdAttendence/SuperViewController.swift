@@ -154,8 +154,15 @@ class SuperViewController: UIViewController {
                             UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
                             appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
                             
+                            
+                            // Calling 2 times
+                            
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                            
+                            
+                       
                         }
+                        
                     } else {
                         appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
                         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
