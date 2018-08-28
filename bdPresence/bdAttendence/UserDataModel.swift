@@ -128,7 +128,7 @@ class UserDayData {
                 let beaconData = attendanceLogForToday.beaconList.sorted(byKeyPath: "lastSeen", ascending: true).filter("beaconNumber = %@","0").filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
                 
                 
-                
+                print("locationData.count = \(beaconData.count)")
                 print("============")
                 
                 //print(beaconData)
@@ -208,7 +208,8 @@ class UserDayData {
                 //let locationData = attendanceLogForToday.locationList.sorted(byKeyPath: "latitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
                 
                 let locationData = attendanceLogForToday.locationList.filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
-                
+                print("locationData.count = \(locationData.count)")
+
                 var locationDataArray = [LocationDataModel]()
                 
                 for index in 0..<locationData.count{

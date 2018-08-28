@@ -100,8 +100,8 @@ class LocationFilters: UIViewController{
                 
                 let distance = LogicHelper.shared.distanceBetween(firstLat: locations[index].latitude, firstLong: locations[index].longitude, secondLat: locations[index + 1].latitude, secondLong: locations[index + 1].longitude)
                 
-                
-                if distance == 0 || distance > 8000{
+                let estimatedDistance = calculateDistanceTravelledBetweenTwoCheckinTimeInterval(first: locations[index].lastSeen!, second: locations[index + 1].lastSeen!)
+                if distance == 0 || distance > estimatedDistance {
                     
                     removeFromGoogleApi(locations: locations, index: index + 1)
                     return nil
@@ -119,6 +119,14 @@ class LocationFilters: UIViewController{
         
     }
     
+    func calculateDistanceTravelledBetweenTwoCheckinTimeInterval (first : Date, second: Date ) -> Double {
+        let timeDifference = Calendar.current.dateComponents([.minute], from: second, to: first).minute ?? 0
+        print("second = \(second) and first = \(first)")
+        print("timedifference = \(timeDifference)")
+        let calculatedValue = (timeDifference * 8000)/10
+        print("newlogic = \(calculatedValue)")
+        return Double(calculatedValue)
+    }
     
     func removeFromGoogleApi(locations: [LocationDataModel], index: Int){
         
