@@ -24,27 +24,17 @@ class SearchViewController: PullUpController {
     }
     @IBOutlet private weak var firstPreviewView: UIView!
     @IBOutlet private weak var secondPreviewView: UIView!
-   
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var timeLabelBottomContraint: NSLayoutConstraint!
     var selectedDate = Date()
     var locationData: [[LocationDataModel]]?{
         didSet{
-            
             makeRelevantData()
-            // tableView.reloadData()
-            
         }
     }
-    
-    var userDetails =  [UserDetailsDataModel](){
-        
-        didSet{
-           // tableView.reloadData()
-        }
-    }
-    
+    var userDetails =  [UserDetailsDataModel]()
     var screenType: LocationDetailsScreenEnum?
     
     
@@ -53,11 +43,8 @@ class SearchViewController: PullUpController {
     
     func setPreviewHeightConstant(){
         
-        
-        
-        
         if screenType == LocationDetailsScreenEnum.dashBoardScreen{
-             secondPreviewHeight.constant = UIScreen.main.bounds.height - 315
+            secondPreviewHeight.constant = UIScreen.main.bounds.height - 315
         }else if screenType == LocationDetailsScreenEnum.historyScreen{
             secondPreviewHeight.constant = UIScreen.main.bounds.height - 325
         }else{
@@ -73,18 +60,27 @@ class SearchViewController: PullUpController {
         
         print(UIScreen.main.bounds.height)
         
-       
-
+        
+        
         //visualEffectView.roundCorners([.topLeft, .topRight], radius: 15)
         setPreviewHeightConstant()
         tableView.estimatedRowHeight = 145
         tableView.rowHeight = UITableViewAutomaticDimension
-
+        
         tableView.attach(to: self)
         //setupDataSource()
         
         willMoveToStickyPoint = { point in
-           
+            
+            if point > UIScreen.main.bounds.height / 2{
+                self.addBlurEffect()
+                //  self.setupConstraint()
+            }else{
+                self.visualEffectView.effect = nil
+                // self.setupConstraint()
+            }
+
+            
             print("willMoveToStickyPoint \(point)")
         }
         
@@ -108,7 +104,12 @@ class SearchViewController: PullUpController {
         
     }
     
-
+    
+    func addBlurEffect(){
+        
+        let blurEffect = UIBlurEffect(style: .regular)
+        visualEffectView.effect = blurEffect
+    }
     
     
     
@@ -140,7 +141,7 @@ class SearchViewController: PullUpController {
     override var pullUpControllerPreferredLandscapeFrame: CGRect {
         return CGRect(x: 5, y: 5, width: 280, height: UIScreen.main.bounds.height - 10)
     }
-
+    
 }
 
 // MARK: - UISearchBarDelegate
@@ -166,11 +167,11 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if userDetails[indexPath.item].isGeoTagged == true {
-//            return 112.0
-//        } else {
-//            return UITableViewAutomaticDimension
-//        }
+        //        if userDetails[indexPath.item].isGeoTagged == true {
+        //            return 112.0
+        //        } else {
+        //            return UITableViewAutomaticDimension
+        //        }
         return UITableViewAutomaticDimension
     }
     
@@ -187,17 +188,17 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func setTeamDetails(cell: NewCheckoutCell, indexPath: IndexPath){
         
         if userDetails[indexPath.item].isGeoTagged == true{
-
+            
             cell.timeBottomConstraint.constant = 10
             cell.geoTagButton.isHidden = true
             cell.geoTagButton.setTitle("", for: .normal)
-
+            
         }else{
-
+            
             cell.timeBottomConstraint.constant = 44
             cell.geoTagButton.isHidden = false
             cell.geoTagButton.setTitle("Geo-Tag this location", for: .normal)
-
+            
         }
         
         
@@ -223,12 +224,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         if let getCell = cell as? NewCheckoutCell{
             if indexPath.item == 0 {
                 
-//                if screenType == LocationDetailsScreenEnum.historyScreen && !Calendar.current.isDateInToday(selectedDate){
-//
-//                    getCell.locationDetailLabel.text = ""
-//                }else{
+                //                if screenType == LocationDetailsScreenEnum.historyScreen && !Calendar.current.isDateInToday(selectedDate){
+                //
+                //                    getCell.locationDetailLabel.text = ""
+                //                }else{
                 
-                   getCell.locationDetailLabel.text = "\(userDetails[indexPath.item].geoLocationName)"
+                getCell.locationDetailLabel.text = "\(userDetails[indexPath.item].geoLocationName)"
                 //}
                 
                 
@@ -249,7 +250,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-       // view.endEditing(true)
+        // view.endEditing(true)
         ///pullUpControllerMoveToVisiblePoint(pullUpControllerMiddleStickyPoints[0], animated: true, completion: nil)
         
         //(parent as? MapViewController)?.zoom(to: locations[indexPath.row].location)
@@ -277,75 +278,88 @@ extension SearchViewController{
                 
                 let userData = UserDetailsDataModel()
                 
-            
+                
                 for locationDetail in location{
                     
                     if let geoTagged = locationDetail.geoTaggedLocations{
                         var lastSeenString = ""
                         userData.isGeoTagged = true
+                        
+                        var firstDate = Date()
                         if let lastGeoTaggedElement = location.first{
                             
                             if let lastSeen = lastGeoTaggedElement.lastSeen{
                                 lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+                                firstDate = lastSeen
                             }
                             //userData.address = geoTagged.placeDetails?.address
                             
                         }
                         
-                        
-                        if let lastGeoTaggedElement = location.last{
-                            
-                            lastSeenString.append("-")
-                            if let lastSeen = lastGeoTaggedElement.lastSeen{
-                                lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+                        if location.count > 1 {
+                            if let lastGeoTaggedElement = location.last{
+                                
+                                lastSeenString.append("-")
+                                if let lastSeen = lastGeoTaggedElement.lastSeen{
+                                    lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+                                     let timeSpend = LogicHelper.shared.convertToTimeSpendInLocation(firstDate: firstDate, secondDate: lastSeen)
+                                    
+                                    let dateString = lastSeenString
+                                    lastSeenString = timeSpend + " (\(dateString))"
+                                    
+                                    
+                                }
+                                //userData.address = geoTagged.placeDetails?.address
+                                
+                               
+                                
                             }
-                            //userData.address = geoTagged.placeDetails?.address
-                            
                         }
                         userData.address = geoTagged.placeDetails?.address
-                        userData.lastSeen = lastSeenString
+                        userData.lastSeen =  lastSeenString
                         if let locationName = locationDetail.geoTaggedLocations?.locationName{
                             userData.geoLocationName = locationName
                         }
-                        
-                        
                         
                     }else{
                         
                         
                         userData.isGeoTagged = false
-                        
+                        var firstDate = Date()
                         if location.count > 1{
-                        var lastSeenString = ""
-                        if let lastGeoTaggedElement = location.first{
-                            
-                            if let lastSeen = lastGeoTaggedElement.lastSeen{
-                                lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+                            var lastSeenString = ""
+                            if let lastGeoTaggedElement = location.first{
+                                
+                                if let lastSeen = lastGeoTaggedElement.lastSeen{
+                                    firstDate = lastSeen
+                                    lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+                                }
+                                
+                                
                             }
-                            //userData.address = geoTagged.placeDetails?.address
                             
-                        }
-                        
-                        
-                        if let lastGeoTaggedElement = location.last{
-                            
-                            lastSeenString.append("-")
-                            if let lastSeen = lastGeoTaggedElement.lastSeen{
-                                lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+                            if location.count > 1{
+                                if let lastGeoTaggedElement = location.last{
+                                    
+                                    lastSeenString.append("-")
+                                    if let lastSeen = lastGeoTaggedElement.lastSeen{
+                                        lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+                                        let timeSpend = LogicHelper.shared.convertToTimeSpendInLocation(firstDate: firstDate, secondDate: lastSeen)
+                                        
+                                        let dateString = lastSeenString
+                                        lastSeenString = timeSpend + " (\(dateString))"
+                                    }
+                                    
+                                    
+                                    userData.lastSeen = lastSeenString
+                                    
+                                }
                             }
-                            //userData.address = geoTagged.placeDetails?.address
-                            userData.lastSeen = lastSeenString
-                            
-                        }
                         }else{
-                             if let lastSeen = locationDetail.lastSeen{
-                            userData.lastSeen = LogicHelper.shared.getLocationDate(date: lastSeen)
+                            if let lastSeen = locationDetail.lastSeen{
+                                userData.lastSeen = LogicHelper.shared.getLocationDate(date: lastSeen)
                             }
                         }
-                        
-                        
-                        
-                       
                         
                         if let lat = locationDetail.latitude, let long = locationDetail.longitude{
                             
@@ -368,19 +382,7 @@ extension SearchViewController{
                 
                 
             }
-            // First short in ascending then assign to userDetails
-//            user.sort(by: { (first, second) -> Bool in
-//
-//
-//                if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
-//                    return  firstDate.compare(secondDate) == .orderedDescending
-//
-//
-//                }
-//
-//                return false
-//            })
-//
+            
             userDetails = user
             
             
