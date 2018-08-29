@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import BluedolphinCloudSdk
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     #if DEBUG
         Swift.print(items[0], separator:separator, terminator: terminator)
@@ -224,5 +224,19 @@ extension String {
         //        allowed.addCharactersInString(unreserved)
         //        urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         return addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+    }
+}
+
+extension String{
+    func getHeader()->[String:String]{
+        let headers = [
+            "Content-Type":"application/json",
+            "Accept-Version":"0.0.1",
+            "Accept-Encoding":"application/gzip",
+            "Accept":"application/json",
+            "Authorization":"Bearer " + SDKSingleton.sharedInstance.accessToken,
+            "userId":SDKSingleton.sharedInstance.userId
+        ]
+        return headers
     }
 }

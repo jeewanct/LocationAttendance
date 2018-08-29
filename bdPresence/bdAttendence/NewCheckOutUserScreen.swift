@@ -19,7 +19,7 @@ class UserDetailsDataModel{
     var long: CLLocationDegrees = 0
     var cllLocation:  CLLocation = CLLocation()
     var geoLocationName =  ""
-    
+    var canGeoTag = false
     
 }
 

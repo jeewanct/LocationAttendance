@@ -48,6 +48,11 @@ class NewOrganisationSelectViewController: UIViewController {
     
     
     func goToHome(){
+        
+        let superController = SuperViewController()
+        superController.geoTagPermission()
+        
+        
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         let destVc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadPlaceController") as! DownloadPlaceController
         self.navigationController?.pushViewController(destVc, animated: true)

@@ -46,6 +46,8 @@ class MyLocationTableView: PullUpController{
         visualEffectView.effect = nil
         
         navigationController?.removeTransparency()
+        setupController()
+        
         willMoveToStickyPoint = { point in
             
             print("willMoveToStickyPoint \(point)")
@@ -152,13 +154,18 @@ extension MyLocationTableView: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
+        if let canGeoTag = UserDefaults.standard.value(forKey: "canGeoTag") as? Bool{
+            if canGeoTag == true{
+                let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
+                geoTagController.editGeoTagPlace = myLocationSearchArray?[indexPath.item]
+                navigationController?.pushViewController(geoTagController, animated: true)
+            }else{
+                
+            }
+        }
         
-        let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
-       // geoTagController.geoTagLocation = cllLocation
-       // geoTagController.geoTagAddress = address
-        geoTagController.editGeoTagPlace = myLocationSearchArray?[indexPath.item]
         
-        navigationController?.pushViewController(geoTagController, animated: true)
+        
         
         
         
@@ -183,6 +190,23 @@ extension MyLocationTableView: UITableViewDelegate, UITableViewDataSource{
 }
 
 
+extension MyLocationTableView{
+    
+    func setupController(){
+        if let canGeoTag = UserDefaults.standard.value(forKey: "canGeoTag") as? Bool{
+           
+            if canGeoTag == true{
+                addButton.isHidden = false
+            }else{
+                addButton.isHidden = true
+            }
+            
+        }else{
+            addButton.isHidden = true
+        }
+        
+    }
+}
 
 
 

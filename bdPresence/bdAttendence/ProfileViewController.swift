@@ -12,6 +12,7 @@ import RealmSwift
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var imageNotAvailableLbl: UILabel!
     @IBOutlet weak var profileTableView: UITableView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -27,20 +28,9 @@ class ProfileViewController: UIViewController {
         self.navigationItem.title = "My Profile"
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
-        profileImageView.isUserInteractionEnabled = true
-        tapGestureForImage = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        profileImageView.addGestureRecognizer(tapGestureForImage)
-        profileImageView.layer.cornerRadius = 50
-        profileImageView.layer.borderWidth = 0.5
-        profileImageView.layer.borderColor = UIColor.gray.cgColor
-        if let imageData = UserDefaults.standard.value(forKey: "profileImage") as? Data {
-            profileImageView.image = UIImage(data: imageData)!
-        }
         
-        self.userNameLabel.text = SDKSingleton.sharedInstance.userName.capitalized
+        setUserDetails()
         
-        
-        self.userNameLabel.font = APPFONT.PROFILEHEADER
         profileTableView.delegate = self
         profileTableView.dataSource = self
         
@@ -230,4 +220,67 @@ extension ProfileViewController :UIImagePickerControllerDelegate,UINavigationCon
         
         
     }
+}
+
+extension ProfileViewController{
+    func setUserDetails(){
+        self.userNameLabel.text = SDKSingleton.sharedInstance.userName.capitalized
+        self.userNameLabel.font = APPFONT.PROFILEHEADER
+        
+        SDKSingleton.sharedInstance.userName.getImageFromText()
+        
+        
+        profileImageView.isUserInteractionEnabled = true
+        tapGestureForImage = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        profileImageView.addGestureRecognizer(tapGestureForImage)
+        profileImageView.layer.cornerRadius = 50
+        profileImageView.layer.borderWidth = 0.5
+        profileImageView.layer.borderColor = UIColor.gray.cgColor
+        if let imageData = UserDefaults.standard.value(forKey: "profileImage") as? Data {
+            profileImageView.image = UIImage(data: imageData)!
+            imageNotAvailableLbl.isHidden = true
+        }else{
+            
+            imageNotAvailableLbl.isHidden = false
+            imageNotAvailableLbl.text = SDKSingleton.sharedInstance.userName.getImageFromText()
+            
+        
+        }
+    }
+}
+
+extension String{
+    
+    func getImageFromText() -> String?{
+        let fullName = self
+        var components = fullName.components(separatedBy: " ")
+        if(components.count > 0)
+        {
+            var fullName = ""
+            if let firstElement = components.first{
+                
+                if let firstCharacter = firstElement.first{
+                    fullName.append(firstCharacter)
+                }
+                
+                
+            }
+            
+            if components.count > 1{
+                
+                if let secondElement = components.last{
+                    
+                    if let firstCharacter = secondElement.first{
+                        fullName.append(firstCharacter)
+                    }
+                }
+            }
+            
+            return fullName.capitalized
+        }
+        
+        return nil
+    }
+    
+    
 }

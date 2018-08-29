@@ -183,6 +183,11 @@ class NewOtpViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     func goToHome(){
+        
+        let superController = SuperViewController()
+        superController.geoTagPermission()
+        
+        
         self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
         //        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
         //        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController

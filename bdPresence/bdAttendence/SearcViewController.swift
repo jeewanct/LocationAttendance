@@ -72,15 +72,6 @@ class SearchViewController: PullUpController {
         
         willMoveToStickyPoint = { point in
             
-            if point > UIScreen.main.bounds.height / 2{
-                self.addBlurEffect()
-                //  self.setupConstraint()
-            }else{
-                self.visualEffectView.effect = nil
-                // self.setupConstraint()
-            }
-
-            
             print("willMoveToStickyPoint \(point)")
         }
         
@@ -101,6 +92,8 @@ class SearchViewController: PullUpController {
         visualEffectView.applyGradient(isTopBottom: false, colorArray:
             [#colorLiteral(red: 0.4470588235, green: 0.662745098, blue: 0.8705882353, alpha: 1),#colorLiteral(red: 0.5019607843, green: 0.9294117647, blue: 0.968627451, alpha: 1)])
         visualEffectView.alpha = 0.8
+        
+        addBlurEffect()
         
     }
     
@@ -189,15 +182,23 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         if userDetails[indexPath.item].isGeoTagged == true{
             
-            cell.timeBottomConstraint.constant = 10
+            cell.timeBottomConstraint.constant = 8
             cell.geoTagButton.isHidden = true
             cell.geoTagButton.setTitle("", for: .normal)
             
         }else{
             
-            cell.timeBottomConstraint.constant = 44
-            cell.geoTagButton.isHidden = false
-            cell.geoTagButton.setTitle("Geo-Tag this location", for: .normal)
+            if userDetails[indexPath.item].canGeoTag == true{
+                cell.timeBottomConstraint.constant = 44
+                cell.geoTagButton.isHidden = false
+                cell.geoTagButton.setTitle("Geo-Tag this location", for: .normal)
+            }else{
+                cell.timeBottomConstraint.constant = 8
+                cell.geoTagButton.isHidden = true
+                cell.geoTagButton.setTitle("", for: .normal)
+            }
+            
+            
             
         }
         
@@ -281,6 +282,17 @@ extension SearchViewController{
                 
                 for locationDetail in location{
                     
+                    if let canGeoTag = UserDefaults.standard.value(forKey: "canGeoTag") as? Bool{
+                        
+                        if canGeoTag == true{
+                            userData.canGeoTag = true
+                        }else{
+                            userData.canGeoTag = false
+                        }
+                    }
+                    
+                    
+                    
                     if let geoTagged = locationDetail.geoTaggedLocations{
                         var lastSeenString = ""
                         userData.isGeoTagged = true
@@ -360,6 +372,8 @@ extension SearchViewController{
                                 userData.lastSeen = LogicHelper.shared.getLocationDate(date: lastSeen)
                             }
                         }
+                        
+                        userData.address = locationDetail.address
                         
                         if let lat = locationDetail.latitude, let long = locationDetail.longitude{
                             

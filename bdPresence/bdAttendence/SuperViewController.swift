@@ -58,6 +58,8 @@ class SuperViewController: UIViewController {
         updateTask()
         
         wakeUpCall(notify: NotifyingFrom.Normal)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
 
     
     }
@@ -670,16 +672,47 @@ extension SuperViewController{
             
             if timeInSeconds() - getPlacesSeconds > 7 * 60{
                 RMCPlacesManager.getPlaces()
-                UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
+               // UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
             }
             
             
         }else{
-            UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
+           
             RMCPlacesManager.getPlaces()
             
         }
         
+    }
+    
+    func handleSuccessRmcPlaces(){
+         UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
+    }
+    
+    func geoTagPermission(){
+        
+        if let getPlacesSeconds = UserDefaults.standard.value(forKey: "geoTagPermissionTime") as? Int{
+            
+            if timeInSeconds() - getPlacesSeconds > 12 * 60 * 60{
+                callGeoAuthentication()
+            }
+            
+            
+        }else{
+            callGeoAuthentication()
+           
+           
+        }
+        
+    }
+    
+    
+    func callGeoAuthentication(){
+        UserGeoTagAuthentication.getGeoTagAccess { (value) in
+            
+            UserDefaults.standard.set(self.timeInSeconds(), forKey: "geoTagPermissionTime")
+            UserDefaults.standard.set(value, forKey: "canGeoTag")
+            
+        }
     }
     
     func timeInSeconds() -> Int{

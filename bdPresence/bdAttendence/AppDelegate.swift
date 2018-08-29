@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         */
         
         
+        
+        
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
@@ -90,6 +92,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Adding a Defaults value which will show gpsCheckinSendStatus
         // And it should be set here on first launch of app
         if !SDKSingleton.sharedInstance.userId.isBlank {
+            
+            
+            
+            
             if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
                 BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
                 // Here check whether the shift is runing or not then only start location monitoring
@@ -114,6 +120,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if isInternetAvailable() {
                 // Adding data to download assignment for status change feature if internet is there and meanwhile
                 // I will start work to check the data from database and act accordingly for STATUS CHANGE FEATURE.
+                
+                let superController = SuperViewController()
+                superController.geoTagPermission()
+                
+                
                 if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
                     let interval = Date().timeIntervalSince(lastAssignmentFetched)
                     print(interval)
@@ -191,6 +202,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !SDKSingleton.sharedInstance.userId.isBlank{
 
             if isInternetAvailable()  {
+                
+                let superController = SuperViewController()
+                superController.geoTagPermission()
+                
+                
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: self, userInfo: nil)
                 CheckinModel.postCheckin()
                 // Adding data to download assignment for status change feature if internet is there and meanwhile

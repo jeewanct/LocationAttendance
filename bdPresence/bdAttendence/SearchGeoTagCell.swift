@@ -15,4 +15,7 @@ class SearchGeoTagCell: UITableViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    
+    
 }
