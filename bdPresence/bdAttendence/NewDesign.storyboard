@@ -452,7 +452,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-digit OTP send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-7P-mO6">
-                                <rect key="frame" x="128.5" y="212" width="119" height="19"/>
+                                <rect key="frame" x="128" y="212" width="119" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -472,7 +472,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-St-diy">
-                                <rect key="frame" x="215" y="329" width="72" height="29"/>
+                                <rect key="frame" x="215" y="328.5" width="72" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Send again">
                                     <color key="titleColor" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -488,7 +488,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zem-fm-UdE">
-                                <rect key="frame" x="249" y="361" width="76" height="29"/>
+                                <rect key="frame" x="249" y="360.5" width="76" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Change No.">
                                     <color key="titleColor" red="0.41734778760000002" green="0.74260265540000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1177,7 +1177,7 @@
                                 <rect key="frame" x="0.0" y="126" width="220" height="501"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="mXN-ad-IkB">
                                         <rect key="frame" x="0.0" y="22" width="220" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXN-ad-IkB" id="syQ-Lf-NEi">
@@ -2459,8 +2459,9 @@ mark your presence at your workplace</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-uc-ZLt">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-uc-ZLt">
                                 <rect key="frame" x="137.5" y="83" width="100" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Cig-Ps-fb4"/>
                                     <constraint firstAttribute="height" constant="100" id="yb0-5L-dyz"/>
@@ -2495,14 +2496,22 @@ mark your presence at your workplace</string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="g7v-aY-O08">
                                 <rect key="frame" x="206.5" y="87" width="27" height="27"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3h-Fg-jeA">
+                                <rect key="frame" x="175.5" y="120.5" width="24.5" height="25.5"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="20"/>
+                                <color key="textColor" red="0.43137254899999999" green="0.76078431369999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="p3h-Fg-jeA" firstAttribute="centerY" secondItem="U4T-uc-ZLt" secondAttribute="centerY" id="0sz-dI-7nQ"/>
                             <constraint firstItem="U4T-uc-ZLt" firstAttribute="top" secondItem="9hx-w4-6nt" secondAttribute="bottom" constant="19" id="6ow-Je-ZSn"/>
                             <constraint firstItem="dRE-Ky-pc8" firstAttribute="leading" secondItem="uEj-yj-xfL" secondAttribute="leading" id="7ug-aY-oho"/>
                             <constraint firstItem="g7v-aY-O08" firstAttribute="top" secondItem="U4T-uc-ZLt" secondAttribute="top" constant="4" id="9Sk-Bu-q39"/>
                             <constraint firstItem="an5-NT-Sbz" firstAttribute="centerX" secondItem="U4T-uc-ZLt" secondAttribute="centerX" id="Jbh-sr-pBn"/>
                             <constraint firstAttribute="trailing" secondItem="dRE-Ky-pc8" secondAttribute="trailing" id="UNJ-pl-6Xh"/>
+                            <constraint firstItem="p3h-Fg-jeA" firstAttribute="centerX" secondItem="U4T-uc-ZLt" secondAttribute="centerX" id="VDo-XF-PPN"/>
                             <constraint firstItem="Om4-aR-nA4" firstAttribute="top" secondItem="dRE-Ky-pc8" secondAttribute="bottom" id="bDV-ti-ZYn"/>
                             <constraint firstItem="dRE-Ky-pc8" firstAttribute="top" secondItem="an5-NT-Sbz" secondAttribute="bottom" constant="16" id="jX0-wu-wez"/>
                             <constraint firstItem="U4T-uc-ZLt" firstAttribute="centerX" secondItem="uEj-yj-xfL" secondAttribute="centerX" id="pN5-s5-LRb"/>
@@ -3635,6 +3644,9 @@ mark your presence at your workplace</string>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Which location are you trying to find?" translatesAutoresizingMaskIntoConstraints="NO" id="RIy-Om-P0X">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <color key="backgroundColor" red="0.43137254901960786" green="0.76078431372549016" blue="0.79607843137254897" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="KqD-vT-sPl"/>
+                                </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -3648,6 +3660,9 @@ mark your presence at your workplace</string>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="searchField.backgroundColor">
                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -3699,19 +3714,37 @@ mark your presence at your workplace</string>
                                     <outlet property="delegate" destination="xM5-f0-EZ2" id="KQg-1o-gYk"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ebo-Xy-Xxe">
+                                <rect key="frame" x="337" y="41" width="14" height="14"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="searchImage"/>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No location found!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5o-G2-ryt">
+                                <rect key="frame" x="115.5" y="322.5" width="144" height="23"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="18"/>
+                                <color key="textColor" red="0.43137254899999999" green="0.76078431369999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="E5o-G2-ryt" firstAttribute="centerY" secondItem="SN1-gy-loA" secondAttribute="centerY" id="3F8-Tf-G4p"/>
                             <constraint firstItem="bMg-4G-rjm" firstAttribute="top" secondItem="RIy-Om-P0X" secondAttribute="bottom" id="7Wa-2N-yhQ"/>
                             <constraint firstItem="RIy-Om-P0X" firstAttribute="leading" secondItem="SN1-gy-loA" secondAttribute="leading" id="CjK-xs-Nap"/>
+                            <constraint firstItem="Ebo-Xy-Xxe" firstAttribute="width" secondItem="RIy-Om-P0X" secondAttribute="height" multiplier="0.25" id="PLU-Ir-a6J"/>
+                            <constraint firstItem="Ebo-Xy-Xxe" firstAttribute="height" secondItem="RIy-Om-P0X" secondAttribute="height" multiplier="0.25" id="SNe-4q-br2"/>
                             <constraint firstItem="RIy-Om-P0X" firstAttribute="top" secondItem="zYe-x5-wEf" secondAttribute="bottom" id="Sx5-ft-3fY"/>
                             <constraint firstAttribute="trailing" secondItem="bMg-4G-rjm" secondAttribute="trailing" id="awh-4I-UuJ"/>
+                            <constraint firstItem="Ebo-Xy-Xxe" firstAttribute="centerY" secondItem="RIy-Om-P0X" secondAttribute="centerY" id="fOb-d3-m2c"/>
                             <constraint firstItem="t6u-Gl-x0e" firstAttribute="top" secondItem="bMg-4G-rjm" secondAttribute="bottom" id="hou-MY-eWO"/>
                             <constraint firstAttribute="trailing" secondItem="RIy-Om-P0X" secondAttribute="trailing" id="sTl-aA-y4Q"/>
+                            <constraint firstAttribute="trailing" secondItem="Ebo-Xy-Xxe" secondAttribute="trailing" constant="24" id="sZI-Pp-Rf7"/>
+                            <constraint firstItem="E5o-G2-ryt" firstAttribute="centerX" secondItem="SN1-gy-loA" secondAttribute="centerX" id="t6d-V9-iyG"/>
                             <constraint firstItem="bMg-4G-rjm" firstAttribute="leading" secondItem="SN1-gy-loA" secondAttribute="leading" id="xuz-TN-ATK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="noLocationFoundLbl" destination="E5o-G2-ryt" id="iyp-rZ-hjG"/>
                         <outlet property="searchBar" destination="RIy-Om-P0X" id="INf-ZO-o0M"/>
                         <outlet property="tableView" destination="bMg-4G-rjm" id="z3o-9O-ZpD"/>
                     </connections>

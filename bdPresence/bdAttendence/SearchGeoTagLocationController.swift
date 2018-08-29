@@ -15,6 +15,7 @@ class SearchGeoTagLocationController:  UIViewController{
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var noLocationFoundLbl: UILabel!
     var myLocationArray: [RMCPlace]?{
         didSet{
             myLocationSearchArray = myLocationArray
@@ -46,6 +47,14 @@ class SearchGeoTagLocationController:  UIViewController{
             txfSearchField.borderStyle = .none
             txfSearchField.backgroundColor = .clear
             txfSearchField.font = UIFont(name: "SourceSansPro-Regular", size: 13)
+          //  txfSearchField.leftViewMode = .never
+            txfSearchField.attributedPlaceholder = NSAttributedString(string: "Which location are you trying to find?", attributes: [NSForegroundColorAttributeName: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)])
+            
+            let uiview = UIView(frame: CGRect(x: 0, y: 0, width: 4, height: 0))
+            txfSearchField.leftView = uiview
+            txfSearchField.leftViewMode = .always
+            txfSearchField.clearButtonMode = .never
+            
         }
         
         
@@ -97,6 +106,17 @@ extension SearchGeoTagLocationController: UISearchBarDelegate, UISearchDisplayDe
             return hotel.geoTagName?.range(of: searchText, options: .caseInsensitive) != nil
             
         })
+        
+        
+        if let count = myLocationSearchArray?.count{
+            if count == 0 {
+                tableView.separatorStyle = .none
+                noLocationFoundLbl.isHidden = false
+            }else{
+                tableView.separatorStyle = .singleLine
+                noLocationFoundLbl.isHidden = true
+            }
+        }
         
         tableView.reloadData()
         

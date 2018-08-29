@@ -46,7 +46,7 @@ class MyLocationViewController: UIViewController{
        // addBottomConstraint.constant = UIScreen.main.bounds.height * 0.2 - 32.5
       //  userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
         searchButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-        
+        navigationController?.navigationBar.backIndicatorImage
     }
     
     override func viewWillAppear(_ animated: Bool) {

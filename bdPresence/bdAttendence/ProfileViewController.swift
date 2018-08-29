@@ -38,6 +38,8 @@ class ProfileViewController: UIViewController {
         }
         
         self.userNameLabel.text = SDKSingleton.sharedInstance.userName.capitalized
+        
+        
         self.userNameLabel.font = APPFONT.PROFILEHEADER
         profileTableView.delegate = self
         profileTableView.dataSource = self
