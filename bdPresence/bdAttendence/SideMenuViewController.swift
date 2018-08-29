@@ -14,6 +14,7 @@ protocol SideMenuDelegate {
 }
 class SideMenuViewController: UIViewController  {
         
+    @IBOutlet weak var imageNotAvaiableLbl: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
         @IBOutlet weak var sideMenuTable: UITableView!
         @IBOutlet weak var userNameLabel: UILabel!
@@ -74,6 +75,11 @@ class SideMenuViewController: UIViewController  {
         if keyPath == "profileImage" {
             if let imageData = UserDefaults.standard.value(forKey: "profileImage") as? Data {
                 userImageView.image = UIImage(data: imageData)!
+                imageNotAvaiableLbl.isHidden = true
+            }else{
+                imageNotAvaiableLbl.isHidden = false
+                imageNotAvaiableLbl.text = SDKSingleton.sharedInstance.userName.getImageFromText()
+                
             }
         }
     }
@@ -92,6 +98,10 @@ class SideMenuViewController: UIViewController  {
     override func viewDidAppear(_ animated: Bool) {
         if let imageData = UserDefaults.standard.value(forKey: "profileImage") as? Data {
             userImageView.image = UIImage(data: imageData)!
+            imageNotAvaiableLbl.isHidden = true
+        }else{
+            imageNotAvaiableLbl.isHidden = false
+            imageNotAvaiableLbl.text = SDKSingleton.sharedInstance.userName.getImageFromText()
         }
         let indexPath = IndexPath(row: menuindex, section: 0)
         self.tableView(sideMenuTable, didSelectRowAt: indexPath)

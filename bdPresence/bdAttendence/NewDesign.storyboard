@@ -1155,8 +1155,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="220" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="zd1-An-RMO">
+                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zd1-An-RMO">
                                 <rect key="frame" x="80" y="24" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="oLq-sA-c8b"/>
                                     <constraint firstAttribute="height" constant="60" id="zDI-UG-lws"/>
@@ -1208,9 +1209,16 @@
                                     <constraint firstAttribute="height" id="nc1-WO-PNq"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ly-s1-cKc">
+                                <rect key="frame" x="94.5" y="38.5" width="32" height="33"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="26"/>
+                                <color key="textColor" red="0.43137254899999999" green="0.76078431369999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="zd1-An-RMO" secondAttribute="centerX" id="0al-cL-Og1"/>
+                            <constraint firstItem="3ly-s1-cKc" firstAttribute="centerX" secondItem="zd1-An-RMO" secondAttribute="centerX" id="1ru-Du-TBw"/>
                             <constraint firstItem="hAE-up-dgZ" firstAttribute="top" secondItem="RCj-KP-j6g" secondAttribute="bottom" id="3Yl-36-hKb"/>
                             <constraint firstItem="eg8-XT-sab" firstAttribute="top" secondItem="zd1-An-RMO" secondAttribute="bottom" constant="8" id="4XB-w6-ZOd"/>
                             <constraint firstItem="RCj-KP-j6g" firstAttribute="leading" secondItem="iIt-b7-8OE" secondAttribute="leading" id="7Yo-Nh-DM3"/>
@@ -1221,6 +1229,7 @@
                             <constraint firstAttribute="trailing" secondItem="RCj-KP-j6g" secondAttribute="trailing" id="MAc-7H-VxO"/>
                             <constraint firstItem="zd1-An-RMO" firstAttribute="top" secondItem="iIt-b7-8OE" secondAttribute="top" constant="24" id="MEB-Qg-09Q"/>
                             <constraint firstAttribute="trailing" secondItem="hAE-up-dgZ" secondAttribute="trailing" id="Qyh-BR-OTB"/>
+                            <constraint firstItem="3ly-s1-cKc" firstAttribute="centerY" secondItem="zd1-An-RMO" secondAttribute="centerY" id="Tzy-eY-LAw"/>
                             <constraint firstItem="4Aj-4K-ftW" firstAttribute="leading" secondItem="iIt-b7-8OE" secondAttribute="leading" id="j5M-7g-xCQ"/>
                             <constraint firstItem="eg8-XT-sab" firstAttribute="leading" secondItem="iIt-b7-8OE" secondAttribute="leading" constant="15" id="mWn-7s-fo9"/>
                             <constraint firstAttribute="trailing" secondItem="4Aj-4K-ftW" secondAttribute="trailing" id="q3u-bZ-coV"/>
@@ -1230,6 +1239,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="imageNotAvaiableLbl" destination="3ly-s1-cKc" id="wey-QD-yd1"/>
                         <outlet property="sideMenuTable" destination="hAE-up-dgZ" id="57T-ao-tcH"/>
                         <outlet property="userImageView" destination="zd1-An-RMO" id="BaX-FF-G3l"/>
                         <outlet property="userNameLabel" destination="eg8-XT-sab" id="13B-SQ-6yX"/>
@@ -3764,7 +3774,6 @@ mark your presence at your workplace</string>
         <image name="logo" width="50" height="50"/>
         <image name="nextImage" width="9" height="15"/>
         <image name="phone" width="14" height="14"/>
-        <image name="profile" width="75" height="75"/>
         <image name="quote" width="21" height="19"/>
         <image name="searchImage" width="32" height="32"/>
         <image name="send_message" width="50" height="36"/>
