@@ -25,7 +25,7 @@ class PolyLineMap{
     
     func takePolyline(){
         
-        if allLocations.count < 8 {
+        if allLocations.count <= 8 {
             getPolylineFromGoogle(location: allLocations, isLast: true)
         }else{
         
@@ -38,6 +38,8 @@ class PolyLineMap{
         }
         
         getPolylineFromGoogle(location: tempLocation, isLast: false)
+            let sequence = 0...6
+            self.allLocations.removeSubrange(sequence)
             
             
         }
@@ -76,8 +78,7 @@ class PolyLineMap{
                 
             }else{
                 
-                let sequence = 0...6
-                self.allLocations.removeSubrange(sequence)
+                
                 self.takePolyline()
                 
             }

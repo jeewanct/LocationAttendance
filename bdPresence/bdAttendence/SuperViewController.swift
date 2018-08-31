@@ -349,6 +349,7 @@ extension SuperViewController{
     
     
     func firstCheckin(sender:NSNotification){
+        
         let state = UIApplication.shared.applicationState
         if state == .background {
             let notification = UILocalNotification()
