@@ -49,6 +49,7 @@ class NewCheckoutViewController: UIViewController {
         addObservers()
         setupGestures()
         updateView()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -342,7 +343,9 @@ extension NewCheckoutViewController{
             
             let polyLine = PolyLineMap()
             polyLine.delegate = self
-            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+            polyLine.allLocations = allLocations
+            polyLine.takePolyline()
+            //polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
             
         }
         

@@ -50,7 +50,7 @@ class NewOtpViewController: UIViewController {
         
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(NewOtpViewController.goToHome), name: NSNotification.Name(rawValue:  LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(NewOtpViewController.goToHome), name: NSNotification.Name(rawValue:  LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
         
     }
     
@@ -153,14 +153,7 @@ class NewOtpViewController: UIViewController {
                             
                             if apiResultStatus == APIResult.Success {
                                 
-                                if LocationHistoryData.getLocationDataCount() == 0{
-
-                                    self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
-
-                                    LocationHistoryData.getTeamMember()
-                                }else{
-                                    self.goToHome()
-                                }
+                                self.goToHome()
                                 
                             }
                         }

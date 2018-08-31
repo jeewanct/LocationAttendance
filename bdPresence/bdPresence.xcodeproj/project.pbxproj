@@ -46,6 +46,7 @@
 		099C0E1D2136703B00B64FB4 /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 099C0E002136703B00B64FB4 /* GQTPointQuadTree.m */; };
 		099C0E1E2136703B00B64FB4 /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 099C0E022136703B00B64FB4 /* GQTPointQuadTreeChild.m */; };
 		099C0E20213675DD00B64FB4 /* UserGeoTagAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099C0E1F213675DD00B64FB4 /* UserGeoTagAuthentication.swift */; };
+		09A438F12137D4C200CF2109 /* LinearProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A438F02137D4C200CF2109 /* LinearProgressBar.swift */; };
 		09A5F9E82118323F009953C6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */; };
 		09B1CC68212C284000A11D5A /* SearchGeoTagLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B1CC67212C284000A11D5A /* SearchGeoTagLocationController.swift */; };
 		09B1CC6A212C33AF00A11D5A /* SearchGeoTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B1CC69212C33AF00A11D5A /* SearchGeoTagCell.swift */; };
@@ -257,6 +258,7 @@
 		099C0E052136703B00B64FB4 /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeChild.h; sourceTree = "<group>"; };
 		099C0E062136703B00B64FB4 /* GQTBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTBounds.h; sourceTree = "<group>"; };
 		099C0E1F213675DD00B64FB4 /* UserGeoTagAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGeoTagAuthentication.swift; sourceTree = "<group>"; };
+		09A438F02137D4C200CF2109 /* LinearProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressBar.swift; sourceTree = "<group>"; };
 		09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		09B1CC67212C284000A11D5A /* SearchGeoTagLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGeoTagLocationController.swift; sourceTree = "<group>"; };
 		09B1CC69212C33AF00A11D5A /* SearchGeoTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGeoTagCell.swift; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 				0941029821259AF200842BE4 /* Google-Maps-iOS-Utils */,
 				99BD39DF1EA5F83800B6942B /* CommonFunction.swift */,
 				9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */,
+				09A438F02137D4C200CF2109 /* LinearProgressBar.swift */,
 				99D6172D1EBA075800E7E05F /* OTPView.swift */,
 				990CBCEC1EFA422000F56E38 /* GradientView.swift */,
 				99BD39EE1EA7453A00B6942B /* Loader.swift */,
@@ -1134,6 +1137,7 @@
 				99F2177A1F20A833002A0E5C /* SplashViewController.swift in Sources */,
 				99B67D5920F78C6E00308137 /* LabelWithImage.swift in Sources */,
 				0982365D2109A948002BEECC /* RoughWork.swift in Sources */,
+				09A438F12137D4C200CF2109 /* LinearProgressBar.swift in Sources */,
 				99B811651F2F11E200174FD0 /* ContactUsViewController.swift in Sources */,
 				09A5F9E82118323F009953C6 /* ActivityIndicatorView.swift in Sources */,
 				099C0E102136703B00B64FB4 /* GMUGradient.m in Sources */,
@@ -1335,7 +1339,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1376,7 +1380,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1548,9 +1552,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

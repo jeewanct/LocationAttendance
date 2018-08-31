@@ -69,12 +69,22 @@ extension SearchGeoTagLocationController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
-        // geoTagController.geoTagLocation = cllLocation
-        // geoTagController.geoTagAddress = address
-        geoTagController.editGeoTagPlace = myLocationSearchArray?[indexPath.item]
+        if let canGeoTag = UserDefaults.standard.value(forKey: "canGeoTag") as? Bool{
+            if canGeoTag == true{
+                let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
+                geoTagController.editGeoTagPlace = myLocationSearchArray?[indexPath.item]
+                navigationController?.pushViewController(geoTagController, animated: true)
+            }else{
+                
+            }
+        }
         
-        navigationController?.pushViewController(geoTagController, animated: true)
+//        let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
+//        // geoTagController.geoTagLocation = cllLocation
+//        // geoTagController.geoTagAddress = address
+//        geoTagController.editGeoTagPlace = myLocationSearchArray?[indexPath.item]
+//        
+//        navigationController?.pushViewController(geoTagController, animated: true)
     
         
         

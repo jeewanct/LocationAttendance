@@ -84,7 +84,9 @@ class LocationFilters: UIViewController{
             }
             return false
         }
-        return updatedLocations
+        
+        return LogicHelper.shared.sortOnlyLocations(location: updatedLocations)
+        //return updatedLocations
         
     }
     
@@ -101,6 +103,7 @@ class LocationFilters: UIViewController{
                 let distance = LogicHelper.shared.distanceBetween(firstLat: locations[index].latitude, firstLong: locations[index].longitude, secondLat: locations[index + 1].latitude, secondLong: locations[index + 1].longitude)
                 
                 let estimatedDistance = calculateDistanceTravelledBetweenTwoCheckinTimeInterval(first: locations[index].lastSeen!, second: locations[index + 1].lastSeen!)
+                
                 if distance == 0 || distance > estimatedDistance {
                     
                     removeFromGoogleApi(locations: locations, index: index + 1)
@@ -125,7 +128,7 @@ class LocationFilters: UIViewController{
         print("timedifference = \(timeDifference)")
         let calculatedValue = (timeDifference * 8000)/10
         print("newlogic = \(calculatedValue)")
-        return Double(calculatedValue)
+        return Double(abs(calculatedValue))
     }
     
     func removeFromGoogleApi(locations: [LocationDataModel], index: Int){

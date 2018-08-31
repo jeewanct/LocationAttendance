@@ -243,6 +243,7 @@ extension HistoryViewController{
 
 extension HistoryViewController{
     func updateView(date:Date = Date()){
+        
         activityIndicator = ActivityIndicatorView()
         self.view.showActivityIndicator(activityIndicator: activityIndicator)
         selectedDate = date
@@ -259,11 +260,14 @@ extension HistoryViewController{
         
         let allLocations = UserPlace.getGeoTagData(location: location)
         //var finalLocations = allLocations
-        mapView.addMarkersInMap(allLocations: allLocations)
+        
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         
         if allLocations.count != 0{
             
+            clearMapData()
+            
+            mapView.addMarkersInMap(allLocations: allLocations)
             pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
             pullController.screenType = LocationDetailsScreenEnum.historyScreen

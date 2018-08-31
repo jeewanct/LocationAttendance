@@ -123,6 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let superController = SuperViewController()
                 superController.geoTagPermission()
+                superController.getPlacesAfterTenMinutes()
                 
                 
                 if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
@@ -389,13 +390,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 6,
+            schemaVersion: 7,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
 
-                if oldSchemaVersion < 6 {
+                if oldSchemaVersion < 7 {
 //                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
 //
 //                    }
@@ -407,6 +408,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                 }
                 // Here we know app is being update so we have to call RMCPlaces
+                
+              //  UserDefaults.standard.setValue(false, forKey: "oldData")
+                
+                
                 RMCPlacesManager.getPlaces()
         }
 

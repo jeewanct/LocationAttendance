@@ -44,25 +44,18 @@ class UserPlace{
         var geoTagLocation: GeoTagLocationModel?
         
         var nearestDistance = -1.0
-      
-        
-       
-        //let places = realm.objects(RMCPlace.self)
         
         
         for place in rmcPlaces{
             
-            
             if let firstLat = place.location?.latitude, let firstLong = place.location?.longitude, let fenceRadius = place.placeDetails?.fenceRadius{
                 
-                
+                if  let secondLat = location.latitude, let secondLong = location.longitude{
                     
-                    if  let secondLat = location.latitude, let secondLong = location.longitude{
-                        
-                       let distance = LogicHelper.shared.distanceBetween(firstLat: firstLat, firstLong: firstLong, secondLat: secondLat, secondLong: secondLong)
-                        
-                        
-                        if distance <= Double(fenceRadius){
+                    let distance = LogicHelper.shared.distanceBetween(firstLat: firstLat, firstLong: firstLong, secondLat: secondLat, secondLong: secondLong)
+                    
+                    
+                    if distance <= Double(fenceRadius){
                         
                         if nearestDistance == -1.0 {
                             nearestDistance = distance
@@ -76,16 +69,14 @@ class UserPlace{
                             
                         }
                     }
-                        
-                    }
-                
+                    
+                }
                 
             }
             
             
-            
         }
-      //  print(places)
+        //  print(places)
         
         return geoTagLocation
         
@@ -107,10 +98,10 @@ class UserPlace{
         geoPlaceDetails.editedBy = place.placeDetails?.editedBy
         
         if let fenceRadius = place.placeDetails?.fenceRadius{
-             geoPlaceDetails.fenceRadius = fenceRadius
+            geoPlaceDetails.fenceRadius = fenceRadius
         }
         
-       
+        
         geoPlaceDetails.placeId = place.placeDetails?.placeId
         geoPlaceDetails.placeType = place.placeDetails?.placeType
         
@@ -156,9 +147,9 @@ class UserPlace{
         }
         
         let clusterGeoTagLocatins = locationAccordingToGeoTag(locations: geoTaggedLocations)
-    
+        
         return clusterNonGeoLocations(locations: clusterGeoTagLocatins)
-    
+        
         
     }
     
@@ -189,20 +180,22 @@ class UserPlace{
                                 let locationData = tempData
                                 clusteringData.append(locationData)
                                 tempData.removeAll()
+                                tempData.append(location)
+                                lastGeoTagId = geoTagId // Check here can be error
                             }else{
-                                 tempData.append(location)
+                                tempData.append(location)
                             }
                             
                         }
                         
                         
                     }else{
-                       tempData.append(location)
+                        tempData.append(location)
                     }
                     
                     // Changes here
                     
-                   
+                    
                 }else{
                     lastGeoTagId = geoTagId
                     if tempData.count == 0{
@@ -244,9 +237,9 @@ class UserPlace{
     
     class func clusterNonGeoLocations(locations: [[LocationDataModel]]) -> [[LocationDataModel]]{
         
-    
+        
         var finalLocations = [[LocationDataModel]]()
-      
+        
         var firstLocation = LocationDataModel()
         
         var tempLocations = [LocationDataModel]()
@@ -266,8 +259,8 @@ class UserPlace{
                 }else{
                     
                     if let _ = firstLocation.lastSeen{
-                       
-                       let distance = LogicHelper.shared.distanceBetween(firstLat: firstLocation.latitude, firstLong: firstLocation.longitude, secondLat: firstLoc.latitude, secondLong: firstLoc.longitude)
+                        
+                        let distance = LogicHelper.shared.distanceBetween(firstLat: firstLocation.latitude, firstLong: firstLocation.longitude, secondLat: firstLoc.latitude, secondLong: firstLoc.longitude)
                         
                         if distance <= 100 {
                             
@@ -284,21 +277,21 @@ class UserPlace{
                             tempLocations.append(firstLocation)
                             
                             
-                           // firstLocation =  LocationDataModel()
+                            // firstLocation =  LocationDataModel()
                             
                         }
                         
                         
                     }else{
-                            firstLocation = firstLoc
-                            tempLocations.append(firstLocation)
+                        firstLocation = firstLoc
+                        tempLocations.append(firstLocation)
                     }
                     
                 }
                 
             }
-       
-        
+            
+            
         }
         
         if tempLocations.count > 0 {
@@ -311,8 +304,8 @@ class UserPlace{
     }
     
     
-   
-
+    
+    
     
     func setClusterTaggedLocation(currentGeoLocation: LocationDataModel,location: [LocationDataModel]) -> GeoTagLocationModel?{
         

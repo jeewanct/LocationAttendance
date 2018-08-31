@@ -93,10 +93,39 @@ class GoogleUtils{
         }) { (error) in
             print(error)
         }
+    
+    }
+    
+    
+    class func getPolylineFromGoogle(originDestination: String,wayPoints: String ,isLast: Bool, completion: @escaping(String, Bool) -> Void){
         
         
-
+        guard let escapedString = wayPoints.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            return
+        }
         
+        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=false&travelmode=driving&waypoints=\(escapedString)&key=" + AppConstants.GoogleConstants.GoogleApiKey
+        
+        
+        Networking.fetchGenericData(url, header: [:], success: { (polyline: GoogleDirectionRoutesModel) in
+            
+            if let getPolyline = polyline.routes{
+                
+                var polyLineString = ""
+                for index in getPolyline{
+                    if let getPolyLine = index.overview_polyline?.points{
+                        polyLineString.append(getPolyLine)
+                    }
+                }
+                
+                completion(polyLineString, isLast)
+                
+            }
+            
+            print(polyline.routes)
+        }) { (error) in
+            print(error)
+        }
         
     }
     

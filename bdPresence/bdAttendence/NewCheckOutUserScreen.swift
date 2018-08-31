@@ -20,6 +20,7 @@ class UserDetailsDataModel{
     var cllLocation:  CLLocation = CLLocation()
     var geoLocationName =  ""
     var canGeoTag = false
+    var checkInId = ""
     
 }
 
@@ -229,7 +230,7 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
             
             LogicHelper.shared.reverseGeoCodeGeoLocations(location: userDetails[indexPath.item].cllLocation, index1: indexPath.item, index2: 0) { (addrress, start, end) in
                 
-                self.userDetails[start].address =  addrress
+               /// self.userDetails[start].address =  addrress
                 cell.addressLabel.text = addrress
                 
             }

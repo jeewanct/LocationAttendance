@@ -14,7 +14,7 @@ class SystemDetailViewController: UIViewController {
 
     @IBOutlet weak var systemTableview: UITableView!
     var systemDetail = [String]()
-    
+    let activityIndicator = ActivityIndicatorView()
     var imageIcons :[UIImage] = [#imageLiteral(resourceName: "syncImage"),#imageLiteral(resourceName: "syncImage"),#imageLiteral(resourceName: "pendingImage"),#imageLiteral(resourceName: "notouchImage")]
     
         var longPressGesture :UILongPressGestureRecognizer?
@@ -62,11 +62,14 @@ class SystemDetailViewController: UIViewController {
                 let interval = Date().timeIntervalSince(lastManualSync)
                 print(interval)
                 if interval > 120 {
-                    AlertView.sharedInstance.setLabelText("Syncing started...")
-                    AlertView.sharedInstance.showActivityIndicator(self.view)
+                    //AlertView.sharedInstance.setLabelText("Syncing started...")
+                   // AlertView.sharedInstance.showActivityIndicator(self.view)
+                    
+                    self.view.showActivityIndicator(activityIndicator: activityIndicator)
                     CheckinModel.postCheckin()
                     checkShiftStatus { (apiResultStatus) in
-                        AlertView.sharedInstance.hideActivityIndicator(self.view)
+                       // AlertView.sharedInstance.hideActivityIndicator(self.view)
+                        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
                         if apiResultStatus == APIResult.Success {
                             self.updateData()
                         }
@@ -75,14 +78,16 @@ class SystemDetailViewController: UIViewController {
                 } else {
                 }
             }else {
-                AlertView.sharedInstance.setLabelText("Syncing started...")
-                AlertView.sharedInstance.showActivityIndicator(self.view)
+//                AlertView.sharedInstance.setLabelText("Syncing started...")
+//                AlertView.sharedInstance.showActivityIndicator(self.view)
+                 self.view.showActivityIndicator(activityIndicator: activityIndicator)
                 UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastManualSync.rawValue)
                 // No last beacon checkin as Date
                 CheckinModel.postCheckin()
                 
                 checkShiftStatus { (apiResultStatus) in
-                    AlertView.sharedInstance.hideActivityIndicator(self.view)
+                    //AlertView.sharedInstance.hideActivityIndicator(self.view)
+                    self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
                     if apiResultStatus == APIResult.Success {
                         self.updateData()
                     }

@@ -227,7 +227,7 @@ extension ProfileViewController{
         self.userNameLabel.text = SDKSingleton.sharedInstance.userName.capitalized
         self.userNameLabel.font = APPFONT.PROFILEHEADER
         
-        SDKSingleton.sharedInstance.userName.getImageFromText()
+        
         
         
         profileImageView.isUserInteractionEnabled = true
@@ -276,7 +276,7 @@ extension String{
                 }
             }
             
-            return fullName.capitalized
+            return fullName.uppercased()
         }
         
         return nil

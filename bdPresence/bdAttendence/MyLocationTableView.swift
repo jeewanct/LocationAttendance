@@ -47,16 +47,26 @@ class MyLocationTableView: PullUpController{
         
         navigationController?.removeTransparency()
         setupController()
-        
+        self.tableView.isScrollEnabled = false
         willMoveToStickyPoint = { point in
             
             print("willMoveToStickyPoint \(point)")
             
             if point > UIScreen.main.bounds.height / 2{
                 self.addBlurEffect()
+                self.tableView.isScrollEnabled = true
                //  self.setupConstraint()
             }else{
                 self.visualEffectView.effect = nil
+                
+                if let getPlaces = self.myLocationSearchArray?.count{
+                    if getPlaces > 0{
+                        let indexPath = IndexPath(item: 0, section: 0)
+                        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                    }
+                }
+                
+                self.tableView.isScrollEnabled = false
                 // self.setupConstraint()
             }
             
@@ -163,12 +173,7 @@ extension MyLocationTableView: UITableViewDelegate, UITableViewDataSource{
                 
             }
         }
-        
-        
-        
-        
-        
-        
+          
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

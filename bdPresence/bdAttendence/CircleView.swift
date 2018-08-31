@@ -18,6 +18,8 @@ class CircleView: UIView {
     }
     */
     init(frame: CGRect, fillColor color: UIColor) {
+        
+        
         super.init(frame: frame)
         self.applyGradient(isTopBottom: true, colorArray: [APPColor.blueGradient,APPColor.greenGradient])
         self.clipsToBounds = true

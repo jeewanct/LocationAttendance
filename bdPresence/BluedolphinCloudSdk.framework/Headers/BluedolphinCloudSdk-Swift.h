@@ -391,7 +391,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk19LocationHistoryData")
 @interface LocationHistoryData : NSObject
 + (void)getTeamMember;
 + (NSInteger)getLocationDataCount SWIFT_WARN_UNUSED_RESULT;
-+ (void)makeAttendanceLogModel;
++ (void)makeAttendanceLogModelWithStatus:(BOOL)status;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

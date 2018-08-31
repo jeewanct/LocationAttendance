@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import PullUpController
+import BluedolphinCloudSdk
+
 
 class SearchViewController: PullUpController {
     
@@ -28,6 +30,8 @@ class SearchViewController: PullUpController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var timeLabelBottomContraint: NSLayoutConstraint!
+    
+    
     var selectedDate = Date()
     var locationData: [[LocationDataModel]]?{
         didSet{
@@ -90,8 +94,8 @@ class SearchViewController: PullUpController {
         super.viewDidAppear(animated)
         visualEffectView.roundCorners([.topLeft, .topRight], radius: 15)
         visualEffectView.applyGradient(isTopBottom: false, colorArray:
-            [#colorLiteral(red: 0.4470588235, green: 0.662745098, blue: 0.8705882353, alpha: 1),#colorLiteral(red: 0.5019607843, green: 0.9294117647, blue: 0.968627451, alpha: 1)])
-        visualEffectView.alpha = 0.8
+            [#colorLiteral(red: 0.4470588235, green: 0.6666666667, blue: 0.862745098, alpha: 1),#colorLiteral(red: 0.4, green: 0.737254902, blue: 0.7529411765, alpha: 1)])
+     
         
         addBlurEffect()
         
@@ -101,7 +105,9 @@ class SearchViewController: PullUpController {
     func addBlurEffect(){
         
         let blurEffect = UIBlurEffect(style: .regular)
-        visualEffectView.effect = blurEffect
+        visualEffectView.effect = nil
+        visualEffectView.alpha = 0.8
+        
     }
     
     
@@ -210,6 +216,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         }else{
             
             LogicHelper.shared.reverseGeoCodeGeoLocations(location: userDetails[indexPath.item].cllLocation, index1: indexPath.item, index2: 0) { (addrress, start, end) in
+                
+                LocationAttendanceLogModel.addAddressToCheckins(checkInId: self.userDetails[start].checkInId, address: addrress)
                 
                 self.userDetails[start].address =  addrress
                 cell.addressLabel.text = addrress
@@ -373,16 +381,20 @@ extension SearchViewController{
                             }
                         }
                         
-                        userData.address = locationDetail.address
+                        if locationDetail.address != ""{
+                            userData.address = locationDetail.address
+                        }
+                        
                         
                         if let lat = locationDetail.latitude, let long = locationDetail.longitude{
                             
                             if let latitude = CLLocationDegrees(lat), let longitude = CLLocationDegrees(long){
                                 userData.cllLocation = CLLocation(latitude: latitude, longitude: longitude)
+                                if let checkinId = locationDetail.checkinId{
+                                    userData.checkInId = checkinId
+                                }
                                 
                             }
-                            
-                            
                             
                         }
                         
@@ -393,13 +405,9 @@ extension SearchViewController{
                 }
                 
                 user.append(userData)
-                
-                
             }
             
             userDetails = user
-            
-            
             
         }
         

@@ -438,6 +438,16 @@ class LogicHelper{
         
     }
     
+    func timeInSeconds() -> Int{
+        
+        let someDate = Date()
+        
+        // convert Date to TimeInterval (typealias for Double)
+        let timeInterval = someDate.timeIntervalSince1970
+        
+        return Int(timeInterval)
+    }
+    
     
     
 }

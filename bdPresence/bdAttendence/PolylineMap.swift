@@ -14,6 +14,97 @@ class PolyLineMap{
     
     var delegate: PolylineStringDelegate?
     
+    // changes for more than 1 polyline
+    var allLocations = [[LocationDataModel]]()
+    var polylineString = ""
+    
+    
+    
+    
+    
+    
+    func takePolyline(){
+        
+        if allLocations.count < 8 {
+            getPolylineFromGoogle(location: allLocations, isLast: true)
+        }else{
+        
+        let locationSequence = 0...7
+        
+        var tempLocation = [[LocationDataModel]]()
+        
+        for index in allLocations[locationSequence]{
+            tempLocation.append(index)
+        }
+        
+        getPolylineFromGoogle(location: tempLocation, isLast: false)
+            
+            
+        }
+        
+    }
+    
+    
+    func getPolylineFromGoogle(location: [[LocationDataModel]], isLast: Bool){
+        
+        let origin = returnLatLongString(location: location.first)
+        let destination = returnLatLongString(location: location.last)
+        var wayPoints = ""
+        
+        if location.count == 3{
+            
+            wayPoints =   returnLatLongString(location: location[1])
+            
+        }else if location.count > 3{
+            wayPoints = returnWayPoints(location: location)
+        }
+        
+        let orginDestinationString = "origin=\(origin)&destination=\(destination)"
+        
+        GoogleUtils.getPolylineFromGoogle(originDestination: orginDestinationString, wayPoints: wayPoints, isLast: isLast) { (polyline, value) in
+            
+            self.polylineString = self.polylineString + polyline
+            
+            if isLast == true{
+                let  coordinates: [CLLocationCoordinate2D]? = decodePolyline(self.polylineString)
+                
+                if let getCoordinates = coordinates{
+                    
+                    self.delegate?.drawPolyline(coordinates: getCoordinates)
+                    //self.drawPath(coordinates: getCoordinates)
+                }
+                
+            }else{
+                
+                let sequence = 0...6
+                self.allLocations.removeSubrange(sequence)
+                self.takePolyline()
+                
+            }
+            
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
      func getPolyline(location: [[LocationDataModel]]){
         
     
@@ -33,6 +124,7 @@ class PolyLineMap{
         let orginDestinationString = "origin=\(origin)&destination=\(destination)"
         
         GoogleUtils.getPolylineGoogle(originDestination: orginDestinationString, wayPoints: wayPoints) { (polyline) in
+            
             
             let  coordinates: [CLLocationCoordinate2D]? = decodePolyline(polyline)
             
@@ -60,23 +152,23 @@ class PolyLineMap{
             
             for index in origin{
                 
-                if let geoTag = index.geoTaggedLocations{
-                    
-                    if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
-                        
-                        locationString.append("\(latitude),\(longitude)")
-                        break
-                    }
-                    
-                }else{
-                    
+//                if let geoTag = index.geoTaggedLocations{
+//
+//                    if let latitude = geoTag.latitude, let longitude = geoTag.longitude{
+//
+//                        locationString.append("\(latitude),\(longitude)")
+//                        break
+//                    }
+//
+//                }else{
+                
                     if let latitude = index.latitude, let longitude = index.longitude{
                         locationString.append("\(latitude),\(longitude)")
                          break
                     }
                    
                     
-                }
+                //}
             }
         }
     

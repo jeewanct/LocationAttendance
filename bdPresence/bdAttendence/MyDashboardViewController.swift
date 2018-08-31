@@ -44,6 +44,9 @@ class MyDashboardViewController: UIViewController {
             }
             
             updateChildController(destVc: destVc)
+            
+            
+            
 //            destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
 //            UIView.animate(withDuration: 0.3) {
 //                destVc.view.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -123,6 +126,8 @@ class MyDashboardViewController: UIViewController {
                 self.postDataCheckin(userInteraction: .swipeUp)
 //                self.checkSwipeUp()
             }
+            
+            
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
@@ -155,6 +160,8 @@ class MyDashboardViewController: UIViewController {
             } else {
                 self.postDataCheckin(userInteraction: .swipeDown)
             }
+            
+            
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckin") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: -containerView.frame.size.height)

@@ -84,6 +84,7 @@ class TutorialControllerCell: UICollectionViewCell{
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.contentView.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+   
+        self.contentView.applyGradient(isTopBottom: true, colorArray: [#colorLiteral(red: 0.4470588235, green: 0.6666666667, blue: 0.862745098, alpha: 1),#colorLiteral(red: 0.4, green: 0.737254902, blue: 0.7529411765, alpha: 1)])//[APPColor.BlueGradient,APPColor.GreenGradient])
     }
 }

@@ -29,6 +29,11 @@ class WeekCollectionViewCell: UICollectionViewCell {
             print(self.frame)
             print(cellLabel.frame)
             print(dateLabel.frame)
+            
+            
+            
+            
+            
             let selectionMarker = CircleView(frame: dateLabel.frame, fillColor: highlightColor)
             selectionMarker.tag = backgroundId;
             insertSubview(selectionMarker, at:0)

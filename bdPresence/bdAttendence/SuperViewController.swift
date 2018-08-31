@@ -61,6 +61,8 @@ class SuperViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
 
+        
+    //    getHistoryData()
     
     }
     func handleLeftGesture() {
@@ -68,6 +70,17 @@ class SuperViewController: UIViewController {
         self.showMenuView()
     }
     
+//    func getHistoryData(){
+//
+//        if let historyCheck = UserDefaults.standard.value(forKey: "oldData") as? Bool{
+//
+//            if historyCheck == false{
+//                LocationHistoryData.getTeamMember()
+//            }
+//
+//        }
+//
+//    }
    
     
     override func viewWillAppear(_ animated: Bool) {
@@ -675,11 +688,8 @@ extension SuperViewController{
                // UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
             }
             
-            
         }else{
-           
             RMCPlacesManager.getPlaces()
-            
         }
         
     }
@@ -699,7 +709,6 @@ extension SuperViewController{
             
         }else{
             callGeoAuthentication()
-           
            
         }
         

@@ -49,13 +49,17 @@ class MyTeamTableView: PullUpController{
         
        // tableView.attach(to: self)
         //setupDataSource()
+        self.visualEffectView.effect = nil
         
         secondPreviewHeightAnchor.constant = UIScreen.main.bounds.height - 214
         
         willMoveToStickyPoint = { point in
-            if point == UIScreen.main.bounds.height - 64{
-          //      self.visualEffectView.isHidden = false
+            if point > UIScreen.main.bounds.height / 2{
+                self.addBlurEffect()
+                self.tableView.isScrollEnabled = true
             }else{
+                self.visualEffectView.effect = nil
+                 self.tableView.isScrollEnabled = false
             //    self.visualEffectView.isHidden = true
             }
             print("willMoveToStickyPoint \(point)")
@@ -71,17 +75,21 @@ class MyTeamTableView: PullUpController{
         onDrag = { point in
             print("onDrag: \(point)")
             if point > 100 {
-                self.tableView.isScrollEnabled = true
+                
             } else {
-                self.tableView.isScrollEnabled = false
-                self.delegate?.handleOnSwipe()
+               
+                //self.delegate?.handleOnSwipe()
             }
         }
         
         tableView.reloadData()
         
     }
-    
+    func addBlurEffect(){
+        
+        let blurEffect = UIBlurEffect(style: .regular)
+        visualEffectView.effect = blurEffect
+    }
     
     
     // MARK: - PullUpController
