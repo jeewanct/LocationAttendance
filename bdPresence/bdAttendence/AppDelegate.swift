@@ -30,10 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*
          Don't config until the location is on
         */
-        
-        
-        
-        
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)

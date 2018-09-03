@@ -14,7 +14,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		qg9N9MSSuci1ZlYA25zLWTFE/7U=
+		YsgV5bjWqoQdBBiCR8xnxhQYRz4=
+		</data>
+		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftdoc</key>
+		<data>
+		KftTkl/EX8/WbrvuYo11QCwwrHQ=
+		</data>
+		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftmodule</key>
+		<data>
+		cB0IGYBRi3pQx3cZfSpKbFgpBio=
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -22,7 +30,7 @@
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		yfHX4SEsj+P5zYOiu9Lqhhy6mZ0=
+		EqarXBuptl1q+Zs4I/6kyGJQXKo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -53,6 +61,28 @@
 			hatb5TuQXkq8q0xEutBnq9uy5T6VZmbquvshhosn0/I=
 			</data>
 		</dict>
+		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KftTkl/EX8/WbrvuYo11QCwwrHQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			jUg4wct2Iaw1tERD0N7TabU4klvin7z/PgZDmqXu8Ro=
+			</data>
+		</dict>
+		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftmodule</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			cB0IGYBRi3pQx3cZfSpKbFgpBio=
+			</data>
+			<key>hash2</key>
+			<data>
+			VWoAaTJ4d6HBS1GZGrEsOpyi8ljon1e22rQXkFVuOSM=
+			</data>
+		</dict>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
@@ -68,11 +98,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yfHX4SEsj+P5zYOiu9Lqhhy6mZ0=
+			EqarXBuptl1q+Zs4I/6kyGJQXKo=
 			</data>
 			<key>hash2</key>
 			<data>
-			QjMnDCsKKKAXAL2OFu5XGsqr4V6DC3MKOb46zSaBkn4=
+			CwyNGzDxHmX1hbZTYB5e2GDbhChj7DljP4P2AYeEvhU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -89,7 +119,7 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^.*</key>
+		<key>^</key>
 		<true/>
 		<key>^.*\.lproj/</key>
 		<dict>
@@ -120,12 +150,24 @@
 			<key>weight</key>
 			<real>11</real>
 		</dict>
+		<key>^</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>2000</real>
+		</dict>
+		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
+		<dict>
+			<key>nested</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
 		</dict>
 		<key>^.*</key>
 		<true/>
@@ -161,6 +203,13 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
+		</dict>
+		<key>^[^/]+$</key>
+		<dict>
+			<key>nested</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>
