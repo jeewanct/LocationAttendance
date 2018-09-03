@@ -27,7 +27,7 @@ class NewCheckoutViewController: UIViewController {
     @IBOutlet weak var bottomMessageLabel: UILabel!
     @IBOutlet weak var unavailableTillLabel: UILabel!
     @IBOutlet weak var todayDateLabel: UILabel!
-    @IBOutlet weak var syncButton: UIBarButtonItem!
+   // @IBOutlet weak var syncButton: UIBarButtonItem!
     let activityIndicator = ActivityIndicatorView()
     var polyline = GMSPolyline()
     var animationPolyline = GMSPolyline()
@@ -52,9 +52,7 @@ class NewCheckoutViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        statusOfUser()
-    }
+   
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,46 +77,7 @@ class NewCheckoutViewController: UIViewController {
     
     
     
-    @IBAction func syncTapped(_ sender: Any) {
-        self.syncButton.isEnabled = false
-        //"&status=" + AssignmentStatus.Assigned.rawValue
-        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
-        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
-            UI {
-                print("completionstatus = \(completionStatus)")
-                if completionStatus == "Success" {
-                    UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
-                }
-                if AssignmentModel.statusOfUser() {
-                    // Here i have to swipe down the user screen to stop mobitoring
-                    self.statusChangeView.isHidden = false
-                    self.syncButton.isEnabled = true
-                    if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
-                        if screenFlag == "1" {
-                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
-                            
-                            UI {
-                                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                                // New change on 20/06/2018 to create one checkin
-                                if isInternetAvailable(){
-                                    CheckinModel.postCheckin()
-                                }
-                                bdCloudStopMonitoring()
-                                
-                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
-                                
-                                //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
-                            }
-                        }
-                    }
-                } else {
-                    self.statusChangeView.isHidden = true
-                    self.syncButton.isEnabled = false
-                }
-            }
-        }
-        
-    }
+   
     
     
     func updateAddress(sender: NSNotification) {
@@ -205,35 +164,7 @@ extension NewCheckoutViewController{
         upperView.layer.shadowRadius = 1
     }
     
-    func statusOfUser(){
-        if AssignmentModel.statusOfUser() {
-            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
-                if screenFlag == "1" {
-                    UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
-                    
-                    UI {
-                        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                        // New change on 20/06/2018 to create one checkin
-                        if isInternetAvailable(){
-                            CheckinModel.postCheckin()
-                        }
-                        bdCloudStopMonitoring()
-                        
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
-                        
-                        //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
-                    }
-                }
-            }
-            self.statusChangeView.isHidden = false
-            self.syncButton.isEnabled = true
-            self.syncButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        } else {
-            self.statusChangeView.isHidden = true
-            self.syncButton.isEnabled = false
-            self.syncButton.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        }
-    }
+    
     
 }
 
@@ -246,6 +177,7 @@ extension NewCheckoutViewController{
 extension NewCheckoutViewController{
     
     func discardFakeLocations(notification: Notification){
+        
         
         mapView.clear()
         

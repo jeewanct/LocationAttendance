@@ -127,6 +127,9 @@ class SystemDetailViewController: UIViewController {
         
     }
     
+   
+    
+    
     func handleLongPress(){
         let message = getBeaconList().joined(separator: "\n")
         let alertController = UIAlertController(title: "Beacons", message: message, preferredStyle: .alert)

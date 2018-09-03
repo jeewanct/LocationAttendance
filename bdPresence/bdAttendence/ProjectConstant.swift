@@ -14,7 +14,7 @@ let APPNAME = "BD Field Force"
 var appIdentifier = "com.raremedia.bdPresence"
 let AppstoreURL = "https://itunes.apple.com/us/app/bd-field-force/id1292604414?ls=1&mt=8"
 let supportEmail = "support@raremediacompany.in"
-let supportAddress = "G-84 Outer Circle, Connaught Place, Delhi"
+let supportAddress = "G-84, Top Floor, Outer Circle, Block G, Connaught Place, New Delhi, Delhi 110001"
 let supportContactNumber = "+911141561260"
 
 let CHECK_IN_DURATION_TOLERANCE:Double = 60 * 60
@@ -53,6 +53,7 @@ enum NotificationType:String{
     
 }
 enum ProjectUserDefaultsKeys:String{
+    
     case startDayTime
 }
 
