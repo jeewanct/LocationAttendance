@@ -309,6 +309,7 @@ extension NewCheckoutViewController{
                 }
                 
                 view.showActivityIndicator(activityIndicator: activityIndicator)
+               
                 let locationFilters = LocationFilters()
                 locationFilters.delegate = self
                 locationFilters.plotMarkers(date: date)

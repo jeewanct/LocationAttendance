@@ -697,6 +697,11 @@ extension SuperViewController{
         
     }
     
+    
+    func getPlaces(){
+        
+    }
+    
     func handleSuccessRmcPlaces(notification: Notification){
         
         if let data = notification.userInfo as? [String: Any]{

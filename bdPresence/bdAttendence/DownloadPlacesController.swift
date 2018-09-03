@@ -43,6 +43,8 @@ class DownloadPlaceController: UIViewController{
             }
             //self.goToHome(userInfo: <#Notification#>)
         }
+        
+        
         RMCPlacesManager.getPlaces()
         
     }

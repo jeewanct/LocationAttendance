@@ -50,17 +50,9 @@ class LocationFilters: UIViewController{
     }
     
     func plotMarkerInMap(locations: [LocationDataModel]){
-        
-//        let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations)
-//
-//        if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
-//            //completion(locationAfterTime)
-//
-//        }
-
-        
+    
             if locations.count > 1 {
-                let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations)
+                let locationAfterAccuracy = self.removeUnneccessaryLocationsWithAccuracy(locations: locations.reversed())
                 
                 if let locationAfterTime = self.removeUnnecessaryLocationWithTime(locations: locationAfterAccuracy, currentIndex: 0){
                     //completion(locationAfterTime)
@@ -78,9 +70,10 @@ class LocationFilters: UIViewController{
     
     func removeUnneccessaryLocationsWithAccuracy(locations: [LocationDataModel]) ->  [LocationDataModel]{
         
+        
         let updatedLocations  = locations.filter{
             if let accuracy = $0.accuracy{
-                return accuracy < 700.0
+                return accuracy < Double(SDKSingleton.sharedInstance.customAccuracy)
             }
             return false
         }
