@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let superController = SuperViewController()
                 superController.geoTagPermission()
-                superController.getPlacesAfterTenMinutes()
+          //      superController.getPlacesAfterTenMinutes()
                 
                 
                 if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
@@ -413,6 +413,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 
                 RMCPlacesManager.getPlaces()
+                
+                
         }
 
         )

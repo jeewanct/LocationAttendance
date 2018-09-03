@@ -109,6 +109,7 @@ class UserPlace{
         
         return geoTagPlace
         
+        
     }
     
     

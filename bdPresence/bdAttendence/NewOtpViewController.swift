@@ -120,12 +120,13 @@ class NewOtpViewController: UIViewController {
         //        AlertView.sharedInstance.showActivityIndicator(self.view)
         
         
-        view.showActivityIndicator(activityIndicator: activityIndicator)
+        
         UserDataModel.userSignUp(param:objectdata) { (value) in
             //        AlertView.sharedInstance.hideActivityIndicator(self.view)
             
             switch (value){
             case APIResult.Success.rawValue:
+               // self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
                 
                 UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
                 UserDefaults.standard.synchronize()
@@ -181,7 +182,7 @@ class NewOtpViewController: UIViewController {
         superController.geoTagPermission()
         
         
-        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+       // self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
         //        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
         //        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
         //        UIApplication.shared.keyWindow?.rootViewController = destVC
@@ -206,10 +207,10 @@ class NewOtpViewController: UIViewController {
             //showLoader(text: "Verifying")
             //            AlertView.sharedInstance.setLabelText("Verifying")
             //            AlertView.sharedInstance.showActivityIndicator(self.view)
-            view.showActivityIndicator(activityIndicator: activityIndicator)
+            self.view.showActivityIndicator(activityIndicator: activityIndicator)
             OauthModel.getToken(userObject: param) { (result) in
                 //AlertView.sharedInstance.hideActivityIndicator(self.view)
-                
+                self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
                 switch (result){
                 case APIResult.Success.rawValue:
                     self.updateUser()

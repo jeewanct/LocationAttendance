@@ -87,25 +87,33 @@ class MyTeamLocationDetails: UIViewController{
     
         
         print("LocationsCount = \(locatins.userInfo)")
+    
+        
         view.removeActivityIndicator(activityIndicator: activityIndicator)
         
         
-        if let teamDetails = locatins.userInfo{
+        if let teamDetails = locatins.userInfo as? [String: Any]{
             
-            if let teamDetailsModel = teamDetails["teamDetails"] as? [MyTeamDetailsDocument]{
+            if let error = teamDetails["status"] as? Bool{
+                if let teamDetailsModel = teamDetails["teamDetails"] as? [MyTeamDetailsDocument]{
+                    
+                    if teamDetailsModel.count == 0{
+                        if error == false{
+                            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "Data fetch error!")
+                        }
+                    }else{
+                        self.makeTeamLocationData(teamLocationData: teamDetailsModel)
+                    }
+                    
+                }
                 
-                //print(teamDetailsModel)
-                self.makeTeamLocationData(teamLocationData: teamDetailsModel)
             }
+    
             
         }
         
-    
-        
     }
     
-    
- 
  }
 
  
@@ -214,42 +222,25 @@ extension MyTeamLocationDetails{
     func plotMarkersInMap(location: [LocationDataModel]){
         
         let allLocations = UserPlace.getGeoTagData(location: location)
-        
-        if allLocations.count == 0{
-           // userLocationContainerView.isHidden = true
-        }else{
+       
+        if allLocations.count != 0{
+             mapView.addMarkersInMap(allLocations: allLocations)
+            if let _ = pullController{
+                self.removePullUpController(pullController, animated: true)
+            }
             
-           // userContainerView?.locationData = allLocations
             
-            pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+            self.pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-            pullController.locationData = allLocations.reversed()
-            pullController.screenType = LocationDetailsScreenEnum.myTeamScreen
-            self.addPullUpController(pullController, animated: true)
+            self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
+            self.pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
+            self.addPullUpController(self.pullController, animated: true)
             
             let polyLine = PolyLineMap()
             polyLine.delegate = self
-            polyLine.getPolyline(location: allLocations)
-        }
-        
-        
-        //plotPathInMap(location: allLocations)
-        
-        
-        for locations in allLocations{
-            
-            for geoTaggedLocation in locations{
-                
-                if let geoTagg = geoTaggedLocation.geoTaggedLocations{
-                    
-                    addMarker(latitude: geoTagg.latitude, longitude: geoTagg.longitude, markerColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
-                }else{
-                    
-                    addMarker(latitude: geoTaggedLocation.latitude, longitude: geoTaggedLocation.longitude, markerColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-                }
-                
-            }
-            
+            // polyLine.allLocations = allLocations
+            //polyLine.takePolyline()
+            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
             
         }
     }
@@ -502,25 +493,9 @@ extension MyTeamLocationDetails{
     
     
     func finalLocations(locations: [LocationDataModel]) {
-        //            self.plotMarkersInMap(location: locations)
-        var finalLocations = locations
-        
-        
-        
-        finalLocations.sort(by: { (first, second) -> Bool in
-            
-            
-            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
-                return  firstDate.compare(secondDate) == .orderedAscending
-                
-                
-            }
-            
-            return false
-        })
-        
-        print(finalLocations)
-        self.plotMarkersInMap(location: finalLocations)
+    
+        //self.plotMarkersInMap(location: finalLocations)
+        self.plotMarkersInMap(location: LogicHelper.shared.sortOnlyLocations(location: locations))
         
         
         

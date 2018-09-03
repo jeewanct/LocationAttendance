@@ -400,6 +400,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk18MyTeamDetailsModel")
 @interface MyTeamDetailsModel : NSObject
 + (void)getTeamMemberWithUserId:(NSString * _Nonnull)userId;
 + (void)removeUnnecessaryData;
++ (void)callBackWithStatus:(BOOL)status;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

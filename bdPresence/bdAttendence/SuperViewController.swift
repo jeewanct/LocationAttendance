@@ -59,9 +59,11 @@ class SuperViewController: UIViewController {
         
         wakeUpCall(notify: NotifyingFrom.Normal)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
-
+        //NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+
+        getPlacesAfterTenMinutes()
     //    getHistoryData()
     
     }
@@ -682,11 +684,11 @@ extension SuperViewController{
     
     func getPlacesAfterTenMinutes(){
         
-        if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Int{
+        if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
             
-            if timeInSeconds() - getPlacesSeconds > 7 * 60{
+            if Date().secondsFrom(getPlacesSeconds) > 600{
+                
                 RMCPlacesManager.getPlaces()
-               // UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
             }
             
         }else{
@@ -695,8 +697,24 @@ extension SuperViewController{
         
     }
     
-    func handleSuccessRmcPlaces(){
-         UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
+    
+    func getPlaces(){
+        
+    }
+    
+    func handleSuccessRmcPlaces(notification: Notification){
+        
+        if let data = notification.userInfo as? [String: Any]{
+            if let status = data["status"] as? Bool{
+                if status == true{
+                    UserDefaults.standard.set(Date(), forKey: "RMCPlacesDuration")
+                }else{
+                    
+                }
+            }
+        }
+        
+         //UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
     }
     
     func geoTagPermission(){
