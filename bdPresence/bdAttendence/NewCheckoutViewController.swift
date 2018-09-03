@@ -137,7 +137,7 @@ extension NewCheckoutViewController{
     
     func addObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
     }
     
     func setupNavigationBar(){
@@ -245,7 +245,7 @@ extension NewCheckoutViewController{
 
 extension NewCheckoutViewController{
     
-    func discardFakeLocations(){
+    func discardFakeLocations(notification: Notification){
         
         mapView.clear()
         
@@ -259,6 +259,22 @@ extension NewCheckoutViewController{
         path.removeAllCoordinates()
         animationPath = GMSMutablePath()
         i = 0
+        
+     
+            
+            if let data = notification.userInfo as? [String: Any]{
+                if let status = data["status"] as? Bool{
+                    if status == true{
+                        UserDefaults.standard.set(Date(), forKey: "RMCPlacesDuration")
+                    }else{
+                        
+                    }
+                }
+            }
+            
+            //UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
+  
+        
         
         updateView()
     }
@@ -343,9 +359,9 @@ extension NewCheckoutViewController{
             
             let polyLine = PolyLineMap()
             polyLine.delegate = self
-            polyLine.allLocations = allLocations
-            polyLine.takePolyline()
-            //polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+           // polyLine.allLocations = allLocations
+            //polyLine.takePolyline()
+            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
             
         }
         

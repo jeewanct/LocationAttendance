@@ -118,7 +118,10 @@ class GoogleUtils{
                     }
                 }
                 
-                completion(polyLineString, isLast)
+                DispatchQueue.main.async {
+                   completion(polyLineString, isLast)
+                }
+                
                 
             }
             

@@ -26,20 +26,25 @@ class PolyLineMap{
     func takePolyline(){
         
         if allLocations.count <= 8 {
+            
             getPolylineFromGoogle(location: allLocations, isLast: true)
+            
         }else{
         
         let locationSequence = 0...7
         
         var tempLocation = [[LocationDataModel]]()
+            
         
         for index in allLocations[locationSequence]{
             tempLocation.append(index)
         }
         
-        getPolylineFromGoogle(location: tempLocation, isLast: false)
             let sequence = 0...6
             self.allLocations.removeSubrange(sequence)
+            
+            
+        getPolylineFromGoogle(location: tempLocation, isLast: false)
             
             
         }
@@ -67,19 +72,24 @@ class PolyLineMap{
             
             self.polylineString = self.polylineString + polyline
             
-            if isLast == true{
+            if value == true{
                 let  coordinates: [CLLocationCoordinate2D]? = decodePolyline(self.polylineString)
                 
                 if let getCoordinates = coordinates{
                     
-                    self.delegate?.drawPolyline(coordinates: getCoordinates)
+                    
+                        self.delegate?.drawPolyline(coordinates: getCoordinates)
+                   
+                    
+                  
                     //self.drawPath(coordinates: getCoordinates)
                 }
                 
             }else{
                 
-                
-                self.takePolyline()
+                  self.takePolyline()
+               
+               
                 
             }
             

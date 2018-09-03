@@ -120,12 +120,13 @@ class NewOtpViewController: UIViewController {
         //        AlertView.sharedInstance.showActivityIndicator(self.view)
         
         
-        view.showActivityIndicator(activityIndicator: activityIndicator)
+        
         UserDataModel.userSignUp(param:objectdata) { (value) in
             //        AlertView.sharedInstance.hideActivityIndicator(self.view)
             
             switch (value){
             case APIResult.Success.rawValue:
+                self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
                 
                 UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
                 UserDefaults.standard.synchronize()
@@ -206,14 +207,15 @@ class NewOtpViewController: UIViewController {
             //showLoader(text: "Verifying")
             //            AlertView.sharedInstance.setLabelText("Verifying")
             //            AlertView.sharedInstance.showActivityIndicator(self.view)
-            view.showActivityIndicator(activityIndicator: activityIndicator)
+            
             OauthModel.getToken(userObject: param) { (result) in
                 //AlertView.sharedInstance.hideActivityIndicator(self.view)
                 
                 switch (result){
-                case APIResult.Success.rawValue:
-                    self.updateUser()
                     
+                case APIResult.Success.rawValue:
+                    self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
+                    self.updateUser()
                     
                 case APIResult.InvalidCredentials.rawValue:
                     self.showAlert(ErrorMessage.InvalidOtp.rawValue)

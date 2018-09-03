@@ -32,7 +32,9 @@ class DownloadPlaceController: UIViewController{
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleUpdate), userInfo: nil, repeats: true)
         
         if LocationHistoryData.getLocationDataCount() == 0{
+            
             LocationHistoryData.getTeamMember()
+            
         }else{
             progressValue = progressValue + 1
             
@@ -90,10 +92,9 @@ class DownloadPlaceController: UIViewController{
                     if let value = userInfo["status"] as? Bool{
                         
                         if value == true{
-                            let someDate = Date()
-                            let timeInterval = someDate.timeIntervalSince1970
+                            
                        // UserDefaults.standard.setValue(LogicHelper.shared.timeInSeconds, forKey: "RMCPlacesDuration")
-                        UserDefaults.standard.set( Int(timeInterval), forKey: "RMCPlacesDuration")
+                        UserDefaults.standard.set( Date(), forKey: "RMCPlacesDuration")
                            
                             
                         }
