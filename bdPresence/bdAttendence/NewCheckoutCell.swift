@@ -13,6 +13,7 @@ class NewCheckoutCell: UITableViewCell{
     
     @IBOutlet weak var locationDetailLabel: UILabel!
     
+    @IBOutlet weak var currentLocationLabel: UILabel!
     @IBOutlet weak var geoTagButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!

@@ -57,7 +57,6 @@ class UserGeoTagAuthentication{
             }
             
         }) { (error) in
-            
             print("Error on savign data")
         }
         

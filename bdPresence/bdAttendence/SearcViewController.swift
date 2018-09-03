@@ -180,6 +180,16 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         //setTeamDetails(cell: cell, indexPath: indexPath)
         cell.delegate = self
         cell.currentIndex = indexPath.item
+        if indexPath.item == 0{
+            if screenType == LocationDetailsScreenEnum.historyScreen {
+                cell.currentLocationLabel.text = "Last Location"
+            }else{
+                cell.currentLocationLabel.text = "Current Location"
+            }
+            
+        }else{
+            cell.currentLocationLabel.text = ""
+        }
         setTeamDetails(cell: cell, indexPath: indexPath)
         return cell
     }
@@ -221,6 +231,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 self.userDetails[start].address =  addrress
                 cell.addressLabel.text = addrress
+                let reloadIndex = IndexPath(item: start, section: 0)
+                self.tableView.reloadRows(at: [reloadIndex], with: .automatic)
                 
             }
         }
@@ -265,9 +277,11 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         //(parent as? MapViewController)?.zoom(to: locations[indexPath.row].location)
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
+    
+    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
     
 }
 

@@ -23,6 +23,8 @@ class SuperViewController: UIViewController {
     
     var visualEffectView = UIVisualEffectView()
     var bool = Bool()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,6 +91,7 @@ class SuperViewController: UIViewController {
         super.viewWillAppear(animated)
          setObservers()
         self.navigationController?.isNavigationBarHidden = true
+        checkStatus()
         
     }
     
@@ -128,6 +131,28 @@ class SuperViewController: UIViewController {
         
     }
     
+    
+    func checkStatus(){
+        if AssignmentModel.statusOfUser() {
+           
+               
+                    UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+                    
+                    UI {
+                        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                        // New change on 20/06/2018 to create one checkin
+                        if isInternetAvailable(){
+                            CheckinModel.postCheckin()
+                        }
+                        bdCloudStopMonitoring()
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                        
+                    }
+               
+           
+        }
+    }
     
     
     func wakeUp (sender : NSNotification) {
@@ -526,7 +551,7 @@ extension SuperViewController{
                             //
                             
                             CheckinModel.createCheckin(checkinData: checkin)
-                          
+                            
                             if isInternetAvailable(){
                                 CheckinModel.postCheckin()
                             }
@@ -688,18 +713,20 @@ extension SuperViewController{
             
             if Date().secondsFrom(getPlacesSeconds) > 600{
                 
-                RMCPlacesManager.getPlaces()
+                self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
+                //RMCPlacesManager.getPlaces()
             }
             
         }else{
-            RMCPlacesManager.getPlaces()
+             self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
+            //RMCPlacesManager.getPlaces()
         }
         
     }
     
     
     func getPlaces(){
-        
+        RMCPlacesManager.getPlaces()
     }
     
     func handleSuccessRmcPlaces(notification: Notification){
