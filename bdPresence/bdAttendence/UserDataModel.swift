@@ -121,7 +121,7 @@ class UserDayData {
         var elapsedTime:TimeInterval
             = 0;
         
-        
+
         if let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("dayofWeek = %@","\(weekDay)").first {
             
             if weekOfYear == Calendar.current.component(.weekOfYear, from: attendanceLogForToday.timeStamp!){

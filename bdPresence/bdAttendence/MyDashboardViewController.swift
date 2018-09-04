@@ -127,7 +127,6 @@ class MyDashboardViewController: UIViewController {
 //                self.checkSwipeUp()
             }
             
-            
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
