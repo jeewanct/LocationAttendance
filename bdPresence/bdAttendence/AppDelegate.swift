@@ -30,10 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*
          Don't config until the location is on
         */
-        
-        
-        
-        
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
@@ -129,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
                     let interval = Date().timeIntervalSince(lastAssignmentFetched)
                     print(interval)
-                    if interval > 600 {
+                    if interval > 15 {
                         //let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
                         let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
 

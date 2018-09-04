@@ -54,13 +54,12 @@ class SuperViewController: UIViewController {
 //            
 //        }
         
-        //setObservers()
         //Adding Check blocker to solve a bug when permission is denied at first time
         checkBlockerScreen()
         updateTask()
         
         wakeUpCall(notify: NotifyingFrom.Normal)
-        
+
         //NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
@@ -89,16 +88,19 @@ class SuperViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         setObservers()
         self.navigationController?.isNavigationBarHidden = true
-        checkStatus()
+        setObservers()
+
+        //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            self.checkStatus()
+            
+        //})
         
     }
     
     
     func setObservers(){
          NotificationCenter.default.removeObserver(self)
-        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.wakeUp(sender:)), name: NSNotification.Name(LocalNotifcation.WakeUpCall.rawValue), object: nil)
 
          NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "HideSideMen"), object: nil)
@@ -136,10 +138,11 @@ class SuperViewController: UIViewController {
         if AssignmentModel.statusOfUser() {
            
                
-                    UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+                    //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
                     
                     UI {
                         UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                        UserDefaults.standard.synchronize()
                         // New change on 20/06/2018 to create one checkin
                         if isInternetAvailable(){
                             CheckinModel.postCheckin()
@@ -151,6 +154,10 @@ class SuperViewController: UIViewController {
                     }
                
            
+        } else {
+            NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.wakeUp(sender:)), name: NSNotification.Name(LocalNotifcation.WakeUpCall.rawValue), object: nil)
+
+
         }
     }
     
@@ -202,7 +209,7 @@ class SuperViewController: UIViewController {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
                             
                             
-                       
+            
                         }
                         
                     } else {

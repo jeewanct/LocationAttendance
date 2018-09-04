@@ -15,7 +15,7 @@ class DayCheckoutViewController: UIViewController {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var syncButton: UIBarButtonItem!
-    
+    var activityIndicator : ActivityIndicatorView?
     /* Changes made from 10th July '18 */
     
     @IBOutlet weak var checkInImageView: UIImageView!
@@ -86,7 +86,11 @@ class DayCheckoutViewController: UIViewController {
         self.syncButton.isEnabled = false
         //"&status=" + AssignmentStatus.Assigned.rawValue
         let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+        activityIndicator = ActivityIndicatorView()
+        self.statusChangeView.showActivityIndicator(activityIndicator: activityIndicator!)
         AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+            self.statusChangeView.removeActivityIndicator(activityIndicator: self.activityIndicator!)
+
             UI {
                 print("completionstatus = \(completionStatus)")
                 if completionStatus == "Success" {
@@ -98,10 +102,10 @@ class DayCheckoutViewController: UIViewController {
                     self.syncButton.isEnabled = true
                    // if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
                        // if screenFlag == "1" {
-                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+                            //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
                             
                             UI {
-                                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                                //UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
                                 // New change on 20/06/2018 to create one checkin
                                 if isInternetAvailable(){
                                     CheckinModel.postCheckin()
@@ -117,6 +121,7 @@ class DayCheckoutViewController: UIViewController {
                 } else {
                     self.statusChangeView.isHidden = true
                     self.syncButton.isEnabled = false
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
                 }
             }
         }
@@ -143,13 +148,21 @@ class DayCheckoutViewController: UIViewController {
 //                }
 //            }
             bdCloudStopMonitoring()
+            self.dateLabel.text = Date().formattedWith(format: "MMM dd, yyyy")
+            self.unavailableUntilLbl.text = "Unavailable till \((SDKSingleton.sharedInstance.toTimeStampForStatusChange?.formattedWith(format: "MMM dd, yyyy hh:mm a"))!)"
             self.statusChangeView.isHidden = false
             self.syncButton.isEnabled = true
-            self.syncButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            self.syncButton.tintColor = APPColor.BlueGradient
         } else {
             self.statusChangeView.isHidden = true
             self.syncButton.isEnabled = false
             self.syncButton.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                if screenFlag == "2" {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                }
+            }
+            
         }
     }
 
