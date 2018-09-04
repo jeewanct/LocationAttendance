@@ -20,6 +20,8 @@
 		094104332125A75B00842BE4 /* NewDesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 094104322125A75B00842BE4 /* NewDesign.storyboard */; };
 		094104352125A78E00842BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 094104342125A78E00842BE4 /* LaunchScreen.storyboard */; };
 		094E034621230E70006E44EE /* DownloadPlacesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E034521230E70006E44EE /* DownloadPlacesController.swift */; };
+		09704E5A213E65F400825516 /* RmcPlaceIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09704E59213E65F400825516 /* RmcPlaceIndicator.xib */; };
+		09704E5C213E686A00825516 /* RmcPlaceIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09704E5B213E686A00825516 /* RmcPlaceIndicator.swift */; };
 		0982365D2109A948002BEECC /* RoughWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982365C2109A948002BEECC /* RoughWork.swift */; };
 		099C0E20213675DD00B64FB4 /* UserGeoTagAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099C0E1F213675DD00B64FB4 /* UserGeoTagAuthentication.swift */; };
 		09A438F12137D4C200CF2109 /* LinearProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A438F02137D4C200CF2109 /* LinearProgressBar.swift */; };
@@ -193,6 +195,8 @@
 		094104322125A75B00842BE4 /* NewDesign.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewDesign.storyboard; sourceTree = "<group>"; };
 		094104342125A78E00842BE4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		094E034521230E70006E44EE /* DownloadPlacesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadPlacesController.swift; sourceTree = "<group>"; };
+		09704E59213E65F400825516 /* RmcPlaceIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RmcPlaceIndicator.xib; sourceTree = "<group>"; };
+		09704E5B213E686A00825516 /* RmcPlaceIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RmcPlaceIndicator.swift; sourceTree = "<group>"; };
 		0982365C2109A948002BEECC /* RoughWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughWork.swift; sourceTree = "<group>"; };
 		099C0E1F213675DD00B64FB4 /* UserGeoTagAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGeoTagAuthentication.swift; sourceTree = "<group>"; };
 		09A438F02137D4C200CF2109 /* LinearProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressBar.swift; sourceTree = "<group>"; };
@@ -402,6 +406,153 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+<<<<<<< HEAD
+=======
+		0941029821259AF200842BE4 /* Google-Maps-iOS-Utils */ = {
+			isa = PBXGroup;
+			children = (
+				099C0DC02136703B00B64FB4 /* src */,
+			);
+			name = "Google-Maps-iOS-Utils";
+			sourceTree = "<group>";
+		};
+		09704E58213E65D000825516 /* Rmc Places */ = {
+			isa = PBXGroup;
+			children = (
+				09704E59213E65F400825516 /* RmcPlaceIndicator.xib */,
+				09704E5B213E686A00825516 /* RmcPlaceIndicator.swift */,
+			);
+			name = "Rmc Places";
+			sourceTree = "<group>";
+		};
+		099C0DC02136703B00B64FB4 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				099C0DC12136703B00B64FB4 /* Clustering */,
+				099C0DDD2136703B00B64FB4 /* Heatmap */,
+				099C0DE42136703B00B64FB4 /* Geometry */,
+				099C0DFF2136703B00B64FB4 /* QuadTree */,
+			);
+			name = src;
+			path = "../../../../../Downloads/google-maps-ios-utils-master/src";
+			sourceTree = "<group>";
+		};
+		099C0DC12136703B00B64FB4 /* Clustering */ = {
+			isa = PBXGroup;
+			children = (
+				099C0DC22136703B00B64FB4 /* GMUClusterManager.m */,
+				099C0DC32136703B00B64FB4 /* GMUStaticCluster.h */,
+				099C0DC42136703B00B64FB4 /* GMUMarkerClustering.h */,
+				099C0DC52136703B00B64FB4 /* Algo */,
+				099C0DCF2136703B00B64FB4 /* GMUClusterManager.h */,
+				099C0DD02136703B00B64FB4 /* GMUClusterManager+Testing.h */,
+				099C0DD12136703B00B64FB4 /* View */,
+				099C0DDA2136703B00B64FB4 /* GMUStaticCluster.m */,
+				099C0DDB2136703B00B64FB4 /* GMUCluster.h */,
+				099C0DDC2136703B00B64FB4 /* GMUClusterItem.h */,
+			);
+			path = Clustering;
+			sourceTree = "<group>";
+		};
+		099C0DC52136703B00B64FB4 /* Algo */ = {
+			isa = PBXGroup;
+			children = (
+				099C0DC62136703B00B64FB4 /* GMUGridBasedClusterAlgorithm.m */,
+				099C0DC72136703B00B64FB4 /* GMUClusterAlgorithm.h */,
+				099C0DC82136703B00B64FB4 /* GMUNonHierarchicalDistanceBasedAlgorithm.h */,
+				099C0DC92136703B00B64FB4 /* GMUWrappingDictionaryKey.m */,
+				099C0DCA2136703B00B64FB4 /* GMUSimpleClusterAlgorithm.m */,
+				099C0DCB2136703B00B64FB4 /* GMUGridBasedClusterAlgorithm.h */,
+				099C0DCC2136703B00B64FB4 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */,
+				099C0DCD2136703B00B64FB4 /* GMUSimpleClusterAlgorithm.h */,
+				099C0DCE2136703B00B64FB4 /* GMUWrappingDictionaryKey.h */,
+			);
+			path = Algo;
+			sourceTree = "<group>";
+		};
+		099C0DD12136703B00B64FB4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				099C0DD22136703B00B64FB4 /* GMUClusterIconGenerator.h */,
+				099C0DD32136703B00B64FB4 /* GMUClusterRenderer.h */,
+				099C0DD42136703B00B64FB4 /* GMUDefaultClusterRenderer+Testing.h */,
+				099C0DD52136703B00B64FB4 /* GMUDefaultClusterRenderer.m */,
+				099C0DD62136703B00B64FB4 /* GMUDefaultClusterIconGenerator.h */,
+				099C0DD72136703B00B64FB4 /* GMUDefaultClusterIconGenerator.m */,
+				099C0DD82136703B00B64FB4 /* GMUDefaultClusterRenderer.h */,
+				099C0DD92136703B00B64FB4 /* GMUDefaultClusterIconGenerator+Testing.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		099C0DDD2136703B00B64FB4 /* Heatmap */ = {
+			isa = PBXGroup;
+			children = (
+				099C0DDE2136703B00B64FB4 /* GMUGradient.h */,
+				099C0DDF2136703B00B64FB4 /* GMUWeightedLatLng.m */,
+				099C0DE02136703B00B64FB4 /* GMUHeatmapTileLayer.h */,
+				099C0DE12136703B00B64FB4 /* GMUWeightedLatLng.h */,
+				099C0DE22136703B00B64FB4 /* GMUGradient.m */,
+				099C0DE32136703B00B64FB4 /* GMUHeatmapTileLayer.m */,
+			);
+			path = Heatmap;
+			sourceTree = "<group>";
+		};
+		099C0DE42136703B00B64FB4 /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				099C0DE52136703B00B64FB4 /* GMUKMLParser.m */,
+				099C0DE62136703B00B64FB4 /* GMUGeometryRenderer.m */,
+				099C0DE72136703B00B64FB4 /* GMUGeoJSONParser.h */,
+				099C0DE82136703B00B64FB4 /* Model */,
+				099C0DFB2136703B00B64FB4 /* GMUKMLParser.h */,
+				099C0DFC2136703B00B64FB4 /* GMUGeometryRenderer+Testing.h */,
+				099C0DFD2136703B00B64FB4 /* GMUGeoJSONParser.m */,
+				099C0DFE2136703B00B64FB4 /* GMUGeometryRenderer.h */,
+			);
+			path = Geometry;
+			sourceTree = "<group>";
+		};
+		099C0DE82136703B00B64FB4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				099C0DE92136703B00B64FB4 /* GMUGeometryCollection.m */,
+				099C0DEA2136703B00B64FB4 /* GMUPoint.h */,
+				099C0DEB2136703B00B64FB4 /* GMUStyle.h */,
+				099C0DEC2136703B00B64FB4 /* GMUPlacemark.m */,
+				099C0DED2136703B00B64FB4 /* GMUPolygon.m */,
+				099C0DEE2136703B00B64FB4 /* GMUGeometryContainer.h */,
+				099C0DEF2136703B00B64FB4 /* GMUFeature.m */,
+				099C0DF02136703B00B64FB4 /* GMULineString.h */,
+				099C0DF12136703B00B64FB4 /* GMUGroundOverlay.m */,
+				099C0DF22136703B00B64FB4 /* GMUStyle.m */,
+				099C0DF32136703B00B64FB4 /* GMUPoint.m */,
+				099C0DF42136703B00B64FB4 /* GMUGeometry.h */,
+				099C0DF52136703B00B64FB4 /* GMUGeometryCollection.h */,
+				099C0DF62136703B00B64FB4 /* GMUPolygon.h */,
+				099C0DF72136703B00B64FB4 /* GMUPlacemark.h */,
+				099C0DF82136703B00B64FB4 /* GMUGroundOverlay.h */,
+				099C0DF92136703B00B64FB4 /* GMULineString.m */,
+				099C0DFA2136703B00B64FB4 /* GMUFeature.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		099C0DFF2136703B00B64FB4 /* QuadTree */ = {
+			isa = PBXGroup;
+			children = (
+				099C0E002136703B00B64FB4 /* GQTPointQuadTree.m */,
+				099C0E012136703B00B64FB4 /* GQTPointQuadTreeItem.h */,
+				099C0E022136703B00B64FB4 /* GQTPointQuadTreeChild.m */,
+				099C0E032136703B00B64FB4 /* GQTPoint.h */,
+				099C0E042136703B00B64FB4 /* GQTPointQuadTree.h */,
+				099C0E052136703B00B64FB4 /* GQTPointQuadTreeChild.h */,
+				099C0E062136703B00B64FB4 /* GQTBounds.h */,
+			);
+			path = QuadTree;
+			sourceTree = "<group>";
+		};
+>>>>>>> 0d9ddfe92c903ef9dd6705a5c30ea1a90f0a9b5f
 		85A66E9167E316A612D192E1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,7 +683,12 @@
 		99CA967C1F021E4300E2813B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				C8B05B522139626400C070CA /* src */,
+=======
+				09704E58213E65D000825516 /* Rmc Places */,
+				0941029821259AF200842BE4 /* Google-Maps-iOS-Utils */,
+>>>>>>> 0d9ddfe92c903ef9dd6705a5c30ea1a90f0a9b5f
 				99BD39DF1EA5F83800B6942B /* CommonFunction.swift */,
 				9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */,
 				09A438F02137D4C200CF2109 /* LinearProgressBar.swift */,
@@ -897,6 +1053,7 @@
 				99F07F581F57D981000B4967 /* ErrorScanView.xib in Resources */,
 				990089171F44177400CED97E /* TwoSideLabelTableViewCell.xib in Resources */,
 				0941028E2125481900842BE4 /* LocationLoader.json in Resources */,
+				09704E5A213E65F400825516 /* RmcPlaceIndicator.xib in Resources */,
 				99E046E220F4BCCF008DA7A8 /* CustomMap.json in Resources */,
 				9924EEA620F86E9300B0A661 /* LabelWithImage.xib in Resources */,
 				99E046EA20F4E098008DA7A8 /* UserLocation.xib in Resources */,
@@ -1154,6 +1311,7 @@
 				9974903B1F0CFC0600AC92B9 /* CorouselEffect.swift in Sources */,
 				997490291F0CD8A000AC92B9 /* UserDataModel.swift in Sources */,
 				0941029021257F5400842BE4 /* Enums.swift in Sources */,
+				09704E5C213E686A00825516 /* RmcPlaceIndicator.swift in Sources */,
 				99068B1C20F7363A0018D3B8 /* MyTeamViewController.swift in Sources */,
 				99482F5920F8BB0B00324AE5 /* MyLocationTableViewCell.swift in Sources */,
 				99E046E820F4E044008DA7A8 /* UserLocationView.swift in Sources */,

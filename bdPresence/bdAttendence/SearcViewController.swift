@@ -48,7 +48,7 @@ class SearchViewController: PullUpController {
     func setPreviewHeightConstant(){
         
         if screenType == LocationDetailsScreenEnum.dashBoardScreen{
-            secondPreviewHeight.constant = UIScreen.main.bounds.height - 315
+            secondPreviewHeight.constant = UIScreen.main.bounds.height - 324
         }else if screenType == LocationDetailsScreenEnum.historyScreen{
             secondPreviewHeight.constant = UIScreen.main.bounds.height - 325
         }else{
@@ -69,7 +69,6 @@ class SearchViewController: PullUpController {
         //visualEffectView.roundCorners([.topLeft, .topRight], radius: 15)
         setPreviewHeightConstant()
         tableView.estimatedRowHeight = 145
-        tableView.rowHeight = UITableViewAutomaticDimension
         
         tableView.attach(to: self)
         //setupDataSource()
@@ -118,7 +117,7 @@ class SearchViewController: PullUpController {
         if screenType == LocationDetailsScreenEnum.myTeamScreen{
             return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 86)
         } else if screenType == LocationDetailsScreenEnum.dashBoardScreen {
-            return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 164)
+            return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 174)
         }
         return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 175)
     }
@@ -166,18 +165,11 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //        if userDetails[indexPath.item].isGeoTagged == true {
-        //            return 112.0
-        //        } else {
-        //            return UITableViewAutomaticDimension
-        //        }
         return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewCheckOutUserScreenCell", for: indexPath) as! NewCheckoutCell
-        //setTeamDetails(cell: cell, indexPath: indexPath)
-        //setTeamDetails(cell: cell, indexPath: indexPath)
         cell.delegate = self
         cell.currentIndex = indexPath.item
         if indexPath.item == 0{
@@ -190,6 +182,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         }else{
             cell.currentLocationLabel.text = ""
         }
+        
+        
         setTeamDetails(cell: cell, indexPath: indexPath)
         return cell
     }
@@ -201,17 +195,21 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             cell.timeBottomConstraint.constant = 8
             cell.geoTagButton.isHidden = true
             cell.geoTagButton.setTitle("", for: .normal)
+            cell.layoutIfNeeded()
+            cell.locationDetailLabel.text = userDetails[indexPath.item].geoLocationName
             
         }else{
-            
+            cell.locationDetailLabel.text = ""
             if userDetails[indexPath.item].canGeoTag == true{
                 cell.timeBottomConstraint.constant = 44
                 cell.geoTagButton.isHidden = false
                 cell.geoTagButton.setTitle("Geo-Tag this location", for: .normal)
+                cell.layoutIfNeeded()
             }else{
                 cell.timeBottomConstraint.constant = 8
                 cell.geoTagButton.isHidden = true
                 cell.geoTagButton.setTitle("", for: .normal)
+                cell.layoutIfNeeded()
             }
             
             
@@ -239,33 +237,33 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        
-        if let getCell = cell as? NewCheckoutCell{
-            if indexPath.item == 0 {
-                
-                //                if screenType == LocationDetailsScreenEnum.historyScreen && !Calendar.current.isDateInToday(selectedDate){
-                //
-                //                    getCell.locationDetailLabel.text = ""
-                //                }else{
-                
-                getCell.locationDetailLabel.text = "\(userDetails[indexPath.item].geoLocationName)"
-                //}
-                
-                
-            }else{
-                if userDetails[indexPath.item].isGeoTagged == true{
-                    getCell.locationDetailLabel.text = userDetails[indexPath.item].geoLocationName
-                }else{
-                    getCell.locationDetailLabel.text = ""
-                }
-                
-            }
-            
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//
+//
+//        if let getCell = cell as? NewCheckoutCell{
+//            if indexPath.item == 0 {
+//
+//                //                if screenType == LocationDetailsScreenEnum.historyScreen && !Calendar.current.isDateInToday(selectedDate){
+//                //
+//                //                    getCell.locationDetailLabel.text = ""
+//                //                }else{
+//
+//                getCell.locationDetailLabel.text = "\(userDetails[indexPath.item].geoLocationName)"
+//                //}
+//
+//
+//            }else{
+//                if userDetails[indexPath.item].isGeoTagged == true{
+//                    getCell.locationDetailLabel.text = userDetails[indexPath.item].geoLocationName
+//                }else{
+//                    getCell.locationDetailLabel.text = ""
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
     
     // MARK: - UITableViewDelegate
     

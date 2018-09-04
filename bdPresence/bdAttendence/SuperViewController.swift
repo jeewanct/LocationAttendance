@@ -718,6 +718,7 @@ extension SuperViewController{
         
         if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
             
+        
             if Date().secondsFrom(getPlacesSeconds) > 600{
                 
                 self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
