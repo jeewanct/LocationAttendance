@@ -253,7 +253,7 @@ extension NewCheckoutViewController{
                         UserDefaults.standard.set(Date(), forKey: "RMCPlacesDuration")
                     }else{
                         if let indicator = activityIndicator{
-                            self.view.removeActivityIndicator(activityIndicator: indicator)
+                            indicator.removeFromSuperview()//self.view.removeActivityIndicator(activityIndicator: indicator)
                         }
                         
                     }
