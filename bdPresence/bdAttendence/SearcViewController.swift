@@ -195,7 +195,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             cell.timeBottomConstraint.constant = 8
             cell.geoTagButton.isHidden = true
             cell.geoTagButton.setTitle("", for: .normal)
-            cell.layoutIfNeeded()
+           // cell.layoutIfNeeded()
             cell.locationDetailLabel.text = userDetails[indexPath.item].geoLocationName
             
         }else{
@@ -204,12 +204,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.timeBottomConstraint.constant = 44
                 cell.geoTagButton.isHidden = false
                 cell.geoTagButton.setTitle("Geo-Tag this location", for: .normal)
-                cell.layoutIfNeeded()
+               // cell.layoutIfNeeded()
             }else{
                 cell.timeBottomConstraint.constant = 8
                 cell.geoTagButton.isHidden = true
                 cell.geoTagButton.setTitle("", for: .normal)
-                cell.layoutIfNeeded()
+               // cell.layoutIfNeeded()
             }
             
             

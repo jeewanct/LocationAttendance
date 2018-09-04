@@ -10,6 +10,8 @@ import UIKit
 import BluedolphinCloudSdk
 import CoreLocation
 import PullUpController
+import RealmSwift
+
 
 class MyTeamDetailsScreen{
     
@@ -120,6 +122,21 @@ class MyTeamTableView: PullUpController{
     func setData(){
     
         
+        
+        let realm = try! Realm()
+        let rmcPlaces  = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeStatus = %@",true)
+        
+        var allGeoTagLocations = [RMCPlace]()
+        
+        
+        for place in rmcPlaces{
+            
+            allGeoTagLocations.append(place)
+        }
+        
+        
+        
+        
         if let myTeamData = teamData{
             
             for location in myTeamData{
@@ -151,7 +168,21 @@ class MyTeamTableView: PullUpController{
                             locations.address = "No location found"
 
                         }else{
+                            
+                            let location = LocationDataModel()
+                            location.latitude = String(CLLocationDegrees(coordinates[1]))
+                            location.longitude = String(CLLocationDegrees(coordinates[0]))
+                            
+                           let geoTagLocation =  UserPlace.getPlacesData(location: location, rmcPlaces: allGeoTagLocations)
+                            
+                            if let _ = geoTagLocation{
+                                locations.address = geoTagLocation?.locationName
+                            }
+                            
                             locations.cllocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
+                            
+                            
+                            
                         }
 
                     }

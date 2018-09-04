@@ -29,7 +29,11 @@ class NewCheckoutViewController: UIViewController {
     @IBOutlet weak var unavailableTillLabel: UILabel!
     @IBOutlet weak var todayDateLabel: UILabel!
    // @IBOutlet weak var syncButton: UIBarButtonItem!
-    let activityIndicator = ActivityIndicatorView()
+    @IBOutlet weak var manualSwipeDisableHieghtAnchor: NSLayoutConstraint!
+    
+    
+    
+    var activityIndicator: ActivityIndicatorView?
     var polyline = GMSPolyline()
     var animationPolyline = GMSPolyline()
     var path = GMSMutablePath()
@@ -37,7 +41,7 @@ class NewCheckoutViewController: UIViewController {
     var i: UInt = 0
     var timer: Timer!
     var pullController: SearchViewController!
-    
+    var placeIndicator: RmcPlaceIndicator?
     
     
     //MARK: View Controller life cycle
@@ -49,11 +53,9 @@ class NewCheckoutViewController: UIViewController {
         setupMap()
         addObservers()
         setupGestures()
-        updateView()
+        getPlacesAfterTenMinutes()
         
     }
-    
-   
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -105,11 +107,60 @@ extension NewCheckoutViewController{
         navigationController?.removeTransparency()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
+        
+        if SDKSingleton.sharedInstance.noTouchMode == true && SDKSingleton.sharedInstance.strictMode == true{
+            manualSwipeDisableHieghtAnchor.constant = 0
+            upperView.isHidden = true
+        }else{
+            manualSwipeDisableHieghtAnchor.constant = 90
+            upperView.isHidden = false
+        }
     }
     
     func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
+    }
+    
+    func getPlacesAfterTenMinutes(){
+        
+        if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
+            
+            
+            if Date().secondsFrom(getPlacesSeconds) > 600{
+                
+                self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
+                //RMCPlacesManager.getPlaces()
+                
+                placeIndicator = UIView.fromNib()
+                
+                if let indicator = placeIndicator{
+                    indicator.todaysDateLbl.startAnimating()
+                    indicator.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+                    view.addSubview(indicator)
+                  //  view.addConstraints(indicator: indicator)
+                }
+                
+                
+            }else{
+                activityIndicator = ActivityIndicatorView()
+                if let indicator = activityIndicator{
+                    view.showActivityIndicator(activityIndicator: indicator)
+                }
+                
+                updateView()
+            }
+            
+        }else{
+            self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
+            //RMCPlacesManager.getPlaces()
+        }
+        
+    }
+    
+    
+    func getPlaces(){
+        RMCPlacesManager.getPlaces()
     }
     
     func setupGestures(){
@@ -201,10 +252,20 @@ extension NewCheckoutViewController{
                     if status == true{
                         UserDefaults.standard.set(Date(), forKey: "RMCPlacesDuration")
                     }else{
+                        if let indicator = activityIndicator{
+                            self.view.removeActivityIndicator(activityIndicator: indicator)
+                        }
                         
                     }
                 }
-            }
+            }else{
+                activityIndicator = ActivityIndicatorView()
+                if let indicator = activityIndicator{
+                  //  view.showActivityIndicator(activityIndicator: activityIndicator!)
+                    view.showActivityIndicator(activityIndicator: indicator)
+                }
+                
+        }
             
             //UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
   
@@ -242,7 +303,7 @@ extension NewCheckoutViewController{
                     
                 }
                 
-                view.showActivityIndicator(activityIndicator: activityIndicator)
+                
                
                 let locationFilters = LocationFilters()
                 locationFilters.delegate = self
@@ -275,7 +336,14 @@ extension NewCheckoutViewController{
     func plotMarkersInMap(location: [LocationDataModel]){
         
         let allLocations = UserPlace.getGeoTagData(location: location)
-        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        if let indicator = activityIndicator{
+             self.view.removeActivityIndicator(activityIndicator: indicator)
+        }
+       
+        
+        if let getIndicator = placeIndicator{
+            getIndicator.removeFromSuperview()
+        }
         
         mapView.addMarkersInMap(allLocations: allLocations)
         
@@ -337,7 +405,11 @@ extension NewCheckoutViewController{
 
 extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
     func onFailure() {
-        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        if let indicator = activityIndicator{
+            self.view.removeActivityIndicator(activityIndicator: indicator)
+        }
+        
+      
     }
     
     

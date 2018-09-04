@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 import BluedolphinCloudSdk
-
+import RealmSwift
 class MyTeamViewController: UIViewController{
     
    
@@ -66,6 +66,9 @@ extension MyTeamViewController{
             return
         }
         
+        
+       
+        
         for teams in getTeamDetails{
             
             if let coordinates = teams.userOb?.userStatus?.location?.coordinates{
@@ -74,6 +77,8 @@ extension MyTeamViewController{
                     let long = coordinates[0]
                     let lat = coordinates[1]
                    
+                    
+                    
                     
                     let marker = GMSMarker()
                     marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))

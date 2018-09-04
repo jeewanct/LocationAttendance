@@ -240,3 +240,19 @@ extension String{
         return headers
     }
 }
+
+extension UIView {
+    class func fromNib<T: UIView>() -> T {
+        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+    }
+    
+    func addConstraints(indicator: RmcPlaceIndicator){
+        
+        addSubview(indicator)
+        indicator.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        indicator.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        indicator.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        indicator.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+    }
+    
+}

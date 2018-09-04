@@ -22,14 +22,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Jx-GM-aPf" customClass="CardView" customModule="bdPresence" customModuleProvider="target">
-                    <rect key="frame" x="49.5" y="283.5" width="276.5" height="100"/>
+                    <rect key="frame" x="49.5" y="293.5" width="276.5" height="80"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wu5-8M-5b4">
-                            <rect key="frame" x="32" y="31.5" width="37" height="37"/>
+                            <rect key="frame" x="32" y="21.5" width="37" height="37"/>
                             <color key="color" red="0.43137254899999999" green="0.76078431369999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Getting Places for you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="la7-kp-Fju">
-                            <rect key="frame" x="85" y="39.5" width="159.5" height="21.5"/>
+                            <rect key="frame" x="85" y="29.5" width="159.5" height="21.5"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
                         <constraint firstItem="Wu5-8M-5b4" firstAttribute="leading" secondItem="6Jx-GM-aPf" secondAttribute="leading" constant="32" id="Aen-tS-nSm"/>
                         <constraint firstItem="la7-kp-Fju" firstAttribute="leading" secondItem="Wu5-8M-5b4" secondAttribute="trailing" constant="16" id="I2Z-gq-7CB"/>
                         <constraint firstAttribute="width" constant="276.5" id="pOz-rN-Vqq"/>
-                        <constraint firstAttribute="height" constant="100" id="uL1-4k-XGo"/>
+                        <constraint firstAttribute="height" constant="80" id="uL1-4k-XGo"/>
                     </constraints>
                 </view>
             </subviews>

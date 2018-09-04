@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		yfHX4SEsj+P5zYOiu9Lqhhy6mZ0=
+		ZrzvuzTgNEPQEH9NbDC2hduuzMk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -68,11 +68,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yfHX4SEsj+P5zYOiu9Lqhhy6mZ0=
+			ZrzvuzTgNEPQEH9NbDC2hduuzMk=
 			</data>
 			<key>hash2</key>
 			<data>
-			QjMnDCsKKKAXAL2OFu5XGsqr4V6DC3MKOb46zSaBkn4=
+			pPXPY1qtB4lRkxkgXVz90wmBMUkoq9tLil26dwGJ7gE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

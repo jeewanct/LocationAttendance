@@ -54,6 +54,14 @@ class SystemDetailViewController: UIViewController {
     }
     
     
+    func callGeoAuthentication(){
+        UserGeoTagAuthentication.getGeoTagAccess { (value) in
+            
+            UserDefaults.standard.set(LogicHelper.shared.timeInSeconds(), forKey: "geoTagPermissionTime")
+            UserDefaults.standard.set(value, forKey: "canGeoTag")
+            
+        }
+    }
     
     func sync(sender:UIBarButtonItem){
         if isInternetAvailable(){
@@ -61,10 +69,10 @@ class SystemDetailViewController: UIViewController {
             if let lastManualSync = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastManualSync.rawValue) as? Date {
                 let interval = Date().timeIntervalSince(lastManualSync)
                 print(interval)
-                if interval > 120 {
+                if interval > 300 {
                     //AlertView.sharedInstance.setLabelText("Syncing started...")
                    // AlertView.sharedInstance.showActivityIndicator(self.view)
-                    
+                    callGeoAuthentication()
                     self.view.showActivityIndicator(activityIndicator: activityIndicator)
                     CheckinModel.postCheckin()
                     checkShiftStatus { (apiResultStatus) in

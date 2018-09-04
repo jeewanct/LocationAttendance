@@ -65,7 +65,7 @@ class SuperViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
 
-        getPlacesAfterTenMinutes()
+//        getPlacesAfterTenMinutes()
     //    getHistoryData()
     
     }
@@ -548,9 +548,14 @@ extension SuperViewController{
                             checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
                             checkin.checkinCategory = CheckinCategory.Transient.rawValue
                             checkin.checkinType = CheckinType.Location.rawValue
-                            //
+                            
+                            
+                            
                             
                             CheckinModel.createCheckin(checkinData: checkin)
+                            
+                            // Change for if user still in screen
+                           // NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil, userInfo: nil)
                             
                             if isInternetAvailable(){
                                 CheckinModel.postCheckin()

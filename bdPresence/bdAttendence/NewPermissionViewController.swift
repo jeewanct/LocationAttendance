@@ -108,15 +108,7 @@ class NewPermissionViewController: UIViewController {
         
         //Changes for location creation
         
-        let userDataForToday = UserDayData.getFrequencyLocationBarData(date: Date())
-       
-        if let data = userDataForToday.getLastCheckinTime() {
-            
-            if abs(LogicHelper.shared.getTimeStamp() - CLong(data)) > 60{
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil, userInfo: nil)
-            }
-            
-        }
+        
         
         
         

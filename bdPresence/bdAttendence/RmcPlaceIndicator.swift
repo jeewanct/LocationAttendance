@@ -14,4 +14,6 @@ class RmcPlaceIndicator: UIView{
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    
 }

@@ -1137,6 +1137,7 @@
                         <outlet property="endTimeLabel" destination="k4P-BA-hhg" id="yHl-nJ-oKg"/>
                         <outlet property="endYourDayLabel" destination="YYf-kK-yZe" id="Kd7-Vo-tVQ"/>
                         <outlet property="lastCheckinAddressLabel" destination="ugh-5c-h6b" id="BcY-LI-vJ3"/>
+                        <outlet property="manualSwipeDisableHieghtAnchor" destination="CuQ-Io-c2K" id="Cqc-9O-jW0"/>
                         <outlet property="mapView" destination="USZ-DE-GZE" id="Lrg-mO-NOA"/>
                         <outlet property="todaysDateLbl" destination="1KC-dv-2FX" id="tu4-oQ-Pib"/>
                         <outlet property="upperView" destination="bsy-os-D3c" id="ovZ-6e-wx6"/>

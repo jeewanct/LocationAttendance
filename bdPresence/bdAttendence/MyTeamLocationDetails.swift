@@ -89,7 +89,7 @@ class MyTeamLocationDetails: UIViewController{
         print("LocationsCount = \(locatins.userInfo)")
     
         
-        view.removeActivityIndicator(activityIndicator: activityIndicator)
+        
         
         
         if let teamDetails = locatins.userInfo as? [String: Any]{
@@ -230,6 +230,8 @@ extension MyTeamLocationDetails{
         
         let allLocations = UserPlace.getGeoTagData(location: location)
        
+        view.removeActivityIndicator(activityIndicator: activityIndicator)
+        
         if allLocations.count != 0{
              mapView.addMarkersInMap(allLocations: allLocations)
             if let _ = pullController{
@@ -239,7 +241,7 @@ extension MyTeamLocationDetails{
             
             self.pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-            self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
+            self.pullController.screenType = LocationDetailsScreenEnum.myTeamScreen
             self.pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
             self.addPullUpController(self.pullController, animated: true)
             
@@ -489,7 +491,7 @@ extension MyTeamLocationDetails{
  
  extension  MyTeamLocationDetails: LocationsFilterDelegate, PolylineStringDelegate{
     func onFailure() {
-        
+        view.removeActivityIndicator(activityIndicator: activityIndicator)
     }
     
     
