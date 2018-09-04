@@ -183,7 +183,14 @@ extension MyTeamLocationDetails{
                         
                         locationData.longitude = String(coordinates[0])
                         locationData.latitude = String(coordinates[1])
+                    
+                        if Int(coordinates[0]) == 0{
+                            locationData.address = "No address found"
+                        }
+                    
                     }
+                    
+                    
                     
                 }
                 

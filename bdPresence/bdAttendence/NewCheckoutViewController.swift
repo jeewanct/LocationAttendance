@@ -16,6 +16,7 @@ import Polyline
 
 class NewCheckoutViewController: UIViewController {
     
+    @IBOutlet weak var todaysDateLbl: UILabel!
     @IBOutlet weak var checkoutButton: UIImageView!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var endYourDayLabel: UILabel!
@@ -100,6 +101,7 @@ extension NewCheckoutViewController{
     }
     
     func setupNavigationBar(){
+        todaysDateLbl.text = LogicHelper.shared.dashBoardDate(date: Date())
         navigationController?.removeTransparency()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]

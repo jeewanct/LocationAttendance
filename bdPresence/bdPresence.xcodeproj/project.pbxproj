@@ -20,6 +20,8 @@
 		094104332125A75B00842BE4 /* NewDesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 094104322125A75B00842BE4 /* NewDesign.storyboard */; };
 		094104352125A78E00842BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 094104342125A78E00842BE4 /* LaunchScreen.storyboard */; };
 		094E034621230E70006E44EE /* DownloadPlacesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E034521230E70006E44EE /* DownloadPlacesController.swift */; };
+		09704E5A213E65F400825516 /* RmcPlaceIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09704E59213E65F400825516 /* RmcPlaceIndicator.xib */; };
+		09704E5C213E686A00825516 /* RmcPlaceIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09704E5B213E686A00825516 /* RmcPlaceIndicator.swift */; };
 		0982365D2109A948002BEECC /* RoughWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982365C2109A948002BEECC /* RoughWork.swift */; };
 		099C0E072136703B00B64FB4 /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 099C0DC22136703B00B64FB4 /* GMUClusterManager.m */; };
 		099C0E082136703B00B64FB4 /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 099C0DC62136703B00B64FB4 /* GMUGridBasedClusterAlgorithm.m */; };
@@ -193,6 +195,8 @@
 		094104322125A75B00842BE4 /* NewDesign.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewDesign.storyboard; sourceTree = "<group>"; };
 		094104342125A78E00842BE4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		094E034521230E70006E44EE /* DownloadPlacesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadPlacesController.swift; sourceTree = "<group>"; };
+		09704E59213E65F400825516 /* RmcPlaceIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RmcPlaceIndicator.xib; sourceTree = "<group>"; };
+		09704E5B213E686A00825516 /* RmcPlaceIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RmcPlaceIndicator.swift; sourceTree = "<group>"; };
 		0982365C2109A948002BEECC /* RoughWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughWork.swift; sourceTree = "<group>"; };
 		099C0DC22136703B00B64FB4 /* GMUClusterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUClusterManager.m; sourceTree = "<group>"; };
 		099C0DC32136703B00B64FB4 /* GMUStaticCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStaticCluster.h; sourceTree = "<group>"; };
@@ -408,6 +412,15 @@
 				099C0DC02136703B00B64FB4 /* src */,
 			);
 			name = "Google-Maps-iOS-Utils";
+			sourceTree = "<group>";
+		};
+		09704E58213E65D000825516 /* Rmc Places */ = {
+			isa = PBXGroup;
+			children = (
+				09704E59213E65F400825516 /* RmcPlaceIndicator.xib */,
+				09704E5B213E686A00825516 /* RmcPlaceIndicator.swift */,
+			);
+			name = "Rmc Places";
 			sourceTree = "<group>";
 		};
 		099C0DC02136703B00B64FB4 /* src */ = {
@@ -667,6 +680,7 @@
 		99CA967C1F021E4300E2813B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				09704E58213E65D000825516 /* Rmc Places */,
 				0941029821259AF200842BE4 /* Google-Maps-iOS-Utils */,
 				99BD39DF1EA5F83800B6942B /* CommonFunction.swift */,
 				9982469E1EDC4C57006CA0E4 /* ProjectSingleton.swift */,
@@ -905,6 +919,7 @@
 				99F07F581F57D981000B4967 /* ErrorScanView.xib in Resources */,
 				990089171F44177400CED97E /* TwoSideLabelTableViewCell.xib in Resources */,
 				0941028E2125481900842BE4 /* LocationLoader.json in Resources */,
+				09704E5A213E65F400825516 /* RmcPlaceIndicator.xib in Resources */,
 				99E046E220F4BCCF008DA7A8 /* CustomMap.json in Resources */,
 				9924EEA620F86E9300B0A661 /* LabelWithImage.xib in Resources */,
 				99E046EA20F4E098008DA7A8 /* UserLocation.xib in Resources */,
@@ -1162,6 +1177,7 @@
 				9974903B1F0CFC0600AC92B9 /* CorouselEffect.swift in Sources */,
 				997490291F0CD8A000AC92B9 /* UserDataModel.swift in Sources */,
 				0941029021257F5400842BE4 /* Enums.swift in Sources */,
+				09704E5C213E686A00825516 /* RmcPlaceIndicator.swift in Sources */,
 				99068B1C20F7363A0018D3B8 /* MyTeamViewController.swift in Sources */,
 				99482F5920F8BB0B00324AE5 /* MyLocationTableViewCell.swift in Sources */,
 				99E046E820F4E044008DA7A8 /* UserLocationView.swift in Sources */,

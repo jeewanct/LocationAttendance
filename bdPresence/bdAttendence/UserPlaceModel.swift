@@ -167,7 +167,6 @@ class UserPlace{
                 
                 if geoTagId == lastGeoTagId{
                     
-                    
                     // Changes here for breaks
                     
                     if let lastLocation = tempData.last{
@@ -189,13 +188,9 @@ class UserPlace{
                             
                         }
                         
-                        
                     }else{
                         tempData.append(location)
                     }
-                    
-                    // Changes here
-                    
                     
                 }else{
                     lastGeoTagId = geoTagId
