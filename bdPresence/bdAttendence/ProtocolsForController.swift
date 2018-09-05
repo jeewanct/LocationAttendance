@@ -10,6 +10,13 @@ import Foundation
 import MapKit
 
 
+enum ErrorMessages: String{
+    case noInternetAvailable = "Internet connection appears to be offline!"
+    case noCheckInFound = "No checkin found!"
+    
+    
+}
+
 protocol HandleUserViewDelegate {
     func handleOnSwipe()
 }
@@ -18,7 +25,7 @@ protocol HandleUserViewDelegate {
 protocol LocationsFilterDelegate{
     
     func finalLocations(locations: [LocationDataModel])
-    func onFailure()
+    func onFailure(type: ErrorMessages)
     
 }
 

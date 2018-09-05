@@ -57,7 +57,7 @@ class GoogleUtils{
             
             
         }) { (error) in
-            
+            completion(nil)
             print(error)
         }
         

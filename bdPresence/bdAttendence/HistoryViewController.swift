@@ -95,7 +95,7 @@ extension HistoryViewController{
     }
     
     func setupObservers(){
-        NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+       // NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
     }
     
     func discardFakeLocations(){
@@ -329,9 +329,9 @@ extension HistoryViewController{
 }
 
 extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate{
-    func onFailure() {
+    func onFailure(type: ErrorMessages) {
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkin found!")
+        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: type.rawValue)
     }
     
     

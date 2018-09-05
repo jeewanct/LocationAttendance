@@ -125,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
                     let interval = Date().timeIntervalSince(lastAssignmentFetched)
                     print(interval)
-                    if interval > 15 {
+                    if interval > 600 {
                         //let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
                         let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
 
@@ -135,7 +135,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
                             }
                             print(AssignmentModel.statusOfUser())
-                            
                         }
                     } else {
                         print(AssignmentModel.statusOfUser())
@@ -202,7 +201,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let superController = SuperViewController()
                 superController.geoTagPermission()
-                
+                superController.getPlacesAfterTenMinutes()
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: self, userInfo: nil)
                 CheckinModel.postCheckin()
@@ -408,7 +407,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
               //  UserDefaults.standard.setValue(false, forKey: "oldData")
                 
                 
-                RMCPlacesManager.getPlaces()
+                //RMCPlacesManager.getPlaces()
+               
                 
                 
         }

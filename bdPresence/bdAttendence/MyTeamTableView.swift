@@ -163,7 +163,7 @@ class MyTeamTableView: PullUpController{
 
                     if coordinates.count > 0 {
 
-                        if Int(coordinates[0]) == 0 &&  Int(coordinates[0]) == 0 {
+                        if Int(coordinates[0]) == 0{
 
                             locations.address = "No location found"
 
@@ -181,13 +181,13 @@ class MyTeamTableView: PullUpController{
                             
                             locations.cllocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
                             
-                            
-                            
                         }
 
                     }
 
 
+                }else{
+                    locations.address = "No location found"
                 }
                 
 //                if let coordinates = location.userOb?.userStatus?.location?.coordinates{
@@ -221,10 +221,16 @@ class MyTeamTableView: PullUpController{
 extension MyTeamTableView: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if myTeamLocations[indexPath.item].address != "No location found"{
         let viewController = storyboard?.instantiateViewController(withIdentifier: "MyTeamLocationDetails") as! MyTeamLocationDetails
         viewController.teamMemberUserId = teamData?[indexPath.item].userId
         viewController.teamMemberUserName = teamData?[indexPath.item].userOb?.userDetails?.name
         navigationController?.pushViewController(viewController, animated: true)
+        
+        }else{
+            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins found!")
+        }
     }
     
     

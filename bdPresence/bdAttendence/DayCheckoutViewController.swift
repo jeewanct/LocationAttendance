@@ -17,7 +17,7 @@ class DayCheckoutViewController: UIViewController {
     @IBOutlet weak var syncButton: UIBarButtonItem!
     var activityIndicator : ActivityIndicatorView?
     /* Changes made from 10th July '18 */
-    
+    let rmcNotifier = RMCNotifier.shared
     @IBOutlet weak var checkInImageView: UIImageView!
     
     
@@ -121,7 +121,10 @@ class DayCheckoutViewController: UIViewController {
                 } else {
                     self.statusChangeView.isHidden = true
                     self.syncButton.isEnabled = false
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                    if self.rmcNotifier.getShiftRunningStatus() {
+                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                    }
+                   
                 }
             }
         }
@@ -159,7 +162,12 @@ class DayCheckoutViewController: UIViewController {
             self.syncButton.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
                 if screenFlag == "2" {
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                    if UserDefaults.standard.bool(forKey: "DownDueToStatusChange"){
+                        if rmcNotifier.getShiftRunningStatus() {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                        }
+                        
+                    }
                 }
             }
             

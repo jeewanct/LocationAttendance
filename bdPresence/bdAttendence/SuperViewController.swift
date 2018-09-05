@@ -142,6 +142,7 @@ class SuperViewController: UIViewController {
                     
                     UI {
                         UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                        UserDefaults.standard.set(true, forKey: "DownDueToStatusChange")
                         UserDefaults.standard.synchronize()
                         // New change on 20/06/2018 to create one checkin
                         if isInternetAvailable(){
@@ -155,6 +156,7 @@ class SuperViewController: UIViewController {
                
            
         } else {
+            UserDefaults.standard.set(false, forKey: "DownDueToStatusChange")
             NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.wakeUp(sender:)), name: NSNotification.Name(LocalNotifcation.WakeUpCall.rawValue), object: nil)
 
 

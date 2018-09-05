@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import BluedolphinCloudSdk
 import Polyline
-
+import GooglePlaces
 class LogicHelper{
     
     static let shared = LogicHelper()
@@ -19,23 +19,39 @@ class LogicHelper{
         
         //var userAddress = ""
         
-        CLGeocoder().reverseGeocodeLocation(location) { (response , error) in
+        let geoCoder = GMSGeocoder()
+        geoCoder.reverseGeocodeCoordinate(location.coordinate) { (response, error) in
             
-            guard let loc = response?.first else {
-                return
+            if let address = response?.firstResult() {
+                let lines = address.lines! as [String]
+                
+            //   let currentAddress = lines.joinWithSeparator("\n")
+                
+                completion(lines.joined(separator: "\n"))
             }
-            
-            let addressDict : [NSString:NSObject] = loc.addressDictionary as! [NSString: NSObject]
-            let addrList = addressDict["FormattedAddressLines"] as! [String]
-            let address = addrList.joined(separator: ", ")
-            print("address from SDK = \(address)")
-            completion(address)
-            //userAddress = address
-            
-            
             
         }
         
+        
+        
+        
+//        geoCoder.reverseGeocodeLocation(location) { (response , error) in
+//
+//            guard let loc = response?.first else {
+//                return
+//            }
+//
+//            let addressDict : [NSString:NSObject] = loc.addressDictionary as! [NSString: NSObject]
+//            let addrList = addressDict["FormattedAddressLines"] as! [String]
+//            let address = addrList.joined(separator: ", ")
+//            print("address from SDK = \(address)")
+//            completion(address)
+//            //userAddress = address
+//
+//
+//
+//        }
+//
         // return userAddress
         
     }
@@ -44,22 +60,37 @@ class LogicHelper{
         
         //var userAddress = ""
         
-        CLGeocoder().reverseGeocodeLocation(location) { (response , error) in
+        
+        let geoCoder = GMSGeocoder()
+        geoCoder.reverseGeocodeCoordinate(location.coordinate) { (response, error) in
             
-            guard let loc = response?.first else {
-                return
+            if let address = response?.firstResult() {
+                let lines = address.lines! as [String]
+                
+                //   let currentAddress = lines.joinWithSeparator("\n")
+                
+               //lines.joined(separator: "\n") completion(lines.joined(separator: "\n"))
+                completion(lines.joined(separator: "\n"), index1, index2)
             }
             
-            let addressDict : [NSString:NSObject] = loc.addressDictionary as! [NSString: NSObject]
-            let addrList = addressDict["FormattedAddressLines"] as! [String]
-            let address = addrList.joined(separator: ", ")
-            print("address from SDK = \(address)")
-            completion(address, index1, index2)
-            //userAddress = address
-            
-            
-            
         }
+        
+//        CLGeocoder().reverseGeocodeLocation(location) { (response , error) in
+//
+//            guard let loc = response?.first else {
+//                return
+//            }
+//
+//            let addressDict : [NSString:NSObject] = loc.addressDictionary as! [NSString: NSObject]
+//            let addrList = addressDict["FormattedAddressLines"] as! [String]
+//            let address = addrList.joined(separator: ", ")
+//            print("address from SDK = \(address)")
+//            completion(address, index1, index2)
+//            //userAddress = address
+//
+//
+//
+//        }
         
         // return userAddress
         

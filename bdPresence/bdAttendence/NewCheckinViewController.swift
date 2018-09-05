@@ -23,7 +23,7 @@ class NewCheckinViewController: UIViewController {
     
     @IBOutlet weak var unavailableUntilLbl: UILabel!
     var activityIndicator : ActivityIndicatorView?
-
+    let rmcNotifier = RMCNotifier.shared
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -84,7 +84,10 @@ class NewCheckinViewController: UIViewController {
                 } else {
                     self.statusChangeView.isHidden = true
                     self.syncButton.isEnabled = false
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                    if self.rmcNotifier.getShiftRunningStatus() {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                    }
+                    
 //                    let superController = SuperViewController()
 //                    superController.wakeUpCall(notify: NotifyingFrom.Normal)
                 }
@@ -125,7 +128,12 @@ class NewCheckinViewController: UIViewController {
             self.syncButton.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
                 if screenFlag == "2" {
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                    if UserDefaults.standard.bool(forKey: "DownDueToStatusChange"){
+                        if rmcNotifier.getShiftRunningStatus() {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                        }
+                    
+                }
                 }
             }
         }

@@ -50,11 +50,15 @@ class NewCheckoutViewController: UIViewController {
         super.viewDidLoad()
         shiftRelatedDetails()
         setupNavigationBar()
-        setupMap()
         addObservers()
         setupGestures()
-        getPlacesAfterTenMinutes()
+        setupMap()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getPlacesAfterTenMinutes()
     }
     
     
@@ -124,35 +128,45 @@ extension NewCheckoutViewController{
     
     func getPlacesAfterTenMinutes(){
         
+        
         if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
             
             
-            if Date().secondsFrom(getPlacesSeconds) > 600{
+            if Date().secondsFrom(getPlacesSeconds) > 0{
                 
-                self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
+                self.performSelector(inBackground: #selector(NewCheckoutViewController.getPlaces), with: nil)
                 //RMCPlacesManager.getPlaces()
                 
-                placeIndicator = UIView.fromNib()
+//                placeIndicator = UIView.fromNib()
+//
+//                if let indicator = placeIndicator{
+//                    indicator.todaysDateLbl.startAnimating()
+//                    indicator.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+//                    view.addSubview(indicator)
+//                  //  view.addConstraints(indicator: indicator)
+//                }
                 
-                if let indicator = placeIndicator{
-                    indicator.todaysDateLbl.startAnimating()
-                    indicator.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-                    view.addSubview(indicator)
-                  //  view.addConstraints(indicator: indicator)
-                }
                 
-                
-            }else{
-                activityIndicator = ActivityIndicatorView()
-                if let indicator = activityIndicator{
-                    view.showActivityIndicator(activityIndicator: indicator)
-                }
-                
-                updateView()
-            }
+            }//else{
+//                activityIndicator = ActivityIndicatorView()
+//                if let indicator = activityIndicator{
+//                    view.showActivityIndicator(activityIndicator: indicator)
+//                }
+//
+//                updateView()
+//            }
             
         }else{
-            self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
+            
+//            placeIndicator = UIView.fromNib()
+//
+//            if let indicator = placeIndicator{
+//                indicator.todaysDateLbl.startAnimating()
+//                indicator.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+//                view.addSubview(indicator)
+//                //  view.addConstraints(indicator: indicator)
+//            }
+            self.performSelector(inBackground: #selector(NewCheckoutViewController.getPlaces), with: nil)
             //RMCPlacesManager.getPlaces()
         }
         
@@ -232,18 +246,18 @@ extension NewCheckoutViewController{
     func discardFakeLocations(notification: Notification){
         
         
-        mapView.clear()
-        
-        animationPolyline = GMSPolyline()
-        if let _ = timer{
-            timer.invalidate()
-            timer = nil
-        }
-        
-        polyline = GMSPolyline()
-        path.removeAllCoordinates()
-        animationPath = GMSMutablePath()
-        i = 0
+//        mapView.clear()
+//
+//        animationPolyline = GMSPolyline()
+//        if let _ = timer{
+//            timer.invalidate()
+//            timer = nil
+//        }
+//
+//        polyline = GMSPolyline()
+//        path.removeAllCoordinates()
+//        animationPath = GMSMutablePath()
+//        i = 0
         
      
             
@@ -252,26 +266,26 @@ extension NewCheckoutViewController{
                     if status == true{
                         UserDefaults.standard.set(Date(), forKey: "RMCPlacesDuration")
                     }else{
-                        if let indicator = activityIndicator{
-                            indicator.removeFromSuperview()//self.view.removeActivityIndicator(activityIndicator: indicator)
-                        }
+//                        if let indicator = activityIndicator{
+//                            indicator.removeFromSuperview()//self.view.removeActivityIndicator(activityIndicator: indicator)
+//                        }
                         
                     }
                 }
-            }else{
-                activityIndicator = ActivityIndicatorView()
-                if let indicator = activityIndicator{
-                  //  view.showActivityIndicator(activityIndicator: activityIndicator!)
-                    view.showActivityIndicator(activityIndicator: indicator)
-                }
-                
-        }
+            }//else{
+//                activityIndicator = ActivityIndicatorView()
+//                if let indicator = activityIndicator{
+//                  //  view.showActivityIndicator(activityIndicator: activityIndicator!)
+//                    view.showActivityIndicator(activityIndicator: indicator)
+//                }
+//
+//        }
             
             //UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
   
         
         
-        updateView()
+       // updateView()
     }
     
     
@@ -303,8 +317,6 @@ extension NewCheckoutViewController{
                     
                 }
                 
-                
-               
                 let locationFilters = LocationFilters()
                 locationFilters.delegate = self
                 locationFilters.plotMarkers(date: date)
@@ -330,6 +342,13 @@ extension NewCheckoutViewController{
     func setupMap(){
         mapView.changeStyle()
         mapView.setupCamera()
+        
+        activityIndicator = ActivityIndicatorView()
+        if let indicator = activityIndicator{
+            view.showActivityIndicator(activityIndicator: indicator)
+        }
+        
+        updateView()
     }
     
     
@@ -341,9 +360,9 @@ extension NewCheckoutViewController{
         }
        
         
-        if let getIndicator = placeIndicator{
-            getIndicator.removeFromSuperview()
-        }
+//        if let getIndicator = placeIndicator{
+//            getIndicator.removeFromSuperview()
+//        }
         
         mapView.addMarkersInMap(allLocations: allLocations)
         
@@ -404,12 +423,13 @@ extension NewCheckoutViewController{
 }
 
 extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
-    func onFailure() {
+    func onFailure(type: ErrorMessages) {
         if let indicator = activityIndicator{
             self.view.removeActivityIndicator(activityIndicator: indicator)
         }
         
-      
+        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: type.rawValue)
+        
     }
     
     

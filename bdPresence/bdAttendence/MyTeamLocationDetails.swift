@@ -88,9 +88,7 @@ class MyTeamLocationDetails: UIViewController{
         
         print("LocationsCount = \(locatins.userInfo)")
     
-        
-        
-        
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         
         if let teamDetails = locatins.userInfo as? [String: Any]{
             
@@ -185,7 +183,7 @@ extension MyTeamLocationDetails{
                         locationData.latitude = String(coordinates[1])
                     
                         if Int(coordinates[0]) == 0{
-                            locationData.address = "No address found"
+                            locationData.address = "No location found"
                         }
                     
                     }
@@ -490,9 +488,12 @@ extension MyTeamLocationDetails{
  
  
  extension  MyTeamLocationDetails: LocationsFilterDelegate, PolylineStringDelegate{
-    func onFailure() {
+    func onFailure(type: ErrorMessages) {
         view.removeActivityIndicator(activityIndicator: activityIndicator)
+        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: type.rawValue)
     }
+    
+    
     
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {

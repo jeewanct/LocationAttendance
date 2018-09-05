@@ -42,7 +42,7 @@ class LocationFilters: UIViewController{
                     // let finalLocations = self.findFaultyLocations(locations: locationAfterTime)
                     
                 }else{
-                    self.delegate?.onFailure()
+                    self.delegate?.onFailure(type: ErrorMessages.noCheckInFound)
                 }
             }
         }
@@ -131,6 +131,7 @@ class LocationFilters: UIViewController{
             
             GoogleUtils.findApproxTimeToTravel(firstLat: firstLat, firstLong: firstLong, secondLat: secondLat, secondLong: secondLong) { (googleDistance) in
                 
+                if let _ = googleDistance{
                 
                 if let firstLocationDate = locations[index].lastSeen, let secondLocationDate = locations[index - 1].lastSeen{
                     
@@ -149,6 +150,10 @@ class LocationFilters: UIViewController{
                         // locations[index].isDiscarded = true
                     }
                     
+                }
+                    
+                }else{
+                    self.delegate?.onFailure(type: ErrorMessages.noInternetAvailable)
                 }
                 
                 
