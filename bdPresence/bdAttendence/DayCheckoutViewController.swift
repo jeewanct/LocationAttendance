@@ -122,6 +122,7 @@ class DayCheckoutViewController: UIViewController {
                     self.statusChangeView.isHidden = true
                     self.syncButton.isEnabled = false
                     if self.rmcNotifier.getShiftRunningStatus() {
+                        UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
                          NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
                     }
                    
@@ -164,6 +165,7 @@ class DayCheckoutViewController: UIViewController {
                 if screenFlag == "2" {
                     if UserDefaults.standard.bool(forKey: "DownDueToStatusChange"){
                         if rmcNotifier.getShiftRunningStatus() {
+                            UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
                         }
                         

@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftmodule</key>
 		<data>
-		24Ilk82HYP3HEdK1uTGfPJf5vwQ=
+		cy3utfW5c6L4kVGXK7dunQYu8dQ=
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		aFBsfD1OICN6ux5b6fKA1/88z/k=
+		kCdlMSFh23D/84sRBIhLtwNMx9o=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -76,11 +76,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			24Ilk82HYP3HEdK1uTGfPJf5vwQ=
+			cy3utfW5c6L4kVGXK7dunQYu8dQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			3bdRl6RFV1fAuDhThgp1KoJtxQ5WfS2vQqOVmDTbaXg=
+			TikMICpSatBiv719XPWcTv6L2tolOXY9Eftj0vqDSx4=
 			</data>
 		</dict>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
@@ -98,11 +98,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aFBsfD1OICN6ux5b6fKA1/88z/k=
+			kCdlMSFh23D/84sRBIhLtwNMx9o=
 			</data>
 			<key>hash2</key>
 			<data>
-			KBanfwIqm65VApOQHBtlN/31FXaLz1YKak1M7TDEWoA=
+			QUVBJAMr/njJ7kRWvfsSkSUVH0gOCbSlz/TveEvkyTg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

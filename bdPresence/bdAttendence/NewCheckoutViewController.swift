@@ -59,6 +59,7 @@ class NewCheckoutViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getPlacesAfterTenMinutes()
+        checkStatus()
     }
     
     
@@ -77,10 +78,38 @@ class NewCheckoutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func checkStatus(){
+        if AssignmentModel.statusOfUser() {
+            
+            
+            //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+            
+            UI {
+                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                UserDefaults.standard.set(true, forKey: "DownDueToStatusChange")
+                UserDefaults.standard.synchronize()
+                // New change on 20/06/2018 to create one checkin
+                if isInternetAvailable(){
+                    CheckinModel.postCheckin()
+                }
+                bdCloudStopMonitoring()
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                
+            }
+            
+            
+        } else {
+            UserDefaults.standard.set(false, forKey: "DownDueToStatusChange")
+            
+        }
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    
     
     
     
@@ -132,7 +161,7 @@ extension NewCheckoutViewController{
         if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
             
             
-            if Date().secondsFrom(getPlacesSeconds) > 0{
+            if Date().secondsFrom(getPlacesSeconds) > 600{
                 
                 self.performSelector(inBackground: #selector(NewCheckoutViewController.getPlaces), with: nil)
                 //RMCPlacesManager.getPlaces()

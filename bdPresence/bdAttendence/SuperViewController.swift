@@ -92,7 +92,7 @@ class SuperViewController: UIViewController {
         setObservers()
 
         //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-            self.checkStatus()
+         //   self.checkStatus()
             
         //})
         
