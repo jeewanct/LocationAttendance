@@ -610,6 +610,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk16RMCPlacesManager")
 @interface RMCPlacesManager : NSObject
 + (void)getPlaces;
 + (RMCDObject * _Nullable)getDObjectFromDBWithDobjectId:(NSString * _Nonnull)dobjectId SWIFT_WARN_UNUSED_RESULT;
++ (void)saveDobjectInDBWithStatus:(BOOL)status;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

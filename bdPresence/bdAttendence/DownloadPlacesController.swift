@@ -52,8 +52,9 @@ class DownloadPlaceController: UIViewController{
     
     @objc func handleUpdate(){
         
-        UI{
-        self.value = self.value + 5
+        
+        self.value = self.value + 1
+            
         print(self.value)
         
         if self.value == 100{
@@ -62,7 +63,7 @@ class DownloadPlaceController: UIViewController{
         
         self.progressBar.progressValue = CGFloat(self.value)
         
-        }
+        
         
         
     }
@@ -118,6 +119,7 @@ class DownloadPlaceController: UIViewController{
     func goToHome(){
         
         timer.invalidate()
+        progressBar.progressValue = 100
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
         UIApplication.shared.keyWindow?.rootViewController = destVC
         

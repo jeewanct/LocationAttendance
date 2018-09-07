@@ -120,11 +120,8 @@ extension MyTeamViewController{
 
 extension MyTeamViewController{
     
-    
-    
-    
     func setupNavigation(){
-        //navigationController?.removeTransparency()
+        navigationController?.removeTransparency()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
     }

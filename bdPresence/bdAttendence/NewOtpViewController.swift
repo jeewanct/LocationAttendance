@@ -18,7 +18,7 @@ class NewOtpViewController: UIViewController {
     var codeInputView : CodeInputView!
     fileprivate var otpToken = String()
     var mobileNumber = "9015620820"
-    let activityIndicator = ActivityIndicatorView()
+    var activityIndicator = ActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,10 +120,13 @@ class NewOtpViewController: UIViewController {
         //        AlertView.sharedInstance.showActivityIndicator(self.view)
         
         
+        activityIndicator = ActivityIndicatorView()
         
+        view.showActivityIndicator(activityIndicator: activityIndicator)
         UserDataModel.userSignUp(param:objectdata) { (value) in
             //        AlertView.sharedInstance.hideActivityIndicator(self.view)
             
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (value){
             case APIResult.Success.rawValue:
                // self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
@@ -218,6 +221,7 @@ class NewOtpViewController: UIViewController {
                     
                 case APIResult.InvalidCredentials.rawValue:
                     self.showAlert(ErrorMessage.InvalidOtp.rawValue)
+                    self.codeInputView.clear()
                     
                 case APIResult.InternalServer.rawValue:
                     self.showAlert(ErrorMessage.InternalServer.rawValue)

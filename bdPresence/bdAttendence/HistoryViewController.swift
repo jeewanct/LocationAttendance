@@ -36,6 +36,7 @@ class HistoryViewController: UIViewController {
     var animationPath = GMSMutablePath()
     var i: UInt = 0
     var timer: Timer!
+    var animate = false
     
     
     //MARK: View Controller life cycle
@@ -116,6 +117,7 @@ extension HistoryViewController{
             self.timer.invalidate()
             self.timer = nil
         }
+        animate = false
     }
     
     
@@ -213,6 +215,7 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         currentDisplayDate = currentData
         updateView(date: currentData)
         self.applyForCell(indexPath) { cell in cell.highlight() }
+        animate = false
 
     }
    
@@ -288,8 +291,21 @@ extension HistoryViewController{
     
     func drawPath(coordinates: [CLLocationCoordinate2D]){
         mapView.drawPath(coordinates: coordinates)
+       // animatePolyline()
+        animate = true
     }
     
+    func animatePolyline(){
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+            // Put your code which should be executed with a delay here
+            self.animatePolylinePath()
+        })
+//        UIView.animate(withDuration: 0.003) {
+//             self.animatePolylinePath()
+//        }
+    
+    }
     
     
     func animatePolylinePath() {
@@ -305,6 +321,15 @@ extension HistoryViewController{
             self.i = 0
             self.animationPath = GMSMutablePath()
             self.animationPolyline.map = nil
+        }
+        
+        if  UIApplication.shared.applicationState  == .background{
+            
+        }else{
+            if animate == true{
+                animatePolyline()
+            }
+            
         }
     }
     
@@ -341,6 +366,14 @@ extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate
     }
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
+        
+        for coordinate in coordinates{
+            path.add(coordinate)
+            // animationPath.add(coordinate)
+        }
+        
+        polyline = GMSPolyline(path: path)
+        
         drawPath(coordinates: coordinates)
     }
     

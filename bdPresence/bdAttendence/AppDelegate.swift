@@ -119,13 +119,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let superController = SuperViewController()
                 superController.geoTagPermission()
-          //      superController.getPlacesAfterTenMinutes()
+                superController.getPlacesAfterTenMinutes()
                 
                 
                 if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
                     let interval = Date().timeIntervalSince(lastAssignmentFetched)
                     print(interval)
-                    if interval > 600 {
+                    if interval > 10 {
                         //let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
                         let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
 

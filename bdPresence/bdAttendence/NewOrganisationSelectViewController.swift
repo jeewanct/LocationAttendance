@@ -34,7 +34,7 @@ class NewOrganisationSelectViewController: UIViewController {
         nextButton.addTarget(self, action: #selector(nextAction), for: UIControlEvents.touchUpInside)
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(NewOtpViewController.goToHome), name: NSNotification.Name(rawValue:  LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
+       // NotificationCenter.default.addObserver(self, selector: #selector(NewOtpViewController.goToHome), name: NSNotification.Name(rawValue:  LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
         
         // Do any additional setup after loading the view.
     }
@@ -44,6 +44,11 @@ class NewOrganisationSelectViewController: UIViewController {
            self.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
         }
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        title = ""
     }
     
     
@@ -88,12 +93,8 @@ class NewOrganisationSelectViewController: UIViewController {
                         
                         if apiResultStatus == APIResult.Success {
                             
-                            if LocationHistoryData.getLocationDataCount() == 0{
-                                LocationHistoryData.getTeamMember()
-                            }
+                           self.goToHome()
                             
-                        }else{
-                            self.goToHome()
                         }
                         
                         

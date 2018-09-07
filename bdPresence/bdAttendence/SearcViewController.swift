@@ -230,7 +230,10 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 self.userDetails[start].address =  addrress
                 cell.addressLabel.text = addrress
                 let reloadIndex = IndexPath(item: start, section: 0)
-                self.tableView.reloadRows(at: [reloadIndex], with: .automatic)
+                DispatchQueue.main.async {
+                  self.tableView.reloadRows(at: [reloadIndex], with: .automatic)
+                }
+                
                 
             }
         }
@@ -420,6 +423,10 @@ extension SearchViewController{
             }
             
             userDetails = user
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             
         }
         

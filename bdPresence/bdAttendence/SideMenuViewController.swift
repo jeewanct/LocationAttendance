@@ -104,8 +104,8 @@ class SideMenuViewController: UIViewController  {
             imageNotAvaiableLbl.text = SDKSingleton.sharedInstance.userName.getImageFromText()
         }
         let indexPath = IndexPath(row: menuindex, section: 0)
-        self.tableView(sideMenuTable, didSelectRowAt: indexPath)
-        sideMenuTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
+        //self.tableView(sideMenuTable, didSelectRowAt: indexPath)
+       // sideMenuTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
        
     }
     

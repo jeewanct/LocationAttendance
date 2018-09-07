@@ -40,6 +40,8 @@ class NewCheckoutViewController: UIViewController {
     var animationPath = GMSMutablePath()
     var i: UInt = 0
     var timer: Timer!
+    var animate = false
+    
     var pullController: SearchViewController!
     var placeIndicator: RmcPlaceIndicator?
     
@@ -58,13 +60,15 @@ class NewCheckoutViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getPlacesAfterTenMinutes()
+        //getPlacesAfterTenMinutes()
         checkStatus()
+        animate = true
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        animate = false
         if let _ = self.timer {
             self.timer.invalidate()
             self.timer = nil
@@ -161,7 +165,7 @@ extension NewCheckoutViewController{
         if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
             
             
-            if Date().secondsFrom(getPlacesSeconds) > 600{
+            if Date().secondsFrom(getPlacesSeconds) > 0{
                 
                 self.performSelector(inBackground: #selector(NewCheckoutViewController.getPlaces), with: nil)
                 //RMCPlacesManager.getPlaces()
@@ -260,6 +264,26 @@ extension NewCheckoutViewController{
         upperView.layer.shadowRadius = 1
     }
     
+    func clearMapData(){
+        mapView.clear()
+        animationPolyline = GMSPolyline()
+        if let _ = timer{
+            timer.invalidate()
+            timer = nil
+        }
+        
+        polyline = GMSPolyline()
+        path.removeAllCoordinates()
+        animationPath = GMSMutablePath()
+        animationPolyline = GMSPolyline()
+        i = 0
+        
+        if let _ = pullController{
+            self.removePullUpController(pullController, animated: true)
+            
+        }
+    }
+    
     
     
 }
@@ -275,22 +299,13 @@ extension NewCheckoutViewController{
     func discardFakeLocations(notification: Notification){
         
         
-//        mapView.clear()
-//
-//        animationPolyline = GMSPolyline()
-//        if let _ = timer{
-//            timer.invalidate()
-//            timer = nil
-//        }
-//
-//        polyline = GMSPolyline()
-//        path.removeAllCoordinates()
-//        animationPath = GMSMutablePath()
-//        i = 0
-        
-     
-            
             if let data = notification.userInfo as? [String: Any]{
+                
+                if let checkInId = data["checkInId"] as? String{
+                    checkIfNewLocationAdded(checkinId: checkInId)
+                }
+                
+                
                 if let status = data["status"] as? Bool{
                     if status == true{
                         UserDefaults.standard.set(Date(), forKey: "RMCPlacesDuration")
@@ -318,7 +333,38 @@ extension NewCheckoutViewController{
     }
     
     
+    func checkIfNewLocationAdded(checkinId: String){
+        
+        var present = false
+        
+        if let getPullController = pullController{
+            if let allLocations = getPullController.locationData{
+                
+                for locations in allLocations{
+                    
+                    for location in locations{
+                        if location.checkinId == checkinId{
+                            present = true
+                            break
+                        }
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+        
+        if present == false{
+            updateView()
+        }
+        
+    }
+    
     func updateView(date:Date = Date()){
+        
         
         
         let isToday = Calendar.current.isDateInToday(date)
@@ -346,6 +392,7 @@ extension NewCheckoutViewController{
                     
                 }
                 
+                
                 let locationFilters = LocationFilters()
                 locationFilters.delegate = self
                 locationFilters.plotMarkers(date: date)
@@ -371,13 +418,12 @@ extension NewCheckoutViewController{
     func setupMap(){
         mapView.changeStyle()
         mapView.setupCamera()
-        
+        updateView()
         activityIndicator = ActivityIndicatorView()
+        
         if let indicator = activityIndicator{
             view.showActivityIndicator(activityIndicator: indicator)
         }
-        
-        updateView()
     }
     
     
@@ -397,17 +443,15 @@ extension NewCheckoutViewController{
         
         if allLocations.count != 0{
             
-            if let _ = pullController{
-                self.removePullUpController(pullController, animated: true)
-            }
+            //clearMapData()
             
-            
+            UI{
             self.pullController = UIStoryboard(name: "NewDesign", bundle: nil)
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
             self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
             self.pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
             self.addPullUpController(self.pullController, animated: true)
-            
+            }
             let polyLine = PolyLineMap()
             polyLine.delegate = self
            // polyLine.allLocations = allLocations
@@ -415,21 +459,21 @@ extension NewCheckoutViewController{
             polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
             
         }
-        
 
         
     }
     
+    func animatePolyline(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+            // Put your code which should be executed with a delay here
+            self.animatePolylinePath()
+        })
+    }
     
     
     
     func animatePolylinePath() {
-        let state = UIApplication.shared.applicationState
         
-        if state == .background {
-            // background
-        }
-        else if state == .active {
             if (self.i < self.path.count()) {
                 self.animationPath.add(self.path.coordinate(at: self.i))
                 self.animationPolyline.path = self.animationPath
@@ -437,18 +481,30 @@ extension NewCheckoutViewController{
                 self.animationPolyline.strokeWidth = 3
                 self.animationPolyline.map = self.mapView
                 self.i += 1
+                
+                
             }
             else {
                 self.i = 0
                 self.animationPath = GMSMutablePath()
                 self.animationPolyline.map = nil
             }
+        
+        if  UIApplication.shared.applicationState  == .background{
             
-            // foreground
+        }else{
+            if animate == true{
+                animatePolyline()
+            }
+            
         }
         
         
-    }
+        
+        }
+    
+        
+    
 }
 
 extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
@@ -464,9 +520,19 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
         
+        //var path = GMSMutablePath()
+        for coordinate in coordinates{
+            path.add(coordinate)
+           // animationPath.add(coordinate)
+        }
+        
+        polyline = GMSPolyline(path: path)
+        //animationPolyline = GMSPolyline(path: path)
+        
         mapView.drawPath(coordinates: coordinates)
         //self.drawPath(coordinates: coordinates)
         
+       // animatePolyline()
     }
     
     func finalLocations(locations: [LocationDataModel]) {

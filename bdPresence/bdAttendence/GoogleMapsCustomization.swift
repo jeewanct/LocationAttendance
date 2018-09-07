@@ -41,10 +41,11 @@ extension GMSMapView{
                 
                 if let firstLoc = firstLocation.geoTaggedLocations{
                     
-                    self.addMarker(latitude: firstLoc.latitude, longitude: firstLoc.longitude, markerColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
+                    self.addMarker(latitude: firstLoc.latitude, longitude: firstLoc.longitude, markerColor: #colorLiteral(red: 0.4431372549, green: 0.7176470588, blue: 0.8235294118, alpha: 1))
                 }else{
                     self.addMarker(latitude: firstLocation.latitude, longitude: firstLocation.longitude, markerColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                 }
+                
                 
             }
             

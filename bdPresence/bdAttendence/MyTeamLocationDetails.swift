@@ -55,6 +55,8 @@ class MyTeamLocationDetails: UIViewController{
 //
         
         NotificationCenter.default.addObserver(self, selector: #selector(MyTeamLocationDetails.teamDetailsFetch(locatins:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyTeamDetailsByUserId.rawValue), object: nil)
+        getTeamMemberDetails()
+        
     
     }
     
@@ -70,7 +72,7 @@ class MyTeamLocationDetails: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getTeamMemberDetails()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -88,7 +90,7 @@ class MyTeamLocationDetails: UIViewController{
         
         print("LocationsCount = \(locatins.userInfo)")
     
-        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        //self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         
         if let teamDetails = locatins.userInfo as? [String: Any]{
             
