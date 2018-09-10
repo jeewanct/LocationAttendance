@@ -52,7 +52,7 @@ class NewCheckinViewController: UIViewController {
         activityIndicator = ActivityIndicatorView()
         
         self.view.showActivityIndicator(activityIndicator: activityIndicator!)
-        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)! +  AppConstants.AssignmentUrls.query
         
         AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
             self.view.removeActivityIndicator(activityIndicator: self.activityIndicator!)
