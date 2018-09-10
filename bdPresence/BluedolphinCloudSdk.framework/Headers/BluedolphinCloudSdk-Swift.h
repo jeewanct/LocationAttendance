@@ -200,6 +200,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk17AccessTokenObject")
 @property (nonatomic, copy) NSString * _Nullable userName;
 @property (nonatomic, copy) NSString * _Nullable orgFeatures;
 @property (nonatomic, copy) NSString * _Nullable privelege;
+@property (nonatomic, copy) NSString * _Nullable userMetas;
 + (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;

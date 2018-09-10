@@ -208,6 +208,7 @@ class UserDayData {
                 //let locationData = attendanceLogForToday.locationList.sorted(byKeyPath: "latitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
                 
                 let locationData = attendanceLogForToday.locationList.filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                
                 print("locationData.count = \(locationData.count)")
 
                 var locationDataArray = [LocationDataModel]()
