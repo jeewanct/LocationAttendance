@@ -176,6 +176,7 @@ extension SideMenuViewController:UITableViewDataSource, UITableViewDelegate {
         
         switch (option)
         {
+            
         case SideMenuOptions.MyDashboard.rawValue:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
         case SideMenuOptions.HistoricData.rawValue:

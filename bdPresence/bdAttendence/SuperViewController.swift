@@ -92,7 +92,7 @@ class SuperViewController: UIViewController {
         setObservers()
 
         //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-           self.checkStatus()
+          // self.checkStatus()
             
         //})
         
@@ -100,9 +100,8 @@ class SuperViewController: UIViewController {
     
     
     func setObservers(){
-         NotificationCenter.default.removeObserver(self)
-
-        
+        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.wakeUp(sender:)), name: NSNotification.Name(LocalNotifcation.WakeUpCall.rawValue), object: nil)
          NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "HideSideMen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: nil)
@@ -158,9 +157,6 @@ class SuperViewController: UIViewController {
            
         } else {
             UserDefaults.standard.set(false, forKey: "DownDueToStatusChange")
-            NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.wakeUp(sender:)), name: NSNotification.Name(LocalNotifcation.WakeUpCall.rawValue), object: nil)
-
-
         }
     }
     
@@ -171,10 +167,13 @@ class SuperViewController: UIViewController {
     
     func wakeUpCall (notify: NotifyingFrom) {
         // Check if UserDefaults.standard.set(true, forKey: "DownDueToStatusChange") is true so dont call wake up
-        let value = UserDefaults.standard.bool(forKey: "DownDueToStatusChange")
-        if value {
+        
+        if  AssignmentModel.statusOfUser(){
             
-        } else {
+           // NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+            
+        }else{
+        
             let rmcNotifier = RMCNotifier.shared
             print(notify)
             
@@ -270,6 +269,7 @@ class SuperViewController: UIViewController {
                 
             })
         }
+        
         
     }
 
@@ -675,7 +675,11 @@ extension SuperViewController {
         switch (sender.name.rawValue) {
             
         case LocalNotifcation.Dashboard.rawValue:
-            changeChildController(identifier: .dashboard)
+            if AssignmentModel.statusOfUser(){
+                changeChildController(identifier: .noShiftToday)
+            }else{
+                changeChildController(identifier: .dashboard)
+            }
         case LocalNotifcation.SystemDetail.rawValue:
             changeChildController(identifier: .systemDetail)
         case LocalNotifcation.VirtualBeacon.rawValue:

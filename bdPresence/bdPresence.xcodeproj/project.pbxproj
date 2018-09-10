@@ -20,6 +20,7 @@
 		094104332125A75B00842BE4 /* NewDesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 094104322125A75B00842BE4 /* NewDesign.storyboard */; };
 		094104352125A78E00842BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 094104342125A78E00842BE4 /* LaunchScreen.storyboard */; };
 		094E034621230E70006E44EE /* DownloadPlacesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E034521230E70006E44EE /* DownloadPlacesController.swift */; };
+		0963C70C214639C9003411E9 /* NoShiftByManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0963C70B214639C9003411E9 /* NoShiftByManager.swift */; };
 		09704E5A213E65F400825516 /* RmcPlaceIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09704E59213E65F400825516 /* RmcPlaceIndicator.xib */; };
 		09704E5C213E686A00825516 /* RmcPlaceIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09704E5B213E686A00825516 /* RmcPlaceIndicator.swift */; };
 		09704EA4213E9BE600825516 /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09704E5F213E9BE600825516 /* GMUClusterManager.m */; };
@@ -195,6 +196,7 @@
 		094104322125A75B00842BE4 /* NewDesign.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewDesign.storyboard; sourceTree = "<group>"; };
 		094104342125A78E00842BE4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		094E034521230E70006E44EE /* DownloadPlacesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadPlacesController.swift; sourceTree = "<group>"; };
+		0963C70B214639C9003411E9 /* NoShiftByManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoShiftByManager.swift; sourceTree = "<group>"; };
 		09704E59213E65F400825516 /* RmcPlaceIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RmcPlaceIndicator.xib; sourceTree = "<group>"; };
 		09704E5B213E686A00825516 /* RmcPlaceIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RmcPlaceIndicator.swift; sourceTree = "<group>"; };
 		09704E5F213E9BE600825516 /* GMUClusterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUClusterManager.m; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 				0912CD552122A4C1008323F0 /* SearcViewController.swift */,
 				0912CD592122C365008323F0 /* GradientViewController.swift */,
 				09B1CC67212C284000A11D5A /* SearchGeoTagLocationController.swift */,
+				0963C70B214639C9003411E9 /* NoShiftByManager.swift */,
 			);
 			name = NewDesign;
 			sourceTree = "<group>";
@@ -1195,6 +1198,7 @@
 				09704EB2213E9BE600825516 /* GMUPlacemark.m in Sources */,
 				99BD39EF1EA7453A00B6942B /* Loader.swift in Sources */,
 				99F2177A1F20A833002A0E5C /* SplashViewController.swift in Sources */,
+				0963C70C214639C9003411E9 /* NoShiftByManager.swift in Sources */,
 				99B67D5920F78C6E00308137 /* LabelWithImage.swift in Sources */,
 				0982365D2109A948002BEECC /* RoughWork.swift in Sources */,
 				09A438F12137D4C200CF2109 /* LinearProgressBar.swift in Sources */,

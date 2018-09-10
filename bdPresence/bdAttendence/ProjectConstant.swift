@@ -36,6 +36,7 @@ enum SideMenuOptions:String{
     case MyProfile = "My Profile"
     case SystemDetail = "System Detail"
     case ContactUs = "Contact Us"
+    case NoShiftTodayManager = "No Shift"
 }
 
 enum NotificationType:String{
@@ -67,8 +68,10 @@ enum StoryboardIdentifier:String{
     case dashboard
     
      /* Changes made from 10 July */
+    
     case myTeam
     case myLocation
+    case noShiftToday
 }
 enum ErrorMessage:String{
     case UserNotFound = "Number not found. Contact admin"

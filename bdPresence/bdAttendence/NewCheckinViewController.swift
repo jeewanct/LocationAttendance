@@ -45,7 +45,7 @@ class NewCheckinViewController: UIViewController {
         checkInImageView.loadGif(name: "swipeUp")
     }
     override func viewDidAppear(_ animated: Bool) {
-        statusOfUser()
+       // statusOfUser()
     }
     
     @IBAction func syncTapped(_ sender: Any) {
@@ -97,49 +97,7 @@ class NewCheckinViewController: UIViewController {
         
     }
     
-    func statusOfUser(){
-        if AssignmentModel.statusOfUser() {
-            //            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
-            //                if screenFlag == "1" {
-            //                   // UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
-            //
-            //                    UI {
-            ////                        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-            ////                        // New change on 20/06/2018 to create one checkin
-            ////                        if isInternetAvailable(){
-            ////                            CheckinModel.postCheckin()
-            ////                        }
-            //                        bdCloudStopMonitoring()
-            //
-            //                        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
-            //
-            //                    }
-            //                }
-            //            }
-            bdCloudStopMonitoring()
-            self.dateLabel.text = Date().formattedWith(format: "MMM dd, yyyy")
-            self.unavailableUntilLbl.text = "Unavailable till \((SDKSingleton.sharedInstance.toTimeStampForStatusChange?.formattedWith(format: "MMM dd, yyyy hh:mm a"))!)"
-            self.statusChangeView.isHidden = false
-            self.syncButton.isEnabled = true
-            self.syncButton.tintColor = APPColor.BlueGradient
-            
-        } else {
-            self.statusChangeView.isHidden = true
-            self.syncButton.isEnabled = false
-            self.syncButton.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
-                if screenFlag == "2" {
-                    if UserDefaults.standard.bool(forKey: "DownDueToStatusChange"){
-                        if rmcNotifier.getShiftRunningStatus() {
-                            UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
-                        }
-                    
-                }
-                }
-            }
-        }
-    }
+    
     
     
     func handleGesture(sender:UIGestureRecognizer){

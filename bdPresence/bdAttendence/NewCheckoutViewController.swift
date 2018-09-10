@@ -24,12 +24,10 @@ class NewCheckoutViewController: UIViewController {
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var upperView: UIView!
     var swipedown :UISwipeGestureRecognizer?
-    @IBOutlet var statusChangeView: UIView!
-    @IBOutlet weak var bottomMessageLabel: UILabel!
-    @IBOutlet weak var unavailableTillLabel: UILabel!
-    @IBOutlet weak var todayDateLabel: UILabel!
    // @IBOutlet weak var syncButton: UIBarButtonItem!
     @IBOutlet weak var manualSwipeDisableHieghtAnchor: NSLayoutConstraint!
+    
+    @IBOutlet weak var shiftSyncBarBtn: UIBarButtonItem!
     
     
     
@@ -81,6 +79,52 @@ class NewCheckoutViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func handleSync(_ sender: Any) {
+        
+        
+        activityIndicator = ActivityIndicatorView()
+        
+        self.view.showActivityIndicator(activityIndicator: activityIndicator!)
+        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+        
+        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator!)
+            UI {
+                print("completionstatus = \(completionStatus)")
+                if completionStatus == "Success" {
+                    UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                }
+                
+                if AssignmentModel.statusOfUser() {
+                    
+                     bdCloudStopMonitoring()
+//                    self.shiftSyncBarBtn.isEnabled = true
+//                    self.shiftSyncBarBtn.tintColor = APPColor.BlueGradient
+                    UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                    UI {
+                        if isInternetAvailable(){
+                            CheckinModel.postCheckin()
+                        }
+                       
+                    }
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+                    
+                } else {
+                    
+                    bdCloudStartMonitoring()
+                    UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+//                    self.shiftSyncBarBtn.isEnabled = false
+//                    self.shiftSyncBarBtn.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    
+                }
+            }
+        }
+    
+    
+    
+    }
+    
     
     func checkStatus(){
         if AssignmentModel.statusOfUser() {
@@ -452,6 +496,12 @@ extension NewCheckoutViewController{
             self.pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
             self.addPullUpController(self.pullController, animated: true)
             }
+            
+            
+            checkIfAllLocationsAreSame(locations: allLocations)
+            
+            
+            
             let polyLine = PolyLineMap()
             polyLine.delegate = self
            // polyLine.allLocations = allLocations
@@ -529,13 +579,46 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
         polyline = GMSPolyline(path: path)
         //animationPolyline = GMSPolyline(path: path)
         
+        
+        
         mapView.drawPath(coordinates: coordinates)
         //self.drawPath(coordinates: coordinates)
         
        // animatePolyline()
     }
     
+    func checkIfAllLocationsAreSame(locations: [[LocationDataModel]]) -> Bool{
+        
+        var isRepeat = false
+        
+        var firstCheckInId = ""
+        if let firstCheckIn = locations.first{
+            
+            if let first = firstCheckIn.first{
+                if let checkInId = first.checkinId{
+                    firstCheckInId = checkInId
+                }
+            }
+            
+        }
+        for location in locations{
+            
+            if let firstLocation  = location.first{
+                //if firstLocation.checkinId != first
+            }
+            
+        }
+        
+        
+        
+        
+    }
+    
+    
     func finalLocations(locations: [LocationDataModel]) {
+        
+        
+        
         
         self.plotMarkersInMap(location: LogicHelper.shared.sortOnlyLocations(location: locations))
         
