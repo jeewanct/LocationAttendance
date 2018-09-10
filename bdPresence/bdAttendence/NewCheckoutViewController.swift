@@ -310,7 +310,6 @@ extension NewCheckoutViewController{
     
     func clearMapData(){
         mapView.clear()
-        animationPolyline = GMSPolyline()
         if let _ = timer{
             timer.invalidate()
             timer = nil
@@ -483,11 +482,13 @@ extension NewCheckoutViewController{
 //            getIndicator.removeFromSuperview()
 //        }
         
+        clearMapData()
+        
         mapView.addMarkersInMap(allLocations: allLocations)
         
         if allLocations.count != 0{
             
-            //clearMapData()
+            
             
             UI{
             self.pullController = UIStoryboard(name: "NewDesign", bundle: nil)
@@ -498,15 +499,15 @@ extension NewCheckoutViewController{
             }
             
             
-            checkIfAllLocationsAreSame(locations: allLocations)
+            if !LogicHelper.shared.checkIfAllLocationsAreSame(locations: allLocations){
+                let polyLine = PolyLineMap()
+                polyLine.delegate = self
+                // polyLine.allLocations = allLocations
+                //polyLine.takePolyline()
+                polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+            }
+        
             
-            
-            
-            let polyLine = PolyLineMap()
-            polyLine.delegate = self
-           // polyLine.allLocations = allLocations
-            //polyLine.takePolyline()
-            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
             
         }
 
@@ -584,40 +585,41 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
         mapView.drawPath(coordinates: coordinates)
         //self.drawPath(coordinates: coordinates)
         
+        
+        
        // animatePolyline()
     }
     
     func checkIfAllLocationsAreSame(locations: [[LocationDataModel]]) -> Bool{
-        
-        var isRepeat = false
-        
         var firstCheckInId = ""
         if let firstCheckIn = locations.first{
-            
+
             if let first = firstCheckIn.first{
-                if let checkInId = first.checkinId{
+                if let checkInId = first.geoTaggedLocations?.placeDetails?.placeId{
                     firstCheckInId = checkInId
+                }else{
+                    return false
                 }
             }
-            
+
         }
         for location in locations{
-            
+
             if let firstLocation  = location.first{
-                //if firstLocation.checkinId != first
+                if firstLocation.geoTaggedLocations?.placeDetails?.placeId != firstCheckInId{
+                    return false
+                    
+                }
             }
-            
+
         }
-        
-        
-        
-        
+
+        return true
+
     }
     
     
     func finalLocations(locations: [LocationDataModel]) {
-        
-        
         
         
         self.plotMarkersInMap(location: LogicHelper.shared.sortOnlyLocations(location: locations))

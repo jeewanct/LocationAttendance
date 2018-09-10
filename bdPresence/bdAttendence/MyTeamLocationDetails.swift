@@ -245,11 +245,19 @@ extension MyTeamLocationDetails{
             self.pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
             self.addPullUpController(self.pullController, animated: true)
             
-            let polyLine = PolyLineMap()
-            polyLine.delegate = self
-            // polyLine.allLocations = allLocations
-            //polyLine.takePolyline()
-            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+            
+            if !LogicHelper.shared.checkIfAllLocationsAreSame(locations: allLocations){
+                let polyLine = PolyLineMap()
+                polyLine.delegate = self
+                // polyLine.allLocations = allLocations
+                //polyLine.takePolyline()
+                polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+            }
+//            let polyLine = PolyLineMap()
+//            polyLine.delegate = self
+//            // polyLine.allLocations = allLocations
+//            //polyLine.takePolyline()
+//            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
             
         }
     }

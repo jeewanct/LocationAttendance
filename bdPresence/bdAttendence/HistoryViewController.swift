@@ -280,9 +280,18 @@ extension HistoryViewController{
             
             self.addPullUpController(pullController, animated: true)
             
-            let polyLine = PolyLineMap()
-            polyLine.delegate = self
-            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+            if !LogicHelper.shared.checkIfAllLocationsAreSame(locations: allLocations){
+                let polyLine = PolyLineMap()
+                polyLine.delegate = self
+                // polyLine.allLocations = allLocations
+                //polyLine.takePolyline()
+                polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+            }
+            
+            
+//            let polyLine = PolyLineMap()
+//            polyLine.delegate = self
+//            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
         }
         
     }

@@ -39,7 +39,7 @@ class DayCheckoutViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        statusOfUser()
+        //statusOfUser()
     }
     
     func setupView(){
@@ -83,52 +83,44 @@ class DayCheckoutViewController: UIViewController {
     
     
     @IBAction func syncTapped(_ sender: Any) {
-        self.syncButton.isEnabled = false
-        //"&status=" + AssignmentStatus.Assigned.rawValue
-        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
         activityIndicator = ActivityIndicatorView()
-        self.statusChangeView.showActivityIndicator(activityIndicator: activityIndicator!)
+        
+        self.view.showActivityIndicator(activityIndicator: activityIndicator!)
+        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+        
         AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
-            self.statusChangeView.removeActivityIndicator(activityIndicator: self.activityIndicator!)
-
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator!)
             UI {
                 print("completionstatus = \(completionStatus)")
                 if completionStatus == "Success" {
                     UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
                 }
+                
                 if AssignmentModel.statusOfUser() {
-                    // Here i have to swipe down the user screen to stop mobitoring
-                    self.statusChangeView.isHidden = false
-                    self.syncButton.isEnabled = true
-                   // if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
-                       // if screenFlag == "1" {
-                            //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
-                            
-                            UI {
-                                //UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                                // New change on 20/06/2018 to create one checkin
-                                if isInternetAvailable(){
-                                    CheckinModel.postCheckin()
-                                }
-                                bdCloudStopMonitoring()
-                                
-                              //  NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
-                                
-                                //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
-                            }
-                       // }
-                    //}
-                } else {
-                    self.statusChangeView.isHidden = true
-                    self.syncButton.isEnabled = false
-                    if self.rmcNotifier.getShiftRunningStatus() {
-                        UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                    
+                    bdCloudStopMonitoring()
+                    //                    self.shiftSyncBarBtn.isEnabled = true
+                    //                    self.shiftSyncBarBtn.tintColor = APPColor.BlueGradient
+                    UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                    UI {
+                        if isInternetAvailable(){
+                            CheckinModel.postCheckin()
+                        }
+                        
                     }
-                   
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+                    
+                } else {
+                    
+                    bdCloudStartMonitoring()
+                    UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+                    //                    self.shiftSyncBarBtn.isEnabled = false
+                    //                    self.shiftSyncBarBtn.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    
                 }
             }
         }
+        
         
     }
     

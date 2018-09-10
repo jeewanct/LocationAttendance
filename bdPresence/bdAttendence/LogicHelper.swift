@@ -505,6 +505,38 @@ class LogicHelper{
     }
     
     
+    func checkIfAllLocationsAreSame(locations: [[LocationDataModel]]) -> Bool{
+        
+        
+        
+        var firstCheckInId = ""
+        if let firstCheckIn = locations.first{
+            
+            if let first = firstCheckIn.first{
+                if let checkInId = first.geoTaggedLocations?.placeDetails?.placeId{
+                    firstCheckInId = checkInId
+                }else{
+                    return false
+                }
+            }
+            
+        }
+        for location in locations{
+            
+            if let firstLocation  = location.first{
+                if firstLocation.geoTaggedLocations?.placeDetails?.placeId != firstCheckInId{
+                    return false
+                    
+                }
+            }
+            
+        }
+        
+        return true
+        
+    }
+    
+    
 }
 
 
