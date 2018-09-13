@@ -59,7 +59,7 @@ class NewCheckoutViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //getPlacesAfterTenMinutes()
-        checkStatus()
+       // checkStatus()
         animate = true
     }
     
@@ -126,47 +126,46 @@ class NewCheckoutViewController: UIViewController {
     }
     
     
-    func checkStatus(){
-        if AssignmentModel.statusOfUser() {
-            
-            
-            //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
-            
-            UI {
-                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                UserDefaults.standard.set(true, forKey: "DownDueToStatusChange")
-                UserDefaults.standard.synchronize()
-                // New change on 20/06/2018 to create one checkin
-                if isInternetAvailable(){
-                    CheckinModel.postCheckin()
-                }
-                bdCloudStopMonitoring()
-                
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
-                
-            }
-            
-            
-        } else {
-            UserDefaults.standard.set(false, forKey: "DownDueToStatusChange")
-            
-        }
-    }
+//    func checkStatus(){
+//        if AssignmentModel.statusOfUser() {
+//
+//
+//            //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+//
+//            UI {
+//                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+//                UserDefaults.standard.set(true, forKey: "DownDueToStatusChange")
+//                UserDefaults.standard.synchronize()
+//                // New change on 20/06/2018 to create one checkin
+//                if isInternetAvailable(){
+//                    CheckinModel.postCheckin()
+//                }
+//
+//                bdCloudStopMonitoring()
+//
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+//
+//            }
+//
+//
+//        } else {
+//            UserDefaults.standard.set(false, forKey: "DownDueToStatusChange")
+//
+//        }
+//    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
-    
-    
-    
-    
+
    
     
     
     func updateAddress(sender: NSNotification) {
         DispatchQueue.main.async {
+            
             self.lastCheckinAddressLabel.text = CurrentLocation.address
+        
         }
     }
     
@@ -564,8 +563,10 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
             self.view.removeActivityIndicator(activityIndicator: indicator)
         }
         
-        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: type.rawValue)
-        
+        if type == .noCheckInFound{
+        }else{
+            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: type.rawValue)
+        }
     }
     
     

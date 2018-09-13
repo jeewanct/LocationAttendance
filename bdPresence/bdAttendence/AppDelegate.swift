@@ -97,7 +97,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Here check whether the shift is runing or not then only start location monitoring
                 let notifier = RMCNotifier.shared
                 if notifier.getShiftRunningStatus() {
-                    BlueDolphinManager.manager.startLocationMonitoring()
+                    bdCloudStartMonitoring()
+                   //BlueDolphinManager.manager.startLocationMonitoring()
+                }else{
+                    bdCloudStopMonitoring()
                 }
 //                if SDKSingleton.sharedInstance.isShiftRunning {
 //                    BlueDolphinManager.manager.startLocationMonitoring()
@@ -260,6 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func applicationWillTerminate(_ application: UIApplication) {
+       
         if !SDKSingleton.sharedInstance.userId.isBlank{
             postDataCheckin(userInteraction: CheckinDetailKeys.AppTerminated)
             
@@ -388,13 +392,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 7,
+            schemaVersion: 8,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
 
-                if oldSchemaVersion < 7 {
+                if oldSchemaVersion < 8 {
 //                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
 //
 //                    }
