@@ -16,26 +16,47 @@ import Fabric
 import Crashlytics
 import CoreLocation
 
+
+/* Change on 10 July '18 New Design */
+import GoogleMaps
+import GooglePlaces
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var locationManager: CLLocationManager?
+    let center = UNUserNotificationCenter.current()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         /*
          Don't config until the location is on
         */
+        
+        
+        
+        
+        
+        
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
         ConfigurationModel.setAppVersion(appVersion: APPVERSION)
         ConfigurationModel.setCheckinInteral(val: 600)
+        // Update the SDK because i have added one function there
+        ConfigurationModel.setAppName(name: "BDPresence")
         print("appversion = \(APPVERSION)")
         switch(ReleaseType.currentConfiguration()) {
         case .Debug:
             ConfigurationModel.stopDebugging(flag: false)
             print("In Debug")
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+
+
+            //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+
         case .Alpha:
             ConfigurationModel.stopDebugging(flag: false)
             print("In Alpha")
@@ -53,6 +74,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         
+        
+        
+        // Testing
+        center.requestAuthorization(options: [.alert, .sound]) { granted, error in
+       
+        }
+        
+        
+        creatVisitLocation()
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
         //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
@@ -79,16 +109,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Adding a Defaults value which will show gpsCheckinSendStatus
         // And it should be set here on first launch of app
         if !SDKSingleton.sharedInstance.userId.isBlank {
+            
+            
+            
+            
             if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
                 BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
-                BlueDolphinManager.manager.startLocationMonitoring()
+                // Here check whether the shift is runing or not then only start location monitoring
+                let notifier = RMCNotifier.shared
+                if notifier.getShiftRunningStatus() {
+                    bdCloudStartMonitoring()
+                   //BlueDolphinManager.manager.startLocationMonitoring()
+                }else{
+                    bdCloudStopMonitoring()
+                }
+//                if SDKSingleton.sharedInstance.isShiftRunning {
+//                    BlueDolphinManager.manager.startLocationMonitoring()
+//                }
+            }
+
+        }
+        //print(Realm.Configuration.defaultConfiguration.fileURL)
+        GMSServices.provideAPIKey(GoogleMaps.GOOGLEMAPSAPI)
+        GMSPlacesClient.provideAPIKey(GoogleMaps.GOOGLEMAPSAPI)
+        
+        startUpTask()
+        
+        if !SDKSingleton.sharedInstance.userId.isBlank {
+            
+            if isInternetAvailable() {
+                // Adding data to download assignment for status change feature if internet is there and meanwhile
+                // I will start work to check the data from database and act accordingly for STATUS CHANGE FEATURE.
+                
+                let superController = SuperViewController()
+                superController.geoTagPermission()
+                superController.getPlacesAfterTenMinutes()
+                
+                
+                if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
+                    let interval = Date().timeIntervalSince(lastAssignmentFetched)
+                    print(interval)
+                    if interval > 600 {
+                        //let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)! + AppConstants.AssignmentUrls.query
+
+                        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                            print("completionstatus = \(completionStatus)")
+                            if completionStatus == "Success" {
+                                
+                                UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+                            }
+                            print(AssignmentModel.statusOfUser())
+                        }
+                    } else {
+                        print(AssignmentModel.statusOfUser())
+                        
+                    }
+                }else {
+                    let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                    AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                        print("completionstatus = \(completionStatus)")
+                        if completionStatus == "Success" {
+                            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                        }
+                        print(AssignmentModel.statusOfUser())
+                    }
+                }
             }
         }
-
-        startUpTask()
+        
+        
         return true
     }
-    
     
     
     /*
@@ -106,7 +199,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 
         //NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
-        
+//        window?.rootViewController?.beginAppearanceTransition(false, animated: false)
+//        window?.rootViewController?.endAppearanceTransition()
         if !SDKSingleton.sharedInstance.userId.isBlank{
             if isInternetAvailable() {
                 CheckinModel.postCheckin()
@@ -122,20 +216,71 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            //get the value for key here
 //        }
 //    }
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
+//        window?.rootViewController?.beginAppearanceTransition(true, animated: false)
+//        window?.rootViewController?.endAppearanceTransition()
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if !SDKSingleton.sharedInstance.userId.isBlank{
-            if isInternetAvailable() {
+
+            if isInternetAvailable()  {
+                
+                let superController = SuperViewController()
+                superController.geoTagPermission()
+                superController.getPlacesAfterTenMinutes()
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: self, userInfo: nil)
                 CheckinModel.postCheckin()
+                // Adding data to download assignment for status change feature if internet is there and meanwhile
+                // I will start work to check the data from database and act accordingly for STATUS CHANGE FEATURE.
+                if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
+                    let interval = Date().timeIntervalSince(lastAssignmentFetched)
+                    print(interval)
+                    if interval > 600 {
+                        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)! + AppConstants.AssignmentUrls.query
+                        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                            print("completionstatus = \(completionStatus)")
+                            if completionStatus == "Success" {
+                                UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+                            }
+                            //print(AssignmentModel.statusOfUser())
+                            
+                        }
+                    } else {
+                        //print(AssignmentModel.statusOfUser())
+                        
+                    }
+                }else {
+                    let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
+                    AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+                        print("completionstatus = \(completionStatus)")
+                        if completionStatus == "Success" {
+                            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                        }
+                        //print(AssignmentModel.statusOfUser())
+                    }
+                }
             }
-            
+
+
+
         }
+
+
+
     }
     
-    
-    
+
     func applicationDidBecomeActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
+        if !SDKSingleton.sharedInstance.userId.isBlank{
+            let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String
+            
+            if isInternetAvailable() && screenFlag == "1" {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: self, userInfo: nil)
+
+            }
+        }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //        BlueDolphinManager.manager.gpsAuthorizationStatus { (newStatus) in
 //            print("newStatus = \(newStatus.rawValue)")
@@ -145,6 +290,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func applicationWillTerminate(_ application: UIApplication) {
+       
+        
         if !SDKSingleton.sharedInstance.userId.isBlank{
             postDataCheckin(userInteraction: CheckinDetailKeys.AppTerminated)
             
@@ -209,6 +356,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func checkLogin(){
         getUserData()
+
         
         if !SDKSingleton.sharedInstance.userId.isBlank{
             
@@ -272,23 +420,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 5,
+            schemaVersion: 8,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
 
-                if oldSchemaVersion < 5 {
+                if oldSchemaVersion < 8 {
 //                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
 //
 //                    }
                     migration.enumerateObjects(ofType: AccessTokenObject.className()) { oldObject, newObject in
                     }
                     migration.enumerateObjects(ofType: RMCAssignmentObject.className()) { oldObject, newObject in
-
+                    
                     }
 
                 }
+                // Here we know app is being update so we have to call RMCPlaces
+                
+              //  UserDefaults.standard.setValue(false, forKey: "oldData")
+                
+                
+                //RMCPlacesManager.getPlaces()
+               
+                
+                
         }
 
         )
@@ -302,6 +459,8 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         print("userInfo sourabh = \(userInfo)")
         //BackgroundDebug().write(string: "didReceiveRemoteNotification- SilentPush")
 
+        SavePushNotification.saveNotification(time: "\(userInfo)")
+        
         let state: UIApplicationState = application.applicationState
        
         UI {
@@ -452,6 +611,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         // perform fetch handler
         
+        
     }
     
     @available(iOS 10.0, *)
@@ -533,14 +693,91 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             CheckinModel.postCheckin()
         }
     }
+}
+
+extension UIApplication{
+    var topViewController: UIViewController?{
+        if keyWindow?.rootViewController == nil{
+            return keyWindow?.rootViewController
+        }
+        
+        var pointedViewController = keyWindow?.rootViewController
+        
+        while  pointedViewController?.presentedViewController != nil {
+            switch pointedViewController?.presentedViewController {
+            case let navagationController as UINavigationController:
+                pointedViewController = navagationController.viewControllers.last
+            case let tabBarController as UITabBarController:
+                pointedViewController = tabBarController.selectedViewController
+            default:
+                pointedViewController = pointedViewController?.presentedViewController
+            }
+        }
+        return pointedViewController
+        
+    }
+}
+
+
+
+//MARK: Extension for Place Visit loction Manager
+
+extension AppDelegate: CLLocationManagerDelegate{
+    
+    func creatVisitLocation(){
+        
+        locationManager = CLLocationManager()
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.startMonitoringVisits()
+        locationManager?.delegate = self
+        
+        
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
+        // create CLLocation from the coordinates of CLVisit
+       // let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
+        
+        locationManager?.stopUpdatingLocation()
+        locationManager?.stopMonitoringVisits()
+        
+        locationManager?.delegate = nil
+        locationManager = nil
+        
+        sendLocalNotification()
+        
+        let notifier = RMCNotifier.shared
+        if notifier.getShiftRunningStatus() {
+            let superViewController = SuperViewController()
+            superViewController.wakeUpCall(notify: NotifyingFrom.Normal)
+          //  bdCloudStartMonitoring()
+            //BlueDolphinManager.manager.startLocationMonitoring()
+        }
+//        else{
+//            bdCloudStopMonitoring()
+//        }
+        
+        // Get location description
+    }
+    
+    func sendLocalNotification(){
+        let content = UNMutableNotificationContent()
+        content.title = "Please notify iOS developer"
+        content.body = "\(Date()) send us the screenshot"
+        content.sound = .default()
+        
+        // 2
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: "Testing", content: content, trigger: trigger)
+        
+        // 3
+        center.add(request, withCompletionHandler: nil)
+    }
     
     
-    
-    
-    
-    
+  
     
     
     
 }
-

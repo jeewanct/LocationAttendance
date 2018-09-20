@@ -14,14 +14,26 @@ class SystemDetailViewController: UIViewController {
 
     @IBOutlet weak var systemTableview: UITableView!
     var systemDetail = [String]()
+    var activityIndicator: ActivityIndicatorView?
+    var imageIcons :[UIImage] = [#imageLiteral(resourceName: "syncImage"),#imageLiteral(resourceName: "syncImage"),#imageLiteral(resourceName: "pendingImage"),#imageLiteral(resourceName: "notouchImage")]
     
-    var imageIcons :[UIImage] = [#imageLiteral(resourceName: "pending_checkin"),#imageLiteral(resourceName: "pending_checkin"),#imageLiteral(resourceName: "sync")]
         var longPressGesture :UILongPressGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+        
+        navigationController?.removeTransparency()
+        setupController()
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
+        
+        
+
+        // Do any additional setup after loading the view.
+    }
+
+    
+    func setupController(){
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sync"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(sync(sender:)))
         self.navigationItem.title = "System Details"
@@ -30,28 +42,49 @@ class SystemDetailViewController: UIViewController {
         systemTableview.dataSource = self
         systemTableview.tableFooterView = UIView()
         systemTableview.allowsSelection = false
+        
+        systemTableview.register(UINib(nibName: "SystemSettingsCell", bundle: nil), forCellReuseIdentifier: "SystemSettingsCell")
+        
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.lightGray
         refreshControl.addTarget(self, action: #selector(refresh(refreshControl:)), for: .valueChanged)
         systemTableview.addSubview(refreshControl)
         longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         updateData()
-
-        // Do any additional setup after loading the view.
     }
-
+    
+    
+    func callGeoAuthentication(){
+        UserGeoTagAuthentication.getGeoTagAccess { (value) in
+            
+            UserDefaults.standard.set(LogicHelper.shared.timeInSeconds(), forKey: "geoTagPermissionTime")
+            UserDefaults.standard.set(value, forKey: "canGeoTag")
+            
+        }
+    }
+    
     func sync(sender:UIBarButtonItem){
         if isInternetAvailable(){
             
             if let lastManualSync = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastManualSync.rawValue) as? Date {
                 let interval = Date().timeIntervalSince(lastManualSync)
                 print(interval)
-                if interval > 120 {
-                    AlertView.sharedInstance.setLabelText("Syncing started...")
-                    AlertView.sharedInstance.showActivityIndicator(self.view)
+                if interval > 0 {
+                    //AlertView.sharedInstance.setLabelText("Syncing started...")
+                   // AlertView.sharedInstance.showActivityIndicator(self.view)
+                    callGeoAuthentication()
+                    activityIndicator = ActivityIndicatorView()
+                    if let indictor = activityIndicator{
+                        self.view.showActivityIndicator(activityIndicator: indictor)
+                    }
+                    
                     CheckinModel.postCheckin()
                     checkShiftStatus { (apiResultStatus) in
-                        AlertView.sharedInstance.hideActivityIndicator(self.view)
+                       // AlertView.sharedInstance.hideActivityIndicator(self.view)
+                        if let indicator = self.activityIndicator{
+                            indicator.removeFromSuperview()
+                        }
+                      //  self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
                         if apiResultStatus == APIResult.Success {
                             self.updateData()
                         }
@@ -60,14 +93,22 @@ class SystemDetailViewController: UIViewController {
                 } else {
                 }
             }else {
-                AlertView.sharedInstance.setLabelText("Syncing started...")
-                AlertView.sharedInstance.showActivityIndicator(self.view)
+//                AlertView.sharedInstance.setLabelText("Syncing started...")
+//                AlertView.sharedInstance.showActivityIndicator(self.view)
+                activityIndicator = ActivityIndicatorView()
+                if let indictor = activityIndicator{
+                    self.view.showActivityIndicator(activityIndicator: indictor)
+                }
+                
                 UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastManualSync.rawValue)
                 // No last beacon checkin as Date
                 CheckinModel.postCheckin()
                 
                 checkShiftStatus { (apiResultStatus) in
-                    AlertView.sharedInstance.hideActivityIndicator(self.view)
+                    //AlertView.sharedInstance.hideActivityIndicator(self.view)
+                    if let indicator = self.activityIndicator{
+                        indicator.removeFromSuperview()
+                    }
                     if apiResultStatus == APIResult.Success {
                         self.updateData()
                     }
@@ -107,6 +148,9 @@ class SystemDetailViewController: UIViewController {
         
     }
     
+   
+    
+    
     func handleLongPress(){
         let message = getBeaconList().joined(separator: "\n")
         let alertController = UIAlertController(title: "Beacons", message: message, preferredStyle: .alert)
@@ -135,7 +179,7 @@ class SystemDetailViewController: UIViewController {
         let userDataForToday = UserDayData.getFrequencyLocationBarData(date: Date())
         var  lastCheckinTime = String()
         if let data = userDataForToday.getLastCheckinTime() {
-        lastCheckinTime = "Last location check-in : \(Date(timeIntervalSince1970: data).formatted)"
+        lastCheckinTime = " \(Date(timeIntervalSince1970: data).formatted)"
         }else{
            lastCheckinTime = "No last Checkin Found"
         }
@@ -149,12 +193,18 @@ class SystemDetailViewController: UIViewController {
 //
 //        }
         
-        let pendingCheckins = "Pending check-ins : \(CheckinModel.getCheckinsTypeCount(type: .Location))"
-        systemDetail.append(pendingCheckins)
+        
         if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastSyncTime.rawValue ) as? Date {
-            let detail = "Last synced at : " + data.formatted
+            let detail = data.formatted
             systemDetail.append(detail)
             
+        }
+        let pendingCheckins = " \(CheckinModel.getCheckinsTypeCount(type: .Location))"
+        systemDetail.append(pendingCheckins)
+        if SDKSingleton.sharedInstance.noTouchMode {
+            systemDetail.append("ON")
+        } else {
+            systemDetail.append("OFF")
         }
         DispatchQueue.main.async {
             self.systemTableview.reloadData()
@@ -198,17 +248,28 @@ class SystemDetailViewController: UIViewController {
 
 extension SystemDetailViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return systemDetail.count
+        return imageIcons.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / 7
+        return 49
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "systemdetailCell", for: indexPath as IndexPath)
-        cell.textLabel?.font = APPFONT.DAYHOURTEXT
-        cell.textLabel?.text = systemDetail[indexPath.row]
-        cell.textLabel?.numberOfLines = 0
-        cell.imageView?.image = imageIcons[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SystemSettingsCell", for: indexPath as IndexPath) as! SystemSettingsCell
+        cell.headerLabel.font = APPFONT.HELPTEXT
+        cell.headerLabel.textColor = UIColor(hex: "333333")
+        cell.valueLabel.textColor =  UIColor(hex: "a9a9a9")
+        cell.valueLabel.font = APPFONT.HELPTEXT
+//        cell.headingLabel.text = "Status"
+//        cell.valueLabel.text = "Available"
+        
+        cell.imageView?.image = imageIcons[indexPath.item]
+        cell.headerLabel.text = ["Last Location Check-in:", "Last synced at:", "Pending check-ins", "No touch mode"][indexPath.item]
+        
+        //cell.valueLabel.text = systemDetail[indexPath.row]
+//        cell.textLabel?.font = APPFONT.DAYHOURTEXT
+//        cell.textLabel?.text = systemDetail[indexPath.row]
+//        cell.textLabel?.numberOfLines = 0
+//        cell.imageView?.image = imageIcons[indexPath.row]
 //        if indexPath.row == 1{
 //            cell.addGestureRecognizer(longPressGesture!)
 //

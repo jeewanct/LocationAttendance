@@ -14,7 +14,7 @@ public class CodeInputView: UIView, UIKeyInput {
     public var delegate: CodeInputViewDelegate?
     private var nextTag = 1
     
-    // MARK: - UIResponder
+    // MARK: - dsfdsfdsfdsdsfdsfffUIResponder
     public override var canBecomeFirstResponder: Bool {
         get {
             return true
@@ -37,7 +37,7 @@ public class CodeInputView: UIView, UIKeyInput {
             digitLabel.font = UIFont.systemFont(ofSize: 42)
             digitLabel.tag = index
             digitLabel.text = "–"
-            digitLabel.textColor = UIColor.white
+            digitLabel.textColor = UIColor.black
             digitLabel.textAlignment = .center
             addSubview(digitLabel)
             frame.origin.x += frame.width + 10

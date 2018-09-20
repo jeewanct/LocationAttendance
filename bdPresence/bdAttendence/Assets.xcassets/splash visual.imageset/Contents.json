@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "introo screen_illustration@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "splash visual@2x.png",
+      "filename" : "introo screen_illustration@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "splash visual@3x.png",
+      "filename" : "introo screen_illustration@3x-1.png",
       "scale" : "3x"
     }
   ],

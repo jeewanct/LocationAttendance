@@ -64,6 +64,7 @@ class AlertView: UIView {
         container.tag = 1000000
         activityIndicator.startAnimating()
         container.tag = 10000;
+        
     }
     
     /*

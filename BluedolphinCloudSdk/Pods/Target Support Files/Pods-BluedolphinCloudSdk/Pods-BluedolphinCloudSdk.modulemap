@@ -1,6 +1,0 @@
-framework module Pods_BluedolphinCloudSdk {
-  umbrella header "Pods-BluedolphinCloudSdk-umbrella.h"
-
-  export *
-  module * { export * }
-}

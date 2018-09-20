@@ -14,7 +14,7 @@ let APPNAME = "BD Field Force"
 var appIdentifier = "com.raremedia.bdPresence"
 let AppstoreURL = "https://itunes.apple.com/us/app/bd-field-force/id1292604414?ls=1&mt=8"
 let supportEmail = "support@raremediacompany.in"
-let supportAddress = "G-84 Outer Circle, Connaught Place, Delhi"
+let supportAddress = "G-84, Top Floor, Outer Circle, Block G, Connaught Place, New Delhi, Delhi 110001"
 let supportContactNumber = "+911141561260"
 
 let CHECK_IN_DURATION_TOLERANCE:Double = 60 * 60
@@ -26,13 +26,17 @@ var officeEndMin = 0
 let PREVIOUSGPSSTATUS = "previousGpsStatus"
 
 
+/* Changes made from 10th July '18 */
 
 enum SideMenuOptions:String{
     case MyDashboard = "My Dashboard"
+    case HistoricData = "Historic Data"
+    case MyTeam = "My Team"
+    case Locations = "Locations"
+    case MyProfile = "My Profile"
     case SystemDetail = "System Detail"
-    case ThisWeek = "This Week"
-    case Transmit
     case ContactUs = "Contact Us"
+    case NoShiftTodayManager = "No Shift"
 }
 
 enum NotificationType:String{
@@ -50,8 +54,10 @@ enum NotificationType:String{
     
 }
 enum ProjectUserDefaultsKeys:String{
+    
     case startDayTime
 }
+
 
 enum StoryboardIdentifier:String{
     case myprofile
@@ -60,6 +66,12 @@ enum StoryboardIdentifier:String{
     case VirtualBeacon
     case systemDetail
     case dashboard
+    
+     /* Changes made from 10 July */
+    
+    case myTeam
+    case myLocation
+    case noShiftToday
 }
 enum ErrorMessage:String{
     case UserNotFound = "Number not found. Contact admin"
@@ -110,8 +122,8 @@ struct APPColor {
     static var green = UIColor(hex: "77c5c9")
     static var yellow = UIColor(hex: "fff200")
     static var GreenGradient =  UIColor(hex: "80edf7")
-    static var BlueGradient = UIColor(hex: "4a7397")
-    static var newGreen = UIColor(hex: "60c19e")
+    static var BlueGradient = UIColor(hex: "72A9DE")
+    static var newGreen = UIColor(hex: "69CAC6")
     static var newGray = UIColor(hex: "e7e7e7")
     static var newYellow = UIColor(hex: "fdfab0")
     static var llGray = UIColor(hex: "00b8dd")
@@ -121,3 +133,15 @@ struct APPColor {
     static var blueGradient = UIColor(red: 112.0/255.0, green: 179.0/255.0, blue: 215.0/255.0, alpha: 1.0)
 
 }
+
+
+/* Change on 10 July '18 New Design */
+
+
+struct GoogleMaps{
+    
+    static let GOOGLEMAPSAPI = "AIzaSyDfC0pHPv-eCmUFbIrtuWrJL2Ci2wRjeDI"
+}
+
+
+

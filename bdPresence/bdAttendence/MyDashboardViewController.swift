@@ -32,6 +32,12 @@ class MyDashboardViewController: UIViewController {
 //        let controller2 = self.storyboard?.instantiateViewController(withIdentifier: "checkout") as! NewCheckoutViewController
 //        controller2.delegate = self
         
+        if AssignmentModel.statusOfUser(){
+            let destVc = self.storyboard?.instantiateViewController(withIdentifier: "noShiftToday") as! UINavigationController
+            updateChildController(destVc: destVc)
+            constraintViewEqual(view1: containerView, view2: destVc.view)
+        }else{
+        
         if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
             var destVc:UINavigationController!
             switch screenFlag {
@@ -44,6 +50,9 @@ class MyDashboardViewController: UIViewController {
             }
             
             updateChildController(destVc: destVc)
+            
+            
+            
 //            destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
 //            UIView.animate(withDuration: 0.3) {
 //                destVc.view.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -51,6 +60,7 @@ class MyDashboardViewController: UIViewController {
             constraintViewEqual(view1: containerView, view2: destVc.view)
             
             
+        }
         }
         
         // Do any additional setup after loading the view.
@@ -123,6 +133,7 @@ class MyDashboardViewController: UIViewController {
                 self.postDataCheckin(userInteraction: .swipeUp)
 //                self.checkSwipeUp()
             }
+            
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckout") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
@@ -155,6 +166,8 @@ class MyDashboardViewController: UIViewController {
             } else {
                 self.postDataCheckin(userInteraction: .swipeDown)
             }
+            
+            
             let destVc  = self.storyboard?.instantiateViewController(withIdentifier: "newCheckin") as! UINavigationController
             self.updateChildController(destVc: destVc)
             destVc.view.transform = CGAffineTransform(translationX:0 , y: -containerView.frame.size.height)
@@ -249,6 +262,9 @@ class MyDashboardViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
 }
 

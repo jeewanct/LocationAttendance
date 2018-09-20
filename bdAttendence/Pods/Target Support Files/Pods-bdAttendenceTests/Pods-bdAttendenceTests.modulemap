@@ -1,6 +1,0 @@
-framework module Pods_bdAttendenceTests {
-  umbrella header "Pods-bdAttendenceTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

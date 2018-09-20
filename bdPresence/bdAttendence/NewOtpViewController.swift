@@ -12,15 +12,17 @@ import BluedolphinCloudSdk
 
 class NewOtpViewController: UIViewController {
     @IBOutlet weak var otpView: UIView!
-
+    
     @IBOutlet weak var sendOtpButton: UIButton!
     @IBOutlet weak var otpLabel: UILabel!
     var codeInputView : CodeInputView!
     fileprivate var otpToken = String()
     var mobileNumber = "9015620820"
+    var activityIndicator = ActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+        //self.view.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -37,22 +39,63 @@ class NewOtpViewController: UIViewController {
         otpLabel.font = APPFONT.OTPCONFIRMATION
         //self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(backbuttonAction(sender:)))
         // Do any additional setup after loading the view.
+        
+        /* Changes made from 10 th July '18 */
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleHideKeyBoard)))
+        let downGesturee = UISwipeGestureRecognizer(target: self, action: #selector(handleHideKeyBoard))
+        downGesturee.direction = .down
+        view.addGestureRecognizer(downGesturee)
+        otpView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        
+        
+        
+        
+        //NotificationCenter.default.addObserver(self, selector: #selector(NewOtpViewController.goToHome), name: NSNotification.Name(rawValue:  LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
+        
+    }
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        title = ""
+    }
+    
+    
+    @objc func handleHideKeyBoard(){
+        codeInputView.resignFirstResponder()
+    }
+    
+    
+    @objc func handleTap(){
+        codeInputView.becomeFirstResponder()
     }
     
     func backbuttonAction(sender:Any){
         self.navigationController?.popViewController(animated: true)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-         codeInputView.becomeFirstResponder()
+        codeInputView.becomeFirstResponder()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        codeInputView.resignFirstResponder()
+    }
+    
+    
     func updateUser(updateflag:Bool = false){
+        
         var deviceToken = "3273a5f0598cd8e9518ccf07c67fbdd1ebb079d2a95aa890e259a4b70ecad57e"
         if let token = UserDefaults.standard.value(forKey: "DeviceToken") as? String {
             deviceToken = token
@@ -73,21 +116,32 @@ class NewOtpViewController: UIViewController {
         }
         print(objectdata)
         //UserDataModel.createUserData(userObject: objectdata as! [String : AnyObject])
-        AlertView.sharedInstance.setLabelText("Verifying")
-        AlertView.sharedInstance.showActivityIndicator(self.view)
+        //        AlertView.sharedInstance.setLabelText("Verifying")
+        //        AlertView.sharedInstance.showActivityIndicator(self.view)
+        
+        
+        activityIndicator = ActivityIndicatorView()
+        
+        view.showActivityIndicator(activityIndicator: activityIndicator)
         UserDataModel.userSignUp(param:objectdata) { (value) in
-        AlertView.sharedInstance.hideActivityIndicator(self.view)
+            //        AlertView.sharedInstance.hideActivityIndicator(self.view)
+            
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (value){
             case APIResult.Success.rawValue:
+               // self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
                 
                 UserDefaults.standard.set(self.mobileNumber, forKey: UserDefaultsKeys.FeCode.rawValue)
                 UserDefaults.standard.synchronize()
                 let realm = try! Realm()
                 let tokensList = realm.objects(AccessTokenObject.self)
                 if tokensList.count > 1{
+                    
+                    self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+                    
                     let destVC = self.storyboard?.instantiateViewController(withIdentifier: "orgList") as! UINavigationController
-//                    let topController = destVC.topViewController as! NewOrganisationSelectViewController
-//                    topController.accessTokensList = tokensList
+                    //                    let topController = destVC.topViewController as! NewOrganisationSelectViewController
+                    //                    topController.accessTokensList = tokensList
                     UIApplication.shared.keyWindow?.rootViewController = destVC
                     
                 }else{
@@ -97,8 +151,18 @@ class NewOtpViewController: UIViewController {
                     }
                     
                     getUserData()
-                    let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-                    UIApplication.shared.keyWindow?.rootViewController = destVC
+                    //self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
+                    if isInternetAvailable(){
+                        checkShiftStatus { (apiResultStatus) in
+                            
+                            if apiResultStatus == APIResult.Success {
+                                
+                                self.goToHome()
+                                
+                            }
+                        }
+                        
+                    }
                 }
             case APIResult.UserInteractionRequired.rawValue:
                 self.showInteractionAlert(ErrorMessage.MultipleUser.rawValue )
@@ -112,6 +176,27 @@ class NewOtpViewController: UIViewController {
     }
     
     
+    @IBAction func handleChangeNumber(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    func goToHome(){
+        
+        let superController = SuperViewController()
+        superController.geoTagPermission()
+        
+        
+       // self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+        //        self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+        //        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+        //        UIApplication.shared.keyWindow?.rootViewController = destVC
+        
+        
+        let destVc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadPlaceController") as! DownloadPlaceController
+        self.navigationController?.pushViewController(destVc, animated: true)
+        
+        
+    }
+    
     func getOauth(){
         let param = [
             "grantType":"accessToken",
@@ -123,11 +208,12 @@ class NewOtpViewController: UIViewController {
         print(param)
         if isInternetAvailable() {
             //showLoader(text: "Verifying")
-            AlertView.sharedInstance.setLabelText("Verifying")
-            AlertView.sharedInstance.showActivityIndicator(self.view)
+            //            AlertView.sharedInstance.setLabelText("Verifying")
+            //            AlertView.sharedInstance.showActivityIndicator(self.view)
+            self.view.showActivityIndicator(activityIndicator: activityIndicator)
             OauthModel.getToken(userObject: param) { (result) in
-                AlertView.sharedInstance.hideActivityIndicator(self.view)
-                
+                //AlertView.sharedInstance.hideActivityIndicator(self.view)
+                self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
                 switch (result){
                 case APIResult.Success.rawValue:
                     self.updateUser()
@@ -135,6 +221,7 @@ class NewOtpViewController: UIViewController {
                     
                 case APIResult.InvalidCredentials.rawValue:
                     self.showAlert(ErrorMessage.InvalidOtp.rawValue)
+                    self.codeInputView.clear()
                     
                 case APIResult.InternalServer.rawValue:
                     self.showAlert(ErrorMessage.InternalServer.rawValue)
@@ -155,12 +242,15 @@ class NewOtpViewController: UIViewController {
         
     }
     
-
+    
     
     func sendOTP(){
         
-        showLoader()
-        OTPModel.getOtp(mobile: mobileNumber) { (result) in
+        //showLoader()
+        view.showActivityIndicator(activityIndicator: activityIndicator)
+        
+        OTPModel.getOtp(mobile: mobileNumber, countryCode: "") { (result) in
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (result){
             case APIResult.Success.rawValue:
                 self.showAlert("Otp Sent")
@@ -230,8 +320,7 @@ class NewOtpViewController: UIViewController {
 extension NewOtpViewController:CodeInputViewDelegate{
     func codeInputView(codeInputView: CodeInputView, didFinishWithCode code: String) {
         otpToken  = code
+        view.endEditing(true)
         getOauth()
     }
 }
-
-

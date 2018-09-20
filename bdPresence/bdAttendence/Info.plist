@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>BD Field Force</string>
+	<string>BD FieldForce</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,9 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.1.3</string>
+	<string>2.2.4</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+
+	<string>7</string>
+
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -34,6 +36,11 @@
 			</dict>
 		</array>
 	</dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>googlechromes</string>
+		<string>comgooglemaps</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothPeripheralUsageDescription</key>
@@ -41,9 +48,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Want to access your camera</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Want to access location to mark your presence</string>
+	<string>Allowing us to access your location would ensure that we are able to capture your real-time locations in order for accurate distance and presence reporting</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Want to access location to mark your presence</string>
+	<string>Allowing us to access your location would ensure that we are able to capture your real-time locations in order for accurate distance and presence reporting</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Want to access near by location to track your indoor location</string>
 	<key>NSPhotoLibraryUsageDescription</key>

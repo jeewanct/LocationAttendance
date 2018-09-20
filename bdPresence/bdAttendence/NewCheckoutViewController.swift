@@ -9,131 +9,255 @@
 import UIKit
 import RealmSwift
 import BluedolphinCloudSdk
-
-
+import GoogleMaps
+import Alamofire
+import Polyline
 
 
 class NewCheckoutViewController: UIViewController {
+    
+    @IBOutlet weak var todaysDateLbl: UILabel!
     @IBOutlet weak var checkoutButton: UIImageView!
-    @IBOutlet weak var timeLabel: UILabel!
-    
-    @IBOutlet weak var lastCheckinLabel: UILabel!
-    @IBOutlet weak var frequencyBarView: UIView!
-    
-    
-    @IBOutlet weak var startTimeLabel: UILabel!
+    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var endYourDayLabel: UILabel!
-    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var lastCheckinAddressLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
-    @IBOutlet weak var progressView: UICircularProgressRingView!
-    var  dataArray = [Date]()
+    @IBOutlet weak var upperView: UIView!
     var swipedown :UISwipeGestureRecognizer?
+   // @IBOutlet weak var syncButton: UIBarButtonItem!
+    @IBOutlet weak var manualSwipeDisableHieghtAnchor: NSLayoutConstraint!
+    
+    @IBOutlet weak var shiftSyncBarBtn: UIBarButtonItem!
+    
+    
+    
+    var activityIndicator: ActivityIndicatorView?
+    var polyline = GMSPolyline()
+    var animationPolyline = GMSPolyline()
+    var path = GMSMutablePath()
+    var animationPath = GMSMutablePath()
+    var i: UInt = 0
+    var timer: Timer!
+    var animate = false
+    
+    var pullController: SearchViewController!
+    var placeIndicator: RmcPlaceIndicator?
+    
+    
+    //MARK: View Controller life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        shiftRelatedDetails()
+        setupNavigationBar()
+        addObservers()
+        setupGestures()
+        setupMap()
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //getPlacesAfterTenMinutes()
+       // checkStatus()
+        animate = true
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        animate = false
+        if let _ = self.timer {
+            self.timer.invalidate()
+            self.timer = nil
+        }
+        
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func handleSync(_ sender: Any) {
+        
+        
+        activityIndicator = ActivityIndicatorView()
+        
+        self.view.showActivityIndicator(activityIndicator: activityIndicator!)
+        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)! + AppConstants.AssignmentUrls.query
+        
+        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator!)
+            UI {
+                print("completionstatus = \(completionStatus)")
+                if completionStatus == "Success" {
+                    UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                }
+                
+                if AssignmentModel.statusOfUser() {
+                    
+                     bdCloudStopMonitoring()
+//                    self.shiftSyncBarBtn.isEnabled = true
+//                    self.shiftSyncBarBtn.tintColor = APPColor.BlueGradient
+                    UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                    UI {
+                        if isInternetAvailable(){
+                            CheckinModel.postCheckin()
+                        }
+                       
+                    }
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+                    
+                } else {
+                    
+                    bdCloudStartMonitoring()
+                    UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+//                    self.shiftSyncBarBtn.isEnabled = false
+//                    self.shiftSyncBarBtn.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    
+                }
+            }
+        }
+    
+    
+    
+    }
+    
+    
+//    func checkStatus(){
+//        if AssignmentModel.statusOfUser() {
+//
+//
+//            //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+//
+//            UI {
+//                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+//                UserDefaults.standard.set(true, forKey: "DownDueToStatusChange")
+//                UserDefaults.standard.synchronize()
+//                // New change on 20/06/2018 to create one checkin
+//                if isInternetAvailable(){
+//                    CheckinModel.postCheckin()
+//                }
+//
+//                bdCloudStopMonitoring()
+//
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+//
+//            }
+//
+//
+//        } else {
+//            UserDefaults.standard.set(false, forKey: "DownDueToStatusChange")
+//
+//        }
+//    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+   
+    
+    
+    func updateAddress(sender: NSNotification) {
+        DispatchQueue.main.async {
+            
+            self.lastCheckinAddressLabel.text = CurrentLocation.address
+        
+        }
+    }
+    
+    
+    
+}
+
+
+//MARK: Setup UI Elements
+extension NewCheckoutViewController{
+    
+    func addObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+    }
+    
+    func setupNavigationBar(){
+        todaysDateLbl.text = LogicHelper.shared.dashBoardDate(date: Date())
+        navigationController?.removeTransparency()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         
-//        let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
-//        swipeleft.direction = .left
-//        let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
-//        swiperight.direction = .right
-//        
-//        self.view.addGestureRecognizer(swipeleft)
-//        self.view.addGestureRecognizer(swiperight)
+        if SDKSingleton.sharedInstance.noTouchMode == true && SDKSingleton.sharedInstance.strictMode == true{
+            manualSwipeDisableHieghtAnchor.constant = 0
+            upperView.isHidden = true
+        }else{
+            manualSwipeDisableHieghtAnchor.constant = 90
+            upperView.isHidden = false
+        }
+    }
+    
+    func menuAction(sender:UIBarButtonItem){
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
-        let image: UIImage = UIImage(named: "swipe_up")!
-        let imageRotated: UIImage =
-            UIImage(cgImage: image.cgImage!, scale: 1, orientation: UIImageOrientation.down)
-        checkoutButton.image = imageRotated
-        endYourDayLabel.font = APPFONT.DAYHEADER
-        lastCheckinLabel.font = APPFONT.DAYHOURTEXT
-        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateTime(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.TimeUpdate.rawValue), object: nil)
+    }
+    
+    func getPlacesAfterTenMinutes(){
         
-        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
+        
+        if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
+            
+            
+            if Date().secondsFrom(getPlacesSeconds) > 0{
+                
+                self.performSelector(inBackground: #selector(NewCheckoutViewController.getPlaces), with: nil)
+                //RMCPlacesManager.getPlaces()
+                
+//                placeIndicator = UIView.fromNib()
+//
+//                if let indicator = placeIndicator{
+//                    indicator.todaysDateLbl.startAnimating()
+//                    indicator.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+//                    view.addSubview(indicator)
+//                  //  view.addConstraints(indicator: indicator)
+//                }
+                
+                
+            }//else{
+//                activityIndicator = ActivityIndicatorView()
+//                if let indicator = activityIndicator{
+//                    view.showActivityIndicator(activityIndicator: indicator)
+//                }
+//
+//                updateView()
+//            }
+            
+        }else{
+            
+//            placeIndicator = UIView.fromNib()
+//
+//            if let indicator = placeIndicator{
+//                indicator.todaysDateLbl.startAnimating()
+//                indicator.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+//                view.addSubview(indicator)
+//                //  view.addConstraints(indicator: indicator)
+//            }
+            self.performSelector(inBackground: #selector(NewCheckoutViewController.getPlaces), with: nil)
+            //RMCPlacesManager.getPlaces()
+        }
+        
+    }
+    
+    
+    func getPlaces(){
+        RMCPlacesManager.getPlaces()
+    }
+    
+    func setupGestures(){
         swipedown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipedown?.direction = .down
-        let shiftDetails = ShiftHandling.getShiftDetail()
-        officeEndHour = shiftDetails.2
-        officeStartHour = shiftDetails.0
-        officeStartMin = shiftDetails.1
-        officeEndMin = shiftDetails.3
-        if let value = UserDefaults.standard.value(forKey: UserDefaultsKeys.BDShiftId.rawValue) as? String{
-            SDKSingleton.sharedInstance.shiftId = value
-        }
-        bdCloudStartMonitoring()
-        
-        
-        
-        // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        updateView()
-//        processCurrentWeek()
-//        if  pageControl.currentPage < dataArray.count {
-//            let value = dataArray[pageControl.currentPage]
-//            updateView(date: value)
-//        }
-        
-    }
-    func updateAddress(sender: NSNotification) {
-        DispatchQueue.main.async {
-            self.lastCheckinAddressLabel.text = CurrentLocation.address
-        }
-    }
-    
-    func updateTime(sender:NSNotification){
-        updateView()
-       
-        
-        //processCurrentWeek()
-        
-//        if  pageControl.currentPage < dataArray.count {
-//            let value = dataArray[pageControl.currentPage]
-//            updateView(date: value)
-//        }
-        
-        
-    }
-//    func processCurrentWeek(){
-//        dataArray = []
-//        let realm = try! Realm()
-//        guard  let firstdateofWeek = Date().startOfWeek() else {
-//            return
-//        }
-//        let attendanceLogForToday = realm.objects(AttendanceLog.self).filter("timeStamp >= %@",firstdateofWeek).sorted(byProperty: "timeStamp", ascending: true)
-//        
-//        let totalCount = attendanceLogForToday.count
-//        if totalCount != 0{
-//            pageControl.numberOfPages = totalCount
-//        }
-//        
-//        for attendance in attendanceLogForToday{
-//            dataArray.append(attendance.timeStamp!)
-//        }
-//        pageControl.currentPage = totalCount
-//        //print(attendanceLogForToday.count)
-//        
-//        
-//    }
-//    @IBAction func pageControlAction(_ sender: UIPageControl) {
-//        if dataArray.count > pageControl.currentPage{
-//            let date = dataArray[pageControl.currentPage]
-//            updateView(date: date)
-//        }
-//        
-//    }
-    
-    //    func pageChanged(sender:UIPageControl){
-    //        let date = dataArray[pageControl.currentPage]
-    //        updateView(date: date)
-    //
-//        }
     func handleGesture(sender:UIGestureRecognizer){
         //print(dataArray)
         //Sourabh - When swiped down then we will not allow SDK to work as accordingly in RMCNotifier
@@ -147,22 +271,6 @@ class NewCheckoutViewController: UIViewController {
             case UISwipeGestureRecognizerDirection.down:
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
                 
-//            case UISwipeGestureRecognizerDirection.left:
-//                if pageControl.currentPage < dataArray.count {
-//                    pageControl.currentPage = pageControl.currentPage + 1
-//                    let value = dataArray[pageControl.currentPage]
-//                    updateView(date: value)
-//                }
-//                
-//                
-//            case UISwipeGestureRecognizerDirection.right:
-//                if pageControl.currentPage >= 0 {
-//                    pageControl.currentPage = pageControl.currentPage - 1
-//                    let value = dataArray[pageControl.currentPage]
-//                    updateView(date: value)
-//                }
-                
-                
             default:
                 break
                 
@@ -171,155 +279,367 @@ class NewCheckoutViewController: UIViewController {
         }
         
     }
+    
+    
+    
+}
+
+//MARK: Shift Related details
+extension NewCheckoutViewController{
+    func shiftRelatedDetails(){
+        let value = NSDate().aws_stringValue("y-MM-ddH:m:ss.SSSS")
+        endYourDayLabel.font = APPFONT.DAYHEADER
+        let shiftDetails = ShiftHandling.getShiftDetail()
+        officeEndHour = shiftDetails.2
+        officeStartHour = shiftDetails.0
+        officeStartMin = shiftDetails.1
+        officeEndMin = shiftDetails.3
+        if let value = UserDefaults.standard.value(forKey: UserDefaultsKeys.BDShiftId.rawValue) as? String{
+            SDKSingleton.sharedInstance.shiftId = value
+        }
+        bdCloudStartMonitoring()
+        addShadowToUpperView()
+    }
+    
+    func addShadowToUpperView () {
+        
+        upperView.layer.shadowColor = UIColor.gray.cgColor
+        upperView.layer.shadowOpacity = 0.3
+        upperView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        upperView.layer.shadowRadius = 1
+    }
+    
+    func clearMapData(){
+        mapView.clear()
+        if let _ = timer{
+            timer.invalidate()
+            timer = nil
+        }
+        
+        polyline = GMSPolyline()
+        path.removeAllCoordinates()
+        animationPath = GMSMutablePath()
+        animationPolyline = GMSPolyline()
+        i = 0
+        
+        if let _ = pullController{
+            self.removePullUpController(pullController, animated: true)
+            
+        }
+    }
+    
+    
+    
+}
+
+
+
+
+
+//MARK: Call Filters on Checkouts
+
+extension NewCheckoutViewController{
+    
+    func discardFakeLocations(notification: Notification){
+        
+        
+            if let data = notification.userInfo as? [String: Any]{
+                
+                if let checkInId = data["checkInId"] as? String{
+                    checkIfNewLocationAdded(checkinId: checkInId)
+                }
+                
+                
+                if let status = data["status"] as? Bool{
+                    if status == true{
+                        UserDefaults.standard.set(Date(), forKey: "RMCPlacesDuration")
+                    }else{
+//                        if let indicator = activityIndicator{
+//                            indicator.removeFromSuperview()//self.view.removeActivityIndicator(activityIndicator: indicator)
+//                        }
+                        
+                    }
+                }
+            }//else{
+//                activityIndicator = ActivityIndicatorView()
+//                if let indicator = activityIndicator{
+//                  //  view.showActivityIndicator(activityIndicator: activityIndicator!)
+//                    view.showActivityIndicator(activityIndicator: indicator)
+//                }
 //
+//        }
+            
+            //UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
+  
+        
+        
+       // updateView()
+    }
     
     
+    func checkIfNewLocationAdded(checkinId: String){
+        
+        var present = false
+        
+        if let getPullController = pullController{
+            if let allLocations = getPullController.locationData{
+                
+                for locations in allLocations{
+                    
+                    for location in locations{
+                        if location.checkinId == checkinId{
+                            present = true
+                            break
+                        }
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+        
+        if present == false{
+            updateView()
+        }
+        
+    }
     
     func updateView(date:Date = Date()){
         
-        progressView.maxValue = CGFloat((officeEndHour - officeStartHour) * 3600)
-        progressView.innerRingColor = APPColor.newGreen
+        
+        
         let isToday = Calendar.current.isDateInToday(date)
         if isToday{
             self.navigationItem.title = "Today"
             
-            self.view.addGestureRecognizer(swipedown!)
-            checkoutButton.isHidden = false
-            endYourDayLabel.isHidden = false
-        }else{
-            self.navigationItem.title = date.dayOfWeekFull()
-            checkoutButton.isHidden = true
-            endYourDayLabel.isHidden = true
-            self.view.removeGestureRecognizer(swipedown!)
-        }
-        
-        
-        createFrequencybarView(date: date)
-    }
-    
-    func createFrequencybarView(date:Date){
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        
-        
-        
-        // submit a task to the queue for background execution
-        queue.async() {
-            let object = UserDayData.getFrequencyLocationBarData(date:date)
-            print(object)
-            DispatchQueue.main.async() {
-                let totalTime = object.getElapsedTime()!
-                self.progressView.setProgress(value: CGFloat(totalTime), animationDuration: 2.0) {
+            if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                if screenFlag == "1" {
+                    
+                    let isToday = Calendar.current.isDateInToday(date)
+                    if isToday{
+                        self.navigationItem.title = "Today"
+                        
+                        self.view.addGestureRecognizer(self.swipedown!)
+                        self.checkoutButton.isHidden = false
+                        self.endYourDayLabel.isHidden = false
+                    }else{
+                        self.navigationItem.title = date.dayOfWeekFull()
+                        self.checkoutButton.isHidden = true
+                        self.endYourDayLabel.isHidden = true
+                        self.view.removeGestureRecognizer(self.swipedown!)
+                        
+                    }
+                    
                     
                 }
-                let (hour,min,_) = self.secondsToHoursMinutesSeconds(seconds: Int(totalTime))
                 
-                let myMutableString =  NSMutableAttributedString(
-                    string: "\(self.timeText(hour)):\(self.timeText(min))",
-                    attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
-                let seconndMutableString =  NSMutableAttributedString(
-                    string: " Total hours",
-                    attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
-                myMutableString.append(seconndMutableString)
-                self.timeLabel.attributedText = myMutableString
-                self.startTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getStartTime()!))
-                self.endTimeLabel.text = self.getDateInAMPM(date: Date(timeIntervalSince1970: object.getEndTime()!))
-                if let lastCheckinTime = object.getLastCheckinTime() {
-                    self.lastCheckinLabel.text = "You were last seen at \(self.currentTime(time: lastCheckinTime)) "
-                }else{
-                    self.lastCheckinLabel.text = "No checkins for today"
-                }
-                self.lastCheckinAddressLabel.numberOfLines = 0
-                self.lastCheckinAddressLabel.lineBreakMode = .byWordWrapping
-                self.lastCheckinAddressLabel.adjustsFontSizeToFitWidth = true
-                self.lastCheckinAddressLabel.text = object.getLastCheckInAddress()?.capitalized
-                self.updateFrequencyBar(mData: object)
+                
+                let locationFilters = LocationFilters()
+                locationFilters.delegate = self
+                locationFilters.plotMarkers(date: date)
+                
             }
+            
         }
         
-        
-        
-        
     }
-    
-    func getDateInAMPM(date:Date)->String{
-        print(date)
-        let timeFormatter = DateFormatter()
-        //timeFormatter.dateStyle = .none
-        
-        timeFormatter.dateFormat = "hh:mm a"
-        return timeFormatter.string(from:date)
-        
-    }
-    
-    
-    func updateFrequencyBar(mData:FrequencyBarGraphData) {
-        var mRectList = [CGRect]()
-        
-        let viewWidth = frequencyBarView.frame.size.width;
-        let viewHeight =
-            frequencyBarView.frame.size.height;
-        let maxDuration = mData.getEndTime()! - mData.getStartTime()!;
-        let widthPerDuration =  viewWidth / CGFloat(maxDuration);
-        for  duration in mData.graphData {
-            
-            let left = Int(widthPerDuration * CGFloat(duration.getStartTime() - mData.getStartTime()!));
-            var right = Int(CGFloat(left) + (widthPerDuration * CGFloat(duration.getEndTime() - duration.getStartTime())));
-            let top = 0;
-            let bottom = viewHeight;
-            right = right - left < 1 ?  1 :  right - left;
-            
-            let rect = CGRect(x: left, y: top, width: right, height: Int(bottom))
-            //print(rect)
-            mRectList.append(rect)
-        }
-        let view = FrequencyGraphView(frame: CGRect(x: 0, y: 0, width: frequencyBarView.frame.width, height: frequencyBarView.frame.height), data: mRectList)
-        frequencyBarView.addSubview(view)
-        
-    }
-    
-    
-    
-    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
-        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
-    
-    func timeText(_ s: Int) -> String {
-        return s < 10 ? "0\(s)" : "\(s)"
-    }
-    func currentTime(time:TimeInterval) -> String {
-        
-        //        if let value = UserDefaults.standard.value(forKey: "LastCheckinTime") as? Date {
-        //            date = value
-        //        }
-        let date = Date(timeIntervalSince1970: time)
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        return "\(timeText(hour)):\(timeText(minutes))"
-    }
-    
-    func menuAction(sender:UIBarButtonItem){
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
+
+
+
+/* Changes made on 10 July '18 New Design */
+
+
+//MARK: Google Map Setup
+
+extension NewCheckoutViewController{
+    
+    
+    func setupMap(){
+        mapView.changeStyle()
+        mapView.setupCamera()
+        updateView()
+        activityIndicator = ActivityIndicatorView()
+        
+        if let indicator = activityIndicator{
+            view.showActivityIndicator(activityIndicator: indicator)
+        }
+    }
+    
+    
+    func plotMarkersInMap(location: [LocationDataModel]){
+        
+        let allLocations = UserPlace.getGeoTagData(location: location)
+        if let indicator = activityIndicator{
+             self.view.removeActivityIndicator(activityIndicator: indicator)
+        }
+       
+        
+//        if let getIndicator = placeIndicator{
+//            getIndicator.removeFromSuperview()
+//        }
+        
+        clearMapData()
+        
+        mapView.addMarkersInMap(allLocations: allLocations)
+        
+        if allLocations.count != 0{
+            
+            
+            
+            UI{
+            self.pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+            self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
+            self.pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
+            self.addPullUpController(self.pullController, animated: true)
+            }
+            
+            
+            if !LogicHelper.shared.checkIfAllLocationsAreSame(locations: allLocations){
+                let polyLine = PolyLineMap()
+                polyLine.delegate = self
+                // polyLine.allLocations = allLocations
+                //polyLine.takePolyline()
+                polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+            }
+        
+            
+            
+        }
+
+        
+    }
+    
+    func animatePolyline(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+            // Put your code which should be executed with a delay here
+            self.animatePolylinePath()
+        })
+    }
+    
+    
+    
+    func animatePolylinePath() {
+        
+            if (self.i < self.path.count()) {
+                self.animationPath.add(self.path.coordinate(at: self.i))
+                self.animationPolyline.path = self.animationPath
+                self.animationPolyline.strokeColor = UIColor.gray
+                self.animationPolyline.strokeWidth = 3
+                self.animationPolyline.map = self.mapView
+                self.i += 1
+                
+                
+            }
+            else {
+                self.i = 0
+                self.animationPath = GMSMutablePath()
+                self.animationPolyline.map = nil
+            }
+        
+        if  UIApplication.shared.applicationState  == .background{
+            
+        }else{
+            if animate == true{
+                animatePolyline()
+            }
+            
+        }
+        
+        
+        
+        }
+    
+        
+    
+}
+
+extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
+    func onFailure(type: ErrorMessages) {
+        if let indicator = activityIndicator{
+            self.view.removeActivityIndicator(activityIndicator: indicator)
+        }
+        
+        if type == .noCheckInFound{
+        }else{
+            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: type.rawValue)
+        }
+    }
+    
+    
+    func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
+        
+        //var path = GMSMutablePath()
+        for coordinate in coordinates{
+            path.add(coordinate)
+           // animationPath.add(coordinate)
+        }
+        
+        polyline = GMSPolyline(path: path)
+        //animationPolyline = GMSPolyline(path: path)
+        
+        
+        
+        mapView.drawPath(coordinates: coordinates)
+        //self.drawPath(coordinates: coordinates)
+        
+        
+        
+       // animatePolyline()
+    }
+    
+    func checkIfAllLocationsAreSame(locations: [[LocationDataModel]]) -> Bool{
+        var firstCheckInId = ""
+        if let firstCheckIn = locations.first{
+
+            if let first = firstCheckIn.first{
+                if let checkInId = first.geoTaggedLocations?.placeDetails?.placeId{
+                    firstCheckInId = checkInId
+                }else{
+                    return false
+                }
+            }
+
+        }
+        for location in locations{
+
+            if let firstLocation  = location.first{
+                if firstLocation.geoTaggedLocations?.placeDetails?.placeId != firstCheckInId{
+                    return false
+                    
+                }
+            }
+
+        }
+
+        return true
+
+    }
+    
+    
+    func finalLocations(locations: [LocationDataModel]) {
+        
+        
+        self.plotMarkersInMap(location: LogicHelper.shared.sortOnlyLocations(location: locations))
+        
+    }
+    
+    
+    
+}
+
+
+
+
+
+
+
+
 
 
 

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import BluedolphinCloudSdk
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     #if DEBUG
         Swift.print(items[0], separator:separator, terminator: terminator)
@@ -225,4 +225,34 @@ extension String {
         //        urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         return addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
     }
+}
+
+extension String{
+    func getHeader()->[String:String]{
+        let headers = [
+            "Content-Type":"application/json",
+            "Accept-Version":"0.0.1",
+            "Accept-Encoding":"application/gzip",
+            "Accept":"application/json",
+            "Authorization":"Bearer " + SDKSingleton.sharedInstance.accessToken,
+            "userId":SDKSingleton.sharedInstance.userId
+        ]
+        return headers
+    }
+}
+
+extension UIView {
+    class func fromNib<T: UIView>() -> T {
+        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+    }
+    
+    func addConstraints(indicator: RmcPlaceIndicator){
+        
+        addSubview(indicator)
+        indicator.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        indicator.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        indicator.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        indicator.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+    }
+    
 }

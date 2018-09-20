@@ -13,25 +13,25 @@ import BluedolphinCloudSdk
 class NewPermissionViewController: UIViewController {
     
     
-    @IBOutlet weak var currentSettingLabel: UILabel!
+ //   @IBOutlet weak var currentSettingLabel: UILabel!
     @IBOutlet weak var detailMessageLabel: UILabel!
     @IBOutlet weak var locationButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let attributedString1 = NSAttributedString(string: "Always enabling the location services ", attributes:  [NSFontAttributeName : APPFONT.PERMISSIONBODY!
-            , NSForegroundColorAttributeName : APPColor.blue])
-        let attributedString2 = NSAttributedString(string: "will ensure that we are able to accurately mark your presence at your workplace", attributes:  [NSFontAttributeName : APPFONT.PERMISSIONBODY!])
-        let combinedString = NSMutableAttributedString()
-        combinedString.append(attributedString1)
-        combinedString.append(NSAttributedString(string: "\n"))
-        combinedString.append(attributedString2)
-        self.detailMessageLabel.attributedText = combinedString
-        self.currentSettingLabel.numberOfLines = 0
-        self.currentSettingLabel.lineBreakMode = .byWordWrapping
-        self.currentSettingLabel.adjustsFontSizeToFitWidth = true
-        self.currentSettingLabel.font = APPFONT.PERMISSIONBODY
+//        let attributedString1 = NSAttributedString(string: "Always enabling the location services ", attributes:  [NSFontAttributeName : APPFONT.PERMISSIONBODY!
+//            , NSForegroundColorAttributeName : APPColor.blue])
+//        let attributedString2 = NSAttributedString(string: "will ensure that we are able to accurately mark your presence at your workplace", attributes:  [NSFontAttributeName : APPFONT.PERMISSIONBODY!])
+//        let combinedString = NSMutableAttributedString()
+//        combinedString.append(attributedString1)
+//        combinedString.append(NSAttributedString(string: "\n"))
+//        combinedString.append(attributedString2)
+//        self.detailMessageLabel.attributedText = combinedString
+//        self.currentSettingLabel.numberOfLines = 0
+//        self.currentSettingLabel.lineBreakMode = .byWordWrapping
+//        self.currentSettingLabel.adjustsFontSizeToFitWidth = true
+//        self.currentSettingLabel.font = APPFONT.PERMISSIONBODY
         NotificationCenter.default.addObserver(self, selector: #selector(NewPermissionViewController.checkPermissionStatus(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: nil)
         
         
@@ -45,19 +45,24 @@ class NewPermissionViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             switch(CLLocationManager.authorizationStatus()) {
             case .notDetermined, .restricted, .denied:
-                currentSettingLabel.text = "CURRENT LOCATION SETTING \n Never access location "
+                print("")
+              //  currentSettingLabel.text = "CURRENT LOCATION SETTING \n Never access location "
                 
             case  .authorizedWhenInUse:
-                currentSettingLabel.text = "CURRENT LOCATION SETTING  \n Allow access location while using the app "
+                print("")
+               // currentSettingLabel.text = "CURRENT LOCATION SETTING  \n Allow access location while using the app "
                 
             case .authorizedAlways:
                 ProjectSingleton.sharedInstance.locationAvailable = true
             }
         }
     }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         updateLayout()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,23 +108,28 @@ class NewPermissionViewController: UIViewController {
         
         CheckinModel.createCheckin(checkinData: checkin)
         
+        
+        //Changes for location creation
+        
+        
+        
+        
+        
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil, userInfo: nil)
+        
+        
         if isInternetAvailable(){
             CheckinModel.postCheckin()
         }
     }
     
-    func openBluetooth(){
-        let url = URL(string: "App-Prefs:root=Bluetooth") //for bluetooth setting
-        let app = UIApplication.shared
-        app.openURL(url!)
-    }
+
     func openAppSetting(){
         let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
         if let url = settingsUrl {
             UIApplication.shared.openURL(url as URL)
         }
     }
-    
     
     
     /*

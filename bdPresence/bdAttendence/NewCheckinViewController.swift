@@ -8,20 +8,30 @@
 
 import UIKit
 import BluedolphinCloudSdk
-
+import SwiftGifOrigin
 
 class NewCheckinViewController: UIViewController {
 
     @IBOutlet weak var swipeLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var checkInImageView: UIImageView!
+    @IBOutlet weak var statusChangeView: UIView!
+    @IBOutlet weak var syncButton: UIBarButtonItem!
     
+    @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var unavailableUntilLbl: UILabel!
+    var activityIndicator : ActivityIndicatorView?
+    let rmcNotifier = RMCNotifier.shared
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.removeTransparency()
+        
+        
        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeUp.direction = .up
@@ -32,8 +42,56 @@ class NewCheckinViewController: UIViewController {
         swipeLabel.font = APPFONT.FOOTERBODY
         
         // Do any additional setup after loading the view.
+        checkInImageView.loadGif(name: "swipeUp")
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+       // statusOfUser()
+    }
+    
+    @IBAction func syncTapped(_ sender: Any) {
+        activityIndicator = ActivityIndicatorView()
+        
+        self.view.showActivityIndicator(activityIndicator: activityIndicator!)
+        let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)! +  AppConstants.AssignmentUrls.query
+        
+        AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator!)
+            UI {
+                print("completionstatus = \(completionStatus)")
+                if completionStatus == "Success" {
+                    UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue)
+                }
+                
+                if AssignmentModel.statusOfUser() {
+                    
+                    bdCloudStopMonitoring()
+                    //                    self.shiftSyncBarBtn.isEnabled = true
+                    //                    self.shiftSyncBarBtn.tintColor = APPColor.BlueGradient
+                    UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                    UI {
+                        if isInternetAvailable(){
+                            CheckinModel.postCheckin()
+                        }
+                        
+                    }
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+                    
+                } else {
+                    
+                    bdCloudStartMonitoring()
+                    UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+                    //                    self.shiftSyncBarBtn.isEnabled = false
+                    //                    self.shiftSyncBarBtn.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    
+                }
+            }
+        }
+        
+    }
+    
+    
+    
+    
     func handleGesture(sender:UIGestureRecognizer){
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
@@ -81,7 +139,9 @@ class NewCheckinViewController: UIViewController {
   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Dispose of any resources that can be recreated.'
+        
+        
     }
     
 

@@ -23,8 +23,15 @@ class SuperViewController: UIViewController {
     
     var visualEffectView = UIVisualEffectView()
     var bool = Bool()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if SDKSingleton.sharedInstance.CheckinsObjectId == ""{
+            GetCheckinsData.getCheckinsId()
+        }
+        
         
         blurView.alpha = 0
         //println(self.childViewControllers)
@@ -65,13 +72,24 @@ class SuperViewController: UIViewController {
 
         
         
-        //setObservers()
         //Adding Check blocker to solve a bug when permission is denied at first time
         checkBlockerScreen()
         updateTask()
         
         wakeUpCall(notify: NotifyingFrom.Normal)
 
+        //NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.handleSuccessRmcPlaces(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+        
+        
+        
+        
+        
+        
+
+//        getPlacesAfterTenMinutes()
+    //    getHistoryData()
     
     }
     func handleLeftGesture() {
@@ -79,20 +97,35 @@ class SuperViewController: UIViewController {
         self.showMenuView()
     }
     
+//    func getHistoryData(){
+//
+//        if let historyCheck = UserDefaults.standard.value(forKey: "oldData") as? Bool{
+//
+//            if historyCheck == false{
+//                LocationHistoryData.getTeamMember()
+//            }
+//
+//        }
+//
+//    }
    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         setObservers()
         self.navigationController?.isNavigationBarHidden = true
+        setObservers()
+
+        //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+          // self.checkStatus()
+            
+        //})
         
     }
     
     
     func setObservers(){
-         NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.wakeUp(sender:)), name: NSNotification.Name(LocalNotifcation.WakeUpCall.rawValue), object: nil)
-
          NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowSideMenu(sender:)), name: NSNotification.Name(rawValue: "HideSideMen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: nil)
@@ -111,97 +144,187 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(shiftHandling), name: NSNotification.Name(rawValue: LocalNotifcation.ShiftEnded.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(locationCheckin(sender:)), name: NSNotification.Name(rawValue: iBeaconNotifications.Location.rawValue), object: nil)
         
+        
+        /* Changes made from 10 July '18 */
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyLocation.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyTeam.rawValue), object: nil)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.getPlacesAfterTenMinutes), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: nil)
+        
+        
+        
     }
+    
+    
+    func checkStatus(){
+        if AssignmentModel.statusOfUser() {
+           
+               
+                    //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+                    
+                    UI {
+                        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                        UserDefaults.standard.set(true, forKey: "DownDueToStatusChange")
+                        UserDefaults.standard.synchronize()
+                        // New change on 20/06/2018 to create one checkin
+                        if isInternetAvailable(){
+                            CheckinModel.postCheckin()
+                        }
+                        bdCloudStopMonitoring()
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                        
+                    }
+               
+           
+        } else {
+            UserDefaults.standard.set(false, forKey: "DownDueToStatusChange")
+        }
+    }
+    
     
     func wakeUp (sender : NSNotification) {
         self.wakeUpCall(notify: NotifyingFrom.SilentPush)
     }
     
     func wakeUpCall (notify: NotifyingFrom) {
-        let rmcNotifier = RMCNotifier.shared
-        print(notify)
+
+        // Check if UserDefaults.standard.set(true, forKey: "DownDueToStatusChange") is true so dont call wake up
         
-        rmcNotifier.notifyUserForStartScanning(notifying: notify, completion:{ (notifier) in
-            print("notify response = \(notifier)")
-            print(UserDefaults.standard.value(forKey: "AlreadyCheckin") as? String)
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if  AssignmentModel.statusOfUser(){
             
-            let tempNotifier = notifier as [String : AnyObject]
-            if tempNotifier["status"] as! Bool {
-                UI {
-                    if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
-                        print("screenflag = \(screenFlag)")
-                        
-                        if screenFlag == "1" {
-                            // Already swipedup
-                            //start scanning
-                            bdCloudStartMonitoring()
-                        } else if screenFlag == "2" {
-                            // automatic checkin function
-                            //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
-                            bdCloudStartMonitoring()
+           // NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+            
+        }else{
+        
+            let rmcNotifier = RMCNotifier.shared
+            print(notify)
+            
+            rmcNotifier.notifyUserForStartScanning(notifying: notify, completion:{ (notifier) in
+                print("notify response = \(notifier)")
+                
+                print(UserDefaults.standard.value(forKey: "AlreadyCheckin") as? String)
+                
+                
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                
+                let tempNotifier = notifier as [String : AnyObject]
+                if tempNotifier["status"] as! Bool {
+                    UI {
+                        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                            print("screenflag = \(screenFlag)")
+                            
+                            if screenFlag == "1" {
+                                // Already swipedup
+                                //start scanning
+                                bdCloudStartMonitoring()
+                            } else if screenFlag == "2" {
+                                // automatic checkin function
+                                UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+                                
+                                 bdCloudStartMonitoring()
+                                
+                                // New change - 20/06/2018
+                                //Here we have to send one location checkin also
+                               
+                                
+                                //then set defaults value to 1
+                                // sending userinfo which will tell dashboard to work accordingly
+                                // with the userinfo will tell which type of chekin to be sent and do not check for blocker screen
+                                UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+                                
+                                if let locations = UserDayData.getLocationData(date: Date()){
+                                    if locations.count > 0{
+                                        
+                                    }else{
+                                        appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                                    }
+                                }else{
+                                    appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                                }
+                                
+                                appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
+                                
+                                
+                                // Calling 2 times
+                                
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                                
+                                
+                                
+                            }
+                            
+                        } else {
+
+                            
+                            UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+                          //    appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                            
+                            
+                            if let locations = UserDayData.getLocationData(date: Date()){
+                                if locations.count > 0{
+                                    
+                                }else{
+                                    appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                                }
+                            }else{
+                                appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                            }
                             
                             appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
-                            // New change - 20/06/2018
-                            //Here we have to send one location checkin also
                             
-                            //then set defaults value to 1
-                            // sending userinfo which will tell dashboard to work accordingly
-                            // with the userinfo will tell which type of chekin to be sent and do not check for blocker screen
-                            UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-                            appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
                             
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
+                            
                         }
-                    } else {
-                        appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
-                        UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-                        appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
-                        
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
-                        
                     }
-                }
-                
-            } else {
-                // Swipe down code
-                if tempNotifier["message"] as! String == notifyUserResponse.swipeDownAndStopScanning.rawValue {
                     
-                    if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
-                        if screenFlag == "1" {
-                            appDelegate.postDataCheckin(userInteraction: .swipeDownAuto)
-                            //UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
 
-                            UI {
-                                UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                                // New change on 20/06/2018 to create one checkin
-                                if isInternetAvailable(){
-                                    CheckinModel.postCheckin()
+                } else {
+                    // Swipe down code
+                    if tempNotifier["message"] as! String == notifyUserResponse.swipeDownAndStopScanning.rawValue {
+                        
+                        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
+                            if screenFlag == "1" {
+                                appDelegate.postDataCheckin(userInteraction: .swipeDownAuto)
+                                UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
+
+                                
+                                UI {
+                                    UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+                                    // New change on 20/06/2018 to create one checkin
+                                    if isInternetAvailable(){
+                                        CheckinModel.postCheckin()
+                                    }
+                                    bdCloudStopMonitoring()
+                                    appDelegate.toShowLocalNotification(message: "Looks like you're out of office. Time to relax!")
+                                    
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
+                                    
+                                    //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
                                 }
-                                bdCloudStopMonitoring()
-                                appDelegate.toShowLocalNotification(message: "Looks like you're out of office. Time to relax!")
-                                
-                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckinScreen.rawValue), object: self, userInfo: ["check":true])
-                                
-                                //                                createLocalNotification(message: "Looks like you're out of office. Time to relax!")
                             }
                         }
+                    } else if tempNotifier["message"] as! String == notifyUserResponse.shiftEnded.rawValue {
+                        print("shift ended")
+                        
+                    } else if tempNotifier["message"] as! String == notifyUserResponse.noShiftToday.rawValue {
+                        print("noshifttoday")
+                        // In any case if this calls then i have to show no shift today and stop monitorig
+                        bdCloudStopMonitoring()
+                        
+                    } else if tempNotifier["message"] as! String == notifyUserResponse.manualSwipeStateChangedToday.rawValue {
+                        print("Do nothing")
                     }
-                } else if tempNotifier["message"] as! String == notifyUserResponse.shiftEnded.rawValue {
-                    print("shift ended")
                     
-                } else if tempNotifier["message"] as! String == notifyUserResponse.noShiftToday.rawValue {
-                    print("noshifttoday")
-                    // In any case if this calls then i have to show no shift today and stop monitorig
-                    bdCloudStopMonitoring()
-                    
-                } else if tempNotifier["message"] as! String == notifyUserResponse.manualSwipeStateChangedToday.rawValue {
-                    print("Do nothing")
                 }
                 
-            }
-            
-        })
+            })
+        }
+        
+        
     }
 
     
@@ -266,6 +389,9 @@ class SuperViewController: UIViewController {
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     
     
@@ -321,6 +447,7 @@ extension SuperViewController{
     
     
     func firstCheckin(sender:NSNotification){
+        
         let state = UIApplication.shared.applicationState
         if state == .background {
             let notification = UILocalNotification()
@@ -338,7 +465,14 @@ extension SuperViewController{
 //            UIApplication.shared.scheduleLocalNotification(notification)
             let message = NotificationMessage.AttendanceMarked.rawValue + "\(Date().formatted)"
             self.showAlert(message )
-//            
+            
+            // Change by me
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil, userInfo: nil)
+            
+            
+//
+            
+            
         }
         
         
@@ -485,10 +619,15 @@ extension SuperViewController{
                             checkin.checkinDetails = [AssignmentWork.AppVersion.rawValue:APPVERSION as AnyObject,AssignmentWork.UserAgent.rawValue:"ios" as AnyObject]
                             checkin.checkinCategory = CheckinCategory.Transient.rawValue
                             checkin.checkinType = CheckinType.Location.rawValue
-                            //
+                            
+                            
+                            
                             
                             CheckinModel.createCheckin(checkinData: checkin)
-                          
+                            
+                            // Change for if user still in screen
+                           // NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil, userInfo: nil)
+                            
                             if isInternetAvailable(){
                                 CheckinModel.postCheckin()
                             }
@@ -504,6 +643,7 @@ extension SuperViewController{
                         
                         CheckinModel.createCheckin(checkinData: checkin)
                        
+                        
                         if isInternetAvailable(){
                             CheckinModel.postCheckin()
                         }
@@ -589,7 +729,11 @@ extension SuperViewController {
         switch (sender.name.rawValue) {
             
         case LocalNotifcation.Dashboard.rawValue:
-            changeChildController(identifier: .dashboard)
+            if AssignmentModel.statusOfUser(){
+                changeChildController(identifier: .noShiftToday)
+            }else{
+                changeChildController(identifier: .dashboard)
+            }
         case LocalNotifcation.SystemDetail.rawValue:
             changeChildController(identifier: .systemDetail)
         case LocalNotifcation.VirtualBeacon.rawValue:
@@ -600,6 +744,12 @@ extension SuperViewController {
             changeChildController(identifier: .contactUs)
         case LocalNotifcation.Profile.rawValue:
             changeChildController(identifier: .myprofile)
+            
+            /* Changes made from 10 July '18 */
+        case LocalNotifcation.MyLocation.rawValue:
+            changeChildController(identifier: .myLocation)
+        case LocalNotifcation.MyTeam.rawValue:
+            changeChildController(identifier: .myTeam)
     
         default:
             print("")
@@ -620,6 +770,7 @@ extension SuperViewController {
         lastController?.willMove(toParentViewController: nil)
         
         lastController?.removeFromParentViewController()
+        
         let destVc = self.storyboard?.instantiateViewController(withIdentifier: identifier.rawValue) as! UINavigationController
         
         
@@ -629,6 +780,86 @@ extension SuperViewController {
         destVc.didMove(toParentViewController: self)
     }
     
+    
+}
+
+
+
+extension SuperViewController{
+    
+    func getPlacesAfterTenMinutes(){
+        
+        if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
+            
+        
+            if Date().secondsFrom(getPlacesSeconds) > CONFIG.RMCCHECKINTERVAL{
+                
+                self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
+                //RMCPlacesManager.getPlaces()
+            }
+            
+        }else{
+             self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
+            //RMCPlacesManager.getPlaces()
+        }
+        
+    }
+    
+    
+    func getPlaces(){
+        RMCPlacesManager.getPlaces()
+    }
+    
+    func handleSuccessRmcPlaces(notification: Notification){
+        
+        if let data = notification.userInfo as? [String: Any]{
+            if let status = data["status"] as? Bool{
+                if status == true{
+                    UserDefaults.standard.set(Date(), forKey: "RMCPlacesDuration")
+                }else{
+                    
+                }
+            }
+        }
+        
+         //UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
+    }
+    
+    func geoTagPermission(){
+        
+        if let getPlacesSeconds = UserDefaults.standard.value(forKey: "geoTagPermissionTime") as? Int{
+            
+            if timeInSeconds() - getPlacesSeconds > CONFIG.GEOAUTHCHECKINTERVAL{
+                callGeoAuthentication()
+            }
+            
+            
+        }else{
+            callGeoAuthentication()
+           
+        }
+        
+    }
+    
+    
+    func callGeoAuthentication(){
+        UserGeoTagAuthentication.getGeoTagAccess { (value) in
+            
+            UserDefaults.standard.set(self.timeInSeconds(), forKey: "geoTagPermissionTime")
+            UserDefaults.standard.set(value, forKey: "canGeoTag")
+            
+        }
+    }
+    
+    func timeInSeconds() -> Int{
+        
+        let someDate = Date()
+        
+        // convert Date to TimeInterval (typealias for Double)
+        let timeInterval = someDate.timeIntervalSince1970
+
+        return Int(timeInterval)
+    }
     
 }
 

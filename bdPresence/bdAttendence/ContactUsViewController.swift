@@ -25,12 +25,15 @@ class ContactUsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getOrganisationName()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.removeTransparency()
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
         self.navigationItem.title = "Contact Us"
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+       
+        
         helloLabel.font = APPFONT.DAYHEADER
         messageLabel.text = "Your Message"
         messageLabel.font = APPFONT.DAYHEADER
@@ -40,7 +43,7 @@ class ContactUsViewController: UIViewController {
         introLabel.lineBreakMode = .byWordWrapping
         contactTableview.delegate = self
         contactTableview.dataSource = self
-        contactTableview.allowsSelection = false
+       // contactTableview.allowsSelection = false
         contactTableview.separatorStyle = .none
         
         messageTextView.layer.borderColor = APPColor.blueGradient.cgColor
@@ -48,7 +51,7 @@ class ContactUsViewController: UIViewController {
         messageTextView.layer.cornerRadius = 5.0;
         sendMessage.addTarget(self, action: #selector(sendMail), for: UIControlEvents.touchUpInside)
         
-        
+        contactTableview.estimatedRowHeight = 100
 
         // Do any additional setup after loading the view.
     }
@@ -188,31 +191,37 @@ class ContactUsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
 }
 extension ContactUsViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath as IndexPath) as! ContactTableViewCell
+        cell.contactButton.textColor = APPColor.blueGradient
+       // cell.contactButton.setTitleColor(APPColor.blueGradient, for: .normal)
        
-        cell.contactButton.setTitleColor(APPColor.blueGradient, for: .normal)
-        cell.contactButton.titleLabel?.adjustsFontSizeToFitWidth = true
+       // cell.contactButton.titleLabel?.adjustsFontSizeToFitWidth = true
         cell.headerLabel.font = APPFONT.DAYHEADER
         
         switch indexPath.row {
         case 0:
             cell.headerLabel.text = "Let's talk on the phone"
-            cell.contactButton.setTitle(supportContactNumber, for: UIControlState.normal)
+            cell.contactButton.text = supportContactNumber
+            //cell.contactButton.setTitle(supportContactNumber, for: UIControlState.normal)
             cell.contactImageView.image = #imageLiteral(resourceName: "phone")
-            cell.contactButton.addTarget(self, action: #selector(callAlertView), for: UIControlEvents.touchUpInside)
+          //  cell.contactButton.addTarget(self, action: #selector(callAlertView), for: UIControlEvents.touchUpInside)
         case 1:
             cell.headerLabel.text = "We'd love for you to visit us"
             cell.contactImageView.image = #imageLiteral(resourceName: "location")
-            cell.contactButton.setTitle(supportAddress, for: UIControlState.normal)
-            cell.contactButton.addTarget(self, action: #selector(addressAction), for: UIControlEvents.touchUpInside)
+            cell.contactButton.text = supportAddress
+           // cell.contactButton.setTitle(supportAddress, for: UIControlState.normal)
+           // cell.contactButton.addTarget(self, action: #selector(addressAction), for: UIControlEvents.touchUpInside)
         default:
             break
         }
-        cell.contactButton.centerTextAndImage(spacing: 2.0)
+       // cell.contactButton.centerTextAndImage(spacing: 2.0)
         return cell
         
     }
@@ -221,6 +230,20 @@ extension ContactUsViewController:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.item {
+        case 0:
+            callAlertView()
+        default:
+            addressAction()
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
 }
 
