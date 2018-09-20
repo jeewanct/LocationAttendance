@@ -179,7 +179,8 @@ extension NewCheckoutViewController{
     
     func addObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.showView), name: NSNotification.Name(rawValue: "CheckInsFromServer"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
     }
     
     func setupNavigationBar(){
@@ -402,7 +403,7 @@ extension NewCheckoutViewController{
         
         
         if present == false{
-            updateView()
+           // updateView()
         }
         
     }
@@ -462,12 +463,104 @@ extension NewCheckoutViewController{
     func setupMap(){
         mapView.changeStyle()
         mapView.setupCamera()
-        updateView()
-        activityIndicator = ActivityIndicatorView()
+        //updateView()
         
-        if let indicator = activityIndicator{
-            view.showActivityIndicator(activityIndicator: indicator)
+        
+        
+        if let valueForDashBoard = UserDefaults.standard.value(forKey: "lastDashBoardUpdated") as? Date{
+            
+            if Date().secondsFrom(valueForDashBoard) > 600{
+                activityIndicator = ActivityIndicatorView()
+                GetClusteringFromServer.getDataOf(date: Date())
+            }else{
+                if let getDataIfAvail =  UserDayData.getLocationDataFromServer(date: Date()){
+                    
+                    if getDataIfAvail.count > 0 {
+                        showDatabaseData(locationData: getDataIfAvail)
+                    }else{
+                        activityIndicator = ActivityIndicatorView()
+                        GetClusteringFromServer.getDataOf(date: Date())
+                    }
+                    
+                }else{
+                    activityIndicator = ActivityIndicatorView()
+                    GetClusteringFromServer.getDataOf(date: Date())
+                }
+            }
+            
+        }else{
+            activityIndicator = ActivityIndicatorView()
+            GetClusteringFromServer.getDataOf(date: Date())
         }
+        
+        
+        
+        
+    }
+    
+    func showDatabaseData(locationData: [UserDetailsDataModel]){
+        
+        
+        pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+            .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+        pullController.screenType = LocationDetailsScreenEnum.historyScreen
+        
+       // pullController.selectedDate = selectedDate
+        pullController.userDetails = locationData
+        
+        self.addPullUpController(pullController, animated: true)
+        
+        mapView.addMarkersInMap(allLocations: locationData)
+        
+        
+        let polyLine = DrawPolyLineInMap()
+        polyLine.delegate = self
+        polyLine.getPolyline(location: locationData)
+        
+        
+        
+    }
+    
+    func showView(notification: Notification){
+        
+        
+        if let activity = activityIndicator{
+           self.view.removeActivityIndicator(activityIndicator: activity)
+        }
+        
+        
+        if let userNotification  = notification.userInfo as? [String: Any]{
+            
+            if let error = userNotification["status"] as? Bool{
+                
+                if !error{
+                    AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "Something went wrong.")
+                }else{
+                    
+                    UserDefaults.standard.set(Date(), forKey: "lastDashBoardUpdated")
+                    
+                    if let getDataIfAvail =  UserDayData.getLocationDataFromServer(date: Date()){
+                        
+                        if getDataIfAvail.count > 0{
+                            showDatabaseData(locationData: getDataIfAvail)
+                        }else{
+                            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
+                        }
+                        
+                        
+                        
+                    }else{
+                        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
+                    }
+                }
+                
+            }
+            
+        }
+        
+        
+        
+        
     }
     
     

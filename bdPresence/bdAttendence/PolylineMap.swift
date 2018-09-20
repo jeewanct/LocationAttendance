@@ -19,10 +19,6 @@ class PolyLineMap{
     var polylineString = ""
     
     
-    
-    
-    
-    
     func takePolyline(){
         
         if allLocations.count <= 8 {
@@ -215,5 +211,98 @@ class PolyLineMap{
     
     
     
+    
+}
+
+
+
+
+class DrawPolyLineInMap{
+    
+    var delegate: PolylineStringDelegate?
+    
+    
+    func getPolyline(location: [UserDetailsDataModel]){
+        
+        
+        
+        let origin = returnLatLongString(location: location.first)
+        let destination = returnLatLongString(location: location.last)
+        var wayPoints = ""
+        
+        if location.count == 3{
+            
+            wayPoints =   returnLatLongString(location: location[1])
+            
+        }else if location.count > 3{
+            wayPoints = returnWayPoints(location: location)
+        }
+        
+        let orginDestinationString = "origin=\(origin)&destination=\(destination)"
+        
+        GoogleUtils.getPolylineGoogle(originDestination: orginDestinationString, wayPoints: wayPoints) { (polyline) in
+            
+            
+            let  coordinates: [CLLocationCoordinate2D]? = decodePolyline(polyline)
+            
+            if let getCoordinates = coordinates{
+                
+                self.delegate?.drawPolyline(coordinates: getCoordinates)
+                //self.drawPath(coordinates: getCoordinates)
+            }
+            
+            
+        }
+        
+        
+        
+        
+    }
+    
+    
+    func returnLatLongString(location: UserDetailsDataModel?) -> String{
+        
+        
+        guard let getLocation = location else {
+            return ""
+        }
+        var locationString = ""
+        
+                
+                if let latitude = getLocation.latitude, let longitude = getLocation.longitude{
+                    locationString.append("\(latitude),\(longitude)")
+                    return locationString
+                }
+                
+                
+        
+        return locationString
+        
+    }
+    
+    func returnWayPoints(location: [UserDetailsDataModel]) -> String{
+        
+        let sequence = 1...location.count-2
+        
+        let array = location[sequence]
+        
+        var locationString = ""
+        
+        for index in array{
+            
+            let locationStr =  returnLatLongString(location: index)
+            
+            locationString.append(locationStr)
+            locationString.append("|")
+            
+        }
+        
+        if locationString.last == "|"{
+            locationString.removeLast()
+        }
+        
+        return locationString
+        
+    }
     
 }

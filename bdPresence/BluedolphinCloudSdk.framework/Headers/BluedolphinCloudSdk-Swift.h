@@ -350,6 +350,24 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk12CheckinModel")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class LocationData;
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk11ClusterData")
+@interface ClusterData : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable checkInId;
+@property (nonatomic, copy) NSString * _Nullable timeSpent;
+@property (nonatomic, copy) NSDate * _Nullable startTime;
+@property (nonatomic, copy) NSDate * _Nullable endTime;
+@property (nonatomic, copy) NSString * _Nullable address;
+@property (nonatomic, strong) LocationData * _Nullable location;
+@property (nonatomic, copy) NSString * _Nullable distance;
+@property (nonatomic, copy) NSString * _Nullable placeId;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 @class NSString;
@@ -358,6 +376,18 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk15KeychainService")
 @interface KeychainService : NSObject
 - (NSString * _Nullable)loadWithName:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk31LocationAttendanceFromServerLog")
+@interface LocationAttendanceFromServerLog : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable dayofWeek;
+@property (nonatomic, copy) NSDate * _Nullable timeStamp;
++ (NSString * _Nullable)primaryKey SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
 @end
 
 

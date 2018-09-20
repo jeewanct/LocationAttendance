@@ -97,7 +97,65 @@ extension HistoryViewController{
     }
     
     func setupObservers(){
-       // NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.discardFakeLocations), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.showView), name: NSNotification.Name(rawValue: "CheckInsFromServer"), object: nil)
+    }
+    
+    func showDatabaseData(locationData: [UserDetailsDataModel]){
+       
+        
+        pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+            .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+        pullController.screenType = LocationDetailsScreenEnum.historyScreen
+        
+        pullController.selectedDate = selectedDate
+        pullController.userDetails = locationData
+        
+        self.addPullUpController(pullController, animated: true)
+        
+        mapView.addMarkersInMap(allLocations: locationData)
+        
+        
+        let polyLine = DrawPolyLineInMap()
+        polyLine.delegate = self
+        polyLine.getPolyline(location: locationData)
+        
+        
+        
+    }
+    
+    func showView(notification: Notification){
+        
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        
+        if let userNotification  = notification.userInfo as? [String: Any]{
+            
+            if let error = userNotification["status"] as? Bool{
+                
+                if error{
+                    AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "Something went wrong.")
+                }else{
+                    if let getDataIfAvail =  UserDayData.getLocationDataFromServer(date: currentDisplayDate){
+                        
+                        if getDataIfAvail.count > 0{
+                             showDatabaseData(locationData: getDataIfAvail)
+                        }else{
+                           AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
+                        }
+                        
+                       
+                        
+                    }else{
+                        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
+                    }
+                }
+                
+            }
+ 
+        }
+        
+        
+    
+        
     }
     
     func discardFakeLocations(){
@@ -214,9 +272,26 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         clearMapData()
         let currentData = thisWeekDays[indexPath.row]
         currentDisplayDate = currentData
-        updateView(date: currentData)
+        //updateView(date: currentData)
         self.applyForCell(indexPath) { cell in cell.highlight() }
         animate = false
+        
+        if let getDataIfAvail =  UserDayData.getLocationDataFromServer(date: currentData){
+            
+            if getDataIfAvail.count > 0 {
+                showDatabaseData(locationData: getDataIfAvail)
+            }else{
+                activityIndicator = ActivityIndicatorView()
+                GetClusteringFromServer.getDataOf(date: currentData)
+            }
+            
+        }else{
+            activityIndicator = ActivityIndicatorView()
+           GetClusteringFromServer.getDataOf(date: currentData)
+        }
+        
+        
+        
 
     }
    

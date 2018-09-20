@@ -53,6 +53,41 @@ extension GMSMapView{
 
     }
     
+    func addMarkersInMap(allLocations: [UserDetailsDataModel]){
+        
+       
+        for location in allLocations{
+            
+            
+            if let _ = location.isGeoTagged{
+               self.addMarker(latitude: location.latitude, longitude: location.longitude, markerColor: #colorLiteral(red: 0.4431372549, green: 0.7176470588, blue: 0.8235294118, alpha: 1))
+            }else{
+                self.addMarker(latitude: location.latitude, longitude: location.longitude, markerColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+            }
+            
+        }
+        
+        
+            
+//            if let firstLocation = locations.first{
+//
+//                if let firstLoc = firstLocation.geoTaggedLocations{
+//
+//                    self.addMarker(latitude: firstLoc.latitude, longitude: firstLoc.longitude, markerColor: #colorLiteral(red: 0.4431372549, green: 0.7176470588, blue: 0.8235294118, alpha: 1))
+//                }else{
+//                    self.addMarker(latitude: firstLocation.latitude, longitude: firstLocation.longitude, markerColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+//                }
+//
+//
+//            }
+        
+        
+        
+    }
+    
+    
+    
+    
     
     func addMarker(latitude: String?, longitude: String?, markerColor: UIColor){
         let marker = GMSMarker()

@@ -27,8 +27,12 @@ class LocationDataModel{
     var isRepeated: Bool?
     var distance: Double?
     var isDiscarded: Bool?
+    var firstSeen: Date?
+    //var lastSeen: Date?
     
 }
+
+
 
 
 
@@ -236,6 +240,71 @@ class UserDayData {
                     locationDataArray.append(locationValue)
                     
                 }
+                return locationDataArray
+                
+            }
+            
+        }
+        
+        return nil
+        
+    }
+    
+    
+    class func getLocationDataFromServer(date: Date) -> [UserDetailsDataModel]?{
+        
+        let realm = try! Realm()
+        let weekDay = Calendar.current.component(.weekday, from: date)
+        let weekOfYear = Calendar.current.component(.weekOfYear, from: date)
+        //let frequencyGraphData = FrequencyBarGraphData()
+        
+        if let attendanceLogForToday = realm.objects(LocationAttendanceFromServerLog.self).filter("dayofWeek = %@","\(weekDay)").first {
+            if weekOfYear == Calendar.current.component(.weekOfYear, from: attendanceLogForToday.timeStamp!){
+                
+                //let locationData = attendanceLogForToday.locationList.sorted(byKeyPath: "latitude", ascending: true).filter("lastSeen BETWEEN %@",[date.dayStart(),date.dayEnd()])
+                
+                let locationData = attendanceLogForToday.cluster.sorted(byKeyPath: "startTime", ascending: false)
+                
+                print("locationData.count = \(locationData.count)")
+                
+                var locationDataArray = [UserDetailsDataModel]()
+                
+                for location in locationData{
+                    
+                  let locationValue = UserDetailsDataModel()
+                    
+                    locationValue.address = location.address
+                    locationValue.lastSeen = LogicHelper.shared.getStayTime(firstSeen: location.startTime, lastSeen: location.endTime)
+                    locationValue.latitude = location.location?.latitude
+                    locationValue.longitude = location.location?.longitude
+                    
+                    if let canGeoTag = location.placeId{
+                        
+                        locationValue.isGeoTagged = true
+                        
+                        let realm = try! Realm()
+                        let rmcPlaces  = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeId = %@", canGeoTag)
+                        
+                        if rmcPlaces.count > 0{
+                            
+                            let value = rmcPlaces[0]
+                            if let placeName = value.placeAddress{
+                                locationValue.geoLocationName = placeName
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    }
+                   // locationValue.firstSeen = location.firstSeen
+                  //  locationValue.lastSeen = location.lastSeen
+                    locationDataArray.append(locationValue)
+                    
+                }
+                
+                
+
                 return locationDataArray
                 
             }

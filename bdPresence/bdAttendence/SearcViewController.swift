@@ -61,7 +61,7 @@ class SearchViewController: PullUpController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.reloadData()
         print(UIScreen.main.bounds.height)
         
         
@@ -161,7 +161,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locationData?.count ?? 0
+        return userDetails.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

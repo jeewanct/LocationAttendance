@@ -21,6 +21,8 @@ class UserDetailsDataModel{
     var geoLocationName =  ""
     var canGeoTag = false
     var checkInId = ""
+    var latitude: String?
+    var longitude: String?
     
 }
 

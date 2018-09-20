@@ -537,6 +537,29 @@ class LogicHelper{
     }
     
     
+    func getStayTime(firstSeen: Date?, lastSeen: Date? ) -> String{
+     
+        
+        var seen = ""
+        if let startDate = firstSeen {
+            seen.append(LogicHelper.shared.getLocationDate(date: startDate))
+        }
+        
+        
+        if let endDate = lastSeen{
+        
+            seen.append("-")
+            seen.append(LogicHelper.shared.getLocationDate(date: endDate))
+        }
+        
+    
+        return seen
+            
+        
+    }
+        
+        
+    
 }
 
 
