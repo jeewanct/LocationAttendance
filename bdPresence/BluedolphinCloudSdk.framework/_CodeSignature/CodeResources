@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BluedolphinCloudSdk-Swift.h</key>
 		<data>
-		O/ci/J7Oes7V7l9FdU4pyJqvQVw=
+		vWg1wtL21WpIgko1J4vavyY7J9s=
 		</data>
 		<key>Headers/BluedolphinCloudSdk.h</key>
 		<data>
@@ -14,23 +14,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		SPw70yDroIGkQy4v+rt09rJABQY=
+		cGcSEUcYdGxa4Ca/WHkdEcjdMa0=
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftdoc</key>
 		<data>
-		KftTkl/EX8/WbrvuYo11QCwwrHQ=
+		FmUtozZENhW+eDS2mt69Qlcj+zM=
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftmodule</key>
 		<data>
-		nX/+2vlcWcMYJ9KVvbHOw7LCxbc=
+		aj8EqoHILK18/2pPKHcNpkIzwCQ=
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		pubZvaKS9CqbMD4l2FWkY4O/+U8=
+		mbqELpZvtgsI076qkbLY6TY58yY=
 		</data>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		NJ9LRcktUcm/aCR45O3EvJXy/WE=
+		pxqBzUK0EoncceXhwfGxiDz9zN0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,11 +43,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			O/ci/J7Oes7V7l9FdU4pyJqvQVw=
+			vWg1wtL21WpIgko1J4vavyY7J9s=
 			</data>
 			<key>hash2</key>
 			<data>
-			NsSEEVsK0yHu0fwDXip6e4cRe3TQaeoo+GoIdiUvUuk=
+			wz55ys6oGgGnWFzQ0LWjXKrYWwdtarrDwo3gFJ5y9rY=
 			</data>
 		</dict>
 		<key>Headers/BluedolphinCloudSdk.h</key>
@@ -65,44 +65,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KftTkl/EX8/WbrvuYo11QCwwrHQ=
+			FmUtozZENhW+eDS2mt69Qlcj+zM=
 			</data>
 			<key>hash2</key>
 			<data>
-			jUg4wct2Iaw1tERD0N7TabU4klvin7z/PgZDmqXu8Ro=
+			/Kd4aaIiiBMb7EeeFtRZ7HLjBo7E3tQKa81o6Ah8RUs=
 			</data>
 		</dict>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nX/+2vlcWcMYJ9KVvbHOw7LCxbc=
+			aj8EqoHILK18/2pPKHcNpkIzwCQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			Yj+kbUG1Khs8fxX88dEfv95MTY9go7U+T4/g9jzqERk=
+			TqNC62+CYgA71xmNp9DHdcuOTpZoRzNdT9Up9jiOfko=
 			</data>
 		</dict>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pubZvaKS9CqbMD4l2FWkY4O/+U8=
+			mbqELpZvtgsI076qkbLY6TY58yY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z+XOYYdG+SzCbeP7q2w73dcaC2hF46XkrZU+lp+GJ8k=
+			KGvxDZvRHYH3paDffe0u8HNbfaLTPxHeKaRTzTqlbuI=
 			</data>
 		</dict>
 		<key>Modules/BluedolphinCloudSdk.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			NJ9LRcktUcm/aCR45O3EvJXy/WE=
+			pxqBzUK0EoncceXhwfGxiDz9zN0=
 			</data>
 			<key>hash2</key>
 			<data>
-			Od5cxNDu80MEQpUhRQ+a+I+6IrdTJmSbQWUM81t7cwU=
+			zTzPBE/QSE5Sp7oIpX4aHvSL9pPPIes67mbj5AQUKOk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

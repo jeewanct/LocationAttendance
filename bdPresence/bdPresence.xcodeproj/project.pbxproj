@@ -48,6 +48,8 @@
 		09704EBA213E9BE600825516 /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 09704E9D213E9BE600825516 /* GQTPointQuadTree.m */; };
 		09704EBB213E9BE600825516 /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 09704E9F213E9BE600825516 /* GQTPointQuadTreeChild.m */; };
 		0982365D2109A948002BEECC /* RoughWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982365C2109A948002BEECC /* RoughWork.swift */; };
+		098488C821521D14005B96E4 /* GeoTagHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098488C721521D14005B96E4 /* GeoTagHeaderView.swift */; };
+		098488CA21521D46005B96E4 /* GeoTagHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 098488C921521D46005B96E4 /* GeoTagHeaderView.xib */; };
 		099C0E20213675DD00B64FB4 /* UserGeoTagAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099C0E1F213675DD00B64FB4 /* UserGeoTagAuthentication.swift */; };
 		09A438F12137D4C200CF2109 /* LinearProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A438F02137D4C200CF2109 /* LinearProgressBar.swift */; };
 		09A5F9E82118323F009953C6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */; };
@@ -263,6 +265,8 @@
 		09704EA2213E9BE600825516 /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeChild.h; sourceTree = "<group>"; };
 		09704EA3213E9BE600825516 /* GQTBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTBounds.h; sourceTree = "<group>"; };
 		0982365C2109A948002BEECC /* RoughWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoughWork.swift; sourceTree = "<group>"; };
+		098488C721521D14005B96E4 /* GeoTagHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoTagHeaderView.swift; sourceTree = "<group>"; };
+		098488C921521D46005B96E4 /* GeoTagHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeoTagHeaderView.xib; sourceTree = "<group>"; };
 		099C0E1F213675DD00B64FB4 /* UserGeoTagAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGeoTagAuthentication.swift; sourceTree = "<group>"; };
 		09A438F02137D4C200CF2109 /* LinearProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressBar.swift; sourceTree = "<group>"; };
 		09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
@@ -781,6 +785,8 @@
 				99482F5820F8BB0B00324AE5 /* MyLocationTableViewCell.swift */,
 				091517A12108694A00FABD3D /* LocationTableViewCell.swift */,
 				091517A92108A8AC00FABD3D /* NewCheckoutCell.swift */,
+				098488C721521D14005B96E4 /* GeoTagHeaderView.swift */,
+				098488C921521D46005B96E4 /* GeoTagHeaderView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -969,6 +975,7 @@
 				094104332125A75B00842BE4 /* NewDesign.storyboard in Resources */,
 				99F07F581F57D981000B4967 /* ErrorScanView.xib in Resources */,
 				990089171F44177400CED97E /* TwoSideLabelTableViewCell.xib in Resources */,
+				098488CA21521D46005B96E4 /* GeoTagHeaderView.xib in Resources */,
 				0941028E2125481900842BE4 /* LocationLoader.json in Resources */,
 				09704E5A213E65F400825516 /* RmcPlaceIndicator.xib in Resources */,
 				99E046E220F4BCCF008DA7A8 /* CustomMap.json in Resources */,
@@ -1222,6 +1229,7 @@
 				99FCB0CA1EFBCB840022AF61 /* SuperViewController.swift in Sources */,
 				99576C091F0CD5E300A53A4C /* SystemDetailViewController.swift in Sources */,
 				999FB43520F61C38000ABA7D /* GeoTagController.swift in Sources */,
+				098488C821521D14005B96E4 /* GeoTagHeaderView.swift in Sources */,
 				990CBCED1EFA422000F56E38 /* GradientView.swift in Sources */,
 				9969531D1F13BA46000A6C26 /* TransmitViewController.swift in Sources */,
 				09704EBA213E9BE600825516 /* GQTPointQuadTree.m in Sources */,

@@ -29,11 +29,18 @@ class MyLocationViewController: UIViewController{
     
     
     @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var searchButton: UIButton!
+//    @IBOutlet weak var searchButton: UIButton!
     var myLocationArray: [RMCPlace]?
    
+    @IBOutlet weak var shadowView: CardView!
+    @IBOutlet weak var allLocationBtn: UIButton!
+    
+@IBOutlet weak var geoTaggedByMeBtn: UIButton!
     
      var clusterManager: GMUClusterManager!
+    
+    var myCreatedPlaces = [RMCPlace]()
+     var pullController: MyLocationTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +52,15 @@ class MyLocationViewController: UIViewController{
         getUserLocation()
        // addBottomConstraint.constant = UIScreen.main.bounds.height * 0.2 - 32.5
       //  userLocationCardHeightAnchor.constant = UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)
-        searchButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+       // searchButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         //navigationController?.navigationBar.backIndicatorImage
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "My Location"
+        allLocationBtn.roundCorners([.bottomRight, .topRight], radius: 17.5)
+        geoTaggedByMeBtn.roundCorners([.topLeft, .bottomLeft], radius: 17.5)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,15 +69,22 @@ class MyLocationViewController: UIViewController{
     }
     
     func addPullController(myLocations: [RMCPlace]){
-        guard let pullController = UIStoryboard(name: "NewDesign", bundle: nil)
-            
-            .instantiateViewController(withIdentifier: "MyLocationTableView") as? MyLocationTableView else{
-                return
-        }
+//        guard let pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+//
+//            .instantiateViewController(withIdentifier: "MyLocationTableView") as? MyLocationTableView else{
+//                return
+//        }
+//        pullController.places = myLocations
+//        myLocationArray = myLocations
+//        //  self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
+//        //  self.pullController.locationData = allLocations.reversed()
+//        self.addPullUpController(pullController, animated: true)
+        
+        
+        self.pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+            .instantiateViewController(withIdentifier: "MyLocationTableView") as? MyLocationTableView
         pullController.places = myLocations
-        myLocationArray = myLocations
-        //  self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
-        //  self.pullController.locationData = allLocations.reversed()
+       // myLocationArray = myLocations
         self.addPullUpController(pullController, animated: true)
         
         
@@ -77,11 +93,33 @@ class MyLocationViewController: UIViewController{
     @IBAction func handleAdd(_ sender: Any) {
     
     }
+
+
+    @IBAction func handleGeoTaggedByMe(_ sender: Any) {
+        
+        geoTaggedByMeBtn.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient, APPColor.GreenGradient])
+        allLocationBtn.applyGradient(isTopBottom: false, colorArray: [#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)])
+        allLocationBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        geoTaggedByMeBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        pullController.places = myCreatedPlaces
+        pullController.tableView.reloadData()
+        
+    }
+    
+    @IBAction func handleAllLocation(_ sender: Any) {
+        allLocationBtn.applyGradient(isTopBottom: false, colorArray: [ APPColor.GreenGradient, APPColor.BlueGradient])
+        geoTaggedByMeBtn.applyGradient(isTopBottom: false, colorArray: [#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)])
+        allLocationBtn.setTitleColor( #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        geoTaggedByMeBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        pullController.places = myLocationArray
+        pullController.tableView.reloadData()
+    }
+    
     
     @IBAction func handleSearch(_ sender: Any) {
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "SearchGeoTagLocationController") as! SearchGeoTagLocationController
-        vc.myLocationArray = myLocationArray
+            vc.myLocationArray = myLocationArray
         navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -121,6 +159,10 @@ extension MyLocationViewController{
         navigationController?.removeTransparency()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        
+        
+        
+        geoTaggedByMeBtn.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient, APPColor.GreenGradient])
         
         
         
@@ -176,6 +218,7 @@ extension MyLocationViewController: GMSMapViewDelegate{
         
     }
     
+    
     func getUserLocation(){
         
         let realm = try! Realm()
@@ -183,15 +226,45 @@ extension MyLocationViewController: GMSMapViewDelegate{
         
         var myLocations = [RMCPlace]()
         for places in rmcPlaces{
-            myLocations.append(places)
             
+            myLocations.append(places)
         }
         
+        
+        createMyGeoTagLocations(locations: myLocations)
         //addMarkersGeoTaggedArea(locations: myLocations)
         generateClusterItems(location: myLocations)
     
-        addPullController(myLocations: myLocations)
+        
         //userContainerView?.places = myLocations
+        
+    }
+    
+    func createMyGeoTagLocations(locations: [RMCPlace]){
+        
+        myLocationArray = locations
+        
+        for location in locations{
+            
+            if location.placeDetails?.addedBy == SDKSingleton.sharedInstance.userId{
+                
+                myCreatedPlaces.append(location)
+            }
+        }
+        
+        
+        if myCreatedPlaces.count > 0 {
+            shadowView.isHidden = false
+            geoTaggedByMeBtn.isHidden = false
+            allLocationBtn.isHidden = false
+            addPullController(myLocations: myCreatedPlaces)
+            
+        }else{
+            shadowView.isHidden = true
+            geoTaggedByMeBtn.isHidden = true
+            allLocationBtn.isHidden = true
+            addPullController(myLocations: locations)
+        }
         
     }
     

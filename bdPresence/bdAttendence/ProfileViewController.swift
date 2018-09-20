@@ -16,6 +16,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileTableView: UITableView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    
+    
+    
     var organisationName = String()
     var tapGestureForImage = UITapGestureRecognizer()
     var picker:UIImagePickerController? = UIImagePickerController()
@@ -30,6 +33,7 @@ class ProfileViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         
         setUserDetails()
+        
         
         profileTableView.delegate = self
         profileTableView.dataSource = self

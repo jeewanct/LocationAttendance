@@ -13,6 +13,7 @@ import PullUpController
 class MyLocationTableView: PullUpController{
 
     
+    @IBOutlet weak var headerVisualEffectView: UIVisualEffectView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var secondPreviewHeightAnchor: NSLayoutConstraint!
     @IBOutlet weak var secondPreviewHeight: UIView!
@@ -36,12 +37,16 @@ class MyLocationTableView: PullUpController{
     
     
     var delegate: HandleUserViewDelegate?
-  
+    var geoTagHeader: UIView?
    
+    @IBOutlet weak var viewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var headerView: GeoTagHeaderView!
     override func viewDidLoad() {
         super.viewDidLoad()
-         secondPreviewHeightAnchor.constant = UIScreen.main.bounds.height - 214
+        
+        
+        secondPreviewHeightAnchor.constant = UIScreen.main.bounds.height - 214
        //  tableView.reloadData()
         visualEffectView.effect = nil
         
@@ -63,6 +68,12 @@ class MyLocationTableView: PullUpController{
                     if getPlaces > 0{
                         let indexPath = IndexPath(item: 0, section: 0)
                         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                        
+                        if UserDefaults.standard.bool(forKey: "canGeoTag"){
+                            self.viewHeight.constant = 82
+                        }else{
+                            self.viewHeight.constant = 0
+                        }
                     }
                 }
                 
@@ -85,10 +96,32 @@ class MyLocationTableView: PullUpController{
             print("onDrag: \(point)")
         }
         
-      
         
+        
+        if let canGeoTag = UserDefaults.standard.value(forKey: "canGeoTag") as? Bool{
+
+            if canGeoTag == true{
+                viewHeight.constant = 82
+            }else{
+                viewHeight.constant = 0
+            }
+
+        }else{
+            viewHeight.constant = 0
+        }
+        
+        
+        headerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleAdd(_:))))
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        headerVisualEffectView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+    }
+    
+    
+    
     
     @IBAction func handleAdd(_ sender: Any) {
         let geoTagController = storyboard?.instantiateViewController(withIdentifier: "GeoTagController") as! GeoTagController
@@ -141,7 +174,7 @@ class MyLocationTableView: PullUpController{
         return CGRect(x: 5, y: 5, width: 280, height: UIScreen.main.bounds.height - 10)
     }
     
-
+    
     
     
 }
@@ -192,6 +225,58 @@ extension MyLocationTableView: UITableViewDelegate, UITableViewDataSource{
         cell.nameLabel.text = myLocationSearchArray?[indexPath.item].geoTagName
         return cell
     }
+    
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if let myView = UINib.init(nibName: "GeoTagHeaderView", bundle: nil).instantiate(withOwner: self)[0] as? GeoTagHeaderView {
+//            return myView
+//            // Do something with myView
+//        }
+//
+//
+//        return nil
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 82
+//    }
+//
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        geoTagHeader = tableView.headerView(forSection: 0)
+        
+        if targetContentOffset.pointee.y < scrollView.contentOffset.y {
+            // it's going up
+            
+            
+            if UserDefaults.standard.bool(forKey: "canGeoTag"){
+                animateView(value: 82)
+            }
+            
+        } else {
+            // it's going down
+            if UserDefaults.standard.bool(forKey: "canGeoTag"){
+                 animateView(value: 0)
+            }
+           
+            
+            
+            
+        }
+        
+    }
+    
+    func animateView(value: CGFloat){
+        
+        UIView.animate(withDuration: 0.4) {
+            self.viewHeight.constant = value
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    
+    
 }
 
 

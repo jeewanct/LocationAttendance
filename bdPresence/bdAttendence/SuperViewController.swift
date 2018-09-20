@@ -199,16 +199,28 @@ class SuperViewController: UIViewController {
                                 // automatic checkin function
                                 UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
                                 
-                                appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
+                                 bdCloudStartMonitoring()
+                                
                                 // New change - 20/06/2018
                                 //Here we have to send one location checkin also
-                                bdCloudStartMonitoring()
+                               
                                 
                                 //then set defaults value to 1
                                 // sending userinfo which will tell dashboard to work accordingly
                                 // with the userinfo will tell which type of chekin to be sent and do not check for blocker screen
                                 UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-                                appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                                
+                                if let locations = UserDayData.getLocationData(date: Date()){
+                                    if locations.count > 0{
+                                        
+                                    }else{
+                                        appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                                    }
+                                }else{
+                                    appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                                }
+                                
+                                appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
                                 
                                 
                                 // Calling 2 times
@@ -220,9 +232,23 @@ class SuperViewController: UIViewController {
                             }
                             
                         } else {
-                            appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
+                            
                             UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-                            appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                          //    appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                            
+                            
+                            if let locations = UserDayData.getLocationData(date: Date()){
+                                if locations.count > 0{
+                                    
+                                }else{
+                                    appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                                }
+                            }else{
+                                appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
+                            }
+                            
+                            appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
+                            
                             
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.CheckoutScreen.rawValue), object: self, userInfo: ["check":true])
                             

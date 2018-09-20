@@ -37,7 +37,7 @@ class LocationFilters: UIViewController{
                     } else {
                         self.delegate?.finalLocations(locations: getLocations)
                     }
-                   
+                    
                     
                     // let finalLocations = self.findFaultyLocations(locations: locationAfterTime)
                     
@@ -58,6 +58,7 @@ class LocationFilters: UIViewController{
                     //completion(locationAfterTime)
                     
                 }
+                
             } else {
                 self.delegate?.finalLocations(locations: locations)
             }

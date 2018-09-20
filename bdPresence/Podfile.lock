@@ -19,7 +19,7 @@ PODS:
     - GoogleMaps/Base (= 2.7.0)
   - GooglePlacesSearchController (0.2.1)
   - IQKeyboardManagerSwift (5.0.7)
-  - ObjectMapper (3.1.0)
+  - ObjectMapper (3.3.0)
   - Polyline (4.2.0)
   - PullUpController (0.3.0)
   - ReachabilitySwift (3)
@@ -80,7 +80,7 @@ SPEC CHECKSUMS:
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
   GooglePlacesSearchController: e53b61b7497cf40cb18ec296b1d3314c11c0a1c0
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
-  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
+  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   Polyline: 3d69f75bb136357e27291d439d0436c6ebda57a4
   PullUpController: 2f9e3852538a1fc1b3af79ee2ad29ec5c1a44efd
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
@@ -88,7 +88,6 @@ SPEC CHECKSUMS:
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
+PODFILE CHECKSUM: 5b4f4d293fd7c0bdebed43a983f0117014a2f2a5
 
-PODFILE CHECKSUM: 6abb4729ff793b23e4577a9317aa1fecdd97e464
-
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.3

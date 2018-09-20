@@ -34,6 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*
          Don't config until the location is on
         */
+        
+        
+        
+        
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
@@ -74,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
+        creatVisitLocation()
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
         //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
@@ -253,7 +258,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
+
+
+
         }
+
+
+
     }
     
 
@@ -276,7 +287,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
        
-        creatVisitLocation()
+        
         if !SDKSingleton.sharedInstance.userId.isBlank{
             postDataCheckin(userInteraction: CheckinDetailKeys.AppTerminated)
             
@@ -596,6 +607,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         // perform fetch handler
         
+        
     }
     
     @available(iOS 10.0, *)
@@ -712,16 +724,9 @@ extension AppDelegate: CLLocationManagerDelegate{
         
         locationManager = CLLocationManager()
         locationManager?.requestAlwaysAuthorization()
-        locationManager?.distanceFilter = 35
-        
-        // 2
-        locationManager?.allowsBackgroundLocationUpdates = true
-        
-        // 3
-        locationManager?.startUpdatingLocation()
-        
         locationManager?.startMonitoringVisits()
         locationManager?.delegate = self
+        
         
         
     }
@@ -731,6 +736,7 @@ extension AppDelegate: CLLocationManagerDelegate{
        // let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
         
         locationManager?.stopUpdatingLocation()
+        locationManager?.stopMonitoringVisits()
         
         locationManager?.delegate = nil
         locationManager = nil
@@ -739,19 +745,22 @@ extension AppDelegate: CLLocationManagerDelegate{
         
         let notifier = RMCNotifier.shared
         if notifier.getShiftRunningStatus() {
-            bdCloudStartMonitoring()
+            let superViewController = SuperViewController()
+            superViewController.wakeUpCall(notify: NotifyingFrom.Normal)
+          //  bdCloudStartMonitoring()
             //BlueDolphinManager.manager.startLocationMonitoring()
-        }else{
-            bdCloudStopMonitoring()
         }
+//        else{
+//            bdCloudStopMonitoring()
+//        }
         
         // Get location description
     }
     
     func sendLocalNotification(){
         let content = UNMutableNotificationContent()
-        content.title = "New Journal entry 📌"
-        content.body = "Wow got new locations"
+        content.title = "Please notify iOS developer"
+        content.body = "\(Date()) send us the screenshot"
         content.sound = .default()
         
         // 2
@@ -761,6 +770,7 @@ extension AppDelegate: CLLocationManagerDelegate{
         // 3
         center.add(request, withCompletionHandler: nil)
     }
+    
     
   
     

@@ -81,6 +81,10 @@ class NewLoginViewController: UIViewController {
         CountriesViewController.Show(countriesViewController: countriesViewController, to: self)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        sendOtpButton.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
+    }
     
     
     func sendOtpAction(){
@@ -139,7 +143,7 @@ class NewLoginViewController: UIViewController {
                 self.showAlert(ErrorMessage.NotValidData.rawValue)
             default:
                 break
-                
+    
             }
             
         }

@@ -57,9 +57,12 @@ class NewPermissionViewController: UIViewController {
             }
         }
     }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         updateLayout()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -120,11 +123,7 @@ class NewPermissionViewController: UIViewController {
         }
     }
     
-    func openBluetooth(){
-        let url = URL(string: "App-Prefs:root=Bluetooth") //for bluetooth setting
-        let app = UIApplication.shared
-        app.openURL(url!)
-    }
+
     func openAppSetting(){
         let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
         if let url = settingsUrl {
