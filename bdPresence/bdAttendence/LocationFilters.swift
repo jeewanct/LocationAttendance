@@ -62,8 +62,6 @@ class LocationFilters: UIViewController{
             } else {
                 self.delegate?.finalLocations(locations: locations)
             }
-        
-        
     }
     
     
@@ -77,6 +75,8 @@ class LocationFilters: UIViewController{
                 return accuracy < Double(SDKSingleton.sharedInstance.customAccuracy)
             }
             return false
+            
+            
         }
         
         return LogicHelper.shared.sortOnlyLocations(location: updatedLocations)
