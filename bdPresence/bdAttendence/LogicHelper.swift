@@ -541,6 +541,8 @@ class LogicHelper{
      
         
         var seen = ""
+        
+        
         if let startDate = firstSeen {
             seen.append(LogicHelper.shared.getLocationDate(date: startDate))
         }

@@ -1,0 +1,137 @@
+{
+   "geocoded_waypoints" : [
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJV7Tarzf9DDkRwvHaDZT74DA",
+         "types" : [ "establishment", "point_of_interest", "real_estate_agency" ]
+      },
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJV7Tarzf9DDkRwvHaDZT74DA",
+         "types" : [ "establishment", "point_of_interest", "real_estate_agency" ]
+      },
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJV7Tarzf9DDkRwvHaDZT74DA",
+         "types" : [ "establishment", "point_of_interest", "real_estate_agency" ]
+      }
+   ],
+   "routes" : [
+      {
+         "bounds" : {
+            "northeast" : {
+               "lat" : 28.6329965,
+               "lng" : 77.21728259999999
+            },
+            "southwest" : {
+               "lat" : 28.6329965,
+               "lng" : 77.21728259999999
+            }
+         },
+         "copyrights" : "Map data ©2018 Google",
+         "legs" : [
+            {
+               "distance" : {
+                  "text" : "1 m",
+                  "value" : 0
+               },
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 0
+               },
+               "end_address" : "11/2,Outer Side, Middle Circle, Connaught Circus, Connaught circle, New Delhi, Delhi 110001, India",
+               "end_location" : {
+                  "lat" : 28.6329965,
+                  "lng" : 77.21728259999999
+               },
+               "start_address" : "11/2,Outer Side, Middle Circle, Connaught Circus, Connaught circle, New Delhi, Delhi 110001, India",
+               "start_location" : {
+                  "lat" : 28.6329965,
+                  "lng" : 77.21728259999999
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "1 m",
+                        "value" : 0
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 0
+                     },
+                     "end_location" : {
+                        "lat" : 28.6329965,
+                        "lng" : 77.21728259999999
+                     },
+                     "html_instructions" : "Head on \u003cb\u003eMiddle Cir\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "gkwmD_ohvM"
+                     },
+                     "start_location" : {
+                        "lat" : 28.6329965,
+                        "lng" : 77.21728259999999
+                     },
+                     "travel_mode" : "DRIVING"
+                  }
+               ],
+               "traffic_speed_entry" : [],
+               "via_waypoint" : []
+            },
+            {
+               "distance" : {
+                  "text" : "1 m",
+                  "value" : 0
+               },
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 0
+               },
+               "end_address" : "11/2,Outer Side, Middle Circle, Connaught Circus, Connaught circle, New Delhi, Delhi 110001, India",
+               "end_location" : {
+                  "lat" : 28.6329965,
+                  "lng" : 77.21728259999999
+               },
+               "start_address" : "11/2,Outer Side, Middle Circle, Connaught Circus, Connaught circle, New Delhi, Delhi 110001, India",
+               "start_location" : {
+                  "lat" : 28.6329965,
+                  "lng" : 77.21728259999999
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "1 m",
+                        "value" : 0
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 0
+                     },
+                     "end_location" : {
+                        "lat" : 28.6329965,
+                        "lng" : 77.21728259999999
+                     },
+                     "html_instructions" : "Head on \u003cb\u003eMiddle Cir\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "gkwmD_ohvM"
+                     },
+                     "start_location" : {
+                        "lat" : 28.6329965,
+                        "lng" : 77.21728259999999
+                     },
+                     "travel_mode" : "DRIVING"
+                  }
+               ],
+               "traffic_speed_entry" : [],
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : {
+            "points" : "gkwmD_ohvM"
+         },
+         "summary" : "Middle Cir",
+         "warnings" : [],
+         "waypoint_order" : [ 0 ]
+      }
+   ],
+   "status" : "OK"
+}

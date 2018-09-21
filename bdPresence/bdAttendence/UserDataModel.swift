@@ -280,7 +280,10 @@ class UserDayData {
                     locationValue.startTime = location.startTime
                    
                     locationValue.address = location.address
+                    
                     locationValue.lastSeen = LogicHelper.shared.getStayTime(firstSeen: location.startTime, lastSeen: location.endTime)
+                    
+                    
                     locationValue.latitude = location.location?.latitude
                     locationValue.longitude = location.location?.longitude
                     
