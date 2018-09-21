@@ -11,6 +11,8 @@ import BluedolphinCloudSdk
 
 class GetClusteringFromServer{
     
+   
+    
     class func getDataOf(date: Date){
         
         let convertedDate = date.toString(dateFormat: "YYYYMMdd")

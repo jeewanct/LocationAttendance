@@ -177,9 +177,17 @@ class NewCheckoutViewController: UIViewController {
 //MARK: Setup UI Elements
 extension NewCheckoutViewController{
     
+    func getDataFromCheckin(){
+        updateView()
+    }
+    
+    
     func addObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.showView), name: NSNotification.Name(rawValue: "CheckInsFromServer"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.showView), name: NSNotification.Name(rawValue: "CheckInsFromServer"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.getDataFromCheckin), name: NSNotification.Name(rawValue: "CheckInsFromServerWithZeroElements"), object: nil)
+        
+        
 //        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
     }
     
@@ -380,37 +388,36 @@ extension NewCheckoutViewController{
     
     func checkIfNewLocationAdded(checkinId: String){
         
-        var present = false
         
+        
+        var present = false
+
         if let getPullController = pullController{
             if let allLocations = getPullController.locationData{
-                
+
                 for locations in allLocations{
-                    
+
                     for location in locations{
                         if location.checkinId == checkinId{
                             present = true
                             break
                         }
                     }
-                    
+
                 }
-                
+
             }
-            
+
         }
-        
-        
-        
+
         if present == false{
            // updateView()
+            getDateFromServer()
         }
         
     }
     
     func updateView(date:Date = Date()){
-        
-        
         
         let isToday = Calendar.current.isDateInToday(date)
         if isToday{
@@ -433,7 +440,6 @@ extension NewCheckoutViewController{
                         self.view.removeGestureRecognizer(self.swipedown!)
                         
                     }
-                    
                     
                 }
                 
@@ -464,8 +470,10 @@ extension NewCheckoutViewController{
         mapView.changeStyle()
         mapView.setupCamera()
         //updateView()
-        
-        
+        getDateFromServer()
+    }
+    
+    func getDateFromServer(){
         
         if let valueForDashBoard = UserDefaults.standard.value(forKey: "lastDashBoardUpdated") as? Date{
             
@@ -492,7 +500,6 @@ extension NewCheckoutViewController{
             activityIndicator = ActivityIndicatorView()
             GetClusteringFromServer.getDataOf(date: Date())
         }
-        
         
         
         
@@ -544,7 +551,8 @@ extension NewCheckoutViewController{
                         if getDataIfAvail.count > 0{
                             showDatabaseData(locationData: getDataIfAvail)
                         }else{
-                            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
+//                            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
+                            updateView()
                         }
                         
                         

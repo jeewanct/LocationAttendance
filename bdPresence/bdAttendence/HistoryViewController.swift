@@ -98,7 +98,14 @@ extension HistoryViewController{
     
     func setupObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.showView), name: NSNotification.Name(rawValue: "CheckInsFromServer"), object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.getDataFromCheckin), name: NSNotification.Name(rawValue: "CheckInsFromServerWithZeroElements"), object: nil)
     }
+    
+    func getDataFromCheckin(){
+        updateView(date: currentDisplayDate)
+        
+    }
+    
     
     func showDatabaseData(locationData: [UserDetailsDataModel]){
        
@@ -109,6 +116,34 @@ extension HistoryViewController{
         
         pullController.selectedDate = selectedDate
         pullController.userDetails = locationData
+        
+        var headerData = [String]()
+        if let firstData = locationData.last{
+            if let startTime = firstData.startTime{
+                
+                 headerData.append(LogicHelper.shared.getLocationDate(date: startTime))
+                
+               
+            }else{
+                headerData.append("")
+            }
+        }
+        
+        var distance = 0
+        for location in locationData {
+            
+            if let distanceDb = location.distance{
+                distance = distance + distanceDb
+            }
+            
+            
+        }
+        
+        headerData.append(String(distance))
+        
+        headerData.append(String(locationData.count))
+        
+        pullController.distanceArray = headerData
         
         self.addPullUpController(pullController, animated: true)
         
@@ -131,7 +166,7 @@ extension HistoryViewController{
             
             if let error = userNotification["status"] as? Bool{
                 
-                if error{
+                if !error{
                     AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "Something went wrong.")
                 }else{
                     if let getDataIfAvail =  UserDayData.getLocationDataFromServer(date: currentDisplayDate){
@@ -353,6 +388,8 @@ extension HistoryViewController{
             
             pullController.selectedDate = selectedDate
             pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
+            
+            
             
             self.addPullUpController(pullController, animated: true)
             

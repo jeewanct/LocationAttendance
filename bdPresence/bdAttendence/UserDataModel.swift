@@ -273,6 +273,12 @@ class UserDayData {
                     
                   let locationValue = UserDetailsDataModel()
                     
+                    if let distance = location.distance, let convertedDistance = Int(distance){
+                         locationValue.distance = convertedDistance
+                    }
+                    
+                    locationValue.startTime = location.startTime
+                   
                     locationValue.address = location.address
                     locationValue.lastSeen = LogicHelper.shared.getStayTime(firstSeen: location.startTime, lastSeen: location.endTime)
                     locationValue.latitude = location.location?.latitude

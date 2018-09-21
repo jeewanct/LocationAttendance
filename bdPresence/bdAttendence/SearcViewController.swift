@@ -16,6 +16,10 @@ class SearchViewController: PullUpController {
     
     // MARK: - IBOutlets
     
+    @IBOutlet weak var headerHeightConstaint: NSLayoutConstraint!
+    @IBOutlet weak var headerViewDistance: UIView!
+    @IBOutlet weak var gradientViewHeader: UIView!
+    @IBOutlet weak var headerCollectionView: UICollectionView!
     @IBOutlet weak var secondPreviewHeight: NSLayoutConstraint!
     @IBOutlet private weak var visualEffectView: UIVisualEffectView!
     @IBOutlet private weak var searchBoxContainerView: UIView!
@@ -40,7 +44,7 @@ class SearchViewController: PullUpController {
     }
     var userDetails =  [UserDetailsDataModel]()
     var screenType: LocationDetailsScreenEnum?
-    
+    var distanceArray = ["-", "-", "-"]
     
     // MARK: - Lifecycle
     
@@ -74,7 +78,20 @@ class SearchViewController: PullUpController {
         //setupDataSource()
         
         willMoveToStickyPoint = { point in
-            
+            if point > UIScreen.main.bounds.height / 2{
+               // self.addBlurEffect()
+                self.animateView(constant: 0)
+                self.tableView.isScrollEnabled = true
+            }else{
+                //self.visualEffectView.effect = nil
+                self.animateView(constant: 90)
+                self.tableView.isScrollEnabled = false
+                if self.userDetails.count > 0 {
+                    let indexPath = IndexPath(item: 0, section: 0)
+                    self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
+                //    self.visualEffectView.isHidden = true
+            }
             print("willMoveToStickyPoint \(point)")
         }
         
@@ -94,6 +111,7 @@ class SearchViewController: PullUpController {
         visualEffectView.roundCorners([.topLeft, .topRight], radius: 15)
         visualEffectView.applyGradient(isTopBottom: false, colorArray:
             [#colorLiteral(red: 0.4470588235, green: 0.6666666667, blue: 0.862745098, alpha: 1),#colorLiteral(red: 0.4, green: 0.737254902, blue: 0.7529411765, alpha: 1)])
+        gradientViewHeader.applyGradient(isTopBottom: false, colorArray:  [#colorLiteral(red: 0.4470588235, green: 0.6666666667, blue: 0.862745098, alpha: 1),#colorLiteral(red: 0.4, green: 0.737254902, blue: 0.7529411765, alpha: 1)])
      
         
         addBlurEffect()
@@ -106,6 +124,15 @@ class SearchViewController: PullUpController {
         let blurEffect = UIBlurEffect(style: .regular)
         visualEffectView.effect = nil
         visualEffectView.alpha = 0.8
+        
+    }
+    
+    func animateView(constant: CGFloat){
+        
+        UIView.animate(withDuration: 0.4) {
+            self.headerHeightConstaint.constant = constant
+            self.view.layoutIfNeeded()
+        }
         
     }
     
@@ -124,7 +151,7 @@ class SearchViewController: PullUpController {
     
     override var pullUpControllerPreviewOffset: CGFloat {
         print(UIScreen.main.bounds.height * 0.2)
-        return UIScreen.main.bounds.height * 0.2
+        return UIScreen.main.bounds.height * 0.3
     }
     
     override var pullUpControllerMiddleStickyPoints: [CGFloat] {
@@ -465,6 +492,46 @@ class SearchResultCell: UITableViewCell {
     
     func configure(title: String) {
         titleLabel.text = title
+    }
+}
+
+
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: headerCollectionView.frame.width / 3, height: headerCollectionView.frame.height)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DistanceTimeView", for: indexPath) as! DistanceTimeView
+        setData(cell: cell, indexPath: indexPath)
+        if indexPath.item == 2{
+            cell.rightView.isHidden = true
+        }else{
+             cell.rightView.isHidden = false
+        }
+        
+        return cell
+    }
+    
+    
+    func setData(cell: DistanceTimeView, indexPath: IndexPath){
+        cell.valueLbl.text = distanceArray[indexPath.item]
+        switch indexPath.item {
+        case 0:
+            cell.headerLbl.text = "Start time"
+            
+        case 1:
+            cell.headerLbl.text = "Distance(km)"
+        default:
+            cell.headerLbl.text = "Locations"
+        }
+        
     }
 }
 
