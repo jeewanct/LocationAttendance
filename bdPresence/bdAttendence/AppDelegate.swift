@@ -120,9 +120,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if notifier.getShiftRunningStatus() {
                     bdCloudStartMonitoring()
                    //BlueDolphinManager.manager.startLocationMonitoring()
-                }else{
-                    bdCloudStopMonitoring()
                 }
+                
 //                if SDKSingleton.sharedInstance.isShiftRunning {
 //                    BlueDolphinManager.manager.startLocationMonitoring()
 //                }
