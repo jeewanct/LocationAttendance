@@ -525,10 +525,10 @@ extension NewCheckoutViewController{
             
             
             
-            if Date().secondsFrom(valueForDashBoard) > 600{
+            //if Date().secondsFrom(valueForDashBoard) > 600{
                 activityIndicator = ActivityIndicatorView()
                 GetClusteringFromServer.getDataOf(date: Date())
-            }
+            //}
             
         }else{
             activityIndicator = ActivityIndicatorView()
