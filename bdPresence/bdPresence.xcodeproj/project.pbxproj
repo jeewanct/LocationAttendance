@@ -28,6 +28,7 @@
 		098488CA21521D46005B96E4 /* GeoTagHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 098488C921521D46005B96E4 /* GeoTagHeaderView.xib */; };
 		09970B81215396FB0011DCC0 /* CheckinsId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09970B80215396FB0011DCC0 /* CheckinsId.swift */; };
 		09970B852153D3180011DCC0 /* GetClusteringFromServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09970B842153D3180011DCC0 /* GetClusteringFromServer.swift */; };
+		09970B892154E0000011DCC0 /* DistanceTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09970B882154E0000011DCC0 /* DistanceTimeView.swift */; };
 		099C0E20213675DD00B64FB4 /* UserGeoTagAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099C0E1F213675DD00B64FB4 /* UserGeoTagAuthentication.swift */; };
 		09A438F12137D4C200CF2109 /* LinearProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A438F02137D4C200CF2109 /* LinearProgressBar.swift */; };
 		09A5F9E82118323F009953C6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */; };
@@ -208,6 +209,7 @@
 		098488C921521D46005B96E4 /* GeoTagHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeoTagHeaderView.xib; sourceTree = "<group>"; };
 		09970B80215396FB0011DCC0 /* CheckinsId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsId.swift; sourceTree = "<group>"; };
 		09970B842153D3180011DCC0 /* GetClusteringFromServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetClusteringFromServer.swift; sourceTree = "<group>"; };
+		09970B882154E0000011DCC0 /* DistanceTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceTimeView.swift; sourceTree = "<group>"; };
 		099C0E1F213675DD00B64FB4 /* UserGeoTagAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGeoTagAuthentication.swift; sourceTree = "<group>"; };
 		09A438F02137D4C200CF2109 /* LinearProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressBar.swift; sourceTree = "<group>"; };
 		09A5F9E72118323F009953C6 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
@@ -620,6 +622,7 @@
 				099C0E1F213675DD00B64FB4 /* UserGeoTagAuthentication.swift */,
 				09970B80215396FB0011DCC0 /* CheckinsId.swift */,
 				09970B842153D3180011DCC0 /* GetClusteringFromServer.swift */,
+				09970B882154E0000011DCC0 /* DistanceTimeView.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1260,6 +1263,7 @@
 				99F07F5C1F57EF75000B4967 /* TimerView.swift in Sources */,
 				091FD601211D9FAB007F6ECC /* LocationFilters.swift in Sources */,
 				991A0ECB1ECC259D00513373 /* ProjectConstant.swift in Sources */,
+				09970B892154E0000011DCC0 /* DistanceTimeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1462,7 +1466,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				ENABLE_BITCODE = NO;
@@ -1636,7 +1640,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
 				ENABLE_BITCODE = NO;

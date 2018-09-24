@@ -24,31 +24,31 @@ class DownloadPlaceController: UIViewController{
     
         NotificationCenter.default.addObserver(self, selector: #selector(DownloadPlaceController.getCallBack), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(DownloadPlaceController.getCallBack), name: NSNotification.Name(rawValue: LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(DownloadPlaceController.getCallBack), name: NSNotification.Name(rawValue: LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
         
         
         progressBar.progressValue = 0
         
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleUpdate), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(handleUpdate), userInfo: nil, repeats: true)
         
         GetCheckinsData.getCheckinsId()
         
-        
-        if LocationHistoryData.getLocationDataCount() == 0{
-            
-            LocationHistoryData.getTeamMember()
-            
-        }else{
-            progressValue = progressValue + 1
-            
-            if progressValue == 2{
-                goToHome()
-            }
-            //self.goToHome(userInfo: <#Notification#>)
-        }
+//        if LocationHistoryData.getLocationDataCount() == 0{
+//
+//            LocationHistoryData.getTeamMember()
+//
+//        }else{
+//            progressValue = progressValue + 1
+//
+//            if progressValue == 2{
+//                goToHome()
+//            }
+//            //self.goToHome(userInfo: <#Notification#>)
+//        }
         
         
         RMCPlacesManager.getPlaces()
+        
         
     }
     
@@ -111,9 +111,9 @@ class DownloadPlaceController: UIViewController{
             }
         }
         
-        if progressValue == 2{
+       // if progressValue == 2{
             goToHome()
-        }
+       // }
         
         
     }

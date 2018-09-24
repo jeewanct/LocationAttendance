@@ -36,10 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         */
         
         
-        
-        
-        
-        
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
@@ -55,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
             //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
 
         case .Alpha:
             ConfigurationModel.stopDebugging(flag: false)
@@ -65,7 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .Release:
             print("In Release")
             ConfigurationModel.stopDebugging(flag: true)
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+            ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
+                //"https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
             Fabric.with([Crashlytics.self])
         case .Unknown:
             print("In unknown")
