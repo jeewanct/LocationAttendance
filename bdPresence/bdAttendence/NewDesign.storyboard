@@ -199,13 +199,13 @@
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mug-7v-reD">
-                                <rect key="frame" x="24" y="417" width="327" height="30"/>
+                                <rect key="frame" x="24" y="414" width="327" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1O-kR-I5d">
-                                <rect key="frame" x="24" y="395" width="327" height="20"/>
+                                <rect key="frame" x="24" y="390.5" width="327" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="17"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -223,7 +223,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wpu-am-SK2">
-                                <rect key="frame" x="24" y="477" width="327" height="30"/>
+                                <rect key="frame" x="24" y="475.5" width="327" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Exz-gu-8vT"/>
                                 </constraints>
@@ -232,13 +232,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save as" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elY-2U-8Fq">
-                                <rect key="frame" x="24" y="455" width="327" height="20"/>
+                                <rect key="frame" x="24" y="452" width="327" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="17"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Geo fence radius - 50m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5t-8P-CYD">
-                                <rect key="frame" x="24" y="515" width="327" height="20"/>
+                                <rect key="frame" x="24" y="513.5" width="327" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="17"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -264,7 +264,7 @@
                                 </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtq-zk-ppK">
-                                <rect key="frame" x="24" y="417" width="327" height="30"/>
+                                <rect key="frame" x="24" y="414" width="327" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="handleGoogePlaces:" destination="hxL-Uq-wHb" eventType="touchUpInside" id="dXb-Wg-SrW"/>
@@ -4018,7 +4018,7 @@
                                 <state key="normal" image="searchImage"/>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No location found!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5o-G2-ryt">
-                                <rect key="frame" x="113.5" y="323" width="148.5" height="21"/>
+                                <rect key="frame" x="115.5" y="322" width="144" height="23"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="18"/>
                                 <color key="textColor" red="0.43137254899999999" green="0.76078431369999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -4074,20 +4074,20 @@
         <image name="addImage" width="19" height="19"/>
         <image name="edit" width="27" height="27"/>
         <image name="error" width="179" height="179"/>
-        <image name="geoTagCancel" width="71" height="71"/>
-        <image name="geoTagConfirm" width="71" height="71"/>
+        <image name="geoTagCancel" width="71.5" height="71.5"/>
+        <image name="geoTagConfirm" width="71.5" height="71.5"/>
         <image name="logo" width="50" height="50"/>
         <image name="nextImage" width="9" height="15"/>
         <image name="phone" width="14" height="14"/>
-        <image name="quote" width="21" height="19"/>
-        <image name="searchImage" width="22" height="22"/>
-        <image name="send_message" width="50" height="36"/>
+        <image name="quote" width="21" height="19.5"/>
+        <image name="searchImage" width="17.600000381469727" height="17.600000381469727"/>
+        <image name="send_message" width="50.5" height="36"/>
         <image name="splash visual" width="253" height="253"/>
         <image name="success" width="144" height="144"/>
         <image name="swipeDown" width="42" height="42"/>
         <image name="swipe_up" width="48" height="42"/>
-        <image name="swipe_up_two" width="35" height="35"/>
+        <image name="swipe_up_two" width="35.5" height="35.5"/>
         <image name="sync" width="12" height="17"/>
-        <image name="unquote" width="21" height="19"/>
+        <image name="unquote" width="21" height="19.5"/>
     </resources>
 </document>

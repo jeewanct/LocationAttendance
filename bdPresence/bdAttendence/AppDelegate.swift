@@ -741,7 +741,7 @@ extension AppDelegate: CLLocationManagerDelegate{
         locationManager?.delegate = nil
         locationManager = nil
         
-        sendLocalNotification()
+        //sendLocalNotification()
         
         let notifier = RMCNotifier.shared
         if notifier.getShiftRunningStatus() {
