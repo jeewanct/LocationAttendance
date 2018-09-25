@@ -100,6 +100,13 @@ extension Date{
         // or capitalized(with: locale)
     }
     
+    func toString( dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+    
 }
 
 public extension DispatchQueue {

@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import BluedolphinCloudSdk
 import Polyline
- 
+ import RealmSwift
  
  
 class MyTeamLocationDetails: UIViewController{
@@ -87,7 +87,7 @@ class MyTeamLocationDetails: UIViewController{
 
     func teamDetailsFetch(locatins: Notification){
     
-        
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         print("LocationsCount = \(locatins.userInfo)")
     
         //self.view.removeActivityIndicator(activityIndicator: activityIndicator)
@@ -95,18 +95,20 @@ class MyTeamLocationDetails: UIViewController{
         if let teamDetails = locatins.userInfo as? [String: Any]{
             
             if let error = teamDetails["status"] as? Bool{
-                if let teamDetailsModel = teamDetails["teamDetails"] as? [MyTeamDetailsDocument]{
+                if let teamDetailsModel = teamDetails["teamDetails"] as? [ClusterDataServer]{
                     
                     if teamDetailsModel.count == 0{
                         if error == false{
                             AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "Data fetch error!")
                         }
                     }else{
-                        self.makeTeamLocationData(teamLocationData: teamDetailsModel)
+                        self.makeTeamLocationData(teamLocationData: teamDetailsModel.reversed())
                     }
                     
                 }
                 
+            }else{
+                AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "oops! something went wrong")
             }
     
             
@@ -130,7 +132,20 @@ extension MyTeamLocationDetails{
         view.showActivityIndicator(activityIndicator: activityIndicator)
         
         
-        MyTeamDetailsModel.getTeamMember(userId: getUserId)
+        
+        let convertedDate = Date().toString(dateFormat: "YYYYMMdd")
+        let query = "{\"docId\":{\"$in\":[\"\(SDKSingleton.sharedInstance.organizationId)|\(getUserId)|\(convertedDate)\"]}}"
+        
+        
+        if let getQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed){
+           // GetCheckinsData.getClusterData(query: getQuery, date: date)
+            MyTeamDetailsModel.getUserDobjId(query: getQuery)
+        }
+        
+        
+        
+        
+        //MyTeamDetailsModel.getTeamMember(userId: getUserId)
  
 //        })
     }
@@ -156,73 +171,211 @@ extension MyTeamLocationDetails{
     
     
     
-    func makeTeamLocationData(teamLocationData: [MyTeamDetailsDocument]){
-        
-        var teamData = [LocationDataModel]()
+    func makeTeamLocationData(teamLocationData: [ClusterDataServer]){
         
         
-       
+        
+        var locationDataArray = [UserDetailsDataModel]()
+        
+        
+        for index in teamLocationData{
             
-            for location in teamLocationData{
+            let rawCheckIn = UserDetailsDataModel()
+            rawCheckIn.address = index.checkinDetails?.address
+           
+            if let checkinId = index.checkinData?.checkinId{
+                rawCheckIn.checkInId = checkinId
+            }
+            
+            
+            
+            if let canGeoTag = index.checkinDetails?.placeId{
                 
-                let locationData = LocationDataModel()
+                rawCheckIn.isGeoTagged = true
                 
-                if let accuracy = location.checkinData?.location?.accuracy{
-                   locationData.accuracy = Double(accuracy)
+                let realm = try! Realm()
+                let rmcPlaces  = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeId = %@", canGeoTag)
+                
+                if rmcPlaces.count > 0{
                     
-                }
-                
-                if let altitude = location.checkinData?.location?.altitude{
-                    locationData.altitude = String(altitude)
-                }
-                
-                
-                if let coordinates = location.checkinData?.location?.coordinates{
-                    
-                    if coordinates.count  == 2{
-                        
-                        locationData.longitude = String(coordinates[0])
-                        locationData.latitude = String(coordinates[1])
-                    
-                        if Int(coordinates[0]) == 0{
-                            locationData.address = "No location found"
-                        }
-                    
+                    let value = rmcPlaces[0]
+                    if let placeName = value.placeAddress{
+                        rawCheckIn.geoLocationName = placeName
                     }
                     
-                    
-                    
-                }
-                
-                if let lastSeen = location.checkinData?.time{
-                    locationData.lastSeen = Formatter.iso8601.date(from: lastSeen)
                 }
                 
                 
                 
-                teamData.append(locationData)
             }
             
-        
-        
-        //reversing the team data
-        teamData.sort(by: { (first, second) -> Bool in
             
-            
-            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
-                return  firstDate.compare(secondDate) == .orderedAscending
+            if let coordinates = index.checkinData?.location?.coordinates{
                 
+                if coordinates.count == 2{
+                    rawCheckIn.latitude = String(coordinates[1])
+                    rawCheckIn.longitude = String(coordinates[0])
+                    
+                }
                 
             }
             
-            return false
-        })
+            if let distance = index.distance{
+                
+                rawCheckIn.distance = Double(distance) / 1000
+            }
+            
+            
+            if let startTime = index.startTime{
+                let date = startTime.asDate
+                rawCheckIn.startTime = date
+            }
+            
+            if let startTime = index.startTime, let endTime = index.endTime{
+                if let convertedDate = startTime.asDate, let convertedEndDate = endTime.asDate{
+                    rawCheckIn.lastSeen = LogicHelper.shared.getStayTime(firstSeen: convertedDate, lastSeen: convertedEndDate)
+                }
+                
+            }else{
+             
+                if let startTime = index.startTime{
+                 
+                    if let convertedDate = startTime.asDate{
+                        rawCheckIn.lastSeen = LogicHelper.shared.getStayTime(firstSeen: convertedDate, lastSeen: nil)
+                    }
+                }
+                    
+            }
+            
+            
+            
+            
+           
+            
+            
+            
+         
+            
+            locationDataArray.append(rawCheckIn)
+        }
         
-        let locationFilters = LocationFilters()
-        locationFilters.delegate = self
-        locationFilters.plotMarkerInMap(locations: teamData)
         
         
+//        for location in teamLocationData{
+//
+//            let locationValue = UserDetailsDataModel()
+//
+//
+//            if let distance = location.distance, let convertedDistance = Double(distance){
+//                locationValue.distance = convertedDistance / 1000
+//            }
+//
+//
+//            locationValue.startTime = location.startTime
+//
+//            locationValue.address = location.address
+//
+//            locationValue.lastSeen = LogicHelper.shared.getStayTime(firstSeen: location.startTime, lastSeen: location.endTime)
+//
+//
+//            locationValue.latitude = location.location?.latitude
+//            locationValue.longitude = location.location?.longitude
+//
+//            if let canGeoTag = location.placeId{
+//
+//                locationValue.isGeoTagged = true
+//
+//                let realm = try! Realm()
+//                let rmcPlaces  = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeId = %@", canGeoTag)
+//
+//                if rmcPlaces.count > 0{
+//
+//                    let value = rmcPlaces[0]
+//                    if let placeName = value.placeAddress{
+//                        locationValue.geoLocationName = placeName
+//                    }
+//
+//                }
+//
+//
+//
+//            }
+//            // locationValue.firstSeen = location.firstSeen
+//            //  locationValue.lastSeen = location.lastSeen
+//            locationDataArray.append(locationValue)
+//
+//        }
+        
+        
+        let headerData = ClusterDataFromServer.getHeaderData(locationData: locationDataArray)
+        
+        dataFromServer(locationData: locationDataArray, headerData: headerData)
+        
+//
+//        var teamData = [LocationDataModel]()
+//
+//
+//
+//            for location in teamLocationData{
+//
+//                let locationData = LocationDataModel()
+//
+//                if let accuracy = location.checkinData?.location?.accuracy{
+//                   locationData.accuracy = Double(accuracy)
+//
+//                }
+//
+//                if let altitude = location.checkinData?.location?.altitude{
+//                    locationData.altitude = String(altitude)
+//                }
+//
+//
+//                if let coordinates = location.checkinData?.location?.coordinates{
+//
+//                    if coordinates.count  == 2{
+//
+//                        locationData.longitude = String(coordinates[0])
+//                        locationData.latitude = String(coordinates[1])
+//
+//                        if Int(coordinates[0]) == 0{
+//                            locationData.address = "No location found"
+//                        }
+//
+//                    }
+//
+//
+//
+//                }
+//
+//                if let lastSeen = location.checkinData?.time{
+//                    locationData.lastSeen = Formatter.iso8601.date(from: lastSeen)
+//                }
+//
+//
+//
+//                teamData.append(locationData)
+//            }
+//
+//
+//
+//        //reversing the team data
+//        teamData.sort(by: { (first, second) -> Bool in
+//
+//
+//            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
+//                return  firstDate.compare(secondDate) == .orderedAscending
+//
+//
+//            }
+//
+//            return false
+//        })
+//
+//        let locationFilters = LocationFilters()
+//        locationFilters.delegate = self
+//        locationFilters.plotMarkerInMap(locations: teamData)
+//
+//
         
     }
     
@@ -507,7 +660,9 @@ extension MyTeamLocationDetails{
     
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
-        drawPath(coordinates: coordinates)
+        
+        mapView.drawPath(coordinates: coordinates)
+        
     }
     
     
@@ -526,7 +681,51 @@ extension MyTeamLocationDetails{
     
  }
  
- 
+ extension MyTeamLocationDetails: ServerDataFromClusterDelegate{
+    
+    func dataFromServer(locationData: [UserDetailsDataModel], headerData: [String]) {
+        
+        clearMapData()
+        
+        mapView.addMarkersInMap(allLocations: locationData)
+        
+        pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+            .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+        pullController.screenType = LocationDetailsScreenEnum.myTeamScreen
+        
+        
+        pullController.userDetails = locationData
+        pullController.distanceArray = headerData
+        self.addPullUpController(pullController, animated: true)
+        
+        let polyLine = DrawPolyLineInMap()
+        polyLine.delegate = self
+        polyLine.getPolyline(location: locationData)
+        
+        
+    }
+    
+    func clearMapData(){
+        mapView.clear()
+        if let _ = timer{
+            timer.invalidate()
+            timer = nil
+        }
+        
+//        polyline = GMSPolyline()
+//        path.removeAllCoordinates()
+//        animationPath = GMSMutablePath()
+//        animationPolyline = GMSPolyline()
+//        i = 0
+        
+        if let _ = pullController{
+            self.removePullUpController(pullController, animated: true)
+            
+        }
+    }
+    
+    
+ }
  
  
 

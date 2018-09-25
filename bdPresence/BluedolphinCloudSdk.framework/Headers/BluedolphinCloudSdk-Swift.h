@@ -432,6 +432,7 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk19LocationHistoryData")
 
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk18MyTeamDetailsModel")
 @interface MyTeamDetailsModel : NSObject
++ (void)getUserDobjIdWithQuery:(NSString * _Nonnull)query;
 + (void)getTeamMemberWithUserId:(NSString * _Nonnull)userId;
 + (void)removeUnnecessaryData;
 + (void)callBackWithStatus:(BOOL)status;

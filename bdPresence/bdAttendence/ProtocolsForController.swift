@@ -38,3 +38,7 @@ protocol PolylineStringDelegate {
 protocol GeoTagLocationDelegate {
     func handleTap(currentIndex: Int)
 }
+
+protocol ServerDataFromClusterDelegate{
+    func dataFromServer(locationData: [UserDetailsDataModel], headerData: [String])
+}

@@ -23,7 +23,7 @@ class UserDetailsDataModel{
     var checkInId = ""
     var latitude: String?
     var longitude: String?
-    var distance: Int?
+    var distance: Double?
     var startTime: Date?
     
 }

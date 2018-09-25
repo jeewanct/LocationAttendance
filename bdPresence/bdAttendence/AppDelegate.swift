@@ -65,8 +65,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .Release:
             print("In Release")
             ConfigurationModel.stopDebugging(flag: true)
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+            ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
             Fabric.with([Crashlytics.self])
+            
+            //https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/
+            
+            
         case .Unknown:
             print("In unknown")
             break
@@ -144,6 +148,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let superController = SuperViewController()
                 superController.geoTagPermission()
                 superController.getPlacesAfterTenMinutes()
+                
+                if SDKSingleton.sharedInstance.CheckinsObjectId == ""{
+                    GetCheckinsData.getCheckinsId()
+                }
                 
                 
                 if let lastAssignmentFetched = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastAssignmentFetched.rawValue) as? Date {
