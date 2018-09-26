@@ -223,6 +223,8 @@ extension MyTeamLocationDetails{
             if let distance = index.distance{
                 
                 rawCheckIn.distance = Double(distance) / 1000
+                
+                
             }
             
             

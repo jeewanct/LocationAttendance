@@ -91,13 +91,13 @@ class ClusterDataFromServer{
         for location in locationData {
             
             if let distanceDb = location.distance{
-                distance = distance + distanceDb
+                distance = distance + distanceDb 
             }
             
             
         }
         
-        headerData.append(String(distance))
+        headerData.append(String(distance.roundToDecimal(2)))
         
         headerData.append(String(locationData.count))
         
