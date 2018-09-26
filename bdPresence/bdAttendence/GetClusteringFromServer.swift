@@ -121,7 +121,7 @@ class ClusterDataFromServer{
                 if getDataIfAvail.count > 0 {
                     
                     if from != LocationDetailsScreenEnum.historyScreen{
-                        if Date().secondsFrom(valueForDashBoard) > 0{
+                        if Date().secondsFrom(valueForDashBoard) > 600{
                             GetClusteringFromServer.getDataOf(date: date)
                         }
                     }
@@ -322,6 +322,24 @@ class ClusterDataFromServer{
         return true
         
     }
+    
+    class func checkIfNewDataCameFromServer(firstData: [UserDetailsDataModel], secondData: [UserDetailsDataModel]) -> Bool{
+        
+        if let firstElementPrevious = firstData.first, let secondElementPrevious = secondData.first{
+            
+            if firstElementPrevious.lastSeen == secondElementPrevious.lastSeen{
+                return false
+            }else{
+                return true
+            }
+           
+        }
+        
+        return true
+        
+        
+    }
+    
     
 }
 

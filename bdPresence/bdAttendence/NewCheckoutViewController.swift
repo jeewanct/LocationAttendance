@@ -155,7 +155,10 @@ class NewCheckoutViewController: UIViewController {
 extension NewCheckoutViewController{
     
     func getDataFromCheckin(){
-        updateView()
+                        let locationFilters = LocationFilters()
+                        locationFilters.delegate = self
+                        locationFilters.plotMarkers(date: Date())
+       // updateView()
     }
     
     
@@ -657,6 +660,8 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
     
     func finalLocations(locations: [LocationDataModel]) {
         
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        
         let allLocations = UserPlace.getGeoTagData(location: LogicHelper.shared.sortOnlyLocations(location: locations))
        
         let locations = ClusterDataFromServer.convertDataToUserModel(locationData: LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed())
@@ -675,6 +680,22 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
 extension NewCheckoutViewController: ServerDataFromClusterDelegate{
     func dataFromServer(locationData: [UserDetailsDataModel], headerData: [String]) {
         
+        
+        if let controller = pullController{
+            
+            if  ClusterDataFromServer.checkIfNewDataCameFromServer(firstData: controller.userDetails, secondData: locationData){
+                showPullController(locationData: locationData, headerData: headerData)
+            }
+            
+        }else{
+            showPullController(locationData: locationData, headerData: headerData)
+            
+        }
+        
+        
+    }
+    
+    func showPullController(locationData: [UserDetailsDataModel], headerData: [String]){
         clearMapData()
         pullController = UIStoryboard(name: "NewDesign", bundle: nil)
             .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
@@ -688,8 +709,6 @@ extension NewCheckoutViewController: ServerDataFromClusterDelegate{
         let polyLine = DrawPolyLineInMap()
         polyLine.delegate = self
         polyLine.getPolyline(location: locationData)
-        
-        
     }
     
     

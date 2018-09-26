@@ -103,7 +103,12 @@ extension HistoryViewController{
     }
     
     func getDataFromCheckin(){
-        updateView(date: currentDisplayDate)
+        
+        let locationFilters = LocationFilters()
+        locationFilters.delegate = self
+        locationFilters.plotMarkers(date: currentDisplayDate)
+        
+        //updateView(date: currentDisplayDate)
         
     }
     
@@ -406,7 +411,7 @@ extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate
     
     func finalLocations(locations: [LocationDataModel]) {
        // self.plotMarkersInMap(location: LogicHelper.shared.sortOnlyLocations(location: locations))
-   
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         let allLocations = UserPlace.getGeoTagData(location: LogicHelper.shared.sortOnlyLocations(location: locations))
         
         let locations = ClusterDataFromServer.convertDataToUserModel(locationData: LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed())
