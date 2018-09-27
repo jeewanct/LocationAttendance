@@ -48,15 +48,7 @@ class MyDashboardViewController: UIViewController {
             default:
                 break
             }
-            
             updateChildController(destVc: destVc)
-            
-            
-            
-//            destVc.view.transform = CGAffineTransform(translationX:0 , y: containerView.frame.size.height)
-//            UIView.animate(withDuration: 0.3) {
-//                destVc.view.transform = CGAffineTransform(translationX: 0, y: 0)
-//            }
             constraintViewEqual(view1: containerView, view2: destVc.view)
             
             

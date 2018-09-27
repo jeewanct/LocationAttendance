@@ -124,6 +124,18 @@ class ClusterDataFromServer{
                         if Date().secondsFrom(valueForDashBoard) > 600{
                             GetClusteringFromServer.getDataOf(date: date)
                         }
+                    }else{
+                        
+                        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+                            
+                            if screenFlag == "2" && !RMCNotifier.shared.getShiftRunningStatus(){
+                                if UserDayData.checkIfPendingCheckinsFound(date: date){
+                                    GetClusteringFromServer.getDataOf(date: date)
+                                    GetClusteringFromServer.getDataOf(date: date)
+                                }
+                            }
+                        }
+                        
                     }
                     
                     let headerData = getHeaderData(locationData: getDataIfAvail)

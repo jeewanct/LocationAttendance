@@ -103,9 +103,16 @@ class SideMenuViewController: UIViewController  {
             imageNotAvaiableLbl.isHidden = false
             imageNotAvaiableLbl.text = SDKSingleton.sharedInstance.userName.getImageFromText()
         }
-        let indexPath = IndexPath(row: menuindex, section: 0)
-        //self.tableView(sideMenuTable, didSelectRowAt: indexPath)
-       // sideMenuTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
+        
+        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+            
+            if screenFlag == "2" && !RMCNotifier.shared.getShiftRunningStatus(){
+                let indexPath = IndexPath(row: 1, section: 0)
+                self.tableView(sideMenuTable, didSelectRowAt: indexPath)
+                sideMenuTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
+            }
+        }
+    
        
     }
     
