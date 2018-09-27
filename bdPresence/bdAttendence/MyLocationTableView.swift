@@ -117,6 +117,7 @@ class MyLocationTableView: PullUpController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         headerVisualEffectView.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
     }
     

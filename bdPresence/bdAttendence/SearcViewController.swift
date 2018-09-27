@@ -254,12 +254,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 LocationAttendanceLogModel.addAddressToCheckins(checkInId: self.userDetails[start].checkInId, address: addrress)
                 
-                self.userDetails[start].address =  addrress
-                cell.addressLabel.text = addrress
-                let reloadIndex = IndexPath(item: start, section: 0)
-                DispatchQueue.main.async {
-                  self.tableView.reloadRows(at: [reloadIndex], with: .automatic)
-                }
+//                self.userDetails[start].address =  addrress
+//                cell.addressLabel.text = addrress
+//                let reloadIndex = IndexPath(item: start, section: 0)
+//                DispatchQueue.main.async {
+//                  self.tableView.reloadRows(at: [reloadIndex], with: .automatic)
+//                }
                 
                 
             }
