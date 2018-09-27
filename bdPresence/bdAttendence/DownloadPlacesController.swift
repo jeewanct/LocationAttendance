@@ -53,6 +53,10 @@ class DownloadPlaceController: UIViewController{
     }
     
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @objc func handleUpdate(){
         
         
@@ -78,53 +82,67 @@ class DownloadPlaceController: UIViewController{
     }
     
     
+    
     func getCallBack(notification: Notification){
-        progressValue  = progressValue + 1
         
-        if let userInfo = notification.userInfo as? [String: Any]{
-            
-            if let from = userInfo["from"] as? String{
-                
-                
-                
-                if from == "history" {
-                    if let value = userInfo["status"] as? Bool{
-                        
-                            UserDefaults.standard.setValue(value, forKey: "historyDataFetched")
-                       
-                        
-                    }
-                }else{
-                    if let value = userInfo["status"] as? Bool{
-                        
-                        if value == true{
-                            
-                       // UserDefaults.standard.setValue(LogicHelper.shared.timeInSeconds, forKey: "RMCPlacesDuration")
-                        UserDefaults.standard.set( Date(), forKey: "RMCPlacesDuration")
-                           
-                            
-                        }
-                        
-                    }
-                }
-                
-            }
+        progressValue = progressValue + 1
+        if progressValue == 2 {
+            goToHome()
         }
         
-       // if progressValue == 2{
-            goToHome()
-       // }
         
         
     }
     
     
+    
+//    func getCallBack(notification: Notification){
+//        progressValue  = progressValue + 1
+//
+//        if let userInfo = notification.userInfo as? [String: Any]{
+//
+//            if let from = userInfo["from"] as? String{
+//
+//
+//
+//                if from == "history" {
+//                    if let value = userInfo["status"] as? Bool{
+//
+//                            UserDefaults.standard.setValue(value, forKey: "historyDataFetched")
+//
+//
+//                    }
+//                }else{
+//                    if let value = userInfo["status"] as? Bool{
+//
+//                        if value == true{
+//
+//                       // UserDefaults.standard.setValue(LogicHelper.shared.timeInSeconds, forKey: "RMCPlacesDuration")
+//                        //UserDefaults.standard.set( Date(), forKey: "RMCPlacesDuration")
+//
+//
+//                        }
+//
+//                    }
+//                }
+//
+//            }
+//        }
+//
+//       // if progressValue == 2{
+//            goToHome()
+//       // }
+//
+//
+//    }
+    
+    
     func goToHome(){
         
-        timer.invalidate()
-        progressBar.progressValue = 100
-        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-        UIApplication.shared.keyWindow?.rootViewController = destVC
+            timer.invalidate()
+            progressBar.progressValue = 100
+            let destVC = self.storyboard?.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+            UIApplication.shared.keyWindow?.rootViewController = destVC
         
     }
     

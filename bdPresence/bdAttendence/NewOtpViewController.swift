@@ -123,6 +123,8 @@ class NewOtpViewController: UIViewController {
         activityIndicator = ActivityIndicatorView()
         
         view.showActivityIndicator(activityIndicator: activityIndicator)
+        
+        
         UserDataModel.userSignUp(param:objectdata) { (value) in
             //        AlertView.sharedInstance.hideActivityIndicator(self.view)
             
@@ -153,13 +155,21 @@ class NewOtpViewController: UIViewController {
                     getUserData()
                     //self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
                     if isInternetAvailable(){
+                        
+                        self.activityIndicator = ActivityIndicatorView()
+                        self.view.showActivityIndicator(activityIndicator: self.activityIndicator)
+                        
                         checkShiftStatus { (apiResultStatus) in
+                            
+                            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
                             
                             if apiResultStatus == APIResult.Success {
                                 
                                 self.goToHome()
                                 
                             }
+                            
+                            
                         }
                         
                     }

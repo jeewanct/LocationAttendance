@@ -406,13 +406,13 @@ extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: type.rawValue)
     }
-    
-    
-    
+
     func finalLocations(locations: [LocationDataModel]) {
        // self.plotMarkersInMap(location: LogicHelper.shared.sortOnlyLocations(location: locations))
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         let allLocations = UserPlace.getGeoTagData(location: LogicHelper.shared.sortOnlyLocations(location: locations))
+        mapView.addMarkersInMap(allLocations: allLocations)
+        
         
         let locations = ClusterDataFromServer.convertDataToUserModel(locationData: LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed())
         let headerData = ClusterDataFromServer.getHeaderData(locationData: locations)

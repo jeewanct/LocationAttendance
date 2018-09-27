@@ -171,7 +171,11 @@ class ClusterDataFromServer{
                 let userData = UserDetailsDataModel()
                 
                 
+                
                 for locationDetail in location{
+                    
+                    
+                    userData.startTime = locationDetail.lastSeen
                     
                     if let canGeoTag = UserDefaults.standard.value(forKey: "canGeoTag") as? Bool{
                         

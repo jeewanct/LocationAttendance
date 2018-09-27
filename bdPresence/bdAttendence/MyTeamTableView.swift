@@ -28,11 +28,8 @@ class MyTeamTableView: PullUpController{
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var secondPreviewHeightAnchor: NSLayoutConstraint!
     @IBOutlet weak var secondPreviewHeight: UIView!
-   @IBOutlet weak var secondPreviewView: UIView!
-    
+    @IBOutlet weak var secondPreviewView: UIView!
     @IBOutlet weak var firstPreviewView: UIView!
-  
-  
     @IBOutlet weak var tableView: UITableView!
     
     var teamData: [MyTeamData]?{

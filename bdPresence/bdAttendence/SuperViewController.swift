@@ -151,7 +151,7 @@ class SuperViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.ShowController(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyTeam.rawValue), object: nil)
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.getPlacesAfterTenMinutes), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: nil)
+       // NotificationCenter.default.addObserver(self, selector: #selector(SuperViewController.getPlacesAfterTenMinutes), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlaceWakeUpCall.rawValue), object: nil)
         
         
         
@@ -789,9 +789,9 @@ extension SuperViewController{
     
     func getPlacesAfterTenMinutes(){
         
-        if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
+        if let getPlacesSeconds = UserDefaults.standard.value(forKey: UserDefaultsKeys.RMCData.rawValue) as? Date{
             
-        
+    
             if Date().secondsFrom(getPlacesSeconds) > CONFIG.RMCCHECKINTERVAL{
                 
                 self.performSelector(inBackground: #selector(SuperViewController.getPlaces), with: nil)
@@ -860,6 +860,7 @@ extension SuperViewController{
 
         return Int(timeInterval)
     }
+    
     
 }
 

@@ -29,17 +29,7 @@ class NewCheckoutViewController: UIViewController {
     
     @IBOutlet weak var shiftSyncBarBtn: UIBarButtonItem!
     
-    
-    
     var activityIndicator: ActivityIndicatorView?
-    var polyline = GMSPolyline()
-    var animationPolyline = GMSPolyline()
-    var path = GMSMutablePath()
-    var animationPath = GMSMutablePath()
-    var i: UInt = 0
-    var timer: Timer!
-    var animate = false
-    
     var pullController: SearchViewController!
     
     
@@ -56,29 +46,12 @@ class NewCheckoutViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       
-       
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateView()
         
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        animate = false
-        if let _ = self.timer {
-            self.timer.invalidate()
-            self.timer = nil
-        }
-        
-        
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -138,14 +111,14 @@ class NewCheckoutViewController: UIViewController {
     
     
     
-    func updateAddress(sender: NSNotification) {
-        DispatchQueue.main.async {
-            
-            self.lastCheckinAddressLabel.text = CurrentLocation.address
-            
-        }
-    }
-    
+    //    func updateAddress(sender: NSNotification) {
+    //        DispatchQueue.main.async {
+    //
+    //            self.lastCheckinAddressLabel.text = CurrentLocation.address
+    //
+    //        }
+    //    }
+    //
     
     
 }
@@ -155,20 +128,21 @@ class NewCheckoutViewController: UIViewController {
 extension NewCheckoutViewController{
     
     func getDataFromCheckin(){
-                        let locationFilters = LocationFilters()
-                        locationFilters.delegate = self
-                        locationFilters.plotMarkers(date: Date())
-       // updateView()
+       // self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        let locationFilters = LocationFilters()
+        locationFilters.delegate = self
+        locationFilters.plotMarkers(date: Date())
+        // updateView()
     }
     
     
     func addObservers(){
-        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.showView), name: NSNotification.Name(rawValue: "CheckInsFromServer"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.getDataFromCheckin), name: NSNotification.Name(rawValue: "CheckInsFromServerWithZeroElements"), object: nil)
         
         
-          NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
     }
     
     func setupNavigationBar(){
@@ -191,62 +165,13 @@ extension NewCheckoutViewController{
         
     }
     
-    func getPlacesAfterTenMinutes(){
-        
-        
-        if let getPlacesSeconds = UserDefaults.standard.value(forKey: "RMCPlacesDuration") as? Date{
-            
-            
-            if Date().secondsFrom(getPlacesSeconds) > 0{
-                
-                self.performSelector(inBackground: #selector(NewCheckoutViewController.getPlaces), with: nil)
-                //RMCPlacesManager.getPlaces()
-                
-                //                placeIndicator = UIView.fromNib()
-                //
-                //                if let indicator = placeIndicator{
-                //                    indicator.todaysDateLbl.startAnimating()
-                //                    indicator.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-                //                    view.addSubview(indicator)
-                //                  //  view.addConstraints(indicator: indicator)
-                //                }
-                
-                
-            }//else{
-            //                activityIndicator = ActivityIndicatorView()
-            //                if let indicator = activityIndicator{
-            //                    view.showActivityIndicator(activityIndicator: indicator)
-            //                }
-            //
-            //                updateView()
-            //            }
-            
-        }else{
-            
-            //            placeIndicator = UIView.fromNib()
-            //
-            //            if let indicator = placeIndicator{
-            //                indicator.todaysDateLbl.startAnimating()
-            //                indicator.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-            //                view.addSubview(indicator)
-            //                //  view.addConstraints(indicator: indicator)
-            //            }
-            self.performSelector(inBackground: #selector(NewCheckoutViewController.getPlaces), with: nil)
-            //RMCPlacesManager.getPlaces()
-        }
-        
-    }
-    
-    
-    func getPlaces(){
-        RMCPlacesManager.getPlaces()
-    }
     
     func setupGestures(){
         swipedown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipedown?.direction = .down
         setupSwipeFeature()
     }
+    
     
     func setupSwipeFeature(){
         if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String {
@@ -274,8 +199,7 @@ extension NewCheckoutViewController{
     
     
     func handleGesture(sender:UIGestureRecognizer){
-        //print(dataArray)
-        //Sourabh - When swiped down then we will not allow SDK to work as accordingly in RMCNotifier
+        
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipeDown.rawValue)
@@ -326,17 +250,6 @@ extension NewCheckoutViewController{
     
     func clearMapData(){
         mapView.clear()
-        if let _ = timer{
-            timer.invalidate()
-            timer = nil
-        }
-        
-//        polyline = GMSPolyline()
-//        path.removeAllCoordinates()
-//        animationPath = GMSMutablePath()
-//        animationPolyline = GMSPolyline()
-//        i = 0
-        
         if let _ = pullController{
             self.removePullUpController(pullController, animated: true)
             
@@ -360,25 +273,27 @@ extension NewCheckoutViewController{
         
         if let data = notification.userInfo as? [String: Any]{
             
-            if let checkInId = data["checkInId"] as? String{
-                 updateView()
-                //checkIfNewLocationAdded(checkinId: checkInId)
-            }
-            
-            
-            if let status = data["status"] as? Bool{
-                if status == true{
-                    UserDefaults.standard.set(Date(), forKey: "RMCPlacesDuration")
+            if let _ = data["checkInId"] as? String{
+                
+                if let value = UserDefaults.standard.value(forKey: "lastDashboardUpdate") as? Date{
+                    if Date().secondsFrom(value) > 50{
+                        updateView()
+                    }
+                }else{
+                    updateView()
                 }
+                
+                let superController = SuperViewController()
+                superController.getPlacesAfterTenMinutes()
             }
+            
+        
+            
+            
         }
         
-        
-        
-        
     }
-    
-    
+
     
     func updateView(date:Date = Date()){
         
@@ -422,16 +337,10 @@ extension NewCheckoutViewController{
                         self.view.showActivityIndicator(activityIndicator: activityIndicator)
                     }
                     
-                   
+                    
                     
                     
                 }
-                
-                
-                
-                //                let locationFilters = LocationFilters()
-                //                locationFilters.delegate = self
-                //                locationFilters.plotMarkers(date: date)
                 
             }
             
@@ -461,7 +370,7 @@ extension NewCheckoutViewController{
     
     func showView(notification: Notification){
         
-    
+        
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         
         if let clusterData = ClusterDataFromServer.showView(date: Date(), notification: notification){
@@ -485,154 +394,8 @@ extension NewCheckoutViewController{
             
         }
         
-        //clusterData.showView(notification: notification)
-        
-        //        if let activity = activityIndicator{
-        //            self.view.removeActivityIndicator(activityIndicator: activity)
-        //        }
-        //
-        //
-        //        if let userNotification  = notification.userInfo as? [String: Any]{
-        //
-        //            if let error = userNotification["status"] as? Bool{
-        //
-        //                if !error{
-        //                    AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "Something went wrong.")
-        //                }else{
-        //
-        //                    UserDefaults.standard.set(Date(), forKey: "lastDashBoardUpdated")
-        //
-        //                    if let getDataIfAvail =  UserDayData.getLocationDataFromServer(date: Date()){
-        //
-        //                        if getDataIfAvail.count > 0{
-        //                            showDatabaseData(locationData: getDataIfAvail)
-        //                        }else{
-        //                            //                            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
-        //                            updateView()
-        //                        }
-        //
-        //
-        //
-        //                    }else{
-        //                        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
-        //                    }
-        //                }
-        //
-        //            }
-        //
-        //        }
-        
-        
-        
         
     }
-    
-    
-//    func plotMarkersInMap(location: [LocationDataModel]){
-//
-//        let allLocations = UserPlace.getGeoTagData(location: location)
-//        if let indicator = activityIndicator{
-//            self.view.removeActivityIndicator(activityIndicator: indicator)
-//        }
-//
-//
-//        //        if let getIndicator = placeIndicator{
-//        //            getIndicator.removeFromSuperview()
-//        //        }
-//
-//        clearMapData()
-//
-//        mapView.addMarkersInMap(allLocations: allLocations)
-//
-//        if allLocations.count != 0{
-//
-//
-//
-//            UI{
-//                self.pullController = UIStoryboard(name: "NewDesign", bundle: nil)
-//                    .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-//                self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
-//                self.pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
-//
-//                var headerData = [String]()
-//                if let firstData = allLocations.first{
-//                    if let startTime = firstData.first{
-//
-//                        if let lastSeen = startTime.lastSeen{
-//                            headerData.append(LogicHelper.shared.getLocationDate(date: lastSeen))
-//                        }
-//
-//
-//
-//                    }else{
-//                        headerData.append("")
-//                    }
-//                }
-//
-//                headerData.append("0.0")
-//
-//                headerData.append(String(allLocations.count))
-//
-//                self.pullController.distanceArray = headerData
-//
-//                self.addPullUpController(self.pullController, animated: true)
-//            }
-//
-//
-//            if !LogicHelper.shared.checkIfAllLocationsAreSame(locations: allLocations){
-//                let polyLine = PolyLineMap()
-//                polyLine.delegate = self
-//                // polyLine.allLocations = allLocations
-//                //polyLine.takePolyline()
-//                polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
-//            }
-//
-//
-//
-//        }
-//
-//
-//    }
-    
-//    func animatePolyline(){
-//        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
-//            // Put your code which should be executed with a delay here
-//            self.animatePolylinePath()
-//        })
-//    }
-//
-//
-//
-//    func animatePolylinePath() {
-//
-//        if (self.i < self.path.count()) {
-//            self.animationPath.add(self.path.coordinate(at: self.i))
-//            self.animationPolyline.path = self.animationPath
-//            self.animationPolyline.strokeColor = UIColor.gray
-//            self.animationPolyline.strokeWidth = 3
-//            self.animationPolyline.map = self.mapView
-//            self.i += 1
-//
-//
-//        }
-//        else {
-//            self.i = 0
-//            self.animationPath = GMSMutablePath()
-//            self.animationPolyline.map = nil
-//        }
-//
-//        if  UIApplication.shared.applicationState  == .background{
-//
-//        }else{
-//            if animate == true{
-//                animatePolyline()
-//            }
-//
-//        }
-//
-//
-//
-//    }
     
     
     
@@ -663,10 +426,13 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         
         let allLocations = UserPlace.getGeoTagData(location: LogicHelper.shared.sortOnlyLocations(location: locations))
-       
+        mapView.addMarkersInMap(allLocations: allLocations)
+        
+        
         let locations = ClusterDataFromServer.convertDataToUserModel(locationData: LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed())
         let headerData = ClusterDataFromServer.getHeaderData(locationData: locations)
         dataFromServer(locationData: locations, headerData: headerData)
+        
         
         
     }
@@ -678,8 +444,8 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
 
 
 extension NewCheckoutViewController: ServerDataFromClusterDelegate{
+    
     func dataFromServer(locationData: [UserDetailsDataModel], headerData: [String]) {
-        
         
         if let controller = pullController{
             
@@ -697,11 +463,15 @@ extension NewCheckoutViewController: ServerDataFromClusterDelegate{
     
     func showPullController(locationData: [UserDetailsDataModel], headerData: [String]){
         clearMapData()
+        
+        UserDefaults.standard.setValue(Date(), forKey: "lastDashboardUpdate")
+        
         pullController = UIStoryboard(name: "NewDesign", bundle: nil)
             .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
         pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
         
         mapView.addMarkersInMap(allLocations: locationData)
+        
         pullController.userDetails = locationData
         pullController.distanceArray = headerData
         self.addPullUpController(pullController, animated: true)
@@ -714,10 +484,4 @@ extension NewCheckoutViewController: ServerDataFromClusterDelegate{
     
     
 }
-
-
-
-
-
-
 
