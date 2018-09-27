@@ -547,13 +547,16 @@ class LogicHelper{
             seen.append(LogicHelper.shared.getLocationDate(date: startDate))
         }
         
-        if firstSeen == lastSeen {
-        } else {
-            if let endDate = lastSeen{
-                
+
+        
+        if let endDate = lastSeen{
+        
+            let lastSeenString = LogicHelper.shared.getLocationDate(date: endDate)
+            if seen != lastSeenString{
                 seen.append("-")
-                seen.append(LogicHelper.shared.getLocationDate(date: endDate))
+                seen.append(lastSeenString)
             }
+            
         }
         
         

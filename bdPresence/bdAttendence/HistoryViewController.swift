@@ -38,6 +38,7 @@ class HistoryViewController: UIViewController {
     var timer: Timer!
     var animate = false
     
+   
     
     //MARK: View Controller life cycle
     override func viewDidLoad() {
@@ -102,96 +103,41 @@ extension HistoryViewController{
     }
     
     func getDataFromCheckin(){
-        updateView(date: currentDisplayDate)
-        
-    }
-    
-    
-    func showDatabaseData(locationData: [UserDetailsDataModel]){
-       
-        
-        pullController = UIStoryboard(name: "NewDesign", bundle: nil)
-            .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-        pullController.screenType = LocationDetailsScreenEnum.historyScreen
-        
-        pullController.selectedDate = selectedDate
-        pullController.userDetails = locationData
-        
-        var headerData = [String]()
-        if let firstData = locationData.last{
-            if let startTime = firstData.startTime{
-                
-                 headerData.append(LogicHelper.shared.getLocationDate(date: startTime))
-                
-               
-            }else{
-                headerData.append("")
-            }
-        }
-        
-        var distance = 0
-        for location in locationData {
-            
-            if let distanceDb = location.distance{
-                distance = distance + distanceDb
-            }
-            
-            
-        }
-        
-        let floatDistance = (Float(distance))/1000
-        
-        headerData.append(String(format: "%.1f",floatDistance))
 
         
-        headerData.append(String(locationData.count))
+        let locationFilters = LocationFilters()
+        locationFilters.delegate = self
+        locationFilters.plotMarkers(date: currentDisplayDate)
         
-        pullController.distanceArray = headerData
-        
-        self.addPullUpController(pullController, animated: true)
-        
-        mapView.addMarkersInMap(allLocations: locationData)
-        
-        
-        let polyLine = DrawPolyLineInMap()
-        polyLine.delegate = self
-        polyLine.getPolyline(location: locationData)
-        
-        
+        //updateView(date: currentDisplayDate)
         
     }
+    
     
     func showView(notification: Notification){
         
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         
-        if let userNotification  = notification.userInfo as? [String: Any]{
+        if let clusterData = ClusterDataFromServer.showView(date: currentDisplayDate, notification: notification){
             
-            if let error = userNotification["status"] as? Bool{
-                
-                if !error{
-                    AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "Something went wrong.")
-                }else{
-                    if let getDataIfAvail =  UserDayData.getLocationDataFromServer(date: currentDisplayDate){
-                        
-                        if getDataIfAvail.count > 0{
-                             showDatabaseData(locationData: getDataIfAvail)
-                        }else{
-                           AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
-                        }
-                        
-                       
-                        
-                    }else{
-                        AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
-                    }
+            switch clusterData.showFrom{
+            case .Server:
+                if let headerData = clusterData.headerData, let locationData = clusterData.locationData{
+                    dataFromServer(locationData: locationData, headerData: headerData)
                 }
                 
+            case .LocalDatabase:
+                let locationFilters = LocationFilters()
+                locationFilters.delegate = self
+                locationFilters.plotMarkers(date: currentDisplayDate)
+                
+            case .NoCheckinFound:
+                print("hello")
+                
             }
- 
+            
+            
         }
-        
-        
     
         
     }
@@ -210,11 +156,6 @@ extension HistoryViewController{
         if let _ = pullController{
             self.removePullUpController(pullController, animated: true)
         }
-        if let _ = self.timer{
-            self.timer.invalidate()
-            self.timer = nil
-        }
-        animate = false
     }
     
     
@@ -251,6 +192,8 @@ extension HistoryViewController{
     
     
     func selectTodayDateInCalendar(){
+        
+     
         if let index = thisWeekDays.index(of: currentDisplayDate) {
             let indexPath = IndexPath(row: index, section: 0)
             self.collectionView(calenderView, didSelectItemAt: indexPath)
@@ -314,21 +257,27 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         self.applyForCell(indexPath) { cell in cell.highlight() }
         animate = false
         
-        if let getDataIfAvail =  UserDayData.getLocationDataFromServer(date: currentData){
+        
+        if let checkinsFromServer = ClusterDataFromServer.getDataFrom(date: currentData, from: LocationDetailsScreenEnum.historyScreen){
             
-            if getDataIfAvail.count > 0 {
-                showDatabaseData(locationData: getDataIfAvail)
+            if checkinsFromServer.showIndicator != true{
+                
+                if let locationData = checkinsFromServer.locationData, let headHeader = checkinsFromServer.headerData{
+                    
+                    dataFromServer(locationData: locationData, headerData: headHeader)
+                    
+                }
+                
             }else{
                 activityIndicator = ActivityIndicatorView()
-                GetClusteringFromServer.getDataOf(date: currentData)
+                self.view.showActivityIndicator(activityIndicator: activityIndicator)
             }
             
-        }else{
-            activityIndicator = ActivityIndicatorView()
-           GetClusteringFromServer.getDataOf(date: currentData)
+//            dataFromServer(locationData: checkinsFromServer.locationData, headerData: checkinsFromServer.headerData)
+            
         }
         
-        
+      
         
 
     }
@@ -362,7 +311,7 @@ extension HistoryViewController{
     func updateView(date:Date = Date()){
         
         activityIndicator = ActivityIndicatorView()
-        self.view.showActivityIndicator(activityIndicator: activityIndicator)
+        //self.view.showActivityIndicator(activityIndicator: activityIndicator)
         selectedDate = date
         
         let locationFilters = LocationFilters()
@@ -373,44 +322,68 @@ extension HistoryViewController{
     }
     
     
-    func plotMarkersInMap(location: [LocationDataModel]){
-        
-        let allLocations = UserPlace.getGeoTagData(location: location)
-        //var finalLocations = allLocations
-        
-        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-        
-        if allLocations.count != 0{
-            
-            clearMapData()
-            
-            mapView.addMarkersInMap(allLocations: allLocations)
-            pullController = UIStoryboard(name: "NewDesign", bundle: nil)
-                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-            pullController.screenType = LocationDetailsScreenEnum.historyScreen
-            
-            pullController.selectedDate = selectedDate
-            pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
-            
-            
-            
-            self.addPullUpController(pullController, animated: true)
-            
-            if !LogicHelper.shared.checkIfAllLocationsAreSame(locations: allLocations){
-                let polyLine = PolyLineMap()
-                polyLine.delegate = self
-                // polyLine.allLocations = allLocations
-                //polyLine.takePolyline()
-                polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
-            }
-            
-            
-//            let polyLine = PolyLineMap()
-//            polyLine.delegate = self
-//            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
-        }
-        
-    }
+//    func plotMarkersInMap(location: [LocationDataModel]){
+//        
+//        let allLocations = UserPlace.getGeoTagData(location: location)
+//        //var finalLocations = allLocations
+//        
+//        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+//        
+//        if allLocations.count != 0{
+//            
+//            clearMapData()
+//            
+//            mapView.addMarkersInMap(allLocations: allLocations)
+//            pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+//                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+//            pullController.screenType = LocationDetailsScreenEnum.historyScreen
+//            
+//            pullController.selectedDate = selectedDate
+//            pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
+//            
+//            
+//            
+//            var headerData = [String]()
+//            if let firstData = allLocations.first{
+//                if let startTime = firstData.first{
+//                    
+//                    if let lastSeen = startTime.lastSeen{
+//                        headerData.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+//                    }
+//                    
+//                    
+//                    
+//                }else{
+//                    headerData.append("")
+//                }
+//            }
+//            
+//            headerData.append("0.0")
+//            
+//            headerData.append(String(allLocations.count))
+//            
+//            self.pullController.distanceArray = headerData
+//            
+//            
+//            
+//            
+//            self.addPullUpController(pullController, animated: true)
+//            
+//            if !LogicHelper.shared.checkIfAllLocationsAreSame(locations: allLocations){
+//                let polyLine = PolyLineMap()
+//                polyLine.delegate = self
+//                // polyLine.allLocations = allLocations
+//                //polyLine.takePolyline()
+//                polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+//            }
+//            
+//            
+////            let polyLine = PolyLineMap()
+////            polyLine.delegate = self
+////            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
+//        }
+//        
+//    }
     
     
     
@@ -419,58 +392,9 @@ extension HistoryViewController{
        // animatePolyline()
         animate = true
     }
-    
-    func animatePolyline(){
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
-            // Put your code which should be executed with a delay here
-            self.animatePolylinePath()
-        })
-//        UIView.animate(withDuration: 0.003) {
-//             self.animatePolylinePath()
-//        }
-    
-    }
-    
-    
-    func animatePolylinePath() {
-        if (self.i < self.path.count()) {
-            self.animationPath.add(self.path.coordinate(at: self.i))
-            self.animationPolyline.path = self.animationPath
-            self.animationPolyline.strokeColor = UIColor.gray
-            self.animationPolyline.strokeWidth = 3
-            self.animationPolyline.map = self.mapView
-            self.i += 1
-        }
-        else {
-            self.i = 0
-            self.animationPath = GMSMutablePath()
-            self.animationPolyline.map = nil
-        }
-        
-        if  UIApplication.shared.applicationState  == .background{
-            
-        }else{
-            if animate == true{
-                animatePolyline()
-            }
-            
-        }
-    }
-    
+
     func clearMapData(){
         mapView.clear()
-        animationPolyline = GMSPolyline()
-        if let _ = timer{
-            timer.invalidate()
-            timer = nil
-        }
-        
-        polyline = GMSPolyline()
-        path.removeAllCoordinates()
-        animationPath = GMSMutablePath()
-        i = 0
-        
         if let _ = pullController{
             self.removePullUpController(pullController, animated: true)
             
@@ -487,18 +411,17 @@ extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate
     
     
     func finalLocations(locations: [LocationDataModel]) {
-        self.plotMarkersInMap(location: LogicHelper.shared.sortOnlyLocations(location: locations))
+       // self.plotMarkersInMap(location: LogicHelper.shared.sortOnlyLocations(location: locations))
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        let allLocations = UserPlace.getGeoTagData(location: LogicHelper.shared.sortOnlyLocations(location: locations))
+        
+        let locations = ClusterDataFromServer.convertDataToUserModel(locationData: LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed())
+        let headerData = ClusterDataFromServer.getHeaderData(locationData: locations)
+        dataFromServer(locationData: locations, headerData: headerData)
+    
     }
     
     func drawPolyline(coordinates: [CLLocationCoordinate2D]) {
-        
-        for coordinate in coordinates{
-            path.add(coordinate)
-            // animationPath.add(coordinate)
-        }
-        
-        polyline = GMSPolyline(path: path)
-        
         drawPath(coordinates: coordinates)
     }
     
@@ -506,3 +429,26 @@ extension HistoryViewController: LocationsFilterDelegate, PolylineStringDelegate
     
 }
 
+extension HistoryViewController: ServerDataFromClusterDelegate{
+    func dataFromServer(locationData: [UserDetailsDataModel], headerData: [String]) {
+        
+        clearMapData()
+        pullController = UIStoryboard(name: "NewDesign", bundle: nil)
+            .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+        pullController.screenType = LocationDetailsScreenEnum.historyScreen
+        
+        mapView.addMarkersInMap(allLocations: locationData)
+        pullController.userDetails = locationData
+        pullController.distanceArray = headerData
+        self.addPullUpController(pullController, animated: true)
+        
+        let polyLine = DrawPolyLineInMap()
+        polyLine.delegate = self
+        polyLine.getPolyline(location: locationData)
+        
+        
+    }
+    
+    
+    
+}

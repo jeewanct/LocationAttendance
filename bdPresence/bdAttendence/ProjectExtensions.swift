@@ -100,6 +100,13 @@ extension Date{
         // or capitalized(with: locale)
     }
     
+    func toString( dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+    
 }
 
 public extension DispatchQueue {
@@ -255,4 +262,12 @@ extension UIView {
         indicator.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
     }
     
+}
+
+
+extension Double {
+    func roundToDecimal(_ fractionDigits: Int) -> Double {
+        let multiplier = pow(10, Double(fractionDigits))
+        return Darwin.round(self * multiplier) / multiplier
+    }
 }

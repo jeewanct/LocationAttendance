@@ -104,22 +104,31 @@ class ActivityIndicatorView: UIView {
 
 
 extension UIView{
-    func showActivityIndicator(activityIndicator: ActivityIndicatorView){
+    func showActivityIndicator(activityIndicator: ActivityIndicatorView?){
+        
+        guard let indicator = activityIndicator else {
+            return
+        }
+        
         
         if let window = UIApplication.shared.keyWindow{
-            activityIndicator.activityIndicator.startAnimating()
-            window.addSubview(activityIndicator)
+            indicator.activityIndicator.startAnimating()
+            window.addSubview(indicator)
             
-            activityIndicator.topAnchor.constraint(equalTo: window.topAnchor).isActive = true
-             activityIndicator.leftAnchor.constraint(equalTo: window.leftAnchor).isActive = true
-             activityIndicator.rightAnchor.constraint(equalTo: window.rightAnchor).isActive = true
-             activityIndicator.bottomAnchor.constraint(equalTo: window.bottomAnchor).isActive = true
+            indicator.topAnchor.constraint(equalTo: window.topAnchor).isActive = true
+             indicator.leftAnchor.constraint(equalTo: window.leftAnchor).isActive = true
+             indicator.rightAnchor.constraint(equalTo: window.rightAnchor).isActive = true
+             indicator.bottomAnchor.constraint(equalTo: window.bottomAnchor).isActive = true
             
         }
     }
     
-    func removeActivityIndicator(activityIndicator: ActivityIndicatorView){
-        activityIndicator.close()
+    func removeActivityIndicator(activityIndicator: ActivityIndicatorView?){
+        
+        if let indicator = activityIndicator{
+            indicator.close()
+        }
+        
     }
     
 }

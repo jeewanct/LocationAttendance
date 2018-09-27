@@ -249,6 +249,7 @@ class NewOtpViewController: UIViewController {
         //showLoader()
         view.showActivityIndicator(activityIndicator: activityIndicator)
         
+        
         OTPModel.getOtp(mobile: mobileNumber, countryCode: "") { (result) in
             self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             switch (result){

@@ -16,3 +16,10 @@ enum LocationDetailsScreenEnum{
     case myTeamScreen
     
 }
+
+
+enum ShowCheckinFrom{
+    case Server
+    case LocalDatabase
+    case NoCheckinFound
+}

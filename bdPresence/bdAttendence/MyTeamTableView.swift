@@ -159,7 +159,7 @@ class MyTeamTableView: PullUpController{
                 
                // Change here coordinate not finding
                 
-                if let coordinates = location.checkinData?.location?.coordinates {
+                if let coordinates = location.lastCheckin?.checkinData?.location?.coordinates {
 
                     if coordinates.count > 0 {
 
@@ -169,15 +169,20 @@ class MyTeamTableView: PullUpController{
 
                         }else{
                             
-                            let location = LocationDataModel()
-                            location.latitude = String(CLLocationDegrees(coordinates[1]))
-                            location.longitude = String(CLLocationDegrees(coordinates[0]))
-                            
-                           let geoTagLocation =  UserPlace.getPlacesData(location: location, rmcPlaces: allGeoTagLocations)
-                            
+                            let locationChunk = LocationDataModel()
+                            locationChunk.latitude = String(CLLocationDegrees(coordinates[1]))
+                            locationChunk.longitude = String(CLLocationDegrees(coordinates[0]))
+
+                           let geoTagLocation =  UserPlace.getPlacesData(location: locationChunk, rmcPlaces: allGeoTagLocations)
+
                             if let _ = geoTagLocation{
                                 locations.address = geoTagLocation?.locationName
+                            }else{
+                                
                             }
+                            
+                            locations.address = location.lastCheckin?.checkinDetails?.address
+                            
                             
                             locations.cllocation = CLLocation(latitude: CLLocationDegrees(coordinates[1]), longitude: CLLocationDegrees(coordinates[0]))
                             
@@ -224,7 +229,7 @@ extension MyTeamTableView: UITableViewDelegate{
         
         if myTeamLocations[indexPath.item].address != "No location found"{
         let viewController = storyboard?.instantiateViewController(withIdentifier: "MyTeamLocationDetails") as! MyTeamLocationDetails
-        viewController.teamMemberUserId = teamData?[indexPath.item].userId
+        viewController.teamMemberUserId = teamData?[indexPath.item].userOb?.userId
         viewController.teamMemberUserName = teamData?[indexPath.item].userOb?.userDetails?.name
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -273,8 +278,9 @@ extension MyTeamTableView: UITableViewDataSource{
         }else{
             LogicHelper.shared.reverseGeoCodeGeoLocations(location: myTeamLocations[indexPath.item].cllocation, index1: indexPath.item, index2: 0) { (address, first, last) in
                 self.myTeamLocations[first].address = address
-                cell.locationLabel.text = address
-
+                
+                let indexPath = IndexPath(item: first, section: 0)
+                self.tableView.reloadRows(at: [indexPath], with: .bottom)
             }
         }
         

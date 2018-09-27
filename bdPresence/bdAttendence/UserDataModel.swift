@@ -273,8 +273,8 @@ class UserDayData {
                     
                   let locationValue = UserDetailsDataModel()
                     
-                    if let distance = location.distance, let convertedDistance = Int(distance){
-                         locationValue.distance = convertedDistance
+                    if let distance = location.distance, let convertedDistance = Double(distance){
+                         locationValue.distance = convertedDistance / 1000
                     }
                     
                     locationValue.startTime = location.startTime
