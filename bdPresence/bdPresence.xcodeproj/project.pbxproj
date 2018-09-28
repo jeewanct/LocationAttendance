@@ -1424,7 +1424,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bdAttendence/bdAttendence.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9S8FZ5YMQ4;
@@ -1449,6 +1449,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = bdPresenceDev;
+
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "bdAttendence/bdPresence-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
