@@ -136,6 +136,8 @@ class ClusterDataFromServer{
                             }
                         }
                         
+                        
+                        
                     }
                     
                     let headerData = getHeaderData(locationData: getDataIfAvail)
@@ -186,6 +188,9 @@ class ClusterDataFromServer{
                 
                 for locationDetail in location{
                     
+                    
+                    userData.latitude = locationDetail.latitude
+                    userData.longitude = locationDetail.longitude
                     
                     userData.startTime = locationDetail.lastSeen
                     

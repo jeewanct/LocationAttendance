@@ -300,6 +300,7 @@ class UserDayData {
                             if let placeName = value.placeAddress{
                                 locationValue.geoLocationName = placeName
                             }
+                            locationValue.address = value.placeDetails?.address
                             
                         }
                         

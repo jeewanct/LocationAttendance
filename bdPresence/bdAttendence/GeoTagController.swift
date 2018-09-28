@@ -114,6 +114,7 @@ class GeoTagController: UIViewController{
             
             geoFenceRadiusSlider.value = fenceRadius
             geoFenceRadiusDistance.text = "Geo fence radius - \(Int(fenceRadius))m"
+        
         }
         
         
@@ -304,6 +305,12 @@ class GeoTagController: UIViewController{
             
         else if saveLocationTextField.text == "" {
             return "Save as field cannot be empty"
+        }
+        
+        if let accuracy = Int(CurrentLocation.accuracy){
+            if accuracy > 100{
+                 return "Accuracy cannot be greater than 100"
+            }
         }
         
         return ""
