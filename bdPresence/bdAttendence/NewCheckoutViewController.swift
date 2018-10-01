@@ -48,8 +48,12 @@ class NewCheckoutViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateView()
         
+        if let locations = UserDayData.getLocationData(date: Date()){
+            if locations.count > 0 {
+                updateView()
+            }
+        }
     }
     
     
@@ -128,7 +132,7 @@ class NewCheckoutViewController: UIViewController {
 extension NewCheckoutViewController{
     
     func getDataFromCheckin(){
-       // self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         let locationFilters = LocationFilters()
         locationFilters.delegate = self
         locationFilters.plotMarkers(date: Date())
@@ -249,6 +253,7 @@ extension NewCheckoutViewController{
     }
     
     func clearMapData(){
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         mapView.clear()
         if let _ = pullController{
             self.removePullUpController(pullController, animated: true)
@@ -274,15 +279,7 @@ extension NewCheckoutViewController{
         if let data = notification.userInfo as? [String: Any]{
             
             if let _ = data["checkInId"] as? String{
-                
-                if let value = UserDefaults.standard.value(forKey: "lastDashboardUpdate") as? Date{
-                    if Date().secondsFrom(value) > 50{
-                        updateView()
-                    }
-                }else{
-                    updateView()
-                }
-                
+                updateView()
                 let superController = SuperViewController()
                 superController.getPlacesAfterTenMinutes()
             }
@@ -296,6 +293,20 @@ extension NewCheckoutViewController{
 
     
     func updateView(date:Date = Date()){
+        
+        
+        if let value = UserDefaults.standard.value(forKey: "lastDashboardUpdate") as? Date{
+            if Date().secondsFrom(value) > 5{
+                getServerData(date: date)
+            }
+        }else{
+            getServerData(date: date)
+        }
+        
+        
+    }
+    
+    func getServerData(date: Date){
         
         let isToday = Calendar.current.isDateInToday(date)
         if isToday{
@@ -321,6 +332,7 @@ extension NewCheckoutViewController{
                     
                 }
                 
+                UserDefaults.standard.setValue(Date(), forKey: "lastDashboardUpdate")
                 
                 if let checkinsFromServer = ClusterDataFromServer.getDataFrom(date: date, from: LocationDetailsScreenEnum.dashBoardScreen){
                     
@@ -466,7 +478,6 @@ extension NewCheckoutViewController: ServerDataFromClusterDelegate{
     func showPullController(locationData: [UserDetailsDataModel], headerData: [String]){
         clearMapData()
         
-        UserDefaults.standard.setValue(Date(), forKey: "lastDashboardUpdate")
         
         pullController = UIStoryboard(name: "NewDesign", bundle: nil)
             .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController

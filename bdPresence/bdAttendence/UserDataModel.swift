@@ -300,6 +300,7 @@ class UserDayData {
                             if let placeName = value.placeAddress{
                                 locationValue.geoLocationName = placeName
                             }
+                            locationValue.address = value.placeDetails?.address
                             
                         }
                         
@@ -393,5 +394,42 @@ class UserDayData {
             return elapsedTime;
         }
         return 0;
+    }
+    
+    
+    class func checkIfPendingCheckinsFound(date: Date) -> Bool{
+        
+        
+        let realm = try! Realm()
+        let weekDay = Calendar.current.component(.weekday, from: date)
+        let weekOfYear = Calendar.current.component(.weekOfYear, from: date)
+        //let frequencyGraphData = FrequencyBarGraphData()
+        
+        if let attendanceLogForToday = realm.objects(LocationAttendanceFromServerLog.self).filter("dayofWeek = %@","\(weekDay)").first, let attendanceLogLocal =  realm.objects(LocationAttendanceLog.self).filter("dayofWeek = %@","\(weekDay)").first{
+            if weekOfYear == Calendar.current.component(.weekOfYear, from: attendanceLogForToday.timeStamp!){
+                
+                
+                let serverData = attendanceLogForToday.cluster.sorted(byKeyPath: "startTime", ascending: false)
+                
+                let localDataCheckind = attendanceLogLocal.locationList.sorted(byKeyPath: "lastSeen", ascending: false)
+                
+                print(serverData.first)
+                print(localDataCheckind.first)
+                
+                if let lastlocalCheckin = localDataCheckind.first, let lastServerCheckin = serverData.first{
+                    
+                    if lastlocalCheckin.lastSeen != lastServerCheckin.endTime{
+                        return true
+                    }
+                    
+                    
+                }
+            }
+            
+        }
+    
+        return false
+    
+    
     }
 }

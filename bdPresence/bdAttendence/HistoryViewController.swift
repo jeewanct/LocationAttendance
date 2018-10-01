@@ -395,6 +395,7 @@ extension HistoryViewController{
 
     func clearMapData(){
         mapView.clear()
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         if let _ = pullController{
             self.removePullUpController(pullController, animated: true)
             

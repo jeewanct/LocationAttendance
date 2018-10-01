@@ -235,15 +235,8 @@ class SuperViewController: UIViewController {
                                 // with the userinfo will tell which type of chekin to be sent and do not check for blocker screen
                                 UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
                                 
-                                if let locations = UserDayData.getLocationData(date: Date()){
-                                    if locations.count > 0{
-                                        
-                                    }else{
-                                        appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
-                                    }
-                                }else{
+                                
                                     appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
-                                }
                                 
                                 appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
                                 
@@ -263,15 +256,9 @@ class SuperViewController: UIViewController {
                           //    appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
                             
                             
-                            if let locations = UserDayData.getLocationData(date: Date()){
-                                if locations.count > 0{
-                                    
-                                }else{
-                                    appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
-                                }
-                            }else{
+                            
                                 appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
-                            }
+                         
                             
                             appDelegate.postDataCheckin(userInteraction: .swipeUpAuto)
                             
@@ -666,6 +653,12 @@ extension SuperViewController{
                 print(id)
                 if !SDKSingleton.sharedInstance.DeviceUDID.isBlank && !id.isBlank{
                     if id.capitalized != SDKSingleton.sharedInstance.DeviceUDID.capitalized{
+                        deleteAllData()
+                        moveToFirstScreen()
+                        bdCloudStopMonitoring()
+                    }
+                } else {
+                    if id.isBlank {
                         deleteAllData()
                         moveToFirstScreen()
                         bdCloudStopMonitoring()

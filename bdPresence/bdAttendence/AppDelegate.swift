@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-        creatVisitLocation()
+      //  creatVisitLocation()
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
         //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
@@ -633,6 +633,38 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         print(response.notification.request.content)
         
         print("User Info = ",response.notification.request.content.userInfo.values)
+        
+        let result: NSDictionary = response.notification.request.content.userInfo as NSDictionary
+        let type =  result ["notificationType"] as! String
+        switch type {
+        case NotificationType.Welcome.rawValue:
+            break
+        case NotificationType.NewAssignment.rawValue , NotificationType.FirstCheckin.rawValue:
+            //self.showLocalNotification(userInfo)
+            break
+        case NotificationType.UpdatedAssignment.rawValue,NotificationType.NoCheckin.rawValue,NotificationType.testNotification.rawValue:
+            
+            break;
+        case NotificationType.AttendanceMarked.rawValue:
+            //pushAlertView(userInfo: result)
+            break
+        case NotificationType.MultipleLogout.rawValue:
+            
+            deleteAllData()
+            moveToFirstScreen()
+            bdCloudStopMonitoring()
+            //bdScanningStop()
+            break
+        default:
+            break
+            
+        }
+        
+        
+        
+        
+        
+        
         completionHandler()
     }
     
