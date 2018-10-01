@@ -463,7 +463,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         print("userInfo sourabh = \(userInfo)")
         //BackgroundDebug().write(string: "didReceiveRemoteNotification- SilentPush")
 
-        SavePushNotification.saveNotification(time: "\(userInfo)")
+        //SavePushNotification.saveNotification(time: "\(userInfo)")
         
         let state: UIApplicationState = application.applicationState
        
@@ -565,7 +565,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                         
                     }
                     
-                    completionHandler(.newData)
+                    //completionHandler(.newData)
 //                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: userInfo)
 //                    completionHandler(.newData)
 
@@ -575,7 +575,8 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
            
             
             
-        } else {
+        }
+        
             let result: NSDictionary = userInfo as NSDictionary
             let type =  result ["notificationType"] as! String
             switch type {
@@ -606,8 +607,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             //
             completionHandler(UIBackgroundFetchResult.newData)
 
-            
-        }
+        
         
         
     }
@@ -635,7 +635,9 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         print("User Info = ",response.notification.request.content.userInfo.values)
         
         let result: NSDictionary = response.notification.request.content.userInfo as NSDictionary
-        let type =  result ["notificationType"] as! String
+        guard let type =  result ["notificationType"] as? String else {
+            return
+        }
         switch type {
         case NotificationType.Welcome.rawValue:
             break
