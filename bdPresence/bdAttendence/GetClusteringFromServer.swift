@@ -131,13 +131,15 @@ class ClusterDataFromServer{
                             if screenFlag == "2" && !RMCNotifier.shared.getShiftRunningStatus(){
                                 if UserDayData.checkIfPendingCheckinsFound(date: date){
                                     GetClusteringFromServer.getDataOf(date: date)
+                                    //GetClusteringFromServer.getDataOf(date: date)
+                                }
+                            }else{
+                                if LogicHelper.compareDates(previous: date){
                                     GetClusteringFromServer.getDataOf(date: date)
                                 }
                             }
+
                         }
-                        
-                        
-                        
                     }
                     
                     let headerData = getHeaderData(locationData: getDataIfAvail)
