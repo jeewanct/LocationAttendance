@@ -26,9 +26,6 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var locationManager: CLLocationManager?
-    let center = UNUserNotificationCenter.current()
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         /*
@@ -73,14 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         
-        
-        
-        // Testing
-        center.requestAuthorization(options: [.alert, .sound]) { granted, error in
        
-        }
-        
-        
       //  creatVisitLocation()
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
@@ -659,11 +649,6 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             
         }
         
-        
-        
-        
-        
-        
         completionHandler()
     }
     
@@ -751,68 +736,4 @@ extension UIApplication{
         return pointedViewController
         
     }
-}
-
-
-
-//MARK: Extension for Place Visit loction Manager
-
-extension AppDelegate: CLLocationManagerDelegate{
-    
-    func creatVisitLocation(){
-        
-        locationManager = CLLocationManager()
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.startMonitoringVisits()
-        locationManager?.delegate = self
-        
-        
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
-        // create CLLocation from the coordinates of CLVisit
-       // let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
-        
-        locationManager?.stopUpdatingLocation()
-        locationManager?.stopMonitoringVisits()
-        
-        locationManager?.delegate = nil
-        locationManager = nil
-        
-        sendLocalNotification()
-        
-        let notifier = RMCNotifier.shared
-        if notifier.getShiftRunningStatus() {
-            let superViewController = SuperViewController()
-            superViewController.wakeUpCall(notify: NotifyingFrom.Normal)
-          //  bdCloudStartMonitoring()
-            //BlueDolphinManager.manager.startLocationMonitoring()
-        }
-//        else{
-//            bdCloudStopMonitoring()
-//        }
-        
-        // Get location description
-    }
-    
-    func sendLocalNotification(){
-        let content = UNMutableNotificationContent()
-        content.title = "Please notify iOS developer"
-        content.body = "\(Date()) send us the screenshot"
-        content.sound = .default()
-        
-        // 2
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "Testing", content: content, trigger: trigger)
-        
-        // 3
-        center.add(request, withCompletionHandler: nil)
-    }
-    
-    
-  
-    
-    
-    
 }
