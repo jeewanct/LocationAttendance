@@ -105,6 +105,7 @@ class FrequencyBarGraphData :NSObject  {
 
 
 class UserDayData {
+    
     class func getFrequencyBarData(date:Date) ->FrequencyBarGraphData{
         
 
@@ -199,7 +200,7 @@ class UserDayData {
     
     
     
-    class func getLocationData(date: Date) -> [LocationDataModel]?{
+    class func getLocationData(date: Date) -> ([LocationDataModel]?){
         
         let realm = try! Realm()
         let weekDay = Calendar.current.component(.weekday, from: date)
@@ -247,6 +248,31 @@ class UserDayData {
         }
         
         return nil
+        
+    }
+    
+    
+    class func isUserAvailableAtDate(date: Date) -> Bool{
+       
+        let realm = try! Realm()
+        let weekDay = Calendar.current.component(.weekday, from: date)
+        let weekOfYear = Calendar.current.component(.weekOfYear, from: date)
+        //let frequencyGraphData = FrequencyBarGraphData()
+        
+        if let attendanceLogForToday = realm.objects(LocationAttendanceFromServerLog.self).filter("dayofWeek = %@","\(weekDay)").first {
+          
+            for index in attendanceLogForToday.avability{
+                
+                if let firstDate = index.availableFrom, let secondDate = index.availableTo{
+
+                    let fallsBetween = (firstDate ... secondDate).contains(Date())
+                    return fallsBetween
+
+                }
+            }
+        }
+        
+        return true
         
     }
     

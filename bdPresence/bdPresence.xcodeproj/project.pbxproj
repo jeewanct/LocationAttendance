@@ -147,8 +147,6 @@
 		99FCB0CC1EFBD22A0022AF61 /* NewCheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CB1EFBD22A0022AF61 /* NewCheckinViewController.swift */; };
 		99FCB0CE1EFBF73C0022AF61 /* NewCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCB0CD1EFBF73C0022AF61 /* NewCheckoutViewController.swift */; };
 		A52B90672101E2EE005056AB /* MyTeamViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52B90662101E2EE005056AB /* MyTeamViewCell.swift */; };
-		C8286F2F211AF2D8007E290C /* BluedolphinCloudSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8286F2B2119B9E1007E290C /* BluedolphinCloudSdk.framework */; };
-		C8286F30211AF2D8007E290C /* BluedolphinCloudSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C8286F2B2119B9E1007E290C /* BluedolphinCloudSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C89A35D320C16AC7000D5FFD /* BackgroundDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */; };
 		C8CBF8D420E3CB4A00D84C89 /* ReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CBF8D320E3CB4A00D84C89 /* ReleaseType.swift */; };
 /* End PBXBuildFile section */
@@ -177,7 +175,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C8286F30211AF2D8007E290C /* BluedolphinCloudSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,7 +376,6 @@
 		A51CA9915A91932E76D05C3D /* Pods-bdPresenceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceTests/Pods-bdPresenceTests.release.xcconfig"; sourceTree = "<group>"; };
 		A52B90662101E2EE005056AB /* MyTeamViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamViewCell.swift; sourceTree = "<group>"; };
 		B795CB9745F44FE3D32B0557 /* Pods-bdPresenceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdPresenceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bdPresenceUITests/Pods-bdPresenceUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		C8286F2B2119B9E1007E290C /* BluedolphinCloudSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BluedolphinCloudSdk.framework; sourceTree = "<group>"; };
 		C89A35D220C16AC7000D5FFD /* BackgroundDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDebug.swift; sourceTree = "<group>"; };
 		C8B05B542139626400C070CA /* GMUClusterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUClusterManager.m; sourceTree = "<group>"; };
 		C8B05B582139626400C070CA /* GMUGridBasedClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGridBasedClusterAlgorithm.m; sourceTree = "<group>"; };
@@ -418,7 +414,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8286F2F211AF2D8007E290C /* BluedolphinCloudSdk.framework in Frameworks */,
 				53443416BE6265BEB125F7FB /* Pods_bdPresence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,7 +642,6 @@
 			isa = PBXGroup;
 			children = (
 				999FB43320F61368000ABA7D /* BDFF-README.md */,
-				C8286F2B2119B9E1007E290C /* BluedolphinCloudSdk.framework */,
 				99BD39A01EA49B7100B6942B /* bdAttendence */,
 				99BD399F1EA49B7100B6942B /* Products */,
 				DF78D011E002203932CCD6B2 /* Frameworks */,

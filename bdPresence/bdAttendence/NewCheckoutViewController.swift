@@ -29,7 +29,7 @@ class NewCheckoutViewController: UIViewController {
     
     @IBOutlet weak var shiftSyncBarBtn: UIBarButtonItem!
     
-    var activityIndicator: ActivityIndicatorView?
+    var activityIndicator =  ActivityIndicatorView()
     var pullController: SearchViewController!
     
     
@@ -56,6 +56,12 @@ class NewCheckoutViewController: UIViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,11 +73,11 @@ class NewCheckoutViewController: UIViewController {
         
         activityIndicator = ActivityIndicatorView()
         
-        self.view.showActivityIndicator(activityIndicator: activityIndicator!)
+        self.view.showActivityIndicator(activityIndicator: activityIndicator)
         let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)! + AppConstants.AssignmentUrls.query
         
         AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
-            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator!)
+            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             UI {
                 print("completionstatus = \(completionStatus)")
                 if completionStatus == "Success" {
@@ -80,24 +86,13 @@ class NewCheckoutViewController: UIViewController {
                 
                 if AssignmentModel.statusOfUser() {
                     
-                    bdCloudStopMonitoring()
-                    //                    self.shiftSyncBarBtn.isEnabled = true
-                    //                    self.shiftSyncBarBtn.tintColor = APPColor.BlueGradient
-                    UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
-                    UI {
-                        if isInternetAvailable(){
-                            CheckinModel.postCheckin()
-                        }
-                        
-                    }
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+                    self.callDashboard()
+                    
                     
                 } else {
                     
                     bdCloudStartMonitoring()
                     UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
-                    //                    self.shiftSyncBarBtn.isEnabled = false
-                    //                    self.shiftSyncBarBtn.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
                     
                 }
             }
@@ -106,6 +101,32 @@ class NewCheckoutViewController: UIViewController {
         
         
     }
+    
+    
+    func callDashboard(){
+        bdCloudStopMonitoring()
+        //                    self.shiftSyncBarBtn.isEnabled = true
+        //                    self.shiftSyncBarBtn.tintColor = APPColor.BlueGradient
+        UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
+        UI {
+            if isInternetAvailable(){
+                CheckinModel.postCheckin()
+            }
+            
+        }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+        
+    }
+    
+    func userAvailable(){
+        
+        bdCloudStartMonitoring()
+        UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.Dashboard.rawValue), object: self, userInfo: nil)
+        
+    }
+    
     
     
     deinit {
@@ -336,6 +357,10 @@ extension NewCheckoutViewController{
                 
                 if let checkinsFromServer = ClusterDataFromServer.getDataFrom(date: date, from: LocationDetailsScreenEnum.dashBoardScreen){
                     
+                    if checkinsFromServer.isAvailable == false{
+                        callDashboard()
+                    }else{
+                    
                     if checkinsFromServer.showIndicator != true{
                         
                         if let locationData = checkinsFromServer.locationData, let headHeader = checkinsFromServer.headerData{
@@ -347,6 +372,8 @@ extension NewCheckoutViewController{
                     }else{
                         activityIndicator = ActivityIndicatorView()
                         self.view.showActivityIndicator(activityIndicator: activityIndicator)
+                    }
+                        
                     }
                     
                     
@@ -398,6 +425,14 @@ extension NewCheckoutViewController{
                 locationFilters.delegate = self
                 locationFilters.plotMarkers(date: Date())
                 
+            case .Avaibilty:
+                if clusterData.avaibiltyStatus == false{
+                    userAvailable()
+                }else{
+                    callDashboard()
+                }
+               
+                
             case .NoCheckinFound:
                 print("hello")
                 
@@ -415,9 +450,9 @@ extension NewCheckoutViewController{
 
 extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
     func onFailure(type: ErrorMessages) {
-        if let indicator = activityIndicator{
-            self.view.removeActivityIndicator(activityIndicator: indicator)
-        }
+        
+            self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+       
         
         if type == .noCheckInFound{
         }else{

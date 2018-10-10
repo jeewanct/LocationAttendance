@@ -163,13 +163,19 @@ class GeoTagController: UIViewController{
             geoTag.latitude = getPlacesFromGoogle.coordinate?.latitude
             geoTag.longitude = getPlacesFromGoogle.coordinate?.longitude
             geoTag.placeAddress = getPlacesFromGoogle.formattedAddress
-            geoTag.accuracy = "0"
-            geoTag.altitude = "0"
+            geoTag.accuracy = 0
+            geoTag.altitude = 0
             
         }else{
             
-            geoTag.accuracy = CurrentLocation.accuracy
-            geoTag.altitude = CurrentLocation.altitude
+            if let accuracy = Double(CurrentLocation.accuracy){
+                geoTag.accuracy = accuracy
+            }
+            
+            if let altitude = Double(CurrentLocation.altitude){
+                geoTag.altitude = altitude
+            }
+            
             
             
             geoTag.latitude = CurrentLocation.coordinate.latitude
@@ -256,13 +262,21 @@ class GeoTagController: UIViewController{
             geoTag.latitude = getPlacesFromGoogle.coordinate?.latitude
             geoTag.longitude = getPlacesFromGoogle.coordinate?.longitude
             geoTag.placeAddress = getPlacesFromGoogle.formattedAddress
-            geoTag.accuracy = "0"
-            geoTag.altitude = "0"
+            geoTag.accuracy = 0
+            geoTag.altitude = 0
             
         }else{
             
-            geoTag.accuracy = CurrentLocation.accuracy
-            geoTag.altitude = CurrentLocation.altitude
+            
+            if let accuracy = Double(CurrentLocation.accuracy){
+                geoTag.accuracy = accuracy
+            }
+            
+            if let altitude = Double(CurrentLocation.altitude){
+                geoTag.altitude = altitude
+            }
+//            geoTag.accuracy = CurrentLocation.accuracy
+//            geoTag.altitude = CurrentLocation.altitude
             
             
             geoTag.latitude = CurrentLocation.coordinate.latitude
@@ -366,7 +380,7 @@ class GeoTagController: UIViewController{
         
         geoFenceRadiusSlider.minimumValue = 0
         geoFenceRadiusSlider.maximumValue = 500
-        geoFenceRadiusSlider.value = 50
+        geoFenceRadiusSlider.value = 100
         
         
         //visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])

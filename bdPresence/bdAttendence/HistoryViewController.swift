@@ -130,6 +130,9 @@ extension HistoryViewController{
                 locationFilters.delegate = self
                 locationFilters.plotMarkers(date: currentDisplayDate)
                 
+            case .Avaibilty:
+                print("Avability")
+                
             case .NoCheckinFound:
                 print("hello")
                 
@@ -155,6 +158,8 @@ extension HistoryViewController{
         if let _ = pullController{
             self.removePullUpController(pullController, animated: true)
         }
+        
+        activityIndicator.removeActivityIndicator(activityIndicator: activityIndicator)
     }
     
     

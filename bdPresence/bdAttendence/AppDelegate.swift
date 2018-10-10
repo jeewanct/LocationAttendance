@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
             //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-            ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
+            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
 
         case .Alpha:
             ConfigurationModel.stopDebugging(flag: false)
@@ -561,8 +561,6 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                 }
             }
             
-           
-            
             
         } else {
             let result: NSDictionary = userInfo as NSDictionary
@@ -626,6 +624,8 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         let result: NSDictionary = response.notification.request.content.userInfo as NSDictionary
         let type =  result ["notificationType"] as! String
         switch type {
+
+            
         case NotificationType.Welcome.rawValue:
             break
         case NotificationType.NewAssignment.rawValue , NotificationType.FirstCheckin.rawValue:

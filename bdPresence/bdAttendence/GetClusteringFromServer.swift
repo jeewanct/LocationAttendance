@@ -31,7 +31,7 @@ class GetClusteringFromServer{
 class ClusterDataFromServer{
 
     
-    class func showView(date: Date, notification: Notification) -> (headerData: [String]?, locationData: [UserDetailsDataModel]?, showFrom: ShowCheckinFrom)? {
+    class func showView(date: Date, notification: Notification) -> (headerData: [String]?, locationData: [UserDetailsDataModel]?, showFrom: ShowCheckinFrom, avaibiltyStatus: Bool?)? {
     
         
         if let userNotification  = notification.userInfo as? [String: Any]{
@@ -42,24 +42,37 @@ class ClusterDataFromServer{
                     //AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "Something went wrong.")
                 }else{
                     
+                    // Avaibility check
+                    
+                   let value = UserDayData.isUserAvailableAtDate(date: date)
+                    
+                    if !value {
+                        
+                        return (nil, nil, ShowCheckinFrom.Avaibilty, false)
+                        
+                    }else{
+    
+                    
                     UserDefaults.standard.set(Date(), forKey: "lastDashBoardUpdated")
                     
                     if let getDataIfAvail =  UserDayData.getLocationDataFromServer(date: date){
                         
                         if getDataIfAvail.count > 0{
                             let headerData = getHeaderData(locationData: getDataIfAvail)
-                            return (headerData, getDataIfAvail, ShowCheckinFrom.Server)
+                            return (headerData, getDataIfAvail, ShowCheckinFrom.Server,nil)
                             //showDatabaseData(locationData: getDataIfAvail)
                             
                         }else{
-                            return (nil, nil, ShowCheckinFrom.LocalDatabase)
+                            return (nil, nil, ShowCheckinFrom.LocalDatabase,nil)
                             //                            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
                           //  updateView()
                         }
                         
                     }else{
-                        return (nil, nil, ShowCheckinFrom.LocalDatabase)
+                        return (nil, nil, ShowCheckinFrom.LocalDatabase,nil)
                         //AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "No Checkins!")
+                        
+                    }
                         
                     }
                 }
@@ -111,7 +124,7 @@ class ClusterDataFromServer{
     }
     
     
-    class func getDataFrom(date: Date,from: LocationDetailsScreenEnum) -> (headerData: [String]?, locationData: [UserDetailsDataModel]?, showIndicator: Bool)?{
+    class func getDataFrom(date: Date,from: LocationDetailsScreenEnum) -> (headerData: [String]?, locationData: [UserDetailsDataModel]?, showIndicator: Bool, isAvailable: Bool?)?{
     
         
         if let valueForDashBoard = UserDefaults.standard.value(forKey: "lastDashBoardUpdated") as? Date{
@@ -143,17 +156,23 @@ class ClusterDataFromServer{
                     }
                     
                     let headerData = getHeaderData(locationData: getDataIfAvail)
-                    return (headerData, getDataIfAvail, false)
+                    
+                    if from != LocationDetailsScreenEnum.historyScreen{
+                        let status = UserDayData.isUserAvailableAtDate(date: date)
+                        return (headerData, getDataIfAvail, false, status)
+                    }else{
+                        return (headerData, getDataIfAvail, false, true)
+                    }
                     //showDatabaseData(locationData: getDataIfAvail)
                 }else{
                     
                     GetClusteringFromServer.getDataOf(date: date)
-                    return (nil, nil, true)
+                    return (nil, nil, true, true)
                 }
 
             }else{
                 GetClusteringFromServer.getDataOf(date: date)
-                return (nil, nil, true)
+                return (nil, nil, true, true)
                
             }
             
@@ -161,7 +180,7 @@ class ClusterDataFromServer{
 
         }else{
             GetClusteringFromServer.getDataOf(date: date)
-            return (nil, nil, true)
+            return (nil, nil, true, true)
         }
         
         return nil
