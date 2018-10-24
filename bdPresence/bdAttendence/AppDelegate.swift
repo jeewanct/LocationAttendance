@@ -15,7 +15,7 @@ import RealmSwift
 import Fabric
 import Crashlytics
 import CoreLocation
-
+import Intents
 
 /* Change on 10 July '18 New Design */
 import GoogleMaps
@@ -26,12 +26,27 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    
+    
+    
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         /*
          Don't config until the location is on
         */
         
+        
+        // Testing Background fetch for checkins
+        
+        application.setMinimumBackgroundFetchInterval(600)
+        
+        
+        
+        
+        
+
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
@@ -47,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
             //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+            ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
 
         case .Alpha:
             ConfigurationModel.stopDebugging(flag: false)
@@ -58,6 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("In Release")
             ConfigurationModel.stopDebugging(flag: true)
             ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
+                //"https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
             Fabric.with([Crashlytics.self])
             
             //https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/
@@ -100,18 +116,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !SDKSingleton.sharedInstance.userId.isBlank {
             
             
-            
-            
             if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
-                BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
+                //BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
                 // Here check whether the shift is runing or not then only start location monitoring
+                let superViewController = SuperViewController()
+                superViewController.wakeUpCall(notify: NotifyingFrom.Normal)
                 let notifier = RMCNotifier.shared
-                if notifier.getShiftRunningStatus() {
-                    bdCloudStartMonitoring()
+                if !notifier.getShiftRunningStatus() {
+                   // bdCloudStartMonitoring()
                    //BlueDolphinManager.manager.startLocationMonitoring()
-                }else{
-                    bdCloudStopMonitoring()
+                     bdCloudStopMonitoring()
                 }
+                
 //                if SDKSingleton.sharedInstance.isShiftRunning {
 //                    BlueDolphinManager.manager.startLocationMonitoring()
 //                }
@@ -135,7 +151,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 superController.getPlacesAfterTenMinutes()
                 
                 if SDKSingleton.sharedInstance.CheckinsObjectId == ""{
-                    GetCheckinsData.getCheckinsId()
+                    let getCheckinId = checkinFromServerManager()
+                    getCheckinId.getCheckinsId()
+                    //GetCheckinsData.getCheckinsId()
                 }
                 
                 
@@ -173,6 +191,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
+        
+        // Testing siri
+        
+     
+        
+        
+        
+        
         return true
     }
     
@@ -185,6 +211,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        
+        
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -413,13 +441,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 8,
+            schemaVersion: 9,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
 
-                if oldSchemaVersion < 8 {
+                if oldSchemaVersion < 9 {
 //                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
 //
 //                    }
@@ -452,7 +480,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         print("userInfo sourabh = \(userInfo)")
         //BackgroundDebug().write(string: "didReceiveRemoteNotification- SilentPush")
 
-        SavePushNotification.saveNotification(time: "\(userInfo)")
+        //SavePushNotification.saveNotification(time: "\(userInfo)")
         
         let state: UIApplicationState = application.applicationState
        
@@ -554,7 +582,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                         
                     }
                     
-                    completionHandler(.newData)
+                    //completionHandler(.newData)
 //                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.WakeUpCall.rawValue), object: self, userInfo: userInfo)
 //                    completionHandler(.newData)
 
@@ -562,7 +590,8 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             }
             
             
-        } else {
+        }
+        
             let result: NSDictionary = userInfo as NSDictionary
             let type =  result ["notificationType"] as! String
             switch type {
@@ -570,9 +599,10 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                 break
             case NotificationType.NewAssignment.rawValue , NotificationType.FirstCheckin.rawValue:
                 //self.showLocalNotification(userInfo)
+                self.toShowLocalNotification(message: NotificationType.NewAssignment.rawValue)
                 break
             case NotificationType.UpdatedAssignment.rawValue,NotificationType.NoCheckin.rawValue,NotificationType.testNotification.rawValue:
-                
+                self.toShowLocalNotification(message: NotificationType.UpdatedAssignment.rawValue)
                 break;
             case NotificationType.AttendanceMarked.rawValue:
                 pushAlertView(userInfo: result)
@@ -593,17 +623,48 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             //
             completionHandler(UIBackgroundFetchResult.newData)
 
+    }
+    
+    
+    
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        
+        
+        
+        if application.applicationState == .background && isInternetAvailable() && !SDKSingleton.sharedInstance.userId.isBlank{
+            
+            if RMCNotifier.shared.getShiftRunningStatus(){
+                
+                let superViewController = SuperViewController()
+                superViewController.wakeUpCall(notify: .Normal)
+                
+                if !SDKSingleton.sharedInstance.userId.isBlank{
+                    let quoteString = GetClusteringFromServer.quoteString(date: Date())
+                    let getCheckinId = checkinFromServerManager()
+                    
+                    getCheckinId.getClusterDataBackground(query: quoteString, date: Date()) { (value) in
+                        
+                        if value == true{
+                            UserDefaults.standard.set(Date(), forKey: "lastDashBoardUpdated")
+                            completionHandler(.newData)
+                        }else{
+                            completionHandler(.noData)
+                        }
+                    }
+                    
+                }
+            }
+            
+            //completionHandler(.noData)
+
             
         }
         
         
     }
 
-    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        // perform fetch handler
-        
-        
-    }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -622,7 +683,9 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         print("User Info = ",response.notification.request.content.userInfo.values)
         
         let result: NSDictionary = response.notification.request.content.userInfo as NSDictionary
-        let type =  result ["notificationType"] as! String
+        guard let type =  result ["notificationType"] as? String else {
+            return
+        }
         switch type {
 
             
@@ -737,3 +800,5 @@ extension UIApplication{
         
     }
 }
+
+

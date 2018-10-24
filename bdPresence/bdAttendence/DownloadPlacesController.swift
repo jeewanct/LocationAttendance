@@ -31,7 +31,10 @@ class DownloadPlaceController: UIViewController{
         
         timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(handleUpdate), userInfo: nil, repeats: true)
         
-        GetCheckinsData.getCheckinsId()
+        
+        let getCheckinId = checkinFromServerManager()
+        getCheckinId.getCheckinsId()
+        
         
 //        if LocationHistoryData.getLocationDataCount() == 0{
 //

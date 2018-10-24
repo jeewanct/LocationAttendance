@@ -9,7 +9,7 @@
 import Foundation
 import Polyline
 import MapKit
-
+import BluedolphinCloudSdk
 class PolyLineMap{
     
     var delegate: PolylineStringDelegate?

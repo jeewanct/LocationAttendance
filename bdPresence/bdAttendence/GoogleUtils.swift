@@ -67,11 +67,15 @@ class GoogleUtils{
     class func getPolylineGoogle(originDestination: String,wayPoints: String, completion: @escaping(String) -> Void){
         
         
-        guard let escapedString = wayPoints.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+        let convertedString = "|" + wayPoints
+        
+        guard let escapedString = convertedString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
             return
         }
         
-        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=false&travelmode=driving&waypoints=\(escapedString)&key=" + AppConstants.GoogleConstants.GoogleApiKey
+      //  let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=true&optimizeWaypoints=true&travelmode=driving&waypoints=\(escapedString)&key=" + AppConstants.GoogleConstants.GoogleApiKey
+        
+        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&waypoints=optimize:true\(escapedString)&travelmode=driving&key=" + AppConstants.GoogleConstants.GoogleApiKey
         
         
         Networking.fetchGenericData(url, header: [:], success: { (polyline: GoogleDirectionRoutesModel) in
@@ -100,11 +104,19 @@ class GoogleUtils{
     class func getPolylineFromGoogle(originDestination: String,wayPoints: String ,isLast: Bool, completion: @escaping(String, Bool) -> Void){
         
         
-        guard let escapedString = wayPoints.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+        let convertedString = "|" + wayPoints
+        
+        guard let escapedString = convertedString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
             return
         }
         
-        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=false&travelmode=driving&waypoints=\(escapedString)&key=" + AppConstants.GoogleConstants.GoogleApiKey
+        guard let orginDest = originDestination.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            return
+        }
+        
+//        let url = AppConstants.GoogleConstants.googleDirectionApi + originDestination + "&optimize=true&optimizeWaypoints=true&travelmode=driving&waypoints=\(escapedString)&key=" + AppConstants.GoogleConstants.GoogleApiKey
+        
+        let url = AppConstants.GoogleConstants.googleDirectionApi + orginDest + "&waypoints=optimize:true&waypoints=\(escapedString)&travelmode=driving&key=" + AppConstants.GoogleConstants.GoogleApiKey
         
         
         Networking.fetchGenericData(url, header: [:], success: { (polyline: GoogleDirectionRoutesModel) in

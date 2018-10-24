@@ -32,10 +32,13 @@ class MyDashboardViewController: UIViewController {
 //        let controller2 = self.storyboard?.instantiateViewController(withIdentifier: "checkout") as! NewCheckoutViewController
 //        controller2.delegate = self
         
+        
         if AssignmentModel.statusOfUser(){
+            
             let destVc = self.storyboard?.instantiateViewController(withIdentifier: "noShiftToday") as! UINavigationController
             updateChildController(destVc: destVc)
             constraintViewEqual(view1: containerView, view2: destVc.view)
+            
         }else{
         
         if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
@@ -86,7 +89,10 @@ class MyDashboardViewController: UIViewController {
         destVc.didMove(toParentViewController: self)
         //constraintViewEqual(view1: containerView, view2: (destVc.topViewController?.view)!)
         
+        
     }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

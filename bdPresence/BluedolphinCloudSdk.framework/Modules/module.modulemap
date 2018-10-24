@@ -1,0 +1,11 @@
+framework module BluedolphinCloudSdk {
+  umbrella header "BluedolphinCloudSdk.h"
+
+  export *
+  module * { export * }
+}
+
+module BluedolphinCloudSdk.Swift {
+    header "BluedolphinCloudSdk-Swift.h"
+    requires objc
+}

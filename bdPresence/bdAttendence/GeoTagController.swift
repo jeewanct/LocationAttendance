@@ -146,7 +146,7 @@ class GeoTagController: UIViewController{
         placeDetailsData.fenceRadius = Int(geoFenceRadiusSlider.value)
         placeDetailsData.placeId = placeId
         placeDetailsData.placeType = "geofence"
-        placeDetailsData.placeStatus = false
+        placeDetailsData.placeStatus = true
         
         
         
@@ -204,11 +204,10 @@ class GeoTagController: UIViewController{
         
         view.showActivityIndicator(activityIndicator: activityIndicator)
         
-        GeoTagManager.createGeoTag(geoTaggedData: [geoTag], completion: { (message) in
-            self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
+        GeoTagManager.createGeoTag(geoTaggedData: [geoTag], completion: {[weak self] (message) in
+            self?.view.removeActivityIndicator(activityIndicator: self?.activityIndicator)
             
-            self.showAlert(error: false, message: message)
-            
+            self?.showAlert(error: false, message: message)
         }) { (errorMessage) in
             self.view.removeActivityIndicator(activityIndicator: self.activityIndicator)
             self.showAlert(error: true, message: errorMessage)

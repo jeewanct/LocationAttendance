@@ -49,12 +49,6 @@ class MyTeamLocationDetails: UIViewController{
         
         navigationController?.removeTransparency()
         setupMap()
-//        addGestureInContainerView()
-//        userLocationContainerView.isHidden = true
-//        userLocationCardHeightAnchor.constant = (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3))
-//
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(MyTeamLocationDetails.teamDetailsFetch(locatins:)), name: NSNotification.Name(rawValue: LocalNotifcation.MyTeamDetailsByUserId.rawValue), object: nil)
         getTeamMemberDetails()
         
     
@@ -85,36 +79,7 @@ class MyTeamLocationDetails: UIViewController{
        // NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-    func teamDetailsFetch(locatins: Notification){
     
-        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-        print("LocationsCount = \(locatins.userInfo)")
-    
-        //self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-        
-        if let teamDetails = locatins.userInfo as? [String: Any]{
-            
-            if let error = teamDetails["status"] as? Bool{
-                if let teamDetailsModel = teamDetails["teamDetails"] as? [ClusterDataServer]{
-                    
-                    if teamDetailsModel.count == 0{
-                        if error == false{
-                            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "Data fetch error!")
-                        }
-                    }else{
-                        self.makeTeamLocationData(teamLocationData: teamDetailsModel.reversed())
-                    }
-                    
-                }
-                
-            }else{
-                AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: "oops! something went wrong")
-            }
-    
-            
-        }
-        
-    }
     
  }
 
@@ -139,7 +104,11 @@ extension MyTeamLocationDetails{
         
         if let getQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed){
            // GetCheckinsData.getClusterData(query: getQuery, date: date)
-            MyTeamDetailsModel.getUserDobjId(query: getQuery)
+            
+            let teamData = MyTeamDetailsModel()
+            teamData.delegate = self
+            teamData.getUserDobjId(query: getQuery)
+
         }
         
         
@@ -169,217 +138,6 @@ extension MyTeamLocationDetails{
         
     }
     
-    
-    
-    func makeTeamLocationData(teamLocationData: [ClusterDataServer]){
-        
-        
-        
-        var locationDataArray = [UserDetailsDataModel]()
-        
-        
-        for index in teamLocationData{
-            
-            let rawCheckIn = UserDetailsDataModel()
-            rawCheckIn.address = index.checkinDetails?.address
-           
-            if let checkinId = index.checkinData?.checkinId{
-                rawCheckIn.checkInId = checkinId
-            }
-            
-            
-            
-            if let canGeoTag = index.checkinDetails?.placeId{
-                
-                rawCheckIn.isGeoTagged = true
-                
-                let realm = try! Realm()
-                let rmcPlaces  = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeId = %@", canGeoTag)
-                
-                if rmcPlaces.count > 0{
-                    
-                    let value = rmcPlaces[0]
-                    if let placeName = value.placeAddress{
-                        rawCheckIn.geoLocationName = placeName
-                    }
-                    
-                }
-                
-                
-                
-            }
-            
-            
-            if let coordinates = index.checkinData?.location?.coordinates{
-                
-                if coordinates.count == 2{
-                    rawCheckIn.latitude = String(coordinates[1])
-                    rawCheckIn.longitude = String(coordinates[0])
-                    
-                }
-                
-            }
-            
-            if let distance = index.distance{
-                
-                rawCheckIn.distance = Double(distance) / 1000
-                
-                
-            }
-            
-            
-            if let startTime = index.startTime{
-                let date = startTime.asDate
-                rawCheckIn.startTime = date
-            }
-            
-            if let startTime = index.startTime, let endTime = index.endTime{
-                if let convertedDate = startTime.asDate, let convertedEndDate = endTime.asDate{
-                    rawCheckIn.lastSeen = LogicHelper.shared.getStayTime(firstSeen: convertedDate, lastSeen: convertedEndDate)
-                }
-                
-            }else{
-             
-                if let startTime = index.startTime{
-                 
-                    if let convertedDate = startTime.asDate{
-                        rawCheckIn.lastSeen = LogicHelper.shared.getStayTime(firstSeen: convertedDate, lastSeen: nil)
-                    }
-                }
-                    
-            }
-            
-            
-            
-            
-           
-            
-            
-            
-         
-            
-            locationDataArray.append(rawCheckIn)
-        }
-        
-        
-        
-//        for location in teamLocationData{
-//
-//            let locationValue = UserDetailsDataModel()
-//
-//
-//            if let distance = location.distance, let convertedDistance = Double(distance){
-//                locationValue.distance = convertedDistance / 1000
-//            }
-//
-//
-//            locationValue.startTime = location.startTime
-//
-//            locationValue.address = location.address
-//
-//            locationValue.lastSeen = LogicHelper.shared.getStayTime(firstSeen: location.startTime, lastSeen: location.endTime)
-//
-//
-//            locationValue.latitude = location.location?.latitude
-//            locationValue.longitude = location.location?.longitude
-//
-//            if let canGeoTag = location.placeId{
-//
-//                locationValue.isGeoTagged = true
-//
-//                let realm = try! Realm()
-//                let rmcPlaces  = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeId = %@", canGeoTag)
-//
-//                if rmcPlaces.count > 0{
-//
-//                    let value = rmcPlaces[0]
-//                    if let placeName = value.placeAddress{
-//                        locationValue.geoLocationName = placeName
-//                    }
-//
-//                }
-//
-//
-//
-//            }
-//            // locationValue.firstSeen = location.firstSeen
-//            //  locationValue.lastSeen = location.lastSeen
-//            locationDataArray.append(locationValue)
-//
-//        }
-        
-        
-        let headerData = ClusterDataFromServer.getHeaderData(locationData: locationDataArray)
-        
-        dataFromServer(locationData: locationDataArray, headerData: headerData)
-        
-//
-//        var teamData = [LocationDataModel]()
-//
-//
-//
-//            for location in teamLocationData{
-//
-//                let locationData = LocationDataModel()
-//
-//                if let accuracy = location.checkinData?.location?.accuracy{
-//                   locationData.accuracy = Double(accuracy)
-//
-//                }
-//
-//                if let altitude = location.checkinData?.location?.altitude{
-//                    locationData.altitude = String(altitude)
-//                }
-//
-//
-//                if let coordinates = location.checkinData?.location?.coordinates{
-//
-//                    if coordinates.count  == 2{
-//
-//                        locationData.longitude = String(coordinates[0])
-//                        locationData.latitude = String(coordinates[1])
-//
-//                        if Int(coordinates[0]) == 0{
-//                            locationData.address = "No location found"
-//                        }
-//
-//                    }
-//
-//
-//
-//                }
-//
-//                if let lastSeen = location.checkinData?.time{
-//                    locationData.lastSeen = Formatter.iso8601.date(from: lastSeen)
-//                }
-//
-//
-//
-//                teamData.append(locationData)
-//            }
-//
-//
-//
-//        //reversing the team data
-//        teamData.sort(by: { (first, second) -> Bool in
-//
-//
-//            if let firstDate = first.lastSeen , let secondDate = second.lastSeen{
-//                return  firstDate.compare(secondDate) == .orderedAscending
-//
-//
-//            }
-//
-//            return false
-//        })
-//
-//        let locationFilters = LocationFilters()
-//        locationFilters.delegate = self
-//        locationFilters.plotMarkerInMap(locations: teamData)
-//
-//
-        
-    }
     
     func plotMarkersInMap(location: [LocationDataModel]){
         
@@ -459,53 +217,7 @@ extension MyTeamLocationDetails{
         }
     }
     
-//    func getLocationCorrospondingLatLong(locations: [[LocationDataModel]]){
-//
-//
-//        for index in 0..<locations.count{
-//
-//            for index1 in 0..<locations[index].count{
-//
-//                if let geoTaggedLocation = locations[index][index1].geoTaggedLocations{
-//
-//                    self.userContainerView?.locationData = locations
-//
-//                }else{
-//
-//                    if let lat = locations[index][index1].latitude, let long = locations[index][index1].longitude{
-//
-//                        if let latD = CLLocationDegrees(lat), let longD = CLLocationDegrees(long){
-//
-//                            let cllLocation = CLLocation(latitude: latD, longitude: longD)
-//
-//                            LogicHelper.shared.reverseGeoCodeGeoLocations(location: cllLocation, index1: index, index2: index1) { (address, firstIndex, secondIndex) in
-//
-//                                locations[firstIndex][secondIndex].address = address
-//
-//                               //if index == locations.count - 1{
-//
-//                                    self.userContainerView?.locationData = locations
-//                                //}
-//
-//                            }
-//
-//                        }
-//
-//
-//                    }
-//
-//
-//
-//                }
-//
-//
-//            }
-//        }
-//
-//        //self.userContainerView?.locationData = locations
-//
-//
-//    }
+
     
     
     
@@ -580,74 +292,12 @@ extension MyTeamLocationDetails{
         
     }
     
-//    func addGestureInContainerView(){
-//
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-//        userLocationContainerView.addGestureRecognizer(tapGesture)
-//
-//        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTap))
-//        downGesture.direction = .up
-//
-//        userLocationContainerView.addGestureRecognizer(downGesture)
-//
-//    }
-//
-//
-//    @objc func handleTap(){
-//
-//        print("View Tapped")
-//
-//        if userLocationCardHeightAnchor.constant == 0 {
-//            animateContainerView(heightToAnimate: (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)))
-//        }else{
-//            // 400
-//            userContainerView?.tableView.isScrollEnabled = true
-//
-//            animateContainerView(heightToAnimate: 0)
-//        }
-//
-//
-//    }
-//
-//    func animateContainerView(heightToAnimate height: CGFloat){
-//
-//        UIView.animate(withDuration: 0.5) {
-//            if height == (UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height * 0.3)){
-//                self.userLocationContainerView.backgroundColor = .clear
-//
-//            }else{
-//                self.userLocationContainerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9016010123)
-//            }
-//
-//            self.userLocationCardHeightAnchor.constant = height
-//            self.view.layoutIfNeeded()
-//
-//        }
-//
-//    }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "MyTeamLocationDetailsSegue"{
-//            userContainerView = segue.destination as! NewCheckOutUserScreen
-//            userContainerView?.delegate = self
-//        }
-//    }
+
     
     
 }
 
 
-//
-//extension MyTeamLocationDetails: HandleUserViewDelegate{
-//
-//    func handleOnSwipe() {
-//        // userLocationCardHeightAnchor.constant += 50
-//        self.view.layoutIfNeeded()
-//        handleTap()
-//    }
-//
-//
-//}
 
  
  
@@ -731,3 +381,24 @@ extension MyTeamLocationDetails{
  
  
 
+ extension MyTeamLocationDetails: ServerResponseDelegate{
+    
+    func successData<T>(data: T) {
+        
+        view.removeActivityIndicator(activityIndicator: activityIndicator)
+        if let locationData = data  as? [UserDetailsDataModel]{
+            let headerData = ClusterDataFromServer.getHeaderData(locationData: locationData)
+            dataFromServer(locationData: locationData, headerData: headerData)
+        }
+        
+        
+    }
+    
+    func errorData<T>(error: T) {
+        view.removeActivityIndicator(activityIndicator: activityIndicator)
+        if let getError = error as? String{
+            AlertsController.shared.displayAlertWithoutAction(whereToShow: self, message: getError)
+        }
+    }
+    
+ }

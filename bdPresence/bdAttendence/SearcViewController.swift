@@ -129,10 +129,17 @@ class SearchViewController: PullUpController {
     
     func animateView(constant: CGFloat){
         
-        UIView.animate(withDuration: 0.4) {
+
+        UIView.animate(withDuration: 0.5) {
             self.headerHeightConstaint.constant = constant
+
             self.view.layoutIfNeeded()
         }
+        
+//        UIView.animate(withDuration: 0.4) {
+//            self.headerHeightConstaint.constant = constant
+//            self.view.layoutIfNeeded()
+//        }
         
     }
     
@@ -320,142 +327,142 @@ extension SearchViewController{
     
     func makeRelevantData(){
         
-        var user = [UserDetailsDataModel]()
-        if let locations = locationData{
-            
-            
-            
-            for location in locations{
-                
-                let userData = UserDetailsDataModel()
-                
-                
-                for locationDetail in location{
-                    
-                    if let canGeoTag = UserDefaults.standard.value(forKey: "canGeoTag") as? Bool{
-                        
-                        if canGeoTag == true{
-                            userData.canGeoTag = true
-                        }else{
-                            userData.canGeoTag = false
-                        }
-                    }
-                    
-                    
-                    
-                    if let geoTagged = locationDetail.geoTaggedLocations{
-                        var lastSeenString = ""
-                        userData.isGeoTagged = true
-                        
-                        var firstDate = Date()
-                        if let lastGeoTaggedElement = location.first{
-                            
-                            if let lastSeen = lastGeoTaggedElement.lastSeen{
-                                lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
-                                firstDate = lastSeen
-                            }
-                            //userData.address = geoTagged.placeDetails?.address
-                            
-                        }
-                        
-                        if location.count > 1 {
-                            if let lastGeoTaggedElement = location.last{
-                                
-                                lastSeenString.append("-")
-                                if let lastSeen = lastGeoTaggedElement.lastSeen{
-                                    lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
-                                     let timeSpend = LogicHelper.shared.convertToTimeSpendInLocation(firstDate: firstDate, secondDate: lastSeen)
-                                    
-                                    let dateString = lastSeenString
-                                    lastSeenString = timeSpend + " (\(dateString))"
-                                    
-                                    
-                                }
-                                //userData.address = geoTagged.placeDetails?.address
-                                
-                               
-                                
-                            }
-                        }
-                        userData.address = geoTagged.placeDetails?.address
-                        userData.lastSeen =  lastSeenString
-                        if let locationName = locationDetail.geoTaggedLocations?.locationName{
-                            userData.geoLocationName = locationName
-                        }
-                        
-                    }else{
-                        
-                        
-                        userData.isGeoTagged = false
-                        var firstDate = Date()
-                        if location.count > 1{
-                            var lastSeenString = ""
-                            if let lastGeoTaggedElement = location.first{
-                                
-                                if let lastSeen = lastGeoTaggedElement.lastSeen{
-                                    firstDate = lastSeen
-                                    lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
-                                }
-                                
-                                
-                            }
-                            
-                            if location.count > 1{
-                                if let lastGeoTaggedElement = location.last{
-                                    
-                                    lastSeenString.append("-")
-                                    if let lastSeen = lastGeoTaggedElement.lastSeen{
-                                        lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
-                                        let timeSpend = LogicHelper.shared.convertToTimeSpendInLocation(firstDate: firstDate, secondDate: lastSeen)
-                                        
-                                        let dateString = lastSeenString
-                                        lastSeenString = timeSpend + " (\(dateString))"
-                                    }
-                                    
-                                    
-                                    userData.lastSeen = lastSeenString
-                                    
-                                }
-                            }
-                        }else{
-                            if let lastSeen = locationDetail.lastSeen{
-                                userData.lastSeen = LogicHelper.shared.getLocationDate(date: lastSeen)
-                            }
-                        }
-                        
-                        if locationDetail.address != ""{
-                            userData.address = locationDetail.address
-                        }
-                        
-                        
-                        if let lat = locationDetail.latitude, let long = locationDetail.longitude{
-                            
-                            if let latitude = CLLocationDegrees(lat), let longitude = CLLocationDegrees(long){
-                                userData.cllLocation = CLLocation(latitude: latitude, longitude: longitude)
-                                if let checkinId = locationDetail.checkinId{
-                                    userData.checkInId = checkinId
-                                }
-                                
-                            }
-                            
-                        }
-                        
-                        
-                    }
-                    
-                    
-                }
-                
-                user.append(userData)
-            }
-            
-            userDetails = user
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-        }
+//        var user = [UserDetailsDataModel]()
+//        if let locations = locationData{
+//            
+//            
+//            
+//            for location in locations{
+//                
+//                let userData = UserDetailsDataModel()
+//                
+//                
+//                for locationDetail in location{
+//                    
+//                    if let canGeoTag = UserDefaults.standard.value(forKey: "canGeoTag") as? Bool{
+//                        
+//                        if canGeoTag == true{
+//                            userData.canGeoTag = true
+//                        }else{
+//                            userData.canGeoTag = false
+//                        }
+//                    }
+//                    
+//                    
+//                    
+//                    if let geoTagged = locationDetail.geoTaggedLocations{
+//                        var lastSeenString = ""
+//                        userData.isGeoTagged = true
+//                        
+//                        var firstDate = Date()
+//                        if let lastGeoTaggedElement = location.first{
+//                            
+//                            if let lastSeen = lastGeoTaggedElement.lastSeen{
+//                                lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+//                                firstDate = lastSeen
+//                            }
+//                            //userData.address = geoTagged.placeDetails?.address
+//                            
+//                        }
+//                        
+//                        if location.count > 1 {
+//                            if let lastGeoTaggedElement = location.last{
+//                                
+//                                lastSeenString.append("-")
+//                                if let lastSeen = lastGeoTaggedElement.lastSeen{
+//                                    lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+//                                     let timeSpend = LogicHelper.shared.convertToTimeSpendInLocation(firstDate: firstDate, secondDate: lastSeen)
+//                                    
+//                                    let dateString = lastSeenString
+//                                    lastSeenString = timeSpend + " (\(dateString))"
+//                                    
+//                                    
+//                                }
+//                                //userData.address = geoTagged.placeDetails?.address
+//                                
+//                               
+//                                
+//                            }
+//                        }
+//                        userData.address = geoTagged.placeDetails?.address
+//                        userData.lastSeen =  lastSeenString
+//                        if let locationName = locationDetail.geoTaggedLocations?.locationName{
+//                            userData.geoLocationName = locationName
+//                        }
+//                        
+//                    }else{
+//                        
+//                        
+//                        userData.isGeoTagged = false
+//                        var firstDate = Date()
+//                        if location.count > 1{
+//                            var lastSeenString = ""
+//                            if let lastGeoTaggedElement = location.first{
+//                                
+//                                if let lastSeen = lastGeoTaggedElement.lastSeen{
+//                                    firstDate = lastSeen
+//                                    lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+//                                }
+//                                
+//                                
+//                            }
+//                            
+//                            if location.count > 1{
+//                                if let lastGeoTaggedElement = location.last{
+//                                    
+//                                    lastSeenString.append("-")
+//                                    if let lastSeen = lastGeoTaggedElement.lastSeen{
+//                                        lastSeenString.append(LogicHelper.shared.getLocationDate(date: lastSeen))
+//                                        let timeSpend = LogicHelper.shared.convertToTimeSpendInLocation(firstDate: firstDate, secondDate: lastSeen)
+//                                        
+//                                        let dateString = lastSeenString
+//                                        lastSeenString = timeSpend + " (\(dateString))"
+//                                    }
+//                                    
+//                                    
+//                                    userData.lastSeen = lastSeenString
+//                                    
+//                                }
+//                            }
+//                        }else{
+//                            if let lastSeen = locationDetail.lastSeen{
+//                                userData.lastSeen = LogicHelper.shared.getLocationDate(date: lastSeen)
+//                            }
+//                        }
+//                        
+//                        if locationDetail.address != ""{
+//                            userData.address = locationDetail.address
+//                        }
+//                        
+//                        
+//                        if let lat = locationDetail.latitude, let long = locationDetail.longitude{
+//                            
+//                            if let latitude = CLLocationDegrees(lat), let longitude = CLLocationDegrees(long){
+//                                userData.cllLocation = CLLocation(latitude: latitude, longitude: longitude)
+//                                if let checkinId = locationDetail.checkinId{
+//                                    userData.checkInId = checkinId
+//                                }
+//                                
+//                            }
+//                            
+//                        }
+//                        
+//                        
+//                    }
+//                    
+//                    
+//                }
+//                
+//                user.append(userData)
+//            }
+//            
+//            userDetails = user
+//            
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//            
+//        }
         
         
         

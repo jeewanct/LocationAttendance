@@ -48,12 +48,13 @@ class NewCheckoutViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateView()
         
-        if let locations = UserDayData.getLocationData(date: Date()){
-            if locations.count > 0 {
-                updateView()
-            }
-        }
+//        if let locations = UserDayData.getLocationData(date: Date()){
+//            if locations.count > 0 {
+//                updateView()
+//            }
+//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -162,11 +163,6 @@ extension NewCheckoutViewController{
     
     
     func addObservers(){
-        //NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.updateAddress(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.LocationUpdate.rawValue), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.showView), name: NSNotification.Name(rawValue: "CheckInsFromServer"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.getDataFromCheckin), name: NSNotification.Name(rawValue: "CheckInsFromServerWithZeroElements"), object: nil)
-        
-        
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
     }
     
@@ -314,21 +310,6 @@ extension NewCheckoutViewController{
 
     
     func updateView(date:Date = Date()){
-        
-        
-        if let value = UserDefaults.standard.value(forKey: "lastDashboardUpdate") as? Date{
-            if Date().secondsFrom(value) > 5{
-                getServerData(date: date)
-            }
-        }else{
-            getServerData(date: date)
-        }
-        
-        
-    }
-    
-    func getServerData(date: Date){
-        
         let isToday = Calendar.current.isDateInToday(date)
         if isToday{
             self.navigationItem.title = "Today"
@@ -351,41 +332,17 @@ extension NewCheckoutViewController{
                         
                     }
                     
-                }
-                
-                UserDefaults.standard.setValue(Date(), forKey: "lastDashboardUpdate")
-                
-                if let checkinsFromServer = ClusterDataFromServer.getDataFrom(date: date, from: LocationDetailsScreenEnum.dashBoardScreen){
-                    
-                    if checkinsFromServer.isAvailable == false{
-                        callDashboard()
-                    }else{
-                    
-                    if checkinsFromServer.showIndicator != true{
-                        
-                        if let locationData = checkinsFromServer.locationData, let headHeader = checkinsFromServer.headerData{
-                            
-                            dataFromServer(locationData: locationData, headerData: headHeader)
-                            
-                        }
-                        
-                    }else{
-                        activityIndicator = ActivityIndicatorView()
-                        self.view.showActivityIndicator(activityIndicator: activityIndicator)
-                    }
-                        
-                    }
-                    
-                    
-                    
+                    getDataIfTenMinutes(date: date)
                     
                 }
+                
                 
             }
             
         }
         
     }
+  
     
 }
 
@@ -404,46 +361,8 @@ extension NewCheckoutViewController{
         mapView.setupCamera()
         //updateView()
         
-    }
-    
-    
-    func showView(notification: Notification){
-        
-        
-        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-        
-        if let clusterData = ClusterDataFromServer.showView(date: Date(), notification: notification){
-            
-            switch clusterData.showFrom{
-            case .Server:
-                if let headerData = clusterData.headerData, let locationData = clusterData.locationData{
-                    dataFromServer(locationData: locationData, headerData: headerData)
-                }
-                
-            case .LocalDatabase:
-                let locationFilters = LocationFilters()
-                locationFilters.delegate = self
-                locationFilters.plotMarkers(date: Date())
-                
-            case .Avaibilty:
-                if clusterData.avaibiltyStatus == false{
-                    userAvailable()
-                }else{
-                    callDashboard()
-                }
-               
-                
-            case .NoCheckinFound:
-                print("hello")
-                
-            }
-            
-            
-        }
-        
         
     }
-    
     
     
 }
@@ -472,6 +391,8 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
         
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         
+        if locations.count > 0{
+        
         let allLocations = UserPlace.getGeoTagData(location: LogicHelper.shared.sortOnlyLocations(location: locations))
         mapView.addMarkersInMap(allLocations: allLocations)
         
@@ -479,7 +400,7 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
         let locations = ClusterDataFromServer.convertDataToUserModel(locationData: LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed())
         let headerData = ClusterDataFromServer.getHeaderData(locationData: locations)
         dataFromServer(locationData: locations, headerData: headerData)
-        
+        }
         
         
     }
@@ -524,10 +445,75 @@ extension NewCheckoutViewController: ServerDataFromClusterDelegate{
         
         let polyLine = DrawPolyLineInMap()
         polyLine.delegate = self
-        polyLine.getPolyline(location: locationData)
+        polyLine.getPolyline(location: locationData.reversed())
+
+        
     }
     
     
     
 }
 
+
+
+extension NewCheckoutViewController: ServerResponseDelegate{
+    
+    func getDataIfTenMinutes(date: Date){
+        
+        if let valueForDashBoard = UserDefaults.standard.value(forKey: "lastDashBoardUpdated") as? Date{
+            
+            if let data = UserDayData.getLocationDataFromServer(date: date){
+                
+                if Date().secondsFrom(valueForDashBoard) > 600{
+                    getDataFromServer(date: date)
+                }
+                
+                let headerData = ClusterDataFromServer.getHeaderData(locationData: data)
+                dataFromServer(locationData: data, headerData: headerData)
+            }else{
+                getDataFromServer(date: date)
+            }
+            
+            
+        }else{
+            getDataFromServer(date: date)
+        }
+        
+    }
+    
+    func getDataFromServer(date: Date){
+        let serverData = checkinFromServerManager()
+        serverData.delegate = self
+        serverData.getClusterData(query: GetClusteringFromServer.quoteString(date: date), date: date)
+    }
+    
+    func successData<T>(data: T) {
+        
+        UserDefaults.standard.set(Date(), forKey: "lastDashBoardUpdated")
+        if let locationData = data  as? [UserDetailsDataModel]{
+                let headerData = ClusterDataFromServer.getHeaderData(locationData: locationData)
+                dataFromServer(locationData: locationData, headerData: headerData)
+         }
+
+        
+    }
+    
+    func errorData<T>(error: T) {
+        
+        if let getError = error as? String{
+            if getError == "No Data"{
+                let databaseData = LocationFilters()
+                databaseData.delegate = self
+                databaseData.plotMarkers(date: Date())
+                
+            }
+            
+            if getError == "NoShift"{
+                callDashboard()
+            }
+            
+            
+        }
+    }
+    
+}

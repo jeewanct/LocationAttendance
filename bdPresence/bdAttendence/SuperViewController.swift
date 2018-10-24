@@ -29,7 +29,11 @@ class SuperViewController: UIViewController {
         super.viewDidLoad()
         
         if SDKSingleton.sharedInstance.CheckinsObjectId == ""{
-            GetCheckinsData.getCheckinsId()
+            
+            let getCheckinId = checkinFromServerManager()
+            getCheckinId.getCheckinsId()
+            
+            //GetCheckinsData.getCheckinsId()
         }
         
         
@@ -251,7 +255,7 @@ class SuperViewController: UIViewController {
                             
                         } else {
 
-                            
+                            bdCloudStartMonitoring()
                             UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
                           //    appDelegate.toShowLocalNotification(message: "We are now trying to mark your presence")
                             
@@ -299,6 +303,7 @@ class SuperViewController: UIViewController {
                         
                     } else if tempNotifier["message"] as! String == notifyUserResponse.noShiftToday.rawValue {
                         print("noshifttoday")
+                        
                         // In any case if this calls then i have to show no shift today and stop monitorig
                         bdCloudStopMonitoring()
                         
@@ -722,11 +727,18 @@ extension SuperViewController {
         switch (sender.name.rawValue) {
             
         case LocalNotifcation.Dashboard.rawValue:
-            if AssignmentModel.statusOfUser(){
-                changeChildController(identifier: .noShiftToday)
+          
+            if UserDayData.isUserAvailableAtDate(date: Date()){
+                 changeChildController(identifier: .noShiftToday)
             }else{
-                changeChildController(identifier: .dashboard)
+               changeChildController(identifier: .dashboard)
             }
+//            if AssignmentModel.statusOfUser(){
+//                changeChildController(identifier: .noShiftToday)
+//            }else{
+//                changeChildController(identifier: .dashboard)
+//            }
+            
         case LocalNotifcation.SystemDetail.rawValue:
             changeChildController(identifier: .systemDetail)
         case LocalNotifcation.VirtualBeacon.rawValue:

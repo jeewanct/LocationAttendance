@@ -11,8 +11,6 @@ import BluedolphinCloudSdk
 
 class GetClusteringFromServer{
     
-    
-    
     class func getDataOf(date: Date){
         
         let convertedDate = date.toString(dateFormat: "YYYYMMdd")
@@ -20,8 +18,28 @@ class GetClusteringFromServer{
         
         
         if let getQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed){
-            GetCheckinsData.getClusterData(query: getQuery, date: date)
+            
+            
+            
+           // GetCheckinsData.getClusterData(query: getQuery, date: date)
         }
+        
+    }
+    
+    class func quoteString(date: Date) -> String{
+        
+        let convertedDate = date.toString(dateFormat: "YYYYMMdd")
+        let query = "{\"docId\":{\"$in\":[\"\(SDKSingleton.sharedInstance.organizationId)|\(SDKSingleton.sharedInstance.userId)|\(convertedDate)\"]}}"
+        
+        
+        if let getQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed){
+            return getQuery
+            //GetCheckinsData.getClusterData(query: getQuery, date: date)
+        }
+        
+        return ""
+        
+        
         
     }
 
@@ -46,7 +64,7 @@ class ClusterDataFromServer{
                     
                    let value = UserDayData.isUserAvailableAtDate(date: date)
                     
-                    if !value {
+                    if value {
                         
                         return (nil, nil, ShowCheckinFrom.Avaibilty, false)
                         
@@ -98,6 +116,8 @@ class ClusterDataFromServer{
             }else{
                 headerData.append("")
             }
+        }else{
+            headerData.append("")
         }
         
         var distance = 0.0
@@ -161,18 +181,18 @@ class ClusterDataFromServer{
                         let status = UserDayData.isUserAvailableAtDate(date: date)
                         return (headerData, getDataIfAvail, false, status)
                     }else{
-                        return (headerData, getDataIfAvail, false, true)
+                        return (headerData, getDataIfAvail, false, false)
                     }
                     //showDatabaseData(locationData: getDataIfAvail)
                 }else{
                     
                     GetClusteringFromServer.getDataOf(date: date)
-                    return (nil, nil, true, true)
+                    return (nil, nil, true, false)
                 }
 
             }else{
                 GetClusteringFromServer.getDataOf(date: date)
-                return (nil, nil, true, true)
+                return (nil, nil, true, false)
                
             }
             
@@ -180,7 +200,7 @@ class ClusterDataFromServer{
 
         }else{
             GetClusteringFromServer.getDataOf(date: date)
-            return (nil, nil, true, true)
+            return (nil, nil, true, false)
         }
         
         return nil

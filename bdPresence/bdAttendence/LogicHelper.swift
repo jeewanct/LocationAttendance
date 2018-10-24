@@ -563,6 +563,7 @@ class LogicHelper{
             seen.append(LogicHelper.shared.getLocationDate(date: startDate))
         }
         
+
         
         if let endDate = lastSeen{
         
@@ -572,8 +573,8 @@ class LogicHelper{
                 seen.append(lastSeenString)
             }
             
-            
         }
+        
         
     
         return seen

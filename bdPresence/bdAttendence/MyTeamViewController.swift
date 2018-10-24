@@ -25,8 +25,6 @@ class MyTeamViewController: UIViewController{
         setupMap()
         setupNavigation()
         getTeamLocation()
-        
-        
     }
     
     func addPullController(teamData: [MyTeamData]?){
@@ -36,8 +34,6 @@ class MyTeamViewController: UIViewController{
                 return 
         }
         pullController.teamData = teamData
-      //  self.pullController.screenType = LocationDetailsScreenEnum.dashBoardScreen
-      //  self.pullController.locationData = allLocations.reversed()
         self.addPullUpController(pullController, animated: true)
     }
     

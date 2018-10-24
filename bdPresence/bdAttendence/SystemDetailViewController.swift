@@ -209,6 +209,7 @@ class SystemDetailViewController: UIViewController {
         DispatchQueue.main.async {
             self.systemTableview.reloadData()
         }
+        
     }
     
     func menuAction(sender:UIBarButtonItem){
@@ -265,6 +266,7 @@ extension SystemDetailViewController:UITableViewDelegate,UITableViewDataSource {
         cell.imageView?.image = imageIcons[indexPath.item]
         cell.headerLabel.text = ["Last Location Check-in:", "Last synced at:", "Pending check-ins", "No touch mode"][indexPath.item]
         
+
          cell.valueLabel.text = systemDetail[indexPath.row]
 //        cell.textLabel?.font = APPFONT.DAYHOURTEXT
 //        cell.textLabel?.text = systemDetail[indexPath.row]

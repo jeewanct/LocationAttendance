@@ -272,7 +272,7 @@ class UserDayData {
             }
         }
         
-        return true
+        return false
         
     }
     
