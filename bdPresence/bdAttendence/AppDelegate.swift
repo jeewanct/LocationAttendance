@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Testing Background fetch for checkins
         
-        application.setMinimumBackgroundFetchInterval(600)
+        application.setMinimumBackgroundFetchInterval(300)
         
         
         

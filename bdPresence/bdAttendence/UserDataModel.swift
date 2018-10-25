@@ -300,7 +300,7 @@ class UserDayData {
                   let locationValue = UserDetailsDataModel()
                     
                     if let distance = location.distance, let convertedDistance = Double(distance){
-                         locationValue.distance = convertedDistance / 1000
+                         locationValue.distance = convertedDistance
                     }
                     
                     locationValue.startTime = location.startTime
@@ -312,6 +312,12 @@ class UserDayData {
                     
                     locationValue.latitude = location.location?.latitude
                     locationValue.longitude = location.location?.longitude
+                    
+                    if let canGeo = UserDefaults.standard.value(forKey: "") as? Bool{
+                        locationValue.canGeoTag = canGeo
+                    }else{
+                        locationValue.canGeoTag = false
+                    }
                     
                     if let canGeoTag = location.placeId{
                         

@@ -65,7 +65,21 @@ class SearchViewController: PullUpController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        for index in userDetails{
+            
+            if let canGeo = UserDefaults.standard.value(forKey: "canGeoTag") as? Bool{
+                index.canGeoTag = canGeo
+            }else{
+                index.canGeoTag = false
+            }
+            
+            
+        }
+        
         tableView.reloadData()
+        
+        
         print(UIScreen.main.bounds.height)
         
         

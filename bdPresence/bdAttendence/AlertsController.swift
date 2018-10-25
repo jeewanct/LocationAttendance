@@ -21,4 +21,12 @@ class AlertsController{
         
         viewController.present(alertController, animated: true, completion: nil)
     }
+    
+    func displaySpreadsheet(whereToShow viewController: UIViewController, message: String){
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alertController.addAction(action)
+        
+        viewController.present(alertController, animated: true, completion: nil)
+    }
 }

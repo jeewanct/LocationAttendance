@@ -848,6 +848,8 @@ extension SuperViewController{
     
     
     func callGeoAuthentication(){
+        
+        
         UserGeoTagAuthentication.getGeoTagAccess { (value) in
             
             UserDefaults.standard.set(self.timeInSeconds(), forKey: "geoTagPermissionTime")

@@ -112,6 +112,24 @@ class UserPlace{
         
     }
     
+    class func getGeoLocations() -> [RMCPlace]{
+        //var geoTaggedLocations = [LocationDataModel]()
+        
+        let realm = try! Realm()
+        let rmcPlaces  = realm.objects(RMCPlace.self).filter("SELF.placeDetails.placeStatus = %@",true)
+        
+        var allGeoTagLocations = [RMCPlace]()
+        
+        
+        for place in rmcPlaces{
+            
+            allGeoTagLocations.append(place)
+        }
+        
+        return allGeoTagLocations
+        
+    }
+    
     
     
     class func getGeoTagData(location: [LocationDataModel]? ) -> [[LocationDataModel]]{

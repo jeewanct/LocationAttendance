@@ -124,11 +124,13 @@ class ClusterDataFromServer{
         for location in locationData {
             
             if let distanceDb = location.distance{
-                distance = distance + distanceDb 
+                distance = distance + distanceDb
+               
             }
             
             
         }
+         distance = distance / 1000
         
         headerData.append(String(distance.roundToDecimal(2)))
         
