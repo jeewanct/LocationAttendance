@@ -209,6 +209,7 @@ class SystemDetailViewController: UIViewController {
         DispatchQueue.main.async {
             self.systemTableview.reloadData()
         }
+        
     }
     
     func menuAction(sender:UIBarButtonItem){

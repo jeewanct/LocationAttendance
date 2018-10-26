@@ -106,17 +106,22 @@ class SideMenuViewController: UIViewController  {
         
         if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
             
-            if screenFlag == "2" && !RMCNotifier.shared.getShiftRunningStatus(){
-                let indexPath = IndexPath(row: 1, section: 0)
-                self.tableView(sideMenuTable, didSelectRowAt: indexPath)
-                sideMenuTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
+            if screenFlag == "2" && !RMCNotifier.shared.getShiftRunningStatus() {
+                
+                if let value = UserDayData.getLocationDataFromServer(date: Date()){
+                    
+                    if value.count > 0{
+                    let indexPath = IndexPath(row: 1, section: 0)
+                    self.tableView(sideMenuTable, didSelectRowAt: indexPath)
+                    sideMenuTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
+                    }
+                    
+                }
             }
         }
     
        
     }
-    
-
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
             // Dispose of any resources that can be recreated.

@@ -15,7 +15,7 @@ import RealmSwift
 import Fabric
 import Crashlytics
 import CoreLocation
-
+import Intents
 
 /* Change on 10 July '18 New Design */
 import GoogleMaps
@@ -26,14 +26,25 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var locationManager: CLLocationManager?
-    let center = UNUserNotificationCenter.current()
+    
+    
+    
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         /*
          Don't config until the location is on
         */
+        
+        
+        // Testing Background fetch for checkins
+        
+        application.setMinimumBackgroundFetchInterval(300)
+        
+        
+        
+        
         
 
         appIdentifier = Bundle.main.bundleIdentifier!
@@ -75,14 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         
-        
-        
-        // Testing
-        center.requestAuthorization(options: [.alert, .sound]) { granted, error in
        
-        }
-        
-        
       //  creatVisitLocation()
         
         //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
@@ -112,15 +116,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !SDKSingleton.sharedInstance.userId.isBlank {
             
             
-            
-            
             if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
-                BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
+                //BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
                 // Here check whether the shift is runing or not then only start location monitoring
+                let superViewController = SuperViewController()
+                superViewController.wakeUpCall(notify: NotifyingFrom.Normal)
                 let notifier = RMCNotifier.shared
-                if notifier.getShiftRunningStatus() {
-                    bdCloudStartMonitoring()
+                if !notifier.getShiftRunningStatus() {
+                   // bdCloudStartMonitoring()
                    //BlueDolphinManager.manager.startLocationMonitoring()
+                     bdCloudStopMonitoring()
                 }
                 
 //                if SDKSingleton.sharedInstance.isShiftRunning {
@@ -146,7 +151,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 superController.getPlacesAfterTenMinutes()
                 
                 if SDKSingleton.sharedInstance.CheckinsObjectId == ""{
-                    GetCheckinsData.getCheckinsId()
+                    let getCheckinId = checkinFromServerManager()
+                    getCheckinId.getCheckinsId()
+                    //GetCheckinsData.getCheckinsId()
                 }
                 
                 
@@ -184,6 +191,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
+        
+        // Testing siri
+        
+     
+        
+        
+        
+        
         return true
     }
     
@@ -196,6 +211,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        
+        
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -424,13 +441,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config =     Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 8,
+            schemaVersion: 9,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
 
-                if oldSchemaVersion < 8 {
+                if oldSchemaVersion < 9 {
 //                    migration.enumerateObjects(ofType: RMCBeacon.className()) { oldObject, newObject in
 //
 //                    }
@@ -572,8 +589,6 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                 }
             }
             
-           
-            
             
         }
         
@@ -584,9 +599,10 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
                 break
             case NotificationType.NewAssignment.rawValue , NotificationType.FirstCheckin.rawValue:
                 //self.showLocalNotification(userInfo)
+                self.toShowLocalNotification(message: NotificationType.NewAssignment.rawValue)
                 break
             case NotificationType.UpdatedAssignment.rawValue,NotificationType.NoCheckin.rawValue,NotificationType.testNotification.rawValue:
-                
+                self.toShowLocalNotification(message: NotificationType.UpdatedAssignment.rawValue)
                 break;
             case NotificationType.AttendanceMarked.rawValue:
                 pushAlertView(userInfo: result)
@@ -607,16 +623,48 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             //
             completionHandler(UIBackgroundFetchResult.newData)
 
+    }
+    
+    
+    
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
+        
+        
+        
+        if application.applicationState == .background && isInternetAvailable() && !SDKSingleton.sharedInstance.userId.isBlank{
+            
+            if RMCNotifier.shared.getShiftRunningStatus(){
+                
+                let superViewController = SuperViewController()
+                superViewController.wakeUpCall(notify: .Normal)
+                
+                if !SDKSingleton.sharedInstance.userId.isBlank{
+                    let quoteString = GetClusteringFromServer.quoteString(date: Date())
+                    let getCheckinId = checkinFromServerManager()
+                    
+                    getCheckinId.getClusterDataBackground(query: quoteString, date: Date()) { (value) in
+                        
+                        if value == true{
+                            UserDefaults.standard.set(Date(), forKey: "lastDashBoardUpdated")
+                            completionHandler(.newData)
+                        }else{
+                            completionHandler(.noData)
+                        }
+                    }
+                    
+                }
+            }
+            
+            //completionHandler(.noData)
+
+            
+        }
         
         
     }
 
-    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        // perform fetch handler
-        
-        
-    }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -639,6 +687,8 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             return
         }
         switch type {
+
+            
         case NotificationType.Welcome.rawValue:
             break
         case NotificationType.NewAssignment.rawValue , NotificationType.FirstCheckin.rawValue:
@@ -661,11 +711,6 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
             break
             
         }
-        
-        
-        
-        
-        
         
         completionHandler()
     }
@@ -757,65 +802,3 @@ extension UIApplication{
 }
 
 
-
-//MARK: Extension for Place Visit loction Manager
-
-extension AppDelegate: CLLocationManagerDelegate{
-    
-    func creatVisitLocation(){
-        
-        locationManager = CLLocationManager()
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.startMonitoringVisits()
-        locationManager?.delegate = self
-        
-        
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
-        // create CLLocation from the coordinates of CLVisit
-       // let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
-        
-        locationManager?.stopUpdatingLocation()
-        locationManager?.stopMonitoringVisits()
-        
-        locationManager?.delegate = nil
-        locationManager = nil
-        
-        //sendLocalNotification()
-        
-        let notifier = RMCNotifier.shared
-        if notifier.getShiftRunningStatus() {
-            let superViewController = SuperViewController()
-            superViewController.wakeUpCall(notify: NotifyingFrom.Normal)
-          //  bdCloudStartMonitoring()
-            //BlueDolphinManager.manager.startLocationMonitoring()
-        }
-//        else{
-//            bdCloudStopMonitoring()
-//        }
-        
-        // Get location description
-    }
-    
-    func sendLocalNotification(){
-        let content = UNMutableNotificationContent()
-        content.title = "Please notify iOS developer"
-        content.body = "\(Date()) send us the screenshot"
-        content.sound = .default()
-        
-        // 2
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "Testing", content: content, trigger: trigger)
-        
-        // 3
-        center.add(request, withCompletionHandler: nil)
-    }
-    
-    
-  
-    
-    
-    
-}

@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 import MapKit
-
+import BluedolphinCloudSdk
 
 extension GMSMapView{
     

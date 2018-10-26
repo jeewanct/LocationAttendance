@@ -22,4 +22,5 @@ enum ShowCheckinFrom{
     case Server
     case LocalDatabase
     case NoCheckinFound
+    case Avaibilty
 }

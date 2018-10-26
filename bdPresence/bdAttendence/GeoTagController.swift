@@ -54,6 +54,14 @@ class GeoTagController: UIViewController{
         if let editPlace = editGeoTagPlace{
             
             setupEdit(place: editPlace)
+            doneButton.isEnabled = true
+        }else{
+            if isAlreadycheckGeoTagged(){
+                doneButton.isEnabled = false
+                AlertsController.shared.displaySpreadsheet(whereToShow: self, message: "Geo Tag place already exist!")
+            }else{
+                doneButton.isEnabled = true
+            }
         }
         
         
@@ -163,13 +171,19 @@ class GeoTagController: UIViewController{
             geoTag.latitude = getPlacesFromGoogle.coordinate?.latitude
             geoTag.longitude = getPlacesFromGoogle.coordinate?.longitude
             geoTag.placeAddress = getPlacesFromGoogle.formattedAddress
-            geoTag.accuracy = "0"
-            geoTag.altitude = "0"
+            geoTag.accuracy = 0
+            geoTag.altitude = 0
             
         }else{
             
-            geoTag.accuracy = CurrentLocation.accuracy
-            geoTag.altitude = CurrentLocation.altitude
+            if let accuracy = Double(CurrentLocation.accuracy){
+                geoTag.accuracy = accuracy
+            }
+            
+            if let altitude = Double(CurrentLocation.altitude){
+                geoTag.altitude = altitude
+            }
+            
             
             
             geoTag.latitude = CurrentLocation.coordinate.latitude
@@ -255,13 +269,21 @@ class GeoTagController: UIViewController{
             geoTag.latitude = getPlacesFromGoogle.coordinate?.latitude
             geoTag.longitude = getPlacesFromGoogle.coordinate?.longitude
             geoTag.placeAddress = getPlacesFromGoogle.formattedAddress
-            geoTag.accuracy = "0"
-            geoTag.altitude = "0"
+            geoTag.accuracy = 0
+            geoTag.altitude = 0
             
         }else{
             
-            geoTag.accuracy = CurrentLocation.accuracy
-            geoTag.altitude = CurrentLocation.altitude
+            
+            if let accuracy = Double(CurrentLocation.accuracy){
+                geoTag.accuracy = accuracy
+            }
+            
+            if let altitude = Double(CurrentLocation.altitude){
+                geoTag.altitude = altitude
+            }
+//            geoTag.accuracy = CurrentLocation.accuracy
+//            geoTag.altitude = CurrentLocation.altitude
             
             
             geoTag.latitude = CurrentLocation.coordinate.latitude
@@ -312,10 +334,39 @@ class GeoTagController: UIViewController{
             }
         }
         
+        
+        
+        
         return ""
         
         
         
+    }
+    
+    func isAlreadycheckGeoTagged() -> Bool{
+        let locationModel = LocationDataModel()
+        
+        if let getPlacesFromGoogle = placeDetails{
+            if let lat = getPlacesFromGoogle.coordinate?.latitude, let long = getPlacesFromGoogle.coordinate?.longitude{
+                locationModel.latitude = String(lat)
+                locationModel.longitude = String(long)
+                
+            }
+            
+        }else {
+            locationModel.latitude = String(CurrentLocation.coordinate.latitude)
+            locationModel.longitude = String(CurrentLocation.coordinate.longitude)
+            
+        }
+        
+        
+        if let canGeoTag = UserPlace.getPlacesData(location: locationModel, rmcPlaces: UserPlace.getGeoLocations()){
+            
+           return true
+            
+        }
+        
+        return false
     }
     
     @IBAction func handleGeoFenceSlider(_ sender: Any) {
@@ -361,11 +412,20 @@ class GeoTagController: UIViewController{
     
     
     func setupFields(){
-        currenLocationTextField.text = CurrentLocation.address
+        
+        let clLocation = CLLocation(latitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude)
+        
+        LogicHelper.shared.reverseGeoCode(location: clLocation) { (address) in
+            self.currenLocationTextField.text = address
+            
+        }
+        
+        
+        
         
         geoFenceRadiusSlider.minimumValue = 0
         geoFenceRadiusSlider.maximumValue = 500
-        geoFenceRadiusSlider.value = 50
+        geoFenceRadiusSlider.value = 100
         
         
         //visualEffect.applyGradient(isTopBottom: false, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
@@ -376,7 +436,7 @@ class GeoTagController: UIViewController{
     
     lazy var geoFenceCircle: GMSCircle = {
         let circle = GMSCircle()
-        circle.radius = 50
+        circle.radius = 100
         circle.fillColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 0.5)
         circle.position = CurrentLocation.coordinate
         circle.strokeWidth = 0
@@ -418,6 +478,20 @@ extension GeoTagController: GooglePlacesAutocompleteViewControllerDelegate {
             geoFenceCircle.position = coordinates
             
             mapView.animate(toLocation: coordinates)
+            
+            if let _ = geoTagAddress{
+                doneButton.isEnabled = true
+            }else{
+            
+                if isAlreadycheckGeoTagged(){
+                    doneButton.isEnabled = false
+                    AlertsController.shared.displaySpreadsheet(whereToShow: self, message: "Geo Tag place already exist!")
+                }else{
+                    doneButton.isEnabled = true
+                }
+                
+            }
+            
         }
         
         // marker.position

@@ -430,16 +430,6 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk19LocationHistoryData")
 @end
 
 
-SWIFT_CLASS("_TtC19BluedolphinCloudSdk18MyTeamDetailsModel")
-@interface MyTeamDetailsModel : NSObject
-+ (void)getUserDobjIdWithQuery:(NSString * _Nonnull)query;
-+ (void)getTeamMemberWithUserId:(NSString * _Nonnull)userId;
-+ (void)removeUnnecessaryData;
-+ (void)callBackWithStatus:(BOOL)status;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
 SWIFT_CLASS("_TtC19BluedolphinCloudSdk11MyTeamModel")
 @interface MyTeamModel : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -672,6 +662,18 @@ SWIFT_CLASS("_TtC19BluedolphinCloudSdk7RMCUser")
 
 @interface UIDevice (SWIFT_EXTENSION(BluedolphinCloudSdk))
 @property (nonatomic, readonly, copy) NSString * _Nonnull modelName;
+@end
+
+
+SWIFT_CLASS("_TtC19BluedolphinCloudSdk17UserAvaiblityData")
+@interface UserAvaiblityData : RealmSwiftObject
+@property (nonatomic, copy) NSString * _Nullable isAvailable;
+@property (nonatomic, copy) NSDate * _Nullable availableFrom;
+@property (nonatomic, copy) NSDate * _Nullable availableTo;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRealm:(RLMRealm * _Nonnull)realm schema:(RLMObjectSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithValue:(id _Nonnull)value schema:(RLMSchema * _Nonnull)schema OBJC_DESIGNATED_INITIALIZER;
 @end
 
 

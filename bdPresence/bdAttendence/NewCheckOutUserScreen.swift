@@ -9,24 +9,24 @@
 import UIKit
 import CoreLocation
 import PullUpController
-
-class UserDetailsDataModel{
-    
-    var lastSeen: String?
-    var address: String?
-    var isGeoTagged: Bool?
-    var lat: CLLocationDegrees = 0
-    var long: CLLocationDegrees = 0
-    var cllLocation:  CLLocation = CLLocation()
-    var geoLocationName =  ""
-    var canGeoTag = false
-    var checkInId = ""
-    var latitude: String?
-    var longitude: String?
-    var distance: Double?
-    var startTime: Date?
-    
-}
+import BluedolphinCloudSdk
+//class UserDetailsDataModel{
+//    
+//    var lastSeen: String?
+//    var address: String?
+//    var isGeoTagged: Bool?
+//    var lat: CLLocationDegrees = 0
+//    var long: CLLocationDegrees = 0
+//    var cllLocation:  CLLocation = CLLocation()
+//    var geoLocationName =  ""
+//    var canGeoTag = false
+//    var checkInId = ""
+//    var latitude: String?
+//    var longitude: String?
+//    var distance: Double?
+//    var startTime: Date?
+//    
+//}
 
 
 

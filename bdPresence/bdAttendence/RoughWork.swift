@@ -10,3 +10,39 @@ import UIKit
 
 
 
+//let closure = { (value: String) -> Bool in
+//    
+//    print("Jeevan chandra tiwari")
+//   // closure()
+//    return true
+//}
+//
+//
+//func testing(_: (String) -> Bool){
+//    
+//    
+//}
+//
+//let y = closure("Jeevan")
+//
+//testing(closure)
+
+
+//class RoughWork{
+//
+//   fileprivate var value = "jeevan"
+//
+//
+//}
+//
+//extension RoughWork{
+//
+//    func testing(){
+//
+//    }
+//
+//
+//}
+
+
+

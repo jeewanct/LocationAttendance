@@ -469,6 +469,22 @@ class LogicHelper{
         
     }
     
+    
+   class func compareDates(previous: Date) -> Bool{
+        
+        if let startOfToday = Date().dayStart(), let previousStartOfDay = previous.dayStart(){
+            if startOfToday > previousStartOfDay{
+                
+                if UserDayData.checkIfPendingCheckinsFound(date: previous){
+                    return true
+                }
+                
+            }
+        }
+        return false
+        
+    }
+    
     func timeInSeconds() -> Int{
         
         let someDate = Date()
@@ -614,6 +630,8 @@ extension Date {
     var iso8601: String {
         return Formatter.iso8601.string(from: self)
     }
+   
+        
 }
 
 extension String {

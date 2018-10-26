@@ -131,6 +131,9 @@ extension HistoryViewController{
                 locationFilters.delegate = self
                 locationFilters.plotMarkers(date: currentDisplayDate)
                 
+            case .Avaibilty:
+                print("Avability")
+                
             case .NoCheckinFound:
                 print("hello")
                 
@@ -156,6 +159,8 @@ extension HistoryViewController{
         if let _ = pullController{
             self.removePullUpController(pullController, animated: true)
         }
+        
+        activityIndicator.removeActivityIndicator(activityIndicator: activityIndicator)
     }
     
     
@@ -257,31 +262,38 @@ extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSou
         self.applyForCell(indexPath) { cell in cell.highlight() }
         animate = false
         
+
         
-        if let checkinsFromServer = ClusterDataFromServer.getDataFrom(date: currentData, from: LocationDetailsScreenEnum.historyScreen){
-            
-            if checkinsFromServer.showIndicator != true{
-                
-                if let locationData = checkinsFromServer.locationData, let headHeader = checkinsFromServer.headerData{
-                    
-                    dataFromServer(locationData: locationData, headerData: headHeader)
-                    
-                }
-                
-            }else{
-                activityIndicator = ActivityIndicatorView()
-                self.view.showActivityIndicator(activityIndicator: activityIndicator)
-            }
-            
-//            dataFromServer(locationData: checkinsFromServer.locationData, headerData: checkinsFromServer.headerData)
-            
+        if let data = UserDayData.getLocationDataFromServer(date: currentData){
+            let headerData = ClusterDataFromServer.getHeaderData(locationData: data)
+            dataFromServer(locationData: data, headerData: headerData)
+        }else{
+            getDataFromServer(currentDate: currentData)
         }
         
-      
+        
+        
+
+        if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
+            
+            if screenFlag == "2" && !RMCNotifier.shared.getShiftRunningStatus(){
+                if UserDayData.checkIfPendingCheckinsFound(date: currentData){
+                    getDataFromServer(currentDate: currentData)
+                }
+            }else{
+                if LogicHelper.compareDates(previous: currentData){
+                    getDataFromServer(currentDate: currentData)
+                }
+            }
+            
+        }
         
 
     }
    
+    
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         self.applyForCell(indexPath) { cell in cell.unhighlight() }
@@ -320,70 +332,7 @@ extension HistoryViewController{
         
         
     }
-    
-    
-//    func plotMarkersInMap(location: [LocationDataModel]){
-//        
-//        let allLocations = UserPlace.getGeoTagData(location: location)
-//        //var finalLocations = allLocations
-//        
-//        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-//        
-//        if allLocations.count != 0{
-//            
-//            clearMapData()
-//            
-//            mapView.addMarkersInMap(allLocations: allLocations)
-//            pullController = UIStoryboard(name: "NewDesign", bundle: nil)
-//                .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-//            pullController.screenType = LocationDetailsScreenEnum.historyScreen
-//            
-//            pullController.selectedDate = selectedDate
-//            pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
-//            
-//            
-//            
-//            var headerData = [String]()
-//            if let firstData = allLocations.first{
-//                if let startTime = firstData.first{
-//                    
-//                    if let lastSeen = startTime.lastSeen{
-//                        headerData.append(LogicHelper.shared.getLocationDate(date: lastSeen))
-//                    }
-//                    
-//                    
-//                    
-//                }else{
-//                    headerData.append("")
-//                }
-//            }
-//            
-//            headerData.append("0.0")
-//            
-//            headerData.append(String(allLocations.count))
-//            
-//            self.pullController.distanceArray = headerData
-//            
-//            
-//            
-//            
-//            self.addPullUpController(pullController, animated: true)
-//            
-//            if !LogicHelper.shared.checkIfAllLocationsAreSame(locations: allLocations){
-//                let polyLine = PolyLineMap()
-//                polyLine.delegate = self
-//                // polyLine.allLocations = allLocations
-//                //polyLine.takePolyline()
-//                polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
-//            }
-//            
-//            
-////            let polyLine = PolyLineMap()
-////            polyLine.delegate = self
-////            polyLine.getPolyline(location: LogicHelper.shared.sortGeoLocations(locations: allLocations))
-//        }
-//        
-//    }
+ 
     
     
     
@@ -445,11 +394,41 @@ extension HistoryViewController: ServerDataFromClusterDelegate{
         
         let polyLine = DrawPolyLineInMap()
         polyLine.delegate = self
-        polyLine.getPolyline(location: locationData)
+        polyLine.getPolyline(location: locationData.reversed())
         
         
     }
     
     
     
+}
+
+
+extension HistoryViewController: ServerResponseDelegate{
+    
+    func getDataFromServer(currentDate: Date){
+        let serverData = checkinFromServerManager()
+        serverData.delegate = self
+        serverData.getClusterData(query: GetClusteringFromServer.quoteString(date: currentDate), date: currentDate)
+    }
+    
+    func successData<T>(data: T) {
+        
+        if let locationData = data  as? [UserDetailsDataModel]{
+            let headerData = ClusterDataFromServer.getHeaderData(locationData: locationData)
+            dataFromServer(locationData: locationData, headerData: headerData)
+        }
+        
+        
+    }
+    
+    func errorData<T>(error: T) {
+        
+        if let getError = error as? String{
+            if getError == "No Data"{
+                getDataFromCheckin()
+                
+            }
+        }
+    }
 }

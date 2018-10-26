@@ -8,7 +8,7 @@
 
 import Foundation
 import MapKit
-
+import BluedolphinCloudSdk
 
 enum ErrorMessages: String{
     case noInternetAvailable = "Internet connection appears to be offline!"
