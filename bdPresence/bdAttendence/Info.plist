@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.2.5</string>
 	<key>CFBundleVersion</key>
-	<string>21</string>
+	<string>22</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -44,7 +44,7 @@
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Want to access near by beacons</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Want to access your camera</string>
+	<string>Want to access your camera to upload user profile picture.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Allowing us to access your location would ensure that we are able to capture your real-time locations in order for accurate distance and presence reporting</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -52,7 +52,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Want to access near by location to track your indoor location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Want to access your gallery</string>
+	<string>Want to access your camera to upload user profile picture.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>IntentIntent</string>

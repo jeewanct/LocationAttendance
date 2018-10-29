@@ -413,17 +413,23 @@ class GeoTagController: UIViewController{
     
     func setupFields(){
         
-        let clLocation = CLLocation(latitude: CurrentLocation.coordinate.latitude, longitude: CurrentLocation.coordinate.longitude)
+        let clLocation = CLLocation(latitude: CurrentLocation.coordinate.latitude, longitude:
+            CurrentLocation.coordinate.longitude)
         
+        
+        if let _ = geoTagAddress{
+            
+        }else{
         LogicHelper.shared.reverseGeoCode(location: clLocation) { (address) in
             self.currenLocationTextField.text = address
             
+        }
         }
         
         
         
         
-        geoFenceRadiusSlider.minimumValue = 0
+        geoFenceRadiusSlider.minimumValue = 100
         geoFenceRadiusSlider.maximumValue = 500
         geoFenceRadiusSlider.value = 100
         

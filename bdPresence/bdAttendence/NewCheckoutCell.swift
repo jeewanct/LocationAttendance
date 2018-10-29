@@ -35,6 +35,7 @@ class NewCheckoutCell: UITableViewCell{
     
     @IBAction func handleGeoTag(_ sender: Any) {
         if let index = currentIndex{
+            
             delegate?.handleTap(currentIndex: index)
         }
         

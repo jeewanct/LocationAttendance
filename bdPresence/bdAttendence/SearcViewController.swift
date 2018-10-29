@@ -498,6 +498,8 @@ extension SearchViewController: GeoTagLocationDelegate{
         geoTagController.geoTagLocation = cllLocation
         geoTagController.geoTagAddress = address
         
+        
+        
         navigationController?.pushViewController(geoTagController, animated: true)
         
     }

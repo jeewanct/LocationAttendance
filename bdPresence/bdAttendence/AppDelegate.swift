@@ -24,92 +24,15 @@ import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     var window: UIWindow?
-    
-    
-    
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         /*
          Don't config until the location is on
         */
-        
-        
         // Testing Background fetch for checkins
+        appConfiguration()
         
-        application.setMinimumBackgroundFetchInterval(300)
-        
-        
-        
-        
-        
-
-        appIdentifier = Bundle.main.bundleIdentifier!
-        APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
-        ConfigurationModel.setBundleId(id: appIdentifier)
-        ConfigurationModel.setAppVersion(appVersion: APPVERSION)
-        ConfigurationModel.setCheckinInteral(val: 600)
-        // Update the SDK because i have added one function there
-        ConfigurationModel.setAppName(name: "BDPresence")
-        print("appversion = \(APPVERSION)")
-        switch(ReleaseType.currentConfiguration()) {
-        case .Debug:
-            ConfigurationModel.stopDebugging(flag: false)
-            print("In Debug")
-
-
-            //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-            ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
-
-        case .Alpha:
-            ConfigurationModel.stopDebugging(flag: false)
-            print("In Alpha")
-            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-            Fabric.with([Crashlytics.self])
-        case .Release:
-            print("In Release")
-            ConfigurationModel.stopDebugging(flag: true)
-            ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
-                //"https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
-            Fabric.with([Crashlytics.self])
-            
-            //https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/
-            
-            
-        case .Unknown:
-            print("In unknown")
-            break
-        }
-        
-        BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
-        
-       
-      //  creatVisitLocation()
-        
-        //setAPIURL(url: "https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/")
-        //https://bp6po2fed3.execute-api.ap-southeast-1.amazonaws.com/BD/staging/
-//        #if DEBUG
-//            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
-//            //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-//
-//        #else
-//            ConfigurationModel.setAPIURL(url: "https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
-//            print("https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
-//            Fabric.with([Crashlytics.self])
-//
-//        #endif
-        
-//        #if DEBUG
-//            setAPIURL(url: "https://kxjakkoxj3.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
-//        #endif
-      
-        IQKeyboardManager.sharedManager().enable = true
-        UIDevice.current.isBatteryMonitoringEnabled = true
-        registerForRemoteNotification()
-        updateRealmConfiguration()
         
         //Adding a Defaults value which will show gpsCheckinSendStatus
         // And it should be set here on first launch of app
@@ -132,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                    BlueDolphinManager.manager.startLocationMonitoring()
 //                }
             }
+            
 
         }
         //print(Realm.Configuration.defaultConfiguration.fileURL)
@@ -801,4 +725,58 @@ extension UIApplication{
     }
 }
 
+
+extension AppDelegate{
+
+    func appConfiguration(){
+     
+        application.setMinimumBackgroundFetchInterval(600)
+        appIdentifier = Bundle.main.bundleIdentifier!
+        APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
+        ConfigurationModel.setBundleId(id: appIdentifier)
+        ConfigurationModel.setAppVersion(appVersion: APPVERSION)
+        ConfigurationModel.setCheckinInteral(val: 600)
+        // Update the SDK because i have added one function there
+        
+        ConfigurationModel.setAppName(name: "BDPresence")
+        print("appversion = \(APPVERSION)")
+        switch(ReleaseType.currentConfiguration()) {
+        case .Debug:
+            ConfigurationModel.stopDebugging(flag: false)
+            print("In Debug")
+            
+            
+            //ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
+            
+        case .Alpha:
+            ConfigurationModel.stopDebugging(flag: false)
+            print("In Alpha")
+            ConfigurationModel.setAPIURL(url: "https://ariuyux3uj.execute-api.ap-southeast-1.amazonaws.com/bd/dev/")
+            Fabric.with([Crashlytics.self])
+        case .Release:
+            print("In Release")
+            ConfigurationModel.stopDebugging(flag: true)
+            ConfigurationModel.setAPIURL(url: "https://ni40ljihu8.execute-api.ap-southeast-1.amazonaws.com/beta/staging/")
+            //"https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/")
+            Fabric.with([Crashlytics.self])
+            
+            //https://dqxr67yajg.execute-api.ap-southeast-1.amazonaws.com/bd/staging/
+            
+        case .Unknown:
+            print("In unknown")
+            break
+        }
+        
+        BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
+        
+        IQKeyboardManager.sharedManager().enable = true
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        registerForRemoteNotification()
+        updateRealmConfiguration()
+        
+        
+    }
+
+}
 
