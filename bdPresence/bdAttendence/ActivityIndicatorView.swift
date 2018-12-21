@@ -74,7 +74,7 @@ class ActivityIndicatorView: UIView {
     let activityIndicator: UIActivityIndicatorView = {
         let activityView = UIActivityIndicatorView()
         activityView.translatesAutoresizingMaskIntoConstraints = false
-        activityView.activityIndicatorViewStyle = .whiteLarge
+        activityView.style = .whiteLarge
         activityView.color =  #colorLiteral(red: 0.4235294118, green: 0.7294117647, blue: 0.8156862745, alpha: 1)
         activityView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         return activityView

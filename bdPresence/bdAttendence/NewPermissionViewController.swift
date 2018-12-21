@@ -35,7 +35,7 @@ class NewPermissionViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(NewPermissionViewController.checkPermissionStatus(sender:)), name: NSNotification.Name(rawValue: LocalNotifcation.Background.rawValue), object: nil)
         
         
-        locationButton.addTarget(self, action: #selector(openAppSetting), for: UIControlEvents.touchUpInside)
+        locationButton.addTarget(self, action: #selector(openAppSetting), for: .touchUpInside)
         
         checkLocationStatus()
         
@@ -67,18 +67,18 @@ class NewPermissionViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func checkPermissionStatus(sender:NSNotification){
+   @objc func checkPermissionStatus(sender:NSNotification){
         checkLocationStatus()
         updateLayout()
     }
     
     func updateLayout(){
         if ProjectSingleton.sharedInstance.locationAvailable{
-            locationButton.setImage(UIImage(named: "Permission_enabled"), for: UIControlState.normal)
+            locationButton.setImage(UIImage(named: "Permission_enabled"), for: .normal)
             locationButton.isUserInteractionEnabled = false
         }else{
             locationButton.isUserInteractionEnabled = true
-            locationButton.setImage(UIImage(named: "Permission_disabled"), for: UIControlState.normal)
+            locationButton.setImage(UIImage(named: "Permission_disabled"), for: .normal)
         }
         //        if ProjectSingleton.sharedInstance.bluetoothAvaliable{
         //            bluetoothButton.isUserInteractionEnabled = false
@@ -124,8 +124,8 @@ class NewPermissionViewController: UIViewController {
     }
     
 
-    func openAppSetting(){
-        let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+   @objc func openAppSetting(){
+    let settingsUrl = NSURL(string: UIApplication.openSettingsURLString)
         if let url = settingsUrl {
             UIApplication.shared.openURL(url as URL)
         }

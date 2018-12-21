@@ -33,14 +33,14 @@ class TimerView: UIView {
         self.cancelButton.clipsToBounds = true
         self.cancelButton.titleLabel?.font = APPFONT.FOOTERBODY
         self.cancelButton.tintColor = UIColor.white
-        self.cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: UIControlEvents.touchUpInside)
+        self.cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: UIControl.Event.touchUpInside)
         timerView.maxValue = CGFloat(timeDuration)
         timerView.innerRingColor = APPColor.newGreen
         timerView.shouldShowValueText = true
         timerView.showFloatingPoint = false
         timerView.font = APPFONT.DAYHOUR!
         timerView.valueIndicator = " secs"
-        timerView.animationStyle = kCAMediaTimingFunctionLinear
+        timerView.animationStyle = CAMediaTimingFunctionName.linear.rawValue
         
         timerView.setProgress(value: CGFloat(timeDuration), animationDuration: TimeInterval(timeDuration)) {
             self.timerView.value = 0.0
@@ -50,7 +50,7 @@ class TimerView: UIView {
         }
     }
     
-    func cancelButtonAction() {
+   @objc func cancelButtonAction() {
     
     }
     

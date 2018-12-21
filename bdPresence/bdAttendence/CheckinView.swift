@@ -68,7 +68,7 @@ class CheckinView: UIView {
         customView.frame = bounds
         
         // Make the view stretch with containing view
-        customView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        customView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         
         // Adding custom subview on top of our view (over any custom drawing > see note below)
         addSubview(customView)
@@ -92,7 +92,7 @@ class CheckinView: UIView {
     }
     
     
-    func handleGesture(sender:UIGestureRecognizer){
+    @objc func handleGesture(sender:UIGestureRecognizer){
         
          delegate?.updateView(moveToView:.Timer)
 //        BlueDolphinManager.manager.startScanning()

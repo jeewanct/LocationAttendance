@@ -156,7 +156,7 @@ extension MyTeamLocationDetails{
                 .instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
             self.pullController.screenType = LocationDetailsScreenEnum.myTeamScreen
             self.pullController.locationData = LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed()
-            self.addPullUpController(self.pullController, animated: true)
+            self.addPullUpController(self.pullController, initialStickyPointOffset: UIScreen.main.bounds.height * 0.3, animated: true)
             
             
             if !LogicHelper.shared.checkIfAllLocationsAreSame(locations: allLocations){
@@ -348,7 +348,7 @@ extension MyTeamLocationDetails{
         
         pullController.userDetails = locationData
         pullController.distanceArray = headerData
-        self.addPullUpController(pullController, animated: true)
+        self.addPullUpController(pullController, initialStickyPointOffset: 0, animated: true)
         
         let polyLine = DrawPolyLineInMap()
         polyLine.delegate = self

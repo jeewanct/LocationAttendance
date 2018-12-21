@@ -86,23 +86,22 @@ extension HistoryViewController{
     
     func setupNavigation(){
         navigationController?.removeTransparency()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: APPFONT.DAYHEADER!]
         self.navigationItem.title = Date().formattedWith(format: "MMMM yyyy")
         hideUpperButton()
     }
     
-    func menuAction(sender:UIBarButtonItem){
+   @objc func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }
     
     func setupObservers(){
-        NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.showView), name: NSNotification.Name(rawValue: "CheckInsFromServer"), object: nil)
          NotificationCenter.default.addObserver(self, selector: #selector(HistoryViewController.getDataFromCheckin), name: NSNotification.Name(rawValue: "CheckInsFromServerWithZeroElements"), object: nil)
     }
     
-    func getDataFromCheckin(){
+   @objc func getDataFromCheckin(){
 
         
         let locationFilters = LocationFilters()
@@ -114,36 +113,6 @@ extension HistoryViewController{
     }
     
     
-    func showView(notification: Notification){
-        
-        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-        
-        if let clusterData = ClusterDataFromServer.showView(date: currentDisplayDate, notification: notification){
-            
-            switch clusterData.showFrom{
-            case .Server:
-                if let headerData = clusterData.headerData, let locationData = clusterData.locationData{
-                    dataFromServer(locationData: locationData, headerData: headerData)
-                }
-                
-            case .LocalDatabase:
-                let locationFilters = LocationFilters()
-                locationFilters.delegate = self
-                locationFilters.plotMarkers(date: currentDisplayDate)
-                
-            case .Avaibilty:
-                print("Avability")
-                
-            case .NoCheckinFound:
-                print("hello")
-                
-            }
-            
-            
-        }
-    
-        
-    }
     
     func discardFakeLocations(){
         updateView()
@@ -202,23 +171,28 @@ extension HistoryViewController{
         if let index = thisWeekDays.index(of: currentDisplayDate) {
             let indexPath = IndexPath(row: index, section: 0)
             self.collectionView(calenderView, didSelectItemAt: indexPath)
-            calenderView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.bottom)
+            calenderView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionView.ScrollPosition.bottom)
         }
     }
 }
 
 
 
-extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSource{
+extension HistoryViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-       // let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        layout.minimumInteritemSpacing = 0
-//        layout.minimumLineSpacing = 0
-//        layout.invalidateLayout()
-        return CGSize(width: collectionView.frame.width/7, height:collectionView.frame.height) // Set your item size here
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+         return CGSize(width: collectionView.frame.width/7, height:collectionView.frame.height)
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+//       // let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+////        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+////        layout.minimumInteritemSpacing = 0
+////        layout.minimumLineSpacing = 0
+////        layout.invalidateLayout()
+//        
+//        // Set your item size here
+//    }
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(collectionView.frame)
@@ -390,7 +364,7 @@ extension HistoryViewController: ServerDataFromClusterDelegate{
         mapView.addMarkersInMap(allLocations: locationData)
         pullController.userDetails = locationData
         pullController.distanceArray = headerData
-        self.addPullUpController(pullController, animated: true)
+        self.addPullUpController(pullController, initialStickyPointOffset: UIScreen.main.bounds.height * 0.3, animated: true)
         
         let polyLine = DrawPolyLineInMap()
         polyLine.delegate = self

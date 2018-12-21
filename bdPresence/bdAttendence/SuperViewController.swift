@@ -189,7 +189,7 @@ class SuperViewController: UIViewController {
     }
     
     
-    func wakeUp (sender : NSNotification) {
+    @objc func wakeUp (sender : NSNotification) {
         self.wakeUpCall(notify: NotifyingFrom.SilentPush)
     }
     
@@ -322,7 +322,7 @@ class SuperViewController: UIViewController {
     
     
     
-    func shiftHandling(){
+   @objc func shiftHandling(){
         UserDefaults.standard.set("2", forKey: "AlreadyCheckin")
         UserDefaults.standard.synchronize()
         bdCloudStopMonitoring()
@@ -336,7 +336,7 @@ class SuperViewController: UIViewController {
         self.slideMenuViewToLeft()
     }
  
-    func handleSwipes(sender:UISwipeGestureRecognizer) {
+    @objc func handleSwipes(sender:UISwipeGestureRecognizer) {
         
         if (sender.direction == .left) {
             //////////println("Swipe Left")
@@ -375,7 +375,7 @@ class SuperViewController: UIViewController {
             
         })
     }
-    func ShowSideMenu(sender : NSNotification) {
+   @objc func ShowSideMenu(sender : NSNotification) {
        
         self.showMenuView()
         
@@ -391,7 +391,7 @@ class SuperViewController: UIViewController {
 
 extension SuperViewController{
     
-    func pushNotificationReceived(sender:NSNotification){
+   @objc func pushNotificationReceived(sender:NSNotification){
         let result: NSDictionary = sender.userInfo! as NSDictionary
         let type =  result ["notificationType"] as! String
         switch type {
@@ -438,7 +438,7 @@ extension SuperViewController{
     }
     
     
-    func firstCheckin(sender:NSNotification){
+    @objc func firstCheckin(sender:NSNotification){
         
         let state = UIApplication.shared.applicationState
         if state == .background {
@@ -490,7 +490,7 @@ extension SuperViewController{
     }
  */
     
-    func checkPermissionStatus(sender:NSNotification){
+    @objc func checkPermissionStatus(sender:NSNotification){
         updateTask()
         checkBlockerScreen()
         if isInternetAvailable(){
@@ -597,7 +597,7 @@ extension SuperViewController{
     //UserDefaults.standard.set("true", forKey: GPSSENDCHECKINSTATUS)
     
     
-    func locationCheckin(sender:NSNotification){
+   @objc func locationCheckin(sender:NSNotification){
         
         
         if let screenFlag = UserDefaults.standard.value(forKeyPath: "AlreadyCheckin") as? String{
@@ -693,7 +693,7 @@ extension SuperViewController{
     
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+        let OkAction = UIAlertAction(title: "OK", style: .cancel) { (action) in
             return        }
         alertController.addAction(OkAction)
         self.present(alertController, animated: true) {
@@ -722,7 +722,7 @@ extension SuperViewController{
 
 
 extension SuperViewController {
-    func ShowController (sender : NSNotification) {
+   @objc func ShowController (sender : NSNotification) {
         self.slideMenuViewToLeft()
         switch (sender.name.rawValue) {
             
@@ -764,25 +764,27 @@ extension SuperViewController {
     func changeChildController(identifier:StoryboardIdentifier){
         var lastController: AnyObject?
         
-        if let controller =  self.childViewControllers.first as? UINavigationController {
+        if let controller =  self.children.first as? UINavigationController {
             lastController = controller
         } else {
-            lastController = self.childViewControllers.last as! UINavigationController
+            lastController = self.children.last as! UINavigationController
         }
         for views in self.mainContainer.subviews {
             views.removeFromSuperview()
         }
-        lastController?.willMove(toParentViewController: nil)
+       
+        lastController?.willMove(toParent: nil)
+        //lastController?.willMove(toParentViewController: nil)
         
-        lastController?.removeFromParentViewController()
+        lastController?.removeFromParent()
         
         let destVc = self.storyboard?.instantiateViewController(withIdentifier: identifier.rawValue) as! UINavigationController
         
         
-        self.addChildViewController(destVc)
+        self.addChild(destVc)
         destVc.view.frame = self.mainContainer.frame
         self.mainContainer.addSubview(destVc.view)
-        destVc.didMove(toParentViewController: self)
+        destVc.didMove(toParent: self)
     }
     
     
@@ -811,11 +813,11 @@ extension SuperViewController{
     }
     
     
-    func getPlaces(){
+   @objc func getPlaces(){
         RMCPlacesManager.getPlaces()
     }
     
-    func handleSuccessRmcPlaces(notification: Notification){
+    @objc func handleSuccessRmcPlaces(notification: Notification){
         
         if let data = notification.userInfo as? [String: Any]{
             if let status = data["status"] as? Bool{
@@ -830,7 +832,7 @@ extension SuperViewController{
          //UserDefaults.standard.set(timeInSeconds(), forKey: "RMCPlacesDuration")
     }
     
-    func geoTagPermission(){
+   @objc func geoTagPermission(){
         
         if let getPlacesSeconds = UserDefaults.standard.value(forKey: "geoTagPermissionTime") as? Int{
             

@@ -69,24 +69,27 @@ class MyDashboardViewController: UIViewController {
     func updateChildController(destVc:UINavigationController){
         var lastController: AnyObject?
         
-        if let controller =  self.childViewControllers.first as? UINavigationController {
+        if let controller =  self.children.first as? UINavigationController {
             lastController = controller
         } else {
-            lastController = self.childViewControllers.last as! UINavigationController
+            lastController = self.children.last as! UINavigationController
         }
         for views in self.containerView.subviews {
             views.removeFromSuperview()
         }
-        lastController?.willMove(toParentViewController: nil)
         
-        lastController?.removeFromParentViewController()
+        lastController?.willMove(toParent: nil)
         
-        self.addChildViewController(destVc)
+       // lastController?.willMove(toParentViewController: nil)
+        
+        lastController?.removeFromParent()
+        
+        self.addChild(destVc)
         print(self.containerView.frame)
         
         destVc.view.frame = self.containerView.frame
         self.containerView.addSubview(destVc.view)
-        destVc.didMove(toParentViewController: self)
+        destVc.didMove(toParent: self)
         //constraintViewEqual(view1: containerView, view2: (destVc.topViewController?.view)!)
         
         
@@ -121,7 +124,7 @@ class MyDashboardViewController: UIViewController {
 //        }
 //    }
     
-    func updateView(sender:NSNotification){
+    @objc func updateView(sender:NSNotification){
           switch (sender.name.rawValue) {
           case LocalNotifcation.CheckoutScreen.rawValue:
             bdCloudStartMonitoring()
@@ -221,7 +224,7 @@ class MyDashboardViewController: UIViewController {
        
          errorView = ErrorScanView(frame: self.view.frame)
             //ErrorScanView(frame: CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height))
-       UIView.transition(with: errorView, duration: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.transition(with: errorView, duration: 0.5, options: UIView.AnimationOptions.curveEaseIn, animations: {
     
        }) { (value) in
         self.view.addSubview(self.errorView)
@@ -231,7 +234,7 @@ class MyDashboardViewController: UIViewController {
     }
     func removeErrorCustomView(){
         
-        UIView.transition(with: errorView, duration: 0.5, options: UIViewAnimationOptions.curveEaseOut, animations: {
+        UIView.transition(with: errorView, duration: 0.5, options: UIView.AnimationOptions.curveEaseOut, animations: {
             
         }) { (value) in
             self.errorView.removeFromSuperview()

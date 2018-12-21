@@ -22,11 +22,11 @@ class ErrorViewController: UIViewController {
         self.transmitButton.clipsToBounds = true
         self.transmitButton.titleLabel?.font = APPFONT.FOOTERBODY
         self.transmitButton.tintColor = UIColor.white
-        self.transmitButton.addTarget(self, action: #selector(transmitButtonAction), for: UIControlEvents.touchUpInside)
+        self.transmitButton.addTarget(self, action: #selector(transmitButtonAction), for: .touchUpInside)
         // Do any additional setup after loading the view.
     }
 
-    func transmitButtonAction(){
+   @objc func transmitButtonAction(){
         self.dismiss(animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {

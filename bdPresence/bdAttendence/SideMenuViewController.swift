@@ -91,7 +91,7 @@ class SideMenuViewController: UIViewController  {
     
         
     
-        func handleTap(sender : UITapGestureRecognizer) {
+    @objc    func handleTap(sender : UITapGestureRecognizer) {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MyProfile"), object: nil)
         }
     
@@ -113,7 +113,7 @@ class SideMenuViewController: UIViewController  {
                     if value.count > 0{
                     let indexPath = IndexPath(row: 1, section: 0)
                     self.tableView(sideMenuTable, didSelectRowAt: indexPath)
-                    sideMenuTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
+                    sideMenuTable.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
                     }
                     
                 }

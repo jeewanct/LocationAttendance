@@ -8,7 +8,7 @@
 
 import UIKit
 import BluedolphinCloudSdk
-import PullUpController
+
 
 class MyLocationTableView: PullUpController{
 
@@ -157,10 +157,10 @@ class MyLocationTableView: PullUpController{
         return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 64)
     }
     
-    override var pullUpControllerPreviewOffset: CGFloat {
-        print(UIScreen.main.bounds.height * 0.2)
-        return UIScreen.main.bounds.height * 0.2 + 64
-    }
+//    override var pullUpControllerPreviewOffset: CGFloat {
+//        print(UIScreen.main.bounds.height * 0.2)
+//        return UIScreen.main.bounds.height * 0.2 + 64
+//    }
     
     override var pullUpControllerMiddleStickyPoints: [CGFloat] {
         return [firstPreviewView.frame.maxY]

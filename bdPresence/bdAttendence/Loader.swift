@@ -30,7 +30,7 @@ class AlertView: UIView {
        // let pleaseWaitText = "Please wait"
         let attributedString = NSMutableAttributedString(string:"\(text)")
             //\n\(pleaseWaitText)")
-        attributedString.addAttribute(NSFontAttributeName, value:  UIFont.systemFont(ofSize: 24), range:NSRange(location: 0, length:text.characters.count))
+        attributedString.addAttribute(NSAttributedString.Key.font, value:  UIFont.systemFont(ofSize: 24), range:NSRange(location: 0, length:text.characters.count))
         
         label.attributedText = attributedString
         label.numberOfLines = 3
@@ -54,7 +54,7 @@ class AlertView: UIView {
         
         
         activityIndicator.frame = CGRect(x: 0.0, y: 10.0, width: 40.0, height: 40.0);
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        activityIndicator.style = .white
         //activityIndicator.center = CGPointMake(loadingView.frame.size.width / 2, (loadingView.frame.size.height / 2) - 40);
         
         loadingView.addSubview(label)

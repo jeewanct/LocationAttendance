@@ -34,7 +34,7 @@ class SplashViewController: UIViewController{
         self.loginButton.clipsToBounds = true
         self.loginButton.titleLabel?.font = APPFONT.FOOTERBODY
         //self.loginButton.tintColor = UIColor.white
-        self.loginButton.addTarget(self, action: #selector(loginButtonAction), for: UIControlEvents.touchUpInside)
+        self.loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
         // Do any additional setup after loading the view.
     }
 
@@ -44,7 +44,7 @@ class SplashViewController: UIViewController{
     }
     
     
-    func loginButtonAction(){
+  @objc  func loginButtonAction(){
         
     }
 

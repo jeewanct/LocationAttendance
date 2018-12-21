@@ -34,10 +34,10 @@ class SystemDetailViewController: UIViewController {
 
     
     func setupController(){
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sync"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(sync(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sync"), style: .plain, target: self, action: #selector(sync(sender:)))
         self.navigationItem.title = "System Details"
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: APPFONT.DAYHEADER!]
         systemTableview.delegate = self
         systemTableview.dataSource = self
         systemTableview.tableFooterView = UIView()
@@ -63,7 +63,7 @@ class SystemDetailViewController: UIViewController {
         }
     }
     
-    func sync(sender:UIBarButtonItem){
+    @objc func sync(sender:UIBarButtonItem){
         if isInternetAvailable(){
             
             if let lastManualSync = UserDefaults.standard.value(forKey: UserDefaultsKeys.LastManualSync.rawValue) as? Date {
@@ -151,10 +151,10 @@ class SystemDetailViewController: UIViewController {
    
     
     
-    func handleLongPress(){
+    @objc func handleLongPress(){
         let message = getBeaconList().joined(separator: "\n")
         let alertController = UIAlertController(title: "Beacons", message: message, preferredStyle: .alert)
-        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+        let OkAction = UIAlertAction(title: "OK", style: .cancel) { (action) in
             return        }
         alertController.addAction(OkAction)
         self.present(alertController, animated: true) {
@@ -163,16 +163,18 @@ class SystemDetailViewController: UIViewController {
     
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+        let OkAction = UIAlertAction(title: "OK", style: .cancel) { (action) in
             return        }
         alertController.addAction(OkAction)
         self.present(alertController, animated: true) {
         }
     }
-    func refresh(refreshControl:UIRefreshControl){
+    
+    @objc func refresh(refreshControl:UIRefreshControl){
         updateData()
         refreshControl.endRefreshing()
     }
+    
     func updateData(){
        
         systemDetail  = []
@@ -212,7 +214,7 @@ class SystemDetailViewController: UIViewController {
         
     }
     
-    func menuAction(sender:UIBarButtonItem){
+    @objc func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }

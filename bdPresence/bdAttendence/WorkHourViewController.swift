@@ -21,10 +21,10 @@ class WorkHourViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuAction(sender:)))
         let image: UIImage = UIImage(named: "swipe_up")!
         let imageRotated: UIImage =
-            UIImage(cgImage: image.cgImage!, scale: 1, orientation: UIImageOrientation.down)
+            UIImage(cgImage: image.cgImage!, scale: 1, orientation: .down)
         swipeDown.image = imageRotated
         timeLabel.font = APPFONT.DAYHEADER
         
@@ -54,10 +54,10 @@ class WorkHourViewController: UIViewController {
             
             let myMutableString =  NSMutableAttributedString(
                 string: "\(self.timeText(hour)):\(self.timeText(min))",
-                attributes: [NSFontAttributeName:APPFONT.DAYHOUR!])
+                attributes: [NSAttributedString.Key.font:APPFONT.DAYHOUR!])
             let seconndMutableString =  NSMutableAttributedString(
                 string: " Total hours",
-                attributes: [NSFontAttributeName:APPFONT.DAYHOURTEXT!])
+                attributes: [NSAttributedString.Key.font:APPFONT.DAYHOURTEXT!])
             myMutableString.append(seconndMutableString)
             self.timeLabel.attributedText = myMutableString
             
@@ -77,10 +77,10 @@ class WorkHourViewController: UIViewController {
         return s < 10 ? "0\(s)" : "\(s)"
     }
     
-    func handleGesture(sender:UIGestureRecognizer){
+    @objc func handleGesture(sender:UIGestureRecognizer){
         if let swipeGesture = sender as? UISwipeGestureRecognizer {
             switch swipeGesture.direction{
-            case UISwipeGestureRecognizerDirection.down:
+            case .down:
             break
 //            case UISwipeGestureRecognizerDirection.left:
 //                if pageControl.currentPage < dataArray.count {
@@ -112,7 +112,7 @@ class WorkHourViewController: UIViewController {
     }
     
     
-    func menuAction(sender:UIBarButtonItem){
+   @objc func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }

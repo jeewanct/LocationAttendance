@@ -31,7 +31,7 @@ class NewOrganisationSelectViewController: UIViewController {
         accessTokensList = realm.objects(AccessTokenObject.self)
         collectionView.delegate = self
         collectionView.dataSource = self
-        nextButton.addTarget(self, action: #selector(nextAction), for: UIControlEvents.touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
         
         
        // NotificationCenter.default.addObserver(self, selector: #selector(NewOtpViewController.goToHome), name: NSNotification.Name(rawValue:  LocalNotifcation.GetUserHistoryAtLogin.rawValue), object: nil)
@@ -41,7 +41,7 @@ class NewOrganisationSelectViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if accessTokensList.count > 0 {
-           self.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
+           self.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .centeredHorizontally, animated: false)
         }
         
     }
@@ -74,10 +74,10 @@ class NewOrganisationSelectViewController: UIViewController {
         insets.left = value
         insets.right = value
         self.collectionView.contentInset = insets
-        self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+        self.collectionView.decelerationRate = UIScrollView.DecelerationRate.fast;
     }
     
-    func nextAction(){
+    @objc func nextAction(){
         if orgId.isBlank {
             
         }else{

@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 import BluedolphinCloudSdk
-import GooglePlacesSearchController
+
 import MapKit
 class GeoTagController: UIViewController{
     

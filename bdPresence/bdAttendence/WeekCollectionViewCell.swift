@@ -12,6 +12,8 @@ class WeekCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cellLabel: UILabel!
 
     @IBOutlet weak var dateLabel: UILabel!
+    
+    
     var highligtedBackgroundId = 1001
     var highlightedColour = UIColor.red
     func highlight() {

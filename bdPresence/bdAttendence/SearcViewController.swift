@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-import PullUpController
+
 import BluedolphinCloudSdk
 
 
@@ -170,10 +170,10 @@ class SearchViewController: PullUpController {
         return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 175)
     }
     
-    override var pullUpControllerPreviewOffset: CGFloat {
-        print(UIScreen.main.bounds.height * 0.2)
-        return UIScreen.main.bounds.height * 0.3
-    }
+//    override var pullUpControllerPreviewOffset: CGFloat {
+//        print(UIScreen.main.bounds.height * 0.2)
+//        return UIScreen.main.bounds.height * 0.3
+//    }
     
     override var pullUpControllerMiddleStickyPoints: [CGFloat] {
         return [firstPreviewView.frame.maxY]
@@ -213,7 +213,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

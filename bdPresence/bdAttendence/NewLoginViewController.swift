@@ -8,7 +8,7 @@
 
 import UIKit
 import BluedolphinCloudSdk
-import CountriesViewController
+
 
 class NewLoginViewController: UIViewController {
     @IBOutlet weak var mobileTextfield: UITextField!
@@ -39,7 +39,7 @@ class NewLoginViewController: UIViewController {
         self.countryCodeLabel.layer.borderColor = UIColor.gray.cgColor
         self.countryCodeLabel.layer.borderWidth = 0.5
         
-        self.selectCountryButton.setTitle("Please select your Country ", for: UIControlState.normal)
+        self.selectCountryButton.setTitle("Please select your Country ", for: .normal)
         self.selectCountryButton.setImage(#imageLiteral(resourceName: "chevron"), for: .normal)
         self.selectCountryButton.semanticContentAttribute = .forceRightToLeft
         //self.selectCountryButton.titleLabel?.font = APPFONT.OTPNOTES
@@ -51,9 +51,9 @@ class NewLoginViewController: UIViewController {
         /* Changes made on 10 July '18 */
         
        // navigationController?.present(TutorialController(), animated: true, completion: nil)
-        countriesViewController.majorCountryLocaleIdentifiers = ["IN"]
-        countriesViewController.allowMultipleSelection = false
-        countriesViewController.delegate = self
+//        countriesViewController.majorCountryLocaleIdentifiers = ["IN"]
+//        countriesViewController.allowMultipleSelection = false
+//        countriesViewController.delegate = self
         
         if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
             print(countryCode)
@@ -73,12 +73,22 @@ class NewLoginViewController: UIViewController {
         //gradientLayer.colors = [UIColor.blue.cgColor, UIColor.green.cgColor]
         
         self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        
+        
     }
     
     
     @IBAction func selectCountryTapped(_ sender: Any) {
         
-        CountriesViewController.Show(countriesViewController: countriesViewController, to: self)
+        let countriesController = UIStoryboard(name: "NewDesign", bundle: nil).instantiateViewController(withIdentifier: "CountriesViewController") as! CountriesViewController
+        countriesController.modalTransitionStyle = .crossDissolve
+        countriesController.modalPresentationStyle = .overCurrentContext
+        countriesController.delegate = self
+        self.present(countriesController, animated: true, completion: nil)
+        
+        
+       // CountriesViewController.Show(countriesViewController: countriesViewController, to: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,7 +97,7 @@ class NewLoginViewController: UIViewController {
     }
     
     
-    func sendOtpAction(){
+   @objc func sendOtpAction(){
         
 //        let controller = self.storyboard?.instantiateViewController(withIdentifier: "otpScreen") as? NewOtpViewController
 //        controller?.mobileNumber = self.mobileTextfield.text!
@@ -155,7 +165,7 @@ class NewLoginViewController: UIViewController {
     }
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+        let OkAction = UIAlertAction(title: "OK", style: .cancel) { (action) in
             return        }
         alertController.addAction(OkAction)
         self.present(alertController, animated: true) {
@@ -201,32 +211,32 @@ extension NewLoginViewController:UITextFieldDelegate{
     
 }
 
-extension NewLoginViewController : CountriesViewControllerDelegate {
-    func countriesViewControllerDidCancel(_ countriesViewController: CountriesViewController) {
-        
-    }
-    
-    func countriesViewController(_ countriesViewController: CountriesViewController, didSelectCountry country: Country) {
-        
-        self.selectCountryButton.setTitle(country.name + " ", for: UIControlState.normal)
-        self.selectCountryButton.setImage(#imageLiteral(resourceName: "editnew"), for: .normal)
-        //        self.countryNameButton.semanticContentAttribute = .ForceRightToLeft
-        self.countryCodeLabel.text = "+" + country.phoneExtension
-//        self.dismiss(animated: true) {
-//            self.countryCodeLabel.text = "+\(country.phoneExtension)"
-//            self.selectCountryButton.titleLabel?.text = country.name
-//        }
-        
-    }
-    
-    func countriesViewController(_ countriesViewController: CountriesViewController, didUnselectCountry country: Country) {
-        
-    }
-    
-    func countriesViewController(_ countriesViewController: CountriesViewController, didSelectCountries countries: [Country]) {
-        
-    }
-}
+//extension NewLoginViewController : CountriesViewControllerDelegate {
+//    func countriesViewControllerDidCancel(_ countriesViewController: CountriesViewController) {
+//
+//    }
+//
+//    func countriesViewController(_ countriesViewController: CountriesViewController, didSelectCountry country: Country) {
+//
+//        self.selectCountryButton.setTitle(country.name + " ", for: UIControlState.normal)
+//        self.selectCountryButton.setImage(#imageLiteral(resourceName: "editnew"), for: .normal)
+//        //        self.countryNameButton.semanticContentAttribute = .ForceRightToLeft
+//        self.countryCodeLabel.text = "+" + country.phoneExtension
+////        self.dismiss(animated: true) {
+////            self.countryCodeLabel.text = "+\(country.phoneExtension)"
+////            self.selectCountryButton.titleLabel?.text = country.name
+////        }
+//
+//    }
+//
+//    func countriesViewController(_ countriesViewController: CountriesViewController, didUnselectCountry country: Country) {
+//
+//    }
+//
+//    func countriesViewController(_ countriesViewController: CountriesViewController, didSelectCountries countries: [Country]) {
+//
+//    }
+//}
 
 extension UITextField {
     func setLeftPaddingPoints(_ amount:CGFloat){
@@ -239,4 +249,31 @@ extension UITextField {
         self.rightView = paddingView
         self.rightViewMode = .always
     }
+}
+
+
+extension NewLoginViewController: ServerResponseDelegate{
+    func successData<T>(data: T) {
+        
+        if let phoneData  = data as? CountryListModel{
+            
+            self.selectCountryButton.setTitle(phoneData.name ?? "" + "  ", for: .normal)
+                    self.selectCountryButton.setImage(#imageLiteral(resourceName: "editnew"), for: .normal)
+            
+            //self.countryNameButton.semanticContentAttribute = .ForceRightToLeft
+            
+            if let phoneCode = phoneData.dial_code{
+                 self.countryCodeLabel.text =  phoneCode
+            }
+        }
+        
+        
+    }
+    
+    func errorData<T>(error: T) {
+        
+    }
+    
+    
+    
 }

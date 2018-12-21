@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreLocation
-import PullUpController
+
 import BluedolphinCloudSdk
 //class UserDetailsDataModel{
 //    
@@ -68,9 +68,9 @@ class NewCheckOutUserScreen: PullUpController{
         return CGSize(width: UIScreen.main.bounds.width, height: 300.0)
     }
     
-    override var pullUpControllerPreviewOffset: CGFloat {
-        return 500
-    }
+//    override var pullUpControllerPreviewOffset: CGFloat {
+//        return 500
+//    }
     
     override var pullUpControllerMiddleStickyPoints: [CGFloat] {
         return [40.0]
@@ -192,7 +192,7 @@ extension NewCheckOutUserScreen: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

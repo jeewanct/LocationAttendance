@@ -1,6 +1,0 @@
-framework module CountriesViewController {
-  umbrella header "CountriesViewController-umbrella.h"
-
-  export *
-  module * { export * }
-}

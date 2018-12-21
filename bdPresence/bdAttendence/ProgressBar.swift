@@ -83,7 +83,7 @@ class UICircularProgressRingLayer: CAShapeLayer {
     @NSManaged var decimalPlaces: Int
     
     var animationDuration: TimeInterval = 1.0
-    var animationStyle: String = kCAMediaTimingFunctionEaseInEaseOut
+    var animationStyle: String = CAMediaTimingFunctionName.easeInEaseOut.rawValue
     var animated = false
     
     // The value label which draws the text for the current value
@@ -126,7 +126,7 @@ class UICircularProgressRingLayer: CAShapeLayer {
         if event == "value" && self.animated {
             let animation = CABasicAnimation(keyPath: "value")
             animation.fromValue = self.presentation()?.value(forKey: "value")
-            animation.timingFunction = CAMediaTimingFunction(name: animationStyle)
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName(rawValue: animationStyle))
             animation.duration = animationDuration
             return animation
         }
@@ -713,7 +713,7 @@ class UICircularProgressRingLayer: CAShapeLayer {
      ## Author:
      Luis Padron
      */
-    open var animationStyle: String = kCAMediaTimingFunctionEaseIn {
+    open var animationStyle: String = CAMediaTimingFunctionName.easeIn.rawValue {
         didSet {
             self.ringLayer.animationStyle = self.animationStyle
         }

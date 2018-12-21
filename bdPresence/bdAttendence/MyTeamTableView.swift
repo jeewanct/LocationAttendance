@@ -9,7 +9,7 @@
 import UIKit
 import BluedolphinCloudSdk
 import CoreLocation
-import PullUpController
+
 import RealmSwift
 
 
@@ -97,10 +97,10 @@ class MyTeamTableView: PullUpController{
          return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 64)
     }
     
-    override var pullUpControllerPreviewOffset: CGFloat {
-        print(UIScreen.main.bounds.height * 0.2)
-        return UIScreen.main.bounds.height * 0.2
-    }
+//    override var pullUpControllerPreviewOffset: CGFloat {
+//        print(UIScreen.main.bounds.height * 0.2)
+//        return UIScreen.main.bounds.height * 0.2
+//    }
     
     override var pullUpControllerMiddleStickyPoints: [CGFloat] {
         return [firstPreviewView.frame.maxY]

@@ -29,8 +29,8 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         self.navigationItem.title = "My Profile"
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: APPFONT.DAYHEADER!]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuAction(sender:)))
         
         setUserDetails()
         
@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController {
         
         
         self.profileTableView.estimatedRowHeight =  50
-        self.profileTableView.rowHeight = UITableViewAutomaticDimension;
+        self.profileTableView.rowHeight = UITableView.automaticDimension
        
         
         //addPullUpController()
@@ -59,14 +59,14 @@ class ProfileViewController: UIViewController {
             organisationName = tokenData.organizationName!
         }
     }
-    func menuAction(sender:UIBarButtonItem){
+   @objc func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }
     
    
     
-    func handleTap(sender : UITapGestureRecognizer) {
+   @objc func handleTap(sender : UITapGestureRecognizer) {
         
         if sender.view == profileImageView {
             self.picker?.allowsEditing = true
@@ -74,18 +74,18 @@ class ProfileViewController: UIViewController {
             self.picker?.modalPresentationStyle = .overCurrentContext
             
             
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-            let openGallaryAction = UIAlertAction(title:"Choose from existing", style: UIAlertActionStyle.default) { (action) in
-                self.picker!.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let openGallaryAction = UIAlertAction(title:"Choose from existing", style: .default) { (action) in
+                self.picker!.sourceType = .photoLibrary
                 
                 self.present(self.picker!, animated: true, completion: nil)
                 return
             }
             
-            let openCameraAction  = UIAlertAction(title:"Take a new photo", style: UIAlertActionStyle.default) { (action) in
-                if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+            let openCameraAction  = UIAlertAction(title:"Take a new photo", style: .default) { (action) in
+                if(UIImagePickerController .isSourceTypeAvailable(.camera)) {
                     
-                    self.picker!.sourceType = UIImagePickerControllerSourceType.camera
+                    self.picker!.sourceType = .camera
                     self.present(self.picker!, animated: true, completion: nil)
                     
                 } else {
@@ -95,7 +95,7 @@ class ProfileViewController: UIViewController {
                 return
             }
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive) { (action) in
+            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
                 return
             }
             alertController.addAction(openGallaryAction)
@@ -208,15 +208,31 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension ProfileViewController :UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        let pickedImage  = info[UIImagePickerControllerEditedImage] as! UIImage
+        let pickedImage  = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
         profileImageView.image = pickedImage
-        UserDefaults.standard.set(UIImageJPEGRepresentation(pickedImage, 100), forKey: "profileImage")
+     //  UserDefaults.standard.set(UIImageJPEGRepresentation(pickedImage, 100), forKey: "profileImage")
+        UserDefaults.standard.set(pickedImage.jpegData(compressionQuality: 100), forKey: "profileImage")
+        
         UserDefaults.standard.synchronize()
         picker.dismiss(animated: true, completion: nil)
+        
+    
+       
     }
     
+    
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//
+//        let pickedImage  = info[UIImagePickerControllerEditedImage] as! UIImage
+//        profileImageView.image = pickedImage
+//        UserDefaults.standard.set(UIImageJPEGRepresentation(pickedImage, 100), forKey: "profileImage")
+//        UserDefaults.standard.synchronize()
+//        picker.dismiss(animated: true, completion: nil)
+//    }
+//
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)

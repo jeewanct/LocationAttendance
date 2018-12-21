@@ -20,9 +20,9 @@ class TimeLineViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(cancelAction))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
         self.navigationItem.title = currentDate?.formattedWith(format: "MMM d, yyyy")
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: APPFONT.DAYHEADER!]
         self.navigationController?.navigationBar.tintColor = APPColor.BlueGradient
         timeLineData = CheckinListModel.getDataFromDb(date: currentDate!)
         timeLineTableview.delegate = self
@@ -31,13 +31,13 @@ class TimeLineViewController: UIViewController {
         timeLineTableview.tableFooterView = UIView()
         timeLineTableview.separatorStyle = .none
         self.timeLineTableview.estimatedRowHeight =  200
-        self.timeLineTableview.rowHeight = UITableViewAutomaticDimension;
+        self.timeLineTableview.rowHeight = UITableView.automaticDimension;
     
     
         // Do any additional setup after loading the view.
     }
 
-    func cancelAction(){
+   @objc func cancelAction(){
         self.dismiss(animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {

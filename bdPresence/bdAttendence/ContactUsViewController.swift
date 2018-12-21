@@ -30,8 +30,8 @@ class ContactUsViewController: UIViewController {
 //        navigationController?.navigationBar.shadowImage = UIImage()
 //        navigationController?.navigationBar.isTranslucent = true
         self.navigationItem.title = "Contact Us"
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: APPFONT.DAYHEADER!]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuAction(sender:)))
        
         
         helloLabel.font = APPFONT.DAYHEADER
@@ -49,7 +49,7 @@ class ContactUsViewController: UIViewController {
         messageTextView.layer.borderColor = APPColor.blueGradient.cgColor
         messageTextView.layer.borderWidth = 1.0;
         messageTextView.layer.cornerRadius = 5.0;
-        sendMessage.addTarget(self, action: #selector(sendMail), for: UIControlEvents.touchUpInside)
+        sendMessage.addTarget(self, action: #selector(sendMail), for: .touchUpInside)
         
         contactTableview.estimatedRowHeight = 100
 
@@ -64,7 +64,7 @@ class ContactUsViewController: UIViewController {
     }
     
     
-    func menuAction(sender:UIBarButtonItem){
+    @objc func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }
@@ -74,7 +74,7 @@ class ContactUsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func sendMail(){
+    @objc func sendMail(){
         if messageTextView.text.isBlank {
             self.showAlert("Please enter your message")
         }else{
@@ -163,12 +163,12 @@ class ContactUsViewController: UIViewController {
         
     }
     func showAlertView(_ alertmessage:String,yesAction: @escaping ()->Void) {
-        let alert=UIAlertController(title: "Alert", message:alertmessage, preferredStyle: UIAlertControllerStyle.alert);
+        let alert=UIAlertController(title: "Alert", message:alertmessage, preferredStyle: .alert);
         //default input textField (no configuration...)
         //no event handler (just close dialog box)
-        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil));
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil));
         //event handler with closure
-        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action:UIAlertAction) in
             yesAction()
         }));
         self.present(alert, animated: true, completion: nil);
@@ -176,7 +176,7 @@ class ContactUsViewController: UIViewController {
     }
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+        let OkAction = UIAlertAction(title: "OK", style: .cancel) { (action) in
             return        }
         alertController.addAction(OkAction)
         self.present(alertController, animated: true) {
@@ -243,7 +243,7 @@ extension ContactUsViewController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 

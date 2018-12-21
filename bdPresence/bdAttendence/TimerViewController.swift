@@ -30,14 +30,14 @@ class TimerViewController: UIViewController {
         self.cancelButton.clipsToBounds = true
         self.cancelButton.titleLabel?.font = APPFONT.FOOTERBODY
         self.cancelButton.tintColor = UIColor.white
-        self.cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: UIControlEvents.touchUpInside)
+        self.cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
             
            // UIBarButtonItem(image: UIImage(named:"menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
         // Do any additional setup after loading the view.
     }
 
     
-     func cancelButtonAction() {
+    @objc func cancelButtonAction() {
          self.dismiss(animated: true, completion: nil)
     }
     
@@ -55,7 +55,7 @@ class TimerViewController: UIViewController {
         timerView.showFloatingPoint = false
         timerView.font = APPFONT.DAYHOUR!
         timerView.valueIndicator = " secs"
-        timerView.animationStyle = kCAMediaTimingFunctionLinear
+        timerView.animationStyle = CAMediaTimingFunctionName.linear.rawValue
 
         timerView.setProgress(value: CGFloat(timeDuration), animationDuration: TimeInterval(timeDuration)) {
             self.timerView.value = 0.0

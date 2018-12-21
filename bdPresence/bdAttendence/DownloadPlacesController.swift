@@ -86,7 +86,7 @@ class DownloadPlaceController: UIViewController{
     
     
     
-    func getCallBack(notification: Notification){
+   @objc func getCallBack(notification: Notification){
         
         progressValue = progressValue + 1
         if progressValue == 2 {

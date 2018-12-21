@@ -85,7 +85,7 @@ class MyLocationViewController: UIViewController{
             .instantiateViewController(withIdentifier: "MyLocationTableView") as? MyLocationTableView
         pullController.places = myLocations
        // myLocationArray = myLocations
-        self.addPullUpController(pullController, animated: true)
+        self.addPullUpController(pullController, initialStickyPointOffset: UIScreen.main.bounds.height * 0.2 + 64, animated: true)
         
         
    
@@ -157,8 +157,8 @@ extension MyLocationViewController{
     
     func setupNavigation(){
         navigationController?.removeTransparency()
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: APPFONT.DAYHEADER!]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuAction(sender:)))
         
         
         
@@ -168,7 +168,7 @@ extension MyLocationViewController{
         
     }
     
-    func menuAction(sender:UIBarButtonItem){
+   @objc func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }

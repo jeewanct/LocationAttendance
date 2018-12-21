@@ -118,7 +118,7 @@ public extension DispatchQueue {
     
     private static var _onceTracker = [String]()
     
-    public class func once(token: String, block:(Void)->Void) {
+    public class func once(token: String, block:()->Void) {
         objc_sync_enter(self); defer { objc_sync_exit(self) }
         
         if _onceTracker.contains(token) {
@@ -134,17 +134,24 @@ public extension DispatchQueue {
 
 extension String {
     var toProper:String {
-        if self.characters.count == 0 {
+        
+        if self.count == 0 {
             return self
         }
-        return String(self[self.startIndex]).capitalized + String(self.characters.dropFirst())
+        
+//        if self.characters.count == 0 {
+//            return self
+//        }
+        
+        return String(self[self.startIndex]).capitalized + self.dropFirst()
+      //  return String(self[self.startIndex]).capitalized + String(self.characters.dropFirst())
     }
     subscript (r: Range<Int>) -> String {
         get {
-            let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
-            let endIndex = self.characters.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
+            let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
+            let endIndex = self.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
             
-            return self[startIndex..<endIndex]
+            return String(self[startIndex..<endIndex])
         }
     }
     
@@ -160,7 +167,7 @@ extension String {
     var isEmail: Bool {
         do {
             let regex = try NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
-            return regex.firstMatch(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.characters.count)) != nil
+            return regex.firstMatch(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.count)) != nil
         } catch {
             return false
         }
@@ -175,7 +182,7 @@ extension String {
         let inputString:[String] = self.components(separatedBy: charcter)
         
         
-        filtered = inputString.joined(separator: "") as String!
+        filtered = inputString.joined(separator: "") as String
         return  self == filtered
         
     }

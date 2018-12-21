@@ -42,32 +42,27 @@ class NewCheckoutViewController: UIViewController {
         addObservers()
         setupGestures()
         setupMap()
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateView()
-        
-//        if let locations = UserDayData.getLocationData(date: Date()){
-//            if locations.count > 0 {
-//                updateView()
-//            }
-//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-        
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     @IBAction func handleSync(_ sender: Any) {
         
@@ -103,7 +98,13 @@ class NewCheckoutViewController: UIViewController {
         
     }
     
-    
+}
+
+
+
+// Upon user avaibility call these methods
+
+extension NewCheckoutViewController{
     func callDashboard(){
         bdCloudStopMonitoring()
         //                    self.shiftSyncBarBtn.isEnabled = true
@@ -128,39 +129,10 @@ class NewCheckoutViewController: UIViewController {
         
     }
     
-    
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    
-    
-    
-    //    func updateAddress(sender: NSNotification) {
-    //        DispatchQueue.main.async {
-    //
-    //            self.lastCheckinAddressLabel.text = CurrentLocation.address
-    //
-    //        }
-    //    }
-    //
-    
-    
 }
-
 
 //MARK: Setup UI Elements
 extension NewCheckoutViewController{
-    
-    func getDataFromCheckin(){
-        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-        let locationFilters = LocationFilters()
-        locationFilters.delegate = self
-        locationFilters.plotMarkers(date: Date())
-        // updateView()
-    }
-    
     
     func addObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(NewCheckoutViewController.discardFakeLocations(notification:)), name: NSNotification.Name(rawValue: LocalNotifcation.RMCPlacesFetched.rawValue), object: nil)
@@ -169,8 +141,8 @@ extension NewCheckoutViewController{
     func setupNavigationBar(){
         todaysDateLbl.text = LogicHelper.shared.dashBoardDate(date: Date())
         navigationController?.removeTransparency()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: APPFONT.DAYHEADER!]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: APPFONT.DAYHEADER!]
         
         if SDKSingleton.sharedInstance.noTouchMode == true && SDKSingleton.sharedInstance.strictMode == true{
             manualSwipeDisableHieghtAnchor.constant = 0
@@ -181,7 +153,7 @@ extension NewCheckoutViewController{
         }
     }
     
-    func menuAction(sender:UIBarButtonItem){
+    @objc  func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }
@@ -219,7 +191,7 @@ extension NewCheckoutViewController{
     }
     
     
-    func handleGesture(sender:UIGestureRecognizer){
+    @objc func handleGesture(sender:UIGestureRecognizer){
         
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
@@ -228,7 +200,7 @@ extension NewCheckoutViewController{
         
         if let swipeGesture = sender as? UISwipeGestureRecognizer {
             switch swipeGesture.direction{
-            case UISwipeGestureRecognizerDirection.down:
+            case .down:
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalNotifcation.DayCheckinScreen.rawValue), object: self, userInfo: nil)
                 
             default:
@@ -247,7 +219,6 @@ extension NewCheckoutViewController{
 //MARK: Shift Related details
 extension NewCheckoutViewController{
     func shiftRelatedDetails(){
-        let value = NSDate().aws_stringValue("y-MM-ddH:m:ss.SSSS")
         endYourDayLabel.font = APPFONT.DAYHEADER
         let shiftDetails = ShiftHandling.getShiftDetail()
         officeEndHour = shiftDetails.2
@@ -268,6 +239,13 @@ extension NewCheckoutViewController{
         upperView.layer.shadowOffset = CGSize(width: 0, height: 3)
         upperView.layer.shadowRadius = 1
     }
+    
+    
+    func setupMap(){
+        mapView.changeStyle()
+        mapView.setupCamera()
+    }
+    
     
     func clearMapData(){
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
@@ -290,7 +268,10 @@ extension NewCheckoutViewController{
 
 extension NewCheckoutViewController{
     
-    func discardFakeLocations(notification: Notification){
+    
+    // This method invoke after every checkin creation
+    
+    @objc func discardFakeLocations(notification: Notification){
         
         
         if let data = notification.userInfo as? [String: Any]{
@@ -301,13 +282,13 @@ extension NewCheckoutViewController{
                 superController.getPlacesAfterTenMinutes()
             }
             
-        
+            
             
             
         }
         
     }
-
+    
     
     func updateView(date:Date = Date()){
         let isToday = Calendar.current.isDateInToday(date)
@@ -342,36 +323,16 @@ extension NewCheckoutViewController{
         }
         
     }
-  
-    
-}
-
-
-
-/* Changes made on 10 July '18 New Design */
-
-
-//MARK: Google Map Setup
-
-extension NewCheckoutViewController{
-    
-    
-    func setupMap(){
-        mapView.changeStyle()
-        mapView.setupCamera()
-        //updateView()
-        
-        
-    }
     
     
 }
+
 
 extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDelegate{
     func onFailure(type: ErrorMessages) {
         
-            self.view.removeActivityIndicator(activityIndicator: activityIndicator)
-       
+        self.view.removeActivityIndicator(activityIndicator: activityIndicator)
+        
         
         if type == .noCheckInFound{
         }else{
@@ -392,14 +353,14 @@ extension  NewCheckoutViewController: LocationsFilterDelegate, PolylineStringDel
         self.view.removeActivityIndicator(activityIndicator: activityIndicator)
         
         if locations.count > 0{
-        
-        let allLocations = UserPlace.getGeoTagData(location: LogicHelper.shared.sortOnlyLocations(location: locations))
-        mapView.addMarkersInMap(allLocations: allLocations)
-        
-        
-        let locations = ClusterDataFromServer.convertDataToUserModel(locationData: LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed())
-        let headerData = ClusterDataFromServer.getHeaderData(locationData: locations)
-        dataFromServer(locationData: locations, headerData: headerData)
+            
+            let allLocations = UserPlace.getGeoTagData(location: LogicHelper.shared.sortOnlyLocations(location: locations))
+            mapView.addMarkersInMap(allLocations: allLocations)
+            
+            
+            let locations = ClusterDataFromServer.convertDataToUserModel(locationData: LogicHelper.shared.sortGeoLocations(locations: allLocations).reversed())
+            let headerData = ClusterDataFromServer.getHeaderData(locationData: locations)
+            dataFromServer(locationData: locations, headerData: headerData)
         }
         
         
@@ -441,12 +402,12 @@ extension NewCheckoutViewController: ServerDataFromClusterDelegate{
         
         pullController.userDetails = locationData
         pullController.distanceArray = headerData
-        self.addPullUpController(pullController, animated: true)
+        self.addPullUpController(pullController, initialStickyPointOffset: UIScreen.main.bounds.height * 0.3, animated: true)
         
         let polyLine = DrawPolyLineInMap()
         polyLine.delegate = self
         polyLine.getPolyline(location: locationData.reversed())
-
+        
         
     }
     
@@ -454,7 +415,7 @@ extension NewCheckoutViewController: ServerDataFromClusterDelegate{
     
 }
 
-
+// Call The Cluster api after 10 min other wise it will pick it from database
 
 extension NewCheckoutViewController: ServerResponseDelegate{
     
@@ -487,14 +448,17 @@ extension NewCheckoutViewController: ServerResponseDelegate{
         serverData.getClusterData(query: GetClusteringFromServer.quoteString(date: date), date: date)
     }
     
+    
+    // Delegate response from Cluster data from sdk
+    
     func successData<T>(data: T) {
         
         UserDefaults.standard.set(Date(), forKey: "lastDashBoardUpdated")
         if let locationData = data  as? [UserDetailsDataModel]{
-                let headerData = ClusterDataFromServer.getHeaderData(locationData: locationData)
-                dataFromServer(locationData: locationData, headerData: headerData)
-         }
-
+            let headerData = ClusterDataFromServer.getHeaderData(locationData: locationData)
+            dataFromServer(locationData: locationData, headerData: headerData)
+        }
+        
         
     }
     

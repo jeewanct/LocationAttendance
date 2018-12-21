@@ -55,7 +55,7 @@ class ErrorScanView: UIView {
         customView.frame = bounds
         
         // Make the view stretch with containing view
-        customView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        customView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         
         // Adding custom subview on top of our view (over any custom drawing > see note below)
         addSubview(customView)
@@ -73,24 +73,24 @@ class ErrorScanView: UIView {
         self.tryAgainButton.clipsToBounds = true
         self.tryAgainButton.titleLabel?.font = APPFONT.FOOTERBODY
         self.tryAgainButton.tintColor = UIColor.white
-        tryAgainButton.addTarget(self, action: #selector(scanAgain), for: UIControlEvents.touchUpInside)
+        tryAgainButton.addTarget(self, action: #selector(scanAgain), for: .touchUpInside)
         self.tryLater.layer.cornerRadius = 15.0
         self.tryLater.applyGradient(isTopBottom: true, colorArray: [APPColor.BlueGradient,APPColor.GreenGradient])
         self.tryLater.clipsToBounds = true
         self.tryLater.titleLabel?.font = APPFONT.FOOTERBODY
         self.tryLater.tintColor = UIColor.white
-        tryLater.addTarget(self, action: #selector(tryLaterAction), for: UIControlEvents.touchUpInside)
+        tryLater.addTarget(self, action: #selector(tryLaterAction), for: .touchUpInside)
         
     }
     
     
-    func scanAgain(){
+  @objc  func scanAgain(){
         
         delegate?.updateView(moveToView: .Timer)
         
         
     }
-    func tryLaterAction(){
+  @objc  func tryLaterAction(){
         delegate?.updateView(moveToView: .Checkin)
         
         

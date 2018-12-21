@@ -27,7 +27,7 @@ class NewOtpViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.tintColor = UIColor.white
-        sendOtpButton.addTarget(self, action: #selector(sendOTP), for: UIControlEvents.touchUpInside)
+        sendOtpButton.addTarget(self, action: #selector(sendOTP), for: .touchUpInside)
         codeInputView = CodeInputView(frame: CGRect(x: 0, y: 0, width: otpView.frame.width, height: otpView.frame.height))
         codeInputView.delegate = self
         codeInputView.tag = 17
@@ -254,7 +254,7 @@ class NewOtpViewController: UIViewController {
     
     
     
-    func sendOTP(){
+   @objc func sendOTP(){
         
         //showLoader()
         view.showActivityIndicator(activityIndicator: activityIndicator)
@@ -281,8 +281,8 @@ class NewOtpViewController: UIViewController {
     }
     func showInteractionAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: userUpdatePressed))
-        alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: userCancelPressed))
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: userUpdatePressed))
+        alertController.addAction(UIAlertAction(title: "cancel", style: .default, handler: userCancelPressed))
         self.present(alertController, animated: true) {
         }
     }
@@ -297,7 +297,7 @@ class NewOtpViewController: UIViewController {
     
     func showAlert(_ message : String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (action) in
+        let OkAction = UIAlertAction(title: "OK", style: .cancel) { (action) in
             return        }
         alertController.addAction(OkAction)
         self.present(alertController, animated: true) {

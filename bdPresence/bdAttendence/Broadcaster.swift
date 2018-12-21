@@ -124,8 +124,8 @@ open class IBeaconBroadcaster: NSObject, CBPeripheralManagerDelegate {
         // If we do not have access to the Bluetooth radio, display an alert in the current view controller
         if(_peripheralManager!.state != .poweredOn) {
             
-            let alert = UIAlertController(title: NSLocalizedString("Bluetooth must be available and enabled to configure your device as an iBeacon", comment:"Alert that is shown if Bluetooth is not available"), message: nil, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment:"OK button used to dismiss alerts"), style: UIAlertActionStyle.cancel, handler: nil))
+            let alert = UIAlertController(title: NSLocalizedString("Bluetooth must be available and enabled to configure your device as an iBeacon", comment:"Alert that is shown if Bluetooth is not available"), message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment:"OK button used to dismiss alerts"), style: .cancel, handler: nil))
             if let topWindow = getTopWindow() {
                 topWindow.present(alert, animated: true, completion: nil)
             } else {

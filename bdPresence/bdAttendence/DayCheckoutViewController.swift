@@ -43,7 +43,7 @@ class DayCheckoutViewController: UIViewController {
     }
     
     func setupView(){
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(menuAction(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuAction(sender:)))
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeUp.direction = .up
         self.view.addGestureRecognizer(swipeUp)
@@ -57,7 +57,7 @@ class DayCheckoutViewController: UIViewController {
     }
     
     
-    func handleGesture(sender:UIGestureRecognizer){
+   @objc func handleGesture(sender:UIGestureRecognizer){
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.ManualSwipe.rawValue)
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.ManualSwipedDate.rawValue)
         UserDefaults.standard.set("1", forKey: "AlreadyCheckin")
@@ -70,7 +70,7 @@ class DayCheckoutViewController: UIViewController {
       
     }
     
-    func menuAction(sender:UIBarButtonItem){
+    @objc func menuAction(sender:UIBarButtonItem){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ShowSideMenu"), object: nil)
         
     }

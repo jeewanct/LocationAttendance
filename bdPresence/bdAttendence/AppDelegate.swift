@@ -25,12 +25,14 @@ import GooglePlaces
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+    
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         /*
          Don't config until the location is on
-        */
+         */
         // Testing Background fetch for checkins
+        application.setMinimumBackgroundFetchInterval(600)
         appConfiguration()
         
         
@@ -39,24 +41,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !SDKSingleton.sharedInstance.userId.isBlank {
             
             
-            if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
+            if launchOptions?[UIApplication.LaunchOptionsKey.location] != nil {
                 //BackgroundDebug().write(string: "UIApplicationLaunchOptionsLocationKey-Location")
                 // Here check whether the shift is runing or not then only start location monitoring
                 let superViewController = SuperViewController()
                 superViewController.wakeUpCall(notify: NotifyingFrom.Normal)
                 let notifier = RMCNotifier.shared
                 if !notifier.getShiftRunningStatus() {
-                   // bdCloudStartMonitoring()
-                   //BlueDolphinManager.manager.startLocationMonitoring()
-                     bdCloudStopMonitoring()
+                    // bdCloudStartMonitoring()
+                    //BlueDolphinManager.manager.startLocationMonitoring()
+                    bdCloudStopMonitoring()
                 }
                 
-//                if SDKSingleton.sharedInstance.isShiftRunning {
-//                    BlueDolphinManager.manager.startLocationMonitoring()
-//                }
+                //                if SDKSingleton.sharedInstance.isShiftRunning {
+                //                    BlueDolphinManager.manager.startLocationMonitoring()
+                //                }
             }
             
-
+            
         }
         //print(Realm.Configuration.defaultConfiguration.fileURL)
         GMSServices.provideAPIKey(GoogleMaps.GOOGLEMAPSAPI)
@@ -87,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if interval > 600 {
                         //let queryStr = "&status=" + AssignmentStatus.Assigned.rawValue + "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)!
                         let queryStr = "&assignmentStartTime=" + ((Calendar.current.date(byAdding: .day, value: -15, to: Date()))?.formattedISO8601)! + AppConstants.AssignmentUrls.query
-
+                        
                         AssignmentModel.getAssignmentsForDesiredTime(query: queryStr) { (completionStatus) in
                             print("completionstatus = \(completionStatus)")
                             if completionStatus == "Success" {
@@ -118,13 +120,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Testing siri
         
-     
+        
         
         
         
         
         return true
     }
+    
+    
+//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        
+//        
+//    }
     
     
     /*
@@ -406,7 +414,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
 
         //SavePushNotification.saveNotification(time: "\(userInfo)")
         
-        let state: UIApplicationState = application.applicationState
+        let state: UIApplication.State = application.applicationState
        
         UI {
             if CLLocationManager.locationServicesEnabled() {
@@ -468,7 +476,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
 //        }
         
         // Till here the new code is written .
-        if state != UIApplicationState.active {
+        if state != UIApplication.State.active {
             
             //        println("json of push \(userInfo)")
             //       println(userInfo["aps"])
@@ -667,7 +675,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate{
         let result = userInfo ["aps"] as AnyObject
         alertMessage = result["alert"]! as! String
         
-        let alert2 = UIAlertController(title: "Message", message:alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        let alert2 = UIAlertController(title: "Message", message:alertMessage, preferredStyle: .alert)
         //    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
         //      //pushReceived = false
         //
@@ -730,7 +738,7 @@ extension AppDelegate{
 
     func appConfiguration(){
      
-        application.setMinimumBackgroundFetchInterval(600)
+        
         appIdentifier = Bundle.main.bundleIdentifier!
         APPVERSION = Bundle.main.releaseVersionNumber! + "." +  Bundle.main.buildVersionNumber!
         ConfigurationModel.setBundleId(id: appIdentifier)
@@ -770,7 +778,9 @@ extension AppDelegate{
         
         BlueDolphinManager.manager.setConfig(secretKey: "hhhh", organizationId: "af39bc69-1938-4149-b9f7-f101fd9baf73")
         
-        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enable = true
+        
+        //IQKeyboardManager.sharedManager().enable = true
         UIDevice.current.isBatteryMonitoringEnabled = true
         registerForRemoteNotification()
         updateRealmConfiguration()

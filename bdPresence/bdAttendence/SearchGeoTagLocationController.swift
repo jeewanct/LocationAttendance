@@ -48,7 +48,7 @@ class SearchGeoTagLocationController:  UIViewController{
             txfSearchField.backgroundColor = .clear
             txfSearchField.font = UIFont(name: "SourceSansPro-Regular", size: 13)
           //  txfSearchField.leftViewMode = .never
-            txfSearchField.attributedPlaceholder = NSAttributedString(string: "Which location are you trying to find?", attributes: [NSForegroundColorAttributeName: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)])
+            txfSearchField.attributedPlaceholder = NSAttributedString(string: "Which location are you trying to find?", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)])
             
             let uiview = UIView(frame: CGRect(x: 0, y: 0, width: 4, height: 0))
             txfSearchField.leftView = uiview
